@@ -108,9 +108,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-bottom: 1px solid var(--line); transition: box-shadow .3s;
 }
 #nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.05); }
-.nav-in { display: flex; align-items: center; justify-content: space-between; height: 92px; }
+.nav-in { display: flex; align-items: center; justify-content: space-between; height: 112px; }
 .nav-menu { display: flex; align-items: center; gap: 38px; }
-.nav-menu > a { font-size: 13.5px; font-weight: 500; color: #1C1C1A; letter-spacing: .01em; transition: color .2s; position: relative; }
+.nav-menu > a { font-size: 17.5px; font-weight: 500; color: #1C1C1A; letter-spacing: .01em; transition: color .2s; position: relative; }
 .nav-menu > a::after { content:''; position: absolute; left:0; bottom:-6px; width:0; height:1px; background: var(--gold); transition: width .25s; }
 .nav-menu > a:hover { color: var(--dark); }
 .nav-menu > a:hover::after { width: 100%; }
@@ -291,7 +291,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ════════════════════════════════════════════ */
 #porque { padding: 120px 0; background: var(--paper); }
 .why-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
-.why-sticky { position: sticky; top: 126px; }
+.why-sticky { position: sticky; top: 150px; }
 .why-list { display: flex; flex-direction: column; }
 .why-row { display: grid; grid-template-columns: 52px 1fr; gap: 28px; padding: 32px 0; border-top: 1px solid var(--line); }
 .why-row:last-child { border-bottom: 1px solid var(--line); }
@@ -411,7 +411,7 @@ footer { background: #101010; padding: 72px 0 36px; }
   <div class="wrap">
     <div class="nav-in">
       <a href="#" aria-label="Bianchini Kitchen Pro — início">
-        <img src="logo-bianchini-kitchen-pro.png" height="65" alt="Bianchini Kitchen Pro — Cozinhas Profissionais" style="display:block">
+        <img src="logo-bianchini-kitchen-pro.png" height="85" alt="Bianchini Kitchen Pro — Cozinhas Profissionais" style="display:block">
       </a>
 
       <nav class="nav-menu" aria-label="Menu principal">
@@ -806,7 +806,7 @@ footer { background: #101010; padding: 72px 0 36px; }
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="logo-bianchini-kitchen-pro.png" height="52" alt="Bianchini Kitchen Pro" style="filter:brightness(0) invert(1) opacity(.6)">
+        <img src="logo-bianchini-kitchen-pro.png" height="68" alt="Bianchini Kitchen Pro" style="filter:brightness(0) invert(1) opacity(.6)">
         <p>Não vendemos equipamentos. Entregamos operações mais eficientes, times mais produtivos e resultado que você mede. 18 anos transformando cozinhas profissionais e industriais no Brasil.</p>
         <p class="foot-holding">Uma empresa do grupo Bianchini Holding</p>
       </div>
@@ -885,7 +885,7 @@ let mo=false;
 function toggleMenu(){
   const m=document.querySelector('.nav-menu'); mo=!mo;
   m.style.cssText = mo
-    ? 'display:flex;flex-direction:column;position:fixed;top:127px;left:0;right:0;background:#fff;padding:28px 24px;gap:22px;border-bottom:1px solid var(--line);z-index:800;box-shadow:0 20px 40px rgba(0,0,0,.08)'
+    ? 'display:flex;flex-direction:column;position:fixed;top:147px;left:0;right:0;background:#fff;padding:28px 24px;gap:22px;border-bottom:1px solid var(--line);z-index:800;box-shadow:0 20px 40px rgba(0,0,0,.08)'
     : '';
 }
 
