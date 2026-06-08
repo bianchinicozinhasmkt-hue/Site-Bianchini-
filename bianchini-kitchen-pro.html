@@ -866,14 +866,32 @@ footer { background: #101010; padding: 72px 0 36px; }
 <script>
 document.body.classList.add('js-on');
 // ---- Hero slider ----
-var slides  = document.querySelectorAll('.hslide');
+var slides  = document.querySelectorAll('.hero-right .hslide');
+var dots    = document.querySelectorAll('.hdot');
 var current = 0;
-function nextSlide() {
+
+function showSlide(n) {
   slides[current].classList.remove('on');
-  current = (current + 1) % slides.length;
+  dots[current].classList.remove('on');
+  current = n % slides.length;
   slides[current].classList.add('on');
+  dots[current].classList.add('on');
 }
-setInterval(nextSlide, 2000);
+
+function nextSlide() {
+  showSlide(current + 1);
+}
+
+// Dots clicáveis
+dots.forEach(function(dot, i) {
+  dot.addEventListener('click', function() {
+    clearInterval(timer);
+    showSlide(i);
+    timer = setInterval(nextSlide, 2000);
+  });
+});
+
+var timer = setInterval(nextSlide, 2000);
 
 // ---- Navbar shadow ----
 const nav = document.getElementById('nav');
