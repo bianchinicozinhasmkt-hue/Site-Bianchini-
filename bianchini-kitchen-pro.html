@@ -161,18 +161,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ════════════════════════════════════════════
    LOGO BAR (trust strip)
    ════════════════════════════════════════════ */
-#trust-strip { background: var(--dark); padding: 20px 0; overflow: hidden; position: relative; }
+#trust-strip { background: var(--dark); padding: 26px 0; overflow: hidden; position: relative; }
 #trust-strip::before,
-#trust-strip::after { content:''; position:absolute; top:0; width:80px; height:100%; z-index:2; pointer-events:none; }
+#trust-strip::after { content:''; position:absolute; top:0; width:100px; height:100%; z-index:2; pointer-events:none; }
 #trust-strip::before { left:0;  background:linear-gradient(to right, var(--dark), transparent); }
 #trust-strip::after  { right:0; background:linear-gradient(to left,  var(--dark), transparent); }
-.ts-track { display:flex; align-items:center; gap:52px; width:max-content; animation:ts-scroll 50s linear infinite; }
+.ts-track { display:flex; align-items:center; gap:64px; width:max-content; animation:ts-scroll 55s linear infinite; }
 .ts-track:hover { animation-play-state:paused; }
 @keyframes ts-scroll { 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
-.ts-item { display:inline-flex; align-items:center; flex-shrink:0; }
-.ts-name { font-size:12px; font-weight:700; color:rgba(255,255,255,.72); letter-spacing:.14em; text-transform:uppercase; white-space:nowrap; }
-.ts-dot { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.22); flex-shrink:0; align-self:center; }
-@media(max-width:768px){ .ts-track { gap:28px; animation-duration:35s; } }
+.ts-item { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ts-logo { height:40px; width:auto; max-width:130px; object-fit:contain; display:block;
+           filter:brightness(0) invert(1) opacity(.42); transition:filter .35s; }
+.ts-item:hover .ts-logo { filter:brightness(0) invert(1) opacity(.9); }
+.ts-dot { width:3px; height:3px; border-radius:50%; background:rgba(255,255,255,.18); flex-shrink:0; align-self:center; }
+@media(max-width:768px){ .ts-track { gap:40px; animation-duration:38s; } .ts-logo { height:32px; max-width:100px; } }
 
 /* ════════════════════════════════════════════
    INTRO / MANIFESTO
@@ -471,20 +473,20 @@ footer { background: #101010; padding: 72px 0 36px; }
 <!-- TRUST STRIP -->
 <div id="trust-strip" aria-label="Clientes atendidos">
   <div class="ts-track" id="ts-track">
-    <span class="ts-item"><span class="ts-name">Rede D'Or</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">SESC</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">AMIL</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">Plaza Lounge</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">Petrobras Offshore</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">SINDAL</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">Cozil Equipamentos</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">Rede D'Or</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">SESC</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">AMIL</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">Plaza Lounge</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">Petrobras Offshore</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">SINDAL</span></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><span class="ts-name">Cozil Equipamentos</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/rede-dor.png"         alt="Rede D'Or"                    class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/sesc.jpeg"            alt="SESC"                         class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/amil.png"             alt="AMIL"                         class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/plaza-lounge.png"     alt="Plaza Lounge"                 class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/petrobras.jpeg"       alt="Petrobras Offshore"           class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/adonis.jpeg"          alt="Restaurante Adonis"           class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/boliche-barra.jpeg"   alt="Boliche Barra Shopping"       class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/marriott.png"         alt="Hotel Marriott"               class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/othon.jpeg"           alt="Othon Hotéis"                 class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/supermarket.jpeg"     alt="Supermarket Supermercados"    class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/guanabara.jpeg"       alt="Supermercados Guanabara"      class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/mocellin.jpeg"        alt="Mocellin Churrascaria"        class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/novilho-de-ouro.jpeg" alt="Novilho de Ouro Churrascaria" class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/varieta.png"          alt="Varieta Restaurante"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
   </div>
 </div>
 
@@ -889,8 +891,25 @@ function toggleMenu(){
 
 // ---- Trust strip ticker ----
 (function(){
-  const clientes = ["Rede D’Or","SESC","AMIL","Plaza Lounge","Petrobras Offshore","SINDAL","Cozil Equipamentos"];
-  const mkItem = n => `<span class="ts-item"><span class="ts-name">${n}</span></span><span class="ts-dot" aria-hidden="true"></span>`;
+  const clientes = [
+    { src:’clientes/rede-dor.png’,         alt:"Rede D’Or"                    },
+    { src:’clientes/sesc.jpeg’,            alt:’SESC’                         },
+    { src:’clientes/amil.png’,             alt:’AMIL’                         },
+    { src:’clientes/plaza-lounge.png’,     alt:’Plaza Lounge’                 },
+    { src:’clientes/petrobras.jpeg’,       alt:’Petrobras Offshore’           },
+    { src:’clientes/adonis.jpeg’,          alt:’Restaurante Adonis’           },
+    { src:’clientes/boliche-barra.jpeg’,   alt:’Boliche Barra Shopping’       },
+    { src:’clientes/marriott.png’,         alt:’Hotel Marriott’               },
+    { src:’clientes/othon.jpeg’,           alt:’Othon Hotéis’                 },
+    { src:’clientes/supermarket.jpeg’,     alt:’Supermarket Supermercados’    },
+    { src:’clientes/guanabara.jpeg’,       alt:’Supermercados Guanabara’      },
+    { src:’clientes/mocellin.jpeg’,        alt:’Mocellin Churrascaria’        },
+    { src:’clientes/novilho-de-ouro.jpeg’, alt:’Novilho de Ouro Churrascaria’ },
+    { src:’clientes/varieta.png’,          alt:’Varieta Restaurante’          },
+  ];
+  const mkItem = c =>
+    `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo"></span>` +
+    `<span class="ts-dot" aria-hidden="true"></span>`;
   const html = clientes.map(mkItem).join(‘’);
   const track = document.getElementById(‘ts-track’);
   if(track) track.innerHTML = html + html;
