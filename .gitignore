@@ -1,0 +1,11 @@
+# Dados de sessão do Claude Code
+.claude/
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editores
+*.swp
+*.swo
