@@ -143,6 +143,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .hslide:nth-child(1){ background-color:#e8e4de; }
 .hslide:nth-child(2){ background-color:#e2ddd7; }
 .hslide:nth-child(3){ background-color:#f5f4f1; }
+.hslide:nth-child(4){ background-color:#ede9e3; }
 .hslide-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: rgba(0,0,0,.22); text-align: center; padding: 40px; }
 .hslide-ph strong { font-family: var(--serif); font-size: 22px; }
 .hslide-ph span { font-size: 12px; letter-spacing: .04em; }
@@ -461,13 +462,15 @@ footer { background: #101010; padding: 72px 0 36px; }
   </div>
 
   <div class="hero-right" aria-hidden="true">
-    <div class="hslide on"><img src="Fotos/Slide1.png" alt="Cozinha industrial profissional em aço inox"></div>
-    <div class="hslide"><img src="Fotos/slide2-rational.png" alt="Fornos combinados Rational iCombi Pro"></div>
-    <div class="hslide"><img src="Slide3.jpg" alt="Do projeto à execução — Bianchini Kitchen Pro"></div>
+    <div class="hslide on"><img src="Fotos/slide1.jpg" alt="Cozinha industrial profissional em aço inox"></div>
+    <div class="hslide"><img src="Fotos/slide2.jpg" alt="Fornos combinados Rational iCombi Pro"></div>
+    <div class="hslide"><img src="Fotos/slide3.jpg" alt="Do projeto à execução — Bianchini Kitchen Pro"></div>
+    <div class="hslide"><img src="Fotos/slide4.jpg" alt="Bianchini Kitchen Pro — equipamentos profissionais"></div>
     <div class="hero-dots">
       <div class="hdot on" onclick="go(0)" role="button" aria-label="Slide 1"></div>
       <div class="hdot" onclick="go(1)" role="button" aria-label="Slide 2"></div>
       <div class="hdot" onclick="go(2)" role="button" aria-label="Slide 3"></div>
+      <div class="hdot" onclick="go(3)" role="button" aria-label="Slide 4"></div>
     </div>
     <div class="hero-tag">Equipamentos Bianchini Kitchen Pro</div>
   </div>
@@ -875,9 +878,9 @@ function go(n){
   sl[cur].classList.remove('on'); dt[cur].classList.remove('on');
   cur = n;
   sl[cur].classList.add('on'); dt[cur].classList.add('on');
-  clearInterval(t); t = setInterval(()=>go((cur+1)%sl.length), 5500);
+  clearInterval(t); t = setInterval(()=>go((cur+1)%sl.length), 2000);
 }
-t = setInterval(()=>go((cur+1)%sl.length), 5500);
+t = setInterval(()=>go((cur+1)%sl.length), 2000);
 
 // ---- Navbar shadow ----
 const nav = document.getElementById('nav');
