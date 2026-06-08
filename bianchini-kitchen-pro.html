@@ -137,13 +137,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .ht-lbl { font-size: 11.5px; color: var(--mid); letter-spacing: .08em; text-transform: uppercase; }
 
 .hero-right { position: relative; overflow: hidden; background: var(--sand); }
-.hslide { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease-in-out; }
+.hslide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease; }
 .hslide.on { opacity: 1; }
-.hslide img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.hslide:nth-child(1){ background-color:#e8e4de; }
-.hslide:nth-child(2){ background-color:#e2ddd7; }
-.hslide:nth-child(3){ background-color:#f5f4f1; }
-.hslide:nth-child(4){ background-color:#ede9e3; }
 .hslide-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: rgba(0,0,0,.22); text-align: center; padding: 40px; }
 .hslide-ph strong { font-family: var(--serif); font-size: 22px; }
 .hslide-ph span { font-size: 12px; letter-spacing: .04em; }
@@ -462,10 +457,10 @@ footer { background: #101010; padding: 72px 0 36px; }
   </div>
 
   <div class="hero-right" aria-hidden="true">
-    <div class="hslide on"><img src="Fotos/slide1.jpg" alt="Cozinha industrial profissional em aço inox"></div>
-    <div class="hslide"><img src="Fotos/slide2.jpg" alt="Fornos combinados Rational iCombi Pro"></div>
-    <div class="hslide"><img src="Fotos/slide3.jpg" alt="Do projeto à execução — Bianchini Kitchen Pro"></div>
-    <div class="hslide"><img src="Fotos/slide4.jpg" alt="Bianchini Kitchen Pro — equipamentos profissionais"></div>
+    <div class="hslide on" style="background-image:url('Fotos/slide1.jpg')"></div>
+    <div class="hslide"    style="background-image:url('Fotos/slide2.jpg')"></div>
+    <div class="hslide"    style="background-image:url('Fotos/slide3.jpg')"></div>
+    <div class="hslide"    style="background-image:url('Fotos/slide4.jpg')"></div>
     <div class="hero-dots">
       <div class="hdot on" role="button" aria-label="Slide 1"></div>
       <div class="hdot" role="button" aria-label="Slide 2"></div>
@@ -871,24 +866,14 @@ footer { background: #101010; padding: 72px 0 36px; }
 <script>
 document.body.classList.add('js-on');
 // ---- Hero slider ----
-var hSlides = document.querySelectorAll('.hslide');
-var hDots   = document.querySelectorAll('.hdot');
-var hIdx    = 0;
-
-function showSlide(n) {
-  hSlides[hIdx].classList.remove('on');
-  if (hDots[hIdx]) hDots[hIdx].classList.remove('on');
-  hIdx = ((n % hSlides.length) + hSlides.length) % hSlides.length;
-  hSlides[hIdx].classList.add('on');
-  if (hDots[hIdx]) hDots[hIdx].classList.add('on');
+var slides  = document.querySelectorAll('.hslide');
+var current = 0;
+function nextSlide() {
+  slides[current].classList.remove('on');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('on');
 }
-
-if (hSlides.length > 1) {
-  setInterval(function () { showSlide(hIdx + 1); }, 2000);
-  for (var _i = 0; _i < hDots.length; _i++) {
-    (function (i) { hDots[i].addEventListener('click', function () { showSlide(i); }); })(_i);
-  }
-}
+setInterval(nextSlide, 2000);
 
 // ---- Navbar shadow ----
 const nav = document.getElementById('nav');
