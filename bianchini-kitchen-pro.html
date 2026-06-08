@@ -174,6 +174,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .ts-logo { height:52px; width:auto; display:block;
            opacity:1; transition:opacity .3s, transform .3s; }
 .ts-item:hover .ts-logo { opacity:.75; transform:scale(1.07); }
+.ts-logo-lg { height:68px; }
 .ts-dot { width:3px; height:3px; border-radius:50%; background:rgba(0,0,0,.12); flex-shrink:0; align-self:center; }
 @media(max-width:768px){ .ts-track { gap:24px; animation-duration:25s; } .ts-logo { height:36px; } }
 
@@ -477,9 +478,9 @@ footer { background: #101010; padding: 72px 0 36px; }
     <span class="ts-item"><img src="clientes/rede-dor.png"         alt="Rede D'Or"                    class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/sesc.png"             alt="SESC"                         class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/amil.png"             alt="AMIL"                         class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/plaza-lounge.png"     alt="Plaza Lounge"                 class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/petrobras.png"        alt="Petrobras Offshore"           class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/adonis.png"           alt="Restaurante Adonis"           class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/plaza-lounge.png"     alt="Plaza Lounge"                 class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/petrobras.png"        alt="Petrobras Offshore"           class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/adonis.png"           alt="Restaurante Adonis"           class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/boliche-barra.png"    alt="Boliche Barra Shopping"       class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/marriott.png"         alt="Hotel Marriott"               class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/othon.png"            alt="Othon Hotéis"                 class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
@@ -896,9 +897,9 @@ function toggleMenu(){
     { src:’clientes/rede-dor.png’,        alt:"Rede D’Or"                    },
     { src:’clientes/sesc.png’,            alt:’SESC’                         },
     { src:’clientes/amil.png’,            alt:’AMIL’                         },
-    { src:’clientes/plaza-lounge.png’,    alt:’Plaza Lounge’                 },
-    { src:’clientes/petrobras.png’,       alt:’Petrobras Offshore’           },
-    { src:’clientes/adonis.png’,          alt:’Restaurante Adonis’           },
+    { src:’clientes/plaza-lounge.png’,    alt:’Plaza Lounge’,         lg:true },
+    { src:’clientes/petrobras.png’,       alt:’Petrobras Offshore’,   lg:true },
+    { src:’clientes/adonis.png’,          alt:’Restaurante Adonis’,   lg:true },
     { src:’clientes/boliche-barra.png’,   alt:’Boliche Barra Shopping’       },
     { src:’clientes/marriott.png’,        alt:’Hotel Marriott’               },
     { src:’clientes/othon.png’,           alt:’Othon Hotéis’                 },
@@ -909,7 +910,7 @@ function toggleMenu(){
     { src:’clientes/varieta.png’,         alt:’Varieta Restaurante’          },
   ];
   const mkItem = c =>
-    `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo"></span>` +
+    `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo${c.lg?' ts-logo-lg':''}"></span>` +
     `<span class="ts-dot" aria-hidden="true"></span>`;
   const html = clientes.map(mkItem).join(‘’);
   const track = document.getElementById(‘ts-track’);
