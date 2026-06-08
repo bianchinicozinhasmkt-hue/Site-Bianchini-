@@ -175,6 +175,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
            opacity:1; transition:opacity .3s, transform .3s; }
 .ts-item:hover .ts-logo { opacity:.75; transform:scale(1.07); }
 .ts-logo-lg { height:68px; }
+.ts-logo-xl { height:88px; }
 .ts-dot { width:3px; height:3px; border-radius:50%; background:rgba(0,0,0,.12); flex-shrink:0; align-self:center; }
 @media(max-width:768px){ .ts-track { gap:24px; animation-duration:25s; } .ts-logo { height:36px; } }
 
@@ -483,11 +484,11 @@ footer { background: #101010; padding: 72px 0 36px; }
     <span class="ts-item"><img src="clientes/adonis.png"           alt="Restaurante Adonis"           class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/boliche-barra.png"    alt="Boliche Barra Shopping"       class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/marriott.png"         alt="Hotel Marriott"               class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/othon.png"            alt="Othon Hotéis"                 class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/othon.png"            alt="Othon Hotéis"                 class="ts-logo ts-logo-xl"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/supermarket.png"      alt="Supermarket Supermercados"    class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/guanabara.png"        alt="Supermercados Guanabara"      class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/mocellin.png"         alt="Mocellin Churrascaria"        class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/novilho-de-ouro.png"  alt="Novilho de Ouro Churrascaria" class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/mocellin.png"         alt="Mocellin Churrascaria"        class="ts-logo ts-logo-xl"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/novilho-de-ouro.png"  alt="Novilho de Ouro Churrascaria" class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/varieta.png"          alt="Varieta Restaurante"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
   </div>
 </div>
@@ -902,15 +903,15 @@ function toggleMenu(){
     { src:’clientes/adonis.png’,          alt:’Restaurante Adonis’,   lg:true },
     { src:’clientes/boliche-barra.png’,   alt:’Boliche Barra Shopping’       },
     { src:’clientes/marriott.png’,        alt:’Hotel Marriott’               },
-    { src:’clientes/othon.png’,           alt:’Othon Hotéis’,         lg:true },
+    { src:’clientes/othon.png’,           alt:’Othon Hotéis’,         xl:true },
     { src:’clientes/supermarket.png’,     alt:’Supermarket Supermercados’    },
     { src:’clientes/guanabara.png’,       alt:’Supermercados Guanabara’      },
-    { src:’clientes/mocellin.png’,        alt:’Mocellin Churrascaria’,lg:true },
-    { src:’clientes/novilho-de-ouro.png’, alt:’Novilho de Ouro Churrascaria’ },
+    { src:’clientes/mocellin.png’,        alt:’Mocellin Churrascaria’,xl:true },
+    { src:’clientes/novilho-de-ouro.png’, alt:’Novilho de Ouro Churrascaria’, lg:true },
     { src:’clientes/varieta.png’,         alt:’Varieta Restaurante’          },
   ];
   const mkItem = c =>
-    `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo${c.lg?' ts-logo-lg':''}"></span>` +
+    `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo${c.xl?' ts-logo-xl':c.lg?' ts-logo-lg':''}"></span>` +
     `<span class="ts-dot" aria-hidden="true"></span>`;
   const html = clientes.map(mkItem).join(‘’);
   const track = document.getElementById(‘ts-track’);
