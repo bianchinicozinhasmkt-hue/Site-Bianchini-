@@ -392,9 +392,9 @@ footer { background: #101010; padding: 72px 0 36px; }
 .wa:hover { transform: scale(1.1); }
 .wa svg { width: 28px; height: 28px; fill: #fff; }
 
-/* reveal animation base */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--e), transform .7s var(--e); }
-.reveal.in { opacity: 1; transform: none; }
+/* reveal animation — só se aplica quando JS está ativo */
+.js-on .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--e), transform .7s var(--e); }
+.js-on .reveal.in { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
@@ -470,7 +470,22 @@ footer { background: #101010; padding: 72px 0 36px; }
 
 <!-- TRUST STRIP -->
 <div id="trust-strip" aria-label="Clientes atendidos">
-  <div class="ts-track" id="ts-track"></div>
+  <div class="ts-track" id="ts-track">
+    <span class="ts-item"><span class="ts-name">Rede D'Or</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">SESC</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">AMIL</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">Plaza Lounge</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">Petrobras Offshore</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">SINDAL</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">Cozil Equipamentos</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">Rede D'Or</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">SESC</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">AMIL</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">Plaza Lounge</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">Petrobras Offshore</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">SINDAL</span></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><span class="ts-name">Cozil Equipamentos</span></span><span class="ts-dot" aria-hidden="true"></span>
+  </div>
 </div>
 
 <!-- INTRO / MANIFESTO -->
@@ -846,6 +861,7 @@ footer { background: #101010; padding: 72px 0 36px; }
 </a>
 
 <script>
+document.body.classList.add('js-on');
 // ---- Hero slider ----
 const sl = document.querySelectorAll('.hslide');
 const dt = document.querySelectorAll('.hdot');
