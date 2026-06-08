@@ -166,7 +166,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 #trust-strip::after { content:''; position:absolute; top:0; width:100px; height:100%; z-index:2; pointer-events:none; }
 #trust-strip::before { left:0;  background:linear-gradient(to right, var(--white), transparent); }
 #trust-strip::after  { right:0; background:linear-gradient(to left,  var(--white), transparent); }
-.ts-track { display:flex; align-items:center; gap:36px; width:max-content; animation:ts-scroll 60s linear infinite; }
+.ts-track { display:flex; align-items:center; gap:36px; width:max-content; animation:ts-scroll 35s linear infinite; }
 .ts-track:hover { animation-play-state:paused; }
 @keyframes ts-scroll { 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
 /* altura uniforme: todas as logos têm 52px de altura, largura proporcional */
@@ -175,7 +175,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
            opacity:1; transition:opacity .3s, transform .3s; }
 .ts-item:hover .ts-logo { opacity:.75; transform:scale(1.07); }
 .ts-dot { width:3px; height:3px; border-radius:50%; background:rgba(0,0,0,.12); flex-shrink:0; align-self:center; }
-@media(max-width:768px){ .ts-track { gap:24px; animation-duration:40s; } .ts-logo { height:36px; } }
+@media(max-width:768px){ .ts-track { gap:24px; animation-duration:25s; } .ts-logo { height:36px; } }
 
 /* ════════════════════════════════════════════
    INTRO / MANIFESTO
