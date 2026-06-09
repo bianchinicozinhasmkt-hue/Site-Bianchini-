@@ -231,15 +231,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .lp-photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; box-sizing: border-box; overflow: hidden; width: 100%; }
 @media(max-width:640px){ .lp-photo-grid { grid-template-columns: 1fr; } }
 .lp-photo-placeholder {
+  width: 100%; box-sizing: border-box; overflow: visible; min-width: 0;
+  display: flex; flex-direction: column; cursor: default;
+}
+.lp-photo-placeholder-img {
   aspect-ratio: 4/3; background: var(--sand);
   border: 1.5px dashed var(--line); border-radius: var(--r);
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; gap: 10px; transition: border-color .2s, background .2s;
-  cursor: default; box-sizing: border-box; overflow: hidden; min-width: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; transition: border-color .2s, background .2s; overflow: hidden; width: 100%;
 }
-.lp-photo-placeholder:hover { border-color: var(--bronze); background: #F0EDE5; }
+.lp-photo-placeholder:hover .lp-photo-placeholder-img { border-color: var(--bronze); background: #F0EDE5; }
 .lp-photo-placeholder svg { width: 28px; height: 28px; stroke: var(--line); }
-.lp-photo-placeholder span { font-size: 11px; color: var(--mid); letter-spacing: .04em; text-align: center; padding: 0 12px; }
+.lp-photo-placeholder span { display: block; padding-top: 8px; font-size: 12px; color: var(--mid); text-align: center; letter-spacing: .04em; }
 
 /* CTA */
 .lp-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -476,15 +479,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Fog&atilde;o industrial 6 bocas</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Linha de coc&ccedil;&atilde;o em opera&ccedil;&atilde;o</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Chapa industrial com grelha</span>
           </div>
         </div>
@@ -545,15 +548,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>C&acirc;mara frigor&iacute;fica modular</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Refrigeradores de 2 portas em inox</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Saladete com mise en place</span>
           </div>
         </div>
@@ -614,15 +617,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Balc&atilde;o frontal de bar em inox</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Esta&ccedil;&atilde;o de chopp com coluna inox</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Painel traseiro com expositores</span>
           </div>
         </div>
@@ -683,15 +686,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Pista quente com banho-maria</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Buffet modular completo</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Pista fria para sobremesas e sal&aacute;das</span>
           </div>
         </div>
@@ -752,15 +755,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Carro de transporte 4 prateleiras</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Carro-estufa em opera&ccedil;&atilde;o</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Carrinho de servi&ccedil;o para hotel</span>
           </div>
         </div>
@@ -821,15 +824,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Forno combinado em opera&ccedil;&atilde;o</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Lavadora de lou&ccedil;as industrial</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Ultracongelador profissional</span>
           </div>
         </div>
@@ -890,15 +893,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Coifa industrial sobre linha de coc&ccedil;&atilde;o</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Dutos em inox instalados</span>
           </div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
+            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
             <span>Casa de m&aacute;quinas com ventiladores</span>
           </div>
         </div>
