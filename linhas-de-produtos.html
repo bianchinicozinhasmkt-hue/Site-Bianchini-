@@ -228,14 +228,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
 }
 .lp-photos-title::after { content:''; flex: 1; height: 1px; background: var(--line); }
-.lp-photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.lp-photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; box-sizing: border-box; overflow: hidden; width: 100%; }
 @media(max-width:640px){ .lp-photo-grid { grid-template-columns: 1fr; } }
 .lp-photo-placeholder {
   aspect-ratio: 4/3; background: var(--sand);
   border: 1.5px dashed var(--line); border-radius: var(--r);
   display: flex; flex-direction: column; align-items: center;
   justify-content: center; gap: 10px; transition: border-color .2s, background .2s;
-  cursor: default;
+  cursor: default; box-sizing: border-box; overflow: hidden; min-width: 0;
 }
 .lp-photo-placeholder:hover { border-color: var(--bronze); background: #F0EDE5; }
 .lp-photo-placeholder svg { width: 28px; height: 28px; stroke: var(--line); }
@@ -297,7 +297,7 @@ footer { background: #101010; padding: 72px 0 36px; }
         <a href="#buffet">Buffet</a>
         <a href="#carros">Carros</a>
         <a href="#tecnologia">Tecnologia</a>
-        <a href="#exaustao">Exhaust&atilde;o</a>
+        <a href="#exaustao">Exaust&atilde;o</a>
       </nav>
       <div class="nav-right">
         <a href="bianchini-kitchen-pro.html" class="back-link">
@@ -350,7 +350,7 @@ footer { background: #101010; padding: 72px 0 36px; }
     <a href="#buffet">Distribui&ccedil;&atilde;o &amp; Buffet</a>
     <a href="#carros">Carros &amp; Transporte</a>
     <a href="#tecnologia">Tecnologia &amp; Equipamentos</a>
-    <a href="#exaustao">Exhaust&atilde;o &amp; Ventila&ccedil;&atilde;o</a>
+    <a href="#exaustao">Exaust&atilde;o &amp; Ventila&ccedil;&atilde;o</a>
   </nav>
 
   <!-- MAIN -->
@@ -363,7 +363,7 @@ footer { background: #101010; padding: 72px 0 36px; }
       <p class="lp-subtitle">"Uma cozinha organizada n&atilde;o &eacute; detalhe. &Eacute; o que separa uma equipe que produz de uma que improvisa."</p>
       <div class="lp-text">
         <p>O mobili&aacute;rio &eacute; a espinha dorsal de qualquer cozinha profissional. &Eacute; ele que define o fluxo, organiza os processos e determina se a sua equipe vai trabalhar com efici&ecirc;ncia ou vai perder tempo improvisando a cada turno.</p>
-        <p>A linha de mobili&aacute;rio Bianchini &eacute; fabricada sob medida em a&ccedil;o inox AISI 304. Cada pe&ccedil;a &eacute; projetada para o seu espa&ccedil;o, o seu volume e o seu ritmo de produ&ccedil;&atilde;o. Sem adapta&ccedil;&otilde;es, sem gambiarras, sem pe&ccedil;as que n&atilde;o encaixam.</p>
+        <p>A linha de mobili&aacute;rio Bianchini &eacute; fabricada sob medida em a&ccedil;o inox AISI 304 ou em outra liga a ser definida pelo Cliente. Cada pe&ccedil;a &eacute; projetada para o seu espa&ccedil;o, o seu volume e o seu ritmo de produ&ccedil;&atilde;o. Sem adapta&ccedil;&otilde;es, sem gambiarras, sem pe&ccedil;as que n&atilde;o encaixam.</p>
       </div>
 
       <div class="lp-products">
@@ -374,8 +374,8 @@ footer { background: #101010; padding: 72px 0 36px; }
             <span>Com ou sem espelho, com ou sem prateleira inferior, em medidas padr&atilde;o ou sob medida. Tampo em inox 18/8, estrutura tubular refor&ccedil;ada, p&eacute;s regul&aacute;veis com sapatas.</span>
           </div>
           <div class="lp-product-item">
-            <strong>Bancadas cont&iacute;nuas</strong>
-            <span>Modulares, sem emenda central, ideais para linhas de produ&ccedil;&atilde;o cont&iacute;nua. Integramos pia, cuba, gavetas e prateleiras em uma &uacute;nica pe&ccedil;a linear.</span>
+            <strong>Esteira Transportadora de Roletes</strong>
+            <span>Estrutura em aço inox AISI 304 ou outra liga a ser definido pelo Cliente, com perfis de reforço estrutural e contraventamento tubular. Roletes em PVC alimentício de alta resistência, pés tubulares com niveladores de altura em poliamida — adaptável a qualquer piso. Comprimento e largura sob medida para o fluxo da sua operação.</span>
           </div>
           <div class="lp-product-item">
             <strong>Estantes e prateleiras</strong>
@@ -390,8 +390,8 @@ footer { background: #101010; padding: 72px 0 36px; }
             <span>Com portas de correr, basculantes ou abatimento. Gavetas com corredi&ccedil;as telesc&oacute;picas em inox. Sequ&ecirc;ncias numeradas para controle de insumos.</span>
           </div>
           <div class="lp-product-item">
-            <strong>Carros de transporte</strong>
-            <span>Com rodas girat&oacute;rias com trava, capacidade de 150 a 400 kg, tampo e estrutura em inox, alturas personaliz&aacute;veis conforme o fluxo operacional.</span>
+            <strong>Grelhas de Piso</strong>
+            <span>Em aço inox AISI 304, com grelha superior perfurada ou barras planas, dimensionada para encaixe preciso em canaletas e ralos. Cesta de retenção de sujeiras, fácil remoção para higienização completa do piso. Resistente ao tráfego intenso de botas, carros e equipamentos — sem empenar, com opção sifonada, sem substituição frequente..</span>
           </div>
         </div>
       </div>
@@ -400,17 +400,24 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
-            <span>Mesa de preparo em inox AISI 304</span>
-          </div>
+  	<img src="Fotos/mobiliario1.jpg" 
+       alt="Conjunto de Mobiliário"
+	style="width:100%; height:100%; object-fit:cover; display:block;"  	
+	<span>Conjunto de Mobiliário</span>
+	</div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
-            <span>Bancada cont&iacute;nua com cuba integrada</span>
-          </div>
+  	<img src="Fotos/mobiliario2.jpg" 
+       alt="Bancada contínua com cuba integrada"
+	style="width:100%; height:100%; object-fit:cover; display:block;"  	
+	<span>Mesas largas para confeitaria</span>
+	</div>
           <div class="lp-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg>
-            <span>Estante aberta — &aacute;rea de estoque</span>
-          </div>
+  	<img src="Fotos/mobiliario3.jpg" 
+       alt="Bancada contínua com cuba integrada"
+	style="width:100%; height:100%; object-fit:cover; display:block;"
+  	<span>Estantes Perfuradas para Câmaras Frias</span>
+	</div>
+
         </div>
       </div>
 
@@ -440,7 +447,7 @@ footer { background: #101010; padding: 72px 0 36px; }
         <div class="lp-product-grid">
           <div class="lp-product-item">
             <strong>Fog&otilde;es industriais</strong>
-            <span>2, 4, 6 e 8 bocas, com ou sem forno inferior. Queimadores duplo-coroa em ferro fundido, v&aacute;lvulas de seguran&ccedil;a, estrutura em inox AISI 304.</span>
+            <span>2, 4, 6 e 8 bocas, com ou sem forno inferior. Queimadores duplo-coroa em ferro fundido, v&aacute;lvulas de seguran&ccedil;a, estrutura em inox AISI 304 em outra liga a ser definida com o Cliente.</span>
           </div>
           <div class="lp-product-item">
             <strong>Chapas e grelhas</strong>
@@ -513,7 +520,7 @@ footer { background: #101010; padding: 72px 0 36px; }
           </div>
           <div class="lp-product-item">
             <strong>Refrigeradores verticais</strong>
-            <span>De 1 a 4 portas, temperatura de 0 a 8&deg;C, revestimento interno em inox 430 ou AISI 304. Pr&oacute;prios para carne, laticínios, bebidas e mise en place.</span>
+            <span>De 1 a 4 portas, temperatura de 0 a 8&deg;C, revestimento interno em inox 430, AISI 304 em outra liga a ser definida com o Cliente. Pr&oacute;prios para carne, laticínios, bebidas e mise en place.</span>
           </div>
           <div class="lp-product-item">
             <strong>Freezers verticais e horizontais</strong>
@@ -586,7 +593,7 @@ footer { background: #101010; padding: 72px 0 36px; }
           </div>
           <div class="lp-product-item">
             <strong>Cubas e pias de bar</strong>
-            <span>Em inox AISI 304, dimensões padrão ou sob medida, com ou sem escorredor, torneira de coluna ou parede. Posicionadas para o fluxo do barman.</span>
+            <span>Em inox AISI 304 em outra liga a ser definida com o Cliente, dimensões padrão ou sob medida, com ou sem escorredor, torneira de coluna ou parede. Posicionadas para o fluxo do barman.</span>
           </div>
           <div class="lp-product-item">
             <strong>Apoios refrigerados under-bar</strong>
@@ -647,7 +654,7 @@ footer { background: #101010; padding: 72px 0 36px; }
         <div class="lp-product-grid">
           <div class="lp-product-item">
             <strong>Balc&otilde;es de distribui&ccedil;&atilde;o quentes</strong>
-            <span>Com banho-maria el&eacute;trico ou a vapor, temperatura de 65 a 90&deg;C. Capacidade GN 1/1 a 1/3. Estrutura em inox AISI 304 com painel de controle digital.</span>
+            <span>Com banho-maria el&eacute;trico ou a vapor, temperatura de 65 a 90&deg;C. Capacidade GN 1/1 a 1/3. Estrutura em inox AISI 304 em outra liga a ser definida com o Cliente com painel de controle digital.</span>
           </div>
           <div class="lp-product-item">
             <strong>Pistas frias</strong>
@@ -724,7 +731,7 @@ footer { background: #101010; padding: 72px 0 36px; }
           </div>
           <div class="lp-product-item">
             <strong>Carros de bandejas</strong>
-            <span>Para cozinhas de hospital, hotel e institucional. Suportes para bandeja 45x35 cm, capacidade de 10 a 30 bandejas, estrutura em inox AISI 304.</span>
+            <span>Para cozinhas de hospital, hotel e institucional. Suportes para bandeja 45x35 cm, capacidade de 10 a 30 bandejas, estrutura em inox AISI 304 em outra liga a ser definida com o Cliente.</span>
           </div>
           <div class="lp-product-item">
             <strong>Carrinhos de servi&ccedil;o</strong>
@@ -841,11 +848,11 @@ footer { background: #101010; padding: 72px 0 36px; }
 
     <!-- ══ 8. EXAUSTÃO & VENTILAÇÃO ══ -->
     <section id="exaustao" class="lp-section">
-      <p class="lp-eyebrow">Exhaust&atilde;o &amp; Ventila&ccedil;&atilde;o &middot; Bianchini Kitchen Pro</p>
-      <h2 class="lp-title">Exhaust&atilde;o &amp; Ventila&ccedil;&atilde;o</h2>
-      <p class="lp-subtitle">"Sem exhaust&atilde;o eficiente, nenhuma cozinha &eacute; aprovada. Com a Bianchini, voc&ecirc; passa na primeira."</p>
+      <p class="lp-eyebrow">Exaust&atilde;o &amp; Ventila&ccedil;&atilde;o &middot; Bianchini Kitchen Pro</p>
+      <h2 class="lp-title">Exaust&atilde;o &amp; Ventila&ccedil;&atilde;o</h2>
+      <p class="lp-subtitle">"Sem exaust&atilde;o eficiente, nenhuma cozinha &eacute; aprovada. Com a Bianchini, voc&ecirc; passa na primeira."</p>
       <div class="lp-text">
-        <p>A exhaust&atilde;o &eacute; o sistema mais cobrado nas vistorias sanit&aacute;rias e de bombeiros — e o mais ignorado no projeto. Uma coifa superdimensionada consome energia desnecessária. Uma subdimensionada cria calor, gordura e fumaça que tomam a cozinha.</p>
+        <p>A exaust&atilde;o &eacute; o sistema mais cobrado nas vistorias sanit&aacute;rias e de bombeiros — e o mais ignorado no projeto. Uma coifa superdimensionada consome energia desnecessária. Uma subdimensionada cria calor, gordura e fumaça que tomam a cozinha.</p>
         <p>A Bianchini projeta, fornece e instala sistemas de HVAC completos — utilizando equipamentos robustos, dimensionados corretamente, atendendo as Normas da Vigil&acirc;ncia sanit&aacute;ria e corpo de bombeiros. Sem surpresa, tudo bem dimensionado para a sua necessidade.</p>
       </div>
 
@@ -854,15 +861,15 @@ footer { background: #101010; padding: 72px 0 36px; }
         <div class="lp-product-grid">
           <div class="lp-product-item">
             <strong>Coifas industriais</strong>
-            <span>Em chapa de a&ccedil;o inox 430 ou 304, com filtros de gordura em alumínio ou inox, calha coletora e grelha de ilumina&ccedil;&atilde;o. Dimensionadas pelo calor gerado pelos equipamentos de coc&ccedil;&atilde;o.</span>
+            <span>Em chapa de a&ccedil;o inox 430, 304 em outra liga a ser definida com o Cliente, com filtros de gordura em alumínio ou inox, calha coletora e grelha de ilumina&ccedil;&atilde;o. Dimensionadas pelo calor gerado pelos equipamentos de coc&ccedil;&atilde;o.</span>
           </div>
           <div class="lp-product-item">
-            <strong>Sistemas de exhaust&atilde;o</strong>
+            <strong>Sistemas de exaust&atilde;o</strong>
             <span>Ventiladores centrif&uacute;gos de alta vaz&atilde;o, silenciosos e de baixa manuten&ccedil;&atilde;o. Calculados pelo volume de ar necess&aacute;rio para cada configura&ccedil;&atilde;o de cozinha.</span>
           </div>
           <div class="lp-product-item">
             <strong>Dutos em inox</strong>
-            <span>Circulares ou retangulares em inox AISI 304, soldados ou flangeados, com isola&ccedil;&atilde;o t&eacute;rmica onde necess&aacute;rio. Conformes &agrave; NBR 15848.</span>
+            <span>Circulares ou retangulares em inox AISI 304 em outra liga a ser definida com o Cliente, soldados ou flangeados, com isola&ccedil;&atilde;o t&eacute;rmica onde necess&aacute;rio. Conformes &agrave; NBR 15848.</span>
           </div>
           <div class="lp-product-item">
             <strong>Filtros e lavadores de gases</strong>
@@ -898,7 +905,7 @@ footer { background: #101010; padding: 72px 0 36px; }
       </div>
 
       <div class="lp-cta">
-        <a href="https://wa.me/5521964690650?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20linha%20de%20Exhaust%C3%A3o%20e%20Ventila%C3%A7%C3%A3o" target="_blank" rel="noopener" class="btn btn-dark">
+        <a href="https://wa.me/5521964690650?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20linha%20de%20Exaust%C3%A3o%20e%20Ventila%C3%A7%C3%A3o" target="_blank" rel="noopener" class="btn btn-dark">
           Solicitar Or&ccedil;amento
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -928,7 +935,7 @@ footer { background: #101010; padding: 72px 0 36px; }
           <li><a href="#buffet">Distribui&ccedil;&atilde;o &amp; Buffet</a></li>
           <li><a href="#carros">Carros &amp; Transporte</a></li>
           <li><a href="#tecnologia">Tecnologia</a></li>
-          <li><a href="#exaustao">Exhaust&atilde;o</a></li>
+          <li><a href="#exaustao">Exaust&atilde;o</a></li>
         </ul>
       </div>
       <div class="foot-col">
