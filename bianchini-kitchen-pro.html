@@ -216,6 +216,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cat-cell:hover::after { transform: scaleX(1); }
 .cat-icon { width: 44px; height: 44px; margin-bottom: 24px; color: var(--gold); }
 .cat-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.4; }
+.cat-icon img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
 .cat-name { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 12px; letter-spacing: -.01em; }
 .cat-list { font-size: 13px; color: var(--mid); line-height: 1.85; flex: 1; }
 .cat-more { margin-top: 20px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--dark); display: flex; align-items: center; gap: 6px; opacity: 0; transform: translateX(-6px); transition: all .3s var(--e); }
@@ -500,7 +501,9 @@ footer { background: #101010; padding: 72px 0 36px; }
     <span class="ts-item"><img src="clientes/guanabara.png"        alt="Supermercados Guanabara"      class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/mocellin.png"         alt="Mocellin Churrascaria"        class="ts-logo ts-logo-xl"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/novilho-de-ouro.png"  alt="Novilho de Ouro Churrascaria" class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/varieta.png"          alt="Varieta Restaurante"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/varieta.png"          alt="Varieta Restaurante"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true">
+hidden="true"></span>
+    <span class="ts-item"><img src="clientes/aeronautica.png"          alt="Aeronáutica"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
   </div>
 </div>
 
@@ -516,7 +519,7 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="intro-statement">Quem compra equipamento compra metal. Quem escolhe a <em>BIANCHINI</em> compra uma opera&ccedil;&atilde;o que <em>produz resultado todos os dias.</em></p>
         <div class="intro-body">
           <p>A Bianchini Kitchen Pro n&atilde;o &eacute; uma mera revendedora de equipamentos. Somos o parceiro que h&aacute; 18 anos atua ao lado das maiores opera&ccedil;&otilde;es de alimenta&ccedil;&atilde;o do Brasil, transformando todo esse conhecimento pr&aacute;tico em cozinhas mais eficientes, seguras e lucrativas &mdash; entregando essa diferen&ccedil;a, projeto a projeto.</p>
-          <p>Do mobili&aacute;rio em inox &agrave; coc&ccedil;&atilde;o, da refrigera&ccedil;&atilde;o ao bar, da distribui&ccedil;&atilde;o em buffet &agrave; tecnologia &mdash; cada componente foi projetado para fazer a sua opera&ccedil;&atilde;o produzir mais, gastar menos e passar em qualquer vistoria na primeira tentativa. Junto com cada projeto, entregamos tamb&eacute;m as plantas t&eacute;cnicas completas: el&eacute;trica, hidr&aacute;ulica, g&aacute;s e esgoto &mdash; porque uma cozinha s&oacute; funciona quando tudo est&aacute; preparado para receber os equipamentos certos. Porque uma cozinha Bianchini n&atilde;o &eacute; obra. &Eacute; resultado entregue.</p>
+          <p>Do mobili&aacute;rio em inox &agrave; coc&ccedil;&atilde;o, da refrigera&ccedil;&atilde;o ao bar, da distribui&ccedil;&atilde;o em buffet &agrave; tecnologia &mdash; cada componente foi projetado para fazer a sua opera&ccedil;&atilde;o produzir mais, gastar menos e passar em qualquer vistoria na primeira tentativa. Junto com cada projeto, entregamos tamb&eacute;m as plantas t&eacute;cnicas complementares de pontos: el&eacute;trica, hidr&aacute;ulica, g&aacute;s e esgoto &mdash; porque uma cozinha s&oacute; funciona quando tudo est&aacute; preparado para receber os equipamentos certos. Porque uma cozinha Bianchini n&atilde;o &eacute; obra. &Eacute; resultado entregue.</p>
           <a href="#categorias" class="link-arrow">Veja o que entregamos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
@@ -538,56 +541,56 @@ footer { background: #101010; padding: 72px 0 36px; }
     <div class="cat-grid">
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><rect x="7" y="14" width="34" height="24" rx="2"/><path d="M7 22h34M15 14v8M27 14v8"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/mobiliario.png" alt="Mobiliario Inox"></div>
         <div class="cat-name">Mobiliário Inox</div>
         <p class="cat-list">Mesas de preparo · Bancadas · Estantes · Prateleiras · Pias e cubas · Armários · Carros de transporte</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><circle cx="16" cy="16" r="4"/><circle cx="32" cy="16" r="4"/><circle cx="16" cy="32" r="4"/><circle cx="32" cy="32" r="4"/><rect x="7" y="7" width="34" height="34" rx="2"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/coccao.png" alt="Coccao"></div>
         <div class="cat-name">Cocção</div>
         <p class="cat-list">Fogões industriais · Chapas e grelhas · Fritadeiras · Char-broilers · Fornos de pizza · Salamandras · Caldeirões</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><rect x="11" y="6" width="26" height="36" rx="2"/><path d="M11 22h26M19 13v4M19 29v4"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/refrigeracao.png" alt="Refrigeracao"></div>
         <div class="cat-name">Refrigeração</div>
         <p class="cat-list">Câmaras frigoríficas · Refrigeradores · Freezers · Balcões refrigerados · Saladetes · Fabricadores de gelo</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><path d="M14 8h20l-2 14H16z"/><path d="M24 22v14M16 40h16"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/bar.png" alt="Bar"></div>
         <div class="cat-name">Bar</div>
         <p class="cat-list">Módulos de bar · Balcões frontais · Cubas e pias · Estações de chopp · Apoios refrigerados · Expositores</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><rect x="6" y="18" width="36" height="14" rx="2"/><path d="M12 18v-4h24v4M14 32v6M34 32v6"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/buffet.png" alt="Distribuicao e Buffet"></div>
         <div class="cat-name">Distribuição & Buffet</div>
         <p class="cat-list">Balcões de distribuição · Buffets térmicos · Pistas frias e quentes · Banho-maria · Réguas de apoio · Estufas</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><rect x="10" y="12" width="28" height="24" rx="2"/><circle cx="24" cy="24" r="6"/><path d="M14 36v4M34 36v4"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/carros.png" alt="Carros e Transporte"></div>
         <div class="cat-name">Carros & Transporte</div>
         <p class="cat-list">Carros de transporte · Carros-estufa · Carros de bandejas · Carrinhos de serviço · Plataformas móveis em inox</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><rect x="9" y="9" width="30" height="30" rx="3"/><circle cx="24" cy="24" r="7"/><path d="M24 14v3M24 31v3"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/tecnologia.png" alt="Tecnologia e Equipamentos"></div>
         <div class="cat-name">Tecnologia & Equipamentos</div>
         <p class="cat-list">Fornos combinados · Lavadoras de louças · Processadores · Batedeiras · Liquidificadores · Cortadores · Ultracongeladores</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
       <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
-        <div class="cat-icon"><svg viewBox="0 0 48 48"><path d="M10 38h28M14 38V20l10-8 10 8v18"/><rect x="20" y="26" width="8" height="12"/></svg></div>
+        <div class="cat-icon"><img src="Fotos/exaustao.png" alt="Exaustao e Ventilacao"></div>
         <div class="cat-name">Exaustão & Ventilação</div>
         <p class="cat-list">Coifas industriais · Sistemas de exaustão · Dutos em inox · Filtros e lavadores de gases · Make-up de ar · Dimensionamento técnico</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
@@ -922,6 +925,7 @@ function toggleMenu(){
     { src:'clientes/mocellin.png',        alt:'Mocellin Churrascaria',xl:true },
     { src:'clientes/novilho-de-ouro.png', alt:'Novilho de Ouro Churrascaria', lg:true },
     { src:'clientes/varieta.png',         alt:'Varieta Restaurante'          },
+    { src:'clientes/aeronautica.png',     alt:'Aeronáutica',   lg:true },
   ];
   const mkItem = c =>
     `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo${c.xl?' ts-logo-xl':c.lg?' ts-logo-lg':''}"></span>` +
