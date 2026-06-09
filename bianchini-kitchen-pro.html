@@ -204,7 +204,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cat-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; flex-wrap: wrap; gap: 24px; }
 .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .cat-cell {
-  background: var(--white); padding: 20px 32px; min-height: 400px;
+  background: var(--white); padding: 16px;
   display: flex; flex-direction: column; cursor: pointer;
   transition: background .3s var(--e); position: relative; overflow: hidden;
 }
@@ -214,10 +214,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .cat-cell:hover { background: var(--paper); }
 .cat-cell:hover::after { transform: scaleX(1); }
-.cat-icon { width: 220px; height: 220px; margin: 0 auto 12px; color: var(--gold); }
+.cat-icon { width: 160px; height: 160px; margin: 0 auto 8px; color: var(--gold); }
 .cat-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.4; }
 .cat-icon img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
-.cat-name { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 8px; letter-spacing: -.01em; }
+.cat-name { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 6px; letter-spacing: -.01em; }
 .cat-list { font-size: 13px; color: var(--mid); line-height: 1.85; flex: 1; }
 .cat-more { margin-top: 20px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--dark); display: flex; align-items: center; gap: 6px; opacity: 0; transform: translateX(-6px); transition: all .3s var(--e); }
 .cat-cell:hover .cat-more { opacity: 1; transform: translateX(0); }
