@@ -180,18 +180,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ════════════════════════════════════════════
    INTRO / MANIFESTO
    ════════════════════════════════════════════ */
-#intro { padding: 72px 0 0; background: var(--white); }
-.intro-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: start; }
-.intro-statement { font-family: var(--serif); font-size: clamp(26px,2.6vw,38px); line-height: 1.3; color: var(--dark); }
+#intro { padding: 80px 0; background: linear-gradient(135deg, #F5F3EE 0%, #EDE9E1 100%); border-top: 2px solid #9A7B4F; }
+.intro-2col { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; min-height: 520px; overflow: hidden; box-shadow: 0 8px 48px rgba(0,0,0,.07); }
+.intro-col-img { overflow: hidden; display: flex; }
+.intro-col-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; flex: 1; }
+.intro-col-text { background: var(--white); padding: 56px 64px; display: flex; flex-direction: column; justify-content: center; }
+.intro-eyebrow-bronze { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #9A7B4F; margin-bottom: 20px; }
+.intro-eyebrow-bronze::before { content: ''; width: 24px; height: 1px; background: #9A7B4F; }
+.intro-statement { font-family: var(--serif); font-size: clamp(24px,2.4vw,36px); line-height: 1.3; color: var(--dark); margin-bottom: 28px; }
 .intro-statement em { font-style: italic; color: var(--gold); }
-.intro-body p { font-size: 16px; color: var(--ink); line-height: 1.85; margin-bottom: 20px; }
+.intro-body p { font-size: 15px; color: #5A5754; line-height: 1.85; margin-bottom: 18px; }
 .intro-body p:last-of-type { margin-bottom: 32px; }
-@media(max-width:900px){ .intro-grid { grid-template-columns: 1fr; gap: 40px; } }
-.intro-photo-wrap { position: relative; overflow: hidden; margin-top: 64px; }
-.intro-photo { width: 100%; height: 520px; object-fit: cover; object-position: center; display: block; }
-.intro-photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 220px; background: linear-gradient(to bottom, transparent, rgba(0,0,0,.3)); pointer-events: none; }
-.intro-photo-caption { text-align: right; font-size: 11px; color: var(--mid); letter-spacing: .05em; padding: 10px 32px 48px; }
-@media(max-width:768px){ .intro-photo { height: 320px; } }
+@media(max-width:900px) {
+  .intro-2col { grid-template-columns: 1fr; box-shadow: none; }
+  .intro-col-img { height: 300px; }
+  .intro-col-text { padding: 40px 32px; }
+}
 
 /* ════════════════════════════════════════════
    CATEGORIES — full offering grid
@@ -503,21 +507,20 @@ footer { background: #101010; padding: 72px 0 36px; }
 <!-- INTRO / MANIFESTO -->
 <section id="intro">
   <div class="wrap">
-    <div class="intro-grid">
-      <div class="reveal">
-        <p class="intro-statement">Quem compra equipamento compra metal. Quem escolhe a <em>BIANCHINI</em> compra uma operação que <em>produz resultado todos os dias.</em></p>
+    <div class="intro-2col reveal">
+      <div class="intro-col-img">
+        <img src="Fotos/foto1.jpg" alt="Cozinha profissional Bianchini Kitchen Pro">
       </div>
-      <div class="intro-body reveal">
-        <p>A Bianchini Kitchen Pro não é uma mera revendedora de equipamentos. Somos o parceiro que há 18 anos atua ao lado das maiores operações de alimentação do Brasil, transformando todo esse conhecimento prático em cozinhas mais eficientes, seguras e lucrativas — entregando essa diferença, projeto a projeto.</p>
-        <p>Do mobiliário em inox à cocção, da refrigeração ao bar, da distribuição em buffet à tecnologia — cada componente foi projetado para fazer a sua operação produzir mais, gastar menos e passar em qualquer vistoria na primeira tentativa. Junto com cada projeto, entregamos também as plantas técnicas completas: elétrica, hidráulica, gás e esgoto — porque uma cozinha só funciona quando tudo está preparado para receber os equipamentos certos. Porque uma cozinha Bianchini não é obra. É resultado entregue.</p>
-        <a href="#categorias" class="link-arrow">Veja o que entregamos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="intro-col-text">
+        <span class="intro-eyebrow-bronze">Sobre a Bianchini</span>
+        <p class="intro-statement">Quem compra equipamento compra metal. Quem escolhe a <em>BIANCHINI</em> compra uma opera&ccedil;&atilde;o que <em>produz resultado todos os dias.</em></p>
+        <div class="intro-body">
+          <p>A Bianchini Kitchen Pro n&atilde;o &eacute; uma mera revendedora de equipamentos. Somos o parceiro que h&aacute; 18 anos atua ao lado das maiores opera&ccedil;&otilde;es de alimenta&ccedil;&atilde;o do Brasil, transformando todo esse conhecimento pr&aacute;tico em cozinhas mais eficientes, seguras e lucrativas &mdash; entregando essa diferen&ccedil;a, projeto a projeto.</p>
+          <p>Do mobili&aacute;rio em inox &agrave; coc&ccedil;&atilde;o, da refrigera&ccedil;&atilde;o ao bar, da distribui&ccedil;&atilde;o em buffet &agrave; tecnologia &mdash; cada componente foi projetado para fazer a sua opera&ccedil;&atilde;o produzir mais, gastar menos e passar em qualquer vistoria na primeira tentativa. Junto com cada projeto, entregamos tamb&eacute;m as plantas t&eacute;cnicas completas: el&eacute;trica, hidr&aacute;ulica, g&aacute;s e esgoto &mdash; porque uma cozinha s&oacute; funciona quando tudo est&aacute; preparado para receber os equipamentos certos. Porque uma cozinha Bianchini n&atilde;o &eacute; obra. &Eacute; resultado entregue.</p>
+          <a href="#categorias" class="link-arrow">Veja o que entregamos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="intro-photo-wrap reveal">
-    <img src="Fotos/foto1.jpg" alt="Cozinha profissional Bianchini Kitchen Pro" class="intro-photo">
-    <div class="intro-photo-overlay"></div>
-    <p class="intro-photo-caption">Equipamentos Bianchini Kitchen Pro &middot; Do projeto &agrave; execu&ccedil;&atilde;o</p>
   </div>
 </section>
 
