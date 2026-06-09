@@ -218,7 +218,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cat-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.4; }
 .cat-icon img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
 .cat-name { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 6px; letter-spacing: -.01em; }
-.cat-list { font-size: 13px; color: var(--mid); line-height: 1.85; flex: 1; }
+.cat-list { font-size: 13px; color: var(--mid); line-height: 1.85; }
+.cat-copy { font-size: 13px; color: var(--ink); line-height: 1.75; margin-top: 12px; font-style: italic; flex: 1; }
 .cat-more { margin-top: 20px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--dark); display: flex; align-items: center; gap: 6px; opacity: 0; transform: translateX(-6px); transition: all .3s var(--e); }
 .cat-cell:hover .cat-more { opacity: 1; transform: translateX(0); }
 @media(max-width:1024px){ .cat-grid { grid-template-columns: repeat(2,1fr); } }
@@ -544,6 +545,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/mobiliario.png" alt="Mobiliario Inox"></div>
         <div class="cat-name">Mobiliário Inox</div>
         <p class="cat-list">Mesas de preparo · Bancadas · Estantes · Prateleiras · Pias e cubas · Armários · Carros de transporte</p>
+        <p class="cat-copy">"Uma cozinha organizada não é detalhe. É o que separa uma equipe que produz de uma que improvisa." O mobiliário Bianchini é projetado para o ritmo real da sua operação — cada bancada, cada estante, cada cuba posicionada onde precisa estar para o fluxo funcionar sem atrito. Mais organização, menos retrabalho, mais produção por turno.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
@@ -551,6 +553,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/coccao.png" alt="Coccao"></div>
         <div class="cat-name">Cocção</div>
         <p class="cat-list">Fogões industriais · Chapas e grelhas · Fritadeiras · Char-broilers · Fornos de pizza · Salamandras · Caldeirões</p>
+        <p class="cat-copy">"Fogo no ponto certo, no tempo certo — é assim que uma cozinha gera lucro consistente." A linha de cocção Bianchini foi dimensionada para quem não pode parar. Alto rendimento, uniformidade de temperatura e durabilidade que resiste ao uso intenso de segunda a domingo. Cozinhas que produzem mais, sem aumentar o time nem o custo de energia.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
@@ -558,6 +561,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/refrigeracao.png" alt="Refrigeracao"></div>
         <div class="cat-name">Refrigeração</div>
         <p class="cat-list">Câmaras frigoríficas · Refrigeradores · Freezers · Balcões refrigerados · Saladetes · Fabricadores de gelo</p>
+        <p class="cat-copy">"Desperdício zero começa na câmara fria. Controle de temperatura é controle de custo." Cada grau importa. A linha de refrigeração Bianchini mantém a cadeia fria intacta — do recebimento ao preparo — com equipamentos dimensionados para o volume real da sua operação. Menos perda, mais aproveitamento, operação dentro da norma sanitária.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
@@ -565,6 +569,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/bar.png" alt="Bar"></div>
         <div class="cat-name">Bar</div>
         <p class="cat-list">Módulos de bar · Balcões frontais · Cubas e pias · Estações de chopp · Apoios refrigerados · Expositores</p>
+        <p class="cat-copy">"Um bar bem estruturado transforma bebida em experiência — e experiência em ticket médio." A estrutura de bar Bianchini foi pensada para o serviço fluir: tudo no lugar certo, na altura certa, sem improvisar. Quando o bar funciona, o consumo aumenta e o cliente fica mais tempo. Resultado que aparece no caixa no mesmo dia.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
@@ -572,6 +577,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/buffet.png" alt="Distribuicao e Buffet"></div>
         <div class="cat-name">Distribuição & Buffet</div>
         <p class="cat-list">Balcões de distribuição · Buffets térmicos · Pistas frias e quentes · Banho-maria · Réguas de apoio · Estufas</p>
+        <p class="cat-copy">"O cliente come primeiro com os olhos. Uma linha de distribuição Bianchini transforma isso em venda." Buffets que mantêm a temperatura ideal, apresentam o alimento com elegância e permitem o serviço sem congestionamento. Cada detalhe projetado para valorizar o que está sendo servido e acelerar o fluxo do cliente.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
@@ -579,6 +585,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/carros.png" alt="Carros e Transporte"></div>
         <div class="cat-name">Carros & Transporte</div>
         <p class="cat-list">Carros de transporte · Carros-estufa · Carros de bandejas · Carrinhos de serviço · Plataformas móveis em inox</p>
+        <p class="cat-copy">"Cada movimento desnecessário dentro da cozinha é tempo perdido. E tempo, na operação, é dinheiro." A linha de transporte Bianchini elimina o improviso entre estações — da produção à distribuição. Fluxo organizado, menos esforço da equipe, mais velocidade no serviço. O tipo de eficiência que só aparece quando tudo está no lugar certo.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
@@ -586,6 +593,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/tecnologia.png" alt="Tecnologia e Equipamentos"></div>
         <div class="cat-name">Tecnologia & Equipamentos</div>
         <p class="cat-list">Fornos combinados · Lavadoras de louças · Processadores · Batedeiras · Liquidificadores · Cortadores · Ultracongeladores</p>
+        <p class="cat-copy">"Tecnologia nas Cozinhas 4.0 não é luxo. É o que permite produzir mais, com menos gente, com consistência todos os dias." Fornos que memorizam receitas, lavadoras que reduzem o ciclo, equipamentos que trabalham enquanto sua equipe faz o que só humanos fazem. Resultado mensurável desde a primeira semana de operação.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
@@ -593,6 +601,7 @@ hidden="true"></span>
         <div class="cat-icon"><img src="Fotos/exaustao.png" alt="Exaustao e Ventilacao"></div>
         <div class="cat-name">Exaustão & Ventilação</div>
         <p class="cat-list">Coifas industriais · Sistemas de exaustão · Dutos em inox · Filtros e lavadores de gases · Make-up de ar · Dimensionamento técnico</p>
+        <p class="cat-copy">"Sem exaustão eficiente, nenhuma cozinha é aprovada. Com a Bianchini, você passa na primeira." A Bianchini projeta, fornece e instala sistemas de HVAC completos — utilizando equipamentos robustos, dimensionados corretamente, atendendo as Normas da Vigilância sanitária e corpo de bombeiros. Sem surpresa, tudo bem dimensionado para a sua necessidade.</p>
         <span class="cat-more">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
 
