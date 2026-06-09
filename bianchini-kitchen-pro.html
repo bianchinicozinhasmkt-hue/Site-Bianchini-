@@ -866,31 +866,14 @@ footer { background: #101010; padding: 72px 0 36px; }
 <script>
 document.body.classList.add('js-on');
 // ---- Hero slider ----
-var slides  = document.querySelectorAll('.hero-right .hslide');
-var dots    = document.querySelectorAll('.hdot');
+var slides = document.querySelectorAll('.hero-right .hslide');
 var current = 0;
-
 function showSlide(n) {
-  slides[current].classList.remove('on');
-  if (dots[current]) dots[current].classList.remove('on');
-  current = ((n % slides.length) + slides.length) % slides.length;
+  slides.forEach(function(s){ s.classList.remove('on'); });
+  current = (n + slides.length) % slides.length;
   slides[current].classList.add('on');
-  if (dots[current]) dots[current].classList.add('on');
 }
-
-// Timer iniciado PRIMEIRO — independente do setup dos dots
-var timer = setInterval(function () { showSlide(current + 1); }, 2000);
-
-// Setup dos dots (não bloqueia o timer acima)
-for (var _di = 0; _di < dots.length; _di++) {
-  (function (i) {
-    dots[i].addEventListener('click', function () {
-      clearInterval(timer);
-      showSlide(i);
-      timer = setInterval(function () { showSlide(current + 1); }, 2000);
-    });
-  })(_di);
-}
+setInterval(function(){ showSlide(current + 1); }, 2000);
 
 // ---- Navbar shadow ----
 const nav = document.getElementById('nav');
@@ -908,26 +891,26 @@ function toggleMenu(){
 // ---- Trust strip ticker ----
 (function(){
   const clientes = [
-    { src:’clientes/rede-dor.png’,        alt:"Rede D’Or"                    },
-    { src:’clientes/sesc.png’,            alt:’SESC’                         },
-    { src:’clientes/amil.png’,            alt:’AMIL’                         },
-    { src:’clientes/plaza-lounge.png’,    alt:’Plaza Lounge’,         lg:true },
-    { src:’clientes/petrobras.png’,       alt:’Petrobras Offshore’,   lg:true },
-    { src:’clientes/adonis.png’,          alt:’Restaurante Adonis’,   lg:true },
-    { src:’clientes/boliche-barra.png’,   alt:’Boliche Barra Shopping’       },
-    { src:’clientes/marriott.png’,        alt:’Hotel Marriott’               },
-    { src:’clientes/othon.png’,           alt:’Othon Hotéis’,         xl:true },
-    { src:’clientes/supermarket.png’,     alt:’Supermarket Supermercados’    },
-    { src:’clientes/guanabara.png’,       alt:’Supermercados Guanabara’      },
-    { src:’clientes/mocellin.png’,        alt:’Mocellin Churrascaria’,xl:true },
-    { src:’clientes/novilho-de-ouro.png’, alt:’Novilho de Ouro Churrascaria’, lg:true },
-    { src:’clientes/varieta.png’,         alt:’Varieta Restaurante’          },
+    { src:'clientes/rede-dor.png',        alt:"Rede D'Or"                    },
+    { src:'clientes/sesc.png',            alt:'SESC'                         },
+    { src:'clientes/amil.png',            alt:'AMIL'                         },
+    { src:'clientes/plaza-lounge.png',    alt:'Plaza Lounge',         lg:true },
+    { src:'clientes/petrobras.png',       alt:'Petrobras Offshore',   lg:true },
+    { src:'clientes/adonis.png',          alt:'Restaurante Adonis',   lg:true },
+    { src:'clientes/boliche-barra.png',   alt:'Boliche Barra Shopping'       },
+    { src:'clientes/marriott.png',        alt:'Hotel Marriott'               },
+    { src:'clientes/othon.png',           alt:'Othon Hotéis',         xl:true },
+    { src:'clientes/supermarket.png',     alt:'Supermarket Supermercados'    },
+    { src:'clientes/guanabara.png',       alt:'Supermercados Guanabara'      },
+    { src:'clientes/mocellin.png',        alt:'Mocellin Churrascaria',xl:true },
+    { src:'clientes/novilho-de-ouro.png', alt:'Novilho de Ouro Churrascaria', lg:true },
+    { src:'clientes/varieta.png',         alt:'Varieta Restaurante'          },
   ];
   const mkItem = c =>
     `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo${c.xl?' ts-logo-xl':c.lg?' ts-logo-lg':''}"></span>` +
     `<span class="ts-dot" aria-hidden="true"></span>`;
-  const html = clientes.map(mkItem).join(‘’);
-  const track = document.getElementById(‘ts-track’);
+  const html = clientes.map(mkItem).join('');
+  const track = document.getElementById('ts-track');
   if(track) track.innerHTML = html + html;
 })();
 
