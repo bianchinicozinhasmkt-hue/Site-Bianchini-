@@ -872,26 +872,25 @@ var current = 0;
 
 function showSlide(n) {
   slides[current].classList.remove('on');
-  dots[current].classList.remove('on');
-  current = n % slides.length;
+  if (dots[current]) dots[current].classList.remove('on');
+  current = ((n % slides.length) + slides.length) % slides.length;
   slides[current].classList.add('on');
-  dots[current].classList.add('on');
+  if (dots[current]) dots[current].classList.add('on');
 }
 
-function nextSlide() {
-  showSlide(current + 1);
+// Timer iniciado PRIMEIRO — independente do setup dos dots
+var timer = setInterval(function () { showSlide(current + 1); }, 2000);
+
+// Setup dos dots (não bloqueia o timer acima)
+for (var _di = 0; _di < dots.length; _di++) {
+  (function (i) {
+    dots[i].addEventListener('click', function () {
+      clearInterval(timer);
+      showSlide(i);
+      timer = setInterval(function () { showSlide(current + 1); }, 2000);
+    });
+  })(_di);
 }
-
-// Dots clicáveis
-dots.forEach(function(dot, i) {
-  dot.addEventListener('click', function() {
-    clearInterval(timer);
-    showSlide(i);
-    timer = setInterval(nextSlide, 2000);
-  });
-});
-
-var timer = setInterval(nextSlide, 2000);
 
 // ---- Navbar shadow ----
 const nav = document.getElementById('nav');
