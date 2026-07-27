@@ -14,404 +14,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-/* ════════════════════════════════════════════
-   RESET & TOKENS
-   ════════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-
-:root {
-  --white:  #FFFFFF;
-  --paper:  #FAF9F6;     /* fundo levíssimo creme */
-  --sand:   #F2F0EB;     /* seção alternada */
-  --line:   #E4E1DA;     /* bordas */
-  --mid:    #A8A49C;     /* texto muted */
-  --ink:    #3D3B37;     /* texto corpo */
-  --dark:   #1A2840;     /* azul-navy da marca */
-  --char:   #243050;     /* navy hover */
-  --gold:   #8C1A2E;     /* carmim — cor da marca Kitchen Pro */
-  --gold-l: #A82035;
-  --sans:   'DM Sans', sans-serif;
-  --serif:  'DM Serif Display', serif;
-  --max:    1340px;
-  --r:      2px;
-  --e:      cubic-bezier(.22,.61,.36,1);
-}
-
-body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.65; overflow-x: hidden; }
-img { display: block; max-width: 100%; }
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; }
-
-.wrap { max-width: var(--max); margin: 0 auto; padding: 0 56px; }
-@media(max-width:768px){ .wrap { padding: 0 24px; } }
-
-/* ════════════════════════════════════════════
-   TYPOGRAPHY UTILITIES
-   ════════════════════════════════════════════ */
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 11px; font-weight: 600; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 18px;
-}
-.eyebrow::before { content:''; width: 24px; height: 1px; background: var(--gold); }
-.eyebrow.center { justify-content: center; }
-
-.display { font-family: var(--serif); font-weight: 400; color: var(--dark); line-height: 1.02; letter-spacing: -.01em; }
-.h-xl { font-size: clamp(48px, 6.5vw, 92px); }
-.h-lg { font-size: clamp(38px, 4.5vw, 64px); }
-.h-md { font-size: clamp(30px, 3.5vw, 46px); }
-.lead { font-size: 17px; color: var(--ink); line-height: 1.8; }
-.serif-em { font-family: var(--serif); font-style: italic; color: var(--gold); }
-
-/* ════════════════════════════════════════════
-   BUTTONS
-   ════════════════════════════════════════════ */
-.btn {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-size: 13px; font-weight: 600; letter-spacing: .06em;
-  text-transform: uppercase; padding: 15px 34px; border-radius: var(--r);
-  transition: all .25s var(--e); white-space: nowrap;
-}
-.btn svg { width: 14px; height: 14px; transition: transform .25s var(--e); }
-.btn:hover svg { transform: translateX(4px); }
-.btn-dark   { background: var(--dark); color: var(--white); }
-.btn-dark:hover { background: var(--char); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.15); }
-.btn-gold   { background: var(--gold); color: var(--white); }
-.btn-gold:hover { background: var(--gold-l); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(140,26,46,.35); }
-.btn-line   { background: transparent; color: var(--dark); border: 1px solid var(--dark); }
-.btn-line:hover { background: var(--dark); color: var(--white); }
-.btn-white  { background: var(--white); color: var(--dark); }
-.btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
-.btn-line-w { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.35); }
-.btn-line-w:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.6); }
-.link-arrow { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--dark); transition: gap .2s; }
-.link-arrow svg { width: 14px; height: 14px; }
-.link-arrow:hover { gap: 12px; }
-
-/* ════════════════════════════════════════════
-   ANNOUNCEMENT BAR
-   ════════════════════════════════════════════ */
-#announce {
-  background: var(--dark); color: rgba(255,255,255,.93);
-  text-align: center; font-size: 12px; letter-spacing: .04em;
-  padding: 9px 24px; font-weight: 500;
-}
-#announce strong { color: #C4A052; font-weight: 600; }
-
-/* ════════════════════════════════════════════
-   NAVIGATION
-   ════════════════════════════════════════════ */
-#nav {
-  position: sticky; top: 0; z-index: 900;
-  background: rgba(255,255,255,.94); backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--line); transition: box-shadow .3s;
-}
-#nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.05); }
-.nav-in { display: flex; align-items: center; justify-content: space-between; height: 112px; }
-.nav-menu { display: flex; align-items: center; gap: 38px; }
-.nav-menu > a { font-size: 17.5px; font-weight: 500; color: #1C1C1A; letter-spacing: .01em; transition: color .2s; position: relative; }
-.nav-menu > a::after { content:''; position: absolute; left:0; bottom:-6px; width:0; height:1px; background: var(--gold); transition: width .25s; }
-.nav-menu > a:hover { color: var(--dark); }
-.nav-menu > a:hover::after { width: 100%; }
-.nav-right { display: flex; align-items: center; gap: 18px; }
-.burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
-.burger span { width: 22px; height: 1.5px; background: var(--dark); transition: .25s; }
-@media(max-width:1024px){
-  .nav-menu { display: none; }
-  .burger { display: flex; }
-}
-
-/* ════════════════════════════════════════════
-   HERO
-   ════════════════════════════════════════════ */
-#hero { position: relative; display: grid; grid-template-columns: 1.4fr 0.6fr; min-height: 480px; }
-.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 64px 56px 64px 0; }
-.hero-left .wrap-inner { margin-left: 0; padding-left: 56px; }
-.hero-title { font-family: var(--serif); font-weight: 400; color: var(--dark); font-size: clamp(46px, 5.5vw, 82px); line-height: 1.0; letter-spacing: -.015em; margin-bottom: 26px; }
-.hero-title em { font-style: italic; color: var(--gold); }
-.hero-sub { font-size: 17px; color: var(--ink); line-height: 1.8; max-width: 660px; margin-bottom: 38px; }
-.hero-cta { display: flex; flex-direction: row; align-items: center; gap: 14px; flex-wrap: nowrap; margin-bottom: 56px; }
-.hero-trust { display: flex; gap: 44px; flex-wrap: wrap; padding-top: 36px; border-top: 1px solid var(--line); }
-.ht-num { font-family: var(--serif); font-size: 34px; color: var(--dark); line-height: 1; margin-bottom: 5px; }
-.ht-lbl { font-size: 11.5px; color: var(--mid); letter-spacing: .08em; text-transform: uppercase; }
-
-.hero-right { position: relative; overflow: hidden; background: var(--sand); }
-.hslide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease; }
-.hslide.on { opacity: 1; }
-.hslide-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: rgba(0,0,0,.22); text-align: center; padding: 40px; }
-.hslide-ph strong { font-family: var(--serif); font-size: 22px; }
-.hslide-ph span { font-size: 12px; letter-spacing: .04em; }
-.hero-dots { position: absolute; right: 36px; bottom: 36px; z-index: 3; display: flex; flex-direction: column; gap: 7px; }
-.hdot { width: 3px; height: 16px; background: rgba(0,0,0,.18); border-radius: 2px; cursor: pointer; transition: all .3s; }
-.hdot.on { background: var(--dark); height: 30px; }
-.hero-tag { position: absolute; left: 36px; bottom: 36px; z-index: 3; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.4); }
-
-@media(max-width:900px){
-  #hero { grid-template-columns: 1fr; min-height: 0; }
-  .hero-left { padding: 36px 0; }
-  .hero-left .wrap-inner { padding: 0 24px; margin: 0; max-width: 100%; }
-  .hero-right { height: 38vh; min-height: 240px; max-height: 320px; order: -1; }
-}
-
-/* ════════════════════════════════════════════
-   LOGO BAR (trust strip)
-   ════════════════════════════════════════════ */
-#trust-strip { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 28px 0; overflow: hidden; position: relative; }
-#trust-strip::before,
-#trust-strip::after { content:''; position:absolute; top:0; width:100px; height:100%; z-index:2; pointer-events:none; }
-#trust-strip::before { left:0;  background:linear-gradient(to right, var(--white), transparent); }
-#trust-strip::after  { right:0; background:linear-gradient(to left,  var(--white), transparent); }
-.ts-track { display:flex; align-items:center; gap:36px; width:max-content; animation:ts-scroll 35s linear infinite; }
-.ts-track:hover { animation-play-state:paused; }
-@keyframes ts-scroll { 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
-/* altura uniforme: todas as logos têm 52px de altura, largura proporcional */
-.ts-item { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
-.ts-logo { height:52px; width:auto; display:block;
-           opacity:1; transition:opacity .3s, transform .3s; }
-.ts-item:hover .ts-logo { opacity:.75; transform:scale(1.07); }
-.ts-logo-lg { height:68px; }
-.ts-logo-xl { height:88px; }
-.ts-dot { width:3px; height:3px; border-radius:50%; background:rgba(0,0,0,.12); flex-shrink:0; align-self:center; }
-@media(max-width:768px){ .ts-track { gap:24px; animation-duration:25s; } .ts-logo { height:36px; } }
-
-/* ════════════════════════════════════════════
-   INTRO / MANIFESTO
-   ════════════════════════════════════════════ */
-#intro { padding: 80px 0; background: linear-gradient(135deg, #F5F3EE 0%, #EDE9E1 100%); border-top: 2px solid #9A7B4F; }
-.intro-2col { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; min-height: 520px; overflow: hidden; box-shadow: 0 8px 48px rgba(0,0,0,.07); }
-.intro-col-img { overflow: hidden; display: flex; }
-.intro-col-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; flex: 1; }
-.intro-col-text { background: var(--white); padding: 56px 64px; display: flex; flex-direction: column; justify-content: center; }
-.intro-eyebrow-bronze { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #9A7B4F; margin-bottom: 20px; }
-.intro-eyebrow-bronze::before { content: ''; width: 24px; height: 1px; background: #9A7B4F; }
-.intro-statement { font-family: var(--serif); font-size: clamp(24px,2.4vw,36px); line-height: 1.3; color: var(--dark); margin-bottom: 28px; }
-.intro-statement em { font-style: italic; color: var(--gold); }
-.intro-body p { font-size: 15px; color: #5A5754; line-height: 1.85; margin-bottom: 18px; }
-.intro-body p:last-of-type { margin-bottom: 32px; }
-@media(max-width:900px) {
-  .intro-2col { grid-template-columns: 1fr; box-shadow: none; }
-  .intro-col-img { height: 300px; }
-  .intro-col-text { padding: 40px 32px; }
-}
-
-/* ════════════════════════════════════════════
-   CATEGORIES — full offering grid
-   ════════════════════════════════════════════ */
-#categorias { padding: 48px 0 120px; background: var(--paper); }
-.cat-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; flex-wrap: wrap; gap: 24px; }
-.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.cat-cell {
-  background: var(--white); padding: 16px;
-  display: flex; flex-direction: column; cursor: pointer;
-  transition: background .3s var(--e); position: relative; overflow: hidden;
-}
-.cat-cell::after {
-  content:''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
-  background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--e);
-}
-.cat-cell:hover { background: var(--paper); }
-.cat-cell:hover::after { transform: scaleX(1); }
-.cat-icon { width: 200px; height: 200px; margin: 0 auto 8px; color: var(--gold); }
-.cat-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.4; }
-.cat-icon img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
-.cat-name { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 6px; letter-spacing: -.01em; }
-.cat-list { font-size: 13px; color: var(--mid); line-height: 1.85; }
-.cat-copy { font-size: 13px; color: var(--ink); line-height: 1.75; margin-top: 12px; font-style: italic; flex: 1; }
-.cat-more { margin-top: 20px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--dark); display: flex; align-items: center; gap: 6px; opacity: 0; transform: translateX(-6px); transition: all .3s var(--e); }
-.cat-cell:hover .cat-more { opacity: 1; transform: translateX(0); }
-@media(max-width:1024px){ .cat-grid { grid-template-columns: repeat(2,1fr); } }
-@media(max-width:560px){ .cat-grid { grid-template-columns: 1fr; } .cat-cell { min-height: auto; } .cat-icon { width: 140px; height: 140px; } }
-
-/* ════════════════════════════════════════════
-   FEATURE PRODUCT (alternating showcase)
-   ════════════════════════════════════════════ */
-.feature { display: grid; grid-template-columns: 1fr 1fr; min-height: 640px; }
-.feature.rev .feat-media { order: 2; }
-.feat-media { position: relative; overflow: hidden; background: var(--sand); }
-.feat-media .ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--mid); text-align: center; padding: 40px; }
-.feat-media .ph strong { font-family: var(--serif); font-size: 22px; }
-.feat-media .ph span { font-size: 12px; }
-.feat-1 .feat-media { background: linear-gradient(135deg,#dad5cd,#c6c1b8); }
-.feat-2 .feat-media { background: linear-gradient(135deg,#cec9c1,#dcd7d0); }
-.feat-3 .feat-media { background: linear-gradient(135deg,#c8c3ba,#d4cfc7); }
-.feat-body { display: flex; flex-direction: column; justify-content: center; padding: 80px 72px; }
-.feat-1 .feat-body, .feat-3 .feat-body { background: var(--white); }
-.feat-2 .feat-body { background: var(--paper); }
-.feat-name { font-family: var(--serif); font-size: clamp(30px,3.4vw,48px); color: var(--dark); line-height: 1.05; margin-bottom: 20px; }
-.feat-desc { font-size: 15.5px; color: var(--ink); line-height: 1.85; margin-bottom: 30px; max-width: 440px; }
-.feat-specs { display: flex; flex-direction: column; margin-bottom: 34px; }
-.feat-spec { display: flex; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
-.feat-spec:last-child { border-bottom: 1px solid var(--line); }
-.feat-spec .k { color: var(--mid); }
-.feat-spec .v { color: var(--dark); font-weight: 600; }
-.feat-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-@media(max-width:900px){
-  .feature, .feature.rev { grid-template-columns: 1fr; }
-  .feature.rev .feat-media { order: 0; }
-  .feat-media { min-height: 320px; }
-  .feat-body { padding: 48px 24px; }
-}
-
-/* ════════════════════════════════════════════
-   STATS BAND
-   ════════════════════════════════════════════ */
-#stats { background: var(--dark); padding: 88px 0; }
-.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
-.stat { padding: 0 44px; border-right: 1px solid rgba(255,255,255,.08); text-align: center; }
-.stat:last-child { border-right: none; }
-.stat-v { font-family: var(--serif); font-size: 56px; color: var(--white); line-height: 1; margin-bottom: 10px; }
-.stat-l { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); }
-@media(max-width:768px){ .stats-grid { grid-template-columns: 1fr 1fr; gap: 40px; } .stat { border-right: none; } }
-
-/* ════════════════════════════════════════════
-   SEGMENTS MOSAIC
-   ════════════════════════════════════════════ */
-#segmentos { padding: 120px 0 0; background: var(--white); }
-.seg-head { margin-bottom: 64px; max-width: 640px; }
-.seg-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: 1px; background: var(--line); }
-.seg { position: relative; overflow: hidden; cursor: pointer; background: var(--sand); }
-.seg.big { grid-column: span 2; grid-row: span 2; }
-.seg.wide { grid-column: span 2; }
-.seg-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .7s var(--e); }
-.seg:hover .seg-bg { transform: scale(1.05); }
-.seg:nth-child(1) .seg-bg{ background: linear-gradient(135deg,#cfcac2,#b9b4ac); }
-.seg:nth-child(2) .seg-bg{ background: linear-gradient(135deg,#c9c4bc,#d7d2ca); }
-.seg:nth-child(3) .seg-bg{ background: linear-gradient(135deg,#ccc7bf,#dad5cd); }
-.seg:nth-child(4) .seg-bg{ background: linear-gradient(135deg,#c5c0b8,#d2cdc5); }
-.seg:nth-child(5) .seg-bg{ background: linear-gradient(135deg,#d0cbc3,#c1bcb4); }
-.seg:nth-child(6) .seg-bg{ background: linear-gradient(135deg,#c7c2ba,#d5d0c8); }
-.seg:nth-child(7) .seg-bg{ background: linear-gradient(135deg,#cdc8c0,#bbb6ae); }
-.seg-ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,15,13,.78) 0%, rgba(15,15,13,.05) 60%); transition: background .35s; }
-.seg:hover .seg-ov { background: linear-gradient(to top, rgba(15,15,13,.88) 0%, rgba(15,15,13,.15) 75%); }
-.seg-c { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px; z-index: 2; }
-.seg-n { font-size: 18px; font-weight: 600; color: var(--white); letter-spacing: -.01em; margin-bottom: 7px; }
-.seg.big .seg-n { font-size: 26px; font-family: var(--serif); font-weight: 400; }
-.seg-d { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.6; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .4s var(--e), opacity .3s; }
-.seg:hover .seg-d { max-height: 90px; opacity: 1; }
-@media(max-width:900px){
-  .seg-mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 240px; }
-  .seg.big, .seg.wide { grid-column: span 1; grid-row: span 1; }
-  .seg.big .seg-n { font-size: 20px; }
-}
-@media(max-width:520px){ .seg-mosaic { grid-template-columns: 1fr; } }
-
-/* ════════════════════════════════════════════
-   WHY US — differentials
-   ════════════════════════════════════════════ */
-#porque { padding: 120px 0; background: var(--paper); }
-.why-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
-.why-sticky { position: sticky; top: 150px; }
-.why-list { display: flex; flex-direction: column; }
-.why-row { display: grid; grid-template-columns: 52px 1fr; gap: 28px; padding: 32px 0; border-top: 1px solid var(--line); }
-.why-row:last-child { border-bottom: 1px solid var(--line); }
-.why-n { font-family: var(--serif); font-size: 26px; color: var(--gold); line-height: 1; }
-.why-t { font-size: 17px; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
-.why-x { font-size: 14.5px; color: var(--ink); line-height: 1.8; }
-@media(max-width:900px){ .why-grid { grid-template-columns: 1fr; gap: 40px; } .why-sticky { position: static; } }
-
-/* ════════════════════════════════════════════
-   PROCESS
-   ════════════════════════════════════════════ */
-#processo { padding: 120px 0; background: var(--white); }
-.proc-head { text-align: center; margin-bottom: 72px; }
-.proc-head .eyebrow { justify-content: center; }
-.proc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
-.proc-grid::before { content:''; position: absolute; top: 27px; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, var(--gold), var(--line)); }
-.proc { text-align: center; padding: 0 28px; position: relative; }
-.proc-num { width: 54px; height: 54px; margin: 0 auto 28px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--white); font-family: var(--serif); font-size: 20px; color: var(--gold); position: relative; z-index: 1; }
-.proc-t { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 12px; }
-.proc-x { font-size: 13.5px; color: var(--ink); line-height: 1.75; }
-@media(max-width:768px){ .proc-grid { grid-template-columns: 1fr 1fr; gap: 48px 0; } .proc-grid::before { display: none; } }
-
-/* ════════════════════════════════════════════
-   PROJECTS GALLERY
-   ════════════════════════════════════════════ */
-#projetos { padding: 120px 0; background: var(--sand); }
-.proj-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; flex-wrap: wrap; gap: 24px; }
-.proj-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 1px; background: var(--line); }
-.proj { position: relative; overflow: hidden; background: var(--sand); }
-.proj.tall { grid-row: span 2; }
-.proj-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .6s var(--e); }
-.proj:hover .proj-img { transform: scale(1.05); }
-.proj:nth-child(1) .proj-img{ background: linear-gradient(135deg,#cbc6be,#b6b1a9); }
-.proj:nth-child(2) .proj-img{ background: linear-gradient(135deg,#cfcac2,#bdb8b0); }
-.proj:nth-child(3) .proj-img{ background: linear-gradient(135deg,#c7c2ba,#d3cec6); }
-.proj:nth-child(4) .proj-img{ background: linear-gradient(135deg,#cdc8c0,#bbb6ae); }
-.proj:nth-child(5) .proj-img{ background: linear-gradient(135deg,#c4bfb7,#d0cbc3); }
-.proj-ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,15,13,.62), transparent 55%); opacity: 0; transition: opacity .3s; }
-.proj:hover .proj-ov { opacity: 1; }
-.proj-lbl { position: absolute; left: 20px; bottom: 18px; z-index: 2; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--white); background: rgba(15,15,13,.55); backdrop-filter: blur(6px); padding: 6px 14px; border-radius: var(--r); }
-.proj-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--mid); font-size: 12px; text-align: center; padding: 24px; }
-@media(max-width:768px){
-  .proj-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px; }
-  .proj.tall { grid-row: span 1; grid-column: span 2; }
-}
-
-/* ════════════════════════════════════════════
-   TESTIMONIALS
-   ════════════════════════════════════════════ */
-#depoimentos { padding: 120px 0; background: var(--white); }
-.test-head { text-align: center; margin-bottom: 64px; }
-.test-head .eyebrow { justify-content: center; }
-.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.test { background: var(--white); padding: 44px 38px; display: flex; flex-direction: column; }
-.test-q { font-family: var(--serif); font-size: 52px; color: var(--gold); opacity: .3; line-height: .7; margin-bottom: 18px; }
-.test-x { font-size: 14.5px; color: var(--ink); line-height: 1.9; flex: 1; margin-bottom: 28px; }
-.test-a { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--line); padding-top: 22px; }
-.test-av { width: 44px; height: 44px; border-radius: 50%; background: var(--sand); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 17px; flex-shrink: 0; }
-.test-name { font-size: 14px; font-weight: 600; color: var(--dark); }
-.test-role { font-size: 12px; color: var(--mid); margin-top: 2px; line-height: 1.4; }
-@media(max-width:900px){ .test-grid { grid-template-columns: 1fr; } }
-
-/* ════════════════════════════════════════════
-   CTA
-   ════════════════════════════════════════════ */
-#cta { position: relative; background: var(--dark); padding: 130px 0; text-align: center; overflow: hidden; }
-#cta::before { content:'BIANCHINI'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--serif); font-size: clamp(120px,18vw,260px); color: rgba(255,255,255,.025); white-space: nowrap; pointer-events: none; }
-#cta .inner { position: relative; z-index: 1; }
-#cta .eyebrow { justify-content: center; color: var(--gold-l); }
-#cta .display { color: var(--white); margin-bottom: 22px; }
-#cta .lead { color: rgba(255,255,255,.55); max-width: 540px; margin: 0 auto 44px; }
-.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.cta-contact { margin-top: 60px; display: flex; justify-content: center; gap: 52px; flex-wrap: wrap; }
-.cc { font-size: 14px; color: rgba(255,255,255,.45); display: flex; align-items: center; gap: 9px; }
-.cc strong { color: rgba(255,255,255,.85); font-weight: 400; }
-.cc svg { width: 16px; height: 16px; stroke: var(--gold-l); fill: none; stroke-width: 1.5; }
-
-/* ════════════════════════════════════════════
-   FOOTER
-   ════════════════════════════════════════════ */
-footer { background: #101010; padding: 72px 0 36px; }
-.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
-.foot-brand p { font-size: 13px; color: rgba(255,255,255,.32); line-height: 1.85; margin-top: 18px; max-width: 280px; }
-.foot-holding { font-size: 11px; color: var(--gold-l); opacity: .7; letter-spacing: .08em; margin-top: 14px !important; }
-.foot-col h5 { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 22px; }
-.foot-col li { margin-bottom: 11px; }
-.foot-col a { font-size: 13px; color: rgba(255,255,255,.42); transition: color .2s; }
-.foot-col a:hover { color: var(--white); }
-.foot-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(255,255,255,.25); flex-wrap: wrap; gap: 12px; }
-.foot-social { display: flex; gap: 16px; }
-.foot-social a { color: rgba(255,255,255,.4); transition: color .2s; }
-.foot-social a:hover { color: var(--gold-l); }
-.foot-social svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-@media(max-width:900px){ .foot-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .foot-bottom { flex-direction: column; text-align: center; } }
-
-/* ════════════════════════════════════════════
-   WHATSAPP FLOAT
-   ════════════════════════════════════════════ */
-.wa { position: fixed; bottom: 28px; right: 28px; z-index: 990; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.18), 0 6px 28px rgba(37,211,102,.45); transition: transform .22s cubic-bezier(.22,.61,.36,1), box-shadow .22s; }
-.wa:hover { transform: scale(1.13); box-shadow: 0 6px 22px rgba(0,0,0,.22), 0 8px 36px rgba(37,211,102,.55); }
-.wa svg { width: 32px; height: 32px; fill: #fff; }
-
-/* reveal animation — só se aplica quando JS está ativo */
-.js-on .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--e), transform .7s var(--e); }
-.js-on .reveal.in { opacity: 1; transform: none; }
-</style>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/utilities.css">
+<link rel="stylesheet" href="assets/css/pages/home.css">
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 
 <!-- ANNOUNCEMENT -->
 <div id="announce">
@@ -422,11 +34,11 @@ footer { background: #101010; padding: 72px 0 36px; }
 <header id="nav">
   <div class="wrap">
     <div class="nav-in">
-      <a href="#" aria-label="Bianchini Kitchen Pro — início">
-        <img src="logo-bianchini-kitchen-pro.png" height="85" alt="Bianchini Kitchen Pro — Cozinhas Profissionais" style="display:block">
+      <a href="bianchini-kitchen-pro.html" aria-label="Bianchini Kitchen Pro — início" aria-current="page">
+      <img src="logo-bianchini-kitchen-pro.png" height="85" alt="Bianchini Kitchen Pro — Cozinhas Profissionais">
       </a>
 
-      <nav class="nav-menu" aria-label="Menu principal">
+      <nav class="nav-menu" id="primary-navigation" aria-label="Menu principal">
         <a href="#categorias">Linhas de Produtos</a>
         <a href="#segmentos">Segmentos</a>
         <a href="#porque">Por que Bianchini</a>
@@ -435,15 +47,17 @@ footer { background: #101010; padding: 72px 0 36px; }
       </nav>
 
       <div class="nav-right">
-        <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" class="btn btn-dark" style="padding:11px 26px">
+      <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" class="btn btn-dark nav-cta nav-cta--home">
           Solicitar Orçamento
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <button class="burger" aria-label="Abrir menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="burger" type="button" aria-label="Abrir menu" aria-controls="primary-navigation" aria-expanded="false" data-menu-toggle><span></span><span></span><span></span></button>
       </div>
     </div>
   </div>
 </header>
+
+<main id="main-content">
 
 <!-- HERO -->
 <section id="hero">
@@ -469,18 +83,18 @@ footer { background: #101010; padding: 72px 0 36px; }
     </div>
   </div>
 
-  <div class="hero-right" aria-hidden="true">
-    <div class="hslide on" style="background-image:url('Fotos/slide1.jpg')"></div>
-    <div class="hslide"    style="background-image:url('Fotos/slide2.jpg')"></div>
-    <div class="hslide"    style="background-image:url('Fotos/slide3.jpg')"></div>
-    <div class="hslide"    style="background-image:url('Fotos/slide4.jpg')"></div>
-    <div class="hslide"    style="background-image:url('Fotos/slide5.jpg')"></div>
+  <div class="hero-right" role="region" aria-roledescription="carrossel" aria-label="Destaques Bianchini Kitchen Pro" tabindex="0">
+      <div class="hslide hslide-1 on"></div>
+      <div class="hslide hslide-2"></div>
+      <div class="hslide hslide-3"></div>
+      <div class="hslide hslide-4"></div>
+      <div class="hslide hslide-5"></div>
     <div class="hero-dots">
-      <div class="hdot on" role="button" aria-label="Slide 1"></div>
-      <div class="hdot" role="button" aria-label="Slide 2"></div>
-      <div class="hdot" role="button" aria-label="Slide 3"></div>
-      <div class="hdot" role="button" aria-label="Slide 4"></div>
-      <div class="hdot" role="button" aria-label="Slide 5"></div>
+      <button class="hdot on" type="button" aria-label="Exibir slide 1" aria-current="true"></button>
+      <button class="hdot" type="button" aria-label="Exibir slide 2" aria-current="false"></button>
+      <button class="hdot" type="button" aria-label="Exibir slide 3" aria-current="false"></button>
+      <button class="hdot" type="button" aria-label="Exibir slide 4" aria-current="false"></button>
+      <button class="hdot" type="button" aria-label="Exibir slide 5" aria-current="false"></button>
     </div>
     <div class="hero-tag">Equipamentos Bianchini Kitchen Pro</div>
   </div>
@@ -502,8 +116,7 @@ footer { background: #101010; padding: 72px 0 36px; }
     <span class="ts-item"><img src="clientes/guanabara.png"        alt="Supermercados Guanabara"      class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/mocellin.png"         alt="Mocellin Churrascaria"        class="ts-logo ts-logo-xl"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/novilho-de-ouro.png"  alt="Novilho de Ouro Churrascaria" class="ts-logo ts-logo-lg"></span><span class="ts-dot" aria-hidden="true"></span>
-    <span class="ts-item"><img src="clientes/varieta.png"          alt="Varieta Restaurante"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true">
-hidden="true"></span>
+    <span class="ts-item"><img src="clientes/varieta.png"          alt="Varieta Restaurante"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
     <span class="ts-item"><img src="clientes/aeronautica.png"          alt="Aeronáutica"          class="ts-logo"></span><span class="ts-dot" aria-hidden="true"></span>
   </div>
 </div>
@@ -536,68 +149,68 @@ hidden="true"></span>
         <span class="eyebrow">Linhas de Produtos</span>
         <h2 class="display h-lg">Cada solução,<br>um resultado a mais.</h2>
       </div>
-      <p style="font-size:17px; color:#232320; line-height:1.8; font-weight:400; max-width:380px;">Cada linha foi projetada com um objetivo: fazer a sua cozinha <strong style="color:#9E2A2B;">produzir mais, desperdiçar menos</strong> e gerar resultado todos os dias. Escolha o segmento e descubra o que a Bianchini entrega.</p>
+        <p class="categories-intro">Cada linha foi projetada com um objetivo: fazer a sua cozinha <strong>produzir mais, desperdiçar menos</strong> e gerar resultado todos os dias. Escolha o segmento e descubra o que a Bianchini entrega.</p>
     </div>
 
     <div class="cat-grid">
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/mobiliario.png" alt="Mobiliario Inox"></div>
-       <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">MOBILIÁRIOS INOX</div>
+          <div class="cat-name">MOBILIÁRIOS INOX</div>
         <p class="cat-subtitle"><em><strong>Uma cozinha organizada não é detalhe. É o que separa uma equipe que produz de uma que improvisa.</p></em></strong> O mobiliário Bianchini é projetado para o ritmo real da sua operação — cada bancada, cada estante, cada cuba posicionada onde precisa estar para o fluxo funcionar sem atrito. Mais organização, menos retrabalho, mais produção por turno.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#mobiliario" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#mobiliario">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/coccao.png" alt="Coccao"></div>
-        <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">COCÇÃO</div>
+          <div class="cat-name">COCÇÃO</div>
 
         <p class="cat-subtitle"><em><strong>Fogo no ponto certo, no tempo certo — é assim que uma cozinha gera lucro consistente.</p></em></strong> A linha de cocção Bianchini foi dimensionada para quem não pode parar. Alto rendimento, uniformidade de temperatura e durabilidade que resiste ao uso intenso de segunda a domingo. Cozinhas que produzem mais, sem aumentar o time nem o custo de energia.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#coccao" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#coccao">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/refrigeracao.png" alt="Refrigeracao"></div>
-        <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">REFRIGERAÇÃO</div>
+          <div class="cat-name">REFRIGERAÇÃO</div>
         <p class="cat-subtitle"><em><strong>Desperdício zero começa na câmara fria. Controle de temperatura é controle de custo.</p></em></strong> Cada grau importa. A linha de refrigeração Bianchini mantém a cadeia fria intacta — do recebimento ao preparo — com equipamentos dimensionados para o volume real da sua operação. Menos perda, mais aproveitamento, operação dentro da norma sanitária.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#refrigeracao" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#refrigeracao">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/bar.png" alt="Bar"></div>
-        <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">BAR</div>
+          <div class="cat-name">BAR</div>
         <p class="cat-subtitle"><em><strong>Um bar bem estruturado transforma bebida em experiência — e experiência em ticket médio.</p></em></strong> A estrutura de bar Bianchini foi pensada para o serviço fluir: tudo no lugar certo, na altura certa, sem improvisar. Quando o bar funciona, o consumo aumenta e o cliente fica mais tempo. Resultado que aparece no caixa no mesmo dia.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#bar" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#bar">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/buffet.png" alt="Distribuicao e Buffet"></div>
-       <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">BUFFET</div>
+          <div class="cat-name">BUFFET</div>
 
         <p class="cat-subtitle"><em><strong>O cliente come primeiro com os olhos. Uma linha de distribuição Bianchini transforma isso em venda.</p></em></strong> Buffets que mantêm a temperatura ideal, apresentam o alimento com elegância e permitem o serviço sem congestionamento. Cada detalhe projetado para valorizar o que está sendo servido e acelerar o fluxo do cliente.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#buffet" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#buffet">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/carros.png" alt="Carros e Transporte"></div>
-        <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">CARROS & TRANSPORTES</div>
+          <div class="cat-name">CARROS & TRANSPORTES</div>
         <p class="cat-subtitle"><em><strong>Cada movimento desnecessário dentro da cozinha é tempo perdido. E tempo, na operação, é dinheiro.</p></em></strong>  A linha de transporte Bianchini elimina o improviso entre estações — da produção à distribuição. Fluxo organizado, menos esforço da equipe, mais velocidade no serviço. O tipo de eficiência que só aparece quando tudo está no lugar certo.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#carros" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#carros">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/tecnologia.png" alt="Tecnologia e Equipamentos"></div>
-        <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">EQUIPAMENTOS TECNOLÓGICOS</div>
+          <div class="cat-name">EQUIPAMENTOS TECNOLÓGICOS</div>
 
         <p class="cat-subtitle"><em><strong>Tecnologia nas Cozinhas 4.0 não é luxo. É o que permite produzir mais, com menos gente, com consistência todos os dias.</p></em></strong> Fornos que memorizam receitas, lavadoras que reduzem o ciclo, equipamentos que trabalham enquanto sua equipe faz o que só humanos fazem. Resultado mensurável desde a primeira semana de operação.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#tecnologia" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#tecnologia">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
-      <div class="cat-cell reveal" onclick="location.href='https://wa.me/5521964690650'">
+        <div class="cat-cell reveal">
         <div class="cat-icon"><img src="Fotos/exaustao.png" alt="Exaustao e Ventilacao"></div>
-        <div class="cat-name" style="font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:#9E2A2B;">EXAUSTÃO & VENTILAÇÃO</div>
+          <div class="cat-name">EXAUSTÃO & VENTILAÇÃO</div>
         <p class="cat-subtitle"><em><strong>Sem exaustão eficiente, nenhuma cozinha é aprovada. Com a Bianchini, você passa na primeira.</p></em></strong> A Bianchini projeta, fornece e instala sistemas de HVAC completos — utilizando equipamentos robustos, dimensionados corretamente, atendendo as Normas da Vigilância sanitária e corpo de bombeiros. Sem surpresa, tudo bem dimensionado para a sua necessidade.</p>
-        <a class="cat-more" href="linhas-de-produtos.html#exaustao" onclick="event.stopPropagation()">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cat-more" href="linhas-de-produtos.html#exaustao">Explorar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
     </div>
@@ -722,8 +335,8 @@ hidden="true"></span>
       <div class="why-sticky reveal">
         <span class="eyebrow">Por que Bianchini</span>
         <h2 class="display h-md">Por que os melhores<br>escolhem a Bianchini.</h2>
-        <p class="lead" style="margin-top:24px; color:var(--ink)">Há 18 anos dentro das maiores operações de alimentação do Brasil, aprendemos exatamente o que separa uma cozinha que gera lucro de uma que gera problema. Essa diferença, nós entregamos.</p>
-        <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:32px">Falar com Especialista</a>
+      <p class="lead feature-product-lead">Há 18 anos dentro das maiores operações de alimentação do Brasil, aprendemos exatamente o que separa uma cozinha que gera lucro de uma que gera problema. Essa diferença, nós entregamos.</p>
+      <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" class="btn btn-gold feature-product-cta">Falar com Especialista</a>
       </div>
 
       <div class="why-list">
@@ -826,12 +439,14 @@ hidden="true"></span>
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="logo-bianchini-kitchen-pro.png" height="68" alt="Bianchini Kitchen Pro" style="filter:brightness(0) invert(1) opacity(.6)">
+      <img src="logo-bianchini-kitchen-pro.png" height="68" alt="Bianchini Kitchen Pro" class="footer-logo-muted">
         <p>Não vendemos equipamentos. Entregamos operações mais eficientes, times mais produtivos e resultado que você mede. 18 anos transformando cozinhas profissionais e industriais no Brasil.</p>
         <p class="foot-holding">Uma empresa do grupo Bianchini Holding</p>
       </div>
@@ -875,8 +490,8 @@ hidden="true"></span>
     <div class="foot-bottom">
       <span>© 2026 Bianchini Kitchen Pro · Todos os direitos reservados · Rio de Janeiro · RJ · Brasil</span>
       <div class="foot-social">
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 11v6"/></svg></a>
+        <button class="social-placeholder" type="button" aria-label="Instagram indisponível" disabled><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></button>
+        <button class="social-placeholder" type="button" aria-label="LinkedIn indisponível" disabled><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 11v6"/></svg></button>
         <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1-5.5a8.5 8.5 0 0 1-1-4 8.38 8.38 0 0 1 8.5-8.5A8.5 8.5 0 0 1 21 11.5z"/></svg></a>
       </div>
     </div>
@@ -887,63 +502,6 @@ hidden="true"></span>
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
 </a>
 
-<script>
-document.body.classList.add('js-on');
-// ---- Hero slider ----
-var slides = document.querySelectorAll('.hero-right .hslide');
-var current = 0;
-function showSlide(n) {
-  slides.forEach(function(s){ s.classList.remove('on'); });
-  current = (n + slides.length) % slides.length;
-  slides[current].classList.add('on');
-}
-setInterval(function(){ showSlide(current + 1); }, 2000);
-
-// ---- Navbar shadow ----
-const nav = document.getElementById('nav');
-addEventListener('scroll', ()=> nav.classList.toggle('scrolled', scrollY>30), {passive:true});
-
-// ---- Mobile menu ----
-let mo=false;
-function toggleMenu(){
-  const m=document.querySelector('.nav-menu'); mo=!mo;
-  m.style.cssText = mo
-    ? 'display:flex;flex-direction:column;position:fixed;top:147px;left:0;right:0;background:#fff;padding:28px 24px;gap:22px;border-bottom:1px solid var(--line);z-index:800;box-shadow:0 20px 40px rgba(0,0,0,.08)'
-    : '';
-}
-
-// ---- Trust strip ticker ----
-(function(){
-  const clientes = [
-    { src:'clientes/rede-dor.png',        alt:"Rede D'Or"                    },
-    { src:'clientes/sesc.png',            alt:'SESC'                         },
-    { src:'clientes/amil.png',            alt:'AMIL'                         },
-    { src:'clientes/plaza-lounge.png',    alt:'Plaza Lounge',         lg:true },
-    { src:'clientes/petrobras.png',       alt:'Petrobras Offshore',   lg:true },
-    { src:'clientes/adonis.png',          alt:'Restaurante Adonis',   lg:true },
-    { src:'clientes/boliche-barra.png',   alt:'Boliche Barra Shopping'       },
-    { src:'clientes/marriott.png',        alt:'Hotel Marriott'               },
-    { src:'clientes/othon.png',           alt:'Othon Hotéis',         xl:true },
-    { src:'clientes/supermarket.png',     alt:'Supermarket Supermercados'    },
-    { src:'clientes/guanabara.png',       alt:'Supermercados Guanabara'      },
-    { src:'clientes/mocellin.png',        alt:'Mocellin Churrascaria',xl:true },
-    { src:'clientes/novilho-de-ouro.png', alt:'Novilho de Ouro Churrascaria', lg:true },
-    { src:'clientes/varieta.png',         alt:'Varieta Restaurante'          },
-    { src:'clientes/aeronautica.png',     alt:'Aeronáutica',   lg:true },
-  ];
-  const mkItem = c =>
-    `<span class="ts-item"><img src="${c.src}" alt="${c.alt}" class="ts-logo${c.xl?' ts-logo-xl':c.lg?' ts-logo-lg':''}"></span>` +
-    `<span class="ts-dot" aria-hidden="true"></span>`;
-  const html = clientes.map(mkItem).join('');
-  const track = document.getElementById('ts-track');
-  if(track) track.innerHTML = html + html;
-})();
-
-// ---- Reveal on scroll ----
-const io = new IntersectionObserver((es)=>{
-  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-}, {threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-</script>
+<script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

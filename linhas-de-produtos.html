@@ -9,276 +9,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-/* ════════════════════════════════════════════
-   RESET & TOKENS (idêntico ao site principal)
-   ════════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-
-:root {
-  --white:  #FFFFFF;
-  --paper:  #FAF9F6;
-  --sand:   #F2F0EB;
-  --line:   #E4E1DA;
-  --mid:    #A8A49C;
-  --ink:    #3D3B37;
-  --dark:   #1A2840;
-  --char:   #243050;
-  --gold:   #8C1A2E;
-  --gold-l: #A82035;
-  --bronze: #9A7B4F;
-  --sans:   'DM Sans', sans-serif;
-  --serif:  'DM Serif Display', serif;
-  --max:    1340px;
-  --r:      2px;
-  --e:      cubic-bezier(.22,.61,.36,1);
-}
-
-body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.65; overflow-x: hidden; }
-img { display: block; max-width: 100%; }
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; }
-.wrap { max-width: var(--max); margin: 0 auto; padding: 0 56px; }
-@media(max-width:768px){ .wrap { padding: 0 24px; } }
-
-/* ════════════════════════════════════════════
-   BOTÕES
-   ════════════════════════════════════════════ */
-.btn {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-size: 13px; font-weight: 600; letter-spacing: .06em;
-  text-transform: uppercase; padding: 15px 34px; border-radius: var(--r);
-  transition: all .25s var(--e); white-space: nowrap;
-}
-.btn svg { width: 14px; height: 14px; transition: transform .25s var(--e); }
-.btn:hover svg { transform: translateX(4px); }
-.btn-dark  { background: var(--dark); color: var(--white); }
-.btn-dark:hover { background: var(--char); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.15); }
-.btn-gold  { background: var(--gold); color: var(--white); }
-.btn-gold:hover { background: var(--gold-l); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(140,26,46,.35); }
-.btn-line  { background: transparent; color: var(--dark); border: 1px solid var(--dark); }
-.btn-line:hover { background: var(--dark); color: var(--white); }
-
-/* ════════════════════════════════════════════
-   ANNOUNCEMENT BAR
-   ════════════════════════════════════════════ */
-#announce {
-  background: var(--dark); color: rgba(255,255,255,.93);
-  text-align: center; font-size: 12px; letter-spacing: .04em;
-  padding: 9px 24px; font-weight: 500;
-}
-#announce strong { color: #C4A052; font-weight: 600; }
-
-/* ════════════════════════════════════════════
-   NAVIGATION
-   ════════════════════════════════════════════ */
-#nav {
-  position: sticky; top: 0; z-index: 900;
-  background: rgba(255,255,255,.94); backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--line); transition: box-shadow .3s;
-}
-#nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.05); }
-.nav-in { display: flex; align-items: center; justify-content: space-between; height: 88px; }
-.nav-menu { display: flex; align-items: center; gap: 32px; }
-.nav-menu > a { font-size: 15px; font-weight: 500; color: #1C1C1A; letter-spacing: .01em; transition: color .2s; position: relative; }
-.nav-menu > a::after { content:''; position: absolute; left:0; bottom:-6px; width:0; height:1px; background: var(--gold); transition: width .25s; }
-.nav-menu > a:hover { color: var(--dark); }
-.nav-menu > a:hover::after { width: 100%; }
-.nav-right { display: flex; align-items: center; gap: 14px; }
-.back-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--mid); transition: color .2s; }
-.back-link svg { width: 14px; height: 14px; }
-.back-link:hover { color: var(--dark); }
-.burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
-.burger span { width: 22px; height: 1.5px; background: var(--dark); }
-@media(max-width:1024px){ .nav-menu { display: none; } .burger { display: flex; } }
-
-/* ════════════════════════════════════════════
-   PAGE HERO BAR
-   ════════════════════════════════════════════ */
-.page-hero {
-  background: var(--dark); padding: 56px 0;
-  border-bottom: 3px solid var(--gold);
-}
-.page-hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 11px; font-weight: 600; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--bronze); margin-bottom: 16px;
-}
-.page-hero-eyebrow::before { content:''; width: 24px; height: 1px; background: var(--bronze); }
-.page-hero h1 { font-family: var(--serif); font-weight: 400; color: var(--white); font-size: clamp(36px,4vw,58px); line-height: 1.05; margin-bottom: 16px; }
-.page-hero p { font-size: 16px; color: rgba(255,255,255,.65); max-width: 600px; }
-
-/* ════════════════════════════════════════════
-   MOBILE TOP NAV (âncoras)
-   ════════════════════════════════════════════ */
-.mobile-anchor-nav {
-  display: none;
-  background: var(--sand);
-  border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.mobile-anchor-nav::-webkit-scrollbar { display: none; }
-.mobile-anchor-nav-inner { display: flex; gap: 0; white-space: nowrap; padding: 0 16px; }
-.mobile-anchor-nav a {
-  display: block; padding: 12px 14px;
-  font-size: 12px; font-weight: 600; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--mid);
-  transition: color .2s; border-bottom: 2px solid transparent;
-}
-.mobile-anchor-nav a.active { color: var(--dark); border-bottom-color: var(--gold); }
-@media(max-width:1024px){ .mobile-anchor-nav { display: block; } }
-
-/* ════════════════════════════════════════════
-   LAYOUT: SIDEBAR + MAIN
-   ════════════════════════════════════════════ */
-.page-layout { display: flex; align-items: flex-start; max-width: var(--max); margin: 0 auto; padding: 0 56px; gap: 0; }
-@media(max-width:1200px){ .page-layout { padding: 0 32px; } }
-@media(max-width:1024px){ .page-layout { padding: 0; } }
-
-/* SIDEBAR */
-.side-nav {
-  width: 220px; flex-shrink: 0;
-  position: sticky; top: 89px;
-  padding: 48px 0 48px;
-  border-right: 1px solid var(--line);
-}
-.side-nav-label {
-  font-size: 10px; font-weight: 600; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--bronze);
-  margin-bottom: 20px; padding-right: 24px;
-}
-.side-nav a {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13px; font-weight: 500; color: var(--mid);
-  padding: 9px 24px 9px 0; border-right: 2px solid transparent;
-  transition: color .2s, border-color .2s; line-height: 1.3;
-}
-.side-nav a::before { content:''; width: 4px; height: 4px; border-radius: 50%; background: var(--line); flex-shrink: 0; transition: background .2s; }
-.side-nav a:hover { color: var(--dark); }
-.side-nav a:hover::before { background: var(--gold); }
-.side-nav a.active { color: var(--dark); font-weight: 600; border-right-color: var(--gold); }
-.side-nav a.active::before { background: var(--gold); }
-@media(max-width:1024px){ .side-nav { display: none; } }
-
-/* MAIN CONTENT */
-.lp-main { flex: 1; min-width: 0; }
-
-/* ════════════════════════════════════════════
-   SEÇÃO DE LINHA DE PRODUTO
-   ════════════════════════════════════════════ */
-.lp-section {
-  padding: 80px 0 80px 64px;
-  border-bottom: 1px solid var(--line);
-}
-.lp-section:last-child { border-bottom: none; }
-@media(max-width:1024px){ .lp-section { padding: 64px 24px; } }
-
-.lp-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 10px; font-weight: 600; letter-spacing: .2em;
-  text-transform: uppercase; color: var(--bronze); margin-bottom: 20px;
-}
-.lp-eyebrow::before { content:''; width: 20px; height: 1px; background: var(--bronze); }
-
-.lp-title {
-  font-family: var(--serif); font-weight: 400; color: var(--dark);
-  font-size: clamp(36px, 3.5vw, 56px); line-height: 1.05;
-  letter-spacing: -.015em; margin-bottom: 28px;
-}
-
-.lp-subtitle {
-  border-left: 3px solid var(--bronze);
-  padding-left: 20px;
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(17px, 1.8vw, 22px); line-height: 1.5;
-  color: var(--dark); margin-bottom: 36px;
-}
-
-.lp-text { max-width: 720px; margin-bottom: 40px; }
-.lp-text p { font-size: 16px; color: var(--ink); line-height: 1.85; margin-bottom: 18px; }
-.lp-text p:last-child { margin-bottom: 0; }
-
-/* LISTA DE PRODUTOS */
-.lp-products { margin-bottom: 48px; }
-.lp-products-title {
-  font-size: 11px; font-weight: 600; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--bronze);
-  margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
-}
-.lp-products-title::after { content:''; flex: 1; height: 1px; background: var(--line); }
-.lp-product-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-@media(max-width:640px){ .lp-product-grid { grid-template-columns: 1fr; } }
-.lp-product-item {
-  background: var(--paper); padding: 16px 20px;
-  border-left: 2px solid var(--line); transition: border-color .2s;
-}
-.lp-product-item:hover { border-left-color: var(--gold); }
-.lp-product-item strong { display: block; font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
-.lp-product-item span { font-size: 12px; color: var(--mid); line-height: 1.6; }
-
-/* FOTOS PLACEHOLDER */
-.lp-photos { margin-bottom: 48px; }
-.lp-photos-title {
-  font-size: 11px; font-weight: 600; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--bronze);
-  margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
-}
-.lp-photos-title::after { content:''; flex: 1; height: 1px; background: var(--line); }
-.lp-photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; box-sizing: border-box; overflow: hidden; width: 100%; }
-@media(max-width:640px){ .lp-photo-grid { grid-template-columns: 1fr; } }
-.lp-photo-placeholder {
-  width: 100%; box-sizing: border-box; overflow: visible; min-width: 0;
-  display: flex; flex-direction: column; cursor: default;
-}
-.lp-photo-placeholder-img {
-  aspect-ratio: 4/3; background: var(--sand);
-  border: 1.5px dashed var(--line); border-radius: var(--r);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; transition: border-color .2s, background .2s; overflow: hidden; width: 100%;
-}
-.lp-photo-placeholder:hover .lp-photo-placeholder-img { border-color: var(--bronze); background: #F0EDE5; }
-.lp-photo-placeholder svg { width: 28px; height: 28px; stroke: var(--line); }
-.lp-photo-placeholder span { display: block; padding-top: 8px; font-size: 12px; color: var(--mid); text-align: center; letter-spacing: .04em; }
-
-/* CTA */
-.lp-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.lp-cta-note { font-size: 12px; color: var(--mid); }
-
-/* DIVIDER */
-.lp-divider {
-  height: 1px; background: linear-gradient(to right, transparent, var(--bronze) 20%, var(--bronze) 80%, transparent);
-  opacity: .35; margin: 0;
-}
-
-/* ════════════════════════════════════════════
-   FOOTER (idêntico ao principal)
-   ════════════════════════════════════════════ */
-footer { background: #101010; padding: 72px 0 36px; }
-.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-.foot-brand p { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.75; margin-top: 20px; }
-.foot-holding { font-size: 11px; color: rgba(255,255,255,.25); margin-top: 12px; }
-.foot-col h5 { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
-.foot-col a { display: block; font-size: 13px; color: rgba(255,255,255,.55); margin-bottom: 10px; transition: color .2s; }
-.foot-col a:hover { color: var(--white); }
-.foot-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.07); font-size: 12px; color: rgba(255,255,255,.25); }
-.foot-social { display: flex; gap: 16px; }
-.foot-social a { color: rgba(255,255,255,.3); transition: color .2s; }
-.foot-social a:hover { color: rgba(255,255,255,.8); }
-.foot-social svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-@media(max-width:900px){ .foot-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .foot-bottom { flex-direction: column; text-align: center; gap: 16px; } }
-@media(max-width:500px){ .foot-grid { grid-template-columns: 1fr; } }
-
-/* WHATSAPP FLOAT */
-.wa { position: fixed; bottom: 28px; right: 28px; z-index: 990; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.18), 0 6px 28px rgba(37,211,102,.45); transition: transform .22s var(--e), box-shadow .22s; }
-.wa:hover { transform: scale(1.13); }
-.wa svg { width: 32px; height: 32px; fill: #fff; }
-</style>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/utilities.css">
+<link rel="stylesheet" href="assets/css/pages/produtos.css">
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 
 <!-- ANNOUNCEMENT -->
 <div id="announce">
@@ -290,9 +30,9 @@ footer { background: #101010; padding: 72px 0 36px; }
   <div class="wrap">
     <div class="nav-in">
       <a href="bianchini-kitchen-pro.html" aria-label="Bianchini Kitchen Pro — in&iacute;cio">
-        <img src="logo-bianchini-kitchen-pro.png" height="72" alt="Bianchini Kitchen Pro" style="display:block">
+        <img src="logo-bianchini-kitchen-pro.png" height="72" alt="Bianchini Kitchen Pro">
       </a>
-      <nav class="nav-menu" aria-label="Linhas de produto">
+      <nav class="nav-menu" id="primary-navigation" aria-label="Linhas de produto">
         <a href="#mobiliario">Mobili&aacute;rio</a>
         <a href="#coccao">Coc&ccedil;&atilde;o</a>
         <a href="#refrigeracao">Refrigera&ccedil;&atilde;o</a>
@@ -307,15 +47,17 @@ footer { background: #101010; padding: 72px 0 36px; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           Voltar ao site
         </a>
-        <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" class="btn btn-gold" style="padding:11px 22px">
+        <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" class="btn btn-gold nav-cta nav-cta--compact">
           Or&ccedil;amento
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <button class="burger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+        <button class="burger" type="button" aria-label="Abrir menu" aria-controls="primary-navigation" aria-expanded="false" data-menu-toggle><span></span><span></span><span></span></button>
       </div>
     </div>
   </div>
 </header>
+
+<main id="main-content">
 
 <!-- MOBILE ANCHOR NAV -->
 <div class="mobile-anchor-nav" id="mobile-anchors">
@@ -403,24 +145,17 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-  	<img src="Fotos/mobiliario1.jpg" 
-       alt="Conjunto de Mobiliário"
-	style="width:100%; height:100%; object-fit:cover; display:block;"  	
-	<span>Conjunto de Mobiliário</span>
-	</div>
+            <img src="Fotos/mobiliario1.jpg" alt="Conjunto de Mobiliário" class="lp-photo-image lp-photo-image--cover">
+            <span>Conjunto de Mobiliário</span>
+          </div>
           <div class="lp-photo-placeholder">
-  	<img src="Fotos/mobiliario2.jpg" 
-       alt="Bancada contínua com cuba integrada"
-	style="width:100%; height:100%; object-fit:cover; display:block;"  	
-	<span>Mesas largas para confeitaria</span>
-	</div>
+            <img src="Fotos/mobiliario2.jpg" alt="Bancada contínua com cuba integrada" class="lp-photo-image lp-photo-image--cover">
+            <span>Mesas largas para confeitaria</span>
+          </div>
           <div class="lp-photo-placeholder">
-  	<img src="Fotos/mobiliario3.jpg" 
-       alt="Bancada contínua com cuba integrada"
-	style="width:100%; height:100%; object-fit:cover; display:block;"
-  	<span>Estantes Perfuradas para Câmaras Frias</span>
-	</div>
-
+            <img src="Fotos/mobiliario3.jpg" alt="Bancada contínua com cuba integrada" class="lp-photo-image lp-photo-image--cover">
+            <span>Estantes Perfuradas para Câmaras Frias</span>
+          </div>
         </div>
       </div>
 
@@ -454,7 +189,7 @@ footer { background: #101010; padding: 72px 0 36px; }
           </div>
           <div class="lp-product-item">
             <strong>Chapas e grelhas</strong>
-            <span>A g&aacute;s ou el&eacute;tricas, lisas ou ranhuradas. Temperaturas de at&eacute; 300&deg;C, aquecimento uniforme em toda a superf&iacute;cie, capacidade de at&eacute; 60 port&otilde;es/hora.</span>
+            <span>A g&aacute;s ou el&eacute;tricas, lisas ou ranhuradas. Temperaturas de at&eacute; 300&deg;C, aquecimento uniforme em toda a superf&iacute;cie, capacidade de at&eacute; 100 porções/hora, dependendo do equipamento.</span>
           </div>
           <div class="lp-product-item">
             <strong>Fritadeiras industriais</strong>
@@ -465,34 +200,39 @@ footer { background: #101010; padding: 72px 0 36px; }
             <span>Grelhas a g&aacute;s de alto desempenho com decks de ferro fundido. Ideais para proteínas em alta temperatura com marcação perfeita.</span>
           </div>
           <div class="lp-product-item">
-            <strong>Fornos e Graninadores</strong>
-            <span>Andares independentes, temperatura at&eacute; 400&deg;C, distribuição uniforme de calor. Capacidade de 2 a 6 pizzas por ciclo dependendo do modelo.</span>
+            <strong>Fornos e Salamandras</strong>
+            <span>Câmaras com andares independentes, temperatura at&eacute; 250&deg;C, distribuição uniforme de calor. CSalamandras a g&aacute;s para gratinados e finaliza&ccedil;&otilde;es.</span>
           </div>
           <div class="lp-product-item">
-            <strong>Salamandras e Calder&otilde;es</strong>
-            <span>Salamandras a g&aacute;s para gratinados e finaliza&ccedil;&otilde;es. Calder&otilde;es de 30 a 200 litros, inclina&ccedil;&atilde;o mec&acirc;nica, base encapsulada em inox.</span>
+            <strong>Frigideiras Basculantes e Calder&otilde;es</strong>
+            <span> Frigideiras basculantes, elétricas ou a gás, diversas capacidade, alto desempenho. Calder&otilde;es de 30 a 200 litros, inclina&ccedil;&atilde;o mec&acirc;nica, base encapsulada em inox.</span>
           </div>
         </div>
       </div>
 
       <div class="lp-photos">
-        <p class="lp-photos-title">Fotos da linha</p>
-        <div class="lp-photo-grid">
-          <div class="lp-photo-placeholder">
-            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
-            <span>Fog&atilde;o industrial 6 bocas</span>
-          </div>
-          <div class="lp-photo-placeholder">
-            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
-            <span>Linha de coc&ccedil;&atilde;o em opera&ccedil;&atilde;o</span>
-          </div>
-          <div class="lp-photo-placeholder">
-            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
-            <span>Chapa industrial com grelha</span>
-          </div>
-        </div>
-      </div>
-
+  <p class="lp-photos-title">Fotos da linha</p>
+  <div class="lp-photo-grid">
+    <div class="lp-photo-placeholder">
+      <img src="Fotos/cocção1.png"
+           alt="Fogão Industrial 6 bocas"
+            class="lp-photo-image lp-photo-image--contain">
+      <span>Fogão Industrial 6 bocas</span>
+    </div>
+    <div class="lp-photo-placeholder">
+      <img src="Fotos/cocção2.jpg"
+           alt="Equipamentos de Cocção"
+            class="lp-photo-image lp-photo-image--contain">
+      <span>Equipamentos de Cocção</span>
+    </div>
+    <div class="lp-photo-placeholder">
+      <img src="Fotos/cocção3.jpg"
+           alt="Bateria de Fritadeiras e Chapas"
+            class="lp-photo-image lp-photo-image--contain">
+      <span>Bateria de Fritadeiras e Chapas</span>
+    </div>
+  </div>
+</div>
       <div class="lp-cta">
         <a href="https://wa.me/5521964690650?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20linha%20de%20Coc%C3%A7%C3%A3o" target="_blank" rel="noopener" class="btn btn-dark">
           Solicitar Or&ccedil;amento
@@ -508,7 +248,7 @@ footer { background: #101010; padding: 72px 0 36px; }
     <section id="refrigeracao" class="lp-section">
       <p class="lp-eyebrow">Refrigera&ccedil;&atilde;o &middot; Bianchini Kitchen Pro</p>
       <h2 class="lp-title">Refrigera&ccedil;&atilde;o</h2>
-      <p class="lp-subtitle">"Desperd&iacute;cio zero come&ccedil;a na c&acirc;mara fria. Controle de temperatura &eacute; controle de custo."</p>
+      <p class="lp-subtitle">"Desperd&iacute;cio zero come&ccedil;a nos Freezers e Refrigeradores. Controle de temperatura &eacute; controle de custo."</p>
       <div class="lp-text">
         <p>Cada grau importa. A cadeia fria &eacute; uma das maiores fontes de perda em cozinhas profissionais — e tamb&eacute;m uma das mais f&aacute;ceis de corrigir quando os equipamentos s&atilde;o dimensionados corretamente.</p>
         <p>A linha de refrigera&ccedil;&atilde;o Bianchini mant&eacute;m a cadeia fria intacta — do recebimento ao preparo — com equipamentos dimensionados para o volume real da sua opera&ccedil;&atilde;o. Menos perda, mais aproveitamento, opera&ccedil;&atilde;o dentro da norma sanit&aacute;ria.</p>
@@ -534,7 +274,7 @@ footer { background: #101010; padding: 72px 0 36px; }
             <span>Com tampa de vidro curvo ou reto, iluminação interna LED, temperatura estabilizada. Ideais para exposi&ccedil;&atilde;o de frios, laticínios e sobremesas.</span>
           </div>
           <div class="lp-product-item">
-            <strong>Saladetes</strong>
+            <strong>Maketables ou Condimentadoras Refrigeradas</strong>
             <span>Mesas com tampa refrigerada para mise en place. Inserções GN 1/1 a 1/6, temperatura de 2 a 8&deg;C, superfície de trabalho integrada.</span>
           </div>
           <div class="lp-product-item">
@@ -548,16 +288,22 @@ footer { background: #101010; padding: 72px 0 36px; }
         <p class="lp-photos-title">Fotos da linha</p>
         <div class="lp-photo-grid">
           <div class="lp-photo-placeholder">
-            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
+            <img src="Fotos/refrigerador1.png"
+                 alt="Câmara frigorífica modular"
+                  class="lp-photo-image lp-photo-image--cover">
             <span>C&acirc;mara frigor&iacute;fica modular</span>
           </div>
           <div class="lp-photo-placeholder">
-            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
+            <img src="Fotos/refrigerador2.webp"
+                 alt="Refrigeradores de 2 portas em inox"
+                  class="lp-photo-image lp-photo-image--cover">
             <span>Refrigeradores de 2 portas em inox</span>
           </div>
           <div class="lp-photo-placeholder">
-            <div class="lp-photo-placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 6l1-3h6l1 3"/></svg></div>
-            <span>Saladete com mise en place</span>
+            <img src="Fotos/refrigerador3.png"
+                 alt="Equipamentos de Refrigeração"
+                  class="lp-photo-image lp-photo-image--cover">
+            <span>Equipamentos de Refrigera&ccedil;&atilde;o</span>
           </div>
         </div>
       </div>
@@ -795,7 +541,7 @@ footer { background: #101010; padding: 72px 0 36px; }
         <div class="lp-product-grid">
           <div class="lp-product-item">
             <strong>Fornos combinados</strong>
-            <span>Com programa&ccedil;&atilde;o por receita, controle de umidade, sonda de temperatura interna. Capacidade de 6 a 40 GN 1/1. Reduzem o tempo de preparo em at&eacute; 40%.<br><a href="forno-combinado-rational.html" style="color:#9A7B4F; font-weight:600;">Ver especifica&ccedil;&otilde;es completas &rarr;</a></span>
+            <span>Com programa&ccedil;&atilde;o por receita, controle de umidade, sonda de temperatura interna. Capacidade de 6 a 40 GN 1/1. Reduzem o tempo de preparo em at&eacute; 40%.<br><a href="forno-combinado-rational.html" class="product-spec-link">Ver especifica&ccedil;&otilde;es completas &rarr;</a></span>
           </div>
           <div class="lp-product-item">
             <strong>Lavadoras de lou&ccedil;as</strong>
@@ -919,12 +665,14 @@ footer { background: #101010; padding: 72px 0 36px; }
   </main>
 </div><!-- /page-layout -->
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="logo-bianchini-kitchen-pro.png" height="68" alt="Bianchini Kitchen Pro" style="filter:brightness(0) invert(1) opacity(.6)">
+      <img src="logo-bianchini-kitchen-pro.png" height="68" alt="Bianchini Kitchen Pro" class="footer-logo-muted">
         <p>N&atilde;o vendemos equipamentos. Entregamos opera&ccedil;&otilde;es mais eficientes, times mais produtivos e resultado que voc&ecirc; mede. 18 anos transformando cozinhas profissionais e industriais no Brasil.</p>
         <p class="foot-holding">Uma empresa do grupo Bianchini Holding</p>
       </div>
@@ -963,8 +711,8 @@ footer { background: #101010; padding: 72px 0 36px; }
     <div class="foot-bottom">
       <span>&copy; 2026 Bianchini Kitchen Pro &middot; Todos os direitos reservados &middot; Rio de Janeiro &middot; RJ &middot; Brasil</span>
       <div class="foot-social">
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 11v6"/></svg></a>
+        <button class="social-placeholder" type="button" aria-label="Instagram indisponível" disabled><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></button>
+        <button class="social-placeholder" type="button" aria-label="LinkedIn indisponível" disabled><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 11v6"/></svg></button>
         <a href="https://wa.me/5521964690650" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1-5.5a8.5 8.5 0 0 1-1-4 8.38 8.38 0 0 1 8.5-8.5A8.5 8.5 0 0 1 21 11.5z"/></svg></a>
       </div>
     </div>
@@ -976,37 +724,6 @@ footer { background: #101010; padding: 72px 0 36px; }
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
 </a>
 
-<script>
-// Navbar shadow on scroll
-var nav = document.getElementById('nav');
-window.addEventListener('scroll', function() {
-  nav.classList.toggle('scrolled', window.scrollY > 10);
-});
-
-// Active section highlight in sidebar and mobile nav
-var sections = document.querySelectorAll('.lp-section');
-var sideLinks = document.querySelectorAll('.side-nav a');
-var mobileLinks = document.querySelectorAll('.mobile-anchor-nav a');
-
-function setActive(id) {
-  sideLinks.forEach(function(a) {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-  });
-  mobileLinks.forEach(function(a) {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-  });
-}
-
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) setActive(entry.target.id);
-  });
-}, { rootMargin: '-30% 0px -60% 0px' });
-
-sections.forEach(function(s) { observer.observe(s); });
-
-// Set first section active on load
-if (sections.length) setActive(sections[0].id);
-</script>
+<script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
