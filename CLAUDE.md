@@ -1,79 +1,88 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Orientações para o Claude Code (claude.ai/code) trabalhar neste repositório.
 
-## Servidor local
+## O que é este projeto
+
+Site institucional da **Bianchini Cozinhas** em Next.js 15 (App Router) + React 19 +
+TypeScript + Tailwind CSS 3.4. Posicionamento: empresa de **projeto, implantação e
+consultoria** de cozinhas profissionais — não um catálogo de equipamentos.
+
+Leia `README.md` para stack, comandos e estrutura, e `BRAND_DIRECTION.md` para a direção de
+arte oficial (paleta, tipografia, tom de voz, componentes).
+
+## Comandos
 
 ```bash
-python -m http.server 8080
-# Acesse: http://localhost:8080/bianchini-kitchen-pro.html
+npm run dev          # http://localhost:3000
+npm run build        # obrigatório antes de considerar qualquer tarefa concluída
+npm run lint
+npm run type-check
 ```
 
-## Processamento de imagens (Python + Pillow)
+## Regras de conteúdo (importante)
 
-Remoção de fundo em logos PNG:
-```python
-from PIL import Image
-import numpy as np
-# L2 distance from average corner pixel color
-# Tolerâncias: lo=17.5, hi=52.5 para transição suave
-```
+O conteúdo do site é comercial e sensível. **Não invente** clientes, números, cases,
+depoimentos, certificações, resultados, prazos ou dados técnicos.
 
-Otimização de imagens para web:
-```python
-img.save(dst, "JPEG", quality=82, optimize=True, progressive=True)
-# MAX_DIM = 1400px em qualquer dimensão
-```
+Dados confirmados como reais:
 
-## Arquitetura
+- 18 anos de atuação
+- mais de 3.000 projetos entregues
+- WhatsApp `+55 21 96469-0650`
+- E-mail `comercial@bianchinicozinhas.com.br`
+- Rio de Janeiro · RJ · Brasil
+- Logotipos em `public/images/clients/` e fotos em `public/images/`
 
-**Arquivo único:** `bianchini-kitchen-pro.html` — todo CSS e JS estão embutidos neste arquivo. Não há build, bundler ou dependências externas além do Google Fonts.
+Deliberadamente **removidos** na reconstrução, por não terem base verificável:
 
-**Pastas de assets:**
-- `Fotos/` — imagens do hero slider (`slide1.jpg`–`slide4.jpg`, JPEG otimizados)
-- `clientes/` — logos dos clientes em PNG com fundo transparente
-- `logo-bianchini-kitchen-pro.png` — logo principal na raiz
+- "100% de aprovação na vistoria"
+- "redução de 25% a 40% do custo operacional"
+- o case hospitalar com métricas (120 leitos, 2.400 refeições, ROI de 8 meses)
+- o depoimento atribuído a "Marina Silva · Rede Hospitalar" (placeholder)
 
-**Design tokens** (`:root` no CSS):
-- `--dark: #1A2840` (navy da marca), `--gold: #8C1A2E` (carmim)
-- Fontes: DM Sans + DM Serif Display (Google Fonts)
+Se um conteúdo real não existir, use estrutura neutra e claramente editável — nunca preencha
+com dado fictício apresentado como verdadeiro.
 
-**Estrutura do `<script>` inline** (final do `<body>`, nesta ordem):
-1. `document.body.classList.add('js-on')` — habilita reveal animations
-2. Hero slider — `querySelectorAll('.hero-right .hslide')` + `setInterval`
-3. Navbar shadow — IntersectionObserver no scroll
-4. Mobile menu — toggle CSS via `style.cssText`
-5. Trust strip — preenche `#ts-track` com logos duplicadas para loop infinito
-6. Reveal on scroll — IntersectionObserver adiciona `.in` nos `.reveal`
+## Convenções de código
 
-**Trust strip (faixa animada de clientes):** os itens são gerados via JS a partir do array `clientes[]`. O HTML contém um fallback estático idêntico caso o JS não rode. A animação é CSS puro (`@keyframes ts-scroll`, `translateX(-50%)`), com os itens HTML duplicados para loop contínuo.
+- **Conteúdo em `src/data/`**, apresentação em `src/components/`. Nada de texto fixo dentro de
+  componente de seção.
+- **Server Component por padrão.** `'use client'` só quando há estado ou API de browser
+  (hoje: `header`, `mobile-menu`, `hero-section`, `reveal`, `whatsapp-float`).
+- **Links de WhatsApp** só via `lib/whatsapp.ts` (`whatsappUrl(topic)` /
+  `whatsappUrlWithText(text)`). Nunca colar URL `wa.me` em componente.
+- **Ícones** em `src/components/ui/icon.tsx` (SVG inline). Não adicionar biblioteca de ícones.
+- **Animações** em CSS/Tailwind. Não adicionar Framer Motion.
+- Sem `<a href="#">` vazio: toda âncora precisa existir como `id` na página.
+- Imagens sempre por `next/image`, com `sizes`; `fill` exige pai `relative` com altura ou
+  `aspect-*`. Logos usam `object-contain`; fotos, `object-cover`.
 
-**Progressive enhancement:** `.js-on .reveal { opacity:0 }` — elementos `.reveal` ficam invisíveis só quando JS roda (evita conteúdo oculto se JS falhar).
+## Armadilhas conhecidas
 
-**Responsivo:** hero vira coluna única abaixo de ~1024px; `.hero-right` recebe altura explícita no mobile.
+**`cn()` e escalas de tipografia customizadas.** `text-display-1..4`, `text-body`,
+`text-body-sm`, `text-eyebrow` e `text-micro` estão registrados no grupo `font-size` do
+`tailwind-merge` em `src/lib/utils.ts`. Ao criar uma escala nova, registre-a lá. Sem isso, o
+merge a interpreta como cor e o tamanho é descartado quando um `text-white` aparece depois —
+o sintoma é título de seção escura renderizando minúsculo.
 
-## Pitfalls conhecidos
+**Lazy loading em carrossel horizontal.** A faixa de logos (`trust-section.tsx`) desliza por
+`transform`, e o lazy loading nativo não carrega o que está fora da viewport horizontal. Os
+logos usam `loading="eager"` por isso.
 
-**Curly quotes quebram o JS:** commits via heredoc podem introduzir Unicode `'` `'` (U+2018/U+2019) no lugar de ASCII `'` (0x27) nas strings JavaScript. Isso causa `SyntaxError` fatal que mata todo o script. Para corrigir:
-```python
-raw = raw.replace(b'\xe2\x80\x98', b"'").replace(b'\xe2\x80\x99', b"'")
-```
+**Logo em fundo escuro.** A logo padrão é navy/carmim e desaparece no navy. Para fundos
+escuros use `<Logo variant="light" />` (arquivo monocromático branco).
 
-**Nomes de arquivo case-sensitive:** o Windows é case-insensitive, mas servidores Linux não são. Sempre salvar assets em minúsculo. Para renomear no Windows (2 passos):
-```powershell
-Rename-Item "ARQUIVO.png" "arquivo-tmp.png"
-Rename-Item "arquivo-tmp.png" "arquivo.png"
-```
+**Nomes de arquivo case-sensitive.** Windows é case-insensitive, Linux não. Assets em
+`public/` são minúsculos, sem acento e com hífen — manter o padrão. Para renomear no Windows,
+use dois passos (`arquivo.png` → `tmp.png` → `arquivo.png`).
 
-**Tamanhos de logo na trust strip:**
-- Padrão: `ts-logo` (52px altura)
-- Grande: `ts-logo-lg` (68px) — Plaza Lounge, Petrobras, Adonis, Novilho de Ouro
-- Extra grande: `ts-logo-xl` (88px) — Othon, Mocellin
+**Reveal on scroll.** `.reveal` só é escondido quando `:root[data-js='on']` existe (flag
+gravada por um script inline no `layout.tsx` antes da primeira pintura). Isso evita conteúdo
+invisível se o JS falhar — não remova o script nem a condição do CSS.
 
-**Slider hero:** usa `background-image` inline em cada `.hslide` (não `<img>`). A classe `.on` controla `opacity: 1`; todos os slides são `position: absolute; inset: 0`.
+## Definição de pronto
 
-## Contatos e dados reais do site
-
-- WhatsApp: `+55 21 96469-0650`
-- Email: `comercial@bianchinicozinhas.com.br`
-- 18 anos de experiência, 3.000+ projetos entregues
+`npm run build` passa, `npm run lint` e `npm run type-check` limpos, nenhuma imagem 404,
+nenhum erro de console, sem overflow horizontal em 375 / 768 / 1024 / 1440 e menu mobile
+abrindo, navegando e fechando (clique, Escape e clique no fundo).

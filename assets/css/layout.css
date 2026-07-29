@@ -1,5 +1,0 @@
-/* ════════════════════════════════════════════
-   LAYOUT — containers
-   ════════════════════════════════════════════ */
-.wrap { max-width: var(--max); margin: 0 auto; padding: 0 56px; }
-@media(max-width:768px){ .wrap { padding: 0 24px; } }

@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Design tokens — espelham BRAND_DIRECTION.md
+   ============================================================ */
+@layer base {
+  :root {
+    --navy: #1a2840;
+    --navy-light: #243050;
+    --carmim: #8c1a2e;
+    --carmim-light: #a82035;
+    --bronze: #9a7b4f;
+    --paper: #faf9f6;
+    --sand: #f2f0eb;
+    --hairline: #e4e1da;
+    --ink: #3d3b37;
+    --muted: #a8a49c;
+
+    --header-height: 5.5rem;
+    --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  * {
+    @apply border-hairline;
+  }
+
+  html {
+    @apply scroll-smooth;
+    /* Compensa o header fixo ao navegar por âncoras. */
+    scroll-padding-top: var(--header-height);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-sans text-body text-ink antialiased;
+    /* Nenhum overflow horizontal, em qualquer largura. */
+    @apply overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-normal text-navy;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-carmim text-white;
+  }
+
+  /* Foco visível e consistente em toda a interface. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-carmim ring-offset-2 ring-offset-white;
+  }
+
+  .on-dark :focus-visible {
+    @apply ring-bronze ring-offset-navy;
+  }
+}
+
+/* ============================================================
+   Componentes utilitários
+   ============================================================ */
+@layer components {
+  .skip-link {
+    @apply fixed left-4 top-0 z-[100] -translate-y-full bg-navy px-4 py-3 text-micro font-semibold uppercase tracking-widest text-white transition-transform focus-visible:translate-y-4;
+  }
+
+  /* Sublinhado animado dos links de navegação. */
+  .nav-link {
+    @apply relative inline-block py-1 text-[0.9375rem] font-medium text-navy transition-colors hover:text-carmim;
+  }
+
+  .nav-link::after {
+    @apply absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-carmim transition-transform duration-300 content-[''];
+    transition-timing-function: var(--ease-brand);
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    @apply scale-x-100;
+  }
+
+  /* Máscara lateral da faixa de logos. */
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+}
+
+/* ============================================================
+   Reveal on scroll — só ativo quando o JS está disponível,
+   para nunca esconder conteúdo em caso de falha do script.
+   ============================================================ */
+:root[data-js='on'] .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s var(--ease-brand),
+    transform 0.7s var(--ease-brand);
+}
+
+:root[data-js='on'] .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-js='on'] .reveal,
+  :root[data-js='on'] .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
