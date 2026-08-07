@@ -102,7 +102,7 @@ export function Header() {
           })}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center lg:ml-[clamp(1.75rem,3cqw,3rem)]">
+        <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-[clamp(1.75rem,3cqw,3rem)] lg:gap-0">
           {/*
             **O Instagram não fica mais aqui** (decisão do gestor, 2026-08-04).
             O glifo da marca é um gradiente saturado e, encostado no amarelo do
@@ -113,7 +113,37 @@ export function Header() {
             o Instagram como item rotulado de navegação, com área de toque
             própria — não como ícone solto.
           */}
-          <HeaderCta href="/contato" className="hidden lg:inline-flex" />
+          {/*
+            V2: o CTA do cabeçalho deixa de ser "Solicitar diagnóstico" e passa
+            a ser orçamento de equipamentos — a ação primária da nova hierarquia
+            comercial (`docs/v2/DECISIONS.md`, DEC-001). O rótulo é a forma
+            curta: o botão vive numa faixa de 64–84px e o rótulo completo
+            ("Solicitar orçamento de equipamentos") quebraria a linha ou
+            comprimiria a navegação. A intenção viaja no parâmetro, como no
+            resto da página.
+          */}
+          <HeaderCta
+            href="/contato?intencao=equipamentos"
+            label="Orçamento"
+            className="hidden lg:inline-flex"
+          />
+
+          {/*
+            Mesmo CTA, versão compacta, **fora** do hambúrguer — a ação
+            comercial primária não pode depender de abrir um menu
+            (`docs/v2/wireframes/V2-02-home-direcao-visual.md` §14).
+
+            Medido para o pior caso (320px): 40px de margem lateral + ~119px de
+            logotipo + 44px do hambúrguer + 8px de vão deixam ~109px, e a caixa
+            abaixo ocupa ~89px (rótulo de 9 caracteres em condensada 12px, mais
+            24px de `padding`). Cabe, sem encolher o logotipo nem o alvo do menu.
+          */}
+          <Link
+            href="/contato?intencao=equipamentos"
+            className="inline-flex h-11 items-center whitespace-nowrap rounded-[3px] bg-yellow px-3 font-condensed text-[0.75rem] font-semibold uppercase tracking-[0.05em] text-ink transition-colors duration-200 ease-precise hover:bg-yellow-bright active:bg-yellow-deep lg:hidden"
+          >
+            Orçamento
+          </Link>
 
           <MobileMenu items={mobileNav} />
         </div>

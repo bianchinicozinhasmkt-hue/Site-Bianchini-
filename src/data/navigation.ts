@@ -75,12 +75,38 @@ import type { NavItem } from '@/types'
  * percurso. `mobileNav` é este mesmo array, então o menu do telefone acompanha
  * automaticamente.
  */
+/**
+ * ============================================================
+ * NAVEGAÇÃO DA V2 (2026-08-07)
+ * ============================================================
+ *
+ * Os cinco itens acima eram as âncoras da home V1. A home V2 tem outra
+ * arquitetura (`docs/v2/specs/V2-01-home-arquitetura.md`: 9 seções, Equipamentos
+ * primeiro), então os destinos mudaram junto — deixar os antigos produziria
+ * exatamente o defeito que a regra 1 acima proíbe: link de menu apontando para
+ * `id` que não existe mais na página.
+ *
+ * A regra continua valendo sem exceção: **a ordem do menu é a ordem da
+ * rolagem.** Aqui ela não precisou ser remedida no navegador porque é a ordem
+ * de montagem declarada em `src/app/page.tsx`, que é linear e sem seção
+ * intercalada — Equipamentos (2ª seção) → Projetos (4ª) → Consultoria (5ª) →
+ * Prova (6ª) → Empresa (7ª). Assim que a home V2 estiver publicada, a medição
+ * real volta a ser obrigatória a cada mudança de ordem física.
+ *
+ * "Soluções" e "Método" saíram: na V2 o que a empresa faz está distribuído nas
+ * três portas nomeadas (Equipamentos, Projetos, Consultoria), e o método deixou
+ * de ter seção própria na home. As rotas `/solucoes/*` continuam existindo e
+ * são alcançadas pelo rodapé.
+ *
+ * O CTA do cabeçalho ("Orçamento") fica fora desta sequência — é ação, não
+ * percurso. `mobileNav` continua sendo este mesmo array.
+ */
 export const mainNav: NavItem[] = [
-  { label: 'Soluções', href: '/#pilares' },
-  { label: 'Projetos', href: '/#projetos' },
-  { label: 'Empresa', href: '/#quem-conduz' },
-  { label: 'Método', href: '/#metodo' },
   { label: 'Equipamentos', href: '/#equipamentos' },
+  { label: 'Projetos', href: '/#projetos' },
+  { label: 'Consultoria', href: '/#consultoria' },
+  { label: 'Prova', href: '/#prova' },
+  { label: 'Empresa', href: '/#empresa' },
 ]
 
 /**

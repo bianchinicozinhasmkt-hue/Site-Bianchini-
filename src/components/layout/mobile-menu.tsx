@@ -126,12 +126,22 @@ export function MobileMenu({ items }: MobileMenuProps) {
         </nav>
 
         <div className="flex flex-col gap-3 px-5 py-6">
-          {/* CTA retangular, igual ao do cabeçalho no mockup aprovado. */}
-          <LinkButton href="/contato" onClick={close} className="w-full rounded-[3px]" withArrow>
-            Solicitar diagnóstico
+          {/*
+            V2: a ação primária do menu é orçamento de equipamentos, não
+            diagnóstico — mesma hierarquia do cabeçalho e da home
+            (`docs/v2/DECISIONS.md`, DEC-001). O WhatsApp acompanha com o tópico
+            correspondente, para o atendimento saber de onde veio o contato.
+          */}
+          <LinkButton
+            href="/contato?intencao=equipamentos"
+            onClick={close}
+            className="w-full rounded-[3px]"
+            withArrow
+          >
+            Solicitar orçamento
           </LinkButton>
           <LinkButton
-            href={whatsappUrl('diagnostico')}
+            href={whatsappUrl('equipamentos')}
             variant="whatsapp"
             className="w-full rounded-[3px]"
           >

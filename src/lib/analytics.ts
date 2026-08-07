@@ -17,6 +17,12 @@ export type AnalyticsEvent =
   | 'material_solicitado'
   | 'projeto_visualizado'
   | 'contato_clicado'
+  /**
+   * V2: qual categoria de equipamento desperta interesse na vitrine da home.
+   * Nome definido no mapa de eventos do Gate 1
+   * (`docs/v2/specs/V2-01-home-arquitetura.md`, item M) — não inventado aqui.
+   */
+  | 'categoria_equipamento_visualizada'
 
 type Payload = Record<string, string | number | boolean>
 
