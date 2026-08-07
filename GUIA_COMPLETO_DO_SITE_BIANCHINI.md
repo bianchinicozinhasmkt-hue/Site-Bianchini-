@@ -1,8 +1,16 @@
+```text
+STATUS: ACTIVE (referência normativa da V1)
+```
+
 # Guia Completo do Site — Bianchini
 
 **Versão:** 1.0  
 **Data-base:** 31 de julho de 2026  
-**Status:** documento normativo para design, conteúdo e implementação  
+**Status:** documento normativo para design, conteúdo e implementação da V1. Para a V2,
+subordinado a `MASTER_BIANCHINI.md` e `docs/v2/DECISIONS.md` em caso de conflito de
+hierarquia comercial ou arquitetura — ver `docs/v2/README.md`. Não confundir com
+`DIRECAO_MESTRA_SITE_BIANCHINI.md`, que este documento supersede e que está hoje em
+`docs/archive/superseded/`.  
 **Público:** direção, marketing, comercial, designers, desenvolvedores e agentes de IA
 
 ---

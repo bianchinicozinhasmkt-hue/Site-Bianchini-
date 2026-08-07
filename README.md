@@ -128,8 +128,18 @@ Tipografia — duas famílias com papéis fixos:
 - **Oswald** (`font-condensed`): a condensada do site oficial, restrita a rótulo comercial
   ou técnico curto — botão, etiqueta de seção, numeral de métrica, índice, cota.
 
-`DIRECAO_MESTRA_SITE_BIANCHINI.md` é a versão anterior dos guias e foi superada. Materiais
-em `docs/archive/legacy-visual/` são preservados apenas como histórico.
+`DIRECAO_MESTRA_SITE_BIANCHINI.md` é a versão anterior dos guias e foi superada — desde
+2026-08-07 está em `docs/archive/superseded/`. Materiais em `docs/archive/` são preservados
+apenas como histórico.
+
+## Governança documental
+
+Para qualquer trabalho de produto, conteúdo, design ou arquitetura (V1 ou V2), o ponto de
+entrada é **`docs/v2/README.md`** — mapa de navegação documental, com a ordem de leitura e
+a regra de precedência entre `docs/v2/DECISIONS.md`, `docs/v2/V2_PRODUCT.md`,
+`MASTER_BIANCHINI.md`, a spec vigente da feature e `docs/v2/DESIGN_SYSTEM.md`. Documentos
+sob `docs/archive/` nunca são fonte de direção atual — cada um tem status declarado
+(`HISTORICAL` ou `SUPERSEDED`) no topo do arquivo ou no índice `docs/archive/README.md`.
 
 ## Mensuração
 

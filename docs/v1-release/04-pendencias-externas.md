@@ -32,7 +32,8 @@ Fica registrada como confirmação externa futura:
 | `src/data/site.ts` (em uso no site) | `+55 21 99518-1918` / `5521995181918` |
 | `CLAUDE.md`, lista de dados confirmados | `+55 21 96469-0650` |
 
-O histórico em `docs/site-audit/` mostra que `96469` foi **ativamente removido** do site em
+O histórico em `docs/archive/audits/site-audit/` (movido de `docs/site-audit/` em 2026-08-07)
+mostra que `96469` foi **ativamente removido** do site em
 2026-08-04, o que sugere que o valor em uso é o corrente — mas isso é inferência a partir
 do histórico, **não confirmação comercial**, e é o número que recebe todo lead do site.
 

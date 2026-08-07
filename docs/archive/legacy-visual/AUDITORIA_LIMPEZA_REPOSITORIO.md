@@ -1,9 +1,19 @@
+```text
+STATUS: HISTORICAL
+USO: REGISTRO DE AUDITORIA CONCLUÍDA — NÃO É DIREÇÃO VIGENTE
+Movido para docs/archive/ na etapa V2-00C (2026-08-07): já estava fisicamente na raiz
+antes disso. A "fonte visual normativa preservada" citada abaixo
+(`DIRECAO_MESTRA_SITE_BIANCHINI.md`) foi, ela própria, superseded depois desta auditoria —
+ver docs/archive/superseded/DIRECAO_MESTRA_SITE_BIANCHINI.md. Não editar o corpo abaixo
+para "corrigir" essa citação: é registro histórico do que era verdade em 31/07/2026.
+```
+
 # Auditoria de limpeza do repositório — Bianchini
 
 **Data da auditoria:** 31 de julho de 2026  
 **Escopo:** auditoria conservadora e arquivamento aprovado de referências visuais antigas  
 **Estado:** arquivamento concluído e validado; nenhuma exclusão executada  
-**Fonte visual normativa preservada:** `DIRECAO_MESTRA_SITE_BIANCHINI.md`
+**Fonte visual normativa preservada (na época desta auditoria):** `DIRECAO_MESTRA_SITE_BIANCHINI.md` — hoje superseded, ver aviso acima
 
 ## 1. Resumo executivo
 

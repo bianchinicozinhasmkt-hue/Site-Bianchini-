@@ -1,8 +1,14 @@
+```text
+STATUS: ACTIVE (referência complementar da V1)
+```
+
 # Guia Visual e Referências — Site Bianchini
 
 **Versão:** 1.0  
 **Data-base:** 31 de julho de 2026  
-**Status:** documento complementar de direção visual  
+**Status:** documento complementar de direção visual, subordinado ao guia principal abaixo.
+Para a V2, ambos ficam subordinados a `MASTER_BIANCHINI.md` e `docs/v2/DECISIONS.md` em
+caso de conflito — ver `docs/v2/README.md`.  
 **Documento principal relacionado:** `GUIA_COMPLETO_DO_SITE_BIANCHINI.md`
 
 ---

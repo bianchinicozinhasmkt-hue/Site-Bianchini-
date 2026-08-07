@@ -1,3 +1,13 @@
+```text
+STATUS: REFERENCE
+USO: DIAGNÓSTICO DA V1 — NÃO É DECISÃO DE ARQUITETURA VIGENTE
+Esta pasta (docs/product-audit/, 14 arquivos) continua relevante como diagnóstico
+(MASTER_BIANCHINI.md §13), mas onde ela conflitar com a direção vigente da V2, prevalecem,
+nesta ordem: docs/v2/DECISIONS.md > docs/v2/V2_PRODUCT.md > MASTER_BIANCHINI.md > spec
+vigente. Ordem completa de precedência em docs/v2/README.md. Nota adicionada em 2026-08-07
+(etapa V2-00C) — o corpo do documento abaixo não foi alterado.
+```
+
 # Auditoria de produto — resumo executivo
 
 **Data:** 2026-08-05 · **Branch:** `chore/auditoria-limpeza-20260731`

@@ -100,14 +100,17 @@ Ambas seriam substituições plausíveis e erradas:
 1. **`(21) 90000-0000` em `contact-form.tsx` (linhas 89 e 238)** — não é telefone de
    ninguém. É uma **máscara neutra deliberada**: o campo antes usava o WhatsApp antigo da
    Bianchini como exemplo, o que fazia parecer que era o número a digitar. A troca está
-   registrada em `docs/site-audit/07-registro-de-alteracoes.md` e foi verificada por CDP.
+   registrada em `docs/archive/audits/site-audit/07-registro-de-alteracoes.md` (movido para
+   `docs/archive/` em 2026-08-07; caminho original era `docs/site-audit/07-registro-de-alteracoes.md`)
+   e foi verificada por CDP.
    Substituir por um número real reintroduz o defeito que já foi corrigido.
 
-2. **`docs/site-audit/*`** — são registro histórico do que aconteceu em 2026-08-04, e
-   citam `96469` justamente para documentar sua remoção. Reescrevê-los falsificaria o
-   histórico. A instrução de "não deixar número antigo apresentado como atual" se aplica a
-   `CLAUDE.md`, onde `96469-0650` aparece na lista de **dados confirmados como reais** —
-   ou seja, apresentado como atual.
+2. **`docs/archive/audits/site-audit/*`** (movido de `docs/site-audit/*` em 2026-08-07) — são
+   registro histórico do que aconteceu em 2026-08-04, e citam `96469` justamente para
+   documentar sua remoção. Reescrevê-los falsificaria o histórico. A instrução de "não
+   deixar número antigo apresentado como atual" se aplica a `CLAUDE.md` — na etapa V2-00C
+   (2026-08-07) essa lista deixou de apresentar `96469-0650` como dado confirmado e passou a
+   registrar a divergência explicitamente (ver `CLAUDE.md`, seção de dados de contato).
 
 ### 2.3 Mensagens contextuais — oito, nenhuma a apagar
 
@@ -132,7 +135,8 @@ Nada a ajustar aqui.
 | `src/data/site.ts` | `+55 21 99518-1918` | com nota "atualizado em 2026-08-03, não alterar sem confirmação comercial" |
 | `CLAUDE.md:58` | `+55 21 96469-0650` | na lista de dados confirmados — **apresentado como atual** |
 
-O histórico em `docs/site-audit/` mostra que `96469` foi ativamente **removido** do site em
+O histórico em `docs/archive/audits/site-audit/` (movido de `docs/site-audit/` em 2026-08-07)
+mostra que `96469` foi ativamente **removido** do site em
 2026-08-04, o que indica que `99518-1918` é o número corrente e o `CLAUDE.md` é que ficou
 para trás. **Mas isso é inferência a partir do histórico, não confirmação comercial** — e é
 o número que recebe todo lead do site.

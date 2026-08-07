@@ -1,7 +1,11 @@
 # Contexto Mestre — Bianchini Cozinhas, Site e Produto Digital
 
-**Versão:** 4.0  
-**Última atualização:** 6 de agosto de 2026  
+```text
+STATUS: ACTIVE
+```
+
+**Versão:** 5.0  
+**Última atualização:** 7 de agosto de 2026 (versão anterior: 4.0, 6 de agosto de 2026)  
 **Status:** fonte mestre interna para continuidade da V1 e desenvolvimento da V2.  
 **Uso:** direção, produto, design, conteúdo, engenharia e agentes de IA. Não é texto pronto para publicação.
 
@@ -19,15 +23,20 @@ Ele não substitui a inspeção do repositório. Antes de implementar: verificar
 2. **Relatório de Direção do Site — agosto de 2026**;
 3. documentos e dados oficiais da Bianchini;
 4. estado atual do código e arquivos de conteúdo;
-5. este Contexto Mestre;
-6. decisões registradas em `DECISIONS.md`, quando existir;
-7. relatórios datados;
-8. referências externas;
-9. inferências de agentes.
+5. decisões registradas em `docs/v2/DECISIONS.md` (**agora existe** — criado na etapa
+   V2-00C de saneamento documental, 2026-08-07; até aqui era um item "quando existir");
+6. este Contexto Mestre;
+7. `docs/v2/V2_PRODUCT.md` para arquitetura/roadmap e specs em `docs/v2/specs/` para o
+   escopo de uma feature aprovada;
+8. relatórios datados;
+9. referências externas;
+10. inferências de agentes.
 
-Nunca transformar inferência em fato público.
+Nunca transformar inferência em fato público. A ordem de precedência completa entre
+documentos (incluindo o que vale quando dois deles conflitam) está em `docs/v2/README.md` —
+este Contexto Mestre não repete essa mecânica, só a alimenta com o conteúdo.
 
-### 1.2 Mudança estratégica desta versão
+### 1.2 Mudança estratégica desta versão (4.0, histórico)
 
 A V4 incorpora a nova direção aprovada em agosto de 2026:
 
@@ -40,6 +49,45 @@ A V4 incorpora a nova direção aprovada em agosto de 2026:
 Isso substitui orientações anteriores que tratavam os três pilares com peso equivalente ou colocavam Projetos como protagonista absoluto da nova arquitetura.
 
 A V1 pode permanecer com sua hierarquia atual enquanto a V2 é construída em paralelo.
+
+### 1.3 Mudança desta versão (5.0)
+
+A V5 não reabre a mudança estratégica da V4 (§1.2) — ela **consolida e fecha três
+ambiguidades** que apareceram durante a produção e correção do Gate 1 da Home V2
+(`docs/v2/specs/V2-01-home-arquitetura.md`), mais o resultado da etapa de governança
+documental (V2-00C) que criou os arquivos de continuidade que a V4 só recomendava (§25).
+
+1. **"Consultoria" vs. "Operação Comercial" — resolvido.** O terceiro pilar público
+   principal da V2 é **Consultoria** (diagnóstico da operação do cliente — cardápio,
+   equipe, processos, gestão, produtividade, priorização; §3.3). "Operação Comercial", o
+   terceiro item de `src/data/pillars.ts` na V1 (funil, CRM, geração de demanda interna da
+   própria Bianchini, responsável Guilherme Beghini), **não substitui nem redefine** esse
+   trio público. Pode aparecer como competência complementar quando houver necessidade e
+   evidência, mas nunca no lugar de Consultoria na arquitetura pública da V2. Ver
+   `docs/v2/DECISIONS.md`, DEC-004.
+2. **Categorias de equipamento — verdade empresarial separada de estado de dataset.** As
+   seis frentes de §3.1 (cocção, refrigeração, preparo, higienização, mobiliário em aço
+   inox, exaustão) são reconhecidas por este Contexto Mestre como categorias empresariais
+   **desde a V4** — a ambiguidade não estava aqui, estava em specs que compararam essa
+   lista só com o dataset de `src/data/equipment-categories.ts` e concluíram, errado, que
+   uma categoria sem dataset não era confirmada. **Ausência de dataset no código não
+   invalida uma categoria empresarial documentada neste arquivo.** Ver `docs/v2/DECISIONS.md`,
+   DEC-007, e o estado de implementação (o que já tem dataset e o que falta) em
+   `docs/v2/V2_PRODUCT.md`.
+3. **Copy final do hero e slugs de rota não bloqueiam Gate 1.** Uma spec de arquitetura
+   (Gate 1 do `WORKFLOW_IA_V2.md`) define o *contrato semântico* que a copy e as rotas
+   terão de cumprir — não a redação final nem a URL final. Tratar a ausência da copy
+   definitiva do hero ou do slug definitivo de uma página-pilar como bloqueio de Gate 1
+   confunde "arquitetura ainda não decidida" com "conteúdo ainda não escrito". A primeira
+   bloqueia; a segunda é `ATENDIDO COM CONTEÚDO PENDENTE` e segue para Gate 2/implementação.
+4. **Arquivos de continuidade do §25 agora existem.** `docs/v2/V2_PRODUCT.md`,
+   `docs/v2/DESIGN_SYSTEM.md` e `docs/v2/DECISIONS.md` foram criados na etapa V2-00C
+   (2026-08-07) — deixam de ser recomendação e passam a ser fonte real, com a hierarquia de
+   precedência publicada em `docs/v2/README.md`.
+
+Nada do exposto acima muda a hierarquia comercial, a arquitetura-alvo da Home ou qualquer
+decisão congelada da V4 (§23) — é consolidação e remoção de ambiguidade, não uma nova
+direção estratégica.
 
 ---
 
@@ -113,6 +161,12 @@ Função:
 - continuar relevante depois da entrega.
 
 CTA prioritário: **Agendar diagnóstico.**
+
+**Nota de nomenclatura (v5.0):** Consultoria, aqui, é o pilar público voltado à operação do
+*cliente*. Não confundir com "Operação Comercial", o terceiro item de `src/data/pillars.ts`
+na V1 — funil, CRM, metas e geração de demanda **da própria Bianchini**, de responsabilidade
+de Guilherme Beghini. Os dois são reais e distintos; só Consultoria é o terceiro pilar
+público principal da V2 (ver §1.3 e `docs/v2/DECISIONS.md`, DEC-004).
 
 ### 3.4 Regra de ouro
 
@@ -430,7 +484,9 @@ Os documentos em `docs/product-audit/` continuam relevantes como diagnóstico da
 
 ## 14. Workflow de IA
 
-O arquivo `WORKFLOW_IA_V2_Bianchini_2026-08-06.md` define o processo.
+O arquivo `WORKFLOW_IA_V2.md` (raiz do repositório) define o processo. (Correção V2-00C,
+2026-08-07: este arquivo citava um nome de arquivo que nunca existiu no repositório,
+`WORKFLOW_IA_V2_Bianchini_2026-08-06.md` — o arquivo real sempre se chamou `WORKFLOW_IA_V2.md`.)
 
 Resumo:
 
@@ -536,9 +592,19 @@ Analytics não bloqueia o início visual da V2, mas deve existir antes de decis�
 
 Consolidar direção, separar V1/V2, criar workflow, registrar decisões, inventariar dados, preparar Design System e arquitetura.
 
+**V2-00C — Governança e saneamento documental (concluída em 2026-08-07):** inventariou todo
+`.md` relevante do repositório, classificou cada um (`ACTIVE`/`REFERENCE`/`HISTORICAL`/`SUPERSEDED`),
+moveu histórico para `docs/archive/` sem apagar nada, corrigiu ponteiros obsoletos entre
+documentos e criou os três arquivos de continuidade do §25. Sem essa etapa, `V2_PRODUCT.md`,
+`DESIGN_SYSTEM.md` e `DECISIONS.md` continuariam como recomendação, não como fonte real.
+
 ### V2-01 — Home: arquitetura e wireframe
 
-Sem código. Entregar arquitetura, wireframes, hierarquia, conteúdo, estados, mobile, CTAs, prova, eventos e direção visual.
+Etapa de **spec/arquitetura** (Gate 1 do `WORKFLOW_IA_V2.md`) concluída e aprovada para a
+Home — ver `docs/v2/specs/V2-01-home-arquitetura.md` e `docs/v2/DECISIONS.md`, DEC-012.
+Wireframe/direção visual (Gate 2) ainda não iniciado. Sem código. Entrega de arquitetura,
+hierarquia, conteúdo, estados, mobile, CTAs, prova e eventos primeiro; wireframe e direção
+visual são o próximo gate, não parte desta entrega.
 
 ### V2-02 — Home: implementação
 
@@ -635,16 +701,21 @@ Podem continuar existindo na V1 até substituição.
 
 ---
 
-## 25. Arquivos de continuidade recomendados
+## 25. Arquivos de continuidade
 
-- `MASTER_BIANCHINI.md` — regras duradouras;
-- `V2_PRODUCT.md` — arquitetura, roadmap e specs;
-- `DESIGN_SYSTEM.md` — tokens e padrões;
+Todos criados/atualizados na etapa V2-00C (2026-08-07) — deixaram de ser recomendação:
+
+- `MASTER_BIANCHINI.md` (este arquivo) — regras duradouras;
+- `docs/v2/V2_PRODUCT.md` — arquitetura, roadmap e specs;
+- `docs/v2/DESIGN_SYSTEM.md` — tokens e padrões (o que já existe; o resto marcado
+  "A DEFINIR NO GATE 2");
 - `AGENTS.md` — regras para agentes;
-- `DECISIONS.md` — decisões aprovadas/rejeitadas;
+- `docs/v2/DECISIONS.md` — decisões aprovadas/rejeitadas;
 - `CLAUDE.md` — instruções específicas ao Claude.
 
-Evitar documentos paralelos contraditórios.
+A ordem de leitura e a regra de precedência entre todos eles estão em `docs/v2/README.md`.
+Evitar documentos paralelos contraditórios — se uma decisão nova surgir, ela entra em
+`docs/v2/DECISIONS.md`, não em um arquivo novo solto na raiz.
 
 ---
 

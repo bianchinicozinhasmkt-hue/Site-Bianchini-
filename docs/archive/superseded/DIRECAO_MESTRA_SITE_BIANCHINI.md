@@ -1,8 +1,17 @@
+```text
+STATUS: SUPERSEDED
+USO: HISTÓRICO / REFERÊNCIA APENAS
+NÃO UTILIZAR COMO DIREÇÃO VIGENTE
+SUBSTITUÍDO POR: GUIA_COMPLETO_DO_SITE_BIANCHINI.md (direção de conteúdo/layout) e
+MASTER_BIANCHINI.md (hierarquia comercial e arquitetura-alvo da V2). Movido para
+docs/archive/ na etapa V2-00C de saneamento documental (2026-08-07).
+```
+
 # Direção Mestre do Site — Bianchini
 
 **Versão:** 1.0  
 **Data-base:** 31 de julho de 2026  
-**Status:** documento normativo para design, conteúdo e implementação  
+**Status:** SUPERSEDED — ver aviso acima. Documento originalmente normativo, hoje histórico.  
 **Público:** direção, marketing, comercial, designers, desenvolvedores e agentes de IA
 
 ---

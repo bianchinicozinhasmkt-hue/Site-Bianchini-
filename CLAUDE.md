@@ -19,6 +19,31 @@ papéis e portas de qualidade). Pontos que já mudam o modo de trabalhar:
 
 O restante deste arquivo (`CLAUDE.md`) descreve o estado **atual** do código — a V1.
 
+## Governança documental — leia antes de citar qualquer documento de direção
+
+O repositório passou por saneamento documental em 2026-08-07 (etapa V2-00C). Regras
+permanentes daqui para frente:
+
+- **Antes de implementar qualquer feature, confirme quais documentos estão `ACTIVE` e qual
+  spec vigente governa o escopo.** Não assuma que o `.md` mais fácil de achar por busca de
+  texto é a fonte certa.
+- Ordem de leitura e precedência completa entre documentos: `docs/v2/README.md`. Resumo:
+  `docs/v2/DECISIONS.md` > `docs/v2/V2_PRODUCT.md` > `MASTER_BIANCHINI.md` > spec vigente
+  em `docs/v2/specs/` > `docs/v2/DESIGN_SYSTEM.md` > referência > histórico.
+- **Nunca usar `docs/archive/` como fonte de direção atual.** Todo conteúdo lá é
+  `HISTORICAL` ou `SUPERSEDED` — preservado para rastreabilidade, não para orientar
+  trabalho novo.
+- **Nunca usar um documento com cabeçalho `STATUS: SUPERSEDED` como requisito.** Ele existe
+  só como contexto de como se chegou à decisão atual.
+- **Auditoria histórica é diagnóstico, não decisão.** `docs/product-audit/` e o conteúdo em
+  `docs/archive/audits/` descrevem o que foi observado num momento; quando divergem da
+  direção vigente, a direção vigente vence — isso já está anotado onde relevante.
+- **Não inferir que "mais antigo = vigente"** nem que **"mais detalhado = superior".**
+  Vigência vem da posição na cadeia de precedência acima, nunca da data do nome do arquivo
+  ou do volume de texto.
+- **Se houver conflito documental real e a ordem de precedência não resolver**, pare e
+  reporte — não escolha um lado por conta própria.
+
 ## O que é este projeto
 
 Site institucional da **Bianchini** em Next.js 15 (App Router) + React 19 + TypeScript +
@@ -51,8 +76,10 @@ o sistema foi remigrado para grafite + amarelo em 2026-08-01; o bordô e o azul-
 saíram do projeto e não devem voltar. A **geometria** da primeira dobra não mudou nessa
 migração — só cor, família dos rótulos comerciais e motion.
 
-`DIRECAO_MESTRA_SITE_BIANCHINI.md` é uma versão anterior dos guias e foi superada.
-Materiais em `docs/archive/legacy-visual/` são apenas históricos.
+`DIRECAO_MESTRA_SITE_BIANCHINI.md` é uma versão anterior dos guias e foi superada — desde
+2026-08-07 o arquivo está em `docs/archive/superseded/`, com cabeçalho `STATUS: SUPERSEDED`.
+Materiais em `docs/archive/legacy-visual/` são apenas históricos. Ver `docs/archive/README.md`
+para o índice completo do que foi arquivado.
 
 ## Comandos
 
@@ -71,13 +98,29 @@ depoimentos, certificações, resultados, prazos ou dados técnicos.
 Dados confirmados como reais:
 
 - 18 anos de atuação
-- mais de 3.000 projetos entregues
-- WhatsApp `+55 21 96469-0650`
+- mais de 3.000 projetos entregues (métrica com pendência de confirmação numérica exata —
+  ver `docs/v1-release/04-pendencias-externas.md` item 5 e `src/data/site.ts` linhas 108–113)
 - E-mail `comercial@bianchinicozinhas.com.br`
 - Rio de Janeiro · RJ · Brasil
 - 15 logotipos em `public/images/clients/` (10 aprovados para exibição)
 - 2 depoimentos identificáveis em `src/data/testimonials.ts`
 - fotos de operações entregues em `public/images/projects/` e `public/images/hero/`
+
+**WhatsApp — divergência não resolvida, não tratar nenhum dos dois como confirmado até
+confirmação comercial:**
+
+| Onde | Valor |
+| --- | --- |
+| `src/data/site.ts` (`contact.phoneDisplay`, em uso no site) | `+55 21 99518-1918` |
+| Versão anterior deste arquivo (até 2026-08-07) | `+55 21 96469-0650` |
+
+Até 2026-08-07 este arquivo listava `96469-0650` na lista de dados confirmados — isso
+**apresentava como fato** um número que a própria auditoria (`docs/v1-release/04-pendencias-externas.md`,
+`docs/v1-release/06-publicacao.md`) já registrava como divergente e não confirmado
+comercialmente. A correção aqui é remover essa afirmação, não substituí-la pelo número do
+código: o código é a única fonte técnica em uso hoje, mas "em uso" não é o mesmo que
+"confirmado pelo comercial como definitivo" (`MASTER_BIANCHINI.md` §21). Não alterar
+`src/data/site.ts` nem este número por inferência — exige confirmação comercial explícita.
 
 Deliberadamente **ausentes**, por não terem base verificável:
 
