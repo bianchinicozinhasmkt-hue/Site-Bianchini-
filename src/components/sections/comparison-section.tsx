@@ -1,68 +1,92 @@
 import { Section, SectionHeader } from '@/components/layout/section'
-import { CheckIcon, MinusIcon } from '@/components/ui/icon'
+import { CheckIcon, MinusIcon } from '@/components/ui/icons'
 import { comparisonRows } from '@/data/comparison'
 
 /**
- * Tabela real (semântica) que vira lista de blocos no mobile via classes
- * responsivas — sem scroll horizontal e sem duplicar conteúdo no DOM.
+ * Comparativo entre o fornecimento tradicional e a entrega integrada.
+ *
+ * No desktop é uma tabela real (com `th` e escopo); abaixo de `lg` vira uma
+ * lista de blocos identificados, porque tabela de três colunas não sobrevive
+ * a 375px (§13 do guia).
  */
 export function ComparisonSection() {
   return (
-    <Section id="comparacao" tone="white">
+    <Section id="comparativo" tone="canvas" space="lg" aria-labelledby="comparativo-titulo">
       <SectionHeader
-        eyebrow="Abordagem"
-        title="Fornecedor tradicional ou parceria de projeto."
-        lead="A diferença aparece antes da obra começar — e continua depois da inauguração."
-        className="max-w-3xl"
+        headingId="comparativo-titulo"
+        eyebrow="Diferença na prática"
+        title="Comprar equipamento não é o mesmo que implantar uma operação"
+        lead="A distinção aparece na documentação, na conformidade e em quem responde quando algo não encaixa na obra."
       />
 
-      <table className="mt-14 w-full border-collapse text-left">
-        <caption className="sr-only">
-          Comparação entre a abordagem de um fornecedor tradicional e a abordagem da Bianchini
-        </caption>
-        <thead className="hidden md:table-header-group">
-          <tr className="border-b border-navy">
-            <th scope="col" className="w-1/5 py-4 pr-6 text-eyebrow font-semibold uppercase text-muted">
-              Critério
-            </th>
-            <th scope="col" className="w-2/5 py-4 pr-6 text-eyebrow font-semibold uppercase text-muted">
-              Fornecedor tradicional
-            </th>
-            <th scope="col" className="w-2/5 py-4 text-eyebrow font-semibold uppercase text-carmim">
-              Bianchini
-            </th>
-          </tr>
-        </thead>
-        <tbody className="md:divide-y md:divide-hairline">
-          {comparisonRows.map((row) => (
-            <tr
-              key={row.aspect}
-              className="mb-4 block rounded-card border border-hairline p-6 md:mb-0 md:table-row md:rounded-none md:border-x-0 md:border-b md:border-t-0 md:p-0"
-            >
-              <th
-                scope="row"
-                className="block pb-4 text-left font-sans text-eyebrow font-semibold uppercase tracking-[0.14em] text-bronze md:table-cell md:py-6 md:pr-6 md:align-top md:text-[0.9375rem] md:normal-case md:tracking-normal md:text-navy"
-              >
-                {row.aspect}
+      {/* Desktop: tabela semântica. */}
+      <div className="mt-14 hidden lg:mt-16 lg:block">
+        <table className="w-full border-collapse text-left">
+          <caption className="sr-only">
+            Comparação entre o fornecedor tradicional de equipamentos e a entrega integrada da Bianchini
+          </caption>
+          <thead>
+            <tr className="border-b border-line">
+              <th scope="col" className="w-1/5 py-4 pr-6 font-condensed text-eyebrow font-semibold uppercase text-muted">
+                Aspecto
               </th>
-              <td className="block pb-4 align-top md:table-cell md:py-6 md:pr-6">
-                <span className="mb-1.5 flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-wider text-muted md:hidden">
-                  <MinusIcon size={12} />
-                  Fornecedor tradicional
-                </span>
-                <span className="block text-body-sm text-muted">{row.traditional}</span>
-              </td>
-              <td className="block align-top md:table-cell md:py-6">
-                <span className="mb-1.5 flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-wider text-carmim md:hidden">
-                  <CheckIcon size={12} />
-                  Bianchini
-                </span>
-                <span className="block text-body-sm font-medium text-navy">{row.bianchini}</span>
-              </td>
+              <th scope="col" className="w-2/5 py-4 pr-6 font-condensed text-eyebrow font-semibold uppercase text-muted">
+                Fornecedor tradicional
+              </th>
+              <th scope="col" className="w-2/5 py-4 font-condensed text-eyebrow font-semibold uppercase text-ink">
+                Bianchini
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row) => (
+              <tr key={row.aspect} className="border-b border-line align-top">
+                <th scope="row" className="py-6 pr-6 font-sans text-body font-semibold text-ink">
+                  {row.aspect}
+                </th>
+                <td className="py-6 pr-6 text-body-sm text-muted">
+                  <span className="flex gap-3">
+                    <MinusIcon size={18} className="mt-0.5 shrink-0 text-steel" />
+                    {row.traditional}
+                  </span>
+                </td>
+                <td className="py-6 text-body-sm text-ink">
+                  <span className="flex gap-3">
+                    <CheckIcon size={18} className="mt-0.5 shrink-0 text-ink" />
+                    {row.bianchini}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile e tablet: blocos identificados. */}
+      <ul className="mt-12 flex flex-col gap-6 lg:hidden">
+        {comparisonRows.map((row) => (
+          <li key={row.aspect} className="rounded-sm border border-line bg-surface p-5">
+            <h3 className="font-sans text-body font-semibold text-ink">{row.aspect}</h3>
+
+            <dl className="mt-4 flex flex-col gap-4">
+              <div>
+                <dt className="font-condensed text-eyebrow font-semibold uppercase text-muted">Fornecedor tradicional</dt>
+                <dd className="mt-1.5 flex gap-2.5 text-body-sm text-muted">
+                  <MinusIcon size={17} className="mt-0.5 shrink-0 text-steel" />
+                  {row.traditional}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-condensed text-eyebrow font-semibold uppercase text-ink">Bianchini</dt>
+                <dd className="mt-1.5 flex gap-2.5 text-body-sm text-ink">
+                  <CheckIcon size={17} className="mt-0.5 shrink-0 text-ink" />
+                  {row.bianchini}
+                </dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ul>
     </Section>
   )
 }

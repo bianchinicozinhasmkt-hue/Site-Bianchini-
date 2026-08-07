@@ -7,6 +7,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
+        // Página de confirmação de conversão não deve ser indexada.
+        disallow: ['/obrigado'],
       },
     ],
     sitemap: `${site.url}/sitemap.xml`,

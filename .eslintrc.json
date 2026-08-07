@@ -1,6 +1,10 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
-  "ignorePatterns": ["next-env.d.ts"],
+  "ignorePatterns": [
+    "next-env.d.ts",
+    "_entrega_chatgpt/**",
+    "docs/archive/**"
+  ],
   "rules": {
     "react/no-unescaped-entities": "off"
   }

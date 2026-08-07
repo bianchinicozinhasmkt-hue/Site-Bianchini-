@@ -43,3 +43,62 @@ export const differentials: Differential[] = [
       'Mais de 3.000 projetos entregues em hospitais, hotéis, restaurantes, redes e operações institucionais em todo o Brasil. Experiência acumulada em campo, não em teoria.',
   },
 ]
+
+/**
+ * Os mesmos seis diferenciais, reorganizados em **três afirmações** — a home
+ * não exibe mais seis tópicos equivalentes.
+ *
+ * Nada foi reescrito: cada afirmação é o título de um dos seis diferenciais,
+ * o apoio é a descrição desse mesmo item e as evidências são os outros itens
+ * que o sustentam. Se um diferencial for editado acima, a afirmação acompanha.
+ */
+const byNumber = (number: string) => differentials.find((item) => item.number === number)!
+
+/**
+ * ============================================================
+ * EVIDÊNCIA — o critério de escolha
+ * ============================================================
+ *
+ * Cada afirmação é sustentada por **um material que a comprova**, e o material
+ * precisa aguentar a escala em que aparece. Duas trocas foram feitas por causa
+ * disso:
+ *
+ *   · `team/leonardo-visita-de-fabrica.jpg` (198 × 198) saiu. Era um registro
+ *     de celular exibido a ~190px, e na composição lia como foto perdida no
+ *     canto — o oposto do que a afirmação "especialistas em operação" precisa
+ *     provar. Entrou uma operação de produção real, em 1024 × 1024.
+ *   · `projects/estante-inox.jpg` (800 × 800) saiu. É uma peça isolada sobre
+ *     fundo claro, e a afirmação fala de **responsabilidade de ponta a ponta**,
+ *     não de um produto. Entrou o mobiliário em inox instalado em operação
+ *     (1170 × 964), que é o entregável na ponta.
+ *
+ * Nenhuma legenda afirma cliente, local, prazo ou resultado: o acervo não
+ * registra isso, e inventar seria pior que não legendar.
+ */
+export const differentialClaims = [
+  {
+    id: 'operacao',
+    lead: byNumber('01'),
+    material: {
+      kind: 'image' as const,
+      src: '/images/projects/producao-panificacao.jpg',
+      alt: 'Área de produção de panificação em operação, com fornos, carros de assadeiras e bancadas em aço inox',
+      caption: 'Operação de panificação em produção — registro do acervo Bianchini.',
+    },
+  },
+  {
+    id: 'responsabilidade',
+    lead: byNumber('02'),
+    material: {
+      kind: 'image' as const,
+      src: '/images/projects/mobiliario-inox.jpg',
+      alt: 'Mobiliário em aço inox fabricado sob medida e instalado em cozinha profissional',
+      caption: 'Mobiliário em inox fabricado sob medida e instalado — acervo Bianchini.',
+    },
+  },
+  {
+    id: 'experiencia',
+    lead: byNumber('06'),
+    material: { kind: 'metrics' as const },
+  },
+]

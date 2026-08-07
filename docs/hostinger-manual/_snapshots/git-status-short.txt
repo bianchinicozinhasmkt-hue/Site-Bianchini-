@@ -1,0 +1,120 @@
+ M .eslintrc.json
+ M .gitignore
+ D BRAND_DIRECTION.md
+ M CLAUDE.md
+ M README.md
+ M next.config.ts
+ D public/images/brand/logo-bianchini-light.png
+ D public/images/brand/logo-bianchini.png
+ M src/app/globals.css
+ M src/app/layout.tsx
+ M src/app/linhas-de-produtos/forno-combinado-rational/page.tsx
+ M src/app/linhas-de-produtos/page.tsx
+ M src/app/not-found.tsx
+ M src/app/page.tsx
+ M src/app/robots.ts
+ M src/app/sitemap.ts
+ M src/components/layout/container.tsx
+ M src/components/layout/footer.tsx
+ M src/components/layout/header.tsx
+ M src/components/layout/mobile-menu.tsx
+ M src/components/layout/section.tsx
+ M src/components/layout/whatsapp-float.tsx
+ D src/components/sections/about-section.tsx
+ M src/components/sections/case-study-section.tsx
+ M src/components/sections/comparison-section.tsx
+ M src/components/sections/differentials-section.tsx
+ M src/components/sections/equipment-strip-section.tsx
+ M src/components/sections/final-cta-section.tsx
+ M src/components/sections/hero-section.tsx
+ M src/components/sections/problems-section.tsx
+ M src/components/sections/process-section.tsx
+ M src/components/sections/projects-section.tsx
+ M src/components/sections/segments-section.tsx
+ M src/components/sections/testimonials-section.tsx
+ M src/components/sections/trust-section.tsx
+ D src/components/ui/button.tsx
+ D src/components/ui/heading.tsx
+ D src/components/ui/icon.tsx
+ D src/components/ui/logo.tsx
+ D src/components/ui/reveal.tsx
+ M src/data/differentials.ts
+ M src/data/equipment-lines.ts
+ M src/data/navigation.ts
+ M src/data/problems.ts
+ M src/data/projects.ts
+ M src/data/site.ts
+ M src/data/testimonials.ts
+ M src/lib/metadata.ts
+ M src/lib/utils.ts
+ M src/lib/whatsapp.ts
+ M src/types/index.ts
+ M tailwind.config.ts
+ M tsconfig.json
+?? AGENTS.md
+?? AUDITORIA_LIMPEZA_REPOSITORIO.md
+?? DIRECAO_MESTRA_SITE_BIANCHINI.md
+?? GUIA_COMPLETO_DO_SITE_BIANCHINI.md
+?? GUIA_VISUAL_E_REFERENCIAS_BIANCHINI.md
+?? MOCKUP_HERO_APROVADO.png
+?? _entrega_chatgpt/
+?? bianchini-site-original-para-analise.zip
+?? docs/
+?? public/images/book/
+?? public/images/brand/logo-bianchini-oficial-grafite.png
+?? public/images/brand/logo-bianchini-oficial.png
+?? public/images/hero/hero-industrial-kitchen.png
+?? public/images/hero/operacao-comercial.png
+?? public/images/projects/planta-executiva-recorte.jpg
+?? public/images/projects/projeto-3d-recorte.jpg
+?? public/images/team/
+?? public/images/testimonials/
+?? scripts/
+?? src/app/contato/
+?? src/app/leonardo-bianchini/
+?? src/app/obrigado/
+?? src/app/politica-de-privacidade/
+?? src/app/projetos/
+?? src/app/sobre/
+?? src/app/solucoes/
+?? src/components/animations/
+?? src/components/blocks/
+?? src/components/forms/
+?? src/components/sections/book-section.tsx
+?? src/components/sections/credibility-section.tsx
+?? src/components/sections/diagnosis-section.tsx
+?? src/components/sections/industry-inox-section.tsx
+?? src/components/sections/journey-section.tsx
+?? src/components/sections/leadership-section.tsx
+?? src/components/sections/leonardo-hero.tsx
+?? src/components/sections/leonardo-section.tsx
+?? src/components/sections/pillars-section.tsx
+?? src/components/sections/scope-section.tsx
+?? src/components/sections/scope-triad-band.tsx
+?? src/components/sections/symptoms-section.tsx
+?? src/components/shared/
+?? src/components/ui/accordion.tsx
+?? src/components/ui/actions/
+?? src/components/ui/book-cover.tsx
+?? src/components/ui/card.tsx
+?? src/components/ui/field.tsx
+?? src/components/ui/icons.tsx
+?? src/components/ui/leonardo-portrait.tsx
+?? src/components/ui/tech.tsx
+?? src/components/ui/typography/
+?? src/data/diagnosis.ts
+?? src/data/equipment-categories.ts
+?? src/data/faq.ts
+?? src/data/hero-slides.ts
+?? src/data/industry.ts
+?? src/data/leonardo.ts
+?? src/data/pages.ts
+?? src/data/pillars.ts
+?? src/data/scope-levels.ts
+?? src/data/solutions.ts
+?? src/data/symptom-chapters.ts
+?? src/data/team.ts
+?? src/hooks/
+?? src/lib/analytics.ts
+?? src/lib/schema.ts
+?? src/styles/

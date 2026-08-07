@@ -13,8 +13,20 @@ next-env.d.ts
 /build
 dist/
 
+# artefato de release manual (Hostinger) — gerado localmente, não versionado
+/release/
+
 # typescript
 *.tsbuildinfo
+
+# coverage / testes
+coverage/
+
+# arquivos temporários e backups locais
+*.tmp
+*.temp
+*.bak
+*.old
 
 # env
 .env
@@ -37,3 +49,9 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 *.swp
+
+# perfis temporários do Edge headless, criados pelos scripts de captura via CDP
+# (scripts/*.mjs sobem o navegador com --user-data-dir apontando para cá).
+# São milhares de arquivos do navegador, não do projeto.
+.tmp-edge-cdp/
+.tmp-edge-cdp*/

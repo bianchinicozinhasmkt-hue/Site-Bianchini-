@@ -3,9 +3,9 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Container } from '@/components/layout/container'
 import { Section, SectionHeader } from '@/components/layout/section'
-import { Reveal } from '@/components/ui/reveal'
-import { Eyebrow, Heading } from '@/components/ui/heading'
-import { LinkButton } from '@/components/ui/button'
+import { Reveal } from '@/components/animations/reveal'
+import { Eyebrow, Heading } from '@/components/ui/typography/heading'
+import { LinkButton } from '@/components/ui/actions/button'
 import { rational } from '@/data/rational'
 import { pageMetadata } from '@/lib/metadata'
 import { whatsappUrlWithText } from '@/lib/whatsapp'
@@ -24,26 +24,26 @@ const quoteUrl = whatsappUrlWithText(
 export default function RationalPage() {
   return (
     <>
-      <section className="bg-navy pb-16 pt-[calc(var(--header-height)+3.5rem)] text-white on-dark md:pb-20 md:pt-[calc(var(--header-height)+5rem)]">
-        <Container>
+      <section className="bg-canvas pt-[var(--header-height)]">
+        <Container className="py-10 md:py-14 lg:py-20">
           <nav aria-label="Trilha de navegação" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-3 text-[0.75rem] text-white/50">
+            <ol className="flex flex-wrap items-center gap-3 text-caption text-muted">
               <li>
-                <Link href="/" className="text-white/60 transition-colors hover:text-white">
+                <Link href="/" className="crumb-link transition-colors hover:text-ink">
                   Início
                 </Link>
               </li>
-              <li aria-hidden="true">/</li>
+              <li aria-hidden="true" className="text-steel">/</li>
               <li>
                 <Link
                   href="/linhas-de-produtos"
-                  className="text-white/60 transition-colors hover:text-white"
+                  className="crumb-link transition-colors hover:text-ink"
                 >
                   Linhas de equipamento
                 </Link>
               </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-white/85">
+              <li aria-hidden="true" className="text-steel">/</li>
+              <li aria-current="page" className="text-ink">
                 {rational.name}
               </li>
             </ol>
@@ -51,21 +51,21 @@ export default function RationalPage() {
 
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <Eyebrow tone="light">{rational.eyebrow}</Eyebrow>
-              <Heading as={1} size={2} className="mt-5 text-white">
+              <Eyebrow>{rational.eyebrow}</Eyebrow>
+              <Heading as={1} size="title-1" className="mt-5">
                 {rational.name}
               </Heading>
-              <p className="mt-4 text-[0.9375rem] font-medium text-bronze-light">{rational.supplied}</p>
-              <p className="mt-7 max-w-xl font-serif text-xl italic leading-snug text-white/90">
+              <p className="mt-4 text-body-sm font-medium text-ink">{rational.supplied}</p>
+              <p className="mt-7 max-w-xl text-lead text-ink">
                 {rational.headline}
               </p>
-              <p className="mt-6 max-w-xl text-body-sm text-white/70">{rational.intro}</p>
+              <p className="mt-6 max-w-xl text-body-sm text-muted">{rational.intro}</p>
               <LinkButton href={quoteUrl} size="lg" className="mt-9" withArrow>
                 Solicitar orçamento
               </LinkButton>
             </div>
 
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card bg-navy-light">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-canvas-deep">
               <Image
                 src={rational.image.src}
                 alt={rational.image.alt}
@@ -80,34 +80,34 @@ export default function RationalPage() {
       </section>
 
       {/* Especificações rápidas */}
-      <Section tone="white" space="sm">
-        <h2 className="text-eyebrow font-semibold uppercase text-muted">Especificações</h2>
+      <Section tone="canvas" space="sm">
+        <h2 className="font-condensed text-eyebrow font-semibold uppercase text-ink">Especificações</h2>
         <dl className="mt-8 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
           {rational.quickSpecs.map((spec) => (
-            <div key={spec.label} className="border-t border-hairline pt-4">
-              <dt className="text-[0.75rem] uppercase tracking-wider text-muted">{spec.label}</dt>
-              <dd className="mt-2 text-[0.9375rem] font-medium text-navy">{spec.value}</dd>
+            <div key={spec.label} className="border-t border-line pt-4">
+              <dt className="text-caption text-muted">{spec.label}</dt>
+              <dd className="mt-2 text-body font-semibold text-ink">{spec.value}</dd>
             </div>
           ))}
         </dl>
       </Section>
 
       {/* Tecnologia embarcada */}
-      <Section tone="paper">
+      <Section tone="surface">
         <SectionHeader
           eyebrow="Tecnologia embarcada"
-          title="Quatro sistemas que padronizam o resultado."
+          title="Quatro sistemas que padronizam o resultado"
           className="max-w-3xl"
         />
         <ul className="mt-12 grid gap-5 md:grid-cols-2">
           {rational.technologies.map((tech, index) => (
             <Reveal as="li" key={tech.name} delay={index * 70}>
-              <article className="h-full rounded-card border border-hairline bg-white p-7">
-                <h3 className="font-serif text-display-4 text-navy">{tech.name}</h3>
-                <p className="mt-1.5 text-[0.75rem] uppercase tracking-wider text-bronze">
+              <article className="h-full rounded-sm border border-line bg-canvas p-7">
+                <h3 className="font-sans font-bold text-title-3 text-ink">{tech.name}</h3>
+                <p className="mt-1.5 font-condensed text-eyebrow font-semibold uppercase text-ink">
                   {tech.subtitle}
                 </p>
-                <p className="mt-4 text-body-sm text-ink/80">{tech.description}</p>
+                <p className="mt-4 text-body-sm text-muted">{tech.description}</p>
               </article>
             </Reveal>
           ))}
@@ -115,10 +115,10 @@ export default function RationalPage() {
       </Section>
 
       {/* Linha completa */}
-      <Section tone="white">
+      <Section tone="canvas">
         <SectionHeader
           eyebrow="Linha completa"
-          title="Modelos por volume de produção."
+          title="Modelos por volume de produção"
           lead="Todos os modelos fornecidos, instalados e comissionados pela Bianchini. Tensão trifásica 220 V / 380 V / 440 V."
           className="max-w-3xl"
         />
@@ -127,13 +127,13 @@ export default function RationalPage() {
           <table className="w-full min-w-[640px] border-collapse text-left text-body-sm">
             <caption className="sr-only">Modelos do Rational iCombi Pro por capacidade</caption>
             <thead>
-              <tr className="border-b border-navy">
+              <tr className="border-b border-ink">
                 {['Modelo', 'Capacidade GN', 'Refeições / dia', 'Potência', 'Dimensões (L×P×A mm)'].map(
                   (heading) => (
                     <th
                       key={heading}
                       scope="col"
-                      className="py-4 pr-6 text-eyebrow font-semibold uppercase text-muted"
+                      className="py-4 pr-6 font-condensed text-eyebrow font-semibold uppercase text-muted"
                     >
                       {heading}
                     </th>
@@ -141,31 +141,31 @@ export default function RationalPage() {
                 )}
               </tr>
             </thead>
-            <tbody className="divide-y divide-hairline">
+            <tbody className="divide-y divide-line">
               {rational.models.map((model) => (
                 <tr key={model.model}>
-                  <th scope="row" className="py-4 pr-6 text-left font-semibold text-navy">
+                  <th scope="row" className="py-4 pr-6 text-left font-semibold text-ink">
                     iCombi Pro {model.model}
                   </th>
-                  <td className="py-4 pr-6 text-ink/80">{model.capacity}</td>
-                  <td className="py-4 pr-6 text-ink/80">{model.meals}</td>
-                  <td className="py-4 pr-6 text-ink/80">{model.power}</td>
-                  <td className="py-4 text-ink/80">{model.size}</td>
+                  <td className="py-4 pr-6 text-muted">{model.capacity}</td>
+                  <td className="py-4 pr-6 text-muted">{model.meals}</td>
+                  <td className="py-4 pr-6 text-muted">{model.power}</td>
+                  <td className="py-4 text-muted">{model.size}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-5 text-[0.8125rem] text-muted">
+        <p className="mt-5 text-caption text-muted">
           Pressão de água de 1,0 a 6,0 bar · Instalação por técnico especializado Bianchini
         </p>
       </Section>
 
       {/* Substitui */}
-      <Section tone="sand">
+      <Section tone="surface">
         <SectionHeader
           eyebrow="Em menos de 1 m²"
-          title="Um equipamento, seis funções."
+          title="Um equipamento, seis funções"
           lead="Menos equipamentos na praça significa menos manutenção, menos consumo e mais área útil de trabalho."
           className="max-w-3xl"
         />
@@ -175,34 +175,34 @@ export default function RationalPage() {
               as="li"
               key={item.name}
               delay={index * 50}
-              className="rounded-card border border-hairline bg-white p-6"
+              className="rounded-sm border border-line bg-canvas p-6"
             >
-              <h3 className="text-[1rem] font-semibold text-navy">{item.name}</h3>
-              <p className="mt-2 text-body-sm text-ink/75">{item.detail}</p>
+              <h3 className="font-sans text-body font-semibold text-ink">{item.name}</h3>
+              <p className="mt-2 text-body-sm text-muted">{item.detail}</p>
             </Reveal>
           ))}
         </ul>
       </Section>
 
       {/* Diferenciais Bianchini */}
-      <Section tone="navy" space="lg">
+      <Section tone="graphite" space="lg">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <SectionHeader
             eyebrow="Diferenciais"
-            tone="dark"
-            title="Por que comprar dentro de um projeto."
+            tone="light"
+            title="Por que comprar dentro de um projeto"
             lead="O equipamento só entrega o que promete quando a instalação, a exaustão e a operação foram dimensionadas para ele."
           />
           <ol className="divide-y divide-white/12 border-t border-white/12">
             {rational.advantages.map((advantage, index) => (
               <Reveal as="li" key={advantage.number} delay={index * 70} className="py-7">
                 <div className="flex gap-6">
-                  <span aria-hidden="true" className="font-serif text-xl leading-none text-bronze-light">
+                  <span aria-hidden="true" className="font-sans font-bold text-title-3 leading-none text-canvas/55">
                     {advantage.number}
                   </span>
                   <div>
-                    <h3 className="text-[1.0625rem] font-semibold text-white">{advantage.title}</h3>
-                    <p className="mt-2.5 max-w-prose text-body-sm text-white/65">
+                    <h3 className="font-sans text-body font-semibold text-canvas">{advantage.title}</h3>
+                    <p className="mt-2.5 max-w-prose text-body-sm text-canvas/70">
                       {advantage.description}
                     </p>
                   </div>
@@ -213,11 +213,11 @@ export default function RationalPage() {
         </div>
 
         <div className="mt-16 flex flex-col items-start gap-5 border-t border-white/12 pt-10 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xl text-body text-white/75">
+          <p className="max-w-xl text-body text-canvas/75">
             Solicite um orçamento com o dimensionamento incluído — elétrica, hidráulica e exaustão
             dimensionadas antes da instalação.
           </p>
-          <LinkButton href={quoteUrl} className="shrink-0" withArrow>
+          <LinkButton href={quoteUrl} variant="primary" className="shrink-0" withArrow>
             Solicitar orçamento
           </LinkButton>
         </div>

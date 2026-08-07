@@ -56,11 +56,6 @@ export const equipmentLines: EquipmentLine[] = [
         caption: 'Conjunto de mobiliário com bancada, gaveteiro e pia',
       },
       {
-        src: '/images/projects/producao-panificacao.jpg',
-        alt: 'Área de produção de panificação com mesas largas em inox e fornos de lastro',
-        caption: 'Mesas largas para panificação e confeitaria',
-      },
-      {
         src: '/images/projects/camara-fria-estantes.jpg',
         alt: 'Estantes em inox instaladas dentro de câmara fria',
         caption: 'Estantes para câmaras frias',

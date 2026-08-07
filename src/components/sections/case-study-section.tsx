@@ -1,63 +1,50 @@
 import Image from 'next/image'
 import { Section, SectionHeader } from '@/components/layout/section'
-import { Reveal } from '@/components/ui/reveal'
-import { LinkButton } from '@/components/ui/button'
+import { Reveal } from '@/components/animations/reveal'
 import { caseStages } from '@/data/process'
-import { whatsappUrl } from '@/lib/whatsapp'
 
 /**
- * Anatomia de um projeto, ilustrada com material técnico real da Bianchini
- * (planta executiva, estudo 3D e a operação construída).
+ * Do desenho técnico à operação entregue, com material real de projeto:
+ * planta executiva em CAD, estudo 3D e a cozinha construída.
  *
- * Não há métricas de resultado aqui: nenhum case com números auditáveis foi
- * fornecido. Quando houver, este é o lugar de incluí-lo.
+ * Não há nome de cliente, métrica de resultado ou prazo — esses dados
+ * dependem de autorização e ainda não foram confirmados.
  */
 export function CaseStudySection() {
   return (
-    <Section id="anatomia" tone="paper">
+    <Section id="etapas" tone="canvas-deep" space="lg" aria-labelledby="etapas-titulo">
       <SectionHeader
-        eyebrow="Anatomia de um projeto"
-        title={
-          <>
-            Da planta ao dia
-            <br />
-            em que a cozinha produz.
-          </>
-        }
-        lead="O mesmo projeto percorre três estágios antes de virar operação. Nada é fabricado antes de estar desenhado, validado e aprovado pelo cliente."
-        className="max-w-3xl"
+        headingId="etapas-titulo"
+        eyebrow="Do desenho à operação"
+        title="O mesmo projeto, em três momentos"
+        lead="A planta define a operação, o estudo tridimensional valida a decisão com o cliente e a entrega confirma o que foi desenhado."
       />
 
-      <ol className="mt-14 grid gap-8 md:grid-cols-3">
+      <ol className="mt-14 grid gap-8 lg:mt-16 lg:grid-cols-3 lg:gap-10">
         {caseStages.map((stage, index) => (
-          <Reveal as="li" key={stage.stage} delay={index * 90} className="flex flex-col">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-card border border-hairline bg-white">
+          <Reveal key={stage.stage} as="li" variant="side" delay={index * 80}>
+            <article className="flex h-full flex-col">
               {stage.image ? (
-                <Image
-                  src={stage.image}
-                  alt={stage.alt ?? ''}
-                  fill
-                  sizes="(max-width: 767px) 100vw, 32vw"
-                  className="object-cover"
-                />
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-canvas">
+                  <Image
+                    src={stage.image}
+                    alt={stage.alt ?? ''}
+                    fill
+                    sizes="(max-width: 1023px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
               ) : null}
-            </div>
-            <span className="mt-6 text-eyebrow font-semibold uppercase text-bronze">{stage.stage}</span>
-            <h3 className="mt-3 font-serif text-display-4 text-navy">{stage.title}</h3>
-            <p className="mt-3 text-body-sm text-ink/80">{stage.description}</p>
+
+              <span className="mt-5 font-condensed text-eyebrow font-semibold uppercase text-ink">
+                {stage.stage}
+              </span>
+              <h3 className="mt-2 font-sans font-bold text-title-3 text-ink">{stage.title}</h3>
+              <p className="mt-2 text-body-sm text-muted">{stage.description}</p>
+            </article>
           </Reveal>
         ))}
       </ol>
-
-      <div className="mt-14 flex flex-col items-start gap-5 rounded-card border border-hairline bg-white p-8 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-xl text-body text-ink/85">
-          Quer entender em qual estágio a sua operação está? O diagnóstico inicial é gratuito e começa
-          com uma conversa.
-        </p>
-        <LinkButton href={whatsappUrl('analise')} withArrow className="shrink-0">
-          Solicitar análise inicial
-        </LinkButton>
-      </div>
     </Section>
   )
 }

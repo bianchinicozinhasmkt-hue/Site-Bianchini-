@@ -3,47 +3,114 @@
 @tailwind utilities;
 
 /* ============================================================
-   Design tokens — espelham BRAND_DIRECTION.md
+   Tokens de runtime.
+
+   Os valores vêm de duas fontes, descritas em `src/styles/colors.ts`:
+   o grafite e o amarelo da identidade publicada em bianchinicozinhas.com.br
+   e a geometria/superfícies amostradas do mockup aprovado.
+
+   Os nomes `--color-*` são os aliases semânticos do sistema; os curtos
+   (`--graphite`, `--canvas`…) espelham as chaves do Tailwind e existem para
+   uso dentro de `background-image` e outras propriedades que não passam por
+   classe utilitária.
    ============================================================ */
 @layer base {
   :root {
-    --navy: #1a2840;
-    --navy-light: #243050;
-    --carmim: #8c1a2e;
-    --carmim-light: #a82035;
-    --bronze: #9a7b4f;
-    --paper: #faf9f6;
-    --sand: #f2f0eb;
-    --hairline: #e4e1da;
-    --ink: #3d3b37;
-    --muted: #a8a49c;
+    --graphite: #101010;
+    --graphite-deep: #0a0b0c;
+    --graphite-soft: #1a1a1a;
+    --graphite-line: #2c2c2c;
+    --canvas: #efedeb;
+    --canvas-deep: #e6e3de;
+    --surface: #ffffff;
+    --ink: #101010;
+    --muted: #5b6065;
+    --line: #dcd9d4;
+    --steel: #8c9095;
+    --yellow: #f5c64b;
+    --yellow-bright: #ffe379;
+    --yellow-deep: #d9a61b;
 
-    --header-height: 5.5rem;
-    --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
+    /* Aliases semânticos. */
+    --color-brand-dark: var(--graphite);
+    --color-brand-yellow: var(--yellow);
+    --color-brand-light: var(--canvas);
+    --color-surface-dark: var(--graphite-deep);
+    --color-surface-light: var(--surface);
+    --color-text-dark: var(--ink);
+    --color-text-light: var(--canvas);
+    --color-border: var(--line);
+    --color-muted: var(--muted);
+
+    --header-height: 4rem;
+
+    /* ----------
+       Curvas. Três, e só três — ver `src/styles/animations.ts`.
+       `--ease-smooth` e `--ease-precise` mantêm os nomes antigos porque são
+       usados como `ease-smooth` / `ease-precise` em dezenas de componentes.
+       ---------- */
+    --ease-precise: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ----------
+     Altura do cabeçalho.
+
+     O mockup fixa 116px em 1586 × 992, mas a faixa ficava alta e dispersa: a
+     altura passa a ser um token responsivo por `clamp()`, não um cálculo
+     preso a uma captura específica.
+
+       mobile ............ 64px  (área de toque do gatilho: 44px)
+       tablet / desktop
+       estreito .......... 72 → 80px
+       desktop amplo ..... 80 → 84px
+
+     A faixa fechou mais um degrau quando a assinatura saiu de dentro dela
+     (ver `header.tsx`): com três elementos em vez de quatro, 90–96px viravam
+     ar em volta de uma linha só. O logotipo, em compensação, cresceu.
+
+     Os termos médios crescem com a viewport (`vw`) entre os dois limites, de
+     modo que a faixa acompanhe a largura sem depender de `svh` — em telas
+     baixas quem comprime é o hero, pela sua própria unidade `--u`.
+     ---------- */
+  @media (min-width: 768px) {
+    :root {
+      --header-height: clamp(4.5rem, 3.4vw + 2.6rem, 5rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    :root {
+      --header-height: clamp(5rem, 3vw + 2rem, 5.25rem);
+    }
   }
 
   * {
-    @apply border-hairline;
+    @apply border-line;
   }
 
   html {
     @apply scroll-smooth;
-    /* Compensa o header fixo ao navegar por âncoras. */
-    scroll-padding-top: var(--header-height);
+    scroll-padding-top: calc(var(--header-height) + 1rem);
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-white font-sans text-body text-ink antialiased;
-    /* Nenhum overflow horizontal, em qualquer largura. */
+    @apply bg-canvas font-sans text-body text-ink antialiased;
     @apply overflow-x-hidden;
   }
 
+  /*
+    Títulos usam a grotesca de leitura, não a condensada. A condensada é da
+    marca, mas em título longo ela custa legibilidade — fica nos elementos
+    comerciais curtos (ver `src/styles/typography.ts`).
+  */
   h1,
   h2,
   h3,
   h4 {
-    @apply font-serif font-normal text-navy;
+    @apply font-sans font-bold text-ink;
     text-wrap: balance;
   }
 
@@ -52,16 +119,23 @@
   }
 
   ::selection {
-    @apply bg-carmim text-white;
+    @apply bg-yellow text-ink;
   }
 
-  /* Foco visível e consistente em toda a interface. */
+  /* ----------
+     Foco visível (WCAG 2.2 AA).
+
+     O anel não pode ser amarelo em fundo claro: `yellow` sobre `canvas` fica
+     em 1,4:1 e o indicador some. Em fundo claro o anel é grafite (16,2:1); em
+     fundo escuro, aí sim, amarelo (11,8:1) — que além de passar em AA é o
+     sinal da marca.
+     ---------- */
   :focus-visible {
-    @apply outline-none ring-2 ring-carmim ring-offset-2 ring-offset-white;
+    @apply outline-none ring-2 ring-ink ring-offset-2 ring-offset-canvas;
   }
 
   .on-dark :focus-visible {
-    @apply ring-bronze ring-offset-navy;
+    @apply ring-yellow ring-offset-graphite;
   }
 }
 
@@ -69,42 +143,872 @@
    Componentes utilitários
    ============================================================ */
 @layer components {
+  /*
+    Fica fora da viewport até receber foco. Usa `top` negativo em vez de
+    `translate`, que deixava uma fresta visível no topo por arredondamento.
+  */
+  /*
+    `inline-flex` + piso de 44px: com `px-4 py-3` sobre `text-caption` a caixa
+    media 43,5px — meio pixel abaixo do mínimo de toque do projeto. Não é
+    detalhe teórico: é o primeiro alvo alcançado por teclado em toda rota.
+  */
   .skip-link {
-    @apply fixed left-4 top-0 z-[100] -translate-y-full bg-navy px-4 py-3 text-micro font-semibold uppercase tracking-widest text-white transition-transform focus-visible:translate-y-4;
+    @apply fixed left-4 top-[-6rem] z-[100] inline-flex min-h-[2.75rem] items-center rounded-b-sm bg-yellow px-4 py-3 font-condensed text-caption font-semibold uppercase tracking-[0.12em] text-ink transition-[top] duration-200 focus-visible:top-0;
   }
 
-  /* Sublinhado animado dos links de navegação. */
+  /* ----------
+     Item da trilha de navegação (breadcrumb).
+
+     A trilha aparece em quatro composições diferentes (`page-hero`,
+     `leonardo-hero` e as duas páginas de linha de equipamento), cada uma com o
+     seu próprio tom de texto — daí a classe carregar **só a caixa**, nunca a
+     cor: quem define cor e hover continua sendo o ponto de uso.
+
+     Medida antes da correção: 31,9 × 18px ("Início") a 140,8 × 18px. São links
+     de navegação independentes, não texto corrido, então valem os 44px do
+     projeto. A altura vem de `min-h` com o texto centrado, e não de `padding`
+     solto: assim o alvo cresce sem empurrar a linha de base do rótulo, e a
+     trilha continua ocupando uma faixa só.
+
+     `min-w` pelo mesmo motivo, e **sem `justify-center`**: "Início" mede 31,9px
+     e ficaria abaixo do mínimo na horizontal. Centrar o rótulo na caixa de
+     44px empurraria a primeira palavra ~6px para dentro, desalinhando a trilha
+     do título logo abaixo — que é o alinhamento que a correção tem de
+     preservar. Alinhado à esquerda, a caixa cresce para a direita, contra o
+     separador (que não é alvo) e não contra o link seguinte.
+     ---------- */
+  .crumb-link {
+    @apply inline-flex min-h-[2.75rem] min-w-[2.75rem] items-center;
+  }
+
+  /* ----------
+     Link da navegação principal, sobre o grafite do cabeçalho.
+
+     O corpo não depende da altura da faixa: com o cabeçalho mais baixo,
+     amarrar tipografia à altura encolheria o rótulo junto. São 15px fixos, com
+     peso médio e tracking curto — a área clicável vem do `padding` vertical,
+     que mantém 44px de alvo sem transformar o item em cápsula.
+
+     Dois sinais de estado, nenhum deles caixa:
+       · sublinhado amarelo que cresce da esquerda para a direita (220ms);
+       · ponto amarelo à esquerda do rótulo, que entra junto.
+
+     O sublinhado cresce a partir da borda de ataque e recolhe pela oposta: a
+     origem troca de `left` para `right` quando o estado sai, então o traço
+     tem direção, e não apenas presença.
+     ---------- */
   .nav-link {
-    @apply relative inline-block py-1 text-[0.9375rem] font-medium text-navy transition-colors hover:text-carmim;
+    @apply relative inline-flex items-center py-[0.85rem] font-medium tracking-[0.005em] text-white/85 transition-colors duration-200 hover:text-white;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+  }
+
+  /* Ponto amarelo: nasce no lugar, sem deslocar o rótulo (é `absolute`). */
+  .nav-link::before {
+    @apply absolute left-[-0.7rem] top-1/2 h-[3px] w-[3px] -translate-y-1/2 scale-0 rounded-full bg-yellow opacity-0 transition-[transform,opacity] duration-200 content-[''];
+    transition-timing-function: var(--ease-precise);
   }
 
   .nav-link::after {
-    @apply absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-carmim transition-transform duration-300 content-[''];
-    transition-timing-function: var(--ease-brand);
+    @apply absolute inset-x-0 bottom-[0.35rem] h-[2px] origin-right scale-x-0 bg-yellow transition-[transform,opacity] duration-[220ms] content-[''];
+    transition-timing-function: var(--ease-precise);
+  }
+
+  /*
+    Página ativa: marca permanente, mais fraca que o hover — a indicação é
+    discreta e não disputa com o item sob o cursor. A semântica fica em
+    `aria-current`; o traço é reforço visual.
+  */
+  .nav-link[data-active='true'] {
+    @apply text-white;
+  }
+
+  .nav-link[data-active='true']::after {
+    @apply origin-left scale-x-100 opacity-[0.55];
   }
 
   .nav-link:hover::after,
   .nav-link:focus-visible::after {
-    @apply scale-x-100;
+    @apply origin-left scale-x-100 opacity-100;
+  }
+
+  .nav-link:hover::before,
+  .nav-link:focus-visible::before {
+    @apply scale-100 opacity-100;
+  }
+
+  .rule {
+    @apply h-px w-full bg-line;
+  }
+
+  .rule-dark {
+    @apply h-px w-full bg-white/15;
+  }
+
+  .mobile-menu-open .whatsapp-float {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  /* ----------
+     Marca-texto amarelo — o único jeito de o amarelo aparecer **atrás de
+     texto** em superfície clara sem reprovar em AA: o texto continua grafite
+     e o amarelo é fundo. Ver a regra do amarelo em `src/styles/colors.ts`.
+
+     O traço fica na base da linha (0,42em de altura), como marcação de
+     caneta, e não cobre a palavra inteira.
+     ---------- */
+  .mark-yellow {
+    background-image: linear-gradient(to top, var(--yellow) 0.42em, transparent 0.42em);
+    background-repeat: no-repeat;
+    padding-inline: 0.08em;
+  }
+
+  /* ==========================================================
+     Primeira dobra — geometria medida no mockup aprovado
+     `MOCKUP_HERO_APROVADO.png` (1586 × 992).
+
+     No desktop, toda medida é um pixel desse mockup expresso em `--u`.
+     `--u` vale 1px do mockup e é o menor entre:
+       · largura do container / 1586 (`cqw`, imune à barra de rolagem — `vw`
+         a inclui e desalinharia a diagonal, que é percentual);
+       · altura livre da janela / 950, para que cabeçalho + hero caibam na
+         primeira dobra sem cortar conteúdo. O divisor é a **altura da
+         composição inteira** em unidades, e por isso muda toda vez que a
+         composição muda:
+
+           900 .... quando o desenho técnico ocupava a faixa sob as métricas
+           810 .... sem ele — 733 unidades (etiqueta → base dos rótulos das
+                    métricas) mais ~10% de folga
+           950 .... hoje: o módulo de pilares desceu da fotografia para o pé
+                    da coluna clara (2026-08-05) e acrescentou ~190 unidades
+                    — identificação do pilar ativo, o seletor segmentado e o
+                    respiro entre eles
+
+         Medido, não estimado: com 810 a coluna passava a **817px numa dobra
+         de 688** em 1366×768, transbordando por cima da seção seguinte;
+
+       · 1.15px, teto que evita composição gigante em telas muito largas.
+
+     Em telas baixas, portanto, título, textos e gaps comprimem juntos e na
+     mesma proporção — nunca por corte nem por `overflow: hidden`.
+
+     Abaixo de 1024px o mockup não se aplica (a diagonal e a coluna única de
+     texto não cabem): a escala móvel é declarada nas regras-base e o mockup
+     assume a partir de `lg`.
+     ========================================================== */
+  .hero-root {
+    container-type: inline-size;
+  }
+
+  /*
+    Etiqueta da primeira dobra: condensada, como no mockup. O tracking é menor
+    que o da escala `eyebrow` porque aqui o corpo é maior.
+  */
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+  }
+
+  /*
+    No mobile o título ocupava quase metade da dobra e empurrava a fotografia
+    para fora dela. O corpo cai ~9% e a entrelinha fecha para 1.03: o texto
+    continua sendo o elemento dominante, mas sobra dobra para a imagem.
+  */
+  .hero-title {
+    font-size: clamp(1.75rem, 7.6vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-lead {
+    font-size: clamp(0.9375rem, 4vw, 1.0625rem);
+    line-height: 1.6;
+  }
+
+  /* Rótulo de CTA: condensada em caixa alta, como no mockup. */
+  .hero-action {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.045em;
+  }
+
+  .hero-numeral {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+
+  .hero-metric-label {
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  /*
+    Frase de valor do pilar ativo, sobre a fotografia — mesma família de
+    escala do resto da dobra. No desktop é medida em `--u`, como o restante
+    do hero, para encolher junto com a coluna de texto em vez de virar um
+    bloco de corpo fixo colado sobre a fotografia.
+  */
+  .hero-context {
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  /* ----------
+     Marcador do pilar ativo — "01 — PROJETOS", entre a etiqueta e o título.
+
+     Substitui `.hero-active-name`, que era o nome do pilar em 17px/700 na base
+     da coluna. Aqui o papel é outro: o marcador antecede o título e **não pode
+     competir com ele**. Daí condensada em caixa alta, 12,5px, no mesmo registro
+     tipográfico da etiqueta institucional logo acima — os dois lem como uma
+     dupla de rótulos, e o peso da dobra continua no `h1`.
+
+     Altura fixa por `line-height` e sem quebra: os três nomes de pilar cabem em
+     uma linha em toda largura ≥1024px (o mais longo, "OPERAÇÃO COMERCIAL", pede
+     ~168px em Oswald 12,5px; a coluna tem 496px em 1586px e 474px em 1366px).
+     Assim a troca de slide não desloca o título abaixo.
+     ---------- */
+  /*
+    A partir de 2026-08-05 (V1.1) esta é a **caixa** do marcador: o texto que
+    troca por slide e o botão de pausa dividem a linha. `flex-wrap` é rede de
+    segurança para 320px, onde "OPERAÇÃO COMERCIAL" mais o índice e o botão
+    ficam a poucos pixels do limite da coluna — se não couber, o botão desce
+    em vez de estourar a caixa. `nowrap` continua valendo para o texto, que não
+    pode partir no meio do nome do pilar.
+  */
+  .hero-pillar-mark {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+    margin-top: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .hero-pillar-name {
+    font-size: 0.78125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+  }
+
+  .hero-tab-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.085em;
+  }
+
+  .hero-tab-number {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.16em;
+  }
+
+  .hero-tab-hint {
+    font-size: 0.625rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.14em;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-fold {
+      --u: min(calc(100cqw / 1586), calc((100svh - var(--header-height)) / 950), 1.15px);
+    }
+
+    .hero-eyebrow {
+      font-size: max(0.6875rem, calc(16.5 * var(--u)));
+      font-weight: 500;
+      letter-spacing: 0.085em;
+    }
+
+    .hero-title {
+      font-size: calc(64.3 * var(--u));
+      line-height: calc(66.5 * var(--u));
+      letter-spacing: -0.016em;
+    }
+
+    .hero-lead {
+      font-size: max(0.8125rem, calc(17.4 * var(--u)));
+      line-height: calc(27 * var(--u));
+    }
+
+    .hero-action {
+      font-size: max(0.8125rem, calc(16.4 * var(--u)));
+    }
+
+    /*
+      Entrelinha igual à altura de maiúscula (24px no mockup): a caixa do
+      número termina onde os dígitos terminam, então a margem do rótulo abaixo
+      é o espaço que se vê — e não entrelinha invisível.
+
+      A razão cap/em da Oswald (0,72) é ~2,7% menor que a da Manrope contra a
+      qual a medida foi levantada; o corpo sobe de 34 para 35 unidades para
+      que a altura de maiúscula continue nos 24px do mockup.
+    */
+    .hero-numeral {
+      font-size: calc(35 * var(--u));
+      line-height: calc(24 * var(--u));
+    }
+
+    .hero-metric-label {
+      font-size: max(0.6875rem, calc(15 * var(--u)));
+      line-height: calc(23 * var(--u));
+    }
+
+    .hero-context {
+      font-size: max(0.8125rem, calc(16.4 * var(--u)));
+      line-height: calc(24 * var(--u));
+    }
+
+    /*
+      O marcador escala em `--u` como o resto da dobra, com piso de 11px para
+      não cair abaixo do mínimo de legibilidade em 1024px. A margem também é em
+      `--u`: em `rem` ela não encolheria junto e roubaria altura do título nas
+      telas mais baixas.
+    */
+    .hero-pillar-mark {
+      margin-top: calc(14 * var(--u));
+      gap: calc(10 * var(--u));
+    }
+
+    .hero-pillar-name {
+      font-size: max(0.6875rem, calc(12.5 * var(--u)));
+    }
+
+    .hero-tab-label {
+      font-size: max(0.6875rem, calc(14.6 * var(--u)));
+    }
+
+    .hero-tab-number {
+      font-size: max(0.625rem, calc(12.6 * var(--u)));
+    }
+
+    .hero-tab-hint {
+      font-size: max(0.625rem, calc(11.6 * var(--u)));
+    }
+  }
+
+  /* ==========================================================
+     Papel de prancha — ÚNICO uso de grade fora do blueprint do hero.
+
+     A grade cartesiana era fundo de seis seções e virava assinatura de
+     template: qualquer bloco ganhava "aparência de engenharia" sem que nada
+     ali fosse de engenharia. Foi removida dos fundos e sobrou aqui, como
+     **suporte de um documento real**: a moldura em que a planta executiva é
+     apresentada na seção de diagnóstico, com área limitada ao próprio
+     documento. Não usar como fundo de seção, nem em faixa, nem em painel de
+     texto.
+     ========================================================== */
+  .drafting-paper {
+    background-color: var(--canvas);
+    background-image:
+      linear-gradient(to right, rgba(16, 16, 16, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16, 16, 16, 0.055) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* ==========================================================
+     Devices propagados do hero para o restante da página
+     ========================================================== */
+
+  /*
+    Régua com marcação, derivada das divisórias do bloco de métricas do hero.
+    Conecta seções sem introduzir caixa: um traço contínuo com ticks a cada
+    12px. `currentColor` deixa a mesma régua servir em fundo claro e escuro.
+  */
+  .tick-rule {
+    height: 7px;
+    background-image: repeating-linear-gradient(
+      to right,
+      currentColor 0 1px,
+      transparent 1px 12px
+    );
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    background-size: 12px 7px;
+    border-top: 1px solid currentColor;
+  }
+
+  /*
+    Aresta diagonal do hero, reaproveitada nos dois painéis fotográficos que
+    fecham a narrativa (problemas e CTA final). A inclinação é a medida no
+    mockup — a borda corre de x 880 (topo) a x 657 (base) em 876px de altura,
+    ou −0,2545 px/px. `--diag` é o deslocamento horizontal correspondente à
+    altura do painel; o padrão de 9,5rem equivale a um painel de ~600px.
+
+    Só vale a partir de `lg`: abaixo disso o painel empilha e a diagonal
+    viraria um corte arbitrário sobre a fotografia.
+
+    O deslocamento vem do elemento que compõe o painel (`--diag`, definido no
+    wrapper). O valor abaixo é **fallback**, não declaração própria: declarar
+    `--diag` aqui sobrescreveria o valor herdado no painel e não na keyline —
+    as duas arestas deixariam de ser paralelas e sobraria uma cunha amarela.
+  */
+  @media (min-width: 1024px) {
+    .diag-panel {
+      clip-path: polygon(var(--diag, 9.5rem) 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    /* Espelhada, para painéis ancorados à esquerda. */
+    .diag-panel-left {
+      clip-path: polygon(0 0, 100% 0, calc(100% - var(--diag, 9.5rem)) 100%, 0 100%);
+    }
+
+    /*
+      Keyline amarela paralela à aresta, 8,5px à esquerda dela no mockup. É o
+      mesmo polígono deslocado — os dois vértices andam juntos, então a reta
+      resultante é paralela, e não apenas mais inclinada.
+    */
+    .diag-keyline {
+      clip-path: polygon(
+        calc(var(--diag) - var(--key)) 0,
+        100% 0,
+        100% 100%,
+        calc(-1 * var(--key)) 100%
+      );
+    }
+
+    .diag-keyline-left {
+      clip-path: polygon(
+        0 0,
+        calc(100% + var(--key)) 0,
+        calc(100% - var(--diag) + var(--key)) 100%,
+        0 100%
+      );
+    }
+  }
+
+  /*
+    Zoom de imagem no hover — teto de 1.03. Aplicado ao filho `img` para não
+    escalar legenda nem moldura junto.
+  */
+  .media-zoom img {
+    transition: transform 0.6s var(--ease-smooth);
+  }
+
+  .group:hover .media-zoom img,
+  .group:focus-visible .media-zoom img {
+    transform: scale(1.03);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .media-zoom img {
+      transition: none;
+    }
+
+    .group:hover .media-zoom img,
+    .group:focus-visible .media-zoom img {
+      transform: none;
+    }
+  }
+
+  /* ==========================================================
+     Máscara fotográfica.
+
+     A fotografia entra por revelação da própria caixa — a máscara sobe da
+     base — e não por opacidade nem por deslizamento de bloco. É o único
+     recurso de entrada aplicado a imagem grande: 560ms, uma vez, sem loop.
+     Depende da mesma flag `data-js` do `.reveal`, para que a foto nunca fique
+     escondida se o script falhar.
+     ========================================================== */
+  :root[data-js='on'] .photo-mask {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 560ms var(--ease-premium);
+  }
+
+  :root[data-js='on'] .photo-mask.is-visible {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /*
+    Mesma máscara, na horizontal: é a linha do método sendo construída da
+    esquerda para a direita. Um traço único, uma vez, 650ms.
+  */
+  :root[data-js='on'] .line-mask {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 650ms var(--ease-premium);
+  }
+
+  :root[data-js='on'] .line-mask.is-visible {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /*
+    Troca de fotografia dentro de um painel fixo (capítulos de sintomas,
+    níveis de atuação). As camadas ficam empilhadas e só a ativa é opaca;
+    o crop desloca poucos pixels, o que dá continuidade sem virar carrossel.
+
+    A camada que entra é mais rápida (300ms) que a que sai (420ms) e as duas
+    se sobrepõem: em nenhum quadro o painel fica vazio, que é o que faria a
+    fotografia piscar durante a troca.
+  */
+  .panel-photo {
+    opacity: 0;
+    transform: scale(1.015);
+    transition:
+      opacity 260ms var(--ease-precise),
+      transform 260ms var(--ease-premium);
+  }
+
+  .panel-photo[data-active='true'] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 260ms var(--ease-precise),
+      transform 260ms var(--ease-premium);
+  }
+
+  /*
+    Painel de nível trocando de aba: o conteúdo entra, o que sai não é
+    animado (o `hidden` já o removeu). 320ms — dentro da faixa de troca de
+    conteúdo, e curto o bastante para não atrasar a leitura.
+  */
+  .scope-panel:not([hidden]) {
+    animation: scope-panel-in 260ms var(--ease-premium) both;
+  }
+
+  /* ----------
+     Troca de mídia por **cortina**, não por fundido.
+
+     A camada que entra é revelada da esquerda para a direita por `clip-path`;
+     a que sai continua opaca durante toda a passagem e só então some. Como as
+     duas convivem, em nenhum quadro o painel fica vazio — que é o defeito do
+     crossfade puro quando a imagem nova ainda não decodificou.
+
+     Usada no painel dos cinco níveis. As camadas inativas ficam recortadas a
+     zero para não capturarem ponteiro nem entrarem na busca da página.
+     ---------- */
+  .panel-wipe {
+    opacity: 0;
+    clip-path: inset(0 0 0 100%);
+    transition:
+      clip-path 460ms var(--ease-premium),
+      opacity 200ms var(--ease-precise) 260ms;
+  }
+
+  .panel-wipe[data-active='true'] {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transition:
+      clip-path 460ms var(--ease-premium),
+      opacity 0ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel-wipe,
+    .panel-wipe[data-active='true'] {
+      clip-path: none;
+      transition: none;
+    }
+
+    .panel-wipe {
+      opacity: 0;
+    }
+
+    .panel-wipe[data-active='true'] {
+      opacity: 1;
+    }
   }
 
   /* Máscara lateral da faixa de logos. */
   .marquee-mask {
-    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root[data-js='on'] .photo-mask,
+    :root[data-js='on'] .photo-mask.is-visible,
+    :root[data-js='on'] .line-mask,
+    :root[data-js='on'] .line-mask.is-visible {
+      clip-path: none;
+      transition: none;
+    }
+
+    .panel-photo {
+      transform: none;
+      transition: none;
+    }
   }
 }
 
 /* ============================================================
-   Reveal on scroll — só ativo quando o JS está disponível,
-   para nunca esconder conteúdo em caso de falha do script.
+   COMPOSIÇÃO DE ENTRADA DA PRIMEIRA DOBRA
+
+   Uma sequência coordenada, executada **uma única vez** no carregamento —
+   não há observador nem estado de React envolvido, porque a dobra já está na
+   janela. Ordem e tempos (o atraso de cada elemento vem de `--seq`):
+
+     cabeçalho ...    0ms · 320ms
+     etiqueta ....  120ms · 420ms
+     título ......  200ms · 640ms, uma linha a cada 55ms
+     parágrafo ...  430ms · 480ms
+     CTAs ........  540ms · 420ms, 60ms entre eles
+     métricas ....  620ms · 360ms, 60ms entre elas
+     blueprint ...  520ms · 620ms (traço sendo desenhado)
+     fotografia ..  160ms · 960ms (cortina correndo pela diagonal)
+     legenda .....  900ms · 380ms
+
+   O último quadro cai em ~1.120ms. Nada bloqueia leitura ou clique: as
+   animações são de `opacity`/`transform`/`clip-path` e todo o conteúdo está
+   no DOM desde a primeira pintura — inclusive o H1.
+   ============================================================ */
+:root[data-js='on'] .hero-seq {
+  animation: hero-rise 420ms var(--ease-premium) both;
+  animation-delay: var(--seq, 0ms);
+}
+
+/*
+  Título por linhas. `inline-block` + `clip-path` só a partir de `lg`, onde as
+  quebras são explícitas (`<br>`): abaixo disso cada linha é uma frase que
+  precisa refluir, e transformá-la em bloco produziria overflow em 320px. No
+  mobile quem anima é o H1 inteiro, com o mesmo `hero-rise`.
+*/
+@media (min-width: 1024px) {
+  :root[data-js='on'] .hero-line {
+    display: inline-block;
+    vertical-align: bottom;
+    animation: hero-line-in 640ms var(--ease-premium) both;
+    animation-delay: var(--seq, 0ms);
+  }
+}
+
+/*
+  Cortina da fotografia: recebe o mesmo polígono do painel, então a aresta que
+  corre é a **diagonal do mockup**, e não um corte vertical. Sai para a direita
+  e é descartada pelo recorte do próprio painel.
+*/
+/*
+  Entrada do cabeçalho — o primeiro tempo da sequência. Só opacidade e 6px de
+  deslocamento: a faixa é fixa, então qualquer percurso maior lê como queda.
+*/
+:root[data-js='on'] .header-in {
+  animation: header-in 320ms var(--ease-precise) both;
+}
+
+@keyframes header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-curtain {
+  display: none;
+}
+
+/*
+  Ajustado em 2026-08-03: em `--ease-premium` (dois pontos de controle em
+  y=1) mais de 90% do deslocamento acontecia nos primeiros ~30% da duração —
+  a cortina "chegava" quase instantânea e os ~600ms restantes eram uma fresta
+  residual quase parada, lida como travamento, não como movimento. Trocado
+  para `--ease-smooth` (entrada de conteúdo — é exatamente o que isto é) e
+  180ms a mais de duração: o deslocamento fica distribuído de forma visível
+  do início ao fim, sem esticar a sequência inteira da dobra além do
+  necessário (fecha ~100ms depois do valor anterior, não vários segundos).
+*/
+:root[data-js='on'] .hero-curtain {
+  display: block;
+  animation: hero-curtain 960ms var(--ease-smooth) 160ms both;
+}
+
+/* ============================================================
+   CARROSSEL DA HERO — troca entre os 3 slides (2026-08-03).
+
+   Dois mecanismos, para dois momentos diferentes:
+
+     `.hero-curtain` (acima) ..... only uma vez, no carregamento — a cortina
+                                    correndo pela diagonal do mockup.
+     `.hero-slide-media` /
+     `.hero-slide-content` ....... toda vez que o slide troca depois disso —
+                                    um fundido simples, mais discreto que a
+                                    cortina de propósito: a cortina é entrada
+                                    de página, isto é troca de conteúdo.
+
+   Refinado em 2026-08-04. A troca continua **sem zoom de banner** — mas o
+   fundido puro anterior tinha dois defeitos:
+
+     · a fotografia trocava sem nenhum deslocamento, e um crossfade de duas
+       imagens paradas no mesmo enquadramento lê como "piscada", não como
+       substituição;
+     · o texto era remontado por `key`, então saía por corte seco e só a
+       entrada era animada — a origem real da "troca dura" relatada.
+
+   Agora são três tempos coordenados (o React coordena a defasagem do texto,
+   ver CONTENT_SWAP em `hero-section.tsx`):
+
+     imagem ..... 700ms, dissolve **com 1,5% de deriva horizontal** — o
+                  suficiente para o olho ler movimento de substituição, longe
+                  de um zoom. É a camada mais longa: é ela que conduz.
+     texto sai .. 190ms, desce 4px perdendo opacidade
+     texto entra  460ms, sobe 6px ganhando opacidade
+
+   Saída (190) + entrada (460) = 650ms, dentro da faixa de 500–750ms pedida, e
+   sob a dissolução de 700ms da imagem, que atravessa as duas.
+   ============================================================ */
+.hero-slide-media {
+  opacity: 0;
+  transform: translateX(1.5%);
+  transition:
+    opacity 700ms var(--ease-smooth),
+    transform 700ms var(--ease-premium);
+}
+
+.hero-slide-media[data-active='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-slide-content {
+  animation: hero-slide-content-in 460ms var(--ease-smooth) both;
+}
+
+.hero-slide-out {
+  animation: hero-slide-content-out 190ms var(--ease-precise) both;
+}
+
+@keyframes hero-slide-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-slide-content-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.34em);
+    clip-path: inset(0 -6% 110% -6%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(-25% -6% -18% -6%);
+  }
+}
+
+@keyframes hero-curtain {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(102%);
+  }
+}
+
+/* ============================================================
+   Blueprint da primeira dobra — entrada de desenho.
+
+   Cada traço declara `pathLength="1"`, então um único `dasharray` serve para
+   linhas de comprimentos diferentes e todas terminam juntas. A animação roda
+   uma vez, no carregamento, e `forwards` mantém o desenho pronto.
+   ============================================================ */
+.blueprint-draw > g > * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: blueprint-draw 620ms var(--ease-precise) 520ms forwards;
+}
+
+@keyframes blueprint-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scope-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   REVELAÇÃO NA ROLAGEM
+
+   Quatro variantes, não uma. Um `fade-up` idêntico em toda a página é o que
+   faz um site parecer template: a leitura fica previsível porque todo bloco
+   chega pelo mesmo lado, na mesma velocidade. As variantes compartilham
+   curva e faixa de duração — o que muda é a direção e o que ela explica.
+
+     (padrão)  sobe 16px .............. bloco de texto
+     side      entra 14px da esquerda . coluna lateral, índice
+     settle    assenta de 0.985 ....... documento, figura, retrato
+     line      cresce da esquerda ..... régua, divisor, barra de progresso
+
+   Só ficam escondidos quando `:root[data-js='on']` existe — a flag é gravada
+   por um script inline no `layout.tsx` antes da primeira pintura. Se o script
+   falhar, nada some.
    ============================================================ */
 :root[data-js='on'] .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(16px);
   transition:
-    opacity 0.7s var(--ease-brand),
-    transform 0.7s var(--ease-brand);
+    opacity 550ms var(--ease-smooth),
+    transform 550ms var(--ease-smooth);
+}
+
+:root[data-js='on'] .reveal[data-reveal='side'] {
+  transform: translateX(-14px);
+}
+
+:root[data-js='on'] .reveal[data-reveal='settle'] {
+  transform: scale(0.985);
+  transition-duration: 650ms;
+  transition-timing-function: var(--ease-premium);
+}
+
+:root[data-js='on'] .reveal[data-reveal='line'] {
+  opacity: 1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 650ms var(--ease-premium);
 }
 
 :root[data-js='on'] .reveal.is-visible {
@@ -112,12 +1016,64 @@
   transform: none;
 }
 
+/* ============================================================
+   Movimento reduzido.
+
+   Regra: **nenhum conteúdo pode ficar invisível**. Toda máscara abre, toda
+   sequência resolve para o estado final e as transições técnicas que
+   precisam existir (troca de aba, abertura de menu) ficam em 0,01ms.
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   :root[data-js='on'] .reveal,
   :root[data-js='on'] .reveal.is-visible {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  :root[data-js='on'] .header-in,
+  :root[data-js='on'] .hero-seq,
+  :root[data-js='on'] .hero-line {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    animation: none;
+  }
+
+  /* A cortina não pode apenas parar: ela precisa sair de cima da fotografia. */
+  :root[data-js='on'] .hero-curtain {
+    animation: none;
+    display: none;
+  }
+
+  /*
+    Carrossel: troca de slide continua funcionando (o React ainda troca qual
+    imagem/texto está ativo), só a transição visual que some — troca
+    instantânea, sem fundido nem deslocamento.
+  */
+  .hero-slide-media {
+    transform: none;
+    transition: none;
+  }
+
+  /*
+    `.hero-slide-out` nunca chega a ser aplicada com movimento reduzido — a
+    defasagem do texto é desligada no próprio componente (ver CONTENT_SWAP em
+    `hero-section.tsx`, ramo `reducedMotion`). A regra existe como rede de
+    segurança: se a classe escapasse por qualquer caminho, `animation: none`
+    sem `opacity: 1` deixaria o título da dobra **invisível**, e conteúdo
+    invisível é justamente o que `prefers-reduced-motion` não pode produzir.
+  */
+  .hero-slide-content,
+  .hero-slide-out {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .blueprint-draw > g > * {
+    stroke-dashoffset: 0;
+    animation: none;
   }
 
   html {

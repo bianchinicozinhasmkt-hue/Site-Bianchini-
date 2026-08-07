@@ -52,30 +52,49 @@ export const defaultMetadata: Metadata = {
   },
 }
 
+interface PageMetadataOptions {
+  title: string
+  description: string
+  path: string
+  /**
+   * Imagem social própria da página. Sem ela a página herda a do site.
+   * Use 1200 × 630 — é a proporção que LinkedIn, WhatsApp e X recortam sem
+   * cortar o assunto.
+   */
+  image?: { url: string; alt: string; width?: number; height?: number }
+  /** Título completo, quando o template `%s — Bianchini` não serve. */
+  absoluteTitle?: string
+}
+
 /** Metadata para páginas internas, herdando os defaults. */
 export function pageMetadata({
   title,
   description,
   path,
-}: {
-  title: string
-  description: string
-  path: string
-}): Metadata {
+  image,
+  absoluteTitle,
+}: PageMetadataOptions): Metadata {
+  const socialTitle = absoluteTitle ?? `${title} — ${site.shortTitle}`
+  const images = image
+    ? [{ url: image.url, width: image.width ?? 1200, height: image.height ?? 630, alt: image.alt }]
+    : defaultMetadata.openGraph?.images
+
   return {
-    title,
+    title: absoluteTitle ? { absolute: absoluteTitle } : title,
     description,
     alternates: { canonical: path },
     openGraph: {
       ...defaultMetadata.openGraph,
-      title: `${title} — ${site.shortTitle}`,
+      title: socialTitle,
       description,
       url: path,
+      images,
     },
     twitter: {
       ...defaultMetadata.twitter,
-      title: `${title} — ${site.shortTitle}`,
+      title: socialTitle,
       description,
+      images: image ? [image.url] : defaultMetadata.twitter?.images,
     },
   }
 }
