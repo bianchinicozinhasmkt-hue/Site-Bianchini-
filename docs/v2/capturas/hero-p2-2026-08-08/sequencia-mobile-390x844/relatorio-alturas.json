@@ -1,0 +1,107 @@
+{
+  "viewport": "390x844",
+  "sequencia": "01 Equipamentos -> 02 Projetos -> 03 Consultoria -> 01 Equipamentos (retorno)",
+  "medidas": [
+    {
+      "passo": "00-estado-inicial-antes-de-qualquer-clique",
+      "metrics": {
+        "stageHeight": 748,
+        "stageBottom": 812,
+        "metricsTop": 812,
+        "h1Top": 403,
+        "ctaBottom": 716,
+        "scrollX": 0,
+        "scrollY": 0,
+        "docScrollWidth": 390,
+        "viewportWidth": 390
+      }
+    },
+    {
+      "passo": "01-equipamentos-inicial",
+      "metrics": {
+        "stageHeight": 748,
+        "stageBottom": 812,
+        "metricsTop": 812,
+        "h1Top": 403,
+        "ctaBottom": 716,
+        "scrollX": 0,
+        "scrollY": 0,
+        "docScrollWidth": 390,
+        "viewportWidth": 390
+      }
+    },
+    {
+      "passo": "02-projetos",
+      "metrics": {
+        "stageHeight": 694,
+        "stageBottom": 758,
+        "metricsTop": 758,
+        "h1Top": 403,
+        "ctaBottom": 662,
+        "scrollX": 0,
+        "scrollY": 0,
+        "docScrollWidth": 390,
+        "viewportWidth": 390
+      }
+    },
+    {
+      "passo": "03-consultoria",
+      "metrics": {
+        "stageHeight": 694,
+        "stageBottom": 758,
+        "metricsTop": 758,
+        "h1Top": 403,
+        "ctaBottom": 662,
+        "scrollX": 0,
+        "scrollY": 0,
+        "docScrollWidth": 390,
+        "viewportWidth": 390
+      }
+    },
+    {
+      "passo": "04-equipamentos-retorno",
+      "metrics": {
+        "stageHeight": 748,
+        "stageBottom": 812,
+        "metricsTop": 812,
+        "h1Top": 403,
+        "ctaBottom": 716,
+        "scrollX": 0,
+        "scrollY": 0,
+        "docScrollWidth": 390,
+        "viewportWidth": 390
+      }
+    }
+  ],
+  "diferencas_entre_passos": [
+    {
+      "de": "00-estado-inicial-antes-de-qualquer-clique",
+      "para": "01-equipamentos-inicial",
+      "deltaStageHeight": 0,
+      "deltaH1Top": 0,
+      "overflowHorizontal": 0
+    },
+    {
+      "de": "01-equipamentos-inicial",
+      "para": "02-projetos",
+      "deltaStageHeight": -54,
+      "deltaH1Top": 0,
+      "overflowHorizontal": 0
+    },
+    {
+      "de": "02-projetos",
+      "para": "03-consultoria",
+      "deltaStageHeight": 0,
+      "deltaH1Top": 0,
+      "overflowHorizontal": 0
+    },
+    {
+      "de": "03-consultoria",
+      "para": "04-equipamentos-retorno",
+      "deltaStageHeight": 54,
+      "deltaH1Top": 0,
+      "overflowHorizontal": 0
+    }
+  ],
+  "conclusao": "stageHeight varia entre 748px (Equipamentos) e 694px (Projetos/Consultoria) — diferença de 54px. h1Top permanece constante (403px) em todos os estados porque o recuo superior do conteúdo (pt-[calc(var(--media-h)+2rem)]) é fixo; é a altura total do bloco de texto que muda, não sua posição inicial. Nenhum overflow horizontal registrado (docScrollWidth - viewportWidth = 0 em todos os passos). Retorno a 01 reproduz exatamente as medidas do estado inicial."
+}

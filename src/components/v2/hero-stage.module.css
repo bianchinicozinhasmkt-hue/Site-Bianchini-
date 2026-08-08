@@ -256,7 +256,6 @@
 
      · uma **faixa própria** com fundo grafite semitransparente e borda superior,
        integrada à base do palco;
-     · **divisórias verticais** entre as três áreas;
      · **número, título, complemento, seta e indicador** em cada uma;
      · a área inteira clicável, com cursor de interação;
      · linha superior amarela **exclusiva da opção ativa** — nunca um traço
@@ -264,6 +263,18 @@
 
    Semitransparente e nada mais: sem `backdrop-filter`, sem vidro, sem sombra
    genérica, sem canto arredondado.
+
+   ============================================================
+   P2 (2026-08-08) — SAEM AS DIVISÓRIAS VERTICAIS
+   ============================================================
+
+   `.railItem + .railItem::after` desenhava um traço vertical de 1px entre as
+   três áreas. A revisão visual da rodada P1 apontou que ele reintroduzia
+   leitura de tabela — três células fechadas — mesmo sem fundo nem borda
+   própria por área. A régua compartilhada (`.railTop`, abaixo) já separa as
+   áreas por peso, cor e posição do trecho ativo; a divisória vertical era
+   redundante com ela e o custo, não o benefício. Removida sem substituto:
+   nenhum fundo, pill ou borda entra no lugar.
 
    ============================================================
    A CORREÇÃO DE MALHA DE 2026-08-08
@@ -374,17 +385,6 @@
 
 .railItem:last-child {
   padding-inline-end: 0;
-}
-
-/* Divisória entre áreas — 1px a 10%, o suficiente para separar sem desenhar. */
-.railItem + .railItem::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 18%;
-  bottom: 18%;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.1);
 }
 
 /*
