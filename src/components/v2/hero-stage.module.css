@@ -301,26 +301,88 @@
    Semitransparente e nada mais: sem `backdrop-filter`, sem vidro, sem sombra
    genérica, sem canto arredondado.
 
-   **`1.2fr 1fr 1fr`** é a hierarquia comercial expressa na malha: Equipamentos
-   é a frente principal e recebe a área maior — o destaque "moderadamente maior"
-   que o briefing pede, sem que nada mude de estrutura entre os três.
+   ============================================================
+   A CORREÇÃO DE MALHA DE 2026-08-08
+   ============================================================
+
+   O seletor estava **fora da grade da própria dobra**. Medido em 1440 × 900,
+   com o `Container` resolvendo em L=60 / R=1380:
+
+     etiqueta, h1, intenção, CTA, instrução, métricas ..... L = 60
+     número de "01 EQUIPAMENTOS" .......................... L = 80   ← 20px fora
+     seta de "03 CONSULTORIA" ............................. R = 1360 ← 20px dentro
+
+   Ou seja: **todo texto da dobra assentava numa linha-guia, e só o do seletor
+   assentava noutra** — os 20px de `px-5` de cada área. Somado a trilhas de
+   495 / 413 / 412px, era isso que lia como "deslocado e esticado".
+
+   Duas mudanças, e as duas são de malha:
+
+   1. **Trilhas iguais.** `1.2fr 1fr 1fr` saiu. A área maior de Equipamentos era
+      hierarquia comercial expressa por deformação da grade — e deformação de
+      grade não é hierarquia, é ruído. Equipamentos continua dominante por
+      estado inicial, `h1`, CTA preenchido, cena ativa, posição e amarelo no
+      número e na régua. Nenhum desses sinais depende da largura da célula.
+
+   2. **O conteúdo das pontas assenta nas guias.** A primeira área perde o
+      recuo à esquerda e a última perde o recuo à direita, então o número de
+      Equipamentos cai exatamente em 60 e a seta de Consultoria exatamente em
+      1380 — as mesmas duas linhas-guia do `h1` e da faixa de métricas. Os
+      recuos internos ficam só entre as áreas, onde de fato separam.
+
+   ============================================================
+   DE CAIXA PREENCHIDA PARA RÉGUA COMPARTILHADA
+   ============================================================
+
+   O ativo era uma **caixa preenchida com deslocamento de 2px no hover**. Numa
+   trilha que agora encosta na guia, o preenchimento nasceria colado ao texto; e
+   a caixa que sobe no hover é justamente o que fazia a base parecer "camadas
+   adicionadas" sobre a dobra em vez de arquitetura contínua.
+
+   Sai o preenchimento, sai o deslocamento. Fica a mecânica que a V1 já usava no
+   seletor de pilares: **uma régua compartilhada sobre as três áreas**, com o
+   ativo marcado por peso + contraste + régua de 2px. Como as três réguas
+   encostam, o olho lê uma linha contínua com um trecho amarelo por cima da área
+   ativa — e não uma trava atravessando as três.
+
+   Sinais do estado ativo, três e um deles não-cromático: régua de 2px
+   (posição/espessura), peso do rótulo (bold contra semibold) e cor.
    ============================================================ */
 .rail {
   position: relative;
   z-index: 10;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(10, 11, 12, 0.68);
+  /*
+    Gradiente, e não faixa chapada com borda: a fotografia continua visível no
+    alto do seletor e fecha na base, onde a faixa de métricas começa. É o que
+    separa o **plano 3** (navegação, sobre a cena) do **plano 4** (faixa
+    factual, superfície sólida) — antes os dois dividiam o mesmo slab escuro e
+    liam como um bloco só.
+  */
+  /*
+    As paradas são medidas, não escolhidas a olho. Com 0,32 / 0,68 / 0,88 o
+    pior pixel sob o complemento inativo era rgb(66,64,62) na cena de
+    Equipamentos, e o texto a 55% fechava em **3,92:1** — reprova em AA para
+    corpo pequeno. A queda começa mais cedo e fecha mais, e o complemento subiu
+    de 55% para 65% (ver `hero-stage.tsx`); as duas correções juntas põem o
+    pior caso das três cenas acima de 4,5:1.
+  */
+  background: linear-gradient(
+    180deg,
+    rgba(12, 13, 14, 0.3) 0%,
+    rgba(12, 13, 14, 0.76) 38%,
+    rgba(12, 13, 14, 0.92) 100%
+  );
 }
 
 /*
-  `minmax(0, …fr)`, e não `1.2fr 1fr 1fr` puro: a base de uma trilha `fr` é
-  `auto`, então uma célula cujo conteúdo não cabe **rouba largura das vizinhas**.
-  Medido em 320px antes da correção: 106,1 / 76,7 / 97,2px, três áreas de
-  larguras diferentes num controle que precisa ler como uma peça só.
+  `minmax(0, 1fr)`: a base de uma trilha `fr` é `auto`, então uma célula cujo
+  conteúdo não cabe **rouba largura das vizinhas**. Medido em 320px antes da
+  correção: 106,1 / 76,7 / 97,2px, três áreas de larguras diferentes num
+  controle que precisa ler como uma peça só.
 */
 .railGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .railItem {
@@ -329,9 +391,25 @@
   align-items: center;
   cursor: pointer;
   text-align: left;
-  transition:
-    background-color 220ms var(--ease-precise),
-    transform 220ms var(--ease-precise);
+  transition: color 220ms var(--ease-precise);
+
+  /*
+    ---------- Recuo interno só ENTRE as áreas ----------
+
+    O recuo existe para separar uma área da vizinha, não para afastar o
+    conteúdo das bordas do seletor. Nas pontas ele some, e é isso que põe o
+    número de Equipamentos na guia esquerda e a seta de Consultoria na guia
+    direita — as mesmas do `h1` e da faixa de métricas.
+  */
+  padding-inline: 1.25rem;
+}
+
+.railItem:first-child {
+  padding-inline-start: 0;
+}
+
+.railItem:last-child {
+  padding-inline-end: 0;
 }
 
 /* Divisória entre áreas — 1px a 10%, o suficiente para separar sem desenhar. */
@@ -346,35 +424,35 @@
 }
 
 /*
-  Linha superior por opção. Ela existe sempre — discreta no inativo, amarela no
-  hover e no ativo —, e é **própria de cada área**: nenhuma trava atravessa as
-  vizinhas. Cresce da esquerda por `scaleX`, nunca por `width`.
+  ---------- A régua compartilhada ----------
+
+  Existe nas três áreas o tempo todo: 1px discreto no inativo, 2px amarelo no
+  ativo e no hover. Encostadas, as três leem como **uma** linha atravessando o
+  seletor de guia a guia — a moldura do controle —, e o trecho amarelo diz qual
+  área está selecionada.
+
+  A espessura muda por `transform: scaleY` sobre uma régua de 2px, nunca por
+  `height`: altura animada reflui a caixa do botão e mexeria no conteúdo.
 */
 .railTop {
   position: absolute;
-  top: -1px;
+  top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: rgb(245, 198, 75);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 240ms var(--ease-premium);
+  background: rgba(255, 255, 255, 0.14);
+  transform: scaleY(0.5);
+  transform-origin: top;
+  transition:
+    transform 240ms var(--ease-premium),
+    background-color 240ms var(--ease-premium);
 }
 
 .railItem:hover .railTop,
 .railItem:focus-visible .railTop,
 .railItemActive .railTop {
-  transform: scaleX(1);
-}
-
-.railItem:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
-}
-
-.railItemActive {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(245, 198, 75);
+  transform: scaleY(1);
 }
 
 /* Seta: 4px no hover e no foco, e nada de deslocamento no repouso. */
@@ -494,31 +572,22 @@
     pede 71px. Cabe em uma linha, então o briefing é atendido sem recorrer à
     rolagem lateral ("somente se indispensável") e sem indicador de "há mais".
 
-    `1.2fr` sai aqui de propósito: com 93px por área, os 17px de diferença entre
-    a primeira e as outras duas seriam a diferença entre "EQUIPAMENTOS" caber e
-    quebrar no meio do glifo. A hierarquia continua dita pela ordem, pelo estado
-    inicial e pelo `h1` — não pela largura da célula.
+    As trilhas iguais agora valem em toda largura — ver o bloco do seletor. O
+    que muda aqui é só o recuo interno, que encolhe com a área disponível.
   */
-  .railGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .railItem {
+    padding-inline: 0.75rem;
   }
 
   /* Sem ponteiro não há hover; o realce por passagem só confundiria o toque. */
-  .railItem:hover {
-    background: none;
-    transform: none;
-  }
-
   .railItem:hover .railTop {
-    transform: scaleX(0);
-  }
-
-  .railItemActive:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.14);
+    transform: scaleY(0.5);
   }
 
   .railItemActive:hover .railTop {
-    transform: scaleX(1);
+    background: rgb(245, 198, 75);
+    transform: scaleY(1);
   }
 
   .railItem:hover .railArrow {
@@ -542,10 +611,6 @@
   .railTop,
   .railArrow {
     transition: none;
-  }
-
-  .railItem:hover {
-    transform: none;
   }
 
   .railItem:hover .railArrow,

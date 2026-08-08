@@ -426,7 +426,20 @@ export function HeroStage() {
                     mancha do `h1` chegava a dominar a cena inteira. A hierarquia
                     continua clara — é o único texto grande da dobra.
                   */
-                  'mt-4 font-sans font-bold tracking-[-0.025em] text-canvas lg:mt-5',
+                  /*
+                    ---------- Ritmo, e não espaçamento uniforme ----------
+
+                    Os três vãos da coluna eram 20 / 20 / 28px em 1440 —
+                    praticamente iguais, e por isso etiqueta, título, intenção e
+                    ação liam como um bloco vertical só. A regra agora é de
+                    proximidade: o que pertence junto encosta, e o vão só abre
+                    onde a **função** muda.
+
+                      etiqueta → título .... 12px  (rótulo do próprio título)
+                      título → intenção .... 20px  (mesma voz, outra frase)
+                      intenção → ação ...... 40px  (de ler para agir)
+                  */
+                  'mt-3 font-sans font-bold tracking-[-0.025em] text-canvas',
                   /*
                     ============================================================
                     `leading-*` DEPOIS de `text-[…]`, NUNCA ANTES
@@ -497,7 +510,7 @@ export function HeroStage() {
 
               <div
                 style={{ '--delay': '180ms' } as CSSProperties}
-                className={cn(styles.enter, 'mt-6 lg:mt-7')}
+                className={cn(styles.enter, 'mt-8 lg:mt-10')}
               >
                 <HeroCta href={state.cta.href} event={state.event} label={state.cta.label} />
               </div>
@@ -562,7 +575,13 @@ export function HeroStage() {
                     onClick={() => select(index)}
                     onMouseEnter={() => onItemEnter(index)}
                     className={cn(
+                      'group/aba',
                       styles.railItem,
+                      /*
+                        Não pinta mais fundo nenhum: o único efeito de
+                        `railItemActive` hoje é acender a régua de 2px da área
+                        selecionada (ver o módulo).
+                      */
                       selected && styles.railItemActive,
                       /*
                         Altura da área, medida no pior caso e não estimada.
@@ -577,8 +596,15 @@ export function HeroStage() {
                         Abaixo de `lg` o complemento sai e sobra número + nome:
                         `min-h-16` (64px) com folga larga sobre o alvo de toque
                         mínimo de 44px.
+
+                        **O recuo horizontal saiu daqui** e passou para o módulo
+                        (`.railItem`), porque ele não é uniforme: as áreas das
+                        pontas não têm recuo do lado da guia, senão o conteúdo
+                        do seletor assenta numa linha vertical diferente da do
+                        `h1`. Era o defeito medido — número em x=80 contra
+                        título em x=60.
                       */
-                      'min-h-16 px-3 py-3 lg:min-h-24 lg:px-5',
+                      'min-h-16 py-3 lg:min-h-24',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-yellow',
                     )}
                   >
@@ -590,7 +616,8 @@ export function HeroStage() {
                         <span
                           className={cn(
                             'block font-condensed text-[0.625rem] font-bold leading-none tabular-nums tracking-[0.1em] transition-colors duration-200',
-                            selected ? 'text-yellow' : 'text-canvas/45',
+                            /* `/65`: a `/45` o índice fechava em 3,36:1. */
+                            selected ? 'text-yellow' : 'text-canvas/65',
                           )}
                         >
                           {item.number}
@@ -612,7 +639,16 @@ export function HeroStage() {
                               não seria gerada — a armadilha já registrada em
                               `CLAUDE.md` (o scrim que sumiu por usar `/88`).
                             */
-                            selected ? 'font-bold text-canvas' : 'font-semibold text-canvas/75',
+                            /*
+                              O preenchimento do ativo saiu (ver o módulo), e
+                              com ele o único retorno visual do hover. Ele volta
+                              aqui, na tinta do rótulo: passar o ponteiro
+                              acende o nome, e a régua amarela confirma. É
+                              resposta sem deslocar nada.
+                            */
+                            selected
+                              ? 'font-bold text-canvas'
+                              : 'font-semibold text-canvas/75 group-hover/aba:text-canvas group-focus-visible/aba:text-canvas',
                           )}
                         >
                           {item.name}
@@ -627,7 +663,14 @@ export function HeroStage() {
                         <span
                           className={cn(
                             'mt-1 hidden text-[0.75rem] leading-snug transition-colors duration-200 sm:block lg:text-[0.8125rem]',
-                            selected ? 'text-canvas/75' : 'text-canvas/55',
+                            /*
+                              `/65` e `/80`, não `/55` e `/75`: com a faixa do
+                              seletor deixando a fotografia aparecer, o pior
+                              pixel sob esta linha subiu e o complemento inativo
+                              caiu para 3,92:1 em Equipamentos. Ver a medição no
+                              módulo, em `.rail`.
+                            */
+                            selected ? 'text-canvas/80' : 'text-canvas/65',
                           )}
                         >
                           {item.cue}
