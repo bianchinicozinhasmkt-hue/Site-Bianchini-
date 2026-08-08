@@ -158,16 +158,21 @@ export interface HeroState {
     src: string
     alt: string
     /**
-     * `photo` ....... fotografia real, de sangria, cobrindo o palco inteiro.
-     * `document` .... material de projeto apresentado **em tamanho controlado**
-     *                 sobre o palco, sem ampliação destrutiva do arquivo. Ver o
-     *                 bloco "PROJETOS" logo abaixo: é uma limitação de acervo
-     *                 declarada, não uma escolha de composição.
+     * `photo` ....... fotografia real de operação.
+     * `document` .... material de projeto (render/estudo), não obra executada.
+     *
+     * Desde a rodada P1 (2026-08-08) os dois tipos recebem **o mesmo
+     * tratamento de palco** — sangria, `object-cover`, cena única. `kind`
+     * deixou de ramificar layout; é só metadado para a legenda (só
+     * `document` carrega `caption`, exigida por `docs/v2/DECISIONS.md`
+     * DEC-008: render nunca aparece sem se declarar como tal). Ver o bloco
+     * "PROJETOS" logo abaixo para a composição anterior, contida, e por que
+     * foi abandonada.
      */
     kind: 'photo' | 'document'
-    /** Enquadramento do recorte dentro do palco (só `kind: 'photo'`). */
+    /** Enquadramento do recorte dentro do palco. */
     objectPosition?: string
-    /** Resolução real do arquivo, para conferência do `sizes` e do teto de escala. */
+    /** Resolução real do arquivo, para conferência do `sizes` e do recorte. */
     intrinsic: string
     /** Legenda técnica curta — só `kind: 'document'`. */
     caption?: string
@@ -219,24 +224,39 @@ export interface HeroState {
  *
  * Descontando o corte de 118px à esquerda (onde o material de origem traz um
  * selo "02" gravado, que não pode ir para a primeira dobra), o detalhe **real**
- * do estudo 3D é de **782px de largura**. Sangrado num palco de 1440px, isso é
- * 1,84× de ampliação — foi exatamente o que produziu a cena lavada, cinza e sem
- * definição registrada na auditoria.
+ * do estudo 3D é de **782px de largura** — já uma reamostragem do arquivo de
+ * 900px, portanto sem nitidez de fotografia em nenhuma escala de exibição.
  *
- * A ordem de decisão pedida chega então ao último item: **reduzir a área visual
- * da imagem e aplicar composição documental, sem ampliar o arquivo.** É o que
- * `kind: 'document'` faz — o estudo entra como prancha ancorada ao canto do
- * palco, com teto de largura de renderização, sobre o mesmo fundo grafite. A
- * caixa do palco, a coluna de conteúdo, a régua e a faixa de métricas não mudam:
- * muda **o que preenche o palco**, que é a única variação que os três estados
- * têm permissão de ter.
+ * ============================================================
+ * A COMPOSIÇÃO CONTIDA (até 2026-08-08) E POR QUE FOI ABANDONADA — P1
+ * ============================================================
  *
- * Nenhum desfoque pesado é usado para esconder resolução, e nada foi gerado,
- * redesenhado ou montado.
+ * A primeira solução tentou conter o dano de resolução: reduzir a área da
+ * imagem e prendê-la a uma prancha ancorada ao canto direito do palco
+ * (`min(46rem, 48%)`), como se fosse um documento colado sobre o fundo
+ * grafite. Medido pela auditoria de 2026-08-08, em 1440 × 900 essa prancha
+ * ocupava só `x 750–1440, y 188–572` — um retângulo de 690 × 384 dentro de um
+ * palco de 1440 × 739 — com ~200px de grafite vazio acima e ~180px abaixo, e
+ * uma borda vertical dura separando "texto" de "documento". O estado de
+ * Projetos deixava de ser uma cena e passava a ler como um PDF colado dentro
+ * da Hero: exatamente o oposto dos outros dois estados, que preenchem o
+ * palco inteiro.
+ *
+ * **A correção prioriza composição sobre nitidez.** Igual aos outros dois
+ * estados, o estudo agora sangra o palco inteiro em `object-cover` — mesmo
+ * `<Image>`, mesmo `sizes`, mesmo scrim. Isso amplia o detalhe real de 782px
+ * para a largura do palco (até ~1,9× a mais que o teto anterior de 736px),
+ * então a cena fica **mais suave** do que seria com uma fonte de projeto em
+ * alta resolução. É a divergência aceita nesta rodada: entre "documento nítido
+ * e contido" e "cena única e desfocada", o briefing pediu a segunda — uma
+ * prancha em alta resolução resolve a nitidez sem reabrir esta composição.
+ *
+ * Nenhum desfoque adicional é aplicado para disfarçar a reamostragem, e nada
+ * foi gerado, redesenhado ou montado — só o enquadramento mudou.
  *
  * **PENDÊNCIA ABERTA.** Uma exportação em alta do mesmo estudo (ou uma
- * fotografia real de prancha/obra em projeto) substitui isto trocando `src`,
- * `intrinsic` e `kind` para `'photo'` — nenhuma outra mudança.
+ * fotografia real de prancha/obra em projeto) substitui isto trocando `src`
+ * e `intrinsic` — nenhuma outra mudança.
  *
  * Tratamento tonal em `hero-stage.module.css` — mínimo, e declarado item a item.
  */
@@ -246,7 +266,17 @@ export const heroStates: HeroState[] = [
     number: '01',
     name: 'Equipamentos',
     cue: 'Comprar, substituir ou especificar',
-    eyebrow: 'Equipamentos para cozinhas profissionais',
+    /*
+      Rodada P1 (2026-08-08): a etiqueta anterior ("Equipamentos para
+      cozinhas profissionais") repetia quase literalmente a abertura do
+      `h1` ("Equipamentos para cozinha profissional…") — a etiqueta perdeu
+      função própria. Ela existe para nomear a porta comercial antes de o
+      título ser lido, não para prefixar o título. Os outros dois estados
+      já cumprem esse papel sem repetir o próprio título ("Projetos para
+      food service" vs. "Abrir, reformar…"; "Diagnóstico operacional" vs.
+      "Encontre a causa…").
+    */
+    eyebrow: 'Equipamentos',
     headline: homeHero.title,
     /*
       "instalação e comissionamento" não é afirmação nova: `src/data/rational.ts`
@@ -299,11 +329,19 @@ export const heroStates: HeroState[] = [
       src: '/images/projects/projeto-3d-hero.jpg',
       /*
         2033 × 1027 é o arquivo; **782 × 395 é o detalhe real** (ver o bloco
-        PROJETOS acima). O teto de largura de renderização no componente é
-        derivado deste segundo número, não do primeiro.
+        PROJETOS acima) — já uma reamostragem, então o `sizes` não tem um
+        teto de nitidez a respeitar como tinha na composição contida.
       */
       intrinsic: '2033x1027 (detalhe real 782x395)',
       alt: 'Estudo 3D de projeto de cozinha profissional em vista axonométrica, com bancadas em inox, ilha refrigerada, prateleiras e a circulação entre os postos',
+      /*
+        42% vertical: a ilha central e a bancada de preparo — o miolo com mais
+        informação da cena — ficam pouco acima do centro do arquivo. Resolve
+        para menos chão vazio na base e mantém a prateleira superior visível.
+        Sem deslocamento horizontal: a planta ocupa a largura inteira do
+        arquivo, e não há um lado "vazio" a recortar como no de Equipamentos.
+      */
+      objectPosition: 'center 42%',
       /*
         A legenda declara o tipo do material. `docs/v2/DECISIONS.md`, DEC-008:
         render nunca é apresentado como obra executada.

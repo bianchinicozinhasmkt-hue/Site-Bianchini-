@@ -65,16 +65,37 @@
     `h1` branco caía em cima dele. Medido em 390 × 844, título e legenda da
     prancha se sobrepunham.
 
-    `42vw` é a proporção; os dois limites são medidos:
+    ============================================================
+    REVISTO NA RODADA P1 (2026-08-08) — A FOTOGRAFIA VIROU TIRA
+    ============================================================
 
-      136px de piso ..... em 320 × 568 a janela tem 504px úteis abaixo do
-                          cabeçalho, e cada pixel a mais na cena empurra o CTA
-                          para longe da dobra. Abaixo de 136 a cena deixa de ser
-                          lida como fotografia de operação;
-      300px de teto ..... acima disso o texto sai da primeira dobra em 390 × 844,
-                          que é o viewport de referência do tráfego móvel.
+    `42vw` (o valor anterior) resolvia para 163,8px em 390 × 844 — 19% da
+    altura da dobra. A auditoria chamou isso pelo nome certo: a fotografia
+    virou uma faixa decorativa, ~80% da tela ficava grafite liso, e parte
+    do vazio sobrando ia para reserva de altura de outros estados (ver
+    `HEADLINE_MIN`/`INTENT_MIN` em `hero-stage.tsx`), não para a cena.
+
+    `69vw` mira o meio da faixa pedida (30–35% da altura inicial da dobra) no
+    viewport de referência do tráfego móvel:
+
+      390 × 844 ... 69vw = 269px = 31,9% de 844
+      414 × 896 ... 69vw = 285,7px = 31,9% de 896
+      430 × 932 ... 69vw = 296,7px = 31,8% de 932
+
+    Os limites do `clamp` são medidos, não redondos:
+
+      9.5rem (152px) de piso ... abaixo de ~220px de largura (nenhum viewport
+                          suportado chega lá) a cena deixaria de ler como
+                          fotografia de operação, o mesmo motivo do piso
+                          anterior — só recalculado para o novo coeficiente;
+      20rem (320px) de teto .... sem teto, `69vw` em 768–1023px (tablet, que
+                          também cai neste bloco) resolveria para 530–706px —
+                          mais da metade da tela em faixa decorativa. O teto
+                          mantém a proporção do tablet perto da anterior
+                          (300px), sem deixar o coeficiente pensado para
+                          telefone dominar telas maiores.
   */
-  --media-h: clamp(8.5rem, 42vw, 18.75rem);
+  --media-h: clamp(9.5rem, 69vw, 20rem);
 
   position: relative;
   overflow: hidden;
@@ -132,92 +153,35 @@
 }
 
 /* ============================================================
-   PROJETOS — PRANCHA EM COMPOSIÇÃO DOCUMENTAL
+   PROJETOS — LEGENDA SOBRE A CENA DE SANGRIA
    ============================================================
 
-   A justificativa completa (levantamento do acervo, resolução real, ordem de
-   decisão) está em `src/data/v2/home.ts`, bloco "PROJETOS". Aqui só a mecânica.
+   Até 2026-08-08 Projetos era uma composição à parte: uma prancha contida
+   (`.plateField`/`.plate`, removidas nesta rodada), presa a 48% do palco para
+   não ampliar um arquivo de baixo detalhe. A auditoria de 2026-08-08 mediu o
+   resultado em 1440 × 900 — retângulo em `x 750–1440, y 188–572`, ~200px de
+   grafite vazio acima, ~180px abaixo, borda vertical dura separando texto de
+   documento — e chamou isso pelo nome certo: um documento colado dentro da
+   Hero, não um palco. A justificativa completa da composição anterior e da
+   decisão de abandoná-la está em `src/data/v2/home.ts`, bloco "PROJETOS".
 
-   O detalhe real do estudo tem **782px de largura**. `max-width: 46rem` (736px)
-   é o teto de renderização derivado dele: em nenhum viewport a prancha é
-   desenhada acima da resolução que o arquivo de fato tem, então nada estica.
-   Abaixo de `lg` o teto passa a ser a largura da tela, que é sempre menor.
-
-   ============================================================
-   POR QUE UM PLANO DE ALTURA INTEIRA, E NÃO UMA PRANCHA SOLTA
-   ============================================================
-
-   A primeira tentativa pôs só a prancha, ancorada ao canto inferior direito.
-   Medida e olhada: 736 × 372 dentro de um palco de 1440 × 739 deixava ~200px de
-   grafite vazio acima e ~180px abaixo, e o estado inteiro lia mais leve que os
-   outros dois — um cartão pousado no vazio, exatamente o oposto de "os três
-   estados compartilham o mesmo ritmo".
-
-   A correção separa **massa** de **resolução**:
-
-     `.plateField` .. o plano — altura inteira do palco, encostado na aresta
-                      direita, com fio de tinta na aresta esquerda e um degradê
-                      quase imperceptível que o distingue do fundo. É ele que
-                      ocupa o mesmo campo visual que a fotografia ocupa nos
-                      outros dois estados;
-     `.plate` ....... o estudo dentro dele, centrado, na largura em que o
-                      arquivo tem detalhe real.
-
-   `48%` com teto de `46rem` (736px) é a largura do plano. Os dois limites têm
-   razão medida:
-
-     · **48%** mantém o plano à direita da coluna de texto em toda largura de
-       desktop — em 1024px o plano começa em 533 e a coluna termina em 520;
-     · **46rem** é o teto de resolução: o detalhe real do estudo tem 782px de
-       largura (ver `src/data/v2/home.ts`), então acima disso a imagem passaria a
-       ser esticada, que é o defeito que esta composição existe para não ter.
-
-   `--plate-lift` é metade da altura do seletor: o estudo é centrado no **campo
-   visível** do palco, que termina onde o seletor começa, e não na caixa do palco
-   (que o inclui). Sem o deslocamento ele nasce visualmente baixo.
+   A imagem agora sangra o palco como as outras duas (ver o `<Image>` em
+   `hero-stage.tsx`); o que sobra aqui é só a legenda que `DEC-008` exige
+   (render declarado como tal, nunca apresentado como obra executada). Ela
+   não tem mais um painel para se apoiar, então ganha o próprio contraste: um
+   fundo sólido, sem vidro nem desfoque, ancorado à aresta direita — a mesma
+   aresta onde a prancha vivia — e **acima da régua do seletor**, que também
+   é opaca nessa faixa e engoliria o texto por trás.
    ============================================================ */
-.plateField {
-  --plate-lift: 4.375rem;
-
+.mediaCaption {
   position: absolute;
-  top: 0;
-  bottom: 0;
   right: 0;
-  width: min(46rem, 48%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-bottom: calc(var(--plate-lift) * 2);
-  border-left: 1px solid rgba(255, 255, 255, 0.09);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.015) 55%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-.plate {
-  position: relative;
-  width: 100%;
-}
-
-/* Fio de tinta na aresta superior — a mesma keyline técnica do resto do site. */
-.plate::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-top: 1px solid rgba(245, 198, 75, 0.5);
-  pointer-events: none;
+  bottom: 7.5rem;
   z-index: 1;
-}
-
-/*
-  A legenda fica **fora** do estudo, na faixa logo abaixo dele. Sobreposta ela
-  cobria o desenho e caía sobre um fundo claro, onde o texto claro reprovava.
-*/
-.plateCaption {
-  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  max-width: min(22rem, 60%);
+  padding: 0.5rem 1rem;
+  background: rgba(16, 16, 16, 0.72);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 /* ============================================================
@@ -533,35 +497,6 @@
       rgba(16, 16, 16, 0.88) 93%,
       rgb(16, 16, 16) 100%
     );
-  }
-
-  /*
-    O plano de projeto ocupa a mesma faixa. A prancha é recortada para caber
-    nela (`object-cover` no `<Image>` mais o `overflow` do quadro), e a legenda
-    sai — em 390px a faixa tem 180px e uma linha de rótulo a mais custaria a
-    leitura do desenho, que é o que a cena precisa dizer aqui.
-
-    A resolução fica folgada nesta largura: 390px de renderização contra 782px
-    de detalhe real.
-  */
-  .plateField {
-    width: 100%;
-    justify-content: flex-start;
-    padding-bottom: 0;
-    border-left: 0;
-    background: none;
-  }
-
-  .plate {
-    height: 100%;
-  }
-
-  .plate::before {
-    border-top: 0;
-  }
-
-  .plateCaption {
-    display: none;
   }
 
   /*

@@ -114,18 +114,43 @@ import styles from './hero-stage.module.css'
                ≥768px ...... 3 linhas (também Equipamentos; medido em 768, 1024,
                              1366, 1440 e 1586 — as outras duas rendem 2)
 
-   O piso é contagem × entrelinha. Título: 1,10 abaixo de `lg` e 1,06 acima →
-   4,4em / 3,3em / 3,18em. Intenção: 1,5 → 6em / 4,5em (inalterada — o texto
-   dela não mudou).
+   O piso é contagem × entrelinha. Título: 1,10 abaixo de `lg` e 1,06 acima.
+   Intenção: 1,5.
 
    **Refaça esta medição sempre que qualquer um dos três títulos ou das três
    intenções mudar de comprimento.** Um piso curto demais devolve o salto; um
    piso longo demais abre vão morto entre título, texto e ação — foi o que a
    primeira rodada produziu em 768 × 1024, com uma linha reservada a mais em
    cada uma das duas caixas.
+
+   ============================================================
+   REVISTO NA RODADA P1 (2026-08-08) — O PISO MÓVEL VIROU VAZIO ARTIFICIAL
+   ============================================================
+
+   Abaixo de 640px, o piso reservava o pior caso absoluto (Equipamentos: 4
+   linhas de título, 4 de intenção — 4,4em / 6em). Como Projetos e Consultoria
+   rendem só 2 linhas nas duas caixas em qualquer largura móvel, a auditoria
+   de 2026-08-08 mediu esse piso como **vazio abaixo do texto**, não como
+   estabilidade: ~63px sobrando sob o título de Projetos, e um vão maior ainda
+   sob a intenção — em 390 × 844 a soma empurrava o CTA quase ao fim da tela.
+
+   O piso móvel agora usa o **mesmo valor do tablet** (3,3em / 4,5em — 3 linhas
+   nas duas caixas), e não o pior caso absoluto:
+
+     · Projetos e Consultoria (2 linhas) perdem a maior parte do vazio — sobra
+       no máximo 1 linha, não 2;
+     · Equipamentos (4 linhas) passa a **exceder** o piso — a caixa cresce pelo
+       próprio conteúdo, sem vazio, e a troca *para* Equipamentos ganha um
+       deslocamento de ~1 linha que não existia antes.
+
+   Essa troca é deliberada: no mobile o briefing pede "estabilidade
+   suficiente", não ausência de salto — ao contrário do desktop, onde o salto
+   de 86px medido na primeira rodada era o defeito a eliminar por completo. Um
+   salto de uma linha ao entrar em Equipamentos é aceitável; um vazio de duas
+   linhas nos outros dois estados, o tempo todo, não é.
    ============================================================ */
-const HEADLINE_MIN = 'min-h-[4.4em] sm:min-h-[3.3em] lg:min-h-[3.18em]'
-const INTENT_MIN = 'min-h-[6em] md:min-h-[4.5em]'
+const HEADLINE_MIN = 'min-h-[3.3em] lg:min-h-[3.18em]'
+const INTENT_MIN = 'min-h-[4.5em]'
 
 /** Atraso do hover, dentro da faixa de 120–180ms pedida. */
 const HOVER_INTENT_MS = 150
@@ -266,74 +291,60 @@ export function HeroStage() {
             aria-hidden={index !== active}
             className={cn(styles.frame, index === active && styles.frameActive)}
           >
-            {item.media.kind === 'photo' ? (
-              <Image
-                src={item.media.src}
-                alt={item.media.alt}
-                fill
-                /*
-                  Só a cena inicial é `priority`: ela é o LCP da página. As
-                  outras duas ficam `lazy` — estão na janela, então o navegador
-                  as busca assim que sobra banda, depois da que foi
-                  pré-carregada. Marcá-las `eager` as poria disputando a
-                  primeira pintura com o LCP.
-                */
-                priority={index === 0}
-                loading={index === 0 ? undefined : 'lazy'}
-                /* O palco é de largura inteira: `100vw` descreve a caixa real. */
-                sizes="100vw"
-                quality={86}
-                style={{ objectPosition: item.media.objectPosition }}
-                className={cn(
-                  'object-cover',
-                  item.id === 'consultoria' && styles.gradeConsultoria,
-                )}
-              />
-            ) : (
+            {/*
+              ---------- Uma cena de sangria, sempre — os três estados iguais ----------
+
+              Até 2026-08-08 Projetos era um caso à parte: uma prancha contida
+              (`.plateField`), presa a 48% do palco para não ampliar um arquivo
+              de baixo detalhe. Medido pela auditoria em 1440 × 900, isso abria
+              ~200px de grafite vazio acima da prancha e ~180px abaixo dela —
+              um retângulo documental dentro da Hero, não uma cena. A rodada P1
+              tira essa exceção: os três estados usam o mesmo `<Image fill>` em
+              `object-cover`, sangrando o palco inteiro. Projetos fica mais
+              suave que os outros dois (o arquivo já é uma reamostragem — ver
+              `src/data/v2/home.ts`, bloco "PROJETOS"), e essa perda de nitidez
+              é o que a correção aceita em troca de voltar a ser um palco.
+            */}
+            <Image
+              src={item.media.src}
+              alt={item.media.alt}
+              fill
               /*
-                ---------- Prancha em composição documental ----------
-
-                Ver `src/data/v2/home.ts`, bloco "PROJETOS", para o levantamento
-                de acervo e a ordem de decisão que chegou aqui, e o módulo CSS
-                para o teto de renderização de 46rem.
-
-                `sizes` acompanha esse teto: pedir `100vw` faria o navegador
-                baixar uma variante muito maior que a caixa, e a fonte já é uma
-                reamostragem — mais pixels não devolvem detalhe.
+                Só a cena inicial é `priority`: ela é o LCP da página. As
+                outras duas ficam `lazy` — estão na janela, então o navegador
+                as busca assim que sobra banda, depois da que foi
+                pré-carregada. Marcá-las `eager` as poria disputando a
+                primeira pintura com o LCP.
               */
-              <div className={styles.plateField}>
-                <figure className={styles.plate}>
-                  {/*
-                    `aspect-*` no desktop dá a altura pela proporção do arquivo;
-                    abaixo de `lg` o módulo troca por `height: 100%`, e a
-                    proporção passa a ser a da faixa (`--media-h`), com o
-                    recorte por `object-cover`.
-                  */}
-                  <div className="relative h-full w-full lg:aspect-[2033/1027]">
-                    <Image
-                      src={item.media.src}
-                      alt={item.media.alt}
-                      fill
-                      loading="lazy"
-                      sizes="(max-width: 1023px) 100vw, 46rem"
-                      quality={86}
-                      className={cn('object-cover', styles.gradeProjetos)}
-                    />
-                  </div>
+              priority={index === 0}
+              loading={index === 0 ? undefined : 'lazy'}
+              /* O palco é de largura inteira: `100vw` descreve a caixa real. */
+              sizes="100vw"
+              quality={86}
+              style={{ objectPosition: item.media.objectPosition }}
+              className={cn(
+                'object-cover',
+                item.id === 'projetos' && styles.gradeProjetos,
+                item.id === 'consultoria' && styles.gradeConsultoria,
+              )}
+            />
 
-                  {item.media.caption ? (
-                    <figcaption
-                      className={cn(
-                        styles.plateCaption,
-                        'px-4 py-2 font-condensed text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-canvas/60 sm:text-[0.6875rem]',
-                      )}
-                    >
-                      {item.media.caption}
-                    </figcaption>
-                  ) : null}
-                </figure>
-              </div>
-            )}
+            {/*
+              Legenda do render — só Projetos tem (`DEC-008`: material de
+              projeto nunca aparece sem se declarar como tal). Sai abaixo de
+              `lg`: no palco em faixa do toque não sobra altura para uma linha
+              extra sem invadir o texto que assenta logo abaixo da cena.
+            */}
+            {item.media.caption ? (
+              <p
+                className={cn(
+                  styles.mediaCaption,
+                  'hidden font-condensed text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-canvas/70 lg:block',
+                )}
+              >
+                {item.media.caption}
+              </p>
+            ) : null}
           </div>
         ))}
 
@@ -393,21 +404,20 @@ export function HeroStage() {
                   /* `leading` explícita e depois do `text-[…]` — ver o `h1`. */
                   'text-[0.6875rem] leading-[1.3] sm:text-[0.75rem]',
                   /*
-                    ---------- Piso da etiqueta ----------
+                    ---------- Piso da etiqueta — dispensado na rodada P1 ----------
 
-                    As três etiquetas têm comprimentos bem diferentes
-                    ("EQUIPAMENTOS PARA COZINHAS PROFISSIONAIS" contra
-                    "DIAGNÓSTICO OPERACIONAL") e, em coluna estreita, a mais
-                    longa quebra em duas linhas. Medido: em 360 × 800 isso
-                    deslocava a etiqueta em 13,6px e todo o resto do bloco em
-                    4,6px a cada troca; em 320 × 568, 8,9px e a dobra inteira
-                    mudava de altura.
-
-                    Duas linhas reservadas abaixo de `sm`, onde a quebra
-                    acontece; a partir de `sm` a mais longa cabe numa linha em
-                    todas as larguras medidas e o piso é dispensado.
+                    A reserva de duas linhas existia por causa da etiqueta
+                    antiga de Equipamentos ("EQUIPAMENTOS PARA COZINHAS
+                    PROFISSIONAIS", 41 caracteres), que quebrava em coluna
+                    estreita. Essa etiqueta foi trocada por "EQUIPAMENTOS" (12
+                    caracteres) nesta rodada — ver `src/data/v2/home.ts` — para
+                    não repetir a abertura do `h1`. A mais longa que sobra,
+                    "Projetos para food service" (27 caracteres), é bem mais
+                    curta que a que causava a quebra medida, e não quebra em
+                    nenhuma largura suportada. Sem quebra, não há salto a
+                    prevenir, e o piso vira só vazio abaixo da etiqueta — por
+                    isso saiu.
                   */
-                  'min-h-[2.6em] sm:min-h-0',
                 )}
               >
                 <span aria-hidden="true" className="h-[2px] w-7 shrink-0 bg-yellow" />
