@@ -127,17 +127,64 @@ export interface HeroPillar {
   media: {
     src: string
     alt: string
-    /**
-     * Enquadramento do recorte. As duas fotografias de projeto do acervo têm um
-     * numeral ("01"/"02") gravado no canto superior esquerdo pelo material de
-     * origem; empurrar o enquadramento para a direita mantém esse canto fora do
-     * painel, sem precisar editar o arquivo.
-     */
-     objectPosition?: string
-    /** Rótulo de tipo, quando a imagem não é fotografia de operação. */
-    kind?: string
+    /** Enquadramento do recorte dentro do painel. */
+    objectPosition?: string
   }
 }
+
+/**
+ * ============================================================
+ * AS TRÊS FOTOGRAFIAS — UM ÚNICO ACERVO, UM ÚNICO TRATAMENTO
+ * ============================================================
+ *
+ * A escolha das três imagens é parte do sistema visual, não ilustração solta:
+ * a primeira dobra tem de ler como **uma cena cortada em três**, e isso começa
+ * na origem do material, não no filtro.
+ *
+ * O QUE SAIU, E POR QUÊ — medido, não estimado
+ * --------------------------------------------
+ * Até aqui Projetos usava `projeto-3d.jpg` e Consultoria
+ * `camara-frigorifica.jpg`. As duas foram medidas contra a fotografia âncora
+ * (`hero-industrial-kitchen.png`) e reprovaram por razões diferentes:
+ *
+ *   projeto-3d.jpg ......... 900 × 395. Num painel de ~520 × 1000 no desktop
+ *                            ele é ampliado ~2,5×. Além disso é um render de
+ *                            estúdio: p05 = 0,346, ou seja **não tem preto** —
+ *                            a faixa inteira vive entre 0,35 e 0,99. Levá-lo
+ *                            ao território da âncora exigiria comprimir tudo
+ *                            num intervalo de ~0,25, que é cinza chapado.
+ *                            Tem ainda um "02" gravado no canto pelo material
+ *                            de origem.
+ *   camara-frigorifica.jpg .. 750 × 400 e p05 = 0,511 / p95 = 0,983: uma caixa
+ *                            branca. Faixa dinâmica de 0,47 contra 0,53 da
+ *                            âncora, mas deslocada inteira para o alto. Nenhum
+ *                            filtro linear a traz para baixo sem destruir o
+ *                            detalhe — e ela ainda era a região **mais clara**
+ *                            da dobra, o que punha o ponto de maior luz sobre
+ *                            o terceiro pilar.
+ *
+ * O QUE ENTROU
+ * ------------
+ * Duas fotografias de operação real do próprio acervo, ambas com preto de
+ * verdade (p05 ≤ 0,12), resolução suficiente para painel de dobra inteira e a
+ * mesma matéria da âncora — inox, coifa, bancada:
+ *
+ *   Projetos ...... `cozinha-completa.jpg` (1400 × 1050). É o corredor central
+ *                   de uma cozinha inteira, com equipamento dos dois lados: a
+ *                   imagem mostra **layout, fluxo e circulação**, que é
+ *                   literalmente o que o pilar entrega.
+ *   Consultoria ... `operacao-comercial.png` (1448 × 1086). O balcão de
+ *                   atendimento com a produção ao fundo — uma operação que já
+ *                   está rodando, que é a condição de quem procura
+ *                   diagnóstico ("minha operação já roda, mas trava").
+ *
+ * DEC-008 fica **mais** satisfeita, não menos: sem render na dobra, não há
+ * imagem de estudo que possa ser lida como obra executada.
+ *
+ * O tratamento comum das três está em `globals.css`, "AS TRÊS FOTOGRAFIAS
+ * COMO UMA CENA SÓ" — os valores de lá são resolvidos a partir do histograma
+ * medido de cada arquivo, não escolhidos a olho.
+ */
 
 export const heroPillars: HeroPillar[] = [
   {
@@ -152,6 +199,13 @@ export const heroPillars: HeroPillar[] = [
     media: {
       src: '/images/hero/hero-industrial-kitchen.png',
       alt: 'Cozinha industrial profissional em aço inox, com coifa contínua, luminárias suspensas e bancada central de produção',
+      /*
+        58%, não centro: o terço esquerdo do arquivo é quase preto e, no
+        desktop, é justamente onde a coluna de texto assenta. Puxar o
+        enquadramento para a direita traz a ilha e as luminárias para dentro do
+        painel sem tirar o repouso escuro de trás do `h1`.
+      */
+      objectPosition: '58% center',
     },
   },
   {
@@ -163,10 +217,10 @@ export const heroPillars: HeroPillar[] = [
     cta: { label: 'Falar com um projetista', href: '/contato?intencao=arquitetura' },
     event: 'hero_projetos_click',
     media: {
-      src: '/images/projects/projeto-3d.jpg',
-      alt: 'Modelo tridimensional de cozinha profissional com bancadas, refrigeração e equipamentos em inox',
-      objectPosition: '68% center',
-      kind: 'Estudo 3D',
+      src: '/images/projects/cozinha-completa.jpg',
+      alt: 'Cozinha profissional completa vista pelo corredor central, com fritadeiras, bancadas em inox, prateleiras suspensas e coifas dos dois lados',
+      /* O corredor central é o assunto: é ele que mostra fluxo e circulação. */
+      objectPosition: '52% center',
     },
   },
   {
@@ -178,9 +232,14 @@ export const heroPillars: HeroPillar[] = [
     cta: { label: 'Agendar diagnóstico', href: '/contato?intencao=consultoria' },
     event: 'hero_consultoria_click',
     media: {
-      src: '/images/projects/camara-frigorifica.jpg',
-      alt: 'Interior de câmara frigorífica com caixas empilhadas em estantes e evaporador de teto',
-      objectPosition: '38% center',
+      src: '/images/hero/operacao-comercial.png',
+      alt: 'Balcão de atendimento com terminal de ponto de venda, pedidos embalados para retirada e a linha de produção em aço inox ao fundo',
+      /*
+        55%: em `center` o painel estreito do desktop pega a planta e o vaso da
+        esquerda e perde o balcão. À direita a leitura é a operação — PDV,
+        pedidos prontos e a produção ao fundo.
+      */
+      objectPosition: '55% center',
     },
   },
 ]

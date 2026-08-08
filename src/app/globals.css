@@ -1090,15 +1090,15 @@
 }
 
 /* ==========================================================
-   HERO DE TRÊS PILARES — V2
+   PRIMEIRA DOBRA — TRÊS PILARES EM UMA COMPOSIÇÃO SÓ (V2)
    ==========================================================
 
-   A primeira dobra da V2 é uma composição única cortada em três painéis
-   diagonais: Equipamentos, Projetos e Consultoria. Ela evolui a linguagem da
-   V1 (aresta diagonal + keyline amarela, ver `.diag-panel`) em vez de repetir
-   a mecânica: lá havia **um** painel com `--diag` em `rem`; aqui há três
-   regiões definidas por fronteiras em **porcentagem da composição**, o que é o
-   que permite as três se moverem juntas e continuarem paralelas.
+   Uma cena cortada em três painéis diagonais: Equipamentos, Projetos e
+   Consultoria. Evolui a linguagem da V1 (aresta diagonal + keyline amarela,
+   ver `.diag-panel`) em vez de repetir a mecânica: lá havia **um** painel com
+   `--diag` em `rem`; aqui há três regiões definidas por fronteiras em
+   **porcentagem da composição**, o que é o que permite as três se moverem
+   juntas e continuarem paralelas.
 
    GEOMETRIA
    ---------
@@ -1111,9 +1111,25 @@
      --tri-gap ... folga entre painéis vizinhos; revela o grafite do fundo e
                    se lê como corte, não como emenda.
 
-   A área de cada pilar é medida na meia-altura (a diagonal tira de um lado o
-   que dá ao outro): com b1=50%, b2=77% e cut=5,5%, resulta em
-   ~47% / ~27% / ~26% — a hierarquia comercial pedida, expressa em área.
+   ÁREA — DISCRETA E COMPOSICIONAL, NÃO "UM CARD GRANDE E DOIS PEQUENOS"
+   --------------------------------------------------------------------
+   Medida na meia-altura (a diagonal tira de um lado o que dá ao outro), com
+   b1 = 46,8%, b2 = 74,8% e cut = 5,5%:
+
+       Equipamentos 44,05%   Projetos 28,00%   Consultoria 27,95%
+
+   Duas coisas mudaram em relação aos 47/27/26 anteriores, e as duas são
+   deliberadas:
+
+     · **os dois pilares de sustentação ficaram iguais.** Antes eram 27 e 26 —
+       uma escada de três degraus, que faz o terceiro parecer resto. Iguais,
+       eles lêem como um par, e a composição passa a ter uma frente principal e
+       duas portas de mesmo peso, que é a hierarquia comercial real (DEC-001:
+       Projetos e Consultoria são pilares de sustentação, não um segundo e um
+       terceiro lugar);
+     · **a diferença caiu de 1,74× para 1,57×.** Continua clara a olho nu, mas
+       deixa de ser a única coisa que diz quem manda — ver a lista de sinais em
+       `hero-pillars.tsx`. A hierarquia não pode depender de proporção física.
 
    POR QUE PORCENTAGEM, E NÃO `rem`
    --------------------------------
@@ -1122,101 +1138,127 @@
    inteira escala junto — a mesma razão pela qual a keyline da V1 é definida
    como deslocamento do próprio polígono.
 
-   ARMADILHA HERDADA: `clip-path` conta como área rolável. A seção precisa de
-   `overflow-hidden` — sem ele os painéis abrem rolagem horizontal.
+   ARMADILHA HERDADA: `clip-path` **e** `transform` contam como área rolável.
+   A seção e o palco precisam de `overflow-hidden` — sem eles os painéis, a
+   cortina de entrada e o zoom de hover abrem rolagem horizontal.
    ========================================================== */
 .hero-tri {
   --tri-cut: 5.5%;
-  --tri-b1: 50%;
-  --tri-b2: 77%;
+  --tri-b1: 46.8%;
+  --tri-b2: 74.8%;
   --tri-gap: 0.3%;
   --tri-key: 0.22%;
+  /* Ampliação da fotografia do painel em foco. Ver "MOTION", mais abaixo. */
+  --tri-zoom: 1.055;
 }
 
 /* ==========================================================
    AS TRÊS FOTOGRAFIAS COMO UMA CENA SÓ
    ==========================================================
 
-   O acervo desta dobra tem três origens diferentes: uma cozinha real
-   (quente, bronze do coifa), um estudo 3D (cinza neutro, sem sombra dura)
-   e uma câmara frigorífica (branco frio, azulado). Montadas cru, elas não
-   lêem como uma composição cortada em três — lêem como uma fotografia
-   ao lado de dois retângulos cinzentos, e o ponto mais claro da dobra cai
-   sobre o pilar **menos** importante, invertendo a hierarquia comercial.
+   REGRA: nenhuma das três pode ser privilegiada por tratamento fotográfico.
+   Nem imagem mais clara, nem mais opaca, nem mais saturada, nem véu mais leve.
+   A hierarquia de Equipamentos vem de composição e conversão — está listada em
+   `hero-pillars.tsx`. Aqui o objetivo é o oposto: **igualar**.
 
-   A correção é de direção de arte, não de layout, e tem duas camadas:
+   O QUE FOI IGUALADO, E COMO O NÚMERO FOI OBTIDO
+   ----------------------------------------------
+   O acervo tem três origens com histogramas incompatíveis. Medido no recorte
+   real de cada painel, com os arquivos servidos pela própria aplicação:
 
-   1. **Grade por painel** (`--tri-sat/--tri-con/--tri-bri`). Cada imagem é
-      levada para o mesmo território tonal — aço e grafite. Equipamentos
-      mantém metade da saturação (continua sendo a fotografia real da
-      dobra); os dois de sustentação vão quase ao monocromático, o que
-      apaga o azulado da câmara e o cinza morto do render de uma vez.
+     arquivo                       p05     p50     p95    sat    temp(R−B)
+     hero-industrial-kitchen.png  0,001   0,094   0,601  0,424    +0,070
+     cozinha-completa.jpg         0,114   0,564   0,992  0,092    +0,023
+     operacao-comercial.png       0,054   0,204   0,647  0,611    +0,198
 
-      **Não é duotone de marca.** Tingir a fotografia de amarelo destruiria
-      a escassez do acento — o amarelo aqui só existe em CTA, keyline e
-      etiqueta. O tom comum é o próprio grafite do sistema.
+   Ou seja: uma cozinha noturna sem meios-tons, uma cozinha diurna sem pretos e
+   um balcão âmbar três vezes mais quente que os outros dois.
 
-   2. **Uma luz só** (`.hero-tri-ramp`). Um clarão suave sobre o painel
-      principal e uma queda progressiva para a direita, aplicados **por
-      cima dos três painéis de uma vez** — não painel a painel. É isso que
-      faz as três regiões lerem como partes de um mesmo ambiente iluminado
-      do mesmo lado, e devolve o ponto mais claro da dobra a Equipamentos.
+   **Igualar a média seria errado.** Foi a primeira tentativa e o resultado
+   medido é o que se esperava: para levar `cozinha-completa` à média da âncora,
+   a faixa inteira comprime para ~0,25 de amplitude — cinza chapado, sem
+   leitura de detalhe. Média é conteúdo da cena (uma é noturna, a outra é
+   diurna); tratamento é outra coisa.
 
-   A rampa fica em `z-index: 5`: acima das fotografias (que não declaram
-   z-index) e abaixo do conteúdo de cada painel (`z-10`) e do alvo de
-   clique (`z-20`). Nenhum texto é escurecido por ela.
+   O que foi igualado são os **âncoras do histograma** — ponto de preto, meio-
+   tom e ponto de branco — mais a saturação de saída. Cada arquivo recebe uma
+   transferência própria `A · in^E + O` (`feComponentTransfer` com `type="gamma"`,
+   a mesma mecânica que a V1 já usa no hero) resolvida a partir do histograma
+   dele, mais um `saturate()` calculado para que as três cheguem à MESMA
+   saturação final. O resultado medido:
+
+     painel        p05     p50     p95    sat     temp     média
+     equipamentos  0,030   0,160   0,560  0,051   +0,011   0,208
+     projetos      0,030   0,160   0,560  0,050   +0,004   0,199
+     consultoria   0,030   0,160   0,560  0,052   +0,009   0,213
+
+   Ponto de preto idêntico, ponto de branco idêntico, saturação idêntica,
+   temperatura praticamente neutra nas três (a dispersão caiu de 0,175 para
+   0,007) e média dentro de 7% — o que sobra é a cena, não o tratamento.
+
+   **Não é duotone de marca.** Tingir a fotografia de amarelo destruiria a
+   escassez do acento — o amarelo aqui só existe em CTA, keyline e etiqueta. O
+   tom comum é o próprio grafite do sistema.
+
+   Os filtros SVG vivem em `hero-pillars.tsx`, junto do ponto de uso; aqui fica
+   só a atribuição e o `saturate()` de cada um.
    ========================================================== */
 .hero-tri-photo {
-  filter: saturate(var(--tri-sat, 1)) contrast(var(--tri-con, 1))
-    brightness(var(--tri-bri, 1));
+  filter: saturate(var(--tri-sat, 1)) var(--tri-grade, none);
+  /*
+    Ampliação e reenquadramento do painel em foco. `transform` é o que muda —
+    nunca `object-position`, que não interpola.
+  */
+  transform: scale(var(--tri-scale, 1));
+  transform-origin: var(--tri-origin, 50% 50%);
+  transition:
+    transform 620ms var(--ease-smooth),
+    opacity 420ms var(--ease-smooth);
+  will-change: transform;
 }
 
 .hero-tri-photo-a {
-  --tri-sat: 0.52;
-  --tri-con: 1.06;
-  --tri-bri: 0.95;
+  --tri-sat: 0.18;
+  --tri-grade: url(#hero-grade-a);
+  --tri-origin: 62% 50%;
 }
 
 .hero-tri-photo-b {
-  --tri-sat: 0.16;
-  --tri-con: 1.14;
-  --tri-bri: 0.74;
+  --tri-sat: 0.39;
+  --tri-grade: url(#hero-grade-b);
+  --tri-origin: 50% 50%;
 }
 
-/*
-  A câmara frigorífica é a fonte mais alta do acervo — parede, estante e
-  caixaria brancas ocupam o quadro inteiro. Com os mesmos valores de
-  Projetos ela continuava sendo a região mais clara da dobra, e o ponto de
-  maior luz caía sobre o **terceiro** pilar. Vale um degrau a mais de
-  fechamento: não é preferência de tom, é hierarquia comercial.
-*/
 .hero-tri-photo-c {
-  --tri-sat: 0.12;
-  --tri-con: 1.18;
-  --tri-bri: 0.56;
+  --tri-sat: 0.05;
+  --tri-grade: url(#hero-grade-c);
+  --tri-origin: 42% 50%;
 }
 
 /* ----------
-   Véu de legibilidade dos painéis de sustentação.
+   Véu de legibilidade — IDÊNTICO nos três painéis.
+
+   Antes eram dois véus diferentes: o painel principal recebia um gradiente do
+   Tailwind (`from-graphite via-graphite/70 to-graphite/25`) e os de sustentação
+   recebiam este, bem mais fechado. Isto é, o painel principal ficava com a
+   fotografia mais aberta e os outros dois com a fotografia mais coberta — que é
+   exatamente a forma de privilégio que o briefing proíbe. Com o envelope tonal
+   já igualado na origem, um véu só serve aos três.
 
    Tailwind só oferece três paradas (`from`/`via`/`to`), e `via` cai fixo em
-   50%. O texto de Projetos e Consultoria começa por volta de 58% da altura —
-   ou seja, logo **abaixo** da parada do meio, onde o gradiente de três
-   paradas ainda está claro. Era daí que vinha o efeito de título cinzento:
-   canvas sobre meio-tom, não canvas sobre grafite.
-
-   Com paradas próprias o piso fecha antes de o texto começar e o topo da
-   fotografia continua aberto — que é o que sustenta a cena.
+   50% — o texto começa por volta de 58% da altura, logo abaixo dessa parada,
+   onde o gradiente de três paradas ainda está claro. Daí as paradas próprias.
    ---------- */
 .hero-tri-veil {
   background: linear-gradient(
     to top,
-    rgb(16, 16, 16) 0%,
-    rgba(16, 16, 16, 0.96) 30%,
-    rgba(16, 16, 16, 0.84) 48%,
-    rgba(16, 16, 16, 0.46) 74%,
-    rgba(16, 16, 16, 0.24) 100%
+    rgba(16, 16, 16, 0.96) 0%,
+    rgba(16, 16, 16, 0.9) 26%,
+    rgba(16, 16, 16, 0.72) 48%,
+    rgba(16, 16, 16, 0.34) 74%,
+    rgba(16, 16, 16, 0.1) 100%
   );
+  transition: opacity 480ms var(--ease-smooth);
 }
 
 /*
@@ -1227,9 +1269,67 @@
   background: linear-gradient(
     to bottom,
     rgba(16, 16, 16, 0) 0%,
-    rgba(16, 16, 16, 0.14) 62%,
-    rgba(16, 16, 16, 0.34) 100%
+    rgba(16, 16, 16, 0.1) 62%,
+    rgba(16, 16, 16, 0.26) 100%
   );
+}
+
+/* ----------
+   Cortina de entrada — uma vez, no carregamento.
+
+   O mesmo gesto da V1 (`.hero-curtain`): uma aresta que corre pela **diagonal
+   da composição**, e não um fundido. A diferença é que aqui ela atravessa os
+   três painéis de uma vez, então os três são revelados em sequência pela
+   própria geometria — Equipamentos primeiro, Consultoria por último. Não há
+   três cortinas: uma cortina só, e a ordem sai do corte.
+
+   `translateX` em vez de `clip-path` animado: o polígono fica **fixo** (mesma
+   inclinação das fronteiras, por construção) e o que se move é a caixa. Isso
+   mantém a aresta paralela às fronteiras em qualquer proporção de janela e
+   deixa a animação no compositor.
+   ---------- */
+.hero-tri-curtain {
+  display: none;
+  background: var(--graphite);
+  clip-path: polygon(var(--tri-cut) 0, 100% 0, 100% 100%, 0 100%);
+}
+
+:root[data-js='on'] .hero-tri-curtain {
+  display: block;
+  animation: hero-tri-wipe 1040ms var(--ease-smooth) 140ms both;
+}
+
+@keyframes hero-tri-wipe {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(106%);
+  }
+}
+
+/* ----------
+   Keylines: crescem de cima para baixo, junto com a cortina.
+
+   `scaleY` com origem no topo, e não `height` — a keyline é um elemento
+   recortado por `clip-path`, então animar a altura recalcularia o recorte a
+   cada quadro.
+   ---------- */
+:root[data-js='on'] .hero-tri-key,
+:root[data-js='on'] .hero-tri-key2 {
+  animation: hero-tri-key-in 760ms var(--ease-premium) both;
+  animation-delay: var(--seq, 0ms);
+}
+
+@keyframes hero-tri-key-in {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
 
 /* ---------- Composição diagonal: só a partir de lg ---------- */
@@ -1257,22 +1357,32 @@
   }
 
   /*
-    A luz da cena, no desktop: um clarão baixo sobre o painel principal e
-    queda progressiva para a direita. O ângulo (96°) acompanha a inclinação
-    das fronteiras, então a rampa não briga com a geometria — reforça.
+    A luz da cena. Fica **sobre os três painéis de uma vez** — é o que faz três
+    fotografias de origens diferentes lerem como um ambiente só, iluminado do
+    mesmo lado. Painel a painel isso não funciona: cada véu pararia na aresta e
+    a emenda apareceria.
+
+    O ângulo (96°) acompanha a inclinação das fronteiras, então a rampa não
+    briga com a geometria — reforça.
+
+    **Ela aliviou nesta rodada** (0,30/0,56 → 0,16/0,34). Antes ela também
+    carregava a tarefa de igualar as três luminâncias, e para isso precisava
+    fechar tanto que o lado direito virava um degrau escuro. Com o envelope
+    tonal resolvido na origem, ela volta a fazer só o que o nome diz: dar uma
+    direção de luz à cena.
   */
   .hero-tri-ramp {
     background:
       radial-gradient(
-        110% 85% at 20% 62%,
-        rgba(255, 255, 255, 0.07) 0%,
-        rgba(255, 255, 255, 0) 58%
+        115% 90% at 22% 58%,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(255, 255, 255, 0) 60%
       ),
       linear-gradient(
         96deg,
-        rgba(16, 16, 16, 0) 26%,
-        rgba(16, 16, 16, 0.3) 60%,
-        rgba(16, 16, 16, 0.56) 100%
+        rgba(16, 16, 16, 0) 32%,
+        rgba(16, 16, 16, 0.11) 66%,
+        rgba(16, 16, 16, 0.24) 100%
       );
   }
 
@@ -1293,9 +1403,9 @@
 
   /*
     Segunda keyline, na fronteira Projetos|Consultoria. Só a folga de grafite
-    não bastava: as duas fotografias vizinhas são claras, e o vão escuro entre
-    elas desaparecia — a composição perdia um dos três cortes justamente onde
-    precisa separar duas ofertas diferentes.
+    não bastava: as duas fotografias vizinhas partilham agora o mesmo ponto de
+    branco, e o vão escuro entre elas desaparecia — a composição perdia um dos
+    três cortes justamente onde precisa separar duas ofertas diferentes.
 
     Ela é branca e discreta, não amarela: o amarelo é o sinal da frente
     principal e marca só a fronteira de Equipamentos. Duas keylines amarelas
@@ -1342,54 +1452,103 @@
     right: 0;
   }
 
-  /*
-    Foco no pilar: passar o mouse ou tabular até Projetos/Consultoria alarga
-    aquele painel. Os três continuam visíveis e legíveis — muda a proporção,
-    nunca a presença, então a compreensão da dobra não depende da interação.
+  /* ==========================================================
+     MOTION — RESPOSTA AO PONTEIRO E AO TECLADO
+     ==========================================================
 
-    É CSS puro (`:has()`), sem estado em JavaScript: o hero continua Server
-    Component e a composição funciona antes de qualquer hidratação.
-  */
+     Passar o mouse ou tabular até um pilar move quatro coisas ao mesmo tempo,
+     no mesmo tempo, com a mesma curva:
+
+       largura ..... a fronteira se desloca (420ms) — a região cresce
+       fotografia .. ampliação de 5,5% com origem própria por painel (620ms),
+                     o que lê como reenquadramento, não como zoom de banner
+       véu ......... alivia 12% no painel em foco (480ms) — a fotografia
+                     aparece um pouco mais, o texto continua legível
+       conteúdo .... proposta e CTA ganham contraste (200ms)
+
+     REGRAS QUE ESTA SEÇÃO NÃO PODE QUEBRAR
+     -------------------------------------
+     1. **Nenhum pilar some.** O menor estado de qualquer pilar é ~23% da
+        composição, e nome, pergunta e CTA continuam visíveis nos três.
+     2. **Equipamentos não perde a hierarquia por causa do ponteiro.** A
+        fronteira b1 se move no máximo 1 ponto (46,8% → 45,8%); todo o ganho do
+        pilar em foco vem do vizinho, não do painel principal. Os valores
+        anteriores tiravam até 13 pontos de Equipamentos — passar o mouse em
+        Consultoria encolhia a frente principal, e abaixo de ~47% a coluna
+        ficava mais estreita que a medida do `h1`, que ganhava linhas e subia
+        por cima do cabeçalho.
+     3. **Sem salto de layout.** O que muda é `clip-path`, `left`/`right`,
+        `transform` e `opacity` — nada que reflua texto.
+
+     É CSS puro (`:has()`), sem estado em JavaScript: o hero continua Server
+     Component e a composição funciona antes de qualquer hidratação.
+     ========================================================== */
   /* ----------
-     O realce é negociado **entre os dois pilares de sustentação**, não
-     tirado de Equipamentos.
+     O CURSO DAS FRONTEIRAS É LIMITADO PELO CTA DO VIZINHO
+     ----------
 
-     Os valores anteriores (b1 de 50% para 39%/37%) estreitavam o painel
-     principal em até 13 pontos — ~190px. Duas consequências, ambas ruins:
+     Os valores abaixo não são estéticos: são o maior deslocamento que **não
+     muda a contagem de linhas de nenhum CTA**. Medido em 1440px, com o rótulo
+     mais longo ("Falar com um projetista", 250px de largura mínima com a cela
+     da seta):
 
-     1. **Hierarquia invertida no hover.** Passar o mouse em Consultoria
-        encolhia Equipamentos. A prioridade comercial da V2 não pode depender
-        de onde está o ponteiro.
-     2. **Refluxo do `h1`.** Abaixo de ~47% a coluna de texto fica mais
-        estreita que a medida do título; ele ganhava linhas, e como o bloco é
-        alinhado pela base, o excedente subia por cima do cabeçalho — o
-        "salto desagradável" que a revisão pede para eliminar.
+       repouso ............ caixa de Projetos 268px úteis · Consultoria 277px
+       foco em Consultoria  cada ponto tirado de `b2` custa 14px à caixa de
+                            Projetos
+       foco em Projetos ... cada ponto somado a `b2` custa 14px à de Consultoria
 
-     Agora b1 se move 2 pontos (48%) e todo o ganho do painel em foco vem de
-     b2, ou seja, do vizinho. O pilar em foco continua crescendo de forma
-     claramente perceptível — Consultoria vai de 23 para 32 pontos — sem que
-     Equipamentos ceda área nem o título mude de forma.
+     Com o curso anterior (b2 indo a 70% / 79,6%) as duas caixas caíam para
+     ~210px e o CTA do vizinho **quebrava em duas linhas ao passar o mouse** —
+     capturado nos dois estados. Um botão que muda de forma porque o ponteiro
+     está no painel ao lado é exatamente a instabilidade que faz a composição
+     parecer frágil, e custa mais que os pontos de área que ela comprava.
+
+     O curso ficou em ±2,4 pontos. A resposta ao foco não enfraquece por isso:
+     ela acontece em **cinco canais simultâneos** — largura, ampliação da
+     fotografia (5,5%), alívio do véu (12%), contraste da proposta e avanço da
+     seta. A largura é um deles, não o único.
      ---------- */
-  .hero-tri:has(.hero-tri-b:hover),
-  .hero-tri:has(.hero-tri-b:focus-within) {
-    --tri-b1: 48%;
-    --tri-b2: 82%;
-  }
+  /* ----------
+     ABAIXO DE 1440px AS FRONTEIRAS NÃO SE MOVEM
+     ----------
 
-  /*
-    71%, e não 68%: a três pontos a mais Consultoria ainda ganha 6 pontos de
-    área, mas Projetos mantém "Falar com um projetista" em **uma linha**. Um
-    CTA que quebra ao passar o mouse no vizinho é o tipo de instabilidade que
-    faz a composição parecer frágil.
-  */
-  .hero-tri:has(.hero-tri-c:hover),
-  .hero-tri:has(.hero-tri-c:focus-within) {
-    --tri-b1: 48%;
-    --tri-b2: 71%;
+     De 1024 a 1439px cada painel de sustentação tem entre 230 e 320px de caixa,
+     e "Falar com um projetista" pede ~250px numa linha. Nessa faixa **qualquer**
+     curso de fronteira troca a contagem de linhas de um dos dois CTAs: medido,
+     o rótulo alternava entre uma e duas linhas conforme o ponteiro entrava no
+     painel ao lado — em 1366px, passar o mouse em Consultoria quebrava o CTA de
+     Projetos; em 1024 e 1280 a troca acontecia nos dois sentidos.
+
+     Um botão que muda de forma porque o cursor está no painel vizinho é pior
+     que um botão que não cresce. Aqui a resposta ao foco continua existindo
+     inteira nos outros quatro canais — ampliação da fotografia, alívio do véu,
+     contraste da proposta e avanço da seta —, e só a largura fica parada.
+
+     De 1440px em diante há folga para o curso, e ele volta.
+     ---------- */
+  @media (min-width: 1440px) {
+    .hero-tri:has(.hero-tri-a:hover),
+    .hero-tri:has(.hero-tri-a:focus-within) {
+      --tri-b1: 48.4%;
+      --tri-b2: 75.8%;
+    }
+
+    .hero-tri:has(.hero-tri-b:hover),
+    .hero-tri:has(.hero-tri-b:focus-within) {
+      --tri-b1: 46%;
+      --tri-b2: 77.2%;
+    }
+
+    .hero-tri:has(.hero-tri-c:hover),
+    .hero-tri:has(.hero-tri-c:focus-within) {
+      --tri-b1: 46%;
+      --tri-b2: 72.4%;
+    }
   }
 
   .hero-tri-panel,
   .hero-tri-key,
+  .hero-tri-key2,
   .hero-tri-box-a,
   .hero-tri-box-b,
   .hero-tri-box-c,
@@ -1404,14 +1563,107 @@
 }
 
 /* ----------
+   Ampliação da fotografia do painel em foco — vale em toda largura.
+
+   `:hover` no painel e `:focus-within` para o teclado, os dois pelo mesmo
+   caminho: quem navega por `Tab` recebe exatamente a mesma resposta de quem
+   usa o ponteiro.
+   ---------- */
+.hero-tri-panel:hover .hero-tri-photo,
+.hero-tri-panel:focus-within .hero-tri-photo {
+  --tri-scale: var(--tri-zoom);
+}
+
+.hero-tri-panel:hover .hero-tri-veil,
+.hero-tri-panel:focus-within .hero-tri-veil {
+  opacity: 0.88;
+}
+
+/* ----------
    Mobile e tablet: a diagonal vira **horizontal**.
 
    Reproduzir três painéis verticais diagonais em 360px destruiria a leitura —
    cada faixa teria ~120px. O corte muda de eixo e a linguagem se mantém: os
    painéis se encaixam por arestas inclinadas paralelas, com Equipamentos
-   ocupando mais que o dobro da altura dos outros dois.
+   ocupando quase o dobro da altura de cada um dos outros dois.
    ---------- */
 @media (max-width: 1023px) {
+  /*
+    ============================================================
+    O ENCAIXE DIAGONAL É MENOR EM TELA ESTREITA
+    ============================================================
+
+    `--tri-mcut` é a altura da cunha que cada painel cede ao vizinho. Ela custa
+    duas vezes: uma em altura do palco (dois encaixes) e outra em folga, porque
+    o painel de baixo avança sobre o de cima em `mcut × (x / largura)` — no pé
+    do CTA, que fica a ~75% da largura, isso são ~27px dos 36px do encaixe.
+
+    Medido em 360 × 800 e 320 × 720 com o encaixe fixo em 2,25rem: o CTA
+    primário e o de Projetos ficavam **por baixo da fotografia do painel
+    seguinte**, cortados na diagonal. Não é overflow — a caixa está dentro da
+    janela, e foi por isso que uma verificação por `getBoundingClientRect`
+    passou. Só a captura mostra.
+
+    2,25rem continua valendo de 480px para cima, onde há altura para pagá-lo.
+    Abaixo disso o encaixe cai para 1,5rem: a linguagem do corte se mantém (a
+    aresta continua inclinada e paralela), e devolve ~24px de palco mais ~18px
+    de folga por painel.
+  */
+  .hero-tri {
+    --tri-mcut: 1.5rem;
+  }
+
+  @media (min-width: 560px) {
+    .hero-tri {
+      --tri-mcut: 2.25rem;
+    }
+  }
+
+  /* ==========================================================
+     ABAIXO DE 375px A DOBRA CRESCE — DE PROPÓSITO
+     ==========================================================
+
+     A repartição por `flex-grow` divide **exatamente** a altura do palco entre
+     os três painéis. É o que faz a dobra fechar na janela, e funciona de 375px
+     para cima — inclusive nos 390 × 844 do iPhone, que é o aparelho de maior
+     peso no tráfego pago.
+
+     Abaixo disso não fecha, e a conta é fechada, não uma impressão. Em
+     360 × 800: cabeçalho 64 + barra de apoio 78 deixam 658px de palco, mais os
+     dois encaixes da diagonal, 706px para repartir. Equipamentos sozinho pede
+     354px (faixa do cabeçalho 72 + `h1` em três linhas 80 + nome, pergunta e
+     CTA 170 + folga da aresta 32) e cada pilar de sustentação pede 211px —
+     776px no total. Faltam 70px, e não há de onde tirá-los sem quebrar uma
+     regra que custa mais: reduzir o corpo do `h1` abaixo de 22px, remover a
+     pergunta que dá paralelismo aos três pilares, ou descer o alvo de toque do
+     CTA abaixo de 44px.
+
+     Comprimir não é opção. `flex-grow` encolhe a **caixa**, não o texto: o
+     conteúdo continua do mesmo tamanho e sai pela base do painel, onde a
+     fotografia do painel seguinte o cobre. Medido em 320 × 720 antes desta
+     saída: o CTA primário terminava 67px abaixo da caixa que deveria contê-lo,
+     recortado na diagonal.
+
+     Aqui a repartição é abandonada e cada painel volta a medir pelo conteúdo
+     (`flex-basis: auto`, sem `grow`), com a seção crescendo além da janela.
+     O visitante rola algumas dezenas de pixels; nada é decapitado.
+
+     **É a mesma escolha já registrada neste projeto** ("alguns pixels de
+     rolagem custam menos que um pilar decapitado"), restrita à faixa em que ela
+     é de fato necessária.
+     ========================================================== */
+  @media (max-width: 374px) {
+    .hero-tri {
+      height: auto;
+      min-height: 100svh;
+    }
+
+    .hero-tri-panel {
+      flex-basis: auto;
+      flex-grow: 0;
+    }
+  }
+
   .hero-tri-a {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tri-mcut)), 0 100%);
   }
@@ -1426,29 +1678,88 @@
     margin-top: calc(-1 * var(--tri-mcut));
   }
 
-  .hero-tri {
-    --tri-mcut: 2.25rem;
-  }
-
   /*
     Véu mais fechado no empilhamento.
 
     As paradas do véu do desktop foram medidas contra painéis de ~1.000px, em
     que o texto ocupa o terço de baixo. No telefone os painéis de sustentação
-    têm 194px e o conteúdo ocupa quase a altura inteira — as mesmas paradas
-    percentuais colocam o título na faixa em que o gradiente ainda está
-    aberto, e o resultado é título claro sobre fotografia clara.
+    têm ~200px e o conteúdo ocupa quase a altura inteira — as mesmas paradas
+    percentuais colocam o título na faixa em que o gradiente ainda está aberto,
+    e o resultado é título claro sobre fotografia clara.
 
-    Mesma lógica, medida na proporção certa: o piso sobe e a abertura fica só
-    na fresta de cima.
+    Mesma lógica, medida na proporção certa: o piso sobe e a abertura fica só na
+    fresta de cima. E continua **igual nos três**.
   */
   .hero-tri-veil {
     background: linear-gradient(
       to top,
-      rgb(16, 16, 16) 0%,
-      rgba(16, 16, 16, 0.95) 46%,
-      rgba(16, 16, 16, 0.78) 80%,
-      rgba(16, 16, 16, 0.56) 100%
+      rgba(16, 16, 16, 0.97) 0%,
+      rgba(16, 16, 16, 0.94) 44%,
+      rgba(16, 16, 16, 0.8) 78%,
+      rgba(16, 16, 16, 0.6) 100%
     );
+  }
+
+  /* No empilhamento a cortina desce, porque a aresta é horizontal. */
+  .hero-tri-curtain {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tri-mcut)), 0 100%);
+  }
+
+  @keyframes hero-tri-wipe {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-106%);
+    }
+  }
+
+  /*
+    O `translateY` da cortina precisa partir de baixo: ela cobre o palco inteiro
+    e sobe, revelando Equipamentos primeiro. `bottom: 0` com altura própria
+    faria o mesmo, mas com layout — aqui é só compositor.
+  */
+  .hero-tri-curtain {
+    transform-origin: bottom;
+  }
+}
+
+/* ==========================================================
+   MOVIMENTO REDUZIDO — a dobra inteira resolve para o estado final
+   ==========================================================
+
+   Regra do projeto: nenhum conteúdo pode ficar invisível e nenhuma máscara
+   pode permanecer fechada. A cortina é o caso crítico — parada, ela cobre a
+   composição inteira, então ela precisa **sumir**, não apenas parar.
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-js='on'] .hero-tri-curtain {
+    animation: none;
+    display: none;
+  }
+
+  :root[data-js='on'] .hero-tri-key,
+  :root[data-js='on'] .hero-tri-key2 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-tri-photo {
+    transition: none;
+  }
+
+  /*
+    A ampliação de hover fica desligada: é movimento decorativo, e o realce do
+    pilar em foco continua acontecendo por largura, véu e contraste de texto —
+    nenhum dos quais depende de percurso.
+  */
+  .hero-tri-panel:hover .hero-tri-photo,
+  .hero-tri-panel:focus-within .hero-tri-photo {
+    --tri-scale: 1;
+  }
+
+  .hero-tri-veil {
+    transition: none;
   }
 }

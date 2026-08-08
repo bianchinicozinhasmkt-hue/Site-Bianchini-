@@ -34,27 +34,66 @@ import { HeaderCta } from '@/components/ui/actions/button'
  * vãos iguais: sem a assinatura, é isso que mantém a navegação afastada da
  * marca em vez de colada nela.
  */
+/**
+ * ============================================================
+ * CABEÇALHO + HERO = UMA CENA SÓ (V2)
+ * ============================================================
+ *
+ * Na home, e **só na home**, a faixa não é uma barra opaca pousada sobre a
+ * fotografia: no repouso ela é um scrim de grafite que dissolve para baixo, e a
+ * primeira dobra corre por baixo dela. É isso que faz cabeçalho e hero lerem
+ * como uma cena única em vez de duas peças empilhadas — a fotografia deixa de
+ * ser decapitada nos primeiros ~84px.
+ *
+ * Ao sair do topo ela fecha em grafite sólido, com borda e sombra: aí embaixo
+ * há seções claras, e uma faixa translúcida sobre elas seria ilegível.
+ *
+ * **Por que só na home.** O cabeçalho é global e as rotas internas abrem com
+ * `PageHero` claro; translúcido ali, a marca e a navegação cairiam sobre
+ * off-white. A condição é de rota, não de preferência visual.
+ *
+ * O scrim mantém densidade alta na faixa em que o texto de fato assenta (0,92
+ * no topo, 0,86 na linha de base dos rótulos) e só abre nos últimos 25% da
+ * altura, onde não há glifo — é o que preserva o contraste da navegação sem
+ * devolver a barra chapada.
+ */
 export function Header() {
   const pathname = usePathname()
   /* Sombra só depois que a página sai do topo — no repouso o cabeçalho é plano. */
   const scrolled = useScrollThreshold(8)
+  const overHero = pathname === '/' && !scrolled
 
   return (
     <header
       className={cn(
-        'header-in on-dark fixed inset-x-0 top-0 z-50 h-[var(--header-height)] border-b bg-graphite [container-type:inline-size]',
+        'header-in on-dark fixed inset-x-0 top-0 z-50 h-[var(--header-height)] border-b [container-type:inline-size]',
         /*
           No topo a faixa é plana e a borda quase não existe; ao sair do topo
           ela ganha uma linha inferior discreta e uma sombra curta. Nada de
           sombra pesada e nada de mudar a altura — logo e navegação ficam
           exatamente onde estavam.
         */
-        'transition-[border-color,box-shadow] duration-[220ms] ease-precise',
+        'transition-[border-color,box-shadow,background-color] duration-[260ms] ease-precise',
         scrolled
-          ? 'border-white/[0.14] shadow-[0_6px_14px_-12px_rgba(0,0,0,0.9)]'
-          : 'border-white/[0.06]',
+          ? 'border-white/[0.14] bg-graphite shadow-[0_6px_14px_-12px_rgba(0,0,0,0.9)]'
+          : 'border-transparent',
+        overHero ? 'bg-transparent' : 'bg-graphite',
       )}
     >
+      {/*
+        O scrim. Elemento próprio, e não `background` do `header`: a transição
+        de opacidade de uma camada é o que permite a troca para grafite sólido
+        sem a faixa piscar, e mantém `bg-graphite` como fundo real assim que a
+        página sai do topo.
+      */}
+      <span
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none absolute inset-0 -z-10 transition-opacity duration-[260ms] ease-precise',
+          'bg-[linear-gradient(180deg,rgba(16,16,16,0.92)_0%,rgba(16,16,16,0.86)_58%,rgba(16,16,16,0.62)_82%,rgba(16,16,16,0)_100%)]',
+          overHero ? 'opacity-100' : 'opacity-0',
+        )}
+      />
       {/*
         Margens em `cqw` (largura do próprio cabeçalho), não em `vw`: `vw`
         inclui a barra de rolagem e desalinharia a marca em relação à coluna
