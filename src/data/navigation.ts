@@ -74,39 +74,36 @@ import type { NavItem } from '@/types'
  * O CTA "Solicitar diagnóstico" fica fora desta sequência — é ação, não
  * percurso. `mobileNav` é este mesmo array, então o menu do telefone acompanha
  * automaticamente.
- */
-/**
+ *
  * ============================================================
- * NAVEGAÇÃO DA V2 (2026-08-07)
+ * REMEDIDO EM 2026-08-08, DEPOIS DA HERO V2
  * ============================================================
  *
- * Os cinco itens acima eram as âncoras da home V1. A home V2 tem outra
- * arquitetura (`docs/v2/specs/V2-01-home-arquitetura.md`: 9 seções, Equipamentos
- * primeiro), então os destinos mudaram junto — deixar os antigos produziria
- * exatamente o defeito que a regra 1 acima proíbe: link de menu apontando para
- * `id` que não existe mais na página.
+ * **Os cinco itens são os mesmos da V1** — mesmos rótulos, mesmos destinos.
+ * Só a posição de "Equipamentos" mudou, e pelo motivo de sempre: a home foi
+ * reordenada pela jornada comercial (`src/app/page.tsx`) e `#equipamentos`
+ * subiu do fim para a sexta seção, passando à frente de `#projetos`.
  *
- * A regra continua valendo sem exceção: **a ordem do menu é a ordem da
- * rolagem.** Aqui ela não precisou ser remedida no navegador porque é a ordem
- * de montagem declarada em `src/app/page.tsx`, que é linear e sem seção
- * intercalada — Equipamentos (2ª seção) → Projetos (4ª) → Consultoria (5ª) →
- * Prova (6ª) → Empresa (7ª). Assim que a home V2 estiver publicada, a medição
- * real volta a ser obrigatória a cada mudança de ordem física.
+ * Posições medidas em 1440 × 900, no navegador, **depois** da reordenação —
+ * não deduzidas de `page.tsx`:
  *
- * "Soluções" e "Método" saíram: na V2 o que a empresa faz está distribuído nas
- * três portas nomeadas (Equipamentos, Projetos, Consultoria), e o método deixou
- * de ter seção própria na home. As rotas `/solucoes/*` continuam existindo e
- * são alcançadas pelo rodapé.
+ *   antes (quebrado)                     depois (corrigido)
+ *   Soluções ......    900px  ↓          Soluções ......    900px  ↓
+ *   Projetos ......  6.836px  ↓          Equipamentos ..  4.365px  ↓
+ *   Empresa ....... 12.214px  ↓          Projetos ......  6.836px  ↓
+ *   Método ........ 10.924px  ↑          Método ........ 10.924px  ↓
+ *   Equipamentos ..  4.365px  ↑          Empresa ....... 12.214px  ↓
  *
- * O CTA do cabeçalho ("Orçamento") fica fora desta sequência — é ação, não
- * percurso. `mobileNav` continua sendo este mesmo array.
+ * Na ordem anterior os dois últimos cliques **subiam** — 1.290px e 6.559px. Na
+ * nova, todas as diferenças voltam a ser positivas: ler o menu da esquerda para
+ * a direita é descer a home do começo ao fim.
  */
 export const mainNav: NavItem[] = [
+  { label: 'Soluções', href: '/#pilares' },
   { label: 'Equipamentos', href: '/#equipamentos' },
   { label: 'Projetos', href: '/#projetos' },
-  { label: 'Consultoria', href: '/#consultoria' },
-  { label: 'Prova', href: '/#prova' },
-  { label: 'Empresa', href: '/#empresa' },
+  { label: 'Método', href: '/#metodo' },
+  { label: 'Empresa', href: '/#quem-conduz' },
 ]
 
 /**

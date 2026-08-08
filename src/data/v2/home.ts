@@ -115,12 +115,15 @@ export const homeHero = {
 
 export interface HeroPillar {
   id: 'equipamentos' | 'projetos' | 'consultoria'
-  index: string
   name: string
-  /** A pergunta do cliente que este pilar responde. */
-  question: string
-  /** Proposta curta — o que a Bianchini entrega nessa frente. */
-  proposition: string
+  /**
+   * **Uma linha, e só uma.** Antes havia três campos de texto por pilar —
+   * numeral, pergunta do cliente e proposta longa — e a dobra somava sete
+   * blocos de microcopy em três painéis: lia como documento técnico, não como
+   * três portas. `intent` é o que o pilar resolve, numa frase que cabe em duas
+   * linhas no telefone.
+   */
+  intent: string
   cta: { label: string; href: string }
   /** Evento de conversão, um por caminho. */
   event: 'hero_equipamentos_click' | 'hero_projetos_click' | 'hero_consultoria_click'
@@ -134,65 +137,71 @@ export interface HeroPillar {
 
 /**
  * ============================================================
- * AS TRÊS FOTOGRAFIAS — UM ÚNICO ACERVO, UM ÚNICO TRATAMENTO
+ * AS TRÊS IMAGENS — CADA UMA DIZ O SEU PILAR SEM O TEXTO
  * ============================================================
  *
- * A escolha das três imagens é parte do sistema visual, não ilustração solta:
- * a primeira dobra tem de ler como **uma cena cortada em três**, e isso começa
- * na origem do material, não no filtro.
+ * Critério: **o visitante tem de saber do que trata o painel antes de ler uma
+ * palavra.** Três fotografias de cozinha pronta falham nisso — as três diriam
+ * "cozinha", e a diferença entre os pilares ficaria inteiramente por conta da
+ * copy. Por isso cada painel tem uma matéria diferente.
  *
- * O QUE SAIU, E POR QUÊ — medido, não estimado
- * --------------------------------------------
- * Até aqui Projetos usava `projeto-3d.jpg` e Consultoria
- * `camara-frigorifica.jpg`. As duas foram medidas contra a fotografia âncora
- * (`hero-industrial-kitchen.png`) e reprovaram por razões diferentes:
+ *   PROJETOS ...... `planta-executiva-hero.jpg`. Uma **planta executiva real**
+ *                   do acervo, com equipamentos locados, bancadas, cotas e
+ *                   circulação. É o único dos três que não é fotografia, e é o
+ *                   ponto: planejamento espacial se reconhece à distância.
  *
- *   projeto-3d.jpg ......... 900 × 395. Num painel de ~520 × 1000 no desktop
- *                            ele é ampliado ~2,5×. Além disso é um render de
- *                            estúdio: p05 = 0,346, ou seja **não tem preto** —
- *                            a faixa inteira vive entre 0,35 e 0,99. Levá-lo
- *                            ao território da âncora exigiria comprimir tudo
- *                            num intervalo de ~0,25, que é cinza chapado.
- *                            Tem ainda um "02" gravado no canto pelo material
- *                            de origem.
- *   camara-frigorifica.jpg .. 750 × 400 e p05 = 0,511 / p95 = 0,983: uma caixa
- *                            branca. Faixa dinâmica de 0,47 contra 0,53 da
- *                            âncora, mas deslocada inteira para o alto. Nenhum
- *                            filtro linear a traz para baixo sem destruir o
- *                            detalhe — e ela ainda era a região **mais clara**
- *                            da dobra, o que punha o ponto de maior luz sobre
- *                            o terceiro pilar.
+ *                   ORIGEM E LIMITAÇÃO, DECLARADAS
+ *                   Derivada de `planta-executiva.jpg` (900 × 393), que é o
+ *                   arquivo real. Duas operações, ambas de apresentação:
+ *                   recorte dos 140px da esquerda, onde o material de origem
+ *                   traz um selo "01" gravado; e reamostragem 3× (lanczos3 +
+ *                   nitidez) para 2280 × 1179, porque a 900px o desenho entra
+ *                   no painel a ~2,7× e as linhas viram mancha. **Nenhum
+ *                   traço, cota ou equipamento foi alterado, e nada foi
+ *                   gerado.** A limitação permanece: o desenho de origem é de
+ *                   baixa resolução, e uma exportação em alta do mesmo projeto
+ *                   substituiria este arquivo sem nenhuma outra mudança.
  *
- * O QUE ENTROU
- * ------------
- * Duas fotografias de operação real do próprio acervo, ambas com preto de
- * verdade (p05 ≤ 0,12), resolução suficiente para painel de dobra inteira e a
- * mesma matéria da âncora — inox, coifa, bancada:
+ *                   `projeto-3d.jpg` foi descartado: além de 900 × 395 e com um
+ *                   "02" gravado no canto, é um render que pode ser lido como
+ *                   obra executada — exatamente o que DEC-008 proíbe.
  *
- *   Projetos ...... `cozinha-completa.jpg` (1400 × 1050). É o corredor central
- *                   de uma cozinha inteira, com equipamento dos dois lados: a
- *                   imagem mostra **layout, fluxo e circulação**, que é
- *                   literalmente o que o pilar entrega.
- *   Consultoria ... `operacao-comercial.png` (1448 × 1086). O balcão de
- *                   atendimento com a produção ao fundo — uma operação que já
- *                   está rodando, que é a condição de quem procura
- *                   diagnóstico ("minha operação já roda, mas trava").
+ *   EQUIPAMENTOS .. `hero-industrial-kitchen.png` (1916 × 821). A fotografia
+ *                   âncora do site: inox, coifa contínua, ilha de produção e
+ *                   fornos, com escala de operação real. É a imagem que mais
+ *                   diretamente mostra o que a frente principal vende.
  *
- * DEC-008 fica **mais** satisfeita, não menos: sem render na dobra, não há
- * imagem de estudo que possa ser lida como obra executada.
+ *   CONSULTORIA ... `operacao-comercial.png` (1448 × 1086). O balcão de
+ *                   atendimento com PDV, pedidos prontos para retirada e a
+ *                   linha de produção ao fundo — uma operação **em
+ *                   funcionamento**, que é a condição de quem procura
+ *                   diagnóstico. Não é "mais uma cozinha": é o ponto onde
+ *                   fluxo, processo e gargalo aparecem.
  *
- * O tratamento comum das três está em `globals.css`, "AS TRÊS FOTOGRAFIAS
- * COMO UMA CENA SÓ" — os valores de lá são resolvidos a partir do histograma
- * medido de cada arquivo, não escolhidos a olho.
+ * TRATAMENTO — em `hero-pillars.module.css`, e agora mínimo. A grade tonal por
+ * `feComponentTransfer` que igualava os três histogramas foi **removida**:
+ * ela fechava o ponto de branco em 0,56 e derrubava a saturação para 0,05–0,39,
+ * e o que se via eram três superfícies quase pretas com texto por cima. Sobrou
+ * uma correção de saturação por arquivo, nenhuma passando de ±30%, e o scrim,
+ * que é local e some antes da meia-altura do painel.
  */
 
 export const heroPillars: HeroPillar[] = [
+  /*
+    ============================================================
+    A ORDEM DESTE ARRAY É A ORDEM DO DOM, NÃO A ORDEM VISUAL
+    ============================================================
+
+    Visualmente a dobra é **Projetos | Equipamentos | Consultoria**, com
+    Equipamentos no centro (a geometria está no módulo CSS). No código
+    Equipamentos vem primeiro de propósito: é ele que carrega o `h1` e a ação
+    primária, então é ele que chega primeiro ao teclado e ao leitor de tela. No
+    empilhamento do telefone as duas ordens coincidem.
+  */
   {
     id: 'equipamentos',
-    index: '01',
     name: 'Equipamentos',
-    question: 'Preciso comprar ou especificar equipamentos.',
-    proposition:
+    intent:
       'Cocção, refrigeração, preparo, higienização, inox e exaustão — dimensionados pelo volume real da operação, não pela ficha técnica.',
     cta: { label: 'Solicitar orçamento', href: '/contato?intencao=equipamentos' },
     event: 'hero_equipamentos_click',
@@ -200,46 +209,47 @@ export const heroPillars: HeroPillar[] = [
       src: '/images/hero/hero-industrial-kitchen.png',
       alt: 'Cozinha industrial profissional em aço inox, com coifa contínua, luminárias suspensas e bancada central de produção',
       /*
-        58%, não centro: o terço esquerdo do arquivo é quase preto e, no
-        desktop, é justamente onde a coluna de texto assenta. Puxar o
-        enquadramento para a direita traz a ilha e as luminárias para dentro do
-        painel sem tirar o repouso escuro de trás do `h1`.
+        60%, não centro: o terço esquerdo do arquivo é quase preto, e com o
+        painel central medindo ~37% da janela é esse trecho que entraria. À
+        direita estão a ilha em inox, as luminárias e os fornos — a matéria do
+        pilar.
       */
-      objectPosition: '58% center',
+      objectPosition: '60% center',
     },
   },
   {
     id: 'projetos',
-    index: '02',
     name: 'Projetos',
-    question: 'Vou abrir, reformar ou reorganizar uma cozinha.',
-    proposition: 'Layout, fluxo, dimensionamento e especificação antes da compra. Quem projeta, especifica.',
+    intent: 'Layout, fluxo e dimensionamento antes da compra. Quem projeta, especifica.',
     cta: { label: 'Falar com um projetista', href: '/contato?intencao=arquitetura' },
     event: 'hero_projetos_click',
     media: {
-      src: '/images/projects/cozinha-completa.jpg',
-      alt: 'Cozinha profissional completa vista pelo corredor central, com fritadeiras, bancadas em inox, prateleiras suspensas e coifas dos dois lados',
-      /* O corredor central é o assunto: é ele que mostra fluxo e circulação. */
-      objectPosition: '52% center',
+      src: '/images/projects/planta-executiva-hero.jpg',
+      alt: 'Recorte de planta executiva de cozinha industrial, com equipamentos locados, bancadas, circulação e cotas',
+      /*
+        62%: o miolo do desenho, onde a locação de equipamentos é mais densa —
+        bancadas, cocção, câmaras e a circulação entre elas. A 45% (primeira
+        tentativa) o painel pegava o **salão de atendimento**, e o que aparecia
+        eram mesas e cadeiras: uma planta de restaurante, não de cozinha.
+      */
+      objectPosition: '62% center',
     },
   },
   {
     id: 'consultoria',
-    index: '03',
     name: 'Consultoria',
-    question: 'Minha operação já roda, mas trava.',
-    proposition: 'Diagnóstico de fluxo, processo, equipe, cardápio e custo — para achar a causa antes de comprar qualquer coisa.',
+    intent: 'Diagnóstico de fluxo, processo e custo na operação que já está rodando.',
     cta: { label: 'Agendar diagnóstico', href: '/contato?intencao=consultoria' },
     event: 'hero_consultoria_click',
     media: {
       src: '/images/hero/operacao-comercial.png',
       alt: 'Balcão de atendimento com terminal de ponto de venda, pedidos embalados para retirada e a linha de produção em aço inox ao fundo',
       /*
-        55%: em `center` o painel estreito do desktop pega a planta e o vaso da
-        esquerda e perde o balcão. À direita a leitura é a operação — PDV,
-        pedidos prontos e a produção ao fundo.
+        46%: em `center` o painel estreito pega a planta e o vaso da esquerda e
+        perde o balcão. Aqui a leitura é a operação — PDV, pedidos prontos e a
+        produção ao fundo.
       */
-      objectPosition: '55% center',
+      objectPosition: '46% center',
     },
   },
 ]

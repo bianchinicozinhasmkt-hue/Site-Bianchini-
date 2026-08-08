@@ -46,13 +46,6 @@ export const industry = {
   },
   ctas: {
     primary: { label: 'Agendar diagnóstico', href: '/contato?intencao=fabricantes' },
-    /*
-      Era `/#livro`, âncora da seção de autoridade da home V1. A home V2 não
-      tem bloco do livro (a autoridade foi condensada — Gate 2), então o destino
-      passa a ser o dossiê de Leonardo, onde `BookSection` já publica o mesmo
-      `id="livro"`. A decisão congelada não muda: o livro vive dentro do dossiê
-      e não recebe CTA de compra.
-    */
-    secondary: { label: 'Conheça o livro', href: '/leonardo-bianchini#livro' },
+    secondary: { label: 'Conheça o livro', href: '/#livro' },
   },
 } as const
