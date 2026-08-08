@@ -12,8 +12,22 @@ export const site = {
   title:
     'Bianchini — Diagnóstico, Projeto e Implantação de Cozinhas Industriais',
   shortTitle: 'Bianchini',
+  /*
+    A frase terminava em "18 anos e mais de 3.000 projetos entregues".
+
+    Isto não é texto interno: `site.description` alimenta a `<meta name=
+    "description">`, o Open Graph, o Twitter card e o JSON-LD — ou seja, o
+    número aparecia no snippet de busca e na prévia de compartilhamento de toda
+    rota que não define descrição própria, inclusive a Home. Como a quantidade
+    de projetos continua **não confirmada** pelo comercial (divergência entre
+    "1.000" e "3.000" registrada logo abaixo, em `heroMetrics`, e listada em
+    `MASTER_BIANCHINI.md` §20), publicá-la assim contraria DEC-006.
+
+    "18 anos" permanece: é dado confirmado. Nenhum número substituto entrou no
+    lugar do que saiu.
+  */
   description:
-    'Diagnosticamos, estruturamos e transformamos operações de food service. Cozinhas industriais completas, arquitetura e fluxo, especificação de equipamentos, implantação e consultoria operacional. 18 anos e mais de 3.000 projetos entregues.',
+    'Diagnosticamos, estruturamos e transformamos operações de food service. Cozinhas industriais completas, arquitetura e fluxo, especificação de equipamentos, implantação e consultoria operacional. 18 anos de atuação.',
   keywords: [
     'cozinha industrial',
     'projeto de cozinha industrial',

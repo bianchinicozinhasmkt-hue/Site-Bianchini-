@@ -30,10 +30,45 @@
  * cliente, resultado de case, marca representada além da única confirmada
  * (Rational, em `rational.ts`). Ver `docs/v2/DECISIONS.md`, DEC-006.
  *
- * As métricas (18 anos, 3.000+ projetos, Brasil) continuam vindo de
- * `src/data/site.ts` — fonte única, com a pendência de confirmação do número
- * exato registrada lá e não resolvida aqui.
+ * As métricas continuam vindo de `src/data/site.ts` — fonte única. A de
+ * "projetos entregues" está **filtrada** desta Home enquanto o número não for
+ * confirmado pelo comercial (ver `homeHeroMetrics`, logo abaixo).
  */
+import type { Metric } from '@/types'
+import { heroMetrics } from '@/data/site'
+
+/**
+ * ============================================================
+ * MÉTRICAS DA PRIMEIRA DOBRA — SÓ AS CONFIRMADAS
+ * ============================================================
+ *
+ * `heroMetrics` (`src/data/site.ts`) traz três entradas. Duas são fatos
+ * confirmados e continuam: **18 anos de atuação** e **abrangência Brasil**
+ * (`CLAUDE.md`, "Dados confirmados como reais"; `contact.coverage`).
+ *
+ * A terceira — **"3.000+ projetos entregues"** — sai da Home nesta release. O
+ * próprio `site.ts` registra divergência não resolvida entre "1.000" e "3.000"
+ * em material fora do código, e `MASTER_BIANCHINI.md` §20 lista "quantidade de
+ * projetos/clientes" entre os dados que não podem ser apresentados como fato
+ * sem confirmação. Publicar um número de escala nessa condição é exatamente o
+ * risco que DEC-006 existe para evitar.
+ *
+ * **Nenhum número substituto foi criado.** A dobra passa a mostrar duas
+ * métricas em vez de três; o bloco é uma lista com quebra de linha, então não
+ * há buraco de composição — ele apenas encurta.
+ *
+ * Para religar quando o comercial confirmar o valor: retire o rótulo da lista
+ * abaixo. Nada mais precisa mudar.
+ *
+ * Escopo: **a Home.** `scopeMetrics` (que repete "3.000+") continua sendo usada
+ * por `/sobre` e por componentes herdados da V1 — alterá-los aqui seria mexer na
+ * V1 congelada sem pedido. A pendência está reportada para decisão humana.
+ */
+const METRICAS_PENDENTES_DE_CONFIRMACAO = ['projetos entregues']
+
+export const homeHeroMetrics: Metric[] = heroMetrics.filter(
+  (metric) => !METRICAS_PENDENTES_DE_CONFIRMACAO.includes(metric.label),
+)
 
 export const homeHero = {
   eyebrow: 'Equipamentos para cozinha profissional',
@@ -146,9 +181,45 @@ export const homeProofSection = {
   title: 'Operações entregues',
   lead: 'Registros fotográficos de operações que a Bianchini projetou, especificou, fabricou ou instalou. As legendas descrevem o que está na imagem — sem cliente, local ou prazo atribuídos.',
   cta: { label: 'Ver todos os projetos', href: '/projetos' },
-  clientsLabel: 'Organizações atendidas',
+  /**
+   * Rótulo e ressalva transcritos da afirmação que a V1 **já publica** sobre os
+   * mesmos logos (`trust-section.tsx`: "Marcas de operações atendidas ao longo
+   * de 18 anos — exibidas mediante autorização"). Uma versão anterior deste
+   * arquivo dizia "Organizações atendidas", que afirma um pouco mais (que toda
+   * marca da faixa é uma organização atendida, e não uma marca de operação
+   * atendida) e omitia a ressalva de autorização. Reusar o texto vigente evita
+   * criar afirmação nova sobre conteúdo que ainda depende de confirmação.
+   */
+  clientsLabel: 'Marcas de operações atendidas',
+  clientsNote: 'Exibidas mediante autorização.',
   testimonialsLabel: 'Depoimentos',
 } as const
+
+/**
+ * ============================================================
+ * O QUE A HOME PODE PUBLICAR HOJE
+ * ============================================================
+ *
+ * Interruptor de divulgação, não de layout: separa "o dado existe no
+ * repositório" de "o dado está autorizado a aparecer em público". Enquanto for
+ * `false`, o bloco correspondente simplesmente não é montado — o dado
+ * permanece intacto em `src/data/`, e religar é trocar este booleano.
+ *
+ * `testimonials`: os dois depoimentos de `src/data/testimonials.ts` são
+ * transcrições do site oficial, mas o próprio arquivo registra como **pendente
+ * de confirmação** o cargo atual, o texto final e a autorização de uso do
+ * depoimento, do retrato e da menção à organização. Até a reconfirmação
+ * comercial, eles ficam fora da composição pública da Home.
+ *
+ * Escopo desta decisão: **a Home V2.** As rotas herdadas da V1 (`/sobre`,
+ * `/projetos`, `/leonardo-bianchini`, `/solucoes/consultoria-para-restaurantes`)
+ * continuam montando `TestimonialsSection` como antes — mexer nelas nesta etapa
+ * seria alterar a V1 congelada por conta própria. A pendência está reportada
+ * para decisão humana.
+ */
+export const homeDisclosure: { testimonials: boolean } = {
+  testimonials: false,
+}
 
 export const homeAuthoritySection = {
   eyebrow: 'Quem conduz',

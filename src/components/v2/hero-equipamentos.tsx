@@ -4,9 +4,8 @@ import { Container } from '@/components/layout/container'
 import { Reveal } from '@/components/animations/reveal'
 import { LinkButton } from '@/components/ui/actions/button'
 import { ArrowRightIcon } from '@/components/ui/icons'
-import { homeHero } from '@/data/v2/home'
+import { homeHero, homeHeroMetrics } from '@/data/v2/home'
 import { homeCategories } from '@/data/v2/categories'
-import { heroMetrics } from '@/data/site'
 
 /**
  * ============================================================
@@ -126,31 +125,50 @@ export function HeroEquipamentos() {
                     sizes="(max-width: 1023px) 100vw, 56vw"
                     className="object-cover object-center"
                   />
-
-                  {/* Legenda de aplicação — única sobreposição sobre a foto. */}
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-graphite/85 px-4 py-3 md:px-5">
-                    <span className="block font-condensed text-[0.6875rem] font-medium uppercase leading-[1.35] tracking-[0.1em] text-canvas md:text-[0.75rem]">
-                      {homeHero.media.caption}
-                    </span>
-                  </figcaption>
                 </div>
               </div>
+
+              {/* ----------
+                  Legenda de aplicação — única sobreposição sobre a foto.
+
+                  Fica como **filha direta do `figure`**, não dentro da caixa da
+                  imagem: `figcaption` só é válido como primeiro ou último filho
+                  do `figure`, e aninhá-lo mais fundo invalida a figura inteira.
+                  O posicionamento visual é o mesmo — o `figure` é o contexto
+                  `relative`, e os deslocamentos abaixo repetem o `padding` da
+                  moldura para a legenda encostar na base da fotografia.
+                  ---------- */}
+              <figcaption className="absolute bottom-2 left-2 right-2 bg-graphite/85 px-4 py-3 md:bottom-2.5 md:left-2.5 md:right-2.5 md:px-5">
+                <span className="block font-condensed text-[0.6875rem] font-medium uppercase leading-[1.35] tracking-[0.1em] text-canvas md:text-[0.75rem]">
+                  {homeHero.media.caption}
+                </span>
+              </figcaption>
             </figure>
           </Reveal>
 
           {/* ---------- Bloco inferior: métricas e categorias ---------- */}
           <div className="flex flex-col lg:col-start-1 lg:row-start-2">
             <Reveal delay={80} className="border-t border-line pt-6">
+              {/* ----------
+                  `dt` é o rótulo e `dd` é o valor, nessa ordem no código — um
+                  `div` dentro de `dl` só pode conter `dt` seguido de `dd`, e a
+                  versão anterior punha um `span` solto ao lado dos dois, o que
+                  invalida a lista e faz o rótulo ser anunciado duas vezes (uma
+                  no `dt` em `sr-only`, outra no `span`).
+
+                  `flex-col-reverse` inverte só a pintura: o numeral aparece
+                  acima do rótulo, como na composição, sem mexer na ordem
+                  semântica nem duplicar texto para leitor de tela.
+                  ---------- */}
               <dl className="flex flex-wrap gap-x-8 gap-y-5">
-                {heroMetrics.map((metric) => (
-                  <div key={metric.label} className="flex flex-col gap-1">
-                    <dt className="sr-only">{metric.label}</dt>
+                {homeHeroMetrics.map((metric) => (
+                  <div key={metric.label} className="flex flex-col-reverse gap-1">
+                    <dt className="max-w-[12em] text-[0.75rem] leading-[1.35] text-muted">
+                      {metric.label}
+                    </dt>
                     <dd className="font-condensed text-[clamp(1.5rem,2.4vw,2rem)] font-bold leading-none tracking-[-0.005em] text-ink">
                       {metric.value}
                     </dd>
-                    <span className="max-w-[12em] text-[0.75rem] leading-[1.35] text-muted">
-                      {metric.label}
-                    </span>
                   </div>
                 ))}
               </dl>

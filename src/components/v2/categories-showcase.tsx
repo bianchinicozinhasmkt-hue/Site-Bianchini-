@@ -170,12 +170,14 @@ export function CategoriesShowcase() {
                     {category.name}
                   </span>
 
-                  <span
-                    className={cn(
-                      'mt-1 line-clamp-1 text-[0.8125rem] leading-[1.4]',
-                      selected ? 'text-muted' : 'text-muted/75',
-                    )}
-                  >
+                  {/*
+                    `text-muted` nos dois estados. A versão anterior esmaecia o
+                    inativo para `text-muted/75`, que sobre `canvas` resolve em
+                    ~3,3:1 — abaixo dos 4,5:1 que o projeto exige. A distinção
+                    entre ativo e inativo não depende disso: já são três sinais
+                    (peso do rótulo, régua grafite e fundo do item).
+                  */}
+                  <span className="mt-1 line-clamp-1 text-[0.8125rem] leading-[1.4] text-muted">
                     {category.statement}
                   </span>
                 </button>

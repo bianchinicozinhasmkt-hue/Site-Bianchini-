@@ -3,7 +3,7 @@ import { Container } from '@/components/layout/container'
 import { Reveal } from '@/components/animations/reveal'
 import { SectionHeader } from '@/components/layout/section'
 import { ArrowLink } from '@/components/ui/actions/button'
-import { homeProofSection } from '@/data/v2/home'
+import { homeDisclosure, homeProofSection } from '@/data/v2/home'
 import { featuredProjects, leadProject } from '@/data/projects'
 import { featuredClients } from '@/data/clients'
 import { testimonials } from '@/data/testimonials'
@@ -15,17 +15,21 @@ import { cn } from '@/lib/utils'
  * ============================================================
  *
  * Três tipos de prova com pesos de confiança diferentes, que não se substituem:
- * operação entregue (fotografia real), organizações atendidas (logos já
- * exibidos publicamente) e depoimentos identificáveis.
+ * operação entregue (fotografia real), marcas de operações atendidas (os mesmos
+ * logos que a V1 já exibe, com a mesma ressalva de autorização) e depoimentos
+ * identificáveis.
  *
- * FUNCIONA COM CONTEÚDO PARCIAL
- * -----------------------------
+ * FUNCIONA COM CONTEÚDO PARCIAL — E ESTÁ FUNCIONANDO ASSIM AGORA
+ * -------------------------------------------------------------
  * Nenhuma raia depende de um número mínimo de itens: a de projetos aceita de 1
- * a 4 registros, a de logos usa `flex-wrap`, e a de depoimentos some inteira se
- * a lista esvaziar. Isso importa porque parte deste conteúdo ainda depende de
- * confirmação comercial — a seção precisa continuar sólida se algum item for
- * retirado antes da publicação, sem buraco de layout e sem substituto
- * inventado.
+ * a 4 registros, a de logos usa `flex-wrap`, e a de depoimentos some inteira
+ * quando não há o que publicar. Isso deixou de ser hipótese: **nesta release a
+ * raia de depoimentos não é montada**, porque a autorização de uso ainda não
+ * voltou do comercial (`homeDisclosure`, em `src/data/v2/home.ts`).
+ *
+ * A seção continua sólida sem ela — abre com a operação entregue em faixa
+ * larga, segue com três registros e fecha com os logos. Nada foi promovido para
+ * ocupar o lugar vago e nenhum substituto foi inventado.
  *
  * O QUE ESTA SEÇÃO DELIBERADAMENTE NÃO FAZ
  * ----------------------------------------
@@ -45,7 +49,13 @@ import { cn } from '@/lib/utils'
  * cartões baixos. Fixando o recorte, o ritmo se mantém com qualquer contagem.
  */
 export function ProofSection() {
-  const hasTestimonials = testimonials.length > 0
+  /*
+    Autorização antes de contagem: os depoimentos existem no repositório, mas
+    a reconfirmação de uso ainda não voltou do comercial — até lá a raia não é
+    montada (`homeDisclosure`, em `src/data/v2/home.ts`). O dado permanece
+    intacto; religar é trocar um booleano.
+  */
+  const hasTestimonials = homeDisclosure.testimonials && testimonials.length > 0
   const hasClients = featuredClients.length > 0
 
   return (
@@ -102,7 +112,7 @@ export function ProofSection() {
                     </span>
                     <span className="text-body-sm leading-[1.45] text-muted">{project.caption}</span>
                     {project.scope?.length ? (
-                      <span className="mt-1 text-[0.75rem] leading-[1.4] text-muted/80">
+                      <span className="mt-1 text-[0.75rem] leading-[1.4] text-muted">
                         {project.scope.join(' · ')}
                       </span>
                     ) : null}
@@ -116,9 +126,14 @@ export function ProofSection() {
         {/* ---------- Raia 2: organizações atendidas ---------- */}
         {hasClients ? (
           <Reveal className="mt-16 border-t border-line pt-8">
-            <h3 className="font-condensed text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted">
-              {homeProofSection.clientsLabel}
-            </h3>
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h3 className="font-condensed text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                {homeProofSection.clientsLabel}
+              </h3>
+              <p className="text-[0.75rem] leading-[1.4] text-muted">
+                {homeProofSection.clientsNote}
+              </p>
+            </div>
 
             {/*
               Grade estática com quebra de linha, não carrossel: um carrossel
