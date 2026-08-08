@@ -79,29 +79,28 @@ import type { NavItem } from '@/types'
  * REMEDIDO EM 2026-08-08, DEPOIS DA HERO V2
  * ============================================================
  *
- * **Os cinco itens são os mesmos da V1** — mesmos rótulos, mesmos destinos.
- * Só a posição de "Equipamentos" mudou, e pelo motivo de sempre: a home foi
- * reordenada pela jornada comercial (`src/app/page.tsx`) e `#equipamentos`
- * subiu do fim para a sexta seção, passando à frente de `#projetos`.
+ * **Os cinco itens são os mesmos da V1** — mesmos rótulos, mesmos destinos. O
+ * que mudou foi a posição de "Equipamentos" e "Soluções", e pelo motivo de
+ * sempre: a home foi reordenada pelo funil comercial (`src/app/page.tsx`),
+ * `#equipamentos` virou a **segunda seção da página** e `#pilares` desceu para
+ * a sexta.
  *
- * Posições medidas em 1440 × 900, no navegador, **depois** da reordenação —
- * não deduzidas de `page.tsx`:
+ * Posições medidas em 1440 × 900, no navegador, **depois** da reordenação — não
+ * deduzidas de `page.tsx`:
  *
- *   antes (quebrado)                     depois (corrigido)
- *   Soluções ......    900px  ↓          Soluções ......    900px  ↓
- *   Projetos ......  6.836px  ↓          Equipamentos ..  4.365px  ↓
- *   Empresa ....... 12.214px  ↓          Projetos ......  6.836px  ↓
- *   Método ........ 10.924px  ↑          Método ........ 10.924px  ↓
- *   Equipamentos ..  4.365px  ↑          Empresa ....... 12.214px  ↓
+ *   Equipamentos ..    900px  ↓
+ *   Projetos ......  2.441px  ↓
+ *   Soluções ......  6.062px  ↓
+ *   Método ........  9.563px  ↓
+ *   Empresa ....... 13.288px  ↓
  *
- * Na ordem anterior os dois últimos cliques **subiam** — 1.290px e 6.559px. Na
- * nova, todas as diferenças voltam a ser positivas: ler o menu da esquerda para
- * a direita é descer a home do começo ao fim.
+ * Todas as diferenças são positivas: ler o menu da esquerda para a direita é
+ * descer a home do começo ao fim.
  */
 export const mainNav: NavItem[] = [
-  { label: 'Soluções', href: '/#pilares' },
   { label: 'Equipamentos', href: '/#equipamentos' },
   { label: 'Projetos', href: '/#projetos' },
+  { label: 'Soluções', href: '/#pilares' },
   { label: 'Método', href: '/#metodo' },
   { label: 'Empresa', href: '/#quem-conduz' },
 ]

@@ -1,0 +1,274 @@
+/* ============================================================
+   PRIMEIRA DOBRA V2 — UM PALCO, TRÊS ESTADOS COMERCIAIS
+   ============================================================
+
+   **Este arquivo é o escopo inteiro da hero.** Nada aqui vaza para a V1: CSS
+   Module gera nomes locais e `globals.css` continua byte a byte igual a
+   `v1-final`. O que a hero **consome** de global é apenas vocabulário V1 já
+   existente e não modificado — `--ease-smooth` / `--ease-precise` /
+   `--ease-premium` e `--header-height`. Consumir não é alterar.
+
+   O QUE ESTA COMPOSIÇÃO SUBSTITUI
+   ------------------------------
+   A montagem anterior tinha **três fotografias verticais simultâneas** de
+   altura inteira, cortadas em diagonal. Três cenas competindo pelo mesmo campo
+   de visão ao mesmo tempo não somam: cada uma perde escala, nenhuma consegue
+   ser a cena, e o conjunto lê como painel de aplicativo, não como a primeira
+   página de uma empresa que vende cozinha industrial.
+
+   Aqui há **uma cena por vez**, no tamanho em que uma fotografia de operação
+   real precisa estar para significar alguma coisa, e os três caminhos vivem
+   numa régua editorial embaixo dela — presentes o tempo todo, sem cada um
+   cobrar um terço da tela.
+   ============================================================ */
+
+.hero {
+  /* Ampliação de entrada da fotografia. Discreta de propósito: ver "MOTION". */
+  --enter-zoom: 1.03;
+}
+
+/* ============================================================
+   O PALCO
+   ============================================================
+
+   `overflow: hidden` é requisito, não acabamento: a fotografia entra ampliada
+   e, sem recorte, o excedente abriria rolagem horizontal — a mesma armadilha de
+   `transform` que a V1 já documenta.
+   ============================================================ */
+.stage {
+  position: relative;
+  overflow: hidden;
+  background-color: #101010;
+}
+
+/* ----------
+   As três fotografias, empilhadas no mesmo lugar. Só a ativa é opaca.
+
+   Ficam as três no DOM porque a troca precisa ser imediata: montar a imagem no
+   clique produziria um quadro vazio no meio da transição. O custo é controlado
+   do lado do `next/image` — só a fotografia do estado inicial é `priority`.
+   ---------- */
+.frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(var(--enter-zoom));
+  transition:
+    opacity 560ms var(--ease-smooth),
+    transform 640ms var(--ease-smooth);
+  will-change: opacity, transform;
+}
+
+.frameActive {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================================
+   TRATAMENTO POR ESTADO — MÍNIMO, E DECLARADO
+   ============================================================
+
+   Nenhum estado é privilegiado por tratamento: o que existe aqui é o mínimo
+   para as três cenas pertencerem ao mesmo mundo tonal quando trocam de lugar.
+
+     equipamentos .. sem correção. A fotografia âncora do site já é escura e
+                     contrastada na origem; é ela que define o alvo.
+     projetos ...... o estudo 3D é um render claro e frio (luminância média
+                     0,69 contra 0,09 da âncora). Sem correção ele entraria como
+                     um salto de exposição no meio da sequência. O ajuste
+                     escurece e tira parte do azul — não inverte, não recorta e
+                     não altera nada do desenho.
+     consultoria ... o balcão é âmbar na origem; a correção é só de saturação.
+   ============================================================ */
+.gradeProjetos {
+  filter: brightness(0.66) saturate(0.55) contrast(1.06);
+}
+
+.gradeConsultoria {
+  filter: saturate(0.78) brightness(0.96);
+}
+
+/* ============================================================
+   SCRIM — LOCAL, ONDE O TEXTO ASSENTA
+   ============================================================
+
+   Dois degradês, e nenhum véu uniforme:
+
+     · um lateral, que fecha a **coluna esquerda**, onde o conteúdo vive, e
+       chega a zero antes dos 70% da largura — a metade direita da fotografia
+       fica sem cobertura nenhuma;
+     · um inferior curto, que assenta a régua dos três caminhos sobre a imagem
+       sem transformá-la numa faixa opaca.
+
+   No telefone a coluna some (o conteúdo é de largura inteira), então o lateral
+   é substituído por um vertical — ver o bloco de telefone, mais abaixo.
+   ============================================================ */
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to top,
+      rgba(16, 16, 16, 0.82) 0%,
+      rgba(16, 16, 16, 0.42) 14%,
+      rgba(16, 16, 16, 0) 34%
+    ),
+    linear-gradient(
+      to right,
+      rgba(16, 16, 16, 0.93) 0%,
+      rgba(16, 16, 16, 0.86) 22%,
+      rgba(16, 16, 16, 0.52) 46%,
+      rgba(16, 16, 16, 0.14) 64%,
+      rgba(16, 16, 16, 0) 76%
+    );
+}
+
+/* ============================================================
+   A RÉGUA DOS TRÊS CAMINHOS
+   ============================================================
+
+   Não são abas de painel, nem cartões, nem pílulas: são três rótulos numa
+   régua compartilhada, que é o mesmo recurso que o seletor de pilares da V1
+   usa — moldura, divisória e preenchimento por item foram justamente o que deu
+   aparência de tabela lá, e não voltam aqui.
+
+   O estado ativo é marcado por **três sinais**, um deles não-cromático: peso e
+   contraste do rótulo, e o indicador amarelo de 2px. Os inativos continuam
+   plenamente legíveis (0,62 de opacidade sobre grafite) — reduzi-los a um
+   fantasma esconderia dois dos três caminhos comerciais.
+   ============================================================ */
+.rail {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/*
+  O indicador é **um** elemento que corre, e não três que acendem: é o que faz a
+  troca ler como um movimento contínuo entre estados em vez de dois piscares
+  independentes.
+*/
+.indicator {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 2px;
+  width: calc(100% / 3);
+  transform: translateX(calc(var(--i, 0) * 100%));
+  transition: transform 420ms var(--ease-premium);
+}
+
+.railItem {
+  position: relative;
+  transition: color 260ms var(--ease-precise);
+}
+
+/*
+  Deslocamento de 2px no ponteiro e no teclado. É a resposta mínima que
+  confirma que o rótulo é um controle — e não muda altura, então nada reflui.
+*/
+.railItem > span {
+  display: block;
+  transition: transform 220ms var(--ease-precise);
+}
+
+.railItem:hover > span,
+.railItem:focus-visible > span {
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   MOTION DO CONTEÚDO
+   ============================================================
+
+   O bloco é remontado a cada troca (chave de React), então a animação abaixo
+   roda uma vez por estado — sem estado intermediário e sem `setTimeout`.
+
+   Escalonamento: título 0ms, intenção 70ms, ação 140ms. Percurso de 10px, que
+   é deslocamento de composição, não queda. Nada aqui altera altura de caixa:
+   só `opacity` e `transform`.
+   ============================================================ */
+@keyframes contentIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.enter {
+  animation: contentIn 340ms var(--ease-premium) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* ============================================================
+   TELEFONE
+   ============================================================ */
+@media (max-width: 1023px) {
+  /*
+    A coluna de texto passa a ser a largura inteira, então o scrim lateral
+    deixa de fazer sentido: ele fecharia o lado esquerdo da fotografia e
+    deixaria o texto sobre a parte aberta. Aqui a luz cai de cima para baixo.
+  */
+  .scrim {
+    background: linear-gradient(
+      to top,
+      rgba(16, 16, 16, 0.94) 0%,
+      rgba(16, 16, 16, 0.88) 26%,
+      rgba(16, 16, 16, 0.64) 46%,
+      rgba(16, 16, 16, 0.26) 66%,
+      rgba(16, 16, 16, 0.04) 100%
+    );
+  }
+
+  /*
+    O estudo 3D é uma vista ampla (2340 × 762, proporção 3:1). Num palco quase
+    quadrado, `cover` já corta as laterais, e o que sobra no centro é bancada
+    solta — a leitura de *layout*, que é o que faz a imagem dizer "projeto" sem
+    legenda, se perde. Ampliado, entra o trecho com ilha, bancadas e a
+    circulação entre os postos.
+
+    A ampliação vai na **imagem**, não no quadro: o quadro carrega a animação de
+    entrada, e somar as duas faria a cena saltar na troca de estado.
+  */
+  .photoProjetos {
+    transform: scale(1.32);
+  }
+}
+
+/* ============================================================
+   `prefers-reduced-motion` — requisito, não cortesia
+   ============================================================
+
+   Troca imediata: sem ampliação, sem escalonamento, sem percurso. Nenhum
+   conteúdo fica invisível e nenhuma camada permanece fechada — a fotografia
+   ativa continua opaca e as inativas continuam transparentes.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .frame {
+    transition: none;
+    transform: none;
+  }
+
+  .frameActive {
+    transform: none;
+  }
+
+  .indicator,
+  .railItem,
+  .railItem > span {
+    transition: none;
+  }
+
+  .railItem:hover > span,
+  .railItem:focus-visible > span {
+    transform: none;
+  }
+
+  .enter {
+    animation: none;
+  }
+}
