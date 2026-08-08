@@ -144,9 +144,31 @@ export function ProofSection() {
             <ul className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-7">
               {featuredClients.map((client) => (
                 <li key={client.id} className="flex items-center">
+                  {/* ----------
+                      Logos em monocromático, cor no hover.
+
+                      Os quinze logotipos trazem as paletas dos seus donos —
+                      azul, vermelho, verde, dourado. Enfileirados em
+                      superfície clara eles somam sete matizes que o sistema
+                      Bianchini não tem, e a faixa passa a ser a região mais
+                      colorida da página inteira: a prova rouba o olho do
+                      amarelo, que aqui é escasso de propósito porque é o sinal
+                      de conversão.
+
+                      Em grafite, os quinze passam a ler como um conjunto — e é
+                      o conjunto que é a prova, não cada marca isolada. A cor
+                      volta no hover, para quem for procurar uma específica.
+                      ---------- */}
                   <span
                     className={cn(
-                      'relative block w-[6.5rem] opacity-75 transition-opacity duration-200 hover:opacity-100 md:w-[7.5rem]',
+                      /*
+                        0,8 e não 0,7: em monocromático os logos de traço
+                        claro (Othon, Mocellin, Plaza Premium) perdem a
+                        saturação que os sustentava e a opacidade mais baixa
+                        os apagava contra a `canvas` off-white. O conjunto
+                        continua calmo, mas nenhuma marca some da fileira.
+                      */
+                      'relative block w-[6.5rem] opacity-80 grayscale transition-[opacity,filter] duration-200 ease-precise hover:opacity-100 hover:grayscale-0 md:w-[7.5rem]',
                       client.scale === 'sm' && 'h-8 md:h-9',
                       client.scale === 'md' && 'h-9 md:h-10',
                       (client.scale === 'lg' || !client.scale) && 'h-10 md:h-12',

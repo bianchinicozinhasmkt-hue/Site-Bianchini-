@@ -159,21 +159,41 @@ export function CategoriesShowcase() {
                   onClick={() => select(category)}
                   onKeyDown={(event) => onKeyDown(event, index)}
                   className={cn(
-                    'group relative flex min-h-[3.5rem] flex-col justify-center border-b border-line py-4 pl-4 pr-3 text-left transition-colors duration-200 ease-precise',
-                    selected ? 'bg-surface' : 'hover:bg-surface/60',
+                    /* ----------
+                       Índice, não tabela.
+
+                       Duas coisas faziam esta lista ler como planilha: o
+                       preenchimento **branco** do item ativo, que sobre a
+                       `canvas` off-white se parece com campo de formulário, e
+                       a frase truncada em cada linha, que enfileirava seis
+                       reticências numa coluna. Reticência é o sinal gráfico
+                       de célula que não coube — nenhum índice editorial tem
+                       uma.
+
+                       O que sobrou é o que um índice precisa ter: numeral,
+                       nome e a régua de ataque marcando onde você está.
+                       ---------- */
+                    'group relative flex min-h-[4.25rem] flex-col justify-center border-b border-line py-5 pl-5 pr-3 text-left transition-colors duration-200 ease-precise',
+                    !selected && 'hover:bg-canvas-deep/50',
                   )}
                 >
                   {/*
                     Estado ativo com três sinais, um deles não-cromático: régua
-                    de 2px na borda de ataque, peso tipográfico e contraste do
-                    rótulo. A régua é **grafite** — em superfície clara o amarelo
-                    não pode ser indicador de estado (1,4:1 sobre `canvas`).
+                    de 3px na borda de ataque, corpo do rótulo (1,25rem contra
+                    1,0625rem) e contraste do texto. A régua é **grafite** — em
+                    superfície clara o amarelo não pode ser indicador de estado
+                    (1,4:1 sobre `canvas`).
+
+                    Ela engrossou de 2px para 3px quando o preenchimento saiu:
+                    era o preenchimento que dava massa ao item ativo, e sem
+                    reforçar a régua o estado passava a depender quase só de
+                    tipografia.
                   */}
                   <span
                     aria-hidden="true"
                     className={cn(
-                      'absolute inset-y-0 left-0 w-[2px] origin-top transition-transform duration-200 ease-precise',
-                      selected ? 'scale-y-100 bg-ink' : 'scale-y-0 bg-ink',
+                      'absolute inset-y-0 left-0 w-[3px] origin-top bg-ink transition-transform duration-200 ease-precise',
+                      selected ? 'scale-y-100' : 'scale-y-0',
                     )}
                   />
 
@@ -203,17 +223,6 @@ export function CategoriesShowcase() {
                     >
                       {category.name}
                     </span>
-                  </span>
-
-                  {/*
-                    `text-muted` nos dois estados. A versão anterior esmaecia o
-                    inativo para `text-muted/75`, que sobre `canvas` resolve em
-                    ~3,3:1 — abaixo dos 4,5:1 que o projeto exige. A distinção
-                    entre ativo e inativo não depende disso: já são três sinais
-                    (peso do rótulo, régua grafite e fundo do item).
-                  */}
-                  <span className="mt-1 line-clamp-1 pl-[1.9rem] text-[0.8125rem] leading-[1.4] text-muted">
-                    {category.statement}
                   </span>
                 </button>
               )

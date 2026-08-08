@@ -94,8 +94,22 @@ export const homeHeroMetrics: Metric[] = heroMetrics.filter(
  */
 export const homeHero = {
   eyebrow: 'Cozinhas profissionais e food service',
-  /** H1 — nomeia as três frentes na ordem comercial, sem metáfora. */
-  title: 'Equipamentos, projeto e consultoria para cozinhas profissionais.',
+  /**
+   * H1 — **Equipamentos lidera, e o H1 não repete os três pilares.**
+   *
+   * A redação anterior ("Equipamentos, projeto e consultoria para cozinhas
+   * profissionais.") nomeava as três frentes exatamente onde os três painéis
+   * logo abaixo já as nomeiam: o visitante lia "Equipamentos, Projetos,
+   * Consultoria" duas vezes em 300px, e o H1 gastava a sua única chance
+   * repetindo o que a composição já dizia melhor.
+   *
+   * Aqui o H1 posiciona a frente principal e qualifica a oferta
+   * ("especificados para a sua operação" — o mesmo critério de dimensionamento
+   * por volume real que a proposta de Equipamentos já declara), e os três
+   * pilares abaixo passam a **explicar as três entradas** em vez de ecoar o
+   * título. Nenhum fato empresarial novo é afirmado.
+   */
+  title: 'Equipamentos para cozinha profissional, especificados para a sua operação.',
 } as const
 
 export interface HeroPillar {

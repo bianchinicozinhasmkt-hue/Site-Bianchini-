@@ -1133,6 +1133,105 @@
   --tri-key: 0.22%;
 }
 
+/* ==========================================================
+   AS TRÊS FOTOGRAFIAS COMO UMA CENA SÓ
+   ==========================================================
+
+   O acervo desta dobra tem três origens diferentes: uma cozinha real
+   (quente, bronze do coifa), um estudo 3D (cinza neutro, sem sombra dura)
+   e uma câmara frigorífica (branco frio, azulado). Montadas cru, elas não
+   lêem como uma composição cortada em três — lêem como uma fotografia
+   ao lado de dois retângulos cinzentos, e o ponto mais claro da dobra cai
+   sobre o pilar **menos** importante, invertendo a hierarquia comercial.
+
+   A correção é de direção de arte, não de layout, e tem duas camadas:
+
+   1. **Grade por painel** (`--tri-sat/--tri-con/--tri-bri`). Cada imagem é
+      levada para o mesmo território tonal — aço e grafite. Equipamentos
+      mantém metade da saturação (continua sendo a fotografia real da
+      dobra); os dois de sustentação vão quase ao monocromático, o que
+      apaga o azulado da câmara e o cinza morto do render de uma vez.
+
+      **Não é duotone de marca.** Tingir a fotografia de amarelo destruiria
+      a escassez do acento — o amarelo aqui só existe em CTA, keyline e
+      etiqueta. O tom comum é o próprio grafite do sistema.
+
+   2. **Uma luz só** (`.hero-tri-ramp`). Um clarão suave sobre o painel
+      principal e uma queda progressiva para a direita, aplicados **por
+      cima dos três painéis de uma vez** — não painel a painel. É isso que
+      faz as três regiões lerem como partes de um mesmo ambiente iluminado
+      do mesmo lado, e devolve o ponto mais claro da dobra a Equipamentos.
+
+   A rampa fica em `z-index: 5`: acima das fotografias (que não declaram
+   z-index) e abaixo do conteúdo de cada painel (`z-10`) e do alvo de
+   clique (`z-20`). Nenhum texto é escurecido por ela.
+   ========================================================== */
+.hero-tri-photo {
+  filter: saturate(var(--tri-sat, 1)) contrast(var(--tri-con, 1))
+    brightness(var(--tri-bri, 1));
+}
+
+.hero-tri-photo-a {
+  --tri-sat: 0.52;
+  --tri-con: 1.06;
+  --tri-bri: 0.95;
+}
+
+.hero-tri-photo-b {
+  --tri-sat: 0.16;
+  --tri-con: 1.14;
+  --tri-bri: 0.74;
+}
+
+/*
+  A câmara frigorífica é a fonte mais alta do acervo — parede, estante e
+  caixaria brancas ocupam o quadro inteiro. Com os mesmos valores de
+  Projetos ela continuava sendo a região mais clara da dobra, e o ponto de
+  maior luz caía sobre o **terceiro** pilar. Vale um degrau a mais de
+  fechamento: não é preferência de tom, é hierarquia comercial.
+*/
+.hero-tri-photo-c {
+  --tri-sat: 0.12;
+  --tri-con: 1.18;
+  --tri-bri: 0.56;
+}
+
+/* ----------
+   Véu de legibilidade dos painéis de sustentação.
+
+   Tailwind só oferece três paradas (`from`/`via`/`to`), e `via` cai fixo em
+   50%. O texto de Projetos e Consultoria começa por volta de 58% da altura —
+   ou seja, logo **abaixo** da parada do meio, onde o gradiente de três
+   paradas ainda está claro. Era daí que vinha o efeito de título cinzento:
+   canvas sobre meio-tom, não canvas sobre grafite.
+
+   Com paradas próprias o piso fecha antes de o texto começar e o topo da
+   fotografia continua aberto — que é o que sustenta a cena.
+   ---------- */
+.hero-tri-veil {
+  background: linear-gradient(
+    to top,
+    rgb(16, 16, 16) 0%,
+    rgba(16, 16, 16, 0.96) 30%,
+    rgba(16, 16, 16, 0.84) 48%,
+    rgba(16, 16, 16, 0.46) 74%,
+    rgba(16, 16, 16, 0.24) 100%
+  );
+}
+
+/*
+  Empilhado no telefone, a leitura é de cima para baixo: a luz cai com a
+  rolagem em vez de correr para a direita.
+*/
+.hero-tri-ramp {
+  background: linear-gradient(
+    to bottom,
+    rgba(16, 16, 16, 0) 0%,
+    rgba(16, 16, 16, 0.14) 62%,
+    rgba(16, 16, 16, 0.34) 100%
+  );
+}
+
 /* ---------- Composição diagonal: só a partir de lg ---------- */
 @media (min-width: 1024px) {
   .hero-tri-a {
@@ -1155,6 +1254,26 @@
       100% 100%,
       calc(var(--tri-b2) - var(--tri-cut) + var(--tri-gap)) 100%
     );
+  }
+
+  /*
+    A luz da cena, no desktop: um clarão baixo sobre o painel principal e
+    queda progressiva para a direita. O ângulo (96°) acompanha a inclinação
+    das fronteiras, então a rampa não briga com a geometria — reforça.
+  */
+  .hero-tri-ramp {
+    background:
+      radial-gradient(
+        110% 85% at 20% 62%,
+        rgba(255, 255, 255, 0.07) 0%,
+        rgba(255, 255, 255, 0) 58%
+      ),
+      linear-gradient(
+        96deg,
+        rgba(16, 16, 16, 0) 26%,
+        rgba(16, 16, 16, 0.3) 60%,
+        rgba(16, 16, 16, 0.56) 100%
+      );
   }
 
   /*
@@ -1231,16 +1350,42 @@
     É CSS puro (`:has()`), sem estado em JavaScript: o hero continua Server
     Component e a composição funciona antes de qualquer hidratação.
   */
+  /* ----------
+     O realce é negociado **entre os dois pilares de sustentação**, não
+     tirado de Equipamentos.
+
+     Os valores anteriores (b1 de 50% para 39%/37%) estreitavam o painel
+     principal em até 13 pontos — ~190px. Duas consequências, ambas ruins:
+
+     1. **Hierarquia invertida no hover.** Passar o mouse em Consultoria
+        encolhia Equipamentos. A prioridade comercial da V2 não pode depender
+        de onde está o ponteiro.
+     2. **Refluxo do `h1`.** Abaixo de ~47% a coluna de texto fica mais
+        estreita que a medida do título; ele ganhava linhas, e como o bloco é
+        alinhado pela base, o excedente subia por cima do cabeçalho — o
+        "salto desagradável" que a revisão pede para eliminar.
+
+     Agora b1 se move 2 pontos (48%) e todo o ganho do painel em foco vem de
+     b2, ou seja, do vizinho. O pilar em foco continua crescendo de forma
+     claramente perceptível — Consultoria vai de 23 para 32 pontos — sem que
+     Equipamentos ceda área nem o título mude de forma.
+     ---------- */
   .hero-tri:has(.hero-tri-b:hover),
   .hero-tri:has(.hero-tri-b:focus-within) {
-    --tri-b1: 39%;
-    --tri-b2: 75%;
+    --tri-b1: 48%;
+    --tri-b2: 82%;
   }
 
+  /*
+    71%, e não 68%: a três pontos a mais Consultoria ainda ganha 6 pontos de
+    área, mas Projetos mantém "Falar com um projetista" em **uma linha**. Um
+    CTA que quebra ao passar o mouse no vizinho é o tipo de instabilidade que
+    faz a composição parecer frágil.
+  */
   .hero-tri:has(.hero-tri-c:hover),
   .hero-tri:has(.hero-tri-c:focus-within) {
-    --tri-b1: 37%;
-    --tri-b2: 64%;
+    --tri-b1: 48%;
+    --tri-b2: 71%;
   }
 
   .hero-tri-panel,
@@ -1283,5 +1428,27 @@
 
   .hero-tri {
     --tri-mcut: 2.25rem;
+  }
+
+  /*
+    Véu mais fechado no empilhamento.
+
+    As paradas do véu do desktop foram medidas contra painéis de ~1.000px, em
+    que o texto ocupa o terço de baixo. No telefone os painéis de sustentação
+    têm 194px e o conteúdo ocupa quase a altura inteira — as mesmas paradas
+    percentuais colocam o título na faixa em que o gradiente ainda está
+    aberto, e o resultado é título claro sobre fotografia clara.
+
+    Mesma lógica, medida na proporção certa: o piso sobe e a abertura fica só
+    na fresta de cima.
+  */
+  .hero-tri-veil {
+    background: linear-gradient(
+      to top,
+      rgb(16, 16, 16) 0%,
+      rgba(16, 16, 16, 0.95) 46%,
+      rgba(16, 16, 16, 0.78) 80%,
+      rgba(16, 16, 16, 0.56) 100%
+    );
   }
 }

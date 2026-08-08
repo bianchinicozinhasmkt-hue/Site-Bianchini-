@@ -68,7 +68,13 @@ export function PillarsBand() {
         <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,57fr)_minmax(0,43fr)] lg:gap-8">
           {/* ---------- Equipamentos — maior área, única fotografia ---------- */}
           <Reveal variant="settle">
-            <article className="flex h-full flex-col border border-white/12 bg-graphite-soft">
+            {/*
+              Só este pilar é um **bloco**: fotografia, preenchimento e botão
+              cheio. A borda saiu — com preenchimento próprio ela era contorno
+              sobre massa, e era ela que empatava visualmente este cartão com
+              os dois de sustentação, que também eram caixas de borda.
+            */}
+            <article className="flex h-full flex-col bg-graphite-soft">
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-graphite-deep">
                 <Image
                   src={equipment.media.src}
@@ -95,18 +101,36 @@ export function PillarsBand() {
             </article>
           </Reveal>
 
-          {/* ---------- Projetos e Consultoria — peso igual entre si ---------- */}
-          <div className="grid gap-6 lg:grid-rows-2 lg:gap-8">
+          {/* ----------
+              Projetos e Consultoria — peso igual entre si, e forma
+              deliberadamente **diferente** da de Equipamentos.
+
+              Antes eram duas caixas de borda dividindo a altura do cartão de
+              Equipamentos, com `mt-auto` empurrando o link para a base: cada
+              uma abria um vão morto no meio, e três retângulos contornados
+              lado a lado é a assinatura visual de grade de cartões de SaaS —
+              exatamente o que esta seção não pode parecer.
+
+              Agora são **entradas de uma pauta**: régua de ataque no topo,
+              conteúdo corrido, link logo depois do texto. A altura de cada
+              uma é a do próprio conteúdo (`content-start`), então não existe
+              vão a preencher. E a assimetria a favor de Equipamentos cresce
+              sem que ninguém encolha: um bloco com fotografia e preenchimento
+              contra duas entradas abertas separa as duas naturezas antes da
+              leitura.
+              ---------- */}
+          {/*
+            `content-start`, não `content-between`. Distribuir as duas entradas
+            pela altura do bloco de Equipamentos fecha o vazio do pé da coluna,
+            mas abre ~400px entre Projetos e Consultoria — e a essa distância
+            elas deixam de ler como um par de pilares de sustentação e passam a
+            parecer duas seções soltas. O vazio embaixo é o custo menor: ele
+            fica **abaixo** das duas, onde não separa nada.
+          */}
+          <div className="grid content-start gap-8 lg:gap-10">
             {support.map((pillar, index) => (
               <Reveal key={pillar.id} variant="side" delay={index * 80}>
-                {/*
-                  Numeral + régua no topo, texto maior e vão interno menor. As
-                  duas caixas dividiam a altura do cartão de Equipamentos e
-                  sobrava um buraco no meio de cada uma — era isso que as fazia
-                  ler como card de SaaS. O numeral também amarra a seção à
-                  primeira dobra, onde os pilares já são 01/02/03.
-                */}
-                <article className="flex h-full flex-col border border-white/12 p-6 md:p-7">
+                <article className="flex flex-col border-t-2 border-white/25 pt-5">
                   <div className="flex items-center gap-3">
                     <span className="font-condensed text-[0.75rem] font-bold leading-none tracking-[0.08em] text-yellow">
                       {String(index + 2).padStart(2, '0')}
@@ -124,7 +148,7 @@ export function PillarsBand() {
                     {pillar.description}
                   </p>
 
-                  <div className="mt-auto pt-5">
+                  <div className="mt-4">
                     <Link
                       href={pillar.cta.href}
                       className="group inline-flex min-h-[2.75rem] w-fit items-center text-body-sm font-semibold text-canvas transition-colors hover:text-white"

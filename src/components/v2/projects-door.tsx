@@ -64,7 +64,18 @@ export function ProjectsDoor() {
             </Reveal>
 
             <Reveal delay={140} className="mt-8">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+              {/* ----------
+                  Lado a lado só onde a coluna é a página inteira.
+
+                  A partir de `lg` esta coluna vale 34fr de ~1.216px — cerca de
+                  390px. Os dois CTAs em linha não cabem ali, e o rótulo do
+                  botão preenchido quebrava em duas linhas dentro da caixa
+                  amarela, que é o pior lugar da página para uma quebra: o
+                  bloco de cor fica com duas alturas e o CTA primário perde a
+                  forma. Empilhados, os dois mantêm a caixa e a ordem de
+                  prioridade continua legível de cima para baixo.
+                  ---------- */}
+              <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6 lg:flex-col lg:items-start lg:gap-5">
                 <LinkButton href={homeProjectsSection.cta.href} size="md" withArrow>
                   {homeProjectsSection.cta.label}
                 </LinkButton>

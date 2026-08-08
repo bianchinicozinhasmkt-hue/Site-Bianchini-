@@ -70,15 +70,27 @@ export function HeroPillars() {
           <HeroPanel key={pillar.id} pillar={pillar} position={index} />
         ))}
 
+        {/* ----------
+            A luz da cena. Fica **sobre os três painéis de uma vez** — é o
+            que faz três fotografias de origens diferentes lerem como um
+            ambiente só, iluminado do mesmo lado (globals.css, "AS TRÊS
+            FOTOGRAFIAS COMO UMA CENA SÓ"). Painel a painel isso não
+            funciona: cada véu pararia na aresta e a emenda apareceria.
+            ---------- */}
+        <span
+          aria-hidden="true"
+          className="hero-tri-ramp pointer-events-none absolute inset-0 z-[5]"
+        />
+
         {/* Keyline amarela: marca a fronteira da frente principal. */}
         <span
           aria-hidden="true"
-          className="hero-tri-key pointer-events-none absolute inset-0 hidden bg-yellow lg:block"
+          className="hero-tri-key pointer-events-none absolute inset-0 z-[6] hidden bg-yellow lg:block"
         />
         {/* Keyline branca discreta entre os dois pilares de sustentação. */}
         <span
           aria-hidden="true"
-          className="hero-tri-key2 pointer-events-none absolute inset-0 hidden bg-white/30 lg:block"
+          className="hero-tri-key2 pointer-events-none absolute inset-0 z-[6] hidden bg-white/30 lg:block"
         />
       </div>
 
@@ -128,14 +140,37 @@ const BOX_CLASS = ['hero-tri-box-a', 'hero-tri-box-b', 'hero-tri-box-c'] as cons
 const MEDIA_CLASS = ['hero-tri-media-a', 'hero-tri-media-b', 'hero-tri-media-c'] as const
 
 /**
+ * Grade tonal por painel. Leva as três origens de imagem — cozinha real,
+ * estudo 3D e câmara frigorífica — para o mesmo território de aço e grafite.
+ * Os valores estão em globals.css; aqui só a atribuição.
+ */
+const PHOTO_CLASS = ['hero-tri-photo-a', 'hero-tri-photo-b', 'hero-tri-photo-c'] as const
+
+/**
  * Alturas do empilhamento móvel: Equipamentos vale mais que os outros dois
  * somados, e os três cabem na primeira tela.
  *
  * Conta em 390×844 (menos 64px de cabeçalho): 456 + 194 + 194, menos os dois
  * encaixes de 36px das diagonais = 772px. Em 360×800 dá 728px. Em ambos os
  * três caminhos aparecem sem rolagem — que é o requisito de tráfego pago.
+ *
+ * **`min-height`, não `height`.** Com altura fixa, um painel cujo conteúdo
+ * cresça um pouco não empurra nada: o excedente sai por cima (o conteúdo é
+ * alinhado pela base) e vai parar dentro da cunha que a diagonal recorta dos
+ * primeiros ~36px. Foi o que aconteceu em 360px, onde a pergunta de Projetos
+ * quebra em duas linhas em vez de uma e o título "PROJETOS" saía cortado ao
+ * meio — o painel tinha altura de sobra na tela, mas não podia usá-la.
+ *
+ * Com `min-height` a altura declarada vira **piso**, não teto: a proporção
+ * entre os três se mantém em todas as larguras em que o conteúdo cabe, e nas
+ * mais estreitas o painel cresce o necessário em vez de recortar o próprio
+ * título. Alguns pixels de rolagem custam menos que um pilar decapitado.
  */
-const MOBILE_HEIGHT = ['h-[60svh] min-h-[26rem]', 'h-[23svh] min-h-[10.5rem]', 'h-[23svh] min-h-[10.5rem]']
+const MOBILE_HEIGHT = [
+  'min-h-[max(60svh,26rem)]',
+  'min-h-[max(23svh,10.5rem)]',
+  'min-h-[max(23svh,10.5rem)]',
+]
 
 function HeroPanel({ pillar, position }: { pillar: HeroPillar; position: number }) {
   const isPrimary = position === 0
@@ -144,9 +179,17 @@ function HeroPanel({ pillar, position }: { pillar: HeroPillar; position: number 
     <div
       className={cn(
         'hero-tri-panel group relative w-full',
+        /*
+          No telefone o painel é uma caixa de fluxo que **cresce com o
+          conteúdo**: `justify-end` mantém os três alinhados pela base quando
+          sobra altura, e o `min-height` age só como piso. No desktop volta a
+          ser um painel absoluto de altura fixa, onde a diagonal é vertical e
+          a proporção entre as três regiões é a hierarquia comercial.
+        */
+        'flex flex-col justify-end',
         PANEL_CLASS[position],
         MOBILE_HEIGHT[position],
-        'lg:absolute lg:inset-0 lg:h-auto lg:min-h-0',
+        'lg:absolute lg:inset-0 lg:block lg:h-auto lg:min-h-0',
       )}
     >
       {/* ---------- Fotografia: enquadrada na região do painel ---------- */}
@@ -159,29 +202,27 @@ function HeroPanel({ pillar, position }: { pillar: HeroPillar; position: number 
           quality={isPrimary ? 86 : 82}
           sizes={isPrimary ? '(max-width: 1023px) 100vw, 55vw' : '(max-width: 1023px) 100vw, 30vw'}
           style={{ objectPosition: pillar.media.objectPosition }}
-          className="object-cover"
+          className={cn('object-cover', 'hero-tri-photo', PHOTO_CLASS[position])}
         />
 
         {/*
-          Véu de legibilidade, não decoração: as três fotografias têm
-          luminâncias muito diferentes (cozinha escura, render cinza, câmara
-          branca) e o texto é o mesmo em todas. O gradiente pesa na base, onde
-          o conteúdo fica, e deixa o topo da imagem respirar.
+          Véu de legibilidade, não decoração: o texto é o mesmo nos três
+          painéis e precisa do mesmo piso de contraste em todos.
+
+          Ele pesa na base, onde o conteúdo fica, e deixa o topo respirar. O
+          véu dos painéis de sustentação **aliviou** quando a grade tonal
+          entrou: antes ele carregava sozinho a tarefa de igualar três
+          luminâncias, e para isso precisava fechar tanto que apagava a
+          fotografia. Agora a grade iguala o tom e o véu volta a fazer só o
+          que o nome diz.
         */}
         <div
           aria-hidden="true"
           className={cn(
-            'absolute inset-0 bg-gradient-to-t',
+            'absolute inset-0',
             isPrimary
-              ? 'from-graphite via-graphite/70 to-graphite/25'
-              : /*
-                  Projetos e Consultoria são as duas fotografias claras do
-                  acervo (render cinza e câmara branca). Com o mesmo véu do
-                  painel principal elas ficavam lavadas e quase idênticas entre
-                  si; o véu mais fechado devolve contraste ao texto e faz cada
-                  uma voltar a ter forma própria.
-                */
-                'from-graphite via-graphite/88 to-graphite/55',
+              ? 'bg-gradient-to-t from-graphite via-graphite/70 to-graphite/25'
+              : 'hero-tri-veil',
           )}
         />
       </div>
@@ -189,7 +230,31 @@ function HeroPanel({ pillar, position }: { pillar: HeroPillar; position: number 
       {/* ---------- Conteúdo (não recebe clique: o alvo é o link ao fim) ---------- */}
       <div
         className={cn(
-          'pointer-events-none absolute inset-0 z-10 flex flex-col justify-end',
+          /*
+            `relative` no telefone (fluxo, empurra a altura do painel) e
+            `absolute` no desktop (sobreposta à fotografia). Enquanto era
+            absoluta nas duas larguras, nenhum `min-height` do painel
+            respondia ao conteúdo: em 360px a pergunta de Projetos quebra em
+            duas linhas, o bloco transbordava por cima e o título "PROJETOS"
+            era decapitado pela cunha da diagonal.
+          */
+          /*
+            `lg:inset-y-0`, **nunca `lg:inset-0`**: o `left`/`right` de cada
+            caixa vem de `.hero-tri-box-*` (globals.css), que é o que a
+            mantém dentro da zona segura da diagonal. `inset-0` tem a mesma
+            especificidade e é emitido depois, então zera os dois lados e as
+            três caixas passam a ocupar a composição inteira — as de Projetos
+            e Consultoria vão parar debaixo da fotografia de Equipamentos e
+            somem no recorte. Aqui só o eixo vertical é declarado.
+          */
+          /*
+            `lg:w-auto` pelo mesmo motivo: num elemento absoluto com `left` e
+            `right` declarados, `width: 100%` vence os dois e a caixa volta a
+            ocupar a composição inteira. No telefone o `w-full` é necessário
+            (a caixa está em fluxo); no desktop a largura tem de ser derivada
+            das duas âncoras.
+          */
+          'pointer-events-none relative z-10 flex w-full flex-col justify-end lg:absolute lg:inset-y-0 lg:w-auto',
           'px-5 pb-6 md:px-8 lg:px-0 lg:pb-10',
           /*
             No mobile a aresta diagonal corre no **topo** dos painéis de
@@ -211,7 +276,7 @@ function HeroPanel({ pillar, position }: { pillar: HeroPillar; position: number 
         */}
         <div
           className={cn(
-            'flex h-full flex-col justify-end',
+            'flex flex-col justify-end lg:h-full',
             /*
               A faixa do cabeçalho é reservada onde o painel encosta no topo da
               página: no desktop isso vale para os três (todos vão de ponta a
@@ -246,7 +311,16 @@ function HeroPanel({ pillar, position }: { pillar: HeroPillar; position: number 
               </p>
               <h1
                 id="hero-titulo"
-                className="mt-4 max-w-[17ch] font-sans text-[clamp(1.5rem,5.6vw,2.875rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-canvas lg:mt-5 lg:leading-[1.05]"
+                /*
+                  Medida mais larga no telefone: `17ch` foi calibrado para a
+                  coluna do desktop, e em 360px ele limitava o título a 275px
+                  numa caixa de 320px — o `h1` quebrava em quatro linhas por
+                  falta de largura concedida, não por falta de espaço, e a
+                  primeira linha subia até encostar no cabeçalho (6px de
+                  folga). Com `21ch` o texto usa a largura que já existe e
+                  volta a três linhas, sem reduzir corpo tipográfico.
+                */
+                className="mt-4 max-w-[21ch] font-sans text-[clamp(1.5rem,5.6vw,2.875rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-canvas lg:mt-5 lg:max-w-[17ch] lg:leading-[1.05]"
               >
                 {homeHero.title}
               </h1>
@@ -254,29 +328,57 @@ function HeroPanel({ pillar, position }: { pillar: HeroPillar; position: number 
           ) : null}
 
           <div className={cn('flex flex-col', isPrimary && 'lg:pb-2')}>
-            {/* Numeral do pilar + rótulo de tipo da imagem, quando houver. */}
-            <div className="flex items-center gap-3">
+            {/* ----------
+                Numeral do pilar, rótulo de tipo da imagem e nome.
+
+                **No telefone o numeral fica na mesma linha do nome; no
+                desktop, na linha de cima.** Não é preferência de composição:
+                empilhado, o numeral caía dentro da cunha que a diagonal
+                recorta do topo dos painéis de sustentação — os painéis do
+                telefone têm 194px e a aresta consome os primeiros ~36px, então
+                "02" e "03" simplesmente não apareciam. Só "01" sobrevivia,
+                porque o painel de Equipamentos não tem corte no topo.
+
+                Numeração pela metade é pior que numeração nenhuma: ela promete
+                um sistema e entrega um rótulo solto. Na mesma linha do nome,
+                os três aparecem em qualquer largura, e é o mesmo elemento —
+                não há numeral duplicado no HTML para o leitor de tela ler duas
+                vezes.
+
+                O traço só existe quando há rótulo depois dele: dois dos três
+                pilares não declaram tipo de imagem, e o traço ficava pendurado
+                no vazio à direita do numeral. Régua serve para separar dois
+                elementos, não para decorar um.
+                ---------- */}
+            <div className="flex flex-wrap items-baseline gap-x-3 lg:block">
               <span className="font-condensed text-[0.8125rem] font-bold leading-none tracking-[0.08em] text-yellow">
                 {pillar.index}
               </span>
-              <span aria-hidden="true" className="h-px w-6 bg-yellow/60" />
+              {/*
+                `lg:ml-3` porque no desktop o contêiner vira `block` e o
+                `gap-x-3` do flex deixa de valer — sem isso o traço encosta no
+                numeral.
+              */}
               {pillar.media.kind ? (
-                <span className="font-condensed text-[0.625rem] font-medium uppercase tracking-[0.14em] text-canvas/70">
-                  {pillar.media.kind}
+                <span className="hidden items-center gap-3 lg:ml-3 lg:inline-flex">
+                  <span aria-hidden="true" className="h-px w-6 bg-yellow/60" />
+                  <span className="font-condensed text-[0.625rem] font-medium uppercase tracking-[0.14em] text-canvas/70">
+                    {pillar.media.kind}
+                  </span>
                 </span>
               ) : null}
-            </div>
 
-            <h2
-              className={cn(
-                'mt-3 font-condensed font-semibold uppercase leading-none tracking-[0.02em] text-canvas',
-                isPrimary
-                  ? 'text-[clamp(1.75rem,3.4vw,2.75rem)]'
-                  : 'text-[clamp(1.375rem,2.1vw,1.875rem)]',
-              )}
-            >
-              {pillar.name}
-            </h2>
+              <h2
+                className={cn(
+                  'font-condensed font-semibold uppercase leading-none tracking-[0.02em] text-canvas lg:mt-3',
+                  isPrimary
+                    ? 'text-[clamp(1.75rem,3.4vw,2.75rem)]'
+                    : 'text-[clamp(1.375rem,2.1vw,1.875rem)]',
+                )}
+              >
+                {pillar.name}
+              </h2>
+            </div>
 
             {/* A pergunta do cliente — é o que faz o visitante se reconhecer. */}
             <p
