@@ -28,19 +28,13 @@ export const clients: Client[] = [
     scale: 'lg',
   },
   /*
-    Fora da faixa pública nesta release — **defeito de asset, não de cliente.**
-
-    O arquivo não é um logotipo: é um recorte quadrado de avatar com o fundo
-    listrado azul-claro chapado dentro do PNG. Na faixa monocromática ele
-    aparece como um retângulo cinza preenchido, com a marca ilegível dentro —
-    o único elemento da fileira que não lê como logotipo.
-
-    Não há correção legítima do lado do CSS: recortar por `mix-blend-mode` ou
-    máscara adulteraria a identidade de terceiro, e uma caixa por trás só
-    esconderia o problema. Volta assim que houver um arquivo com fundo
-    transparente. O registro e a imagem seguem no repositório.
+    PENDÊNCIA DE ACERVO: `guanabara.png` é um recorte quadrado de avatar com
+    fundo listrado azul-claro chapado, não um logotipo de fundo transparente
+    como os demais da faixa. Repor o arquivo quando houver uma versão com
+    fundo transparente. Mantido `featured: true` — é defeito de asset, não
+    motivo para remover o cliente da prova social.
   */
-  { id: 'guanabara', name: 'Guanabara', logo: '/images/clients/guanabara.png', featured: false, scale: 'lg' },
+  { id: 'guanabara', name: 'Guanabara', logo: '/images/clients/guanabara.png', featured: true, scale: 'lg' },
 
   // Logos disponíveis no repositório, aguardando confirmação para exibição.
   { id: 'amil', name: 'Amil', logo: '/images/clients/amil.png', featured: false, scale: 'sm' },

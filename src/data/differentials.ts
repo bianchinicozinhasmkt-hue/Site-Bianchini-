@@ -39,15 +39,8 @@ export const differentials: Differential[] = [
   {
     number: '06',
     title: '18 anos dentro de operações de alimentação',
-    /*
-      Abria com "Mais de 3.000 projetos entregues". O número saiu por não ter
-      confirmação comercial (`src/data/site.ts`, "MÉTRICAS PÚBLICAS"); o
-      argumento do diferencial nunca dependeu dele — o título já carrega o
-      fato confirmado (18 anos), e o que a descrição acrescenta é a variedade
-      de operações, que também é confirmada.
-    */
     description:
-      'Operações entregues em hospitais, hotéis, restaurantes, redes e operações institucionais em todo o Brasil. Experiência acumulada em campo, não em teoria.',
+      'Mais de 3.000 projetos entregues em hospitais, hotéis, restaurantes, redes e operações institucionais em todo o Brasil. Experiência acumulada em campo, não em teoria.',
   },
 ]
 

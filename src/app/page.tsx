@@ -11,7 +11,7 @@ import { JourneySection } from '@/components/sections/journey-section'
 import { LeonardoSection } from '@/components/sections/leonardo-section'
 import { CredibilitySection } from '@/components/sections/credibility-section'
 import { LeadershipSection } from '@/components/sections/leadership-section'
-import { ClosingCta } from '@/components/v2/closing-cta'
+import { FinalCtaSection } from '@/components/sections/final-cta-section'
 
 /**
  * ============================================================
@@ -28,7 +28,10 @@ import { ClosingCta } from '@/components/v2/closing-cta'
  * Os componentes V2 que já ocuparam esta página — `CategoriesShowcase`,
  * `PillarsBand`, `ProjectsDoor`, `ConsultingDoor`, `ProofSection`,
  * `AuthorityBand`, `FinalCta` — continuam no repositório, em
- * `src/components/v2/`, e **fora da montagem**. Nenhuma faixa de confiança,
+ * `src/components/v2/`, e **fora da montagem**. `ClosingCta` também: foi
+ * criado e montado em 2026-08-08 no lugar de `FinalCtaSection` sem
+ * autorização, e a restauração da baseline em 2026-08-08 devolveu o
+ * fechamento ao componente V1. Nenhuma faixa de confiança,
  * grade de benefícios ou métrica nova ficou entre a hero e a primeira seção V1:
  * terminada a dobra, começa `EquipmentStripSection`.
  *
@@ -49,28 +52,11 @@ import { ClosingCta } from '@/components/v2/closing-cta'
  *   11 leonardo .......... graphite     · AUTORIDADE que sustenta o método
  *   12 credibilidade ..... canvas       · PROVA — números, clientes e depoimentos
  *   13 quem conduz ....... graphite     · QUEM CONDUZ (+ o livro, em `id="livro"`)
- *   14 fechamento ........ **canvas**   · CONVERSÃO — o respiro antes do rodapé
+ *   14 fechamento ........ graphite     · CONVERSÃO — `FinalCtaSection`, a mesma das rotas internas
  *
- * ============================================================
- * A ÚLTIMA SEÇÃO É CLARA, E ISSO É ESTRUTURAL (2026-08-08)
- * ============================================================
- *
- * O item 14 era `FinalCtaSection`, em grafite. A página terminava em **três
- * blocos escuros encostados** — quem conduz, CTA e rodapé, 666 + 693 + 640px
- * em 1440 × 900 — e o rodapé não chegava: continuava a seção anterior.
- *
- * Além do valor, havia um problema de vocabulário. `FinalCtaSection` fecha com
- * a **geometria que abria a V1**: painel diagonal à direita e keyline amarela,
- * na inclinação do mockup. Era a outra ponta do arco enquanto a primeira dobra
- * era a diagonal. A dobra da V2 é um palco retangular de sangria, então a
- * diagonal do fim virou rima de um verso que não existe mais.
- *
- * `ClosingCta` (`src/components/v2/`) fecha em `canvas`, e a sequência final
- * passa a ser **escuro → branco → escuro**: o rodapé entra por contraste, de
- * propósito.
- *
- * `FinalCtaSection` **não foi alterado** e continua montado nas nove rotas
- * internas que o usam — lá a diagonal ainda rima com o `PageHero`.
+ * O fechamento é `FinalCtaSection`, sem alteração — o mesmo componente que as
+ * nove rotas internas usam, com o mesmo painel diagonal e a mesma keyline
+ * amarela do mockup. Não há componente V2 de fechamento montado nesta página.
  *
  * **Equipamentos é a segunda seção da página.** Era essa a exigência: quem
  * chegou para cotar equipamento não atravessa quatro grandes seções antes de
@@ -93,10 +79,9 @@ import { ClosingCta } from '@/components/v2/closing-cta'
  * RITMO DE FUNDO — a restrição que limitou a ordem
  * ------------------------------------------------
  * As seções escuras somam quase metade da página, e três seguidas viram uma
- * mancha sem transição. Com o fechamento em `canvas`, sobra **um único par
- * escuro adjacente** — `hero`+`equipamentos` —, contra os dois da V1:
- * `quem conduz`+`CTA` deixou de existir como par, porque o CTA ficou claro.
- * `sintomas`, `entrega`, `inox` e `quem conduz` ficam isolados entre seções
+ * mancha sem transição. Nesta ordem há **dois pares escuros adjacentes** —
+ * `hero`+`equipamentos` e `quem conduz`+`fechamento` —, o mesmo teto que a V1
+ * já respeitava. `sintomas`, `entrega` e `inox` ficam isolados entre seções
  * claras; `método` termina em grafite e entrega para `leonardo`, que é a mesma
  * transição que a V1 fazia de `método` para `leonardo`.
  *
@@ -123,7 +108,7 @@ export default function HomePage() {
       <LeonardoSection />
       <CredibilitySection />
       <LeadershipSection />
-      <ClosingCta />
+      <FinalCtaSection />
     </>
   )
 }

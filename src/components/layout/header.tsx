@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation'
 import { mainNav, mobileNav } from '@/data/navigation'
 import { useScrollThreshold } from '@/hooks/use-scroll-threshold'
 import { cn } from '@/lib/utils'
-import { Container } from './container'
 import { MobileMenu } from './mobile-menu'
 import { Logo } from '@/components/shared/logo'
 import { HeaderCta } from '@/components/ui/actions/button'
@@ -17,39 +16,13 @@ import { HeaderCta } from '@/components/ui/actions/button'
  * `MOCKUP_HERO_APROVADO.png`; a **altura**, não: os 116px medidos ali deixavam
  * a faixa alta e dispersa. A altura é um token responsivo (`--header-height`,
  * em globals.css) — 64px no mobile, 72–80px em tablet e desktop estreito,
- * 80–84px em desktop amplo. Ela **não muda** nesta rodada: medida no navegador,
- * já está dentro da faixa pedida (64 no telefone, 76,4 em 1024, 80 de 1366 a
- * 1586).
+ * 80–84px em desktop amplo.
  *
  * Três elementos, três posições, e nada entre eles:
  *
  *   marca ....... altura fixa de 34/40px (ver o bloco da `Logo` abaixo)
  *   navegação ... corpo fixo de 15px, alvo de toque pelo `padding`
  *   CTA ......... 46% da altura da faixa, com piso de 40px
- *
- * ============================================================
- * O CABEÇALHO PASSOU A USAR O CONTAINER DO SITE (2026-08-08)
- * ============================================================
- *
- * Ele tinha margens próprias — `lg:pl-[3.1cqw] lg:pr-[4.2cqw]`, medidas sobre a
- * largura da própria faixa — enquanto **todo o resto do site** (incluindo a
- * primeira dobra) assenta em `Container`: `max-w-[1400px]`, centrado, com
- * `px-10` no desktop. As duas malhas não coincidem em nenhuma largura, e o erro
- * cresce com a tela:
- *
- *   viewport   marca (antes)   coluna do hero   desalinhamento
- *   1366px         42,3px           40px            +2,3px
- *   1440px         44,6px           60px           −15,4px
- *   1586px         49,2px          133px           −83,8px
- *
- * Em 1586px a marca ficava 84px à esquerda do título do hero: os dois elementos
- * de abertura da página, um sobre o outro, sem nenhum eixo comum. Agora
- * cabeçalho e dobra compartilham a mesma caixa, e o logotipo cai exatamente
- * sobre a etiqueta, o `h1`, o CTA e a régua dos três caminhos.
- *
- * Os `cqw` dos vãos internos saíram junto: com a faixa limitada a 1400px, a
- * largura do container deixa de crescer com a janela e o `clamp()` em `rem`
- * descreve o mesmo comportamento sem depender de `container-type`.
  *
  * **A assinatura "Diagnóstico · Projeto · Implantação" foi removida da faixa.**
  * Ao lado da marca ela lia como ornamento e disputava atenção com o logotipo,
@@ -69,7 +42,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'header-in on-dark fixed inset-x-0 top-0 z-50 h-[var(--header-height)] border-b bg-graphite',
+        'header-in on-dark fixed inset-x-0 top-0 z-50 h-[var(--header-height)] border-b bg-graphite [container-type:inline-size]',
         /*
           No topo a faixa é plana e a borda quase não existe; ao sair do topo
           ela ganha uma linha inferior discreta e uma sombra curta. Nada de
@@ -83,12 +56,11 @@ export function Header() {
       )}
     >
       {/*
-        **A mesma caixa da primeira dobra e de toda seção do site.** É
-        literalmente `Container` (`max-w-container`, `px-5 md:px-8 lg:px-10`,
-        centrado), e não margens próprias — ver o bloco de comentário do
-        componente para a medição do desalinhamento que isso corrige.
+        Margens em `cqw` (largura do próprio cabeçalho), não em `vw`: `vw`
+        inclui a barra de rolagem e desalinharia a marca em relação à coluna
+        de texto do hero, que é medida sobre a área de conteúdo.
       */}
-      <Container className="flex h-full items-center">
+      <div className="flex h-full w-full items-center px-5 md:px-8 lg:pl-[3.1cqw] lg:pr-[4.2cqw]">
         {/* ----------
             Marca. `shrink-0` nos dois níveis: sem ele o logotipo é um item
             flexível dentro de outro e encolhe abaixo da altura pedida.
@@ -108,7 +80,7 @@ export function Header() {
 
         <nav
           aria-label="Menu principal"
-          className="ml-auto hidden shrink-0 items-center gap-[clamp(1.5rem,2.2vw,2.5rem)] lg:flex"
+          className="ml-auto hidden shrink-0 items-center gap-[clamp(1.5rem,2.6cqw,2.5rem)] lg:flex"
         >
           {mainNav.map((item) => {
             // Âncoras da home não marcam item ativo — só rotas reais.
@@ -130,7 +102,7 @@ export function Header() {
           })}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center lg:ml-[clamp(1.5rem,2.5vw,2.75rem)]">
+        <div className="ml-auto flex shrink-0 items-center lg:ml-[clamp(1.75rem,3cqw,3rem)]">
           {/*
             **O Instagram não fica mais aqui** (decisão do gestor, 2026-08-04).
             O glifo da marca é um gradiente saturado e, encostado no amarelo do
@@ -145,7 +117,7 @@ export function Header() {
 
           <MobileMenu items={mobileNav} />
         </div>
-      </Container>
+      </div>
     </header>
   )
 }

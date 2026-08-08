@@ -18,14 +18,8 @@ const path = '/sobre'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Sobre a Bianchini',
-  /*
-    A contagem de projetos saiu da descrição: "mais de 3.000 projetos
-    entregues" não tem confirmação comercial (ver `src/data/site.ts`,
-    "MÉTRICAS PÚBLICAS"). Metadata é conteúdo público — aparece em resultado de
-    busca e em prévia de link — e vale a mesma regra da página.
-  */
   description:
-    '18 anos dentro de operações de alimentação, com atendimento em todo o Brasil. Arquitetura, engenharia, equipamentos, processo e estratégia comercial tratados como um sistema só.',
+    '18 anos dentro de operações de alimentação e mais de 3.000 projetos entregues. Arquitetura, engenharia, equipamentos, processo e estratégia comercial tratados como um sistema só.',
   path,
 })
 
@@ -81,16 +75,9 @@ export default function AboutPage() {
               pelo catálogo, o trabalho começa pelo diagnóstico — entender o volume, o espaço, o
               processo e o custo antes de recomendar qualquer solução.
             </p>
-            {/*
-              A frase abria com "São mais de 3.000 projetos entregues". O
-              número saiu por não ter confirmação comercial; o que ele
-              qualificava — a variedade de operações atendidas e a abrangência
-              — é fato confirmado e permanece. Nenhuma outra contagem entrou no
-              lugar.
-            */}
             <p>
-              São operações entregues em restaurantes, hotéis, hospitais, redes e operações
-              institucionais em todo o Brasil, com sede no Rio de Janeiro. A empresa reúne
+              São mais de 3.000 projetos entregues em restaurantes, hotéis, hospitais, redes e
+              operações institucionais em todo o Brasil, com sede no Rio de Janeiro. A empresa reúne
               competências que costumam aparecer separadas — arquitetura, engenharia, equipamentos,
               processo e estratégia comercial — e as trata como um sistema único.
             </p>

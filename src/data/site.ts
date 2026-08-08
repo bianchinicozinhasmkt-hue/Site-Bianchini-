@@ -12,22 +12,8 @@ export const site = {
   title:
     'Bianchini — Diagnóstico, Projeto e Implantação de Cozinhas Industriais',
   shortTitle: 'Bianchini',
-  /*
-    A frase terminava em "18 anos e mais de 3.000 projetos entregues".
-
-    Isto não é texto interno: `site.description` alimenta a `<meta name=
-    "description">`, o Open Graph, o Twitter card e o JSON-LD — ou seja, o
-    número aparecia no snippet de busca e na prévia de compartilhamento de toda
-    rota que não define descrição própria, inclusive a Home. Como a quantidade
-    de projetos continua **não confirmada** pelo comercial (divergência entre
-    "1.000" e "3.000" registrada logo abaixo, em `heroMetrics`, e listada em
-    `MASTER_BIANCHINI.md` §20), publicá-la assim contraria DEC-006.
-
-    "18 anos" permanece: é dado confirmado. Nenhum número substituto entrou no
-    lugar do que saiu.
-  */
   description:
-    'Diagnosticamos, estruturamos e transformamos operações de food service. Cozinhas industriais completas, arquitetura e fluxo, especificação de equipamentos, implantação e consultoria operacional. 18 anos de atuação.',
+    'Diagnosticamos, estruturamos e transformamos operações de food service. Cozinhas industriais completas, arquitetura e fluxo, especificação de equipamentos, implantação e consultoria operacional. 18 anos e mais de 3.000 projetos entregues.',
   keywords: [
     'cozinha industrial',
     'projeto de cozinha industrial',
@@ -148,46 +134,25 @@ export const contact = {
 } as const
 
 /**
- * ============================================================
- * MÉTRICAS PÚBLICAS — SÓ O QUE ESTÁ CONFIRMADO
- * ============================================================
+ * Números confirmados como reais no projeto (CLAUDE.md e site anterior):
+ * 18 anos de experiência e mais de 3.000 projetos entregues. As demais
+ * entradas são contagens verificáveis nos próprios dados do repositório.
  *
- * Confirmados: **18 anos de atuação** e **abrangência Brasil** (`CLAUDE.md`,
- * "Dados confirmados como reais"). As demais entradas são contagens
- * verificáveis nos próprios dados do repositório — "8 linhas" sai de
- * `equipment-lines.ts`, não de estimativa.
- *
- * A CONTAGEM DE PROJETOS SAIU DAS DUAS LISTAS
- * -------------------------------------------
- * "3.000+ projetos entregues" **não é um número confirmado**: há divergência
- * registrada entre "1.000" e "3.000" em material fora do código, e o comercial
- * nunca validou o valor final (`docs/v1-release/04-pendencias-externas.md`
- * item 5). Enquanto isso não voltar por escrito, ele não pode ser afirmado em
- * rota pública — número de entrega é exatamente o tipo de dado que DEC-006
- * proíbe apresentar como fato sem fonte verificável.
- *
- * A remoção é da **afirmação**, não do registro: o valor histórico continua
- * documentado aqui e nos documentos de pendência, para que a reintrodução seja
- * uma decisão consciente e não uma redescoberta.
- *
- * PARA RELIGAR, quando o comercial confirmar o número: acrescente **uma**
- * entrada em cada array abaixo, com o valor confirmado. Nenhum componente
- * precisa mudar — todos iteram sobre estas listas, e `homeHeroMetrics`
- * (`src/data/v2/home.ts`) filtra por rótulo, então revise aquele filtro junto.
+ * FONTE ÚNICA da métrica de projetos/cozinhas entregues: "3.000+", usada aqui
+ * e em `scopeMetrics` abaixo — nenhum outro valor deve ser introduzido em
+ * nenhuma outra seção sem passar por este arquivo. PENDENTE: confirmação
+ * comercial definitiva do número exato (houve divergência apontada entre
+ * "1.000" e "3.000" em material fora do código; o projeto usa "3.000+" em
+ * todo lugar hoje, mas o valor final ainda não foi validado pelo comercial).
  */
 export const heroMetrics: Metric[] = [
   { value: '18', label: 'anos de atuação' },
+  { value: '3.000+', label: 'projetos entregues' },
   { value: 'Brasil', label: 'abrangência de atendimento' },
 ]
 
 export const scopeMetrics: Metric[] = [
   { value: '18 anos', label: 'Atuação dentro de operações de alimentação' },
-  /*
-    Substituição qualitativa, não um número novo: a grade de `/sobre` é
-    `sm:grid-cols-3` e ficaria com um vão se a lista caísse para duas
-    entradas. O texto repete a cobertura já confirmada em `contact.coverage`
-    — nenhuma afirmação nova entra aqui.
-  */
-  { value: 'Brasil', label: 'Abrangência de atendimento' },
+  { value: '3.000+', label: 'Projetos entregues em todo o Brasil' },
   { value: '8 linhas', label: 'Equipamentos especificados dentro do projeto' },
 ]
