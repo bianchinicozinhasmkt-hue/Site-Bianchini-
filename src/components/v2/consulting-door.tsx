@@ -82,12 +82,31 @@ export function ConsultingDoor() {
                 {homeConsultingSection.areasLabel}
               </h3>
 
-              <ul className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2">
-                {diagnosisAreas.map((area) => (
-                  <li key={area.title} className="flex flex-col gap-1 border-t border-white/12 pt-3">
-                    <span className="text-body-sm font-semibold text-canvas">{area.title}</span>
-                    <span className="text-[0.8125rem] leading-[1.45] text-canvas/60">
-                      {area.description}
+              {/* ----------
+                  Seis frentes como **lista numerada de leitura**, não como
+                  grade de seis caixas.
+
+                  Em duas colunas com borda em cada item, a seção lia como
+                  catálogo de serviços — e era o bloco mais fragmentado da
+                  página. Em coluna única, com numeral técnico e uma régua
+                  separando as linhas, ela passa a se ler como o roteiro da
+                  visita: uma frente depois da outra, na ordem em que são
+                  levantadas.
+                  ---------- */}
+              <ul className="mt-5 flex flex-col">
+                {diagnosisAreas.map((area, index) => (
+                  <li
+                    key={area.title}
+                    className="flex gap-4 border-t border-white/12 py-3 first:border-t-0 first:pt-0"
+                  >
+                    <span className="mt-[0.2em] shrink-0 font-condensed text-[0.75rem] font-bold leading-none tracking-[0.08em] text-yellow">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="flex flex-col gap-0.5">
+                      <span className="text-body-sm font-semibold text-canvas">{area.title}</span>
+                      <span className="text-[0.8125rem] leading-[1.45] text-canvas/70">
+                        {area.description}
+                      </span>
                     </span>
                   </li>
                 ))}

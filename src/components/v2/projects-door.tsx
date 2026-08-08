@@ -32,7 +32,14 @@ export function ProjectsDoor() {
   return (
     <section id="projetos" className="bg-surface py-16 md:py-20 lg:py-section">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,40fr)_minmax(0,60fr)] lg:items-center lg:gap-x-12">
+        {/*
+          A coluna de texto encolheu (40fr → 34fr) e as duas evidências
+          cresceram: a autoridade desta seção vem do **documento**, não do
+          parágrafo. Antes os dois painéis ocupavam metade da metade e liam
+          como miniatura de apoio — "imagem + texto", que é exatamente o que
+          esta porta não pode parecer.
+        */}
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,34fr)_minmax(0,66fr)] lg:items-center lg:gap-x-12">
           <div className="flex flex-col">
             <Reveal>
               <Eyebrow>{homeProjectsSection.eyebrow}</Eyebrow>
@@ -73,22 +80,31 @@ export function ProjectsDoor() {
             <div className="grid gap-5 sm:grid-cols-2">
               {homeProjectsSection.evidence.map((item) => (
                 <figure key={item.id} className="flex flex-col">
+                  {/*
+                    O rótulo de tipo sobe para **dentro** da imagem, numa tarja
+                    grafite: é a mesma legenda técnica do hero e das categorias,
+                    e resolve de uma vez o requisito de DEC-008 — o tipo viaja
+                    colado à evidência, não numa linha solta abaixo que pode ser
+                    lida separada dela.
+                  */}
                   <div className="relative aspect-[4/3] w-full overflow-hidden border border-line bg-canvas-deep">
                     <Image
                       src={item.src}
                       alt={item.alt}
                       fill
                       quality={82}
-                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 30vw"
+                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                       className="object-cover object-center"
                     />
-                  </div>
 
-                  <figcaption className="mt-3 flex flex-col gap-1.5">
-                    <span className="font-condensed text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-ink">
+                    <span className="absolute left-0 top-0 inline-flex items-center gap-2 bg-graphite px-3 py-2 font-condensed text-[0.625rem] font-semibold uppercase leading-none tracking-[0.12em] text-canvas">
+                      <span aria-hidden="true" className="h-[2px] w-4 shrink-0 bg-yellow" />
                       {item.kind}
                     </span>
-                    <span className="text-body-sm leading-[1.45] text-muted">{item.caption}</span>
+                  </div>
+
+                  <figcaption className="mt-3 text-body-sm leading-[1.45] text-muted">
+                    {item.caption}
                   </figcaption>
                 </figure>
               ))}

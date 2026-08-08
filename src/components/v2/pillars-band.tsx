@@ -99,14 +99,32 @@ export function PillarsBand() {
           <div className="grid gap-6 lg:grid-rows-2 lg:gap-8">
             {support.map((pillar, index) => (
               <Reveal key={pillar.id} variant="side" delay={index * 80}>
-                <article className="flex h-full flex-col border border-white/12 p-6 md:p-8">
-                  <h3 className="font-condensed text-[1.125rem] font-semibold uppercase tracking-[0.04em] text-canvas">
-                    {pillar.name}
-                  </h3>
-                  <p className="mt-3 text-body font-semibold text-canvas">{pillar.statement}</p>
-                  <p className="mt-2 max-w-[42ch] text-body-sm text-canvas/70">{pillar.description}</p>
+                {/*
+                  Numeral + régua no topo, texto maior e vão interno menor. As
+                  duas caixas dividiam a altura do cartão de Equipamentos e
+                  sobrava um buraco no meio de cada uma — era isso que as fazia
+                  ler como card de SaaS. O numeral também amarra a seção à
+                  primeira dobra, onde os pilares já são 01/02/03.
+                */}
+                <article className="flex h-full flex-col border border-white/12 p-6 md:p-7">
+                  <div className="flex items-center gap-3">
+                    <span className="font-condensed text-[0.75rem] font-bold leading-none tracking-[0.08em] text-yellow">
+                      {String(index + 2).padStart(2, '0')}
+                    </span>
+                    <span aria-hidden="true" className="h-px w-6 bg-yellow/60" />
+                    <h3 className="font-condensed text-[1.125rem] font-semibold uppercase tracking-[0.04em] text-canvas">
+                      {pillar.name}
+                    </h3>
+                  </div>
 
-                  <div className="mt-auto pt-6">
+                  <p className="mt-4 text-[1.0625rem] font-semibold leading-[1.35] text-canvas">
+                    {pillar.statement}
+                  </p>
+                  <p className="mt-2 max-w-[42ch] text-body-sm leading-[1.5] text-canvas/70">
+                    {pillar.description}
+                  </p>
+
+                  <div className="mt-auto pt-5">
                     <Link
                       href={pillar.cta.href}
                       className="group inline-flex min-h-[2.75rem] w-fit items-center text-body-sm font-semibold text-canvas transition-colors hover:text-white"

@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Container } from '@/components/layout/container'
 import { Reveal } from '@/components/animations/reveal'
-import { SectionHeader } from '@/components/layout/section'
 import { ArrowLink } from '@/components/ui/actions/button'
 import { homeCategories, type HomeCategory } from '@/data/v2/categories'
 import { homeCategoriesSection } from '@/data/v2/home'
@@ -101,13 +100,30 @@ export function CategoriesShowcase() {
   }
 
   return (
-    <section id="equipamentos" className="bg-canvas py-16 md:py-20 lg:py-section">
+    <section id="equipamentos" className="bg-canvas py-14 md:py-16 lg:py-20">
       <Container>
-        <SectionHeader
-          eyebrow={homeCategoriesSection.eyebrow}
-          title={homeCategoriesSection.title}
-          lead={homeCategoriesSection.lead}
-        />
+        {/* ----------
+            Cabeçalho próprio, não o `SectionHeader` padrão: a seção que segue
+            a primeira dobra precisa da mesma escala tipográfica dela, senão a
+            página parece cair de nível logo depois do hero. O título ganha o
+            corpo do `h1` e a etiqueta repete a composição traço+rótulo da
+            primeira dobra.
+            ---------- */}
+        <div className="flex flex-col gap-6 border-t-2 border-ink pt-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+          <div className="flex max-w-3xl flex-col">
+            <p className="inline-flex items-center gap-3 font-condensed text-[0.75rem] font-semibold uppercase leading-none tracking-[0.16em] text-ink">
+              <span aria-hidden="true" className="h-[2px] w-8 shrink-0 bg-yellow-deep" />
+              {homeCategoriesSection.eyebrow}
+            </p>
+            <h2 className="mt-5 max-w-[20ch] font-sans text-[clamp(1.75rem,3.2vw,2.75rem)] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink">
+              {homeCategoriesSection.title}
+            </h2>
+          </div>
+
+          <p className="max-w-[46ch] text-body-sm leading-[1.55] text-muted lg:pb-2">
+            {homeCategoriesSection.lead}
+          </p>
+        </div>
 
         {/* ==========================================================
             DESKTOP — lista completa à esquerda, painel ativo à direita
@@ -161,13 +177,32 @@ export function CategoriesShowcase() {
                     )}
                   />
 
-                  <span
-                    className={cn(
-                      'font-condensed text-[1.0625rem] uppercase leading-tight tracking-[0.03em] transition-colors',
-                      selected ? 'font-semibold text-ink' : 'font-medium text-muted group-hover:text-ink',
-                    )}
-                  >
-                    {category.name}
+                  {/* ----------
+                      Numeral por categoria — o mesmo vocabulário técnico dos
+                      pilares da primeira dobra (01/02/03). É o que tira desta
+                      lista a aparência de "abas genéricas" e a devolve para a
+                      linguagem industrial do resto da página.
+                      ---------- */}
+                  <span className="flex items-baseline gap-3">
+                    <span
+                      className={cn(
+                        'font-condensed text-[0.75rem] font-bold leading-none tracking-[0.08em] transition-colors',
+                        selected ? 'text-yellow-deep' : 'text-muted',
+                      )}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    <span
+                      className={cn(
+                        'font-condensed uppercase leading-tight tracking-[0.03em] transition-[color,font-size]',
+                        selected
+                          ? 'text-[1.25rem] font-semibold text-ink'
+                          : 'text-[1.0625rem] font-medium text-muted group-hover:text-ink',
+                      )}
+                    >
+                      {category.name}
+                    </span>
                   </span>
 
                   {/*
@@ -177,7 +212,7 @@ export function CategoriesShowcase() {
                     entre ativo e inativo não depende disso: já são três sinais
                     (peso do rótulo, régua grafite e fundo do item).
                   */}
-                  <span className="mt-1 line-clamp-1 text-[0.8125rem] leading-[1.4] text-muted">
+                  <span className="mt-1 line-clamp-1 pl-[1.9rem] text-[0.8125rem] leading-[1.4] text-muted">
                     {category.statement}
                   </span>
                 </button>
@@ -310,7 +345,7 @@ function CategoryMedia({ category, compact = false }: { category: HomeCategory; 
   }
 
   return (
-    <div className={cn('group relative w-full overflow-hidden bg-graphite', ratio)}>
+    <figure className={cn('group relative w-full overflow-hidden bg-graphite', ratio)}>
       <Image
         src={category.media.src}
         alt={category.media.alt}
@@ -319,6 +354,21 @@ function CategoryMedia({ category, compact = false }: { category: HomeCategory; 
         sizes={compact ? '100vw' : '(max-width: 1023px) 100vw, 62vw'}
         className="object-cover object-center transition-transform duration-[420ms] ease-smooth motion-reduce:transition-none"
       />
-    </div>
+
+      {/* ----------
+          Legenda de aplicação, no mesmo formato da primeira dobra: faixa
+          contida no rodapé da fotografia, condensada em caixa alta. É o
+          elemento que amarra esta vitrine ao vocabulário do hero sem repetir
+          a diagonal — a linguagem é compartilhada, o layout não.
+          ---------- */}
+      {!compact ? (
+        <figcaption className="absolute inset-x-0 bottom-0 flex items-center gap-3 bg-graphite/85 px-5 py-3">
+          <span aria-hidden="true" className="h-[2px] w-6 shrink-0 bg-yellow" />
+          <span className="font-condensed text-[0.6875rem] font-medium uppercase leading-[1.35] tracking-[0.12em] text-canvas">
+            {category.name} — equipamento especificado e fornecido pela Bianchini
+          </span>
+        </figcaption>
+      ) : null}
+    </figure>
   )
 }
