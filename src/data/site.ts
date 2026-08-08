@@ -98,7 +98,40 @@ export const heroPhotoCaption =
   'Operação entregue: projeto, especificação, fabricação e instalação'
 
 export const contact = {
-  /** Número atualizado em 2026-08-03. Não alterar sem confirmação comercial. */
+  /**
+   * ============================================================
+   * TELEFONE — FONTE ÚNICA, PENDENTE DE CONFIRMAÇÃO COMERCIAL
+   * ============================================================
+   *
+   * **Divergência aberta, não resolvida por decisão técnica.** Há dois números
+   * documentados e nenhum confirmado pelo comercial (`CLAUDE.md`, "Regras de
+   * conteúdo"; `docs/v1-release/04-pendencias-externas.md`):
+   *
+   *   +55 21 99518-1918 .... o que está em uso aqui, e portanto no ar
+   *   +55 21 96469-0650 .... registrado em versão anterior do `CLAUDE.md`
+   *
+   * "Em uso" **não** é o mesmo que "confirmado". Nenhum agente deve escolher
+   * entre os dois: a decisão é comercial e precisa vir por escrito.
+   *
+   * QUANDO O NÚMERO CORRETO CHEGAR, ALTERE **SÓ ESTES DOIS CAMPOS**
+   * --------------------------------------------------------------
+   * `phoneDisplay` (formatado, o que o visitante lê) e `phoneE164` (só
+   * dígitos, com país e DDD, sem `+` — é o formato que o `wa.me` exige).
+   * Mantenha os dois apontando para o mesmo número.
+   *
+   * Uma edição aqui basta para o site inteiro. Todo consumidor deriva daqui,
+   * e não existe número escrito à mão em nenhum outro arquivo:
+   *
+   *   `lib/whatsapp.ts` ....... monta todo link `wa.me` (`whatsappUrl`,
+   *                             `whatsappUrlWithText`) — usado por contato,
+   *                             rodapé, menu mobile, botão flutuante, CTA
+   *                             final da V1 e da V2, formulário e as duas
+   *                             páginas de linhas de produtos
+   *   `lib/schema.ts` ......... `telephone` do JSON-LD da organização
+   *   `layout/footer.tsx` ..... texto exibido
+   *   `layout/mobile-menu.tsx`  texto exibido + `tel:`
+   *   `app/contato/page.tsx` .. texto exibido + `tel:`
+   */
   phoneDisplay: '+55 21 99518-1918',
   phoneE164: '5521995181918',
   email: 'comercial@bianchinicozinhas.com.br',
@@ -115,25 +148,46 @@ export const contact = {
 } as const
 
 /**
- * Números confirmados como reais no projeto (CLAUDE.md e site anterior):
- * 18 anos de experiência e mais de 3.000 projetos entregues. As demais
- * entradas são contagens verificáveis nos próprios dados do repositório.
+ * ============================================================
+ * MÉTRICAS PÚBLICAS — SÓ O QUE ESTÁ CONFIRMADO
+ * ============================================================
  *
- * FONTE ÚNICA da métrica de projetos/cozinhas entregues: "3.000+", usada aqui
- * e em `scopeMetrics` abaixo — nenhum outro valor deve ser introduzido em
- * nenhuma outra seção sem passar por este arquivo. PENDENTE: confirmação
- * comercial definitiva do número exato (houve divergência apontada entre
- * "1.000" e "3.000" em material fora do código; o projeto usa "3.000+" em
- * todo lugar hoje, mas o valor final ainda não foi validado pelo comercial).
+ * Confirmados: **18 anos de atuação** e **abrangência Brasil** (`CLAUDE.md`,
+ * "Dados confirmados como reais"). As demais entradas são contagens
+ * verificáveis nos próprios dados do repositório — "8 linhas" sai de
+ * `equipment-lines.ts`, não de estimativa.
+ *
+ * A CONTAGEM DE PROJETOS SAIU DAS DUAS LISTAS
+ * -------------------------------------------
+ * "3.000+ projetos entregues" **não é um número confirmado**: há divergência
+ * registrada entre "1.000" e "3.000" em material fora do código, e o comercial
+ * nunca validou o valor final (`docs/v1-release/04-pendencias-externas.md`
+ * item 5). Enquanto isso não voltar por escrito, ele não pode ser afirmado em
+ * rota pública — número de entrega é exatamente o tipo de dado que DEC-006
+ * proíbe apresentar como fato sem fonte verificável.
+ *
+ * A remoção é da **afirmação**, não do registro: o valor histórico continua
+ * documentado aqui e nos documentos de pendência, para que a reintrodução seja
+ * uma decisão consciente e não uma redescoberta.
+ *
+ * PARA RELIGAR, quando o comercial confirmar o número: acrescente **uma**
+ * entrada em cada array abaixo, com o valor confirmado. Nenhum componente
+ * precisa mudar — todos iteram sobre estas listas, e `homeHeroMetrics`
+ * (`src/data/v2/home.ts`) filtra por rótulo, então revise aquele filtro junto.
  */
 export const heroMetrics: Metric[] = [
   { value: '18', label: 'anos de atuação' },
-  { value: '3.000+', label: 'projetos entregues' },
   { value: 'Brasil', label: 'abrangência de atendimento' },
 ]
 
 export const scopeMetrics: Metric[] = [
   { value: '18 anos', label: 'Atuação dentro de operações de alimentação' },
-  { value: '3.000+', label: 'Projetos entregues em todo o Brasil' },
+  /*
+    Substituição qualitativa, não um número novo: a grade de `/sobre` é
+    `sm:grid-cols-3` e ficaria com um vão se a lista caísse para duas
+    entradas. O texto repete a cobertura já confirmada em `contact.coverage`
+    — nenhuma afirmação nova entra aqui.
+  */
+  { value: 'Brasil', label: 'Abrangência de atendimento' },
   { value: '8 linhas', label: 'Equipamentos especificados dentro do projeto' },
 ]

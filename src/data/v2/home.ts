@@ -46,23 +46,24 @@ import { heroMetrics } from '@/data/site'
  * confirmados e continuam: **18 anos de atuação** e **abrangência Brasil**
  * (`CLAUDE.md`, "Dados confirmados como reais"; `contact.coverage`).
  *
- * A terceira — **"3.000+ projetos entregues"** — sai da Home nesta release. O
- * próprio `site.ts` registra divergência não resolvida entre "1.000" e "3.000"
- * em material fora do código, e `MASTER_BIANCHINI.md` §20 lista "quantidade de
- * projetos/clientes" entre os dados que não podem ser apresentados como fato
- * sem confirmação. Publicar um número de escala nessa condição é exatamente o
- * risco que DEC-006 existe para evitar.
+ * A terceira — **"3.000+ projetos entregues"** — foi removida na origem: desde
+ * a limpeza de bloqueadores de release ela não existe mais em `heroMetrics`
+ * nem em `scopeMetrics`, e portanto não é renderizada em nenhuma rota pública.
+ * O motivo está registrado em `src/data/site.ts`, "MÉTRICAS PÚBLICAS":
+ * divergência não resolvida entre "1.000" e "3.000" em material fora do
+ * código, sem confirmação comercial (`MASTER_BIANCHINI.md` §20, DEC-006).
  *
- * **Nenhum número substituto foi criado.** A dobra passa a mostrar duas
- * métricas em vez de três; o bloco é uma lista com quebra de linha, então não
- * há buraco de composição — ele apenas encurta.
+ * **Nenhum número substituto foi criado.**
  *
- * Para religar quando o comercial confirmar o valor: retire o rótulo da lista
- * abaixo. Nada mais precisa mudar.
+ * ESTE FILTRO CONTINUA AQUI DE PROPÓSITO
+ * --------------------------------------
+ * Ele é hoje redundante — o rótulo que ele remove já não existe na origem — e
+ * é exatamente por isso que vale mantê-lo: se a métrica voltar a `site.ts`
+ * antes de a confirmação comercial chegar, a Home continua não a publicando.
+ * A rede de proteção custa uma linha e o modo de falha que ela cobre é
+ * publicar um número inventado na primeira dobra.
  *
- * Escopo: **a Home.** `scopeMetrics` (que repete "3.000+") continua sendo usada
- * por `/sobre` e por componentes herdados da V1 — alterá-los aqui seria mexer na
- * V1 congelada sem pedido. A pendência está reportada para decisão humana.
+ * Ao religar a métrica com o valor confirmado, retire o rótulo desta lista.
  */
 const METRICAS_PENDENTES_DE_CONFIRMACAO = ['projetos entregues']
 

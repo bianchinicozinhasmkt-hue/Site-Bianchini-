@@ -135,15 +135,30 @@ export function ProofSection() {
               </p>
             </div>
 
-            {/*
-              Grade estática com quebra de linha, não carrossel: um carrossel
-              automático sem controle de pausa reprova em WCAG 2.2.2, e a faixa
-              deslizante da V1 ainda precisava de `loading="eager"` para não
-              perder logo fora da viewport horizontal. Parado, nada disso existe.
-            */}
-            <ul className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-7">
+            {/* ----------
+                Grade estática, não carrossel: um carrossel automático sem
+                controle de pausa reprova em WCAG 2.2.2, e a faixa deslizante
+                da V1 ainda precisava de `loading="eager"` para não perder logo
+                fora da viewport horizontal. Parado, nada disso existe.
+
+                **Colunas declaradas, não `flex-wrap`.** Com quebra automática
+                a distribuição dependia da largura da janela: nove logos em
+                1440px davam 8 + 1, e o último ficava sozinho numa segunda
+                linha com mil pixels de vazio à direita — lia como sobra, não
+                como composição. Fixando a contagem de colunas, a divisão passa
+                a ser decidida aqui:
+
+                  base .... 3 colunas → 3 + 3 + 3
+                  md+ ..... 5 colunas → 5 + 4
+
+                Nos dois casos a última linha fica cheia ou quase, e o ritmo
+                horizontal é o mesmo em todas as linhas. A grade também
+                sobrevive à contagem mudar: com 10 logos vira 5 + 5, com 8 vira
+                5 + 3 — nenhuma dessas hipóteses produz um órfão.
+                ---------- */}
+            <ul className="mt-8 grid grid-cols-3 items-center justify-items-center gap-x-6 gap-y-9 md:grid-cols-5 md:gap-x-8 lg:gap-x-10">
               {featuredClients.map((client) => (
-                <li key={client.id} className="flex items-center">
+                <li key={client.id} className="flex w-full items-center justify-center">
                   {/* ----------
                       Logos em monocromático, cor no hover.
 
@@ -168,7 +183,15 @@ export function ProofSection() {
                         os apagava contra a `canvas` off-white. O conjunto
                         continua calmo, mas nenhuma marca some da fileira.
                       */
-                      'relative block w-[6.5rem] opacity-80 grayscale transition-[opacity,filter] duration-200 ease-precise hover:opacity-100 hover:grayscale-0 md:w-[7.5rem]',
+                      /*
+                        Largura por `max-width` dentro da célula: em 320px a
+                        célula da grade de três colunas mede ~77px, e uma
+                        largura fixa de 104px transbordaria. O logo encolhe até
+                        o que a célula permite e para de crescer no teto — que
+                        sobe em `lg`, onde há área sobrando e os traços finos
+                        (Othon, Mocellin) ganham legibilidade.
+                      */
+                      'relative block w-full max-w-[6.5rem] opacity-80 grayscale transition-[opacity,filter] duration-200 ease-precise hover:opacity-100 hover:grayscale-0 md:max-w-[7.5rem] lg:max-w-[8.5rem]',
                       client.scale === 'sm' && 'h-8 md:h-9',
                       client.scale === 'md' && 'h-9 md:h-10',
                       (client.scale === 'lg' || !client.scale) && 'h-10 md:h-12',

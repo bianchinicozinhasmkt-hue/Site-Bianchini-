@@ -22,7 +22,9 @@ import { cn } from '@/lib/utils'
  *
  * Só entram logos com arquivo real no repositório e marcados como aprovados em
  * `src/data/clients.ts`. Os números exibidos são os confirmados (18 anos,
- * 3.000+ projetos) e a contagem verificável de linhas de equipamento.
+ * abrangência Brasil) e a contagem verificável de linhas de equipamento — a
+ * contagem de projetos saiu de `scopeMetrics` por não ter confirmação
+ * comercial (`src/data/site.ts`, "MÉTRICAS PÚBLICAS").
  *
  * A faixa desliza por `transform`, e o lazy loading nativo não carrega o que
  * está fora da viewport horizontal: por isso os logos usam `loading="eager"`.
