@@ -1,0 +1,13 @@
+reduced-motion 50ms apos a troca: h1 opacity=1, cta opacity=1 (nada invisivel)
+zoom 200% (1280x720 -> 640x360 CSS px): {"overflowX":0,"h1":"Equipamentos dimensionados para a sua operação.","tabs":3,"ctaVisivel":true}
+alvos de toque em 390px: todos >= 44x44
+alinhamento em 1586px (x, px): {
+ "logo": 133,
+ "navPrimeiroItem": 712,
+ "ctaHeader": 1235,
+ "eyebrowHero": 133,
+ "h1": 133,
+ "ctaHero": 133,
+ "primeiraAbaSeletor": 133,
+ "metricas": 133
+}

@@ -8,84 +8,216 @@
    existente e não modificado — `--ease-smooth` / `--ease-precise` /
    `--ease-premium` e `--header-height`. Consumir não é alterar.
 
-   O QUE ESTA COMPOSIÇÃO SUBSTITUI
-   ------------------------------
-   A montagem anterior tinha **três fotografias verticais simultâneas** de
-   altura inteira, cortadas em diagonal. Três cenas competindo pelo mesmo campo
-   de visão ao mesmo tempo não somam: cada uma perde escala, nenhuma consegue
-   ser a cena, e o conjunto lê como painel de aplicativo, não como a primeira
-   página de uma empresa que vende cozinha industrial.
+   ============================================================
+   O QUE A RECONSTRUÇÃO DE 2026-08-08 CORRIGIU
+   ============================================================
 
-   Aqui há **uma cena por vez**, no tamanho em que uma fotografia de operação
-   real precisa estar para significar alguma coisa, e os três caminhos vivem
-   numa régua editorial embaixo dela — presentes o tempo todo, sem cada um
-   cobrar um terço da tela.
+   A montagem anterior era o palco certo com a arquitetura errada. Medido no
+   navegador, nos sete viewports obrigatórios:
+
+     · **o `h1` saltava a cada troca de estado.** Em 1586 × 992 ele ia de
+       y=371,6 (altura 230,9) para y=457,4 (altura 173,2) e de volta — 86px de
+       deslocamento vertical por clique, com a etiqueta, o lead e o CTA
+       acompanhando. O bloco era ancorado pela base (`items-end`), então cada
+       linha a menos no título empurrava tudo para baixo;
+     · **em 320 × 568 o `h1` ficava em y = −75,6** — as duas primeiras linhas do
+       título e a etiqueta inteira acima da janela, inalcançáveis. Causa:
+       `height: 100svh` fixo num viewport onde o conteúdo não cabe;
+     · **o seletor não parecia um controle.** Três rótulos soltos sobre a
+       fotografia, sem caixa, sem divisória, sem número e sem seta, distribuídos
+       em terços de 440px enquanto a coluna de texto media 640 — o rótulo do
+       meio caía no vazio da composição;
+     · **um único indicador amarelo corria por cima dos três**, o que é
+       exatamente a linha contínua atravessando várias opções que o briefing
+       proíbe;
+     · **cabeçalho e dobra não compartilhavam eixo** (ver `header.tsx`);
+     · **a faixa de métricas media ~52px** e dividia a mesma base escura do
+       seletor, encostada nele;
+     · **a cena de Projetos era um render de 782px de detalhe real sangrado a
+       1440px**, com `brightness(0.66) saturate(0.55)` por cima. Daí a leitura
+       de "lavada e sem definição": ampliação de 1,84× somada a uma correção que
+       tirava um terço da luz e quase metade da cor.
+
+   O que **não** mudou, porque estava certo: um palco e três estados, uma cena
+   por vez em tamanho de operação real, o conteúdo comercial dentro da cena, os
+   três caminhos nomeados o tempo todo, `tablist` de verdade, e Equipamentos
+   liderando por posição na narrativa — não por tratamento de imagem.
    ============================================================ */
-
-.hero {
-  /* Ampliação de entrada da fotografia. Discreta de propósito: ver "MOTION". */
-  --enter-zoom: 1.03;
-}
 
 /* ============================================================
    O PALCO
    ============================================================
 
-   `overflow: hidden` é requisito, não acabamento: a fotografia entra ampliada
-   e, sem recorte, o excedente abriria rolagem horizontal — a mesma armadilha de
-   `transform` que a V1 já documenta.
+   `overflow: hidden` é requisito, não acabamento: a prancha de Projetos e a
+   fotografia recebem `transform`, e a V1 já documenta que transform conta como
+   área rolável.
    ============================================================ */
 .stage {
+  /*
+    ---------- Altura da cena no toque e no tablet ----------
+
+    Abaixo de `lg` a dobra é **fluxo vertical**, não uma redução do desktop: a
+    cena ocupa uma faixa de altura controlada no alto do palco e o conteúdo
+    comercial assenta **abaixo** dela, sobre grafite liso.
+
+    A montagem anterior mantinha a fotografia de altura inteira com o texto por
+    cima, e isso quebrava no estado de Projetos: o estudo 3D é claro, e o
+    `h1` branco caía em cima dele. Medido em 390 × 844, título e legenda da
+    prancha se sobrepunham.
+
+    `42vw` é a proporção; os dois limites são medidos:
+
+      136px de piso ..... em 320 × 568 a janela tem 504px úteis abaixo do
+                          cabeçalho, e cada pixel a mais na cena empurra o CTA
+                          para longe da dobra. Abaixo de 136 a cena deixa de ser
+                          lida como fotografia de operação;
+      300px de teto ..... acima disso o texto sai da primeira dobra em 390 × 844,
+                          que é o viewport de referência do tráfego móvel.
+  */
+  --media-h: clamp(8.5rem, 42vw, 18.75rem);
+
   position: relative;
   overflow: hidden;
   background-color: #101010;
 }
 
 /* ----------
-   As três fotografias, empilhadas no mesmo lugar. Só a ativa é opaca.
+   As três cenas, empilhadas no mesmo lugar. Só a ativa é opaca.
 
-   Ficam as três no DOM porque a troca precisa ser imediata: montar a imagem no
+   **Sem ampliação de entrada.** A versão anterior escalava a cena de 1,03 a 1 em
+   640ms a cada troca; somado ao crossfade, o palco inteiro respirava a cada
+   clique. O briefing pede crossfade, e só: 380ms, dentro da faixa de 300–450.
+
+   Ficam as três no DOM porque a troca precisa ser imediata — montar a imagem no
    clique produziria um quadro vazio no meio da transição. O custo é controlado
-   do lado do `next/image` — só a fotografia do estado inicial é `priority`.
+   do lado do `next/image`: só a cena inicial é `priority`.
    ---------- */
 .frame {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transform: scale(var(--enter-zoom));
-  transition:
-    opacity 560ms var(--ease-smooth),
-    transform 640ms var(--ease-smooth);
-  will-change: opacity, transform;
+  transition: opacity 380ms var(--ease-smooth);
+  will-change: opacity;
 }
 
 .frameActive {
   opacity: 1;
-  transform: scale(1);
 }
 
 /* ============================================================
    TRATAMENTO POR ESTADO — MÍNIMO, E DECLARADO
    ============================================================
 
-   Nenhum estado é privilegiado por tratamento: o que existe aqui é o mínimo
-   para as três cenas pertencerem ao mesmo mundo tonal quando trocam de lugar.
+   Nenhum estado é privilegiado por tratamento. O que existe aqui é o mínimo para
+   as três cenas pertencerem ao mesmo mundo tonal quando ocupam o mesmo lugar uma
+   depois da outra.
 
-     equipamentos .. sem correção. A fotografia âncora do site já é escura e
-                     contrastada na origem; é ela que define o alvo.
-     projetos ...... o estudo 3D é um render claro e frio (luminância média
-                     0,69 contra 0,09 da âncora). Sem correção ele entraria como
-                     um salto de exposição no meio da sequência. O ajuste
-                     escurece e tira parte do azul — não inverte, não recorta e
-                     não altera nada do desenho.
-     consultoria ... o balcão é âmbar na origem; a correção é só de saturação.
+   **A correção pesada de Projetos saiu.** Era `brightness(0.66) saturate(0.55)`
+   — um terço da luz e 45% da cor —, aplicada quando o render sangrava o palco
+   inteiro e precisava ser afogado para o texto sobreviver. Com a prancha em
+   composição documental sobre fundo grafite, a superfície escura já vem do
+   próprio palco: o render fica com a luz que tem, e ganha só um ganho de
+   contraste que devolve a aresta das bancadas.
+
+   consultoria: o balcão é âmbar e mais saturado que a âncora; a correção é só de
+   saturação, e mais leve que antes (0,86 contra 0,78) — o briefing pede
+   preservar brilho, inox e profundidade, não uniformizar.
    ============================================================ */
 .gradeProjetos {
-  filter: brightness(0.66) saturate(0.55) contrast(1.06);
+  filter: brightness(0.92) contrast(1.06) saturate(0.94);
 }
 
 .gradeConsultoria {
-  filter: saturate(0.78) brightness(0.96);
+  filter: saturate(0.86);
+}
+
+/* ============================================================
+   PROJETOS — PRANCHA EM COMPOSIÇÃO DOCUMENTAL
+   ============================================================
+
+   A justificativa completa (levantamento do acervo, resolução real, ordem de
+   decisão) está em `src/data/v2/home.ts`, bloco "PROJETOS". Aqui só a mecânica.
+
+   O detalhe real do estudo tem **782px de largura**. `max-width: 46rem` (736px)
+   é o teto de renderização derivado dele: em nenhum viewport a prancha é
+   desenhada acima da resolução que o arquivo de fato tem, então nada estica.
+   Abaixo de `lg` o teto passa a ser a largura da tela, que é sempre menor.
+
+   ============================================================
+   POR QUE UM PLANO DE ALTURA INTEIRA, E NÃO UMA PRANCHA SOLTA
+   ============================================================
+
+   A primeira tentativa pôs só a prancha, ancorada ao canto inferior direito.
+   Medida e olhada: 736 × 372 dentro de um palco de 1440 × 739 deixava ~200px de
+   grafite vazio acima e ~180px abaixo, e o estado inteiro lia mais leve que os
+   outros dois — um cartão pousado no vazio, exatamente o oposto de "os três
+   estados compartilham o mesmo ritmo".
+
+   A correção separa **massa** de **resolução**:
+
+     `.plateField` .. o plano — altura inteira do palco, encostado na aresta
+                      direita, com fio de tinta na aresta esquerda e um degradê
+                      quase imperceptível que o distingue do fundo. É ele que
+                      ocupa o mesmo campo visual que a fotografia ocupa nos
+                      outros dois estados;
+     `.plate` ....... o estudo dentro dele, centrado, na largura em que o
+                      arquivo tem detalhe real.
+
+   `48%` com teto de `46rem` (736px) é a largura do plano. Os dois limites têm
+   razão medida:
+
+     · **48%** mantém o plano à direita da coluna de texto em toda largura de
+       desktop — em 1024px o plano começa em 533 e a coluna termina em 520;
+     · **46rem** é o teto de resolução: o detalhe real do estudo tem 782px de
+       largura (ver `src/data/v2/home.ts`), então acima disso a imagem passaria a
+       ser esticada, que é o defeito que esta composição existe para não ter.
+
+   `--plate-lift` é metade da altura do seletor: o estudo é centrado no **campo
+   visível** do palco, que termina onde o seletor começa, e não na caixa do palco
+   (que o inclui). Sem o deslocamento ele nasce visualmente baixo.
+   ============================================================ */
+.plateField {
+  --plate-lift: 4.375rem;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: min(46rem, 48%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: calc(var(--plate-lift) * 2);
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.015) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.plate {
+  position: relative;
+  width: 100%;
+}
+
+/* Fio de tinta na aresta superior — a mesma keyline técnica do resto do site. */
+.plate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-top: 1px solid rgba(245, 198, 75, 0.5);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/*
+  A legenda fica **fora** do estudo, na faixa logo abaixo dele. Sobreposta ela
+  cobria o desenho e caía sobre um fundo claro, onde o texto claro reprovava.
+*/
+.plateCaption {
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 /* ============================================================
@@ -95,13 +227,39 @@
    Dois degradês, e nenhum véu uniforme:
 
      · um lateral, que fecha a **coluna esquerda**, onde o conteúdo vive, e
-       chega a zero antes dos 70% da largura — a metade direita da fotografia
+       chega a zero antes dos 74% da largura — o terço direito da fotografia
        fica sem cobertura nenhuma;
-     · um inferior curto, que assenta a régua dos três caminhos sobre a imagem
-       sem transformá-la numa faixa opaca.
+     · um inferior curto, que assenta a régua sobre a imagem sem transformá-la
+       numa faixa opaca.
 
-   No telefone a coluna some (o conteúdo é de largura inteira), então o lateral
-   é substituído por um vertical — ver o bloco de telefone, mais abaixo.
+   ============================================================
+   OS VALORES SÃO MEDIDOS, NÃO ESCOLHIDOS A OLHO
+   ============================================================
+
+   Uma primeira tentativa afrouxou o degradê (0,93 → 0,90 na origem, 0,52 → 0,44
+   no meio) apostando que o texto tinha ganhado contraste por outro caminho — o
+   título encurtou e a coluna estreitou. **Não tinha.** Amostragem de pixel do
+   pior caso (o ponto mais claro da fotografia dentro da caixa de cada texto),
+   sobre a cena de Equipamentos:
+
+     viewport   h1        intenção
+     1586        3,27:1    5,0:1
+     1440        3,47:1    4,6:1
+     1366        3,56:1    4,0:1   ← reprova
+     1024        2,92:1    2,48:1  ← reprova por larga margem
+
+   1024 é o pior caso por dois motivos somados: a coluna de texto vai até 51% da
+   tela (contra 46% em 1440) e o recorte da fotografia ali cai justamente sobre a
+   parede clara ao fundo.
+
+   Os valores abaixo foram remedidos até que o **pior pixel** sob o corpo de
+   texto passe 4,5:1 em todos os viewports e nas três cenas. O degradê continua
+   chegando a zero antes de 78% — o quarto direito da fotografia, onde estão a
+   linha de cocção, a coifa e o inox, segue sem cobertura nenhuma.
+
+   No telefone a coluna some (o conteúdo é de largura inteira e assenta abaixo da
+   cena), então o lateral é substituído por um vertical curto — ver o bloco de
+   telefone, mais abaixo.
    ============================================================ */
 .scrim {
   position: absolute;
@@ -110,71 +268,123 @@
   background:
     linear-gradient(
       to top,
-      rgba(16, 16, 16, 0.82) 0%,
-      rgba(16, 16, 16, 0.42) 14%,
-      rgba(16, 16, 16, 0) 34%
+      rgba(16, 16, 16, 0.78) 0%,
+      rgba(16, 16, 16, 0.36) 15%,
+      rgba(16, 16, 16, 0) 36%
     ),
     linear-gradient(
       to right,
-      rgba(16, 16, 16, 0.93) 0%,
-      rgba(16, 16, 16, 0.86) 22%,
-      rgba(16, 16, 16, 0.52) 46%,
-      rgba(16, 16, 16, 0.14) 64%,
-      rgba(16, 16, 16, 0) 76%
+      rgba(16, 16, 16, 0.95) 0%,
+      rgba(16, 16, 16, 0.93) 28%,
+      rgba(16, 16, 16, 0.82) 46%,
+      rgba(16, 16, 16, 0.42) 62%,
+      rgba(16, 16, 16, 0.12) 71%,
+      rgba(16, 16, 16, 0) 78%
     );
 }
 
 /* ============================================================
-   A RÉGUA DOS TRÊS CAMINHOS
+   O SELETOR DOS TRÊS CAMINHOS
    ============================================================
 
-   Não são abas de painel, nem cartões, nem pílulas: são três rótulos numa
-   régua compartilhada, que é o mesmo recurso que o seletor de pilares da V1
-   usa — moldura, divisória e preenchimento por item foram justamente o que deu
-   aparência de tabela lá, e não voltam aqui.
+   Um seletor de intenção, não três textos soltos sobre a foto. O que o torna
+   legível como controle, e que a versão anterior não tinha:
 
-   O estado ativo é marcado por **três sinais**, um deles não-cromático: peso e
-   contraste do rótulo, e o indicador amarelo de 2px. Os inativos continuam
-   plenamente legíveis (0,62 de opacidade sobre grafite) — reduzi-los a um
-   fantasma esconderia dois dos três caminhos comerciais.
+     · uma **faixa própria** com fundo grafite semitransparente e borda superior,
+       integrada à base do palco;
+     · **divisórias verticais** entre as três áreas;
+     · **número, título, complemento, seta e indicador** em cada uma;
+     · a área inteira clicável, com cursor de interação;
+     · linha superior amarela **exclusiva da opção ativa** — nunca um traço
+       contínuo correndo por cima das três.
+
+   Semitransparente e nada mais: sem `backdrop-filter`, sem vidro, sem sombra
+   genérica, sem canto arredondado.
+
+   **`1.2fr 1fr 1fr`** é a hierarquia comercial expressa na malha: Equipamentos
+   é a frente principal e recebe a área maior — o destaque "moderadamente maior"
+   que o briefing pede, sem que nada mude de estrutura entre os três.
    ============================================================ */
 .rail {
   position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 11, 12, 0.68);
 }
 
 /*
-  O indicador é **um** elemento que corre, e não três que acendem: é o que faz a
-  troca ler como um movimento contínuo entre estados em vez de dois piscares
-  independentes.
+  `minmax(0, …fr)`, e não `1.2fr 1fr 1fr` puro: a base de uma trilha `fr` é
+  `auto`, então uma célula cujo conteúdo não cabe **rouba largura das vizinhas**.
+  Medido em 320px antes da correção: 106,1 / 76,7 / 97,2px, três áreas de
+  larguras diferentes num controle que precisa ler como uma peça só.
 */
-.indicator {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  height: 2px;
-  width: calc(100% / 3);
-  transform: translateX(calc(var(--i, 0) * 100%));
-  transition: transform 420ms var(--ease-premium);
+.railGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
 }
 
 .railItem {
   position: relative;
-  transition: color 260ms var(--ease-precise);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color 220ms var(--ease-precise),
+    transform 220ms var(--ease-precise);
+}
+
+/* Divisória entre áreas — 1px a 10%, o suficiente para separar sem desenhar. */
+.railItem + .railItem::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /*
-  Deslocamento de 2px no ponteiro e no teclado. É a resposta mínima que
-  confirma que o rótulo é um controle — e não muda altura, então nada reflui.
+  Linha superior por opção. Ela existe sempre — discreta no inativo, amarela no
+  hover e no ativo —, e é **própria de cada área**: nenhuma trava atravessa as
+  vizinhas. Cresce da esquerda por `scaleX`, nunca por `width`.
 */
-.railItem > span {
-  display: block;
+.railTop {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgb(245, 198, 75);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms var(--ease-premium);
+}
+
+.railItem:hover .railTop,
+.railItem:focus-visible .railTop,
+.railItemActive .railTop {
+  transform: scaleX(1);
+}
+
+.railItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.railItemActive {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Seta: 4px no hover e no foco, e nada de deslocamento no repouso. */
+.railArrow {
   transition: transform 220ms var(--ease-precise);
 }
 
-.railItem:hover > span,
-.railItem:focus-visible > span {
-  transform: translateY(-2px);
+.railItem:hover .railArrow,
+.railItem:focus-visible .railArrow {
+  transform: translateX(4px);
 }
 
 /* ============================================================
@@ -184,9 +394,10 @@
    O bloco é remontado a cada troca (chave de React), então a animação abaixo
    roda uma vez por estado — sem estado intermediário e sem `setTimeout`.
 
-   Escalonamento: título 0ms, intenção 70ms, ação 140ms. Percurso de 10px, que
-   é deslocamento de composição, não queda. Nada aqui altera altura de caixa:
-   só `opacity` e `transform`.
+   Escalonamento: etiqueta 0ms, título 60ms, intenção 120ms, ação 180ms.
+   Percurso de 10px, dentro da faixa de 8–12 pedida. Nada aqui altera altura de
+   caixa: só `opacity` e `transform`. As caixas do título e da intenção têm piso
+   medido (ver `hero-stage.tsx`), então nenhum elemento se move entre estados.
    ============================================================ */
 @keyframes contentIn {
   from {
@@ -205,37 +416,113 @@
 }
 
 /* ============================================================
-   TELEFONE
+   TABLET E TELEFONE
    ============================================================ */
 @media (max-width: 1023px) {
   /*
-    A coluna de texto passa a ser a largura inteira, então o scrim lateral
-    deixa de fazer sentido: ele fecharia o lado esquerdo da fotografia e
-    deixaria o texto sobre a parte aberta. Aqui a luz cai de cima para baixo.
+    ---------- A cena vira uma faixa no alto ----------
+
+    As três cenas passam a ocupar a mesma faixa de `--media-h` no topo do palco;
+    abaixo dela é grafite liso, e é ali que o conteúdo comercial assenta. Vale
+    para as três de forma idêntica, então a troca de estado continua não mexendo
+    em nada da moldura.
+  */
+  .frame {
+    bottom: auto;
+    height: var(--media-h);
+  }
+
+  /*
+    O scrim acompanha a faixa e serve a um propósito só: dissolver a base da
+    cena no grafite, para que ela não termine num corte reto. Nenhum texto
+    assenta sobre ele nesta largura.
   */
   .scrim {
+    bottom: auto;
+    height: calc(var(--media-h) + 1px);
+    /*
+      Muitas paradas próximas na base de propósito: com três, o degradê fechava
+      de 0,22 para opaco em 12% da faixa e o olho lia uma **linha** atravessando
+      a fotografia. Aqui a queda começa antes e termina mais suave.
+    */
     background: linear-gradient(
-      to top,
-      rgba(16, 16, 16, 0.94) 0%,
-      rgba(16, 16, 16, 0.88) 26%,
-      rgba(16, 16, 16, 0.64) 46%,
-      rgba(16, 16, 16, 0.26) 66%,
-      rgba(16, 16, 16, 0.04) 100%
+      to bottom,
+      rgba(16, 16, 16, 0.34) 0%,
+      rgba(16, 16, 16, 0.1) 22%,
+      rgba(16, 16, 16, 0.16) 48%,
+      rgba(16, 16, 16, 0.34) 68%,
+      rgba(16, 16, 16, 0.62) 82%,
+      rgba(16, 16, 16, 0.88) 93%,
+      rgb(16, 16, 16) 100%
     );
   }
 
   /*
-    O estudo 3D é uma vista ampla (2340 × 762, proporção 3:1). Num palco quase
-    quadrado, `cover` já corta as laterais, e o que sobra no centro é bancada
-    solta — a leitura de *layout*, que é o que faz a imagem dizer "projeto" sem
-    legenda, se perde. Ampliado, entra o trecho com ilha, bancadas e a
-    circulação entre os postos.
+    O plano de projeto ocupa a mesma faixa. A prancha é recortada para caber
+    nela (`object-cover` no `<Image>` mais o `overflow` do quadro), e a legenda
+    sai — em 390px a faixa tem 180px e uma linha de rótulo a mais custaria a
+    leitura do desenho, que é o que a cena precisa dizer aqui.
 
-    A ampliação vai na **imagem**, não no quadro: o quadro carrega a animação de
-    entrada, e somar as duas faria a cena saltar na troca de estado.
+    A resolução fica folgada nesta largura: 390px de renderização contra 782px
+    de detalhe real.
   */
-  .photoProjetos {
-    transform: scale(1.32);
+  .plateField {
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 0;
+    border-left: 0;
+    background: none;
+  }
+
+  .plate {
+    height: 100%;
+  }
+
+  .plate::before {
+    border-top: 0;
+  }
+
+  .plateCaption {
+    display: none;
+  }
+
+  /*
+    ---------- O seletor no toque ----------
+
+    **Três áreas iguais, e nenhuma rolagem horizontal.** Medido: em 320px a
+    faixa tem 280px e cada área fica com 93px; "EQUIPAMENTOS" em Oswald a 12px
+    pede 71px. Cabe em uma linha, então o briefing é atendido sem recorrer à
+    rolagem lateral ("somente se indispensável") e sem indicador de "há mais".
+
+    `1.2fr` sai aqui de propósito: com 93px por área, os 17px de diferença entre
+    a primeira e as outras duas seriam a diferença entre "EQUIPAMENTOS" caber e
+    quebrar no meio do glifo. A hierarquia continua dita pela ordem, pelo estado
+    inicial e pelo `h1` — não pela largura da célula.
+  */
+  .railGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Sem ponteiro não há hover; o realce por passagem só confundiria o toque. */
+  .railItem:hover {
+    background: none;
+    transform: none;
+  }
+
+  .railItem:hover .railTop {
+    transform: scaleX(0);
+  }
+
+  .railItemActive:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .railItemActive:hover .railTop {
+    transform: scaleX(1);
+  }
+
+  .railItem:hover .railArrow {
+    transform: none;
   }
 }
 
@@ -243,28 +530,26 @@
    `prefers-reduced-motion` — requisito, não cortesia
    ============================================================
 
-   Troca imediata: sem ampliação, sem escalonamento, sem percurso. Nenhum
-   conteúdo fica invisível e nenhuma camada permanece fechada — a fotografia
-   ativa continua opaca e as inativas continuam transparentes.
+   Troca imediata: sem crossfade, sem escalonamento, sem percurso, sem
+   deslocamento de seta. Nenhum conteúdo fica invisível e nenhuma camada
+   permanece fechada — a cena ativa continua opaca, as inativas continuam
+   transparentes, e a linha superior da opção ativa continua desenhada (ela vira
+   `scaleX(1)` instantâneo, não some).
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .frame {
-    transition: none;
-    transform: none;
-  }
-
-  .frameActive {
-    transform: none;
-  }
-
-  .indicator,
+  .frame,
   .railItem,
-  .railItem > span {
+  .railTop,
+  .railArrow {
     transition: none;
   }
 
-  .railItem:hover > span,
-  .railItem:focus-visible > span {
+  .railItem:hover {
+    transform: none;
+  }
+
+  .railItem:hover .railArrow,
+  .railItem:focus-visible .railArrow {
     transform: none;
   }
 

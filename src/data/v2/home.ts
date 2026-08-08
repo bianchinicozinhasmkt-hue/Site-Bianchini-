@@ -102,26 +102,52 @@ export const homeHeroMetrics: Metric[] = heroMetrics.filter(
  *   fluxo, processo, custo .......... `diagnosis.ts` (`diagnosisAreas`)
  */
 export const homeHero = {
-  eyebrow: 'Cozinhas profissionais e food service',
   /**
-   * H1 — copy aprovada, transcrita sem alteração.
-   *
-   * É o título do **estado inicial**, e portanto o `h1` que o servidor entrega e
+   * Instrução do seletor. Fica **colada à régua**, não como linha própria acima
+   * dela: é o rótulo do controle, e uma frase de largura inteira ali roubaria
+   * altura da fotografia sem dizer nada que o controle já não diga.
+   */
+  railHint: 'Escolha o que sua operação precisa resolver',
+  /**
+   * H1 — título do **estado inicial**, portanto o `h1` que o servidor entrega e
    * que buscador e prévia de link leem. Quando o visitante troca de estado, o
    * mesmo `h1` passa a carregar o título daquele estado: um título de nível 1
-   * por página, sempre visível e sempre descrevendo o que está na tela. O texto
-   * aprovado não muda — ele é o padrão.
+   * por página, sempre visível e sempre descrevendo o que está na tela.
+   *
+   * ============================================================
+   * COPY TRAVADA — NÃO ENCURTAR (2026-08-08)
+   * ============================================================
+   *
+   * Este texto é **conteúdo aprovado do briefing de entrega**, não uma escolha
+   * de redação deste arquivo. Uma rodada anterior o trocou por "Equipamentos
+   * dimensionados para a sua operação." (46 caracteres) para resolver um
+   * problema de composição: aos 49px de corpo que o `h1` tinha então, os 74
+   * caracteres rendiam **quatro linhas** e um bloco de 209,7px em 1440 × 900,
+   * empurrando lead e CTA para baixo do centro óptico.
+   *
+   * O problema era real; a correção estava no lugar errado. **Copy aprovada não
+   * é variável de layout.** O ajuste vive agora na tipografia — o teto do corpo
+   * do `h1` caiu de 3,5rem para 2,875rem no desktop —, e o título completo cabe
+   * em três linhas com a mesma altura de bloco que a versão curta tinha em
+   * quatro. Ver `HEADLINE_MIN` em `hero-stage.tsx` para a contagem medida.
+   *
+   * Ao mexer neste texto, remeça `HEADLINE_MIN`. Ao querer encurtá-lo, não:
+   * peça a mudança a quem aprovou a copy.
    */
   title: 'Equipamentos para cozinha profissional, especificados para a sua operação.',
 } as const
 
 export interface HeroState {
   id: 'equipamentos' | 'projetos' | 'consultoria'
+  /** Índice na régua — `01`, `02`, `03`. Ordem comercial, não cronológica. */
+  number: string
   /** Rótulo na régua dos três caminhos. */
   name: string
-  /** Uma linha curta sob o rótulo, na régua. Não é slogan: é a situação do cliente. */
+  /** Complemento do rótulo, na régua. Não é slogan: é a situação do cliente. */
   cue: string
-  /** Título do estado. No estado inicial, é a copy aprovada de `homeHero.title`. */
+  /** Etiqueta acima do título. Nomeia a frente antes de o título ser lido. */
+  eyebrow: string
+  /** Título do estado. No estado inicial, é `homeHero.title`. */
   headline: string
   /** Uma frase — o que a Bianchini entrega nessa frente. */
   intent: string
@@ -131,8 +157,20 @@ export interface HeroState {
   media: {
     src: string
     alt: string
-    /** Enquadramento do recorte dentro do palco. */
+    /**
+     * `photo` ....... fotografia real, de sangria, cobrindo o palco inteiro.
+     * `document` .... material de projeto apresentado **em tamanho controlado**
+     *                 sobre o palco, sem ampliação destrutiva do arquivo. Ver o
+     *                 bloco "PROJETOS" logo abaixo: é uma limitação de acervo
+     *                 declarada, não uma escolha de composição.
+     */
+    kind: 'photo' | 'document'
+    /** Enquadramento do recorte dentro do palco (só `kind: 'photo'`). */
     objectPosition?: string
+    /** Resolução real do arquivo, para conferência do `sizes` e do teto de escala. */
+    intrinsic: string
+    /** Legenda técnica curta — só `kind: 'document'`. */
+    caption?: string
   }
 }
 
@@ -142,99 +180,156 @@ export interface HeroState {
  * ============================================================
  *
  * Critério: **o visitante tem de saber do que trata o palco antes de ler uma
- * palavra** — e as três precisam pertencer ao mesmo mundo visual, porque agora
- * elas ocupam o *mesmo* lugar, uma depois da outra. Uma imagem que salta de
- * exposição ou de matéria na troca destrói a leitura de composição única.
+ * palavra** — e as três precisam pertencer ao mesmo mundo visual, porque elas
+ * ocupam o *mesmo* lugar, uma depois da outra. Uma imagem que salta de exposição
+ * ou de matéria na troca destrói a leitura de composição única.
  *
- *   EQUIPAMENTOS .. `hero-industrial-kitchen.png` (1916 × 821). A fotografia
- *                   âncora do site: inox, coifa contínua, ilha de produção e
- *                   fornos, com escala de operação real. É ela que define o alvo
- *                   tonal dos outros dois estados.
- *
- *   PROJETOS ...... `projeto-3d-hero.jpg`. Um **estudo 3D real** do acervo:
- *                   vista axonométrica em corte de uma cozinha inteira, com
- *                   bancadas, ilha refrigerada, prateleiras e a circulação entre
- *                   elas. Diz "projeto" à distância — é volume e layout, não
- *                   obra pronta — e, por ser feito das mesmas peças em inox da
- *                   fotografia âncora, conversa com ela.
- *
- *                   ORIGEM E LIMITAÇÃO, DECLARADAS
- *                   Derivado de `projeto-3d.jpg` (900 × 395), que é o arquivo
- *                   real. Duas operações, ambas de apresentação: corte de 118px
- *                   à esquerda, onde o material de origem traz um selo "02"
- *                   gravado; e reamostragem 2,6× (lanczos3 + nitidez) para
- *                   2033 × 1027. **Nada foi gerado, redesenhado ou montado.** A
- *                   limitação permanece: o arquivo de origem é de baixa
- *                   resolução, e uma exportação em alta do mesmo estudo
- *                   substituiria este sem nenhuma outra mudança.
- *
- *                   A planta executiva (`planta-executiva-hero.jpg`) foi
- *                   descartada como palco: em negativo, traço branco sobre
- *                   grafite, ela é semanticamente perfeita e visualmente
- *                   incompatível — entra como um gráfico de altíssimo contraste
- *                   no meio de duas fotografias e desmonta a direção de arte. O
- *                   arquivo permanece no repositório.
+ *   EQUIPAMENTOS .. `hero-industrial-kitchen.png` (**1672 × 941**, recorte
+ *                   atualizado pelo gestor — o arquivo anterior era 1916 × 821).
+ *                   A fotografia âncora do site: inox, coifa contínua, ilha de
+ *                   produção e fornos, com escala de operação real. É ela que
+ *                   define o alvo tonal dos outros dois estados, e é a única com
+ *                   resolução para sangrar num palco de 1586px sem ampliação.
  *
  *   CONSULTORIA ... `operacao-comercial.png` (1448 × 1086). O balcão de
  *                   atendimento com PDV, pedidos embalados para retirada, louça
  *                   empilhada e a linha de produção acesa ao fundo — uma
  *                   operação **em funcionamento**, que é a condição de quem
- *                   procura diagnóstico. Não é cozinha vazia: o que está em cena
- *                   é o ponto onde fluxo, processo e gargalo aparecem.
+ *                   procura diagnóstico. Não é cozinha vazia nem reunião
+ *                   corporativa genérica: o que está em cena é o ponto onde
+ *                   fluxo, processo e gargalo aparecem.
  *
- * Tratamento em `hero-stage.module.css` — mínimo, e declarado item por item.
+ * ============================================================
+ * PROJETOS — LIMITAÇÃO DE ACERVO, E A SOLUÇÃO ADOTADA
+ * ============================================================
+ *
+ * **O acervo não tem material de projeto em alta resolução.** Levantamento
+ * completo de `public/images/projects/` (2026-08-08):
+ *
+ *   projeto-3d.jpg .............. 900 × 395   ← arquivo real
+ *   projeto-3d-recorte.jpg ...... 900 × 299   ← recorte do mesmo arquivo
+ *   projeto-3d-hero.jpg ........ 2033 × 1027  ← **reamostragem 2,6× do real**
+ *   planta-executiva.jpg ........ 900 × 393   ← arquivo real
+ *   planta-executiva-recorte.jpg  900 × 293   ← recorte do mesmo arquivo
+ *   planta-executiva-hero.jpg .. 2280 × 1179  ← **reamostragem do real**
+ *
+ * Nenhuma fotografia do acervo representa *projeto*: as demais são operações
+ * construídas, que é a matéria do estado de Equipamentos — usá-las aqui daria
+ * dois estados ilustrados pelo mesmo assunto.
+ *
+ * Descontando o corte de 118px à esquerda (onde o material de origem traz um
+ * selo "02" gravado, que não pode ir para a primeira dobra), o detalhe **real**
+ * do estudo 3D é de **782px de largura**. Sangrado num palco de 1440px, isso é
+ * 1,84× de ampliação — foi exatamente o que produziu a cena lavada, cinza e sem
+ * definição registrada na auditoria.
+ *
+ * A ordem de decisão pedida chega então ao último item: **reduzir a área visual
+ * da imagem e aplicar composição documental, sem ampliar o arquivo.** É o que
+ * `kind: 'document'` faz — o estudo entra como prancha ancorada ao canto do
+ * palco, com teto de largura de renderização, sobre o mesmo fundo grafite. A
+ * caixa do palco, a coluna de conteúdo, a régua e a faixa de métricas não mudam:
+ * muda **o que preenche o palco**, que é a única variação que os três estados
+ * têm permissão de ter.
+ *
+ * Nenhum desfoque pesado é usado para esconder resolução, e nada foi gerado,
+ * redesenhado ou montado.
+ *
+ * **PENDÊNCIA ABERTA.** Uma exportação em alta do mesmo estudo (ou uma
+ * fotografia real de prancha/obra em projeto) substitui isto trocando `src`,
+ * `intrinsic` e `kind` para `'photo'` — nenhuma outra mudança.
+ *
+ * Tratamento tonal em `hero-stage.module.css` — mínimo, e declarado item a item.
  */
 export const heroStates: HeroState[] = [
   {
     id: 'equipamentos',
+    number: '01',
     name: 'Equipamentos',
-    cue: 'Preciso comprar ou especificar',
+    cue: 'Comprar, substituir ou especificar',
+    eyebrow: 'Equipamentos para cozinhas profissionais',
     headline: homeHero.title,
+    /*
+      "instalação e comissionamento" não é afirmação nova: `src/data/rational.ts`
+      já publica "Fornecido, instalado e comissionado pela Bianchini", e
+      `faq.ts` (`kitchensFaq[0]`) publica "especificamos e fornecemos".
+      "volume real de produção" é transcrição literal de `faq.ts`.
+    */
     intent:
-      'Cocção, refrigeração, preparo, higienização, inox e exaustão — dimensionados pelo volume real da operação, não pela ficha técnica.',
+      'Da especificação à instalação e ao comissionamento, a Bianchini ajuda sua empresa a investir no equipamento certo para o volume real de produção.',
+    /*
+      Rótulo travado pelo briefing de entrega: "SOLICITAR ORÇAMENTO". Era
+      "Solicitar especificação e orçamento" — mais preciso, mas mais longo e
+      não é o texto aprovado. O mesmo vale para os outros dois CTAs: "Falar com
+      um projetista" e "Agendar diagnóstico", literais.
+    */
     cta: { label: 'Solicitar orçamento', href: '/contato?intencao=equipamentos' },
     event: 'hero_equipamentos_click',
     media: {
+      kind: 'photo',
       src: '/images/hero/hero-industrial-kitchen.png',
+      intrinsic: '1672x941',
       alt: 'Cozinha industrial profissional em aço inox, com coifa contínua, luminárias suspensas e bancada central de produção',
       /*
-        58%: o terço esquerdo do arquivo é quase preto e é justamente onde a
+        62%: o terço esquerdo do arquivo é quase preto e é justamente onde a
         coluna de texto assenta. À direita estão a ilha em inox, as luminárias e
-        os fornos — a matéria do estado.
+        os fornos — a matéria do estado. Subiu de 58% para 62% quando o gestor
+        trocou o recorte do arquivo (1916 × 821 → 1672 × 941): o novo enquadre é
+        mais alto e menos largo, então o mesmo percentual mostrava menos linha.
       */
-      objectPosition: '58% center',
+      objectPosition: '62% center',
     },
   },
   {
     id: 'projetos',
+    number: '02',
     name: 'Projetos',
-    cue: 'Vou abrir, reformar ou reorganizar',
-    headline: 'Abrir, reformar ou reorganizar uma cozinha começa pelo projeto.',
-    intent: 'Layout, fluxo e dimensionamento definidos antes da compra. Quem projeta, especifica.',
+    cue: 'Abrir, reformar ou reorganizar',
+    eyebrow: 'Projetos para food service',
+    headline: 'Abrir, reformar ou reorganizar começa pelo projeto.',
+    /*
+      "Layout, fluxo, infraestrutura e dimensionamento" são os entregáveis já
+      publicados em `src/data/scope-levels.ts` (nível 02) — não uma lista nova.
+    */
+    intent:
+      'Layout, fluxo, infraestrutura e dimensionamento definidos antes da compra e da implantação.',
     cta: { label: 'Falar com um projetista', href: '/contato?intencao=arquitetura' },
     event: 'hero_projetos_click',
     media: {
+      kind: 'document',
       src: '/images/projects/projeto-3d-hero.jpg',
+      /*
+        2033 × 1027 é o arquivo; **782 × 395 é o detalhe real** (ver o bloco
+        PROJETOS acima). O teto de largura de renderização no componente é
+        derivado deste segundo número, não do primeiro.
+      */
+      intrinsic: '2033x1027 (detalhe real 782x395)',
       alt: 'Estudo 3D de projeto de cozinha profissional em vista axonométrica, com bancadas em inox, ilha refrigerada, prateleiras e a circulação entre os postos',
       /*
-        Centro: com a proporção do arquivo (1,98) perto da do palco, o estudo
-        entra praticamente inteiro e o corte de `cover` é vertical, não
-        horizontal — é o que preserva a leitura de layout.
+        A legenda declara o tipo do material. `docs/v2/DECISIONS.md`, DEC-008:
+        render nunca é apresentado como obra executada.
       */
-      objectPosition: 'center',
+      caption: 'Estudo 3D de layout — material de projeto, não obra executada',
     },
   },
   {
     id: 'consultoria',
+    number: '03',
     name: 'Consultoria',
-    cue: 'A operação roda, mas trava',
-    headline: 'A operação já roda. O que trava raramente começa no equipamento.',
+    cue: 'Corrigir gargalos e melhorar resultados',
+    eyebrow: 'Diagnóstico operacional',
+    headline: 'Encontre a causa antes de investir na solução.',
+    /*
+      "fluxo, capacidade, processos e equipamentos" são quatro das seis frentes
+      já publicadas em `src/data/diagnosis.ts` (`diagnosisAreas`).
+    */
     intent:
-      'Diagnóstico de fluxo, processo e custo para achar a causa antes de comprar qualquer coisa.',
+      'A Bianchini analisa fluxo, capacidade, processos e equipamentos para indicar prioridades com mais segurança.',
     cta: { label: 'Agendar diagnóstico', href: '/contato?intencao=consultoria' },
     event: 'hero_consultoria_click',
     media: {
+      kind: 'photo',
       src: '/images/hero/operacao-comercial.png',
+      intrinsic: '1448x1086',
       alt: 'Balcão de atendimento com terminal de ponto de venda, pedidos embalados para retirada, louça empilhada e a linha de produção em aço inox acesa ao fundo',
       /*
         46%: em `center` o palco pega a planta e o vaso da esquerda e perde o
