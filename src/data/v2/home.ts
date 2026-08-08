@@ -70,20 +70,110 @@ export const homeHeroMetrics: Metric[] = heroMetrics.filter(
   (metric) => !METRICAS_PENDENTES_DE_CONFIRMACAO.includes(metric.label),
 )
 
+/**
+ * ============================================================
+ * PRIMEIRA DOBRA — TRÊS PILARES EM UMA COMPOSIÇÃO SÓ
+ * ============================================================
+ *
+ * O visitante de tráfego pago precisa responder quatro perguntas em segundos:
+ * o que a Bianchini faz, quais são as frentes, em qual delas o problema dele
+ * se encaixa e o que fazer agora. Por isso cada pilar carrega **a pergunta do
+ * cliente**, não uma descrição institucional da empresa.
+ *
+ * A ordem é a hierarquia comercial (DEC-001) e está expressa em área, posição,
+ * contraste e tipo de CTA — não só no texto. Só Equipamentos recebe botão
+ * preenchido; Projetos e Consultoria recebem CTA textual.
+ *
+ * ORIGEM DAS AFIRMAÇÕES — nada novo sobre a empresa
+ * ------------------------------------------------
+ *   seis frentes de equipamento .... `MASTER_BIANCHINI.md` §3.1, DEC-007
+ *   "volume real"/"ficha técnica" .. `equipment-categories.ts`, `faq.ts`
+ *   "quem projeta, especifica" ..... `MASTER_BIANCHINI.md` §3.2
+ *   layout/fluxo/dimensionamento ... `scope-levels.ts` nível 02
+ *   gargalo, processo, equipe ...... `diagnosis.ts` (`diagnosisAreas`)
+ */
 export const homeHero = {
-  eyebrow: 'Equipamentos para cozinha profissional',
-  title: 'Equipamentos para cozinha profissional, dimensionados pela operação — não pela ficha técnica.',
-  lead: 'Cocção, refrigeração, preparo, higienização, mobiliário em aço inox e exaustão: especificamos e fornecemos o equipamento certo para o volume real de produção. Projeto e consultoria entram quando a decisão precisa vir antes da compra.',
-  primaryCta: { label: 'Solicitar orçamento de equipamentos', href: '/contato?intencao=equipamentos' },
-  secondaryCta: { label: 'Conhecer projetos e consultoria', href: '#do-projeto-a-execucao' },
-  /** Rótulo do seletor compacto que liga a primeira dobra à vitrine. */
-  categoriesLabel: 'Categorias',
+  eyebrow: 'Cozinhas profissionais e food service',
+  /** H1 — nomeia as três frentes na ordem comercial, sem metáfora. */
+  title: 'Equipamentos, projeto e consultoria para cozinhas profissionais.',
+} as const
+
+export interface HeroPillar {
+  id: 'equipamentos' | 'projetos' | 'consultoria'
+  index: string
+  name: string
+  /** A pergunta do cliente que este pilar responde. */
+  question: string
+  /** Proposta curta — o que a Bianchini entrega nessa frente. */
+  proposition: string
+  cta: { label: string; href: string }
+  /** Evento de conversão, um por caminho. */
+  event: 'hero_equipamentos_click' | 'hero_projetos_click' | 'hero_consultoria_click'
   media: {
-    src: '/images/hero/hero-industrial-kitchen.png',
-    alt: 'Cozinha industrial profissional em aço inox, com coifa contínua, luminárias suspensas e bancada central de produção',
-    /** Legenda de aplicação: descreve o que está na fotografia, nada além. */
-    caption: 'Cozinha industrial em aço inox — coifa contínua, bancada central e apoio de produção',
+    src: string
+    alt: string
+    /**
+     * Enquadramento do recorte. As duas fotografias de projeto do acervo têm um
+     * numeral ("01"/"02") gravado no canto superior esquerdo pelo material de
+     * origem; empurrar o enquadramento para a direita mantém esse canto fora do
+     * painel, sem precisar editar o arquivo.
+     */
+     objectPosition?: string
+    /** Rótulo de tipo, quando a imagem não é fotografia de operação. */
+    kind?: string
+  }
+}
+
+export const heroPillars: HeroPillar[] = [
+  {
+    id: 'equipamentos',
+    index: '01',
+    name: 'Equipamentos',
+    question: 'Preciso comprar ou especificar equipamentos.',
+    proposition:
+      'Cocção, refrigeração, preparo, higienização, inox e exaustão — dimensionados pelo volume real da operação, não pela ficha técnica.',
+    cta: { label: 'Solicitar orçamento', href: '/contato?intencao=equipamentos' },
+    event: 'hero_equipamentos_click',
+    media: {
+      src: '/images/hero/hero-industrial-kitchen.png',
+      alt: 'Cozinha industrial profissional em aço inox, com coifa contínua, luminárias suspensas e bancada central de produção',
+    },
   },
+  {
+    id: 'projetos',
+    index: '02',
+    name: 'Projetos',
+    question: 'Vou abrir, reformar ou reorganizar uma cozinha.',
+    proposition: 'Layout, fluxo, dimensionamento e especificação antes da compra. Quem projeta, especifica.',
+    cta: { label: 'Falar com um projetista', href: '/contato?intencao=arquitetura' },
+    event: 'hero_projetos_click',
+    media: {
+      src: '/images/projects/projeto-3d.jpg',
+      alt: 'Modelo tridimensional de cozinha profissional com bancadas, refrigeração e equipamentos em inox',
+      objectPosition: '68% center',
+      kind: 'Estudo 3D',
+    },
+  },
+  {
+    id: 'consultoria',
+    index: '03',
+    name: 'Consultoria',
+    question: 'Minha operação já roda, mas trava.',
+    proposition: 'Diagnóstico de fluxo, processo, equipe, cardápio e custo — para achar a causa antes de comprar qualquer coisa.',
+    cta: { label: 'Agendar diagnóstico', href: '/contato?intencao=consultoria' },
+    event: 'hero_consultoria_click',
+    media: {
+      src: '/images/projects/camara-frigorifica.jpg',
+      alt: 'Interior de câmara frigorífica com caixas empilhadas em estantes e evaporador de teto',
+      objectPosition: '38% center',
+    },
+  },
+]
+
+/** Ação secundária da dobra — fica fora dos painéis para não aninhar links. */
+export const heroSecondary = {
+  label: 'Ver as seis categorias de equipamento',
+  href: '#equipamentos',
 } as const
 
 export const homeCategoriesSection = {

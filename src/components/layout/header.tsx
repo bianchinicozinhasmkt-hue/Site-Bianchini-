@@ -74,8 +74,15 @@ export function Header() {
             A margem negativa que cancelava a folga transparente do PNG antigo
             saiu junto com ele: o arquivo oficial não tem folga lateral.
             ---------- */}
+        {/*
+          O logotipo encolhe um degrau abaixo de `sm`. Com o CTA de orçamento
+          agora presente também no cabeçalho móvel (V2), os 34px anteriores
+          somavam mais que a faixa de 360–390px comporta: o CTA saía cortado e
+          o botão do menu era empurrado para fora da tela. A 30px o lockup de
+          duas linhas continua legível — foi o piso testado na V1.
+        */}
         <span className="flex shrink-0 items-center">
-          <Logo priority variant="light" className="h-[2.125rem] shrink-0 md:h-10" />
+          <Logo priority variant="light" className="h-[1.875rem] shrink-0 sm:h-[2.125rem] md:h-10" />
         </span>
 
         <nav
@@ -140,7 +147,7 @@ export function Header() {
           */}
           <Link
             href="/contato?intencao=equipamentos"
-            className="inline-flex h-11 items-center whitespace-nowrap rounded-[3px] bg-yellow px-3 font-condensed text-[0.75rem] font-semibold uppercase tracking-[0.05em] text-ink transition-colors duration-200 ease-precise hover:bg-yellow-bright active:bg-yellow-deep lg:hidden"
+            className="inline-flex h-11 items-center whitespace-nowrap rounded-[3px] bg-yellow px-2.5 font-condensed text-[0.6875rem] font-semibold uppercase tracking-[0.04em] text-ink transition-colors duration-200 ease-precise hover:bg-yellow-bright active:bg-yellow-deep sm:px-3 sm:text-[0.75rem] lg:hidden"
           >
             Orçamento
           </Link>

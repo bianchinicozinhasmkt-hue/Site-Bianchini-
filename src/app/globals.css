@@ -1088,3 +1088,200 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================
+   HERO DE TRÊS PILARES — V2
+   ==========================================================
+
+   A primeira dobra da V2 é uma composição única cortada em três painéis
+   diagonais: Equipamentos, Projetos e Consultoria. Ela evolui a linguagem da
+   V1 (aresta diagonal + keyline amarela, ver `.diag-panel`) em vez de repetir
+   a mecânica: lá havia **um** painel com `--diag` em `rem`; aqui há três
+   regiões definidas por fronteiras em **porcentagem da composição**, o que é o
+   que permite as três se moverem juntas e continuarem paralelas.
+
+   GEOMETRIA
+   ---------
+     --tri-b1 .... fronteira Equipamentos|Projetos, medida no TOPO
+     --tri-b2 .... fronteira Projetos|Consultoria, medida no TOPO
+     --tri-cut ... deslocamento horizontal da diagonal entre topo e base.
+                   É o mesmo para as duas fronteiras — é isso que as mantém
+                   paralelas, exatamente como a keyline da V1 é o mesmo
+                   polígono deslocado, e não uma reta mais inclinada.
+     --tri-gap ... folga entre painéis vizinhos; revela o grafite do fundo e
+                   se lê como corte, não como emenda.
+
+   A área de cada pilar é medida na meia-altura (a diagonal tira de um lado o
+   que dá ao outro): com b1=50%, b2=77% e cut=5,5%, resulta em
+   ~47% / ~27% / ~26% — a hierarquia comercial pedida, expressa em área.
+
+   POR QUE PORCENTAGEM, E NÃO `rem`
+   --------------------------------
+   Em `rem` a inclinação mudaria com a largura da janela e as três fronteiras
+   deixariam de ser paralelas em telas largas. Em porcentagem a composição
+   inteira escala junto — a mesma razão pela qual a keyline da V1 é definida
+   como deslocamento do próprio polígono.
+
+   ARMADILHA HERDADA: `clip-path` conta como área rolável. A seção precisa de
+   `overflow-hidden` — sem ele os painéis abrem rolagem horizontal.
+   ========================================================== */
+.hero-tri {
+  --tri-cut: 5.5%;
+  --tri-b1: 50%;
+  --tri-b2: 77%;
+  --tri-gap: 0.3%;
+  --tri-key: 0.22%;
+}
+
+/* ---------- Composição diagonal: só a partir de lg ---------- */
+@media (min-width: 1024px) {
+  .hero-tri-a {
+    clip-path: polygon(0 0, var(--tri-b1) 0, calc(var(--tri-b1) - var(--tri-cut)) 100%, 0 100%);
+  }
+
+  .hero-tri-b {
+    clip-path: polygon(
+      calc(var(--tri-b1) + var(--tri-gap)) 0,
+      var(--tri-b2) 0,
+      calc(var(--tri-b2) - var(--tri-cut)) 100%,
+      calc(var(--tri-b1) - var(--tri-cut) + var(--tri-gap)) 100%
+    );
+  }
+
+  .hero-tri-c {
+    clip-path: polygon(
+      calc(var(--tri-b2) + var(--tri-gap)) 0,
+      100% 0,
+      100% 100%,
+      calc(var(--tri-b2) - var(--tri-cut) + var(--tri-gap)) 100%
+    );
+  }
+
+  /*
+    Keyline amarela na fronteira Equipamentos|Projetos — e só nela. É o sinal
+    que aponta qual é a frente principal, no mesmo lugar em que a V1 punha a
+    keyline do hero. Em fundo escuro o amarelo tem 11,8:1, então aqui ele é
+    acento pleno e não apenas hairline decorativa.
+  */
+  .hero-tri-key {
+    clip-path: polygon(
+      calc(var(--tri-b1) + 0.04%) 0,
+      calc(var(--tri-b1) + 0.04% + var(--tri-key)) 0,
+      calc(var(--tri-b1) - var(--tri-cut) + 0.04% + var(--tri-key)) 100%,
+      calc(var(--tri-b1) - var(--tri-cut) + 0.04%) 100%
+    );
+  }
+
+  /*
+    Segunda keyline, na fronteira Projetos|Consultoria. Só a folga de grafite
+    não bastava: as duas fotografias vizinhas são claras, e o vão escuro entre
+    elas desaparecia — a composição perdia um dos três cortes justamente onde
+    precisa separar duas ofertas diferentes.
+
+    Ela é branca e discreta, não amarela: o amarelo é o sinal da frente
+    principal e marca só a fronteira de Equipamentos. Duas keylines amarelas
+    diriam que as três frentes têm o mesmo peso.
+  */
+  .hero-tri-key2 {
+    clip-path: polygon(
+      calc(var(--tri-b2) + 0.04%) 0,
+      calc(var(--tri-b2) + 0.04% + var(--tri-key)) 0,
+      calc(var(--tri-b2) - var(--tri-cut) + 0.04% + var(--tri-key)) 100%,
+      calc(var(--tri-b2) - var(--tri-cut) + 0.04%) 100%
+    );
+  }
+
+  /* Caixa de conteúdo de cada pilar, dentro da zona segura da diagonal. */
+  .hero-tri-box-a {
+    left: 0;
+    right: calc(100% - var(--tri-b1) + var(--tri-cut));
+  }
+
+  .hero-tri-box-b {
+    left: var(--tri-b1);
+    right: calc(100% - var(--tri-b2) + var(--tri-cut));
+  }
+
+  .hero-tri-box-c {
+    left: var(--tri-b2);
+    right: 0;
+  }
+
+  /* Caixa da fotografia: acompanha a região do painel, não a tela inteira. */
+  .hero-tri-media-a {
+    left: 0;
+    right: calc(100% - var(--tri-b1));
+  }
+
+  .hero-tri-media-b {
+    left: calc(var(--tri-b1) - var(--tri-cut));
+    right: calc(100% - var(--tri-b2));
+  }
+
+  .hero-tri-media-c {
+    left: calc(var(--tri-b2) - var(--tri-cut));
+    right: 0;
+  }
+
+  /*
+    Foco no pilar: passar o mouse ou tabular até Projetos/Consultoria alarga
+    aquele painel. Os três continuam visíveis e legíveis — muda a proporção,
+    nunca a presença, então a compreensão da dobra não depende da interação.
+
+    É CSS puro (`:has()`), sem estado em JavaScript: o hero continua Server
+    Component e a composição funciona antes de qualquer hidratação.
+  */
+  .hero-tri:has(.hero-tri-b:hover),
+  .hero-tri:has(.hero-tri-b:focus-within) {
+    --tri-b1: 39%;
+    --tri-b2: 75%;
+  }
+
+  .hero-tri:has(.hero-tri-c:hover),
+  .hero-tri:has(.hero-tri-c:focus-within) {
+    --tri-b1: 37%;
+    --tri-b2: 64%;
+  }
+
+  .hero-tri-panel,
+  .hero-tri-key,
+  .hero-tri-box-a,
+  .hero-tri-box-b,
+  .hero-tri-box-c,
+  .hero-tri-media-a,
+  .hero-tri-media-b,
+  .hero-tri-media-c {
+    transition:
+      clip-path 420ms var(--ease-smooth),
+      left 420ms var(--ease-smooth),
+      right 420ms var(--ease-smooth);
+  }
+}
+
+/* ----------
+   Mobile e tablet: a diagonal vira **horizontal**.
+
+   Reproduzir três painéis verticais diagonais em 360px destruiria a leitura —
+   cada faixa teria ~120px. O corte muda de eixo e a linguagem se mantém: os
+   painéis se encaixam por arestas inclinadas paralelas, com Equipamentos
+   ocupando mais que o dobro da altura dos outros dois.
+   ---------- */
+@media (max-width: 1023px) {
+  .hero-tri-a {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tri-mcut)), 0 100%);
+  }
+
+  .hero-tri-b {
+    clip-path: polygon(0 var(--tri-mcut), 100% 0, 100% calc(100% - var(--tri-mcut)), 0 100%);
+    margin-top: calc(-1 * var(--tri-mcut));
+  }
+
+  .hero-tri-c {
+    clip-path: polygon(0 var(--tri-mcut), 100% 0, 100% 100%, 0 100%);
+    margin-top: calc(-1 * var(--tri-mcut));
+  }
+
+  .hero-tri {
+    --tri-mcut: 2.25rem;
+  }
+}

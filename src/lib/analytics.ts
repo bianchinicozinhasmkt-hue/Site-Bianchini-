@@ -23,6 +23,15 @@ export type AnalyticsEvent =
    * (`docs/v2/specs/V2-01-home-arquitetura.md`, item M) — não inventado aqui.
    */
   | 'categoria_equipamento_visualizada'
+  /**
+   * V2: os três caminhos da primeira dobra, medidos separadamente. É o que
+   * permite ler qual intenção o tráfego pago está trazendo — o principal dado
+   * de campanha da Home (`MASTER_BIANCHINI.md` §18).
+   */
+  | 'hero_equipamentos_click'
+  | 'hero_projetos_click'
+  | 'hero_consultoria_click'
+  | 'hero_orcamento_click'
 
 type Payload = Record<string, string | number | boolean>
 

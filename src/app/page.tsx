@@ -1,4 +1,4 @@
-import { HeroEquipamentos } from '@/components/v2/hero-equipamentos'
+import { HeroPillars } from '@/components/v2/hero-pillars'
 import { CategoriesShowcase } from '@/components/v2/categories-showcase'
 import { PillarsBand } from '@/components/v2/pillars-band'
 import { ProjectsDoor } from '@/components/v2/projects-door'
@@ -60,7 +60,7 @@ import { FinalCta } from '@/components/v2/final-cta'
 export default function HomePage() {
   return (
     <>
-      <HeroEquipamentos />
+      <HeroPillars />
       <CategoriesShowcase />
       <PillarsBand />
       <ProjectsDoor />
