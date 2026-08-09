@@ -435,46 +435,32 @@
    (posição/espessura), peso do rótulo (bold contra semibold) e cor.
    ============================================================ */
 /* ============================================================
-   A BASE — UMA SUPERFÍCIE, DO SELETOR ATÉ O FIM DA DOBRA
+   A BASE — A SUPERFÍCIE QUE ASSENTA O SELETOR SOBRE A CENA
    ============================================================
 
-   O degradê era do `.rail` e ia do topo do seletor até a base **dele**; logo
-   abaixo começava outra superfície (`bg-graphite-deep` sólido, com `border-t`).
-   Duas superfícies coladas, e o olho lia a segunda como rodapé.
+   Esta caixa já foi três coisas em três rodadas, e vale registrar por quê:
 
-   Agora o degradê é desta caixa, que contém o seletor **e** as métricas, e cai
-   uma vez só até o fim da dobra.
+     1. era `.rail`, e pintava só a faixa do seletor. Abaixo dela vinha a faixa
+        de métricas, com `bg-graphite-deep` sólido e `border-t` — duas
+        superfícies coladas, e o olho lia a segunda como rodapé;
+     2. virou `.base` e passou a conter seletor **e** métricas, com o degradê
+        remapeado para a altura maior, para que as duas lessem como uma coisa
+        só sobre a fotografia;
+     3. **agora as métricas saíram da dobra** (decisão do gestor — ver o
+        comentário em `hero-stage.tsx`), e a base volta a conter só o seletor.
 
-   ============================================================
-   AS PARADAS SÃO AS ANTIGAS, REMAPEADAS — NÃO SÃO NOVAS
-   ============================================================
+   Com isso as paradas voltam ao perfil original, que é o que foi **medido**
+   contra o pior pixel das três cenas: 0,30 no topo, 0,76 a 38% e 0,98 na base.
+   Na etapa 2 elas tinham sido convertidas para percentual de uma caixa mais
+   alta (0,76 a 23%, 0,97 a 58%) justamente para preservar essa densidade na
+   mesma altura física; desfeita a causa, desfaz-se a conversão.
 
-   O perfil de escuridão sob o seletor foi medido contra o pior pixel das três
-   cenas (ver "AS PARADAS SÃO MEDIDAS" no `.rail`, abaixo): 0,30 no topo, 0,76 a
-   38% e 0,98 na base. Se eu reaproveitasse esses percentuais numa caixa quase
-   duas vezes mais alta, o seletor cairia na **metade de cima** do degradê e
-   ficaria mais claro do que o medido — o complemento inativo voltaria a
-   reprovar em AA.
+   Remedido depois de voltar: o pior pixel sob o complemento inativo fica em
+   6,9–7,2:1 nas três cenas, contra o piso de 4,5:1.
 
-   Por isso as paradas foram convertidas de percentual da régua para percentual
-   da base, mantendo a mesma densidade na mesma altura física. Medido em
-   1920 × 1080: a base fecha em 245px e o seletor ocupa os primeiros ~148px,
-   ou 60% dela. Logo:
-
-     antiga (do .rail)      nova (da .base)
-     0,30 em   0%     →     0,30 em   0%
-     0,76 em  38%     →     0,76 em  23%   (38% de 60%)
-     0,98 em 100%     →     0,97 em  58%   (o fim do seletor)
-                            0,99 em 100%   (a base da dobra)
-
-   Da marca de 58% para baixo a superfície é praticamente opaca — é onde as
-   métricas assentam. Ela **não** vira uma cor nova: é a mesma tinta do
-   degradê, no fim do próprio curso. Sem borda, sem troca de `background`, sem
-   emenda.
-
-   A tinta é a mesma de antes (`12,13,14`), então o encontro com a seção
-   seguinte da home continua sendo a passagem escura → mais clara que já
-   estava documentada.
+   A última parada em 0,98 continua tendo função: é ela que fecha o encontro
+   entre a dobra e a primeira seção da home sem deixar um resíduo de fotografia
+   aparecendo na emenda.
    ============================================================ */
 .base {
   position: relative;
@@ -482,36 +468,9 @@
   background: linear-gradient(
     180deg,
     rgba(12, 13, 14, 0.3) 0%,
-    rgba(12, 13, 14, 0.76) 23%,
-    rgba(12, 13, 14, 0.97) 58%,
-    rgba(12, 13, 14, 0.99) 100%
+    rgba(12, 13, 14, 0.76) 38%,
+    rgba(12, 13, 14, 0.98) 100%
   );
-}
-
-/*
-  A hairline que separa o seletor das métricas **não** é de ponta a ponta: ela
-  vive dentro das guias do `Container`, como todo o resto da dobra. Uma borda
-  cheia na largura da janela é exatamente o que lia como corte de rodapé — foi
-  ela que saiu do `[data-hero-metrics]`.
-
-  6% de branco: o suficiente para dar um degrau de ritmo entre as duas zonas,
-  fraco o bastante para não desenhar uma segunda faixa. Em telas estreitas ela
-  some: ali as métricas empilham e o vão já separa sem ajuda.
-*/
-.metricRow {
-  position: relative;
-}
-
-@media (min-width: 640px) {
-  .metricRow::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.06);
-  }
 }
 
 /*
@@ -833,9 +792,15 @@
   transform: translateY(-1px);
 }
 
+/*
+  4px, e não 3 (2026-08-09): com o seletor mais alto em 1920 — a folga que a
+  saída da faixa de métricas devolveu — 3px lia curto dentro de uma trilha de
+  128px. Continua sendo `transform`, então a fileira não reflui e as outras
+  duas portas não se movem.
+*/
 .railItemActive .railContent,
 .railItemActive:hover .railContent {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
 /*
