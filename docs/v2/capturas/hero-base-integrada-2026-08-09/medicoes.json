@@ -1,0 +1,502 @@
+{
+ "320": {
+  "geo": {
+   "hero": {
+    "top": 0,
+    "bottom": 1008.3,
+    "h": 1008.3,
+    "w": 320
+   },
+   "base": {
+    "top": 788.4,
+    "bottom": 1008.3,
+    "h": 219.9
+   },
+   "seletor": {
+    "top": 788.4,
+    "bottom": 852.4,
+    "h": 64
+   },
+   "metricas": {
+    "top": 852.4,
+    "bottom": 1008.3,
+    "h": 155.9
+   },
+   "ctaPrincipalParaSeletor": 100,
+   "seletorParaMetricas": 0,
+   "ctaCategorias": {
+    "top": 943.4,
+    "bottom": 988.3,
+    "h": 44.9,
+    "w": 280
+   },
+   "ctaWhatsapp": {
+    "top": 700.4,
+    "bottom": 748.4,
+    "h": 48,
+    "w": 228.1
+   },
+   "controles": [
+    {
+     "nome": "Equipamentos",
+     "trilhaX": 4.6,
+     "trilhaW": 109,
+     "centroTrilha": 59.1,
+     "centroRotulo": 59.1,
+     "desvioRotulo": 0,
+     "desvioComplemento": -59.1
+    },
+    {
+     "nome": "Projetos",
+     "trilhaX": 126.4,
+     "trilhaW": 77,
+     "centroTrilha": 164.9,
+     "centroRotulo": 164.9,
+     "desvioRotulo": 0,
+     "desvioComplemento": -164.9
+    },
+    {
+     "nome": "Consultoria",
+     "trilhaX": 216.2,
+     "trilhaW": 99.3,
+     "centroTrilha": 265.8,
+     "centroRotulo": 265.8,
+     "desvioRotulo": 0,
+     "desvioComplemento": -265.8
+    }
+   ],
+   "gaps": [
+    12.8,
+    12.8
+   ],
+   "overflow": 0
+  },
+  "contraste": {
+   "equipamentos": {
+    "complementoInativo_65": null,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.55,
+    "ctaCategorias_90": 13.49,
+    "setaAmarela": 12.1
+   },
+   "projetos": {
+    "complementoInativo_65": null,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.55,
+    "ctaCategorias_90": 13.49,
+    "setaAmarela": 12.1
+   },
+   "consultoria": {
+    "complementoInativo_65": null,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.55,
+    "ctaCategorias_90": 13.49,
+    "setaAmarela": 12.1
+   }
+  },
+  "console": 0,
+  "http400": 0
+ },
+ "390": {
+  "geo": {
+   "hero": {
+    "top": 0,
+    "bottom": 1057.3,
+    "h": 1057.3,
+    "w": 390
+   },
+   "base": {
+    "top": 850.8,
+    "bottom": 1057.3,
+    "h": 206.5
+   },
+   "seletor": {
+    "top": 850.8,
+    "bottom": 914.8,
+    "h": 64
+   },
+   "metricas": {
+    "top": 914.8,
+    "bottom": 1057.3,
+    "h": 142.5
+   },
+   "ctaPrincipalParaSeletor": 100,
+   "seletorParaMetricas": 0,
+   "ctaCategorias": {
+    "top": 993.3,
+    "bottom": 1037.3,
+    "h": 44,
+    "w": 308.4
+   },
+   "ctaWhatsapp": {
+    "top": 762.8,
+    "bottom": 810.8,
+    "h": 48,
+    "w": 228.1
+   },
+   "controles": [
+    {
+     "nome": "Equipamentos",
+     "trilhaX": 36.8,
+     "trilhaW": 109,
+     "centroTrilha": 91.3,
+     "centroRotulo": 91.3,
+     "desvioRotulo": 0,
+     "desvioComplemento": -91.3
+    },
+    {
+     "nome": "Projetos",
+     "trilhaX": 161.4,
+     "trilhaW": 77,
+     "centroTrilha": 199.9,
+     "centroRotulo": 199.9,
+     "desvioRotulo": 0,
+     "desvioComplemento": -199.9
+    },
+    {
+     "nome": "Consultoria",
+     "trilhaX": 254,
+     "trilhaW": 99.3,
+     "centroTrilha": 303.6,
+     "centroRotulo": 303.6,
+     "desvioRotulo": 0,
+     "desvioComplemento": -303.6
+    }
+   ],
+   "gaps": [
+    15.6,
+    15.6
+   ],
+   "overflow": 0
+  },
+  "contraste": {
+   "equipamentos": {
+    "complementoInativo_65": null,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.55,
+    "ctaCategorias_90": 13.49,
+    "setaAmarela": 12.1
+   },
+   "projetos": {
+    "complementoInativo_65": null,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.55,
+    "ctaCategorias_90": 13.49,
+    "setaAmarela": 12.1
+   },
+   "consultoria": {
+    "complementoInativo_65": null,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.55,
+    "ctaCategorias_90": 13.49,
+    "setaAmarela": 12.1
+   }
+  },
+  "console": 0,
+  "http400": 0
+ },
+ "1024": {
+  "geo": {
+   "hero": {
+    "top": 0,
+    "bottom": 913.7,
+    "h": 913.7,
+    "w": 1024
+   },
+   "base": {
+    "top": 648.8,
+    "bottom": 913.7,
+    "h": 264.9
+   },
+   "seletor": {
+    "top": 687,
+    "bottom": 818,
+    "h": 131
+   },
+   "metricas": {
+    "top": 818,
+    "bottom": 913.7,
+    "h": 95.8
+   },
+   "ctaPrincipalParaSeletor": 160.1,
+   "seletorParaMetricas": 0,
+   "ctaCategorias": {
+    "top": 845.7,
+    "bottom": 889.7,
+    "h": 44,
+    "w": 335.4
+   },
+   "ctaWhatsapp": {
+    "top": 542.8,
+    "bottom": 600.8,
+    "h": 58,
+    "w": 266.8
+   },
+   "controles": [
+    {
+     "nome": "Equipamentos",
+     "trilhaX": 60,
+     "trilhaW": 280,
+     "centroTrilha": 200,
+     "centroRotulo": 200,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    },
+    {
+     "nome": "Projetos",
+     "trilhaX": 372,
+     "trilhaW": 280,
+     "centroTrilha": 512,
+     "centroRotulo": 512,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    },
+    {
+     "nome": "Consultoria",
+     "trilhaX": 684,
+     "trilhaW": 280,
+     "centroTrilha": 824,
+     "centroRotulo": 824,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    }
+   ],
+   "gaps": [
+    32,
+    32
+   ],
+   "overflow": 0
+  },
+  "contraste": {
+   "equipamentos": {
+    "complementoInativo_65": 7.05,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.42,
+    "setaAmarela": 12.02
+   },
+   "projetos": {
+    "complementoInativo_65": 7.24,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.34,
+    "setaAmarela": 11.93
+   },
+   "consultoria": {
+    "complementoInativo_65": 7.24,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.34,
+    "setaAmarela": 11.94
+   }
+  },
+  "console": 0,
+  "http400": 0
+ },
+ "1440": {
+  "geo": {
+   "hero": {
+    "top": 0,
+    "bottom": 900,
+    "h": 900,
+    "w": 1440
+   },
+   "base": {
+    "top": 655.7,
+    "bottom": 900,
+    "h": 244.3
+   },
+   "seletor": {
+    "top": 693.9,
+    "bottom": 804.3,
+    "h": 110.4
+   },
+   "metricas": {
+    "top": 804.3,
+    "bottom": 900,
+    "h": 95.8
+   },
+   "ctaPrincipalParaSeletor": 123.5,
+   "seletorParaMetricas": 0,
+   "ctaCategorias": {
+    "top": 832,
+    "bottom": 876,
+    "h": 44,
+    "w": 335.4
+   },
+   "ctaWhatsapp": {
+    "top": 512.4,
+    "bottom": 570.4,
+    "h": 58,
+    "w": 266.8
+   },
+   "controles": [
+    {
+     "nome": "Equipamentos",
+     "trilhaX": 144,
+     "trilhaW": 352,
+     "centroTrilha": 320,
+     "centroRotulo": 320,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    },
+    {
+     "nome": "Projetos",
+     "trilhaX": 544,
+     "trilhaW": 352,
+     "centroTrilha": 720,
+     "centroRotulo": 720,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    },
+    {
+     "nome": "Consultoria",
+     "trilhaX": 944,
+     "trilhaW": 352,
+     "centroTrilha": 1120,
+     "centroRotulo": 1120,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    }
+   ],
+   "gaps": [
+    48,
+    48
+   ],
+   "overflow": 0
+  },
+  "contraste": {
+   "equipamentos": {
+    "complementoInativo_65": 7.15,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.42,
+    "setaAmarela": 12.02
+   },
+   "projetos": {
+    "complementoInativo_65": 7.22,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.34,
+    "setaAmarela": 11.93
+   },
+   "consultoria": {
+    "complementoInativo_65": 7.24,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.41,
+    "setaAmarela": 12.01
+   }
+  },
+  "console": 0,
+  "http400": 0
+ },
+ "1920": {
+  "geo": {
+   "hero": {
+    "top": 0,
+    "bottom": 1080,
+    "h": 1080,
+    "w": 1920
+   },
+   "base": {
+    "top": 819.7,
+    "bottom": 1080,
+    "h": 260.3
+   },
+   "seletor": {
+    "top": 857.9,
+    "bottom": 984.3,
+    "h": 126.4
+   },
+   "metricas": {
+    "top": 984.3,
+    "bottom": 1080,
+    "h": 95.8
+   },
+   "ctaPrincipalParaSeletor": 157.3,
+   "seletorParaMetricas": 0,
+   "ctaCategorias": {
+    "top": 1012,
+    "bottom": 1056,
+    "h": 44,
+    "w": 335.4
+   },
+   "ctaWhatsapp": {
+    "top": 642.6,
+    "bottom": 700.6,
+    "h": 58,
+    "w": 266.8
+   },
+   "controles": [
+    {
+     "nome": "Equipamentos",
+     "trilhaX": 352,
+     "trilhaW": 352,
+     "centroTrilha": 528,
+     "centroRotulo": 528,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    },
+    {
+     "nome": "Projetos",
+     "trilhaX": 784,
+     "trilhaW": 352,
+     "centroTrilha": 960,
+     "centroRotulo": 960,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    },
+    {
+     "nome": "Consultoria",
+     "trilhaX": 1216,
+     "trilhaW": 352,
+     "centroTrilha": 1392,
+     "centroRotulo": 1392,
+     "desvioRotulo": 0,
+     "desvioComplemento": 0
+    }
+   ],
+   "gaps": [
+    80,
+    80
+   ],
+   "overflow": 0
+  },
+  "contraste": {
+   "equipamentos": {
+    "complementoInativo_65": 7.12,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.34,
+    "setaAmarela": 11.93
+   },
+   "projetos": {
+    "complementoInativo_65": 7.15,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.34,
+    "setaAmarela": 11.93
+   },
+   "consultoria": {
+    "complementoInativo_65": 7.24,
+    "rotuloMetrica_50": 4.73,
+    "valorMetrica_100": 16.66,
+    "ctaCategorias_90": 13.42,
+    "setaAmarela": 12.02
+   }
+  },
+  "console": 0,
+  "http400": 0
+ },
+ "botoes": {
+  "ink_sobre_verde_novo_1DA851": 6.14,
+  "ink_sobre_verde_antigo_25D366": 9.59,
+  "ink_sobre_amarelo_F5C64B": 11.84,
+  "luminancia": {
+   "amarelo": 0.603,
+   "verdeNovo": 0.289,
+   "verdeAntigo": 0.479
+  }
+ }
+}

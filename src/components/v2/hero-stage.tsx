@@ -397,23 +397,6 @@ export function HeroStage() {
                 item.id === 'consultoria' && styles.gradeConsultoria,
               )}
             />
-
-            {/*
-              Legenda do render — só Projetos tem (`DEC-008`: material de
-              projeto nunca aparece sem se declarar como tal). Sai abaixo de
-              `lg`: no palco em faixa do toque não sobra altura para uma linha
-              extra sem invadir o texto que assenta logo abaixo da cena.
-            */}
-            {item.media.caption ? (
-              <p
-                className={cn(
-                  styles.mediaCaption,
-                  'hidden font-condensed text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-canvas/70 lg:block',
-                )}
-              >
-                {item.media.caption}
-              </p>
-            ) : null}
           </div>
         ))}
 
@@ -822,7 +805,10 @@ export function HeroStage() {
                   180ms de atraso de `.enter` deixavam o par de botões em
                   `opacity: 0` a cada clique.
                 */
-                className={cn(styles.enter, 'mt-10 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-10 xl:mt-12')}
+                className={cn(
+                  styles.enter,
+                  'mt-10 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-10 xl:mt-12',
+                )}
               >
                 <HeroCta activeId={state.id} />
                 <HeroWhatsappCta topic={state.id} />
@@ -831,8 +817,62 @@ export function HeroStage() {
           </Container>
         </div>
 
-        {/* ================= O SELETOR ================= */}
-        <div className={cn(styles.rail, 'shrink-0')}>
+        {/* ================= A BASE DA CENA ================= */}
+        {/*
+          ============================================================
+          UMA SUPERFÍCIE SÓ (2026-08-09) — SELETOR + MÉTRICAS + AÇÃO
+          ============================================================
+
+          Até aqui a faixa de métricas era **irmã do palco**, não filha: ficava
+          fora de `[data-hero-stage]`, com `bg-graphite-deep` sólido e um
+          `border-t` próprio. O resultado lia em três tempos — cena → seletor →
+          *outra barra* — e a última parecia um rodapé anexado à dobra.
+
+          Agora as duas vivem dentro de `.base`, que é filha do palco. Três
+          consequências, e todas são o ponto:
+
+            1. a fotografia passa por trás das duas (os `.frame` são
+               `inset: 0` do palco), então as métricas assentam **sobre a
+               cena**, não abaixo dela;
+            2. o degradê que era do `.rail` passa a ser da `.base` inteira —
+               uma queda contínua do topo do seletor até a base da dobra, sem
+               troca de superfície no meio do caminho;
+            3. o `border-t` e o `bg-graphite-deep` saem. Não há mais emenda a
+               marcar, porque não há mais duas superfícies.
+
+          **A dobra não cresceu.** As métricas já estavam dentro dos 100svh da
+          `<section>`; mudou o pai, não a altura. Medido antes e depois em
+          1920 × 1080, a dobra fecha em 1080 nos dois casos.
+        */}
+        <div className={cn(styles.base, 'shrink-0')}>
+          {/*
+            Legenda do render — só Projetos tem (`DEC-008`: material de projeto
+            nunca aparece sem se declarar como tal).
+
+            **Saiu de dentro dos `.frame` (2026-08-09).** Lá ela era
+            `bottom: 7.5rem`, um número medido contra a altura do seletor de
+            então; com a base agora quase o dobro mais alta, aquele valor cairia
+            dentro dela e a legenda ficaria por cima dos três controles.
+            Ancorada em `bottom: 100%` da própria base, ela assenta sempre
+            imediatamente acima da superfície, qualquer que seja a altura —
+            não há mais número a remedir.
+
+            Sai abaixo de `lg`: no palco em faixa do toque não sobra altura para
+            uma linha extra sem invadir o texto que assenta logo abaixo da cena.
+          */}
+          {state.media.caption ? (
+            <p
+              key={state.id}
+              className={cn(
+                styles.mediaCaption,
+                styles.swap,
+                'hidden font-condensed text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-canvas/70 lg:block',
+              )}
+            >
+              {state.media.caption}
+            </p>
+          ) : null}
+
           <Container>
             {/*
               ---------- Instrução do seletor ----------
@@ -984,8 +1024,33 @@ export function HeroStage() {
                       centrar é a única distribuição que dá o mesmo acabamento
                       às três áreas.
                     */}
-                    <span className="flex w-full min-w-0 flex-col items-center gap-1.5 text-center">
-                      <span className="flex min-w-0 max-w-full items-center justify-center gap-2 lg:gap-2.5">
+                    {/*
+                      ============================================================
+                      BASE INTEGRADA (2026-08-09) — CENTRADO DE FATO, NÃO SÓ NA CONTA
+                      ============================================================
+
+                      A caixa já estava matematicamente centrada, mas o conteúdo
+                      não **parecia** centrado: a seta dividia a linha com o
+                      rótulo, então o que ficava no eixo da trilha era o conjunto
+                      "rótulo + vão + seta". Medido em 1920, isso jogava o
+                      **rótulo** 13px à esquerda do centro da trilha nas três
+                      portas — e o complemento, esse sim centrado, ficava
+                      visivelmente desalinhado em relação ao nome logo acima.
+
+                      A seta sai do fluxo: `position: absolute` em `left: 100%`
+                      da linha do rótulo. Ela continua encostada no nome (não
+                      volta a ser glifo de canto, que foi o defeito corrigido na
+                      rodada passada), mas deixa de entrar na conta da largura —
+                      então rótulo e complemento passam a compartilhar o mesmo
+                      eixo, que é o eixo da trilha.
+                    */}
+                    <span
+                      className={cn(
+                        styles.railContent,
+                        'flex w-full min-w-0 flex-col items-center gap-1.5 text-center',
+                      )}
+                    >
+                      <span className="relative flex min-w-0 max-w-full items-center justify-center">
                         <span
                           className={cn(
                             /* `leading` depois do `text-[…]` — ver o `h1`. */
@@ -1019,23 +1084,27 @@ export function HeroStage() {
 
                         {/*
                           Seta — o sinal permanente de que a área é um controle,
-                          e não um parágrafo. Ela existe nos três estados; o que
-                          muda é a cor e o avanço de 4px no hover e no foco.
+                          e não um parágrafo. Ela existe nos três estados.
 
-                          **Ela subiu para a linha do rótulo (2026-08-09).** No
-                          canto direito da trilha ela ficava a até 190px do
-                          texto — lida como glifo solto, não como o "vá por
-                          aqui" do nome. Ao lado do rótulo, o avanço de 4px do
-                          hover passa a empurrar a seta *para longe do texto que
-                          a motiva*, que é o gesto que ela sempre quis fazer.
+                          **Fora do fluxo desde 2026-08-09** (`absolute` em
+                          `left-full`): encostada no rótulo, como desde a rodada
+                          passada, mas sem entrar na largura da linha — ver o
+                          comentário do bloco de conteúdo, acima. É o que faz o
+                          rótulo ficar de fato no eixo da trilha.
+
+                          A da porta ativa é amarela e fica 2px à frente o tempo
+                          todo (ver `.railArrow` no módulo): ela aponta, não só
+                          muda de cor. A inativa sobe de `/45` para `/55` — o
+                          briefing pede que o estado inativo continue presente e
+                          claramente clicável, e a 45% ela lia como desabilitada.
                         */}
                         <ArrowRightIcon
                           size={16}
                           aria-hidden="true"
                           className={cn(
                             styles.railArrow,
-                            'hidden shrink-0 transition-colors duration-200 sm:block',
-                            selected ? 'text-yellow' : 'text-canvas/45',
+                            'absolute left-full ml-2 hidden shrink-0 transition-colors duration-200 sm:block lg:ml-2.5',
+                            selected ? 'text-yellow' : 'text-canvas/55',
                           )}
                         />
                       </span>
@@ -1053,10 +1122,19 @@ export function HeroStage() {
                             `/65` e `/80`, não `/55` e `/75`: com a faixa do
                             seletor deixando a fotografia aparecer, o pior
                             pixel sob esta linha subiu e o complemento inativo
-                            caiu para 3,92:1 em Equipamentos. Ver a medição no
-                            módulo, em `.rail`.
+                            caiu para 3,92:1 em Equipamentos. Ver a medição em
+                            `.base`, no módulo — o perfil de escuridão foi
+                            preservado ali quando o degradê mudou de dono, e
+                            remedido depois.
                           */
-                          selected ? 'text-canvas/80' : 'text-canvas/65',
+                          /*
+                            Ativo sobe de `/80` para `/95` (2026-08-09): o
+                            briefing pede "complemento com contraste superior"
+                            como parte da assinatura do estado ativo. A
+                            distância entre 65% e 95% é visível de relance; a
+                            de 65% para 80% não era.
+                          */
+                          selected ? 'text-canvas/95' : 'text-canvas/65',
                         )}
                       >
                         {item.cue}
@@ -1067,151 +1145,169 @@ export function HeroStage() {
               })}
             </div>
           </Container>
-        </div>
-      </div>
 
-      {/* ================= FAIXA DE MÉTRICAS ================= */}
-      {/*
-        **Fora do seletor, e com faixa própria.** Antes ela dividia a base escura
-        com os três caminhos, media ~52px e ficava encostada neles: o olho lia um
-        bloco só, e os números disputavam a atenção do controle.
+          {/* ---------- Métricas e ação, na mesma superfície ---------- */}
+          {/*
+            Só o que está confirmado (`site.ts`: 18 anos, abrangência Brasil)
+            mais uma ação. Nenhum ícone, cartão ou selo — e nenhum número,
+            rótulo ou claim novo: os dois pares são exatamente
+            `homeHeroMetrics`, e a métrica de "projetos entregues" continua
+            filtrada na origem por falta de confirmação comercial.
 
-        Agora é uma faixa independente, imediatamente abaixo do palco, em
-        `graphite-deep` — um degrau mais escuro que o palco e mais escuro que a
-        seção seguinte (`graphite-soft`). Essa diferença de valor é o que faz a
-        passagem para a home ser uma **transição** e não um corte: palco escuro →
-        faixa de fechamento mais escura → primeira seção mais clara.
-
-        Altura 80px no desktop (dentro da faixa de 80–104) e a mesma caixa
-        compacta no telefone, onde os números e a ação empilham. Só o que está
-        confirmado (`site.ts`: 18 anos, abrangência Brasil) mais uma ação.
-        Tipografia e um separador; nenhum ícone, cartão ou selo.
-      */}
-      {/*
-        Direção visual (2026-08-08): `border-white/[0.14]` → `/[0.06]`, e a
-        régua com `.rail` sobe de 0,92 para 0,98 (ver o módulo CSS) na mesma
-        rodada. As duas mudanças resolvem a mesma emenda: com `.rail` quase
-        opaco na própria base, um traço de 14% ainda lia como corte —
-        "faixa preta" cortando ao meio de "três opções". Mais claro o
-        bastante para continuar marcando a passagem para a superfície sólida,
-        fraco o bastante para não competir com ela.
-
-        `min-h-20` → `min-h-24` e `py-3/4` → `py-4/5`: mais respiro, dentro
-        da faixa de 80–104px já documentada acima — a régua e as métricas
-        deixam de ler como uma tira socada contra o painel de cima.
-      */}
-      <div
-        data-hero-metrics
-        className="shrink-0 border-t border-white/[0.06] bg-graphite-deep"
-      >
-        <Container>
-          <div className="flex min-h-24 flex-col justify-center gap-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:py-5">
-            {/*
-              ============================================================
-              HARMONIA (2026-08-09) — DO PAR INLINE PARA A COLUNA DE DADO
-              ============================================================
-
-              Antes cada métrica era `18 anos de atuação` numa linha só, valor e
-              rótulo no mesmo corpo baixo, separados por um fio vertical de 12px.
-              O resultado lia como legenda de rodapé: nenhum dos dois elementos
-              tinha peso, e o valor — que é o dado — não se destacava do rótulo,
-              que é só a unidade.
-
-              Agora cada métrica é uma **coluna**: o valor em condensada, corpo
-              maior, sobre o rótulo em caixa-alta miúda com tracking largo. É a
-              mesma gramática de "numeral + cota" que o resto do site já usa
-              (`hero-numeral` / `hero-metric-label` da V1), e é ela que faz o
-              par ler como dado técnico em vez de frase solta.
-
-              O fio vertical vira uma **régua de 28px** entre as colunas, e não
-              um tique de 12: com duas colunas empilhadas de cada lado, o
-              separador precisa da altura das duas para ler como divisão.
-
-              Nenhum número, rótulo ou claim novo entra — os dois pares são
-              exatamente `homeHeroMetrics` (18 / anos de atuação · Brasil /
-              abrangência de atendimento), e a métrica de "projetos entregues"
-              continua filtrada na origem por falta de confirmação comercial.
-            */}
-            <dl className="flex items-stretch gap-4 sm:gap-6">
-              {homeHeroMetrics.map((metric, index) => (
-                <div key={metric.label} className="flex items-stretch gap-4 sm:gap-6">
-                  {index > 0 ? (
-                    <span aria-hidden="true" className="w-px shrink-0 self-stretch bg-white/[0.14]" />
-                  ) : null}
-                  <div className="flex min-w-0 flex-col justify-center gap-1">
-                    <dt className="sr-only">{metric.label}</dt>
-                    <dd className="font-condensed text-[1.375rem] font-bold uppercase leading-none tracking-[0.02em] text-canvas sm:text-[1.5rem] lg:text-[1.75rem]">
-                      {metric.value}
-                    </dd>
-                    {/*
-                      Rótulo em caixa-alta condensada, 10/11px com tracking de
-                      0,14em. Medido em 390px: os dois rótulos somam 233px numa
-                      coluna de 350, então a faixa continua em duas colunas lado
-                      a lado no telefone — sem quebra e sem crescer de altura.
-                    */}
-                    <span
-                      aria-hidden="true"
-                      className="font-condensed text-[0.625rem] font-medium uppercase leading-tight tracking-[0.14em] text-canvas/55 sm:text-[0.6875rem]"
-                    >
-                      {metric.label}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </dl>
-
-            {/*
-              ============================================================
-              HARMONIA (2026-08-09) — A AÇÃO PASSA A PARECER UMA AÇÃO
-              ============================================================
-
-              Era texto corrido de 14px em `canvas/85` com uma seta amarela. Num
-              rodapé escuro, sem caixa, sem contorno e sem tratamento de rótulo,
-              ele não se anunciava como clicável — o briefing apontou isso
-              exatamente ("não parece nitidamente um elemento clicável").
-
-              Agora é um alvo com contorno: hairline amarela, rótulo em
-              condensada caixa-alta (a família dos rótulos comerciais do
-              projeto), e a cela da seta separada por um fio — a **mesma
-              gramática de instrumento** do CTA da dobra, um degrau abaixo em
-              massa. Assim ele lê como ação sem virar um terceiro botão
-              preenchido disputando com o primário da dobra.
-
-              O preenchimento do hover é `scaleY` sobre um `::before` em amarelo
-              a 12%, a mecânica de botão fixada em `CLAUDE.md` — nunca `width`
-              nem troca de `background-color`. `focus-visible` dispara o mesmo.
-
-              Sobre `graphite-deep` o amarelo é acento pleno (11,8:1), então
-              rótulo e contorno em amarelo são permitidos aqui — a proibição da
-              regra do amarelo vale para superfície clara.
-            */}
-            <Link
-              href={heroSecondary.href}
-              data-band-cta
-              onClick={() => trackEvent('hero_orcamento_click', { origem: 'hero' })}
-              className={cn(
-                'group/band relative inline-flex min-h-[2.75rem] w-fit items-stretch overflow-hidden rounded-[2px]',
-                'border border-yellow/45 transition-colors duration-200 ease-precise hover:border-yellow focus-visible:border-yellow',
-                'font-condensed text-[0.8125rem] font-semibold uppercase tracking-[0.05em] text-canvas sm:text-[0.875rem]',
-                'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-yellow/[0.12]',
-                'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
-                'hover:before:scale-y-100 focus-visible:before:scale-y-100',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-graphite-deep',
-              )}
-            >
-              <span className="relative z-10 flex items-center px-4 sm:px-5">{heroSecondary.label}</span>
-              <span
-                aria-hidden="true"
-                className="relative z-10 flex w-10 shrink-0 items-center justify-center border-l border-yellow/25 sm:w-11"
+            **Sem `bg` e sem `border-t` (2026-08-09).** Os dois existiam para
+            marcar a passagem para uma segunda superfície; não há segunda
+            superfície. O que separa esta faixa do seletor agora é ritmo
+            vertical e uma hairline recuada às guias do `Container` — não uma
+            borda de ponta a ponta, que é o que lia como corte de rodapé.
+          */}
+          <div data-hero-metrics>
+            <Container>
+              <div
+                className={cn(
+                  styles.metricRow,
+                  'flex flex-col gap-5 py-5 sm:flex-row sm:items-end sm:justify-between sm:gap-8 lg:py-6',
+                )}
               >
-                <ArrowRightIcon
-                  size={15}
-                  className="text-yellow transition-transform duration-200 ease-precise group-hover/band:translate-x-1 group-focus-visible/band:translate-x-1"
-                />
-              </span>
-            </Link>
+                {/*
+                  ============================================================
+                  BASE INTEGRADA (2026-08-09) — DE DOIS DADOS SOLTOS PARA UM PAR
+                  ============================================================
+
+                  A composição de coluna (valor em condensada sobre rótulo em
+                  caixa-alta miúda) fica: é a gramática de "numeral + cota" que
+                  o resto do site já usa, e é ela que faz o par ler como dado
+                  técnico. O que muda é a **relação entre as duas**, que ainda
+                  liam como dois elementos avulsos:
+
+                    · **o fio vertical entre elas saiu.** Um separador de altura
+                      cheia entre dois itens é o que dá leitura de tabela — a
+                      mesma razão que tirou as divisórias do seletor em
+                      2026-08-05. O que separa as duas agora é vão;
+                    · **um único tique amarelo** abre o par, à esquerda,
+                      repetindo exatamente o traço de 2px × 28px que precede a
+                      etiqueta no alto da dobra. É a rima que amarra a base ao
+                      topo da composição — e é **um** sinal amarelo, não um por
+                      métrica, porque em fundo escuro o amarelo é acento pleno e
+                      dois marcadores já viram decoração;
+                    · **proximidade:** o vão valor→rótulo fecha de 4px para 2px,
+                      e o vão entre as métricas abre. O dado e a sua unidade
+                      passam a ler como uma coisa só, e as duas métricas como
+                      dois blocos distintos, sem precisar de fio;
+                    · **proporção:** o valor sobe um degrau no desktop
+                      (1,75rem → 2rem a partir de `lg`) e o rótulo baixa a
+                      opacidade (55% → 50%). A distância entre dado e unidade
+                      cresce sem que o número chegue perto do `h1` (58px).
+
+                  Nenhum número, rótulo ou claim novo entra.
+                */}
+                {/*
+                  O tique tem vão próprio (16px), menor que o vão entre as duas
+                  métricas (32/48px). Com um `gap` só, ele herdava os 48 e lia
+                  como um terceiro elemento solto na fileira em vez de abertura
+                  do par — medido, ficava a 48px de "18" e a 2px de coisa
+                  nenhuma. A hierarquia de proximidade tem de estar na distância,
+                  não só no tamanho.
+                */}
+                <div className="flex items-center gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="hidden h-[2px] w-7 shrink-0 bg-yellow sm:block"
+                  />
+                  <dl className="flex items-center gap-8 sm:gap-12">
+                    {homeHeroMetrics.map((metric) => (
+                      <div key={metric.label} className="flex min-w-0 flex-col gap-0.5">
+                        <dt className="sr-only">{metric.label}</dt>
+                        <dd className="font-condensed text-[1.5rem] font-bold uppercase leading-none tracking-[0.02em] text-canvas lg:text-[2rem]">
+                          {metric.value}
+                        </dd>
+                        {/*
+                        Rótulo em caixa-alta condensada, 10/11px com tracking de
+                        0,14em. Medido em 390px: os dois rótulos somam 233px numa
+                        coluna de 350, então a faixa continua em duas colunas lado
+                        a lado no telefone — sem quebra e sem crescer de altura.
+                      */}
+                        <span
+                          aria-hidden="true"
+                          /*
+                          `/55`, e não `/50`. Baixar para 50 foi tentado nesta
+                          rodada para afastar o rótulo do valor, e **medido**: o
+                          pior pixel sob esta linha põe o texto em 4,73:1 a 50%
+                          — passa em AA, mas com margem de 0,23. A distância
+                          entre dado e unidade já vem do corpo (32px contra
+                          11px) e do peso; não vale gastar a margem de contraste
+                          nela. A 55% o pior caso volta para ~5,3:1.
+                        */
+                        className="font-condensed text-[0.625rem] font-medium uppercase leading-tight tracking-[0.14em] text-canvas/55 sm:text-[0.6875rem]"
+                        >
+                          {metric.label}
+                        </span>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+
+                {/*
+                  ============================================================
+                  BASE INTEGRADA (2026-08-09) — O TERCEIRO NÍVEL DA HIERARQUIA
+                  ============================================================
+
+                  A rodada anterior deu contorno a este alvo porque ele não se
+                  anunciava como clicável. Resolveu — e criou o problema
+                  seguinte: com **hairline amarela e cela de seta separada por
+                  fio**, ele reproduzia peça por peça a gramática de instrumento
+                  dos dois CTAs da dobra. Três alvos da mesma família na mesma
+                  tela, e o olho passava a escolher entre três coisas.
+
+                  A hierarquia da dobra tem três níveis, e cada um agora tem uma
+                  forma própria:
+
+                    1. amarelo preenchido ....... a ação comercial;
+                    2. verde preenchido ......... o canal de contato rápido;
+                    3. **este** ................. exploração, navegação.
+
+                  O que muda para ele descer ao terceiro nível sem deixar de ser
+                  um alvo:
+
+                    · o contorno deixa de ser amarelo e passa a **neutro**
+                      (`white/18`). Contorno amarelo é vocabulário de ação
+                      comercial no sistema; navegação não usa;
+                    · **a cela da seta e o fio que a separava saem.** Era essa
+                      peça, mais que a cor, que fazia o alvo ler como irmão dos
+                      dois botões. A seta agora acompanha o rótulo dentro da
+                      mesma caixa;
+                    · o amarelo fica **só na seta** — um sinal, não uma moldura.
+                      É o mesmo uso controlado do tique das métricas ao lado;
+                    · o hover acende `white/[0.07]` por `scaleY`, e não amarelo
+                      a 12%: a mecânica de botão de `CLAUDE.md` continua, a cor
+                      desce de categoria.
+
+                  Altura mínima de 44px preservada — é alvo de toque.
+                */}
+                <Link
+                  href={heroSecondary.href}
+                  data-band-cta
+                  onClick={() => trackEvent('hero_orcamento_click', { origem: 'hero' })}
+                  className={cn(
+                    'group/band relative inline-flex min-h-[2.75rem] w-fit items-center gap-3 overflow-hidden rounded-[2px] px-4 sm:px-5',
+                    'border border-white/[0.18] transition-colors duration-200 ease-precise hover:border-white/40 focus-visible:border-white/40',
+                    'font-condensed text-[0.8125rem] font-semibold uppercase tracking-[0.05em] text-canvas/90 hover:text-canvas sm:text-[0.875rem]',
+                    'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-white/[0.07]',
+                    'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
+                    'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
+                  )}
+                >
+                  <span className="relative z-10">{heroSecondary.label}</span>
+                  <ArrowRightIcon
+                    size={15}
+                    aria-hidden="true"
+                    className="relative z-10 shrink-0 text-yellow transition-transform duration-200 ease-precise group-hover/band:translate-x-1 group-focus-visible/band:translate-x-1"
+                  />
+                </Link>
+              </div>
+            </Container>
           </div>
-        </Container>
+        </div>
       </div>
     </section>
   )
@@ -1331,12 +1427,32 @@ function HeroCta({ activeId }: { activeId: HeroState['id'] }) {
  * rótulos empilhados fixa na largura do mais longo. Amarelo = ação comercial;
  * verde = contato rápido. Os dois são preenchidos, mas não são intercambiáveis.
  *
- * **O verde é o que já estava no projeto.** `#25D366` é a cor do WhatsApp e já
- * vinha sendo usada aqui e no `whatsapp-float.tsx` — nenhum matiz novo entrou.
- * O texto sobre ele é `ink`, e não `canvas`: branco sobre `#25D366` dá **2,1:1**
- * e reprovaria em AA, enquanto o grafite dá **9,6:1**. É a mesma inversão que o
- * botão amarelo já faz — massa clara, tinta escura —, o que é justamente o que
- * faz os dois lerem como um par.
+ * ============================================================
+ * O VERDE DESCE UM DEGRAU (2026-08-09) — `#25D366` → `#1DA851`
+ * ============================================================
+ *
+ * Preenchido resolveu a forma e criou um problema de peso: `#25D366` é o verde
+ * de tela do WhatsApp, saturado e claro (luminância relativa **0,48**), e ao
+ * lado do amarelo (**0,60**) os dois disputavam o mesmo primeiro olhar. Duas
+ * massas quase igualmente luminosas não formam hierarquia.
+ *
+ * `#1DA851` é **o mesmo verde, mais fundo** — não um matiz novo e não uma cor de
+ * outra marca. Convertido para HSL, `#25D366` é `hsl(142,4°, 70,2%, 48,6%)`;
+ * `#1DA851` é `hsl(142,4°, 70,6%, 38,6%)`. Matiz idêntico, saturação idêntica,
+ * dez pontos de luminosidade a menos. Luminância relativa cai de 0,48 para
+ * **0,29**: o amarelo passa a ser inequivocamente a primeira massa da linha, e o
+ * verde continua verde-WhatsApp — o reconhecimento vem do par cor + glifo, não
+ * do valor exato do canal.
+ *
+ * O texto e o glifo continuam em `ink`. Sobre `#1DA851` o grafite mede
+ * **6,1:1** (era 9,6:1 sobre o verde claro) — passa AA com folga; `canvas` sobre
+ * o mesmo fundo daria 2,7:1 e reprovaria, então a inversão continua sendo a
+ * única saída acessível, e é ela que mantém o par legível como par.
+ *
+ * `whatsapp-float.tsx` continua com `#25D366`: lá o verde é um disco de 28px
+ * sobre fundo claro, não uma massa de 267px na dobra. A escala é outra e o
+ * problema de competição não existe — não é divergência, é a mesma cor em dois
+ * pesos.
  *
  * **O hover não troca de cor: acende.** O `::before` é branco a 18% subindo por
  * `scaleY` — a mecânica de botão fixada em `CLAUDE.md`, e uma mudança de
@@ -1363,8 +1479,8 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
       onClick={() => trackEvent('whatsapp_iniciado', { origem: 'hero' })}
       className={cn(
         'group/wa relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] sm:min-h-[3.625rem]',
-        /* Massa verde cheia — o pedido desta rodada. Tinta escura, como no primário. */
-        'bg-[#25D366] text-ink',
+        /* Massa verde cheia, um degrau mais funda que o verde de tela — ver acima. */
+        'bg-[#1DA851] text-ink',
         'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] sm:text-[1rem] lg:text-[1.0625rem]',
         'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-white/[0.18]',
         'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
@@ -1373,7 +1489,9 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
       )}
     >
-      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-7">Falar no WhatsApp</span>
+      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-7">
+        Falar no WhatsApp
+      </span>
       <span
         aria-hidden="true"
         className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-ink/20 sm:w-[3.25rem]"

@@ -221,10 +221,25 @@
    aresta onde a prancha vivia — e **acima da régua do seletor**, que também
    é opaca nessa faixa e engoliria o texto por trás.
    ============================================================ */
+/*
+  ---------- Reancorada à base (2026-08-09) ----------
+
+  Era `bottom: 7.5rem` — 120px medidos contra a altura do seletor de então,
+  quando ele era o último elemento do palco. A base agora contém seletor **e**
+  métricas e mede ~245px em 1920, então aquele valor cairia dentro dela e a
+  legenda ficaria por cima dos três controles.
+
+  Agora a legenda é filha da `.base` e usa `bottom: 100%`: ela assenta sempre
+  imediatamente acima da superfície, qualquer que seja a altura dela em cada
+  viewport. Não há mais número a remedir quando a base mudar de altura.
+
+  `margin-bottom` dá o respiro entre a legenda e a borda superior da base.
+*/
 .mediaCaption {
   position: absolute;
   right: 0;
-  bottom: 7.5rem;
+  bottom: 100%;
+  margin-bottom: 0.75rem;
   z-index: 1;
   max-width: min(22rem, 60%);
   padding: 0.5rem 1rem;
@@ -419,41 +434,100 @@
    Sinais do estado ativo, três e um deles não-cromático: régua de 2px
    (posição/espessura), peso do rótulo (bold contra semibold) e cor.
    ============================================================ */
-.rail {
+/* ============================================================
+   A BASE — UMA SUPERFÍCIE, DO SELETOR ATÉ O FIM DA DOBRA
+   ============================================================
+
+   O degradê era do `.rail` e ia do topo do seletor até a base **dele**; logo
+   abaixo começava outra superfície (`bg-graphite-deep` sólido, com `border-t`).
+   Duas superfícies coladas, e o olho lia a segunda como rodapé.
+
+   Agora o degradê é desta caixa, que contém o seletor **e** as métricas, e cai
+   uma vez só até o fim da dobra.
+
+   ============================================================
+   AS PARADAS SÃO AS ANTIGAS, REMAPEADAS — NÃO SÃO NOVAS
+   ============================================================
+
+   O perfil de escuridão sob o seletor foi medido contra o pior pixel das três
+   cenas (ver "AS PARADAS SÃO MEDIDAS" no `.rail`, abaixo): 0,30 no topo, 0,76 a
+   38% e 0,98 na base. Se eu reaproveitasse esses percentuais numa caixa quase
+   duas vezes mais alta, o seletor cairia na **metade de cima** do degradê e
+   ficaria mais claro do que o medido — o complemento inativo voltaria a
+   reprovar em AA.
+
+   Por isso as paradas foram convertidas de percentual da régua para percentual
+   da base, mantendo a mesma densidade na mesma altura física. Medido em
+   1920 × 1080: a base fecha em 245px e o seletor ocupa os primeiros ~148px,
+   ou 60% dela. Logo:
+
+     antiga (do .rail)      nova (da .base)
+     0,30 em   0%     →     0,30 em   0%
+     0,76 em  38%     →     0,76 em  23%   (38% de 60%)
+     0,98 em 100%     →     0,97 em  58%   (o fim do seletor)
+                            0,99 em 100%   (a base da dobra)
+
+   Da marca de 58% para baixo a superfície é praticamente opaca — é onde as
+   métricas assentam. Ela **não** vira uma cor nova: é a mesma tinta do
+   degradê, no fim do próprio curso. Sem borda, sem troca de `background`, sem
+   emenda.
+
+   A tinta é a mesma de antes (`12,13,14`), então o encontro com a seção
+   seguinte da home continua sendo a passagem escura → mais clara que já
+   estava documentada.
+   ============================================================ */
+.base {
   position: relative;
   z-index: 10;
-  /*
-    Gradiente, e não faixa chapada com borda: a fotografia continua visível no
-    alto do seletor e fecha na base, onde a faixa de métricas começa. É o que
-    separa o **plano 3** (navegação, sobre a cena) do **plano 4** (faixa
-    factual, superfície sólida) — antes os dois dividiam o mesmo slab escuro e
-    liam como um bloco só.
-  */
-  /*
-    As paradas são medidas, não escolhidas a olho. Com 0,32 / 0,68 / 0,88 o
-    pior pixel sob o complemento inativo era rgb(66,64,62) na cena de
-    Equipamentos, e o texto a 55% fechava em **3,92:1** — reprova em AA para
-    corpo pequeno. A queda começa mais cedo e fecha mais, e o complemento subiu
-    de 55% para 65% (ver `hero-stage.tsx`); as duas correções juntas põem o
-    pior caso das três cenas acima de 4,5:1.
-  */
-  /*
-    Direção visual (2026-08-08): a última parada sobe de 0,92 para 0,98 — o
-    suficiente para o degradê chegar praticamente opaco no encontro com a
-    faixa de métricas (`graphite-deep`, sólida) logo abaixo. Com 0,92 sobrava
-    8% de fotografia visível bem na hora em que o painel muda de "gradiente
-    sobre cena" para "superfície opaca": era esse resíduo, não a cor, que
-    fazia o encontro ler como emenda. Só a última parada muda — as duas
-    primeiras (e o pior pixel medido sob o complemento inativo) ficam
-    intactas.
-  */
   background: linear-gradient(
     180deg,
     rgba(12, 13, 14, 0.3) 0%,
-    rgba(12, 13, 14, 0.76) 38%,
-    rgba(12, 13, 14, 0.98) 100%
+    rgba(12, 13, 14, 0.76) 23%,
+    rgba(12, 13, 14, 0.97) 58%,
+    rgba(12, 13, 14, 0.99) 100%
   );
 }
+
+/*
+  A hairline que separa o seletor das métricas **não** é de ponta a ponta: ela
+  vive dentro das guias do `Container`, como todo o resto da dobra. Uma borda
+  cheia na largura da janela é exatamente o que lia como corte de rodapé — foi
+  ela que saiu do `[data-hero-metrics]`.
+
+  6% de branco: o suficiente para dar um degrau de ritmo entre as duas zonas,
+  fraco o bastante para não desenhar uma segunda faixa. Em telas estreitas ela
+  some: ali as métricas empilham e o vão já separa sem ajuda.
+*/
+.metricRow {
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .metricRow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/*
+  ---------- `.rail` deixou de existir (2026-08-09) ----------
+
+  Ele era o `<div>` que embrulhava o seletor e pintava o degradê. Com o seletor
+  e as métricas na mesma superfície, esse embrulho virava uma caixa sem função:
+  o degradê subiu para `.base` (remapeado para a altura maior — ver acima) e o
+  `Container` do seletor passou a ser filho direto dela.
+
+  As paradas originais — 0,30 / 0,76 / 0,98 — foram medidas contra o pior pixel
+  das três cenas, com o complemento inativo em `canvas/65`; com 0,32 / 0,68 /
+  0,88 o pior caso fechava em 3,92:1 e reprovava em AA. Esse perfil não foi
+  descartado: está preservado na `.base`, na mesma altura física, e foi
+  remedido depois da mudança.
+*/
 
 /*
   Grupo centrado, não grade esticada — ver "DIREÇÃO VISUAL (2026-08-08) — DE
@@ -666,35 +740,126 @@
   outras duas — não um efeito novo, só a categoria de tempo certa para o que
   ela já faz.
 */
+/*
+  ============================================================
+  BASE INTEGRADA (2026-08-09) — A RÉGUA GANHA UM PERCURSO
+  ============================================================
+
+  A régua inativa era um traço uniforme a 14% de branco na largura inteira da
+  trilha, e a ativa o mesmo traço em amarelo, mais grosso. Correto, e sem
+  assinatura: três linhas iguais com texto embaixo.
+
+  Duas mudanças, nenhuma delas ornamento novo:
+
+    · **a inativa deixa de ser uniforme.** Vira um degradê que nasce a 20% de
+      branco à esquerda e morre a 6% à direita. Ela deixa de ler como "borda de
+      célula" e passa a ler como um traço desenhado, com começo e fim;
+    · **a ativa fica cheia e chapada.** Amarelo sólido de ponta a ponta da
+      trilha, contra o traço que se dissolve das outras duas. A diferença entre
+      "traço que morre" e "traço que atravessa" é legível de relance, antes de
+      o olho ler cor ou peso do rótulo.
+
+  A espessura continua mudando por `scaleY` sobre uma régua de 2px (1px no
+  inativo, 2px no ativo), nunca por `height` — altura animada refluiria a caixa
+  do botão. Medido: inativo `scaleY(0.5)`, ativo `scaleY(1)`.
+*/
 .railTop {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
   transform: scaleY(0.5);
-  transform-origin: top;
+  transform-origin: top left;
   transition:
     transform 300ms var(--ease-premium),
-    background-color 300ms var(--ease-premium);
+    background 300ms var(--ease-premium);
 }
 
+/*
+  Hover e foco acendem a régua em amarelo **sem engrossá-la**: a espessura de
+  2px é só do estado ativo.
+
+  Na prática isso é uma resposta de transição, não um estado estável: em
+  ponteiro fino, passar o mouse fixa a prévia depois de 150ms
+  (`HOVER_INTENT_MS` em `hero-stage.tsx`) e a porta *vira* a ativa — daí em
+  diante ela tem a régua cheia, o rótulo em peso e o conteúdo levantado. O que
+  este bloco cobre são os 150ms antes disso, e o caso do teclado, onde
+  `:focus-visible` pode cair numa porta que ainda não foi escolhida.
+*/
 .railItem:hover .railTop,
-.railItem:focus-visible .railTop,
+.railItem:focus-visible .railTop {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 198, 75, 0.85) 0%,
+    rgba(245, 198, 75, 0.25) 100%
+  );
+}
+
 .railItemActive .railTop {
   background: rgb(245, 198, 75);
   transform: scaleY(1);
 }
 
-/* Seta: 4px no hover e no foco, e nada de deslocamento no repouso. */
+/*
+  ============================================================
+  BASE INTEGRADA (2026-08-09) — A PORTA ATIVA SOBE
+  ============================================================
+
+  A assinatura do estado ativo era cromática e tipográfica: régua amarela, peso
+  do rótulo, cor do complemento. Faltava a ela um sinal **espacial** — algo que
+  dissesse "esta porta está aberta" antes de o olho ler cor ou peso.
+
+  O conteúdo da porta ativa sobe 3px em direção à própria régua. É o
+  microdeslocamento que o briefing autorizou, e é `transform`, então não reflui
+  a fileira nem move as outras duas: as trilhas continuam com a mesma caixa, o
+  mesmo centro e a mesma altura.
+
+  No hover de uma porta inativa o mesmo conteúdo sobe 1px — um décimo do gesto,
+  o suficiente para a superfície responder ao ponteiro sem se confundir com a
+  seleção.
+*/
+.railContent {
+  transition: transform 200ms var(--ease-precise);
+}
+
+.railItem:hover .railContent,
+.railItem:focus-visible .railContent {
+  transform: translateY(-1px);
+}
+
+.railItemActive .railContent,
+.railItemActive:hover .railContent {
+  transform: translateY(-3px);
+}
+
+/*
+  Seta: 4px no hover e no foco. A da porta ativa fica permanentemente 2px à
+  frente — ela aponta o tempo todo, e o hover ainda a empurra mais.
+*/
 .railArrow {
-  transition: transform 220ms var(--ease-precise);
+  transition:
+    transform 220ms var(--ease-precise),
+    opacity 220ms var(--ease-precise);
+}
+
+.railItemActive .railArrow {
+  transform: translateX(2px);
 }
 
 .railItem:hover .railArrow,
 .railItem:focus-visible .railArrow {
   transform: translateX(4px);
+}
+
+.railItemActive:hover .railArrow,
+.railItemActive:focus-visible .railArrow {
+  transform: translateX(6px);
 }
 
 /* ============================================================
@@ -893,12 +1058,30 @@
   .frame,
   .railItem,
   .railTop,
-  .railArrow {
+  .railArrow,
+  .railContent {
     transition: none;
   }
 
+  /*
+    Todo deslocamento do seletor cai: o avanço da seta (hover, foco e o de 2px
+    permanente do ativo) e a subida do conteúdo da porta ativa. O que sobra é
+    o que não se move — régua amarela, peso do rótulo, cor do rótulo e do
+    complemento, cor da seta —, e são quatro sinais, mais que os três que o
+    projeto exige para estado ativo.
+  */
   .railItem:hover .railArrow,
-  .railItem:focus-visible .railArrow {
+  .railItem:focus-visible .railArrow,
+  .railItemActive .railArrow,
+  .railItemActive:hover .railArrow,
+  .railItemActive:focus-visible .railArrow {
+    transform: none;
+  }
+
+  .railItem:hover .railContent,
+  .railItem:focus-visible .railContent,
+  .railItemActive .railContent,
+  .railItemActive:hover .railContent {
     transform: none;
   }
 
