@@ -86,115 +86,65 @@ import styles from './hero-stage.module.css'
  */
 
 /* ============================================================
-   PISOS DE ALTURA — A CONTA QUE ELIMINA O SALTO ENTRE ESTADOS
+   OS PISOS DE ALTURA SAÍRAM (2026-08-09)
    ============================================================
 
-   Os três títulos e as três intenções têm comprimentos diferentes, e a versão
-   anterior deixava a caixa seguir o texto: cada troca movia o `h1` em até 86px
-   (medido em 1586 × 992). Aqui as duas caixas têm **piso em `em`**, então elas
-   escalam junto com a tipografia e a moldura fica parada nos três estados.
+   O `h1` tinha `min-h-[3.3em] lg:min-h-[3.15em]` e a intenção
+   `min-h-[4.5em] lg:min-h-[4.8em]`. Os dois existiam para uma razão real: sem
+   eles, a versão de 2026-08-08 movia o `h1` em até 86px por troca de estado.
+   Com a caixa travada no pior caso, a moldura ficava parada nos três estados.
 
-   Em `em` e não em `px` porque o corpo é `clamp()`: um piso fixo em pixel
-   sobraria em 1024 e faltaria em 1586.
+   O custo dessa estabilidade era uma **linha fantasma**, e ela ficava no pior
+   lugar possível — dentro do bloco de texto. Medido no build de produção, em
+   1920 × 1080, do fim real do texto do `h1` até o topo do parágrafo:
 
-   Contagem de linhas **medida no navegador**, estado por estado e viewport por
-   viewport — não deduzida do número de caracteres:
+     equipamentos ... 11,9px   (3 linhas de título — o piso é o próprio texto)
+     projetos ....... 11,9px   (3 linhas)
+     consultoria .... 72,8px   ← 60,9px a mais, exatamente uma linha de título
 
-   REMEDIDO EM 2026-08-08, COM O `h1` APROVADO DE 74 CARACTERES
-   ------------------------------------------------------------
-   A tabela anterior media o título curto que a rodada passada tinha posto no
-   lugar da copy aprovada. Com o texto aprovado de volta e o corpo reduzido
-   (ver o bloco do `h1`), o pior caso subiu uma linha em quase toda faixa:
+   E a intenção tinha o mesmo defeito, um degrau abaixo: 33,6px de reserva não
+   usada em Projetos e em Consultoria (as duas rendem 2 linhas contra as 3 do
+   piso), agora entre o parágrafo e os CTAs.
 
-     título    <640px ...... 4 linhas (Equipamentos; 320, 360 e 390 medidos)
-               640–1023 .... 3 linhas (Equipamentos; as outras duas rendem 2)
-               ≥1024 ....... 3 linhas (a coluna cai para 480px em 1024–1279 para
-                             não invadir o plano de projeto, e volta a 600 em
-                             1280; nas duas faixas o pior caso é 3)
-     intenção  <768px ...... 4 linhas (Equipamentos, o mais longo dos três)
-               ≥768px ...... 3 linhas (também Equipamentos; medido em 768, 1024,
-                             1366, 1440 e 1586 — as outras duas rendem 2)
+   Em 1440 × 900 o mesmo: 12,4px nos dois primeiros contra **63,8px** em
+   Consultoria.
 
-   O piso é contagem × entrelinha. Título: 1,10 abaixo de `lg` e 1,06 acima.
-   Intenção: 1,5.
-
-   **Refaça esta medição sempre que qualquer um dos três títulos ou das três
-   intenções mudar de comprimento.** Um piso curto demais devolve o salto; um
-   piso longo demais abre vão morto entre título, texto e ação — foi o que a
-   primeira rodada produziu em 768 × 1024, com uma linha reservada a mais em
-   cada uma das duas caixas.
+   Em 1024 × 768 e em 390 × 844 os pisos **não mordem** — ali as três copies
+   rendem o mesmo número de linhas (4 no título, 3 na intenção em 1024; 4 e 4
+   em 390), e medido antes e depois a composição é byte a byte a mesma. O
+   defeito era só de desktop, e a correção também.
 
    ============================================================
-   REVISTO NA RODADA P1 (2026-08-08) — O PISO MÓVEL VIROU VAZIO ARTIFICIAL
+   POR QUE A SOBRA VAI PARA A CENTRAGEM, E NÃO PARA UM PISO NA COLUNA
    ============================================================
 
-   Abaixo de 640px, o piso reservava o pior caso absoluto (Equipamentos: 4
-   linhas de título, 4 de intenção — 4,4em / 6em). Como Projetos e Consultoria
-   rendem só 2 linhas nas duas caixas em qualquer largura móvel, a auditoria
-   de 2026-08-08 mediu esse piso como **vazio abaixo do texto**, não como
-   estabilidade: ~63px sobrando sob o título de Projetos, e um vão maior ainda
-   sob a intenção — em 390 × 844 a soma empurrava o CTA quase ao fim da tela.
+   Sem pisos, a coluna passa a ter altura natural e ela varia entre os estados
+   (medido em 1920): equipamentos 433,5px, projetos 404,7px, consultoria
+   343,8px — 89,7px entre o mais alto e o mais baixo. Essa diferença tem de ir
+   para algum lugar, e há duas escolhas:
 
-   O piso móvel agora usa o **mesmo valor do tablet** (3,3em / 4,5em — 3 linhas
-   nas duas caixas), e não o pior caso absoluto:
+     · **piso na coluna, conteúdo no topo** — a etiqueta e o `h1` ficam parados
+       e a sobra inteira cai depois dos CTAs. Deslocamento do par de botões:
+       **89,7px**;
+     · **centragem no palco** (`items-center`, o que já existe) — a sobra é
+       repartida em duas metades, acima e abaixo. Deslocamento de qualquer
+       elemento: **44,8px**.
 
-     · Projetos e Consultoria (2 linhas) perdem a maior parte do vazio — sobra
-       no máximo 1 linha, não 2;
-     · Equipamentos (4 linhas) passa a **exceder** o piso — a caixa cresce pelo
-       próprio conteúdo, sem vazio, e a troca *para* Equipamentos ganha um
-       deslocamento de ~1 linha que não existia antes.
+   A centragem é o ótimo: nenhum elemento anda mais que metade do que andaria
+   na outra. E é ela que o briefing nomeia como absorvedor aceitável
+   ("distribuição vertical do palco"), ao lado do vão entre bloco e seletor —
+   que é justamente a metade de baixo dessa conta.
 
-   Essa troca é deliberada: no mobile o briefing pede "estabilidade
-   suficiente", não ausência de salto — ao contrário do desktop, onde o salto
-   de 86px medido na primeira rodada era o defeito a eliminar por completo. Um
-   salto de uma linha ao entrar em Equipamentos é aceitável; um vazio de duas
-   linhas nos outros dois estados, o tempo todo, não é.
+   O `h1` de Consultoria passa a assentar 44,8px mais baixo que o de
+   Equipamentos em 1920 (40,1px em 1440). É consequência direta de o título ser
+   uma linha mais curto, e não uma caixa vazia: o bloco inteiro se recompõe,
+   com o mesmo ritmo interno nos três estados.
 
-   ============================================================
-   REMEDIDO NA DIREÇÃO VISUAL (2026-08-08) — CORPO MAIOR, MESMA CONTAGEM
-   ============================================================
-
-   O bump de tipografia desta rodada (ver o `h1` e o parágrafo, abaixo) sobe o
-   corpo mas não muda quantas linhas cada estado ocupa nos viewports medidos —
-   a coluna também ficou mais larga (o degrau de 480px saiu, e um quarto
-   degrau entrou em 1536px+ — ver o comentário do `key={state.id}`), então o
-   mesmo texto continua quebrando nas mesmas 3–4 linhas de antes, medido nos
-   dez viewports obrigatórios. O que muda é só o multiplicador:
-
-     título    abaixo de `lg` .... 1,1  (igual)
-               a partir de `lg` .. 1,05 (era 1,06)
-     intenção  abaixo de `lg` .... 1,5  (igual — o corpo também não mudou,
-                                     ver o comentário do parágrafo: o bump
-                                     de tipografia é só a partir de `lg`)
-               a partir de `lg` .. 1,6  (era 1,5)
-
-   Refaça esta medição se qualquer título/intenção mudar de comprimento ou se
-   a coluna mudar de largura de novo.
+   **Nenhuma contagem de linha a remedir daqui para frente.** Era essa tabela —
+   "refaça a medição sempre que qualquer título ou intenção mudar de
+   comprimento" — que os pisos obrigavam a manter. Mudar a copy agora só muda
+   onde o bloco se centra.
    ============================================================ */
-/* ============================================================
-   HARMONIZAÇÃO (2026-08-09) — POR QUE O PISO DA INTENÇÃO **NÃO** MUDA
-   ============================================================
-
-   Esta rodada alargou a coluna de leitura em ≥1536px (44rem → 48rem) e tentou
-   baixar o piso da intenção junto, na hipótese de que numa coluna maior os
-   três estados cairiam para 2 linhas e o piso de 3 viraria vazio artificial.
-
-   **A hipótese estava errada, e a medição pegou.** A intenção não é governada
-   pela coluna: ela tem `max-w-[52ch]` (ver o parágrafo, abaixo), então a
-   largura de linha dela é a mesma em 1280 e em 1920 — alargar a coluna não
-   muda uma linha. Com `2xl:min-h-[3.2em]` o resultado medido em 1920 × 1080
-   foi Equipamentos e Consultoria (3 linhas naturais) **estourando** o piso e
-   Projetos (2 linhas) não, o que devolveu um desvio de 14,4px entre estados na
-   etiqueta e no CTA — exatamente o salto que os pisos existem para eliminar.
-
-   Fica o piso de 3 linhas em toda faixa ≥1024. Ele reserva uma linha a mais
-   apenas para Projetos, que é o mínimo possível: 3 linhas é o natural de dois
-   dos três estados, e qualquer piso menor reabre o salto.
-
-   Remeça os dois pisos ao mexer em qualquer título, intenção, `max-w` em `ch`
-   ou corpo de texto. */
-const HEADLINE_MIN = 'min-h-[3.3em] lg:min-h-[3.15em]'
-const INTENT_MIN = 'min-h-[4.5em] lg:min-h-[4.8em]'
 
 /** Atraso do hover, dentro da faixa de 120–180ms pedida. */
 const HOVER_INTENT_MS = 150
@@ -410,7 +360,7 @@ export function HeroStage() {
             `items-center`, e não `items-end`. Ancorado pela base, cada linha a
             menos no título empurrava o bloco inteiro para baixo — era metade da
             causa do salto entre estados (a outra metade eram as caixas sem
-            piso, resolvidas por `HEADLINE_MIN` / `INTENT_MIN`).
+            piso, removidas em 2026-08-09 — ver o bloco no topo do arquivo).
 
             `py-*` garante respiro contra o cabeçalho e contra o seletor mesmo
             no viewport mais apertado (1366 × 768). Direção visual
@@ -651,7 +601,6 @@ export function HeroStage() {
                 style={{ '--delay': '60ms' } as CSSProperties}
                 className={cn(
                   styles.enter,
-                  HEADLINE_MIN,
                   /*
                     **Peso 700, não 800.** O extrabold em 50px numa coluna de
                     600px é o "excesso de peso visual no título" do briefing: a
@@ -721,8 +670,8 @@ export function HeroStage() {
                       1024–1279 coluna 560px → 2,375rem rende 3 linhas
                       <640 ... coluna cheia → 2,375rem rende 4 linhas em 390
 
-                    `HEADLINE_MIN` foi remedido para os novos tamanhos — ver o
-                    bloco no topo do arquivo.
+                    Os pisos que acompanhavam esta medição saíram em
+                    2026-08-09 — ver o bloco no topo do arquivo.
                   */
                   /*
                     ============================================================
@@ -764,7 +713,6 @@ export function HeroStage() {
                 style={{ '--delay': '120ms' } as CSSProperties}
                 className={cn(
                   styles.enter,
-                  INTENT_MIN,
                   /*
                     `max-w` em `ch`, não em `rem`: o limite que importa aqui é o
                     comprimento de linha (52 caracteres), e ele acompanha o
