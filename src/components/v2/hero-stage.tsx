@@ -148,9 +148,30 @@ import styles from './hero-stage.module.css'
    de 86px medido na primeira rodada era o defeito a eliminar por completo. Um
    salto de uma linha ao entrar em Equipamentos é aceitável; um vazio de duas
    linhas nos outros dois estados, o tempo todo, não é.
+
+   ============================================================
+   REMEDIDO NA DIREÇÃO VISUAL (2026-08-08) — CORPO MAIOR, MESMA CONTAGEM
+   ============================================================
+
+   O bump de tipografia desta rodada (ver o `h1` e o parágrafo, abaixo) sobe o
+   corpo mas não muda quantas linhas cada estado ocupa nos viewports medidos —
+   a coluna também ficou mais larga (o degrau de 480px saiu, e um quarto
+   degrau entrou em 1536px+ — ver o comentário do `key={state.id}`), então o
+   mesmo texto continua quebrando nas mesmas 3–4 linhas de antes, medido nos
+   dez viewports obrigatórios. O que muda é só o multiplicador:
+
+     título    abaixo de `lg` .... 1,1  (igual)
+               a partir de `lg` .. 1,05 (era 1,06)
+     intenção  abaixo de `lg` .... 1,5  (igual — o corpo também não mudou,
+                                     ver o comentário do parágrafo: o bump
+                                     de tipografia é só a partir de `lg`)
+               a partir de `lg` .. 1,6  (era 1,5)
+
+   Refaça esta medição se qualquer título/intenção mudar de comprimento ou se
+   a coluna mudar de largura de novo.
    ============================================================ */
-const HEADLINE_MIN = 'min-h-[3.3em] lg:min-h-[3.18em]'
-const INTENT_MIN = 'min-h-[4.5em]'
+const HEADLINE_MIN = 'min-h-[3.3em] lg:min-h-[3.15em]'
+const INTENT_MIN = 'min-h-[4.5em] lg:min-h-[4.8em]'
 
 /** Atraso do hover, dentro da faixa de 120–180ms pedida. */
 const HOVER_INTENT_MS = 150
@@ -367,7 +388,11 @@ export function HeroStage() {
             piso, resolvidas por `HEADLINE_MIN` / `INTENT_MIN`).
 
             `py-*` garante respiro contra o cabeçalho e contra o seletor mesmo
-            no viewport mais apertado (1366 × 768).
+            no viewport mais apertado (1366 × 768). Direção visual
+            (2026-08-08): 32/40px lia curto contra a régua do seletor logo
+            abaixo — "elementos socados no meio" incluía essa transição. Sobe
+            para 40/56px (medido para não empurrar a dobra para fora de
+            1366 × 768 — ver a medição de linhas do `h1`/parágrafo acima).
 
             `pt-[var(--media-h)]` abaixo de `lg`: a cena ocupa a faixa do topo
             (ver `--media-h` no módulo) e o conteúdo assenta **abaixo** dela, em
@@ -375,7 +400,7 @@ export function HeroStage() {
             a faixa e, no estado de Projetos — que é claro —, o `h1` branco caía
             em cima do desenho.
           */
-          className="relative z-10 flex min-h-0 flex-1 items-center pb-8 pt-[calc(var(--media-h)+2rem)] lg:py-10 lg:pt-10"
+          className="relative z-10 flex min-h-0 flex-1 items-center pb-10 pt-[calc(var(--media-h)+2rem)] lg:py-14 lg:pt-14"
         >
           <Container className="w-full">
             {/*
@@ -383,26 +408,62 @@ export function HeroStage() {
               escalonada do módulo CSS roda uma vez por troca — sem estado
               intermediário e sem temporizador em JavaScript.
 
-              **Largura de leitura controlada**, dentro da faixa de 560–640px
-              pedida — e em três degraus, não dois:
+              **Largura de leitura controlada**, em quatro degraus:
 
-                até `lg` ..... 560px
-                1024–1279 .... 480px
-                ≥1280 ........ 600px
+                até `lg` ....... 560px
+                1024–1279 ...... 480px
+                1280–1535 ...... 640px
+                ≥1536 .......... 704px
 
-              O degrau do meio existe por medição, não por gosto: em 1024px o
-              plano de projeto começa em x=533 (48% da tela) e uma coluna de
-              600px terminaria em 640 — o `h1` entrava 107px por cima do estudo
-              3D. Com 480px ela termina em 520 e os dois campos não se tocam.
-              Em 1280 o plano já começa em 666 e a coluna de 600px cabe.
+              ============================================================
+              DIREÇÃO VISUAL (2026-08-08) — LARGURA SOBE, MENOS EM 1024–1279
+              ============================================================
+
+              O degrau de 480px em 1024–1279 nasceu para não invadir a
+              "prancha de projeto", um painel contido que Projetos usava até a
+              rodada P1 — essa razão original saiu de cena (os três estados
+              sangram o palco inteiro desde P1). A primeira tentativa desta
+              rodada leu esse degrau como puramente herdado e o alinhou aos
+              outros três em 560px, pela leitura de "coluna com presença".
+
+              **Medição pegou o que a leitura não previu.** Alargar a coluna em
+              1024 não esbarra em nenhum painel, mas põe a linha de texto mais
+              longa mais perto da borda direita do `.scrim` — cujo degradê
+              horizontal já é mais raso nesse viewport (a mesma razão que fez
+              1024 ser "o pior caso" na tabela de contraste de P2, no módulo
+              CSS). Resultado, medido com a metodologia de P2 (pior pixel real
+              sob o corpo de texto): o parágrafo de Consultoria caiu para
+              4,48:1 em 1024×768 — reprova o piso de 4,5:1. Os outros três
+              degraus (560/640/704) passam com folga porque a coluna aí é mais
+              estreita relativa à largura da tela (560 e 640 ainda deixam mais
+              distância até a borda do `.scrim`) ou porque a tela é larga o
+              bastante para o degradê já ter caído a zero bem antes da margem
+              direita da coluna.
+
+              A correção é local: **1024–1279 volta a 480px** — a largura que
+              já era seguro por medição desde antes desta rodada — e os outros
+              três degraus (560/640/704) ficam como pedido. "Coluna com
+              presença" vale onde a medição confirma que cabe sem reabrir
+              contraste; não vale como valor uniforme nos quatro degraus.
+
+              **Quarto degrau (novo nesta rodada).** Em 1586 e 1920px o corpo
+              do `h1` já bateu no teto do `clamp` (54px) mas a coluna de 640px
+              não: Equipamentos, o título mais longo, passou de 3 para 4
+              linhas — o mesmo salto de altura entre estados que a rodada P1
+              eliminou no desktop, reaberto aqui só nas duas larguras mais
+              extremas. `2xl:max-w-[44rem]` (704px, a partir de 1536px) dá
+              largura suficiente para a linha de quebra mais longa
+              ("profissional, especificados") caber, e Equipamentos volta a 3
+              linhas — e o parágrafo, medido de novo com a coluna maior,
+              continua acima de 4,5:1 (14,7–16,3:1 nos dez viewports).
             */}
-            <div key={state.id} className="max-w-[35rem] lg:max-w-[30rem] xl:max-w-[37.5rem]">
+            <div key={state.id} className="max-w-[35rem] lg:max-w-[30rem] xl:max-w-[40rem] 2xl:max-w-[44rem]">
               <p
                 className={cn(
                   styles.enter,
                   'inline-flex items-center gap-3 font-condensed font-semibold uppercase tracking-[0.16em] text-yellow',
                   /* `leading` explícita e depois do `text-[…]` — ver o `h1`. */
-                  'text-[0.6875rem] leading-[1.3] sm:text-[0.75rem]',
+                  'text-[0.75rem] leading-[1.3] sm:text-[0.8125rem]',
                   /*
                     ---------- Piso da etiqueta — dispensado na rodada P1 ----------
 
@@ -473,25 +534,37 @@ export function HeroStage() {
 
                     O `h1` aprovado tem 74 caracteres — "Equipamentos para
                     cozinha profissional, especificados para a sua operação." —
-                    e é copy travada (ver `src/data/v2/home.ts`). Aos 49px que o
-                    teto anterior (3,5rem) produzia em 1440, ele rendia quatro
-                    linhas e 210px de bloco, e a rodada anterior resolveu isso
-                    **encurtando o texto**. Errado: o corpo é variável de
-                    layout, a copy aprovada não.
+                    e é copy travada (ver `src/data/v2/home.ts`). O corpo é
+                    variável de layout, a copy aprovada não.
 
-                    Tetos medidos contra a linha mais longa da quebra natural
-                    ("profissional, especificados", 27 caracteres), com o
-                    Manrope bold real e não por estimativa de largura média:
+                    ============================================================
+                    DIREÇÃO VISUAL (2026-08-08) — MAIS AUTORIDADE, MENOS
+                    HIERARQUIA ACHATADA
+                    ============================================================
 
-                      ≥1280 .. coluna 600px → 2,875rem (46px) rende 3 linhas
-                      1024–1279 coluna 480px → o piso de 2,125rem rende 4
-                      <640 ... coluna cheia → 4 linhas em 390, 5 em 320
+                    A rodada anterior fechou o `h1` em 2,875rem (46px) no
+                    desktop para caber em três linhas contra o antigo teto da
+                    coluna (600px). O gestor apontou o resultado como pequeno
+                    demais para uma dobra deste tamanho — o título não lia como
+                    a peça de maior autoridade da composição. Dois ajustes
+                    somados resolvem sem tocar a copy: a coluna de leitura
+                    ganhou largura (ver o comentário do `key={state.id}` acima:
+                    560/560/640px, contra 560/480/600 antes) e o corpo subiu
+                    junto — o mesmo texto, na mesma coluna mais larga, cabe nas
+                    mesmas três linhas com fonte maior.
 
-                    O bloco resultante em 1440 tem a mesma altura que a versão
-                    curta tinha, com o título inteiro.
+                    Tetos remedidos no navegador, Manrope bold real, contra a
+                    linha mais longa da quebra natural:
+
+                      ≥1280 .. coluna 640px → 3,375rem (54px) rende 3 linhas
+                      1024–1279 coluna 560px → 2,375rem rende 3 linhas
+                      <640 ... coluna cheia → 2,375rem rende 4 linhas em 390
+
+                    `HEADLINE_MIN` foi remedido para os novos tamanhos — ver o
+                    bloco no topo do arquivo.
                   */
-                  'text-[clamp(1.625rem,7.4vw,2.125rem)] leading-[1.1]',
-                  'lg:text-[clamp(2.125rem,2.9vw,2.875rem)] lg:leading-[1.06]',
+                  'text-[clamp(1.75rem,7.8vw,2.375rem)] leading-[1.1]',
+                  'lg:text-[clamp(2.375rem,3.4vw,3.375rem)] lg:leading-[1.05]',
                 )}
               >
                 {state.headline}
@@ -512,7 +585,17 @@ export function HeroStage() {
                     `h1` acima; aqui valia o mesmo descarte silencioso.
                   */
                   'mt-4 max-w-[52ch] font-sans font-medium text-canvas/85 lg:mt-5',
-                  'text-[0.9375rem] leading-[1.5] lg:text-[1.0625rem] lg:leading-[1.5]',
+                  /*
+                    Direção visual (2026-08-08): o bump é só no desktop
+                    (17px → 18px). Testado em 16px no mobile também — em
+                    320px o texto de Equipamentos foi de 4 para 5 linhas
+                    (medido: 124px contra o piso de 74,4), empurrando o CTA
+                    mais perto do fim da tela no telefone mais estreito
+                    suportado. Abaixo de `lg` o corpo fica como estava (15px);
+                    a "leitura mais editorial" pedida vale onde há coluna
+                    para sustentá-la sem custar linha.
+                  */
+                  'text-[0.9375rem] leading-[1.5] lg:text-[1.125rem] lg:leading-[1.6]',
                 )}
               >
                 {state.intent}
@@ -520,7 +603,12 @@ export function HeroStage() {
 
               <div
                 style={{ '--delay': '180ms' } as CSSProperties}
-                className={cn(styles.enter, 'mt-8 lg:mt-10')}
+                /*
+                  Direção visual (2026-08-08): 32/40px deixava o CTA colado ao
+                  parágrafo — "elementos socados no meio" incluía essa
+                  transição. 40/48px separa a ação de ler.
+                */
+                className={cn(styles.enter, 'mt-10 lg:mt-12')}
               >
                 <HeroCta href={state.cta.href} event={state.event} label={state.cta.label} />
               </div>
@@ -543,9 +631,13 @@ export function HeroStage() {
               do espaço, mas `display:none` tiraria o elemento da árvore de
               acessibilidade e o `aria-describedby` do seletor ficaria apontando
               para o nada.
+
+              Direção visual (2026-08-08): `sm:pt-3` → `sm:pt-5`. O seletor
+              lia colado à faixa de conteúdo acima dele — mais respiro aqui
+              separa as duas zonas sem precisar de um divisor.
             */}
             <p
-              className="sr-only sm:not-sr-only sm:block sm:pt-3 sm:font-condensed sm:text-[0.6875rem] sm:font-medium sm:uppercase sm:tracking-[0.14em] sm:text-canvas/50"
+              className="sr-only sm:not-sr-only sm:block sm:pt-5 sm:font-condensed sm:text-[0.6875rem] sm:font-medium sm:uppercase sm:tracking-[0.14em] sm:text-canvas/50"
               id="hero-seletor-instrucao"
             >
               {homeHero.railHint}
@@ -560,12 +652,31 @@ export function HeroStage() {
               onMouseLeave={onRailLeave}
               onFocusCapture={onRailFocus}
               /*
-                Altura: 96–112px no desktop, medida na caixa inteira do botão
-                (`min-h` no item + `py`). Abaixo de `lg` o complemento sai e a
-                altura cai para 64px, que continua muito acima do alvo mínimo de
-                44px de toque.
+                ============================================================
+                DIREÇÃO VISUAL (2026-08-08) — DE GRADE PARA GRUPO
+                ============================================================
+
+                Até aqui os três controles eram `grid-template-columns:
+                repeat(3, minmax(0, 1fr))` — três células esticadas de guia a
+                guia do `Container`, sem vão visível entre elas. O gestor
+                apontou o resultado pelo nome certo: leitura de planilha, três
+                colunas de tabela, não três portas de navegação. A malha que
+                alinhava o número de Equipamentos e a seta de Consultoria às
+                mesmas guias do `h1` (documentada no módulo CSS, "A CORREÇÃO DE
+                MALHA DE 2026-08-08") é abandonada nesta rodada — era ela,
+                esticando as células ponta a ponta, que produzia a leitura de
+                tabela.
+
+                `styles.railGroup` substitui `styles.railGrid`: `flex` com
+                `justify-content: center` e um `gap` generoso — os três
+                controles agora têm largura própria (a do conteúdo mais um
+                respiro fixo, não a de uma célula de grade) e ficam centrados
+                como grupo dentro do `Container`, com vão visível nas duas
+                pontas. Cada `.railTop` (a régua de estado) passa a cobrir só a
+                largura do seu próprio controle — não mais um segmento de uma
+                linha contínua de guia a guia.
               */
-              className={cn(styles.railGrid, 'sm:pt-2')}
+              className={cn(styles.railGroup, 'sm:pt-3')}
             >
               {heroStates.map((item, index) => {
                 const selected = index === active
@@ -594,28 +705,26 @@ export function HeroStage() {
                       */
                       selected && styles.railItemActive,
                       /*
-                        Altura da área, medida no pior caso e não estimada.
+                        ============================================================
+                        DIREÇÃO VISUAL (2026-08-08) — ALTURA E RECUO, AUTÔNOMOS
+                        ============================================================
 
-                        Em 1024px cada célula tem 295px e "Corrigir gargalos e
-                        melhorar resultados" quebra em duas linhas; com `py-4` o
-                        conteúdo media **119,8px** e estourava o teto de 112 do
-                        briefing. Com `py-3` o pior caso fecha em 101px, dentro
-                        da faixa de 96–112 — e `min-h-[6rem]` garante o piso de
-                        96 nas larguras em que o complemento cabe numa linha só.
-
-                        Abaixo de `lg` o complemento sai e sobra número + nome:
-                        `min-h-16` (64px) com folga larga sobre o alvo de toque
-                        mínimo de 44px.
-
-                        **O recuo horizontal saiu daqui** e passou para o módulo
-                        (`.railItem`), porque ele não é uniforme: as áreas das
-                        pontas não têm recuo do lado da guia, senão o conteúdo
-                        do seletor assenta numa linha vertical diferente da do
-                        `h1`. Era o defeito medido — número em x=80 contra
-                        título em x=60.
+                        Até aqui a altura mirava um teto de grade (96–112px, o
+                        "não estourar a célula") e o recuo horizontal só existia
+                        **entre** as áreas (as pontas encostavam nas guias do
+                        `h1`/CTA — ver "A CORREÇÃO DE MALHA DE 2026-08-08" no
+                        módulo). As duas contas mudam porque a área deixou de
+                        ser uma célula de grade: agora é um controle
+                        autocontido, com o próprio recuo nas quatro bordas
+                        (`.railItem` no módulo) e sem teto de altura importado
+                        de uma grade que não existe mais. `min-h` aqui é só o
+                        piso de toque: 44px de sobra é o mínimo pedido, 64/96
+                        já cobria isso e continua cobrindo com folga maior
+                        ainda, porque o número saiu (uma linha a menos) e o
+                        recuo interno cresceu.
                       */
-                      'min-h-16 py-3 lg:min-h-24',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-yellow',
+                      'min-h-16 py-4 lg:min-h-24 lg:py-6',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow',
                     )}
                   >
                     {/* Linha superior própria da opção — nunca contínua entre elas. */}
@@ -625,19 +734,9 @@ export function HeroStage() {
                       <span className="min-w-0 flex-1">
                         <span
                           className={cn(
-                            'block font-condensed text-[0.625rem] font-bold leading-none tabular-nums tracking-[0.1em] transition-colors duration-200',
-                            /* `/65`: a `/45` o índice fechava em 3,36:1. */
-                            selected ? 'text-yellow' : 'text-canvas/65',
-                          )}
-                        >
-                          {item.number}
-                        </span>
-
-                        <span
-                          className={cn(
                             /* `leading` depois do `text-[…]` — ver o `h1`. */
-                            'mt-1.5 block font-condensed uppercase tracking-[0.05em] transition-colors duration-200 lg:mt-1.5',
-                            'text-[0.75rem] leading-tight sm:text-[0.875rem] lg:text-[1.0625rem]',
+                            'block font-condensed uppercase tracking-[0.05em] transition-colors duration-200',
+                            'text-[0.8125rem] leading-tight sm:text-[0.9375rem] lg:text-[1.1875rem]',
                             /*
                               Inativo em `canvas/75`, não num fantasma: o
                               briefing pede que ele continue legível e não
@@ -672,7 +771,7 @@ export function HeroStage() {
                         */}
                         <span
                           className={cn(
-                            'mt-1 hidden text-[0.75rem] leading-snug transition-colors duration-200 sm:block lg:text-[0.8125rem]',
+                            'mt-1.5 hidden text-[0.8125rem] leading-snug transition-colors duration-200 sm:block lg:text-[0.9375rem]',
                             /*
                               `/65` e `/80`, não `/55` e `/75`: com a faixa do
                               seletor deixando a fotografia aparecer, o pior
@@ -804,6 +903,10 @@ export function HeroStage() {
  * por `lib/analytics`, como manda a convenção.
  *
  * `min-h-12` no telefone é o piso de 48px pedido para o toque.
+ *
+ * Direção visual (2026-08-08): rótulo e caixa cresceram um degrau
+ * (14/15/16px → 15/16/17px; caixa 48/54px → 48/58px) para equilibrar o peso
+ * contra o `h1` maior desta rodada — sem chegar a competir com ele.
  */
 function HeroCta({ href, event, label }: { href: string; event: AnalyticsEvent; label: string }) {
   return (
@@ -812,18 +915,18 @@ function HeroCta({ href, event, label }: { href: string; event: AnalyticsEvent; 
       data-hero-cta
       onClick={() => trackEvent(event, { origem: 'hero' })}
       className={cn(
-        'group/cta relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] bg-yellow sm:min-h-[3.375rem]',
-        'font-condensed text-[0.875rem] font-semibold uppercase tracking-[0.05em] text-ink sm:text-[0.9375rem] lg:text-[1rem]',
+        'group/cta relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] bg-yellow sm:min-h-[3.625rem]',
+        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] text-ink sm:text-[1rem] lg:text-[1.0625rem]',
         'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-yellow-bright',
         'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
         'hover:before:scale-y-100 focus-visible:before:scale-y-100',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
       )}
     >
-      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-7">{label}</span>
+      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-8">{label}</span>
       <span
         aria-hidden="true"
-        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-ink/20 sm:w-[3.25rem]"
+        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-ink/20 sm:w-[3.5rem]"
       >
         <ArrowRightIcon
           size={18}

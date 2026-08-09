@@ -94,8 +94,19 @@
                           mantém a proporção do tablet perto da anterior
                           (300px), sem deixar o coeficiente pensado para
                           telefone dominar telas maiores.
+
+    ============================================================
+    DIREÇÃO VISUAL (2026-08-08) — MÍDIA RESPIRANDO
+    ============================================================
+
+    `69vw` → `74vw`. Item do briefing "mídia respirando": em 390 × 844 o
+    coeficiente anterior já estava no meio da faixa pedida (30–35%); o novo
+    fecha perto do teto de faixa (390 × 844 = 296px = 35,1%; 430 × 932 =
+    317,4px = 34,1%), sem furar o teto de 20rem no tablet. Ganho modesto e
+    deliberado — o objetivo é presença maior da foto, não uma faixa
+    dominante que empurre o texto para fora da tela em telefones baixos.
   */
-  --media-h: clamp(9.5rem, 69vw, 20rem);
+  --media-h: clamp(9.5rem, 74vw, 20rem);
 
   position: relative;
   overflow: hidden;
@@ -252,11 +263,11 @@
    ============================================================
 
    Um seletor de intenção, não três textos soltos sobre a foto. O que o torna
-   legível como controle, e que a versão anterior não tinha:
+   legível como controle:
 
      · uma **faixa própria** com fundo grafite semitransparente e borda superior,
        integrada à base do palco;
-     · **número, título, complemento, seta e indicador** em cada uma;
+     · **título, complemento, seta e indicador** em cada uma;
      · a área inteira clicável, com cursor de interação;
      · linha superior amarela **exclusiva da opção ativa** — nunca um traço
        contínuo correndo por cima das três.
@@ -277,48 +288,53 @@
    nenhum fundo, pill ou borda entra no lugar.
 
    ============================================================
-   A CORREÇÃO DE MALHA DE 2026-08-08
+   A CORREÇÃO DE MALHA DE 2026-08-08 (SUPERADA — VER ABAIXO)
    ============================================================
 
-   O seletor estava **fora da grade da própria dobra**. Medido em 1440 × 900,
-   com o `Container` resolvendo em L=60 / R=1380:
+   O seletor estava fora da grade da própria dobra: número/seta das pontas
+   não caíam nas mesmas guias do `h1`/CTA/métricas. A correção da época
+   esticou as três áreas em `grid-template-columns: repeat(3, minmax(0, 1fr))`
+   (trilhas iguais, ponta a ponta do `Container`) e fez as pontas encostarem
+   nas guias, tirando o recuo lateral só delas.
 
-     etiqueta, h1, intenção, CTA, instrução, métricas ..... L = 60
-     número de "01 EQUIPAMENTOS" .......................... L = 80   ← 20px fora
-     seta de "03 CONSULTORIA" ............................. R = 1360 ← 20px dentro
+   ============================================================
+   DIREÇÃO VISUAL (2026-08-08) — DE GRADE PARA GRUPO
+   ============================================================
 
-   Ou seja: **todo texto da dobra assentava numa linha-guia, e só o do seletor
-   assentava noutra** — os 20px de `px-5` de cada área. Somado a trilhas de
-   495 / 413 / 412px, era isso que lia como "deslocado e esticado".
+   A malha resolveu o desalinhamento, mas trocou de defeito: três células
+   esticadas de guia a guia, sem vão visível entre elas, é exatamente a
+   "leitura de planilha" que o gestor apontou depois de ver a composição
+   funcionando — três colunas de tabela, não três portas de navegação.
 
-   Duas mudanças, e as duas são de malha:
+   A correção agora é abandonar a grade, não realinhá-la de novo:
 
-   1. **Trilhas iguais.** `1.2fr 1fr 1fr` saiu. A área maior de Equipamentos era
-      hierarquia comercial expressa por deformação da grade — e deformação de
-      grade não é hierarquia, é ruído. Equipamentos continua dominante por
-      estado inicial, `h1`, CTA preenchido, cena ativa, posição e amarelo no
-      número e na régua. Nenhum desses sinais depende da largura da célula.
+     · `.railGroup` substitui `.railGrid` — `flex` com `justify-content:
+       center` e um `gap` generoso entre as três áreas, que passam a ter
+       **largura própria** (a do conteúdo mais um recuo fixo) em vez da
+       largura de uma célula de grade;
+     · o grupo inteiro fica centrado dentro do `Container`, com vão visível
+       nas duas pontas — as guias do `h1`/CTA/métricas deixam de reger o
+       seletor, que agora é lido como um cluster de controles à parte, não
+       como uma extensão da grade de conteúdo;
+     · o recuo interno de cada área deixa de depender de ser primeira/última
+       (`.railItem:first-child`/`:last-child` saem) porque não há mais guia
+       a alcançar — as quatro bordas de cada área têm o mesmo recuo.
 
-   2. **O conteúdo das pontas assenta nas guias.** A primeira área perde o
-      recuo à esquerda e a última perde o recuo à direita, então o número de
-      Equipamentos cai exatamente em 60 e a seta de Consultoria exatamente em
-      1380 — as mesmas duas linhas-guia do `h1` e da faixa de métricas. Os
-      recuos internos ficam só entre as áreas, onde de fato separam.
+   Trade-off assumido: número de Equipamentos e seta de Consultoria não
+   caem mais em x=60/x=1380. É a troca deliberada desta rodada — alinhamento
+   de guia por presença de tabela.
 
    ============================================================
    DE CAIXA PREENCHIDA PARA RÉGUA COMPARTILHADA
    ============================================================
 
-   O ativo era uma **caixa preenchida com deslocamento de 2px no hover**. Numa
-   trilha que agora encosta na guia, o preenchimento nasceria colado ao texto; e
-   a caixa que sobe no hover é justamente o que fazia a base parecer "camadas
-   adicionadas" sobre a dobra em vez de arquitetura contínua.
-
-   Sai o preenchimento, sai o deslocamento. Fica a mecânica que a V1 já usava no
-   seletor de pilares: **uma régua compartilhada sobre as três áreas**, com o
-   ativo marcado por peso + contraste + régua de 2px. Como as três réguas
-   encostam, o olho lê uma linha contínua com um trecho amarelo por cima da área
-   ativa — e não uma trava atravessando as três.
+   O ativo era uma **caixa preenchida com deslocamento de 2px no hover** —
+   removida ainda na rodada da correção de malha. Fica a mecânica que a V1 já
+   usava no seletor de pilares: uma régua de 2px no topo de cada área, com o
+   ativo marcado por peso + contraste + régua. Com o grupo espaçado desta
+   rodada, cada régua cobre só a largura da sua própria área — três traços
+   curtos e distintos, não mais uma linha contínua de guia a guia (essa leitura
+   só fazia sentido quando as áreas encostavam umas nas outras).
 
    Sinais do estado ativo, três e um deles não-cromático: régua de 2px
    (posição/espessura), peso do rótulo (bold contra semibold) e cor.
@@ -350,50 +366,51 @@
 }
 
 /*
-  `minmax(0, 1fr)`: a base de uma trilha `fr` é `auto`, então uma célula cujo
-  conteúdo não cabe **rouba largura das vizinhas**. Medido em 320px antes da
-  correção: 106,1 / 76,7 / 97,2px, três áreas de larguras diferentes num
-  controle que precisa ler como uma peça só.
+  Grupo centrado, não grade. `justify-content: center` + `gap` são o que faz
+  o seletor ler como três controles com vão visível, e não três colunas
+  esticadas — ver "DIREÇÃO VISUAL (2026-08-08) — DE GRADE PARA GRUPO" acima.
+
+  `flex-wrap: nowrap` é deliberado: as três áreas têm de caber numa linha só
+  em toda largura suportada (o recuo/gap encolhem no telefone — ver o bloco
+  de tablet/telefone, abaixo — para garantir isso sem rolagem horizontal).
 */
-.railGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.railGroup {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: clamp(0.5rem, 4vw, 3.5rem);
 }
 
 .railItem {
   position: relative;
   display: flex;
+  flex: 0 1 auto;
   align-items: center;
   cursor: pointer;
   text-align: left;
   transition: color 220ms var(--ease-precise);
 
   /*
-    ---------- Recuo interno só ENTRE as áreas ----------
-
-    O recuo existe para separar uma área da vizinha, não para afastar o
-    conteúdo das bordas do seletor. Nas pontas ele some, e é isso que põe o
-    número de Equipamentos na guia esquerda e a seta de Consultoria na guia
-    direita — as mesmas do `h1` e da faixa de métricas.
+    Recuo autocontido nas quatro bordas — não há mais guia de `Container` a
+    alcançar (ver "DE GRADE PARA GRUPO", acima), então a primeira e a última
+    área têm o mesmo recuo que as do meio.
   */
-  padding-inline: 1.25rem;
+  padding-inline: 1rem;
 }
 
-.railItem:first-child {
-  padding-inline-start: 0;
-}
-
-.railItem:last-child {
-  padding-inline-end: 0;
+@media (min-width: 1024px) {
+  .railItem {
+    padding-inline: 1.5rem;
+  }
 }
 
 /*
-  ---------- A régua compartilhada ----------
+  ---------- A régua de cada porta ----------
 
   Existe nas três áreas o tempo todo: 1px discreto no inativo, 2px amarelo no
-  ativo e no hover. Encostadas, as três leem como **uma** linha atravessando o
-  seletor de guia a guia — a moldura do controle —, e o trecho amarelo diz qual
-  área está selecionada.
+  ativo e no hover — desde a direção visual de 2026-08-08, três traços
+  distintos (um por área, com o vão do `.railGroup` entre eles), não uma
+  linha contínua de guia a guia (ver "DE GRADE PARA GRUPO", acima).
 
   A espessura muda por `transform: scaleY` sobre uma régua de 2px, nunca por
   `height`: altura animada reflui a caixa do botão e mexeria no conteúdo.
@@ -502,16 +519,17 @@
   /*
     ---------- O seletor no toque ----------
 
-    **Três áreas iguais, e nenhuma rolagem horizontal.** Medido: em 320px a
-    faixa tem 280px e cada área fica com 93px; "EQUIPAMENTOS" em Oswald a 12px
-    pede 71px. Cabe em uma linha, então o briefing é atendido sem recorrer à
-    rolagem lateral ("somente se indispensável") e sem indicador de "há mais".
-
-    As trilhas iguais agora valem em toda largura — ver o bloco do seletor. O
-    que muda aqui é só o recuo interno, que encolhe com a área disponível.
+    **Grupo centrado, e nenhuma rolagem horizontal.** Abaixo de `sm` só o
+    nome aparece (complemento e seta somem — ver `hero-stage.tsx`), então
+    cada área é só recuo + rótulo. `.railGroup` já encolhe o `gap` por
+    `clamp()` nas larguras estreitas (ver o bloco do seletor, acima); aqui o
+    recuo interno de cada área encolhe junto, para a soma das três caber em
+    320px sem recorrer à rolagem lateral ("somente se indispensável") nem a
+    indicador de "há mais" — medido no navegador nesta rodada (ver
+    `docs/v2/capturas/` da direção visual de 2026-08-08).
   */
   .railItem {
-    padding-inline: 0.75rem;
+    padding-inline: 0.625rem;
   }
 
   /* Sem ponteiro não há hover; o realce por passagem só confundiria o toque. */

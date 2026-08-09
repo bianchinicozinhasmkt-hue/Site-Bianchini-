@@ -139,8 +139,6 @@ export const homeHero = {
 
 export interface HeroState {
   id: 'equipamentos' | 'projetos' | 'consultoria'
-  /** Índice na régua — `01`, `02`, `03`. Ordem comercial, não cronológica. */
-  number: string
   /** Rótulo na régua dos três caminhos. */
   name: string
   /** Complemento do rótulo, na régua. Não é slogan: é a situação do cliente. */
@@ -263,7 +261,6 @@ export interface HeroState {
 export const heroStates: HeroState[] = [
   {
     id: 'equipamentos',
-    number: '01',
     name: 'Equipamentos',
     cue: 'Comprar, substituir ou especificar',
     /*
@@ -311,7 +308,6 @@ export const heroStates: HeroState[] = [
   },
   {
     id: 'projetos',
-    number: '02',
     name: 'Projetos',
     cue: 'Abrir, reformar ou reorganizar',
     eyebrow: 'Projetos para food service',
@@ -351,7 +347,6 @@ export const heroStates: HeroState[] = [
   },
   {
     id: 'consultoria',
-    number: '03',
     name: 'Consultoria',
     cue: 'Corrigir gargalos e melhorar resultados',
     eyebrow: 'Diagnóstico operacional',
