@@ -439,7 +439,27 @@ export function HeroStage() {
             1440 os dois vãos já fecham em 143 e 133px com o `xl:py-14`
             simétrico, e em 1024 a dobra continua excedendo o viewport.
           */
-          className="relative z-10 flex min-h-0 flex-1 items-center pb-10 pt-[calc(var(--media-h)+2rem)] lg:py-12 lg:pt-12 xl:py-14 xl:pt-14 2xl:pb-6 2xl:pt-32"
+          /*
+            ============================================================
+            ALTURA RESPONSIVA (2026-08-09) — OS DOIS VÃOS DO TELEFONE
+            ============================================================
+
+            `pb-10` → `pb-8` e o recuo da cena `+2rem` → `+1,5rem`, os dois
+            **só abaixo de `lg`** (o `lg:py-12` já cobre 1024 para cima, e
+            1440/1920 não são tocados nesta rodada).
+
+            Medido em 390 × 844 antes da correção: o vão entre a base da
+            fotografia e a etiqueta somava 42,2px (32 de recuo mais 10,2 de
+            entrelinha morta da etiqueta — ver o `flex` no `<p>`, abaixo) e o
+            vão entre o último CTA e o seletor, 40px. São 82px de grafite liso
+            nas duas emendas de uma dobra que excedia a janela em 70,8.
+
+            8px em cada um devolve 16px sem que nenhuma das duas emendas perca
+            a função: 24px continuam separando a cena do texto e 32px, a ação
+            do seletor — ambos acima do vão de 16px que o próprio par de CTAs
+            usa entre si nessa largura.
+          */
+          className="relative z-10 flex min-h-0 flex-1 items-center pb-8 pt-[calc(var(--media-h)+1.5rem)] lg:py-12 lg:pt-12 xl:py-14 xl:pt-14 2xl:pb-6 2xl:pt-32"
         >
           <Container className="w-full">
             {/*
@@ -560,7 +580,31 @@ export function HeroStage() {
               <p
                 className={cn(
                   styles.enter,
-                  'inline-flex items-center gap-3 font-condensed font-semibold uppercase tracking-[0.16em] text-yellow',
+                  /*
+                    ============================================================
+                    ALTURA RESPONSIVA (2026-08-09) — `flex` ABAIXO DE `lg`
+                    ============================================================
+
+                    Como `inline-flex`, este `<p>` é uma caixa **de nível
+                    inline**: ela participa de uma linha do bloco pai e essa
+                    linha tem a entrelinha herdada do `<div>`, não a da
+                    etiqueta. O resultado é um vão que nenhuma classe declara e
+                    que nenhuma medida do projeto prevê — medido no build de
+                    produção, **10,2px em 390 × 844 e 9,6px em 1024 × 768** de
+                    espaço morto entre o topo da coluna e o topo real da
+                    etiqueta.
+
+                    `flex` torna a caixa de nível bloco e a linha desaparece com
+                    a entrelinha dela. A etiqueta não muda de tamanho, de
+                    posição horizontal nem de aparência: o `<p>` passa a ocupar
+                    a largura da coluna, mas o conteúdo continua sendo traço +
+                    texto alinhados à esquerda, exatamente como antes.
+
+                    `lg:inline-flex` devolve o comportamento atual de 1024 para
+                    cima — 1440 e 1920 ficam byte a byte como estavam, que é o
+                    requisito desta rodada.
+                  */
+                  'flex items-center gap-3 font-condensed font-semibold uppercase tracking-[0.16em] text-yellow lg:inline-flex',
                   /* `leading` explícita e depois do `text-[…]` — ver o `h1`. */
                   'text-[0.75rem] leading-[1.3] sm:text-[0.8125rem]',
                   /*
@@ -775,9 +819,60 @@ export function HeroStage() {
                   180ms de atraso de `.enter` deixavam o par de botões em
                   `opacity: 0` a cada clique.
                 */
+                /*
+                  ============================================================
+                  ALTURA RESPONSIVA (2026-08-09) — 1024 VOLTA A UMA LINHA SÓ
+                  ============================================================
+
+                  **Era daqui que vinham os 62px de excesso de 1024 × 768, e
+                  não de uma soma difusa de vãos.** Medido no build de
+                  produção, com a coluna de leitura em 480px (`lg:max-w-[30rem]`):
+
+                    CTA amarelo ......... 326,0px
+                    vão ................. 16,0px
+                    CTA de WhatsApp ..... 266,8px
+                    ─────────────────────────────
+                    linha pedida ........ 608,8px  contra 480 disponíveis
+
+                  O par quebrava, a linha de ação passava de 58 para **132px**
+                  e a dobra crescia 74px — mais que os 62 de excesso medidos.
+                  Resolver a quebra resolve o viewport inteiro; nada mais
+                  precisa ceder ali.
+
+                  Duas correções somadas, ambas escopadas a 1024–1279 (`lg`,
+                  com `xl` restaurando o valor de hoje — 1440 e 1920 não são
+                  tocados):
+
+                    1. **os dois botões encolhem um degrau** (rótulo 17 → 16px,
+                       recuos e cela do ícone menores — ver `HeroCta` e
+                       `HeroWhatsappCta`), levando o par de 608,8 para ~538px
+                       sem que nenhum rótulo quebre e sem descer de 58px de
+                       altura, bem acima do piso de 44 de toque;
+                    2. **`lg:w-max`** — a linha de ação passa a medir o próprio
+                       conteúdo em vez de herdar os 480px da coluna de leitura.
+
+                  O ponto 2 é o que evita a alternativa ruim: alargar a coluna
+                  de leitura nessa faixa **já foi medido e reprovou** — a 560px
+                  o parágrafo de Consultoria caiu para 4,48:1 em 1024 × 768
+                  (ver o comentário da coluna, acima). A largura de leitura
+                  fica onde a medição a travou, em 480px; quem ganha largura é
+                  só o par de botões, que é massa opaca e não depende do
+                  `.scrim` para contrastar. O par termina em x=578 de 1024 —
+                  dentro do palco, sem overflow, e a 221px da borda direita.
+
+                  `xl:w-auto` devolve o comportamento herdado em 1280+, onde a
+                  coluna de 640px já comporta os 608,8px do par em tamanho
+                  cheio.
+
+                  `mt-10` → `mt-8` **só abaixo de `lg`**: 40px entre ler e agir
+                  é a medida do desktop, e no telefone ela concorre com os
+                  outros dois vãos da mesma dobra. `lg:mt-10` e `xl:mt-12`
+                  ficam como estavam.
+                */
                 className={cn(
                   styles.enter,
-                  'mt-10 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-10 xl:mt-12',
+                  'mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4',
+                  'lg:mt-10 lg:w-max lg:gap-3 xl:mt-12 xl:w-auto xl:gap-4',
                 )}
               >
                 <HeroCta activeId={state.id} />
@@ -1026,7 +1121,27 @@ export function HeroStage() {
                         vez de deixá-la como vão morto. Gated em `2xl`: 1440 e
                         1024 não têm essa folga.
                       */
-                      'min-h-16 py-4 lg:min-h-24 lg:py-6 2xl:min-h-32 2xl:py-9',
+                      /*
+                        ============================================================
+                        ALTURA RESPONSIVA (2026-08-09) — O PISO DO TELEFONE ERA
+                        FOLGA, NÃO CONTEÚDO
+                        ============================================================
+
+                        `min-h-16` (64px) contra um conteúdo real de **48,3px**
+                        em 390 × 844 — recuo de 16px em cima e embaixo mais a
+                        linha do rótulo. Os 15,7px de diferença eram piso de
+                        caixa sem nada dentro: nem texto, nem respiro declarado.
+
+                        `min-h-[3.5rem]` (56px) devolve 8px e mantém 7,7px de
+                        folga sobre o conteúdo — a área de toque continua em
+                        56px, doze acima do piso de 44 que o projeto exige, e o
+                        seletor não perde presença: o que encolhe é a reserva
+                        vazia, não o controle.
+
+                        Nada muda de 1024 para cima — `lg:min-h-24` e
+                        `2xl:min-h-32` seguem intactos.
+                      */
+                      'min-h-[3.5rem] py-4 lg:min-h-24 lg:py-6 2xl:min-h-32 2xl:py-9',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow',
                     )}
                   >
@@ -1239,7 +1354,14 @@ function HeroCta({ activeId }: { activeId: HeroState['id'] }) {
       onClick={() => trackEvent(state.event, { origem: 'hero' })}
       className={cn(
         'group/cta relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] bg-yellow sm:min-h-[3.625rem]',
-        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] text-ink sm:text-[1rem] lg:text-[1.0625rem]',
+        /*
+          `lg:text-[1rem] xl:text-[1.0625rem]` (2026-08-09): um degrau a menos
+          **só em 1024–1279**, a faixa onde o par de CTAs não cabia numa linha.
+          É a menor parte da correção (ver o comentário da linha de ação): o
+          grosso dos ~70px veio dos recuos e da cela do ícone. A altura da
+          caixa não muda — continua 58px, contra o piso de 44 de toque.
+        */
+        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] text-ink sm:text-[1rem] lg:text-[1rem] xl:text-[1.0625rem]',
         'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-yellow-bright',
         'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
         'hover:before:scale-y-100 focus-visible:before:scale-y-100',
@@ -1269,7 +1391,8 @@ function HeroCta({ activeId }: { activeId: HeroState['id'] }) {
         Os inativos levam `aria-hidden`, então o nome acessível do link é só o
         rótulo ativo — não os três concatenados.
       */}
-      <span className={cn(styles.ctaLabels, 'relative z-10 px-5 sm:px-6 lg:px-8')}>
+      {/* `lg:px-6 xl:px-8` — ver o comentário da linha de ação. */}
+      <span className={cn(styles.ctaLabels, 'relative z-10 px-5 sm:px-6 lg:px-6 xl:px-8')}>
         {heroStates.map((item) => (
           <span
             key={item.id}
@@ -1282,7 +1405,7 @@ function HeroCta({ activeId }: { activeId: HeroState['id'] }) {
       </span>
       <span
         aria-hidden="true"
-        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-ink/20 sm:w-[3.5rem]"
+        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-ink/20 sm:w-[3.5rem] lg:w-12 xl:w-[3.5rem]"
       >
         <ArrowRightIcon
           size={18}
@@ -1384,7 +1507,8 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
         'group/wa relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] sm:min-h-[3.625rem]',
         /* Massa verde funda e dessaturada, com tinta clara — ver acima. */
         'bg-[#2A6F44] text-canvas',
-        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] sm:text-[1rem] lg:text-[1.0625rem]',
+        /* `lg:text-[1rem] xl:…` — mesmo degrau do primário; o par continua um par. */
+        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] sm:text-[1rem] lg:text-[1rem] xl:text-[1.0625rem]',
         'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-white/[0.14]',
         'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
         'hover:before:scale-y-100 focus-visible:before:scale-y-100',
@@ -1392,12 +1516,13 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
       )}
     >
-      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-7">
+      {/* `lg:px-5 xl:px-7` e cela `lg:w-12` — ver o comentário da linha de ação. */}
+      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-5 xl:px-7">
         Falar no WhatsApp
       </span>
       <span
         aria-hidden="true"
-        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-canvas/25 sm:w-[3.25rem]"
+        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-canvas/25 sm:w-[3.25rem] lg:w-12 xl:w-[3.25rem]"
       >
         {/*
           O glifo segue a tinta do rótulo, como a seta segue a do botão amarelo:

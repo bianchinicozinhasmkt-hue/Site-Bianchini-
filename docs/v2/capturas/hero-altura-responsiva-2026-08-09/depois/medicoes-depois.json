@@ -1,0 +1,1854 @@
+{
+  "1920x1080": {
+    "equipamentos": {
+      "viewportHeight": 1080,
+      "viewportWidth": 1920,
+      "docScrollWidth": 1920,
+      "overflowX": 0,
+      "headerHeight": 84,
+      "heroHeight": 1080,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 996,
+      "panel": {
+        "top": 84,
+        "bottom": 889.9,
+        "height": 805.9,
+        "left": 0,
+        "right": 1920,
+        "width": 1920
+      },
+      "panelPad": {
+        "top": "128px",
+        "bottom": "24px"
+      },
+      "column": {
+        "top": 322.2,
+        "bottom": 755.7,
+        "height": 433.5,
+        "left": 260,
+        "right": 1660,
+        "width": 1400
+      },
+      "eyebrow": {
+        "top": 331.7,
+        "bottom": 348.6,
+        "height": 16.9,
+        "left": 300,
+        "right": 444.6,
+        "width": 144.6
+      },
+      "h1": {
+        "top": 360.6,
+        "bottom": 543.3,
+        "height": 182.7,
+        "left": 300,
+        "right": 1068,
+        "width": 768
+      },
+      "h1Lines": 3,
+      "h1Font": "58px",
+      "h1LineHeight": "60.9px",
+      "intent": {
+        "top": 563.3,
+        "bottom": 649.7,
+        "height": 86.4,
+        "left": 300,
+        "right": 885.9,
+        "width": 585.9
+      },
+      "intentLines": 3,
+      "intentFont": "18px",
+      "action": {
+        "top": 697.7,
+        "bottom": 755.7,
+        "height": 58,
+        "left": 300,
+        "right": 1068,
+        "width": 768
+      },
+      "actionWrap": "linha unica",
+      "actionMt": "48px",
+      "cta": {
+        "top": 697.7,
+        "bottom": 755.7,
+        "height": 58,
+        "left": 300,
+        "right": 626,
+        "width": 326
+      },
+      "wa": {
+        "top": 697.7,
+        "bottom": 755.7,
+        "height": 58,
+        "left": 642,
+        "right": 908.8,
+        "width": 266.8
+      },
+      "base": {
+        "top": 889.9,
+        "bottom": 1080,
+        "height": 190.1,
+        "left": 0,
+        "right": 1920,
+        "width": 1920
+      },
+      "hint": {
+        "top": 889.9,
+        "bottom": 928,
+        "height": 38.1,
+        "left": 300,
+        "right": 1620,
+        "width": 1320
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 928,
+        "bottom": 1080,
+        "height": 152,
+        "left": 300,
+        "right": 1620,
+        "width": 1320
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 952,
+        "bottom": 1080,
+        "height": 128,
+        "left": 352,
+        "right": 704,
+        "width": 352
+      },
+      "railItemPad": {
+        "top": "36px",
+        "bottom": "36px",
+        "minH": "128px"
+      },
+      "ctaToSelector": 134.2,
+      "gapAboveEyebrow": 247.7,
+      "gapBelowAction": 134.2,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "1440x900": {
+    "equipamentos": {
+      "viewportHeight": 900,
+      "viewportWidth": 1440,
+      "docScrollWidth": 1440,
+      "overflowX": 0,
+      "headerHeight": 80,
+      "heroHeight": 900,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 820,
+      "panel": {
+        "top": 80,
+        "bottom": 739.5,
+        "height": 659.5,
+        "left": 0,
+        "right": 1440,
+        "width": 1440
+      },
+      "panelPad": {
+        "top": "56px",
+        "bottom": "56px"
+      },
+      "column": {
+        "top": 207.2,
+        "bottom": 612.3,
+        "height": 405,
+        "left": 20,
+        "right": 1420,
+        "width": 1400
+      },
+      "eyebrow": {
+        "top": 216.8,
+        "bottom": 233.7,
+        "height": 16.9,
+        "left": 60,
+        "right": 204.6,
+        "width": 144.6
+      },
+      "h1": {
+        "top": 245.7,
+        "bottom": 399.9,
+        "height": 154.2,
+        "left": 60,
+        "right": 700,
+        "width": 640
+      },
+      "h1Lines": 3,
+      "h1Font": "48.96px",
+      "h1LineHeight": "51.408px",
+      "intent": {
+        "top": 419.9,
+        "bottom": 506.3,
+        "height": 86.4,
+        "left": 60,
+        "right": 645.9,
+        "width": 585.9
+      },
+      "intentLines": 3,
+      "intentFont": "18px",
+      "action": {
+        "top": 554.3,
+        "bottom": 612.3,
+        "height": 58,
+        "left": 60,
+        "right": 700,
+        "width": 640
+      },
+      "actionWrap": "linha unica",
+      "actionMt": "48px",
+      "cta": {
+        "top": 554.3,
+        "bottom": 612.3,
+        "height": 58,
+        "left": 60,
+        "right": 386,
+        "width": 326
+      },
+      "wa": {
+        "top": 554.3,
+        "bottom": 612.3,
+        "height": 58,
+        "left": 402,
+        "right": 668.8,
+        "width": 266.8
+      },
+      "base": {
+        "top": 739.5,
+        "bottom": 900,
+        "height": 160.5,
+        "left": 0,
+        "right": 1440,
+        "width": 1440
+      },
+      "hint": {
+        "top": 739.5,
+        "bottom": 777.6,
+        "height": 38.1,
+        "left": 60,
+        "right": 1380,
+        "width": 1320
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 777.6,
+        "bottom": 900,
+        "height": 122.4,
+        "left": 60,
+        "right": 1380,
+        "width": 1320
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 801.6,
+        "bottom": 900,
+        "height": 98.4,
+        "left": 144,
+        "right": 496,
+        "width": 352
+      },
+      "railItemPad": {
+        "top": "24px",
+        "bottom": "24px",
+        "minH": "96px"
+      },
+      "ctaToSelector": 127.2,
+      "gapAboveEyebrow": 136.8,
+      "gapBelowAction": 127.2,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "1366x768": {
+    "equipamentos": {
+      "viewportHeight": 768,
+      "viewportWidth": 1366,
+      "docScrollWidth": 1366,
+      "overflowX": 0,
+      "headerHeight": 80,
+      "heroHeight": 768,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 688,
+      "panel": {
+        "top": 80,
+        "bottom": 607.5,
+        "height": 527.5,
+        "left": 0,
+        "right": 1366,
+        "width": 1366
+      },
+      "panelPad": {
+        "top": "56px",
+        "bottom": "56px"
+      },
+      "column": {
+        "top": 145.2,
+        "bottom": 542.3,
+        "height": 397.1,
+        "left": 0,
+        "right": 1366,
+        "width": 1366
+      },
+      "eyebrow": {
+        "top": 154.8,
+        "bottom": 171.6,
+        "height": 16.9,
+        "left": 40,
+        "right": 184.6,
+        "width": 144.6
+      },
+      "h1": {
+        "top": 183.6,
+        "bottom": 329.9,
+        "height": 146.3,
+        "left": 40,
+        "right": 680,
+        "width": 640
+      },
+      "h1Lines": 3,
+      "h1Font": "46.444px",
+      "h1LineHeight": "48.7662px",
+      "intent": {
+        "top": 349.9,
+        "bottom": 436.3,
+        "height": 86.4,
+        "left": 40,
+        "right": 625.9,
+        "width": 585.9
+      },
+      "intentLines": 3,
+      "intentFont": "18px",
+      "action": {
+        "top": 484.3,
+        "bottom": 542.3,
+        "height": 58,
+        "left": 40,
+        "right": 680,
+        "width": 640
+      },
+      "actionWrap": "linha unica",
+      "actionMt": "48px",
+      "cta": {
+        "top": 484.3,
+        "bottom": 542.3,
+        "height": 58,
+        "left": 40,
+        "right": 366,
+        "width": 326
+      },
+      "wa": {
+        "top": 484.3,
+        "bottom": 542.3,
+        "height": 58,
+        "left": 382,
+        "right": 648.8,
+        "width": 266.8
+      },
+      "base": {
+        "top": 607.5,
+        "bottom": 768,
+        "height": 160.5,
+        "left": 0,
+        "right": 1366,
+        "width": 1366
+      },
+      "hint": {
+        "top": 607.5,
+        "bottom": 645.6,
+        "height": 38.1,
+        "left": 40,
+        "right": 1326,
+        "width": 1286
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 645.6,
+        "bottom": 768,
+        "height": 122.4,
+        "left": 40,
+        "right": 1326,
+        "width": 1286
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 669.6,
+        "bottom": 768,
+        "height": 98.4,
+        "left": 107,
+        "right": 459,
+        "width": 352
+      },
+      "railItemPad": {
+        "top": "24px",
+        "bottom": "24px",
+        "minH": "96px"
+      },
+      "ctaToSelector": 65.2,
+      "gapAboveEyebrow": 74.8,
+      "gapBelowAction": 65.2,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "1024x768": {
+    "equipamentos": {
+      "viewportHeight": 768,
+      "viewportWidth": 1024,
+      "docScrollWidth": 1024,
+      "overflowX": 0,
+      "headerHeight": 76.4,
+      "heroHeight": 768,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 691.6,
+      "panel": {
+        "top": 76.4,
+        "bottom": 586.9,
+        "height": 510.5,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "panelPad": {
+        "top": "48px",
+        "bottom": "48px"
+      },
+      "column": {
+        "top": 130.4,
+        "bottom": 532.8,
+        "height": 402.4,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "eyebrow": {
+        "top": 140,
+        "bottom": 156.9,
+        "height": 16.9,
+        "left": 40,
+        "right": 184.6,
+        "width": 144.6
+      },
+      "h1": {
+        "top": 168.9,
+        "bottom": 328.4,
+        "height": 159.6,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "h1Lines": 4,
+      "h1Font": "38px",
+      "h1LineHeight": "39.9px",
+      "intent": {
+        "top": 348.4,
+        "bottom": 434.8,
+        "height": 86.4,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "intentLines": 3,
+      "intentFont": "18px",
+      "action": {
+        "top": 474.8,
+        "bottom": 532.8,
+        "height": 58,
+        "left": 40,
+        "right": 579.3,
+        "width": 539.3
+      },
+      "actionWrap": "linha unica",
+      "actionMt": "40px",
+      "cta": {
+        "top": 474.8,
+        "bottom": 532.8,
+        "height": 58,
+        "left": 40,
+        "right": 329.9,
+        "width": 289.9
+      },
+      "wa": {
+        "top": 474.8,
+        "bottom": 532.8,
+        "height": 58,
+        "left": 341.9,
+        "right": 579.3,
+        "width": 237.4
+      },
+      "base": {
+        "top": 586.9,
+        "bottom": 768,
+        "height": 181.1,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "hint": {
+        "top": 586.9,
+        "bottom": 625,
+        "height": 38.1,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 625,
+        "bottom": 768,
+        "height": 143,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 649,
+        "bottom": 768,
+        "height": 119,
+        "left": 60,
+        "right": 340,
+        "width": 280
+      },
+      "railItemPad": {
+        "top": "24px",
+        "bottom": "24px",
+        "minH": "96px"
+      },
+      "ctaToSelector": 54,
+      "gapAboveEyebrow": 63.6,
+      "gapBelowAction": 54,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "projetos": {
+      "viewportHeight": 768,
+      "viewportWidth": 1024,
+      "docScrollWidth": 1024,
+      "overflowX": 0,
+      "headerHeight": 76.4,
+      "heroHeight": 768,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 691.6,
+      "panel": {
+        "top": 76.4,
+        "bottom": 586.9,
+        "height": 510.5,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "panelPad": {
+        "top": "48px",
+        "bottom": "48px"
+      },
+      "column": {
+        "top": 164.8,
+        "bottom": 498.5,
+        "height": 333.7,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "eyebrow": {
+        "top": 174.3,
+        "bottom": 191.2,
+        "height": 16.9,
+        "left": 40,
+        "right": 294.9,
+        "width": 254.9
+      },
+      "h1": {
+        "top": 203.2,
+        "bottom": 322.9,
+        "height": 119.7,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "h1Lines": 3,
+      "h1Font": "38px",
+      "h1LineHeight": "39.9px",
+      "intent": {
+        "top": 342.9,
+        "bottom": 400.5,
+        "height": 57.6,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "intentLines": 2,
+      "intentFont": "18px",
+      "action": {
+        "top": 440.5,
+        "bottom": 498.5,
+        "height": 58,
+        "left": 40,
+        "right": 579.3,
+        "width": 539.3
+      },
+      "actionWrap": "linha unica",
+      "actionMt": "40px",
+      "cta": {
+        "top": 440.5,
+        "bottom": 498.5,
+        "height": 58,
+        "left": 40,
+        "right": 329.9,
+        "width": 289.9
+      },
+      "wa": {
+        "top": 440.5,
+        "bottom": 498.5,
+        "height": 58,
+        "left": 341.9,
+        "right": 579.3,
+        "width": 237.4
+      },
+      "base": {
+        "top": 586.9,
+        "bottom": 768,
+        "height": 181.1,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "hint": {
+        "top": 586.9,
+        "bottom": 625,
+        "height": 38.1,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 625,
+        "bottom": 768,
+        "height": 143,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 649,
+        "bottom": 768,
+        "height": 119,
+        "left": 60,
+        "right": 340,
+        "width": 280
+      },
+      "railItemPad": {
+        "top": "24px",
+        "bottom": "24px",
+        "minH": "96px"
+      },
+      "ctaToSelector": 88.4,
+      "gapAboveEyebrow": 97.9,
+      "gapBelowAction": 88.4,
+      "activeTab": "hero-aba-projetos"
+    },
+    "consultoria": {
+      "viewportHeight": 768,
+      "viewportWidth": 1024,
+      "docScrollWidth": 1024,
+      "overflowX": 0,
+      "headerHeight": 76.4,
+      "heroHeight": 768,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 691.6,
+      "panel": {
+        "top": 76.4,
+        "bottom": 586.9,
+        "height": 510.5,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "panelPad": {
+        "top": "48px",
+        "bottom": "48px"
+      },
+      "column": {
+        "top": 170.3,
+        "bottom": 492.9,
+        "height": 322.6,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "eyebrow": {
+        "top": 179.9,
+        "bottom": 196.8,
+        "height": 16.9,
+        "left": 40,
+        "right": 275,
+        "width": 235
+      },
+      "h1": {
+        "top": 208.8,
+        "bottom": 288.5,
+        "height": 79.8,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "h1Lines": 2,
+      "h1Font": "38px",
+      "h1LineHeight": "39.9px",
+      "intent": {
+        "top": 308.5,
+        "bottom": 394.9,
+        "height": 86.4,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "intentLines": 3,
+      "intentFont": "18px",
+      "action": {
+        "top": 434.9,
+        "bottom": 492.9,
+        "height": 58,
+        "left": 40,
+        "right": 579.3,
+        "width": 539.3
+      },
+      "actionWrap": "linha unica",
+      "actionMt": "40px",
+      "cta": {
+        "top": 434.9,
+        "bottom": 492.9,
+        "height": 58,
+        "left": 40,
+        "right": 329.9,
+        "width": 289.9
+      },
+      "wa": {
+        "top": 434.9,
+        "bottom": 492.9,
+        "height": 58,
+        "left": 341.9,
+        "right": 579.3,
+        "width": 237.4
+      },
+      "base": {
+        "top": 586.9,
+        "bottom": 768,
+        "height": 181.1,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "hint": {
+        "top": 586.9,
+        "bottom": 625,
+        "height": 38.1,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 625,
+        "bottom": 768,
+        "height": 143,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 649,
+        "bottom": 768,
+        "height": 119,
+        "left": 60,
+        "right": 340,
+        "width": 280
+      },
+      "railItemPad": {
+        "top": "24px",
+        "bottom": "24px",
+        "minH": "96px"
+      },
+      "ctaToSelector": 93.9,
+      "gapAboveEyebrow": 103.5,
+      "gapBelowAction": 93.9,
+      "activeTab": "hero-aba-consultoria"
+    },
+    "voltaEquipamentos": {
+      "viewportHeight": 768,
+      "viewportWidth": 1024,
+      "docScrollWidth": 1024,
+      "overflowX": 0,
+      "headerHeight": 76.4,
+      "heroHeight": 768,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 691.6,
+      "panel": {
+        "top": 76.4,
+        "bottom": 586.9,
+        "height": 510.5,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "panelPad": {
+        "top": "48px",
+        "bottom": "48px"
+      },
+      "column": {
+        "top": 130.4,
+        "bottom": 532.8,
+        "height": 402.4,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "eyebrow": {
+        "top": 140,
+        "bottom": 156.9,
+        "height": 16.9,
+        "left": 40,
+        "right": 184.6,
+        "width": 144.6
+      },
+      "h1": {
+        "top": 168.9,
+        "bottom": 328.4,
+        "height": 159.6,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "h1Lines": 4,
+      "h1Font": "38px",
+      "h1LineHeight": "39.9px",
+      "intent": {
+        "top": 348.4,
+        "bottom": 434.8,
+        "height": 86.4,
+        "left": 40,
+        "right": 520,
+        "width": 480
+      },
+      "intentLines": 3,
+      "intentFont": "18px",
+      "action": {
+        "top": 474.8,
+        "bottom": 532.8,
+        "height": 58,
+        "left": 40,
+        "right": 579.3,
+        "width": 539.3
+      },
+      "actionWrap": "linha unica",
+      "actionMt": "40px",
+      "cta": {
+        "top": 474.8,
+        "bottom": 532.8,
+        "height": 58,
+        "left": 40,
+        "right": 329.9,
+        "width": 289.9
+      },
+      "wa": {
+        "top": 474.8,
+        "bottom": 532.8,
+        "height": 58,
+        "left": 341.9,
+        "right": 579.3,
+        "width": 237.4
+      },
+      "base": {
+        "top": 586.9,
+        "bottom": 768,
+        "height": 181.1,
+        "left": 0,
+        "right": 1024,
+        "width": 1024
+      },
+      "hint": {
+        "top": 586.9,
+        "bottom": 625,
+        "height": 38.1,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 625,
+        "bottom": 768,
+        "height": 143,
+        "left": 40,
+        "right": 984,
+        "width": 944
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 649,
+        "bottom": 768,
+        "height": 119,
+        "left": 60,
+        "right": 340,
+        "width": 280
+      },
+      "railItemPad": {
+        "top": "24px",
+        "bottom": "24px",
+        "minH": "96px"
+      },
+      "ctaToSelector": 54,
+      "gapAboveEyebrow": 63.6,
+      "gapBelowAction": 54,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "768x1024": {
+    "equipamentos": {
+      "viewportHeight": 1024,
+      "viewportWidth": 768,
+      "docScrollWidth": 768,
+      "overflowX": 0,
+      "headerHeight": 72,
+      "heroHeight": 1024,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 307.2,
+      "panel": {
+        "top": 72,
+        "bottom": 869.4,
+        "height": 797.4,
+        "left": 0,
+        "right": 768,
+        "width": 768
+      },
+      "panelPad": {
+        "top": "331.2px",
+        "bottom": "32px"
+      },
+      "column": {
+        "top": 419.4,
+        "bottom": 821.2,
+        "height": 401.8,
+        "left": 0,
+        "right": 768,
+        "width": 768
+      },
+      "eyebrow": {
+        "top": 419.4,
+        "bottom": 436.3,
+        "height": 16.9,
+        "left": 32,
+        "right": 592,
+        "width": 560
+      },
+      "h1": {
+        "top": 448.3,
+        "bottom": 573.7,
+        "height": 125.4,
+        "left": 32,
+        "right": 592,
+        "width": 560
+      },
+      "h1Lines": 3,
+      "h1Font": "38px",
+      "h1LineHeight": "41.8px",
+      "intent": {
+        "top": 589.7,
+        "bottom": 657.2,
+        "height": 67.5,
+        "left": 32,
+        "right": 520.3,
+        "width": 488.3
+      },
+      "intentLines": 3,
+      "intentFont": "15px",
+      "action": {
+        "top": 689.2,
+        "bottom": 821.2,
+        "height": 132,
+        "left": 32,
+        "right": 592,
+        "width": 560
+      },
+      "actionWrap": "QUEBRADO",
+      "actionMt": "32px",
+      "cta": {
+        "top": 689.2,
+        "bottom": 747.2,
+        "height": 58,
+        "left": 32,
+        "right": 329.9,
+        "width": 297.9
+      },
+      "wa": {
+        "top": 763.2,
+        "bottom": 821.2,
+        "height": 58,
+        "left": 32,
+        "right": 281.4,
+        "width": 249.4
+      },
+      "base": {
+        "top": 869.4,
+        "bottom": 1024,
+        "height": 154.6,
+        "left": 0,
+        "right": 768,
+        "width": 768
+      },
+      "hint": {
+        "top": 869.4,
+        "bottom": 907.5,
+        "height": 38.1,
+        "left": 32,
+        "right": 736,
+        "width": 704
+      },
+      "hintPt": "20px",
+      "tablist": {
+        "top": 907.5,
+        "bottom": 1024,
+        "height": 116.5,
+        "left": 32,
+        "right": 736,
+        "width": 704
+      },
+      "tablistPt": "24px",
+      "railItem": {
+        "top": 931.5,
+        "bottom": 1024,
+        "height": 92.5,
+        "left": 52,
+        "right": 260,
+        "width": 208
+      },
+      "railItemPad": {
+        "top": "16px",
+        "bottom": "16px",
+        "minH": "56px"
+      },
+      "ctaToSelector": 48.2,
+      "gapAboveEyebrow": 347.4,
+      "gapBelowAction": 48.2,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "430x932": {
+    "equipamentos": {
+      "viewportHeight": 932,
+      "viewportWidth": 430,
+      "docScrollWidth": 430,
+      "overflowX": 0,
+      "headerHeight": 64,
+      "heroHeight": 932,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 279.6,
+      "panel": {
+        "top": 64,
+        "bottom": 876,
+        "height": 812,
+        "left": 0,
+        "right": 430,
+        "width": 430
+      },
+      "panelPad": {
+        "top": "303.6px",
+        "bottom": "32px"
+      },
+      "column": {
+        "top": 406.5,
+        "bottom": 805.1,
+        "height": 398.7,
+        "left": 0,
+        "right": 430,
+        "width": 430
+      },
+      "eyebrow": {
+        "top": 406.5,
+        "bottom": 422.1,
+        "height": 15.6,
+        "left": 20,
+        "right": 410,
+        "width": 390
+      },
+      "h1": {
+        "top": 434.1,
+        "bottom": 581.6,
+        "height": 147.6,
+        "left": 20,
+        "right": 410,
+        "width": 390
+      },
+      "h1Lines": 4,
+      "h1Font": "33.54px",
+      "h1LineHeight": "36.894px",
+      "intent": {
+        "top": 597.6,
+        "bottom": 665.1,
+        "height": 67.5,
+        "left": 20,
+        "right": 410,
+        "width": 390
+      },
+      "intentLines": 3,
+      "intentFont": "15px",
+      "action": {
+        "top": 697.1,
+        "bottom": 805.1,
+        "height": 108,
+        "left": 20,
+        "right": 410,
+        "width": 390
+      },
+      "actionWrap": "QUEBRADO",
+      "actionMt": "32px",
+      "cta": {
+        "top": 697.1,
+        "bottom": 745.1,
+        "height": 48,
+        "left": 20,
+        "right": 289.8,
+        "width": 269.8
+      },
+      "wa": {
+        "top": 757.1,
+        "bottom": 805.1,
+        "height": 48,
+        "left": 20,
+        "right": 248.1,
+        "width": 228.1
+      },
+      "base": {
+        "top": 876,
+        "bottom": 932,
+        "height": 56,
+        "left": 0,
+        "right": 430,
+        "width": 430
+      },
+      "hint": {
+        "top": 875,
+        "bottom": 876,
+        "height": 1,
+        "left": 19,
+        "right": 20,
+        "width": 1
+      },
+      "hintPt": "0px",
+      "tablist": {
+        "top": 876,
+        "bottom": 932,
+        "height": 56,
+        "left": 20,
+        "right": 410,
+        "width": 390
+      },
+      "tablistPt": "0px",
+      "railItem": {
+        "top": 876,
+        "bottom": 932,
+        "height": 56,
+        "left": 55.2,
+        "right": 164.2,
+        "width": 109
+      },
+      "railItemPad": {
+        "top": "16px",
+        "bottom": "16px",
+        "minH": "56px"
+      },
+      "ctaToSelector": 70.9,
+      "gapAboveEyebrow": 342.5,
+      "gapBelowAction": 70.9,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "390x844": {
+    "equipamentos": {
+      "viewportHeight": 844,
+      "viewportWidth": 390,
+      "docScrollWidth": 390,
+      "overflowX": 0,
+      "headerHeight": 64,
+      "heroHeight": 844,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 253.2,
+      "panel": {
+        "top": 64,
+        "bottom": 788,
+        "height": 724,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "panelPad": {
+        "top": "277.2px",
+        "bottom": "32px"
+      },
+      "column": {
+        "top": 344.9,
+        "bottom": 752.3,
+        "height": 407.4,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "eyebrow": {
+        "top": 344.9,
+        "bottom": 360.5,
+        "height": 15.6,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1": {
+        "top": 372.5,
+        "bottom": 506.3,
+        "height": 133.8,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1Lines": 4,
+      "h1Font": "30.42px",
+      "h1LineHeight": "33.462px",
+      "intent": {
+        "top": 522.3,
+        "bottom": 612.3,
+        "height": 90,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "intentLines": 4,
+      "intentFont": "15px",
+      "action": {
+        "top": 644.3,
+        "bottom": 752.3,
+        "height": 108,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "actionWrap": "QUEBRADO",
+      "actionMt": "32px",
+      "cta": {
+        "top": 644.3,
+        "bottom": 692.3,
+        "height": 48,
+        "left": 20,
+        "right": 289.8,
+        "width": 269.8
+      },
+      "wa": {
+        "top": 704.3,
+        "bottom": 752.3,
+        "height": 48,
+        "left": 20,
+        "right": 248.1,
+        "width": 228.1
+      },
+      "base": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "hint": {
+        "top": 787,
+        "bottom": 788,
+        "height": 1,
+        "left": 19,
+        "right": 20,
+        "width": 1
+      },
+      "hintPt": "0px",
+      "tablist": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "tablistPt": "0px",
+      "railItem": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 36.8,
+        "right": 145.8,
+        "width": 109
+      },
+      "railItemPad": {
+        "top": "16px",
+        "bottom": "16px",
+        "minH": "56px"
+      },
+      "ctaToSelector": 35.7,
+      "gapAboveEyebrow": 280.9,
+      "gapBelowAction": 35.7,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "projetos": {
+      "viewportHeight": 844,
+      "viewportWidth": 390,
+      "docScrollWidth": 390,
+      "overflowX": 0,
+      "headerHeight": 64,
+      "heroHeight": 844,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 253.2,
+      "panel": {
+        "top": 64,
+        "bottom": 788,
+        "height": 724,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "panelPad": {
+        "top": "277.2px",
+        "bottom": "32px"
+      },
+      "column": {
+        "top": 384.1,
+        "bottom": 713.1,
+        "height": 329,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "eyebrow": {
+        "top": 384.1,
+        "bottom": 399.7,
+        "height": 15.6,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1": {
+        "top": 411.7,
+        "bottom": 512.1,
+        "height": 100.4,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1Lines": 3,
+      "h1Font": "30.42px",
+      "h1LineHeight": "33.462px",
+      "intent": {
+        "top": 528.1,
+        "bottom": 573.1,
+        "height": 45,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "intentLines": 2,
+      "intentFont": "15px",
+      "action": {
+        "top": 605.1,
+        "bottom": 713.1,
+        "height": 108,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "actionWrap": "QUEBRADO",
+      "actionMt": "32px",
+      "cta": {
+        "top": 605.1,
+        "bottom": 653.1,
+        "height": 48,
+        "left": 20,
+        "right": 289.8,
+        "width": 269.8
+      },
+      "wa": {
+        "top": 665.1,
+        "bottom": 713.1,
+        "height": 48,
+        "left": 20,
+        "right": 248.1,
+        "width": 228.1
+      },
+      "base": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "hint": {
+        "top": 787,
+        "bottom": 788,
+        "height": 1,
+        "left": 19,
+        "right": 20,
+        "width": 1
+      },
+      "hintPt": "0px",
+      "tablist": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "tablistPt": "0px",
+      "railItem": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 37,
+        "right": 144.4,
+        "width": 107.4
+      },
+      "railItemPad": {
+        "top": "16px",
+        "bottom": "16px",
+        "minH": "56px"
+      },
+      "ctaToSelector": 74.9,
+      "gapAboveEyebrow": 320.1,
+      "gapBelowAction": 74.9,
+      "activeTab": "hero-aba-projetos"
+    },
+    "consultoria": {
+      "viewportHeight": 844,
+      "viewportWidth": 390,
+      "docScrollWidth": 390,
+      "overflowX": 0,
+      "headerHeight": 64,
+      "heroHeight": 844,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 253.2,
+      "panel": {
+        "top": 64,
+        "bottom": 788,
+        "height": 724,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "panelPad": {
+        "top": "277.2px",
+        "bottom": "32px"
+      },
+      "column": {
+        "top": 389.6,
+        "bottom": 707.6,
+        "height": 318,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "eyebrow": {
+        "top": 389.6,
+        "bottom": 405.2,
+        "height": 15.6,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1": {
+        "top": 417.2,
+        "bottom": 484.1,
+        "height": 66.9,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1Lines": 2,
+      "h1Font": "30.42px",
+      "h1LineHeight": "33.462px",
+      "intent": {
+        "top": 500.1,
+        "bottom": 567.6,
+        "height": 67.5,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "intentLines": 3,
+      "intentFont": "15px",
+      "action": {
+        "top": 599.6,
+        "bottom": 707.6,
+        "height": 108,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "actionWrap": "QUEBRADO",
+      "actionMt": "32px",
+      "cta": {
+        "top": 599.6,
+        "bottom": 647.6,
+        "height": 48,
+        "left": 20,
+        "right": 289.8,
+        "width": 269.8
+      },
+      "wa": {
+        "top": 659.6,
+        "bottom": 707.6,
+        "height": 48,
+        "left": 20,
+        "right": 248.1,
+        "width": 228.1
+      },
+      "base": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "hint": {
+        "top": 787,
+        "bottom": 788,
+        "height": 1,
+        "left": 19,
+        "right": 20,
+        "width": 1
+      },
+      "hintPt": "0px",
+      "tablist": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "tablistPt": "0px",
+      "railItem": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 36.8,
+        "right": 144.2,
+        "width": 107.4
+      },
+      "railItemPad": {
+        "top": "16px",
+        "bottom": "16px",
+        "minH": "56px"
+      },
+      "ctaToSelector": 80.4,
+      "gapAboveEyebrow": 325.6,
+      "gapBelowAction": 80.4,
+      "activeTab": "hero-aba-consultoria"
+    },
+    "voltaEquipamentos": {
+      "viewportHeight": 844,
+      "viewportWidth": 390,
+      "docScrollWidth": 390,
+      "overflowX": 0,
+      "headerHeight": 64,
+      "heroHeight": 844,
+      "heroTop": 0,
+      "excess": 0,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 253.2,
+      "panel": {
+        "top": 64,
+        "bottom": 788,
+        "height": 724,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "panelPad": {
+        "top": "277.2px",
+        "bottom": "32px"
+      },
+      "column": {
+        "top": 344.9,
+        "bottom": 752.3,
+        "height": 407.4,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "eyebrow": {
+        "top": 344.9,
+        "bottom": 360.5,
+        "height": 15.6,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1": {
+        "top": 372.5,
+        "bottom": 506.3,
+        "height": 133.8,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "h1Lines": 4,
+      "h1Font": "30.42px",
+      "h1LineHeight": "33.462px",
+      "intent": {
+        "top": 522.3,
+        "bottom": 612.3,
+        "height": 90,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "intentLines": 4,
+      "intentFont": "15px",
+      "action": {
+        "top": 644.3,
+        "bottom": 752.3,
+        "height": 108,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "actionWrap": "QUEBRADO",
+      "actionMt": "32px",
+      "cta": {
+        "top": 644.3,
+        "bottom": 692.3,
+        "height": 48,
+        "left": 20,
+        "right": 289.8,
+        "width": 269.8
+      },
+      "wa": {
+        "top": 704.3,
+        "bottom": 752.3,
+        "height": 48,
+        "left": 20,
+        "right": 248.1,
+        "width": 228.1
+      },
+      "base": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 0,
+        "right": 390,
+        "width": 390
+      },
+      "hint": {
+        "top": 787,
+        "bottom": 788,
+        "height": 1,
+        "left": 19,
+        "right": 20,
+        "width": 1
+      },
+      "hintPt": "0px",
+      "tablist": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 20,
+        "right": 370,
+        "width": 350
+      },
+      "tablistPt": "0px",
+      "railItem": {
+        "top": 788,
+        "bottom": 844,
+        "height": 56,
+        "left": 36.8,
+        "right": 145.8,
+        "width": 109
+      },
+      "railItemPad": {
+        "top": "16px",
+        "bottom": "16px",
+        "minH": "56px"
+      },
+      "ctaToSelector": 35.7,
+      "gapAboveEyebrow": 280.9,
+      "gapBelowAction": 35.7,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  },
+  "320x568": {
+    "equipamentos": {
+      "viewportHeight": 568,
+      "viewportWidth": 320,
+      "docScrollWidth": 320,
+      "overflowX": 0,
+      "headerHeight": 64,
+      "heroHeight": 743.2,
+      "heroTop": 0,
+      "excess": 175.2,
+      "mediaVar": "clamp(9.5rem,min(74vw,30svh),20rem)",
+      "mediaHeight": 170.4,
+      "panel": {
+        "top": 64,
+        "bottom": 687.2,
+        "height": 623.2,
+        "left": 0,
+        "right": 320,
+        "width": 320
+      },
+      "panelPad": {
+        "top": "194.4px",
+        "bottom": "32px"
+      },
+      "column": {
+        "top": 258.4,
+        "bottom": 655.2,
+        "height": 396.8,
+        "left": 0,
+        "right": 320,
+        "width": 320
+      },
+      "eyebrow": {
+        "top": 258.4,
+        "bottom": 274,
+        "height": 15.6,
+        "left": 20,
+        "right": 300,
+        "width": 280
+      },
+      "h1": {
+        "top": 286,
+        "bottom": 409.2,
+        "height": 123.2,
+        "left": 20,
+        "right": 300,
+        "width": 280
+      },
+      "h1Lines": 4,
+      "h1Font": "28px",
+      "h1LineHeight": "30.8px",
+      "intent": {
+        "top": 425.2,
+        "bottom": 515.2,
+        "height": 90,
+        "left": 20,
+        "right": 300,
+        "width": 280
+      },
+      "intentLines": 4,
+      "intentFont": "15px",
+      "action": {
+        "top": 547.2,
+        "bottom": 655.2,
+        "height": 108,
+        "left": 20,
+        "right": 300,
+        "width": 280
+      },
+      "actionWrap": "QUEBRADO",
+      "actionMt": "32px",
+      "cta": {
+        "top": 547.2,
+        "bottom": 595.2,
+        "height": 48,
+        "left": 20,
+        "right": 289.8,
+        "width": 269.8
+      },
+      "wa": {
+        "top": 607.2,
+        "bottom": 655.2,
+        "height": 48,
+        "left": 20,
+        "right": 248.1,
+        "width": 228.1
+      },
+      "base": {
+        "top": 687.2,
+        "bottom": 743.2,
+        "height": 56,
+        "left": 0,
+        "right": 320,
+        "width": 320
+      },
+      "hint": {
+        "top": 686.2,
+        "bottom": 687.2,
+        "height": 1,
+        "left": 19,
+        "right": 20,
+        "width": 1
+      },
+      "hintPt": "0px",
+      "tablist": {
+        "top": 687.2,
+        "bottom": 743.2,
+        "height": 56,
+        "left": 20,
+        "right": 300,
+        "width": 280
+      },
+      "tablistPt": "0px",
+      "railItem": {
+        "top": 687.2,
+        "bottom": 743.2,
+        "height": 56,
+        "left": 4.6,
+        "right": 113.6,
+        "width": 109
+      },
+      "railItemPad": {
+        "top": "16px",
+        "bottom": "16px",
+        "minH": "56px"
+      },
+      "ctaToSelector": 32,
+      "gapAboveEyebrow": 194.4,
+      "gapBelowAction": 32,
+      "activeTab": "hero-aba-equipamentos"
+    },
+    "consoleErrors": [],
+    "failedRequests": []
+  }
+}

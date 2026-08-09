@@ -105,8 +105,51 @@
     317,4px = 34,1%), sem furar o teto de 20rem no tablet. Ganho modesto e
     deliberado — o objetivo é presença maior da foto, não uma faixa
     dominante que empurre o texto para fora da tela em telefones baixos.
+
+    ============================================================
+    ALTURA RESPONSIVA (2026-08-09) — A FAIXA PASSA A SER MEDIDA NA ALTURA
+    ============================================================
+
+    A faixa alvo desta cena sempre foi enunciada em **altura da dobra**
+    (30–35%, fixada na rodada P1 e mantida na direção visual de 08-08). O
+    coeficiente que a implementava, porém, era `vw` — medido na **largura**.
+    Enquanto o telefone de referência tinha a proporção prevista os dois
+    valores coincidiam; fora dela, não:
+
+      viewport     74vw     % da altura
+      390 × 844    288,6px     34,2%   ← dentro da faixa
+      430 × 932    318,2px     34,1%   ← dentro da faixa
+      768 × 1024   320,0px     31,3%   (o teto de 20rem é que segurava)
+      320 × 568    236,8px     41,7%   ← **fora da faixa**, e por larga margem
+
+    Ou seja: o mesmo coeficiente entregava 34% num telefone e 42% noutro, e
+    quanto mais baixa a tela mais a cena crescia em proporção — exatamente ao
+    contrário do que a altura disponível pedia. Era essa deriva, somada aos
+    vãos verticais, que punha a dobra 70,8px além da janela em 390 × 844.
+
+    `min(74vw, 30svh)` mantém o coeficiente de largura como **teto de
+    proporção** e acrescenta o que faltava: um teto medido na dimensão que a
+    faixa sempre descreveu. Resultado — 30% da altura em todo telefone, o
+    piso da faixa aprovada, constante:
+
+      390 × 844 ... 253,2px = 30,0%   (era 34,2%)
+      430 × 932 ... 279,6px = 30,0%   (era 34,1%)
+      320 × 568 ... 170,4px = 30,0%   (era 41,7%)
+      768 × 1024 .. 307,2px = 30,0%   (era 31,3%)
+
+    **Não é o retorno à tira decorativa que P1 corrigiu.** Aquilo era 19% da
+    altura (163,8px em 390). Isto é o piso da mesma faixa de 30–35% que a
+    rodada P1 fixou e a direção visual de 08-08 manteve — a diferença entre o
+    valor anterior e este é de 4 pontos percentuais, contra os 15 que
+    separavam a tira do palco. E é o único item desta rodada que devolve
+    altura em quantidade suficiente sem tocar em copy, corpo de texto ou área
+    de toque, que é a ordem de preferência do briefing.
+
+    O piso de 9,5rem e o teto de 20rem continuam valendo e não mordem mais em
+    nenhum viewport suportado — `30svh` já fica abaixo dos 20rem a partir de
+    1066px de altura, e acima de 9,5rem em qualquer tela acima de 507px.
   */
-  --media-h: clamp(9.5rem, 74vw, 20rem);
+  --media-h: clamp(9.5rem, min(74vw, 30svh), 20rem);
 
   position: relative;
   overflow: hidden;
