@@ -11,9 +11,10 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/layout/container'
-import { ArrowRightIcon } from '@/components/ui/icons'
+import { ArrowRightIcon, WhatsappIcon } from '@/components/ui/icons'
 import { heroSecondary, heroStates, homeHero, homeHeroMetrics } from '@/data/v2/home'
 import { trackEvent, type AnalyticsEvent } from '@/lib/analytics'
+import { whatsappUrl, type WhatsappTopic } from '@/lib/whatsapp'
 import { cn } from '@/lib/utils'
 import styles from './hero-stage.module.css'
 
@@ -450,7 +451,15 @@ export function HeroStage() {
             qualquer deslocamento nessas faixas empurraria a faixa de métricas
             para fora da primeira tela.
           */
-          className="relative z-10 flex min-h-0 flex-1 items-center pb-10 pt-[calc(var(--media-h)+2rem)] lg:py-14 lg:pt-14 2xl:pb-8 2xl:pt-24"
+          /*
+            `lg:py-12 xl:py-14` (2026-08-09): em 1024–1279 a coluna de leitura
+            tem 480px e o par de CTAs (295 + 269) **não cabe numa linha** — ele
+            quebra, que é a adaptação correta ali, e a dobra cresceu 74px. Doze
+            unidades de recuo em vez de catorze devolvem 16px desses 74 sem
+            mexer em 1440/1920, onde o par fica lado a lado e o recuo de 14
+            continua sendo o valor medido.
+          */
+          className="relative z-10 flex min-h-0 flex-1 items-center pb-10 pt-[calc(var(--media-h)+2rem)] lg:py-12 lg:pt-12 xl:py-14 xl:pt-14 2xl:pb-8 2xl:pt-24"
         >
           <Container className="w-full">
             {/*
@@ -722,9 +731,26 @@ export function HeroStage() {
                   parágrafo — "elementos socados no meio" incluía essa
                   transição. 40/48px separa a ação de ler.
                 */
-                className={cn(styles.enter, 'mt-10 lg:mt-12')}
+                /*
+                  ============================================================
+                  HARMONIA (2026-08-09) — A AÇÃO VIROU UM PAR
+                  ============================================================
+
+                  O CTA principal era o único elemento da linha de ação, e uma
+                  massa amarela de ~295 × 58px sozinha numa coluna de 768 deixava
+                  o resto da linha vazio — parte da "sensação de vazio mal
+                  resolvido" desta rodada vinha daí, não só do respiro vertical.
+
+                  Agora são dois: o preenchido (prioritário, inalterado) e o de
+                  WhatsApp, contornado. `flex-wrap` com `gap-3` porque abaixo de
+                  `sm` os dois empilham — e empilham **na largura do conteúdo**
+                  (`items-start`), não esticados, para não virar dois blocos
+                  cheios num telefone.
+                */
+                className={cn(styles.enter, 'mt-10 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-10 xl:mt-12')}
               >
                 <HeroCta href={state.cta.href} event={state.event} label={state.cta.label} />
+                <HeroWhatsappCta topic={state.id} />
               </div>
             </div>
           </Container>
@@ -855,12 +881,40 @@ export function HeroStage() {
                     {/* Linha superior própria da opção — nunca contínua entre elas. */}
                     <span aria-hidden="true" className={styles.railTop} />
 
-                    <span className="flex w-full min-w-0 items-center gap-3 lg:gap-4">
-                      <span className="min-w-0 flex-1">
+                    {/*
+                      ============================================================
+                      HARMONIA (2026-08-09) — O CONTEÚDO PASSA A SER CENTRADO
+                      ============================================================
+
+                      Antes: `flex w-full items-center` com o bloco de texto em
+                      `flex-1` e a seta em `shrink-0`. Isso empurrava o texto
+                      contra a borda esquerda da trilha e a seta contra a
+                      direita — medido em 1920, o centro do conteúdo caía a
+                      0,0px do centro da trilha só por coincidência de soma,
+                      mas visualmente o rótulo começava a 24px da borda e a seta
+                      terminava a 24px da outra, com até 190px de vazio entre os
+                      dois. Era isso que fazia a área ler como "trilha solta"
+                      em vez de porta resolvida: o conteúdo não ocupava o
+                      próprio componente, ficava pendurado nas duas pontas.
+
+                      Agora o conteúdo é uma coluna centrada, e a seta entra
+                      **na linha do rótulo** — ela passa a conversar com o
+                      texto (é o "vá por aqui" do nome que está ao lado) em vez
+                      de ser um glifo no canto. O complemento fica centrado
+                      abaixo, na mesma medida.
+
+                      `text-center` é o que o briefing autorizou explicitamente,
+                      e aqui ele resolve: com trilhas de largura igual (desde
+                      2026-08-09) e três textos de comprimentos diferentes,
+                      centrar é a única distribuição que dá o mesmo acabamento
+                      às três áreas.
+                    */}
+                    <span className="flex w-full min-w-0 flex-col items-center gap-1.5 text-center">
+                      <span className="flex min-w-0 max-w-full items-center justify-center gap-2 lg:gap-2.5">
                         <span
                           className={cn(
                             /* `leading` depois do `text-[…]` — ver o `h1`. */
-                            'block font-condensed uppercase tracking-[0.05em] transition-colors duration-300',
+                            'font-condensed uppercase tracking-[0.05em] transition-colors duration-300',
                             'text-[0.8125rem] leading-tight sm:text-[0.9375rem] lg:text-[1.1875rem]',
                             /*
                               Inativo em `canvas/75`, não num fantasma: o
@@ -889,42 +943,49 @@ export function HeroStage() {
                         </span>
 
                         {/*
-                          Complemento — a situação do cliente, em uma linha. Sai
-                          abaixo de `sm`: em 390px as três áreas têm ~110px e a
-                          frase quebraria em quatro linhas, empurrando o seletor
-                          para dentro do palco.
+                          Seta — o sinal permanente de que a área é um controle,
+                          e não um parágrafo. Ela existe nos três estados; o que
+                          muda é a cor e o avanço de 4px no hover e no foco.
+
+                          **Ela subiu para a linha do rótulo (2026-08-09).** No
+                          canto direito da trilha ela ficava a até 190px do
+                          texto — lida como glifo solto, não como o "vá por
+                          aqui" do nome. Ao lado do rótulo, o avanço de 4px do
+                          hover passa a empurrar a seta *para longe do texto que
+                          a motiva*, que é o gesto que ela sempre quis fazer.
                         */}
-                        <span
+                        <ArrowRightIcon
+                          size={16}
+                          aria-hidden="true"
                           className={cn(
-                            'mt-1.5 hidden text-[0.8125rem] leading-snug transition-colors duration-300 sm:block lg:text-[0.9375rem]',
-                            /*
-                              `/65` e `/80`, não `/55` e `/75`: com a faixa do
-                              seletor deixando a fotografia aparecer, o pior
-                              pixel sob esta linha subiu e o complemento inativo
-                              caiu para 3,92:1 em Equipamentos. Ver a medição no
-                              módulo, em `.rail`.
-                            */
-                            selected ? 'text-canvas/80' : 'text-canvas/65',
+                            styles.railArrow,
+                            'hidden shrink-0 transition-colors duration-200 sm:block',
+                            selected ? 'text-yellow' : 'text-canvas/45',
                           )}
-                        >
-                          {item.cue}
-                        </span>
+                        />
                       </span>
 
                       {/*
-                        Seta — o sinal permanente de que a área é um controle, e
-                        não um parágrafo. Ela existe nos três estados; o que muda
-                        é a cor e o avanço de 4px no hover e no foco.
+                        Complemento — a situação do cliente, em uma linha. Sai
+                        abaixo de `sm`: em 390px as três áreas têm ~110px e a
+                        frase quebraria em quatro linhas, empurrando o seletor
+                        para dentro do palco.
                       */}
-                      <ArrowRightIcon
-                        size={16}
-                        aria-hidden="true"
+                      <span
                         className={cn(
-                          styles.railArrow,
-                          'hidden shrink-0 transition-colors duration-200 sm:block',
-                          selected ? 'text-yellow' : 'text-canvas/45',
+                          'hidden text-[0.8125rem] leading-snug transition-colors duration-300 sm:block lg:text-[0.9375rem]',
+                          /*
+                            `/65` e `/80`, não `/55` e `/75`: com a faixa do
+                            seletor deixando a fotografia aparecer, o pior
+                            pixel sob esta linha subiu e o complemento inativo
+                            caiu para 3,92:1 em Equipamentos. Ver a medição no
+                            módulo, em `.rail`.
+                          */
+                          selected ? 'text-canvas/80' : 'text-canvas/65',
                         )}
-                      />
+                      >
+                        {item.cue}
+                      </span>
                     </span>
                   </button>
                 )
@@ -969,52 +1030,110 @@ export function HeroStage() {
         className="shrink-0 border-t border-white/[0.06] bg-graphite-deep"
       >
         <Container>
-          <div className="flex min-h-24 flex-col justify-center gap-2 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-5">
+          <div className="flex min-h-24 flex-col justify-center gap-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:py-5">
             {/*
-              `flex-nowrap` só a partir de `md`. Em `sm` (640px) travar a quebra
-              empurrava a lista para fora do container e abria **85px de rolagem
-              horizontal** — medido. A partir de 768 os dois pares cabem numa
-              linha com folga.
+              ============================================================
+              HARMONIA (2026-08-09) — DO PAR INLINE PARA A COLUNA DE DADO
+              ============================================================
+
+              Antes cada métrica era `18 anos de atuação` numa linha só, valor e
+              rótulo no mesmo corpo baixo, separados por um fio vertical de 12px.
+              O resultado lia como legenda de rodapé: nenhum dos dois elementos
+              tinha peso, e o valor — que é o dado — não se destacava do rótulo,
+              que é só a unidade.
+
+              Agora cada métrica é uma **coluna**: o valor em condensada, corpo
+              maior, sobre o rótulo em caixa-alta miúda com tracking largo. É a
+              mesma gramática de "numeral + cota" que o resto do site já usa
+              (`hero-numeral` / `hero-metric-label` da V1), e é ela que faz o
+              par ler como dado técnico em vez de frase solta.
+
+              O fio vertical vira uma **régua de 28px** entre as colunas, e não
+              um tique de 12: com duas colunas empilhadas de cada lado, o
+              separador precisa da altura das duas para ler como divisão.
+
+              Nenhum número, rótulo ou claim novo entra — os dois pares são
+              exatamente `homeHeroMetrics` (18 / anos de atuação · Brasil /
+              abrangência de atendimento), e a métrica de "projetos entregues"
+              continua filtrada na origem por falta de confirmação comercial.
             */}
-            <dl className="flex flex-wrap items-baseline gap-x-4 gap-y-1 sm:gap-x-6 md:flex-nowrap">
+            <dl className="flex items-stretch gap-4 sm:gap-6">
               {homeHeroMetrics.map((metric, index) => (
-                <div key={metric.label} className="flex items-baseline gap-2 md:whitespace-nowrap">
+                <div key={metric.label} className="flex items-stretch gap-4 sm:gap-6">
                   {index > 0 ? (
-                    <span aria-hidden="true" className="mr-3 hidden h-3 w-px bg-white/20 sm:block" />
+                    <span aria-hidden="true" className="w-px shrink-0 self-stretch bg-white/[0.14]" />
                   ) : null}
-                  <dt className="sr-only">{metric.label}</dt>
-                  <dd className="font-condensed text-[1rem] font-bold uppercase tracking-[0.03em] text-canvas sm:text-[1.0625rem] lg:text-[1.25rem]">
-                    {metric.value}
-                  </dd>
-                  {/*
-                    12px no telefone, 13px acima. Medido: a 13px os dois pares
-                    somam 357px contra os 350 de coluna em 390px, a lista
-                    quebrava em duas linhas e a faixa ia a 137px de altura.
-                  */}
-                  <span aria-hidden="true" className="text-[0.75rem] text-canvas/60 sm:text-[0.8125rem]">
-                    {metric.label}
-                  </span>
+                  <div className="flex min-w-0 flex-col justify-center gap-1">
+                    <dt className="sr-only">{metric.label}</dt>
+                    <dd className="font-condensed text-[1.375rem] font-bold uppercase leading-none tracking-[0.02em] text-canvas sm:text-[1.5rem] lg:text-[1.75rem]">
+                      {metric.value}
+                    </dd>
+                    {/*
+                      Rótulo em caixa-alta condensada, 10/11px com tracking de
+                      0,14em. Medido em 390px: os dois rótulos somam 233px numa
+                      coluna de 350, então a faixa continua em duas colunas lado
+                      a lado no telefone — sem quebra e sem crescer de altura.
+                    */}
+                    <span
+                      aria-hidden="true"
+                      className="font-condensed text-[0.625rem] font-medium uppercase leading-tight tracking-[0.14em] text-canvas/55 sm:text-[0.6875rem]"
+                    >
+                      {metric.label}
+                    </span>
+                  </div>
                 </div>
               ))}
             </dl>
 
             {/*
-              Ação secundária, em texto — deliberadamente sem massa: o CTA
-              preenchido da dobra é o do estado ativo, e um segundo botão aqui
-              disputaria com ele. Também é a ponte para a seção seguinte, que é
-              justamente `#equipamentos`.
+              ============================================================
+              HARMONIA (2026-08-09) — A AÇÃO PASSA A PARECER UMA AÇÃO
+              ============================================================
+
+              Era texto corrido de 14px em `canvas/85` com uma seta amarela. Num
+              rodapé escuro, sem caixa, sem contorno e sem tratamento de rótulo,
+              ele não se anunciava como clicável — o briefing apontou isso
+              exatamente ("não parece nitidamente um elemento clicável").
+
+              Agora é um alvo com contorno: hairline amarela, rótulo em
+              condensada caixa-alta (a família dos rótulos comerciais do
+              projeto), e a cela da seta separada por um fio — a **mesma
+              gramática de instrumento** do CTA da dobra, um degrau abaixo em
+              massa. Assim ele lê como ação sem virar um terceiro botão
+              preenchido disputando com o primário da dobra.
+
+              O preenchimento do hover é `scaleY` sobre um `::before` em amarelo
+              a 12%, a mecânica de botão fixada em `CLAUDE.md` — nunca `width`
+              nem troca de `background-color`. `focus-visible` dispara o mesmo.
+
+              Sobre `graphite-deep` o amarelo é acento pleno (11,8:1), então
+              rótulo e contorno em amarelo são permitidos aqui — a proibição da
+              regra do amarelo vale para superfície clara.
             */}
             <Link
               href={heroSecondary.href}
+              data-band-cta
               onClick={() => trackEvent('hero_orcamento_click', { origem: 'hero' })}
-              className="group inline-flex min-h-[2.75rem] w-fit items-center gap-2 text-[0.875rem] font-semibold text-canvas/85 transition-colors hover:text-canvas focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow sm:min-h-0 md:whitespace-nowrap"
+              className={cn(
+                'group/band relative inline-flex min-h-[2.75rem] w-fit items-stretch overflow-hidden rounded-[2px]',
+                'border border-yellow/45 transition-colors duration-200 ease-precise hover:border-yellow focus-visible:border-yellow',
+                'font-condensed text-[0.8125rem] font-semibold uppercase tracking-[0.05em] text-canvas sm:text-[0.875rem]',
+                'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-yellow/[0.12]',
+                'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
+                'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-graphite-deep',
+              )}
             >
-              {heroSecondary.label}
-              <ArrowRightIcon
-                size={16}
+              <span className="relative z-10 flex items-center px-4 sm:px-5">{heroSecondary.label}</span>
+              <span
                 aria-hidden="true"
-                className="shrink-0 text-yellow transition-transform duration-200 ease-precise group-hover:translate-x-1"
-              />
+                className="relative z-10 flex w-10 shrink-0 items-center justify-center border-l border-yellow/25 sm:w-11"
+              >
+                <ArrowRightIcon
+                  size={15}
+                  className="text-yellow transition-transform duration-200 ease-precise group-hover/band:translate-x-1 group-focus-visible/band:translate-x-1"
+                />
+              </span>
             </Link>
           </div>
         </Container>
@@ -1072,5 +1191,74 @@ function HeroCta({ href, event, label }: { href: string; event: AnalyticsEvent; 
         />
       </span>
     </Link>
+  )
+}
+
+/**
+ * ============================================================
+ * CTA DE WHATSAPP — A ALTERNATIVA RÁPIDA, AO LADO DA PRINCIPAL
+ * ============================================================
+ *
+ * **Mesmo sistema dimensional do `HeroCta`**, e não um botão de outra família:
+ * a mesma altura (`min-h-12` / `sm:min-h-[3.625rem]`), o mesmo raio de 2px, a
+ * mesma escala de rótulo (15/16/17px em condensada caixa-alta) e a mesma cela de
+ * ícone separada por um fio de tinta. Colocados lado a lado, os dois leem como
+ * um par — massa preenchida e contorno — em vez de dois componentes diferentes.
+ *
+ * **A hierarquia não muda.** O primário continua sendo o único preenchido, em
+ * amarelo, que é o acento pleno do sistema sobre grafite; este é contornado, com
+ * fundo transparente, então pesa menos por construção e não disputa a
+ * prioridade. É alternativa de canal, não uma segunda oferta.
+ *
+ * **O verde é funcional, não decorativo.** `#25D366` é a cor do WhatsApp e já
+ * está no projeto (`whatsapp-float.tsx`); ela existe aqui para o canal ser
+ * reconhecido antes de o rótulo ser lido. Sobre grafite mede **9,6:1** — passa
+ * AA com folga larga. Não entra em fundo claro em nenhum lugar, então a regra do
+ * amarelo (`src/styles/colors.ts`) não é contrariada: o verde não substitui o
+ * amarelo em papel nenhum, ele marca um canal.
+ *
+ * **O preenchimento do hover é `scaleY` sobre um `::before`**, exatamente como
+ * no primário — a mecânica de botão fixada em `CLAUDE.md`. Aqui o `::before` é
+ * um verde a 14% de opacidade: acende a caixa sem virar botão cheio (o que
+ * duplicaria a massa do primário) e sem trocar `background-color`.
+ *
+ * O link sai por `whatsappUrl(topic)` (`lib/whatsapp.ts`), como manda a
+ * convenção — nenhuma URL `wa.me` escrita à mão, e o número continua vindo de
+ * `src/data/site.ts`. O tópico acompanha o estado ativo, então a mensagem
+ * pré-preenchida chega ao comercial já dizendo de qual frente o contato veio.
+ */
+function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
+  return (
+    <a
+      href={whatsappUrl(topic)}
+      data-hero-cta-wa
+      target="_blank"
+      rel="noopener noreferrer"
+      /*
+        `whatsapp_iniciado` é o evento que já existe em `lib/analytics.ts` para
+        este canal — nenhum nome novo foi inventado aqui. `origem` distingue
+        este CTA do botão flutuante e do rodapé.
+      */
+      onClick={() => trackEvent('whatsapp_iniciado', { origem: 'hero' })}
+      className={cn(
+        'group/wa relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] sm:min-h-[3.625rem]',
+        /* Fundo transparente e contorno verde — o pedido, e o que mantém a hierarquia. */
+        'border border-[#25D366]/70 bg-transparent',
+        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] text-canvas sm:text-[1rem] lg:text-[1.0625rem]',
+        'transition-colors duration-200 ease-precise hover:border-[#25D366] focus-visible:border-[#25D366]',
+        'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-[#25D366]/[0.14]',
+        'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
+        'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
+      )}
+    >
+      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-7">Falar no WhatsApp</span>
+      <span
+        aria-hidden="true"
+        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-[#25D366]/35 sm:w-[3.25rem]"
+      >
+        <WhatsappIcon size={19} className="text-[#25D366]" />
+      </span>
+    </a>
   )
 }

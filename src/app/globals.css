@@ -189,18 +189,38 @@
      peso médio e tracking curto — a área clicável vem do `padding` vertical,
      que mantém 44px de alvo sem transformar o item em cápsula.
 
-     Dois sinais de estado, nenhum deles caixa:
-       · sublinhado amarelo que cresce da esquerda para a direita (220ms);
-       · ponto amarelo à esquerda do rótulo, que entra junto.
+     ============================================================
+     HARMONIA (2026-08-09) — DE SUBLINHADO PARA ESCALA
+     ============================================================
 
-     O sublinhado cresce a partir da borda de ataque e recolhe pela oposta: a
-     origem troca de `left` para `right` quando o estado sai, então o traço
-     tem direção, e não apenas presença.
+     Até aqui o sinal de hover/foco era um **sublinhado amarelo de 2px** que
+     crescia de uma borda à outra, mais um ponto amarelo à esquerda. O traço era
+     o protagonista: em cinco itens de navegação, ele pesava mais que o próprio
+     rótulo e competia com o amarelo do CTA na mesma faixa.
+
+     Agora o sinal é **escala do rótulo** — 1 → 1,04, com a origem no centro —
+     somada ao clareamento do texto. Três razões para isso funcionar aqui:
+
+       · `transform` não reflui: a faixa é `flex` e escalar um item não desloca
+         os vizinhos, então a trilha da navegação fica parada;
+       · 4% é o suficiente para o olho ler resposta sem que o glifo pareça
+         "pular"; acima de ~6% a renderização do texto começa a suavizar em
+         telas 1×;
+       · a curva é `--ease-precise` na faixa de 180ms — resposta, que é a
+         categoria certa para hover (`src/styles/animations.ts`).
+
+     **O ponto amarelo fica**, e passa a ser o único sinal cromático: é ele que
+     marca a página ativa, agora sem sublinhado nenhum. Discreto de propósito —
+     o pedido era uma indicação de estado mais sutil, não mais uma borda.
+
+     `::after` foi removido por completo. Não sobrou regra órfã apontando para
+     ele.
      ---------- */
   .nav-link {
-    @apply relative inline-flex items-center py-[0.85rem] font-medium tracking-[0.005em] text-white/85 transition-colors duration-200 hover:text-white;
+    @apply relative inline-flex items-center py-[0.85rem] font-medium tracking-[0.005em] text-white/85 transition-[color,transform] duration-[180ms] hover:text-white;
     font-size: 0.9375rem;
     line-height: 1.2;
+    transition-timing-function: var(--ease-precise);
   }
 
   /* Ponto amarelo: nasce no lugar, sem deslocar o rótulo (é `absolute`). */
@@ -209,27 +229,22 @@
     transition-timing-function: var(--ease-precise);
   }
 
-  .nav-link::after {
-    @apply absolute inset-x-0 bottom-[0.35rem] h-[2px] origin-right scale-x-0 bg-yellow transition-[transform,opacity] duration-[220ms] content-[''];
-    transition-timing-function: var(--ease-precise);
-  }
-
   /*
     Página ativa: marca permanente, mais fraca que o hover — a indicação é
     discreta e não disputa com o item sob o cursor. A semântica fica em
-    `aria-current`; o traço é reforço visual.
+    `aria-current`; o ponto é reforço visual.
   */
   .nav-link[data-active='true'] {
     @apply text-white;
   }
 
-  .nav-link[data-active='true']::after {
-    @apply origin-left scale-x-100 opacity-[0.55];
+  .nav-link[data-active='true']::before {
+    @apply scale-100 opacity-[0.55];
   }
 
-  .nav-link:hover::after,
-  .nav-link:focus-visible::after {
-    @apply origin-left scale-x-100 opacity-100;
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    transform: scale(1.04);
   }
 
   .nav-link:hover::before,
@@ -1038,6 +1053,19 @@
     transform: none;
     clip-path: none;
     animation: none;
+  }
+
+  /*
+    A escala do hover da navegação (2026-08-09) é movimento, então ela sai por
+    completo aqui — e não apenas com a duração zerada pela regra geral no fim
+    deste bloco. Uma escala **instantânea** ainda é um salto de tamanho sob o
+    cursor, que é exatamente o que `prefers-reduced-motion` pede para não
+    existir. O sinal de hover continua: a cor do rótulo clareia e o ponto
+    amarelo aparece, os dois sem deslocamento.
+  */
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    transform: none;
   }
 
   /* A cortina não pode apenas parar: ela precisa sair de cima da fotografia. */

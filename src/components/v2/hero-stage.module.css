@@ -615,8 +615,19 @@
     estrutural e não depende da medida da trilha.
   */
   align-items: flex-start;
+  /*
+    ---------- Conteúdo centrado na própria trilha (2026-08-09) ----------
+
+    `justify-content: center` + `text-align: center`. Com trilhas de largura
+    igual e três textos de comprimentos bem diferentes, centrar é a única
+    distribuição que dá o mesmo acabamento às três áreas — alinhado à esquerda,
+    o rótulo curto ("PROJETOS") deixava um vazio grande à direita dentro da
+    própria trilha, e a área lia como trilha solta em vez de porta resolvida.
+    Ver o comentário do conteúdo em `hero-stage.tsx`.
+  */
+  justify-content: center;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   transition: color 220ms var(--ease-precise);
 
   /*
