@@ -335,11 +335,14 @@ export function HeroStage() {
               sizes="100vw"
               quality={86}
               style={{ objectPosition: item.media.objectPosition }}
-              className={cn(
-                'object-cover',
-                item.id === 'projetos' && styles.gradeProjetos,
-                item.id === 'consultoria' && styles.gradeConsultoria,
-              )}
+              /*
+                Sem correção tonal por estado desde 2026-08-09. As três cenas
+                novas chegam com 12 pontos de amplitude de luminância entre si
+                (eram 87 no conjunto anterior), então `.gradeProjetos` e
+                `.gradeConsultoria` deixaram de fechar um desvio e passariam a
+                criar um — a tabela medida está no cabeçalho do módulo CSS.
+              */
+              className="object-cover"
             />
           </div>
         ))}

@@ -179,7 +179,7 @@ export interface HeroState {
 
 /**
  * ============================================================
- * AS TRÊS IMAGENS — CADA UMA DIZ O SEU ESTADO SEM O TEXTO
+ * AS TRÊS IMAGENS — TROCADAS PELO GESTOR EM 2026-08-09
  * ============================================================
  *
  * Critério: **o visitante tem de saber do que trata o palco antes de ler uma
@@ -187,74 +187,57 @@ export interface HeroState {
  * ocupam o *mesmo* lugar, uma depois da outra. Uma imagem que salta de exposição
  * ou de matéria na troca destrói a leitura de composição única.
  *
- *   EQUIPAMENTOS .. `hero-industrial-kitchen.png` (**1672 × 941**, recorte
- *                   atualizado pelo gestor — o arquivo anterior era 1916 × 821).
- *                   A fotografia âncora do site: inox, coifa contínua, ilha de
- *                   produção e fornos, com escala de operação real. É ela que
- *                   define o alvo tonal dos outros dois estados, e é a única com
- *                   resolução para sangrar num palco de 1586px sem ampliação.
+ * Os três arquivos novos foram entregues **já compostos para este palco** e é
+ * isso que muda tudo em relação ao conjunto anterior:
  *
- *   CONSULTORIA ... `operacao-comercial.png` (1448 × 1086). O balcão de
- *                   atendimento com PDV, pedidos embalados para retirada, louça
- *                   empilhada e a linha de produção acesa ao fundo — uma
- *                   operação **em funcionamento**, que é a condição de quem
- *                   procura diagnóstico. Não é cozinha vazia nem reunião
- *                   corporativa genérica: o que está em cena é o ponto onde
- *                   fluxo, processo e gargalo aparecem.
+ *   · os três têm **exatamente 1672 × 941** — a mesma moldura, então a troca de
+ *     estado não muda o enquadramento, só o assunto;
+ *   · os três têm o **sujeito à direita e área escura vazia à esquerda**, que é
+ *     justamente onde a coluna de texto assenta e onde o scrim fecha. Antes isso
+ *     era verdade só para a âncora de Equipamentos, e os outros dois dependiam
+ *     de `objectPosition` para simular o mesmo efeito.
  *
- * ============================================================
- * PROJETOS — LIMITAÇÃO DE ACERVO, E A SOLUÇÃO ADOTADA
- * ============================================================
+ *   EQUIPAMENTOS .. `equipamento-hero.png` — praça de cocção em inox: fogão de
+ *                   seis bocas, chapa, forno combinado e coifa contínua, com o
+ *                   corredor de serviço em sombra à esquerda. Substitui
+ *                   `hero-industrial-kitchen.png`.
  *
- * **O acervo não tem material de projeto em alta resolução.** Levantamento
- * completo de `public/images/projects/` (2026-08-08):
+ *   PROJETOS ...... `projeto-hero.png` — planta técnica impressa sobre a mesa de
+ *                   trabalho, com escalímetro, lapiseira, pranchas afixadas ao
+ *                   fundo e a sala de reunião fora de foco. Substitui
+ *                   `projeto-3d-hero.jpg`.
  *
- *   projeto-3d.jpg .............. 900 × 395   ← arquivo real
- *   projeto-3d-recorte.jpg ...... 900 × 299   ← recorte do mesmo arquivo
- *   projeto-3d-hero.jpg ........ 2033 × 1027  ← **reamostragem 2,6× do real**
- *   planta-executiva.jpg ........ 900 × 393   ← arquivo real
- *   planta-executiva-recorte.jpg  900 × 293   ← recorte do mesmo arquivo
- *   planta-executiva-hero.jpg .. 2280 × 1179  ← **reamostragem do real**
- *
- * Nenhuma fotografia do acervo representa *projeto*: as demais são operações
- * construídas, que é a matéria do estado de Equipamentos — usá-las aqui daria
- * dois estados ilustrados pelo mesmo assunto.
- *
- * Descontando o corte de 118px à esquerda (onde o material de origem traz um
- * selo "02" gravado, que não pode ir para a primeira dobra), o detalhe **real**
- * do estudo 3D é de **782px de largura** — já uma reamostragem do arquivo de
- * 900px, portanto sem nitidez de fotografia em nenhuma escala de exibição.
+ *   CONSULTORIA ... `consultoria.png` — retrato de estúdio de Leonardo
+ *                   Bianchini, que é quem conduz o diagnóstico (`leonardo.ts`,
+ *                   `home.eyebrow`). Substitui `operacao-comercial.png`.
  *
  * ============================================================
- * A COMPOSIÇÃO CONTIDA (até 2026-08-08) E POR QUE FOI ABANDONADA — P1
+ * A PENDÊNCIA DE PROJETOS ESTÁ RESOLVIDA
  * ============================================================
  *
- * A primeira solução tentou conter o dano de resolução: reduzir a área da
- * imagem e prendê-la a uma prancha ancorada ao canto direito do palco
- * (`min(46rem, 48%)`), como se fosse um documento colado sobre o fundo
- * grafite. Medido pela auditoria de 2026-08-08, em 1440 × 900 essa prancha
- * ocupava só `x 750–1440, y 188–572` — um retângulo de 690 × 384 dentro de um
- * palco de 1440 × 739 — com ~200px de grafite vazio acima e ~180px abaixo, e
- * uma borda vertical dura separando "texto" de "documento". O estado de
- * Projetos deixava de ser uma cena e passava a ler como um PDF colado dentro
- * da Hero: exatamente o oposto dos outros dois estados, que preenchem o
- * palco inteiro.
+ * O estado de Projetos servia `projeto-3d-hero.jpg`: 2033 × 1027 de arquivo,
+ * mas **782 × 395 de detalhe real** — uma reamostragem 2,6× de um original de
+ * 900px. Medido em produção, a cena era decodificada a 762 × 385 e renderizada
+ * a 1440 × 723, ~1,9× de ampliação, e por isso aparecia visivelmente mais macia
+ * que as outras duas. Havia ainda uma inscrição espelhada legível no fundo do
+ * render.
  *
- * **A correção prioriza composição sobre nitidez.** Igual aos outros dois
- * estados, o estudo agora sangra o palco inteiro em `object-cover` — mesmo
- * `<Image>`, mesmo `sizes`, mesmo scrim. Isso amplia o detalhe real de 782px
- * para a largura do palco (até ~1,9× a mais que o teto anterior de 736px),
- * então a cena fica **mais suave** do que seria com uma fonte de projeto em
- * alta resolução. É a divergência aceita nesta rodada: entre "documento nítido
- * e contido" e "cena única e desfocada", o briefing pediu a segunda — uma
- * prancha em alta resolução resolve a nitidez sem reabrir esta composição.
+ * `projeto-hero.png` é material nativo na moldura do palco, sem reamostragem —
+ * a limitação de acervo que forçava aquela composição não existe mais, e os
+ * dois defeitos registrados na validação de `40ff37a` saem junto.
  *
- * Nenhum desfoque adicional é aplicado para disfarçar a reamostragem, e nada
- * foi gerado, redesenhado ou montado — só o enquadramento mudou.
+ * O arquivo antigo **não foi apagado**: continua em `public/images/projects/`,
+ * fora de uso nesta rota.
  *
- * **PENDÊNCIA ABERTA.** Uma exportação em alta do mesmo estudo (ou uma
- * fotografia real de prancha/obra em projeto) substitui isto trocando `src`
- * e `intrinsic` — nenhuma outra mudança.
+ * ============================================================
+ * PROJETOS CONTINUA DECLARANDO O TIPO DO MATERIAL — DEC-008
+ * ============================================================
+ *
+ * `kind: 'document'` e a legenda permanecem. A cena não é mais um estudo 3D, e a
+ * legenda foi corrigida para dizer o que ela é de fato: material de projeto —
+ * planta e documentação técnica. A garantia que DEC-008 pede continua de pé,
+ * agora com texto verdadeiro: em nenhum momento a imagem é apresentada como
+ * fotografia de obra executada.
  *
  * Tratamento tonal em `hero-stage.module.css` — mínimo, e declarado item a item.
  */
@@ -293,15 +276,20 @@ export const heroStates: HeroState[] = [
     event: 'hero_equipamentos_click',
     media: {
       kind: 'photo',
-      src: '/images/hero/hero-industrial-kitchen.png',
+      src: '/images/hero/equipamento-hero.png',
       intrinsic: '1672x941',
-      alt: 'Cozinha industrial profissional em aço inox, com coifa contínua, luminárias suspensas e bancada central de produção',
+      alt: 'Praça de cocção em aço inox com fogão industrial de seis bocas, chapa, forno combinado e coifa contínua sobre a linha',
       /*
-        62%: o terço esquerdo do arquivo é quase preto e é justamente onde a
-        coluna de texto assenta. À direita estão a ilha em inox, as luminárias e
-        os fornos — a matéria do estado. Subiu de 58% para 62% quando o gestor
-        trocou o recorte do arquivo (1916 × 821 → 1672 × 941): o novo enquadre é
-        mais alto e menos largo, então o mesmo percentual mostrava menos linha.
+        `62%` no eixo horizontal, que é o eixo que **só o telefone usa**: abaixo
+        de `lg` a cena vira uma tira larga e o corte é lateral, então o
+        enquadramento tem de trazer o fogão e a chapa em vez do corredor vazio.
+        No desktop o palco é mais largo que a proporção do arquivo, o corte é
+        vertical e este valor não participa — ver a tabela de cortes medidos no
+        cabeçalho de `hero-stage.module.css`.
+
+        Vertical em `center`: o arquivo já enquadra a linha de cocção no meio da
+        altura, e o corte vertical do desktop é pequeno o bastante para não
+        encostar nem na coifa nem no piso.
       */
       objectPosition: '62% center',
     },
@@ -322,27 +310,27 @@ export const heroStates: HeroState[] = [
     event: 'hero_projetos_click',
     media: {
       kind: 'document',
-      src: '/images/projects/projeto-3d-hero.jpg',
+      src: '/images/hero/projeto-hero.png',
+      /** Nativo na moldura do palco — sem reamostragem, ao contrário do anterior. */
+      intrinsic: '1672x941',
+      alt: 'Planta técnica de cozinha profissional impressa sobre a mesa de trabalho, com escalímetro, lapiseira e pranchas de projeto afixadas ao fundo',
       /*
-        2033 × 1027 é o arquivo; **782 × 395 é o detalhe real** (ver o bloco
-        PROJETOS acima) — já uma reamostragem, então o `sizes` não tem um
-        teto de nitidez a respeitar como tinha na composição contida.
+        `62%` horizontal pelo mesmo motivo do estado anterior: no telefone o
+        corte é lateral, e é ele que decide se a tira mostra a planta ou a
+        parede vazia da esquerda.
+
+        `58%` vertical: a planta ocupa a metade de baixo do arquivo. Puxar o
+        enquadramento para baixo do centro mantém o documento inteiro no palco
+        no desktop, onde o corte é vertical, sem perder as pranchas do fundo.
       */
-      intrinsic: '2033x1027 (detalhe real 782x395)',
-      alt: 'Estudo 3D de projeto de cozinha profissional em vista axonométrica, com bancadas em inox, ilha refrigerada, prateleiras e a circulação entre os postos',
+      objectPosition: '62% 58%',
       /*
-        42% vertical: a ilha central e a bancada de preparo — o miolo com mais
-        informação da cena — ficam pouco acima do centro do arquivo. Resolve
-        para menos chão vazio na base e mantém a prateleira superior visível.
-        Sem deslocamento horizontal: a planta ocupa a largura inteira do
-        arquivo, e não há um lado "vazio" a recortar como no de Equipamentos.
+        A legenda declara o tipo do material. `docs/v2/DECISIONS.md`, DEC-008: o
+        que não é obra executada nunca é apresentado como tal. O texto anterior
+        dizia "Estudo 3D de layout" — descrevia o arquivo antigo e ficaria falso
+        aqui, porque a cena agora é uma planta impressa, não um render.
       */
-      objectPosition: 'center 42%',
-      /*
-        A legenda declara o tipo do material. `docs/v2/DECISIONS.md`, DEC-008:
-        render nunca é apresentado como obra executada.
-      */
-      caption: 'Estudo 3D de layout — material de projeto, não obra executada',
+      caption: 'Material de projeto — planta técnica',
     },
   },
   {
@@ -361,15 +349,29 @@ export const heroStates: HeroState[] = [
     event: 'hero_consultoria_click',
     media: {
       kind: 'photo',
-      src: '/images/hero/operacao-comercial.png',
-      intrinsic: '1448x1086',
-      alt: 'Balcão de atendimento com terminal de ponto de venda, pedidos embalados para retirada, louça empilhada e a linha de produção em aço inox acesa ao fundo',
+      src: '/images/hero/consultoria.png',
+      intrinsic: '1672x941',
       /*
-        46%: em `center` o palco pega a planta e o vaso da esquerda e perde o
-        balcão. Aqui a leitura é a operação — PDV, pedidos prontos e a produção
-        ao fundo.
+        A pessoa é nomeada porque é dado publicado e verificado: é o mesmo
+        Leonardo Bianchini de `public/images/team/leonardo-bianchini.png` (mesma
+        pose, camisa e relógio) e é ele quem conduz o diagnóstico —
+        `src/data/leonardo.ts`, `home.eyebrow`. Nomear no `alt` é mais preciso
+        para leitor de tela do que "um homem de camisa branca", e não introduz
+        afirmação nova.
       */
-      objectPosition: '46% center',
+      alt: 'Leonardo Bianchini, especialista em cozinhas comerciais e industriais, de braços cruzados e camisa branca, em retrato de estúdio',
+      /*
+        `70%` horizontal: no telefone o corte é lateral e o rosto precisa
+        sobreviver a ele — em `center` a tira corta metade da figura.
+
+        `12%` vertical: este é o único dos três arquivos em que o corte vertical
+        do desktop **morde de verdade**, porque a cabeça começa a ~2% da altura
+        do arquivo. Enquadrar perto do topo protege a cabeça; o que se perde é a
+        base, que é fundo vazio. Ver a tabela de cortes medidos no cabeçalho de
+        `hero-stage.module.css` — em 1920 o corte vertical passa de 30%, e é
+        esse o pior caso que este valor atende.
+      */
+      objectPosition: '70% 12%',
     },
   },
 ]
