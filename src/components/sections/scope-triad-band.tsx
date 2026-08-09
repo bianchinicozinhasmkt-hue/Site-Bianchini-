@@ -89,9 +89,28 @@ export function ScopeTriadBand() {
           </div>
 
           <div className="flex flex-col items-start gap-5 lg:col-span-4 lg:col-start-9">
+            {/*
+              ============================================================
+              TEXTO TROCADO EM 2026-08-09 — era duplicata literal
+              ============================================================
+
+              Esta faixa e a seção Método (`journey-section.tsx`) publicavam a
+              **mesma frase, palavra por palavra**: "O mesmo time responde pelo
+              entendimento do problema, pelo desenho da solução, pelo
+              fornecimento e pela entrega em operação." Duas seções da mesma
+              página dizendo a mesma coisa é a repetição que faz a home parecer
+              template — e a frase pertence ao Método, que é onde a
+              responsabilidade única é o argumento.
+
+              O que entra aqui responde a outra pergunta, a desta faixa: o
+              visitante precisa das três etapas para contratar? Não.
+              "Sem repasse de culpa entre projetista, fornecedor e instalador"
+              é transcrição de `src/data/solutions.ts`.
+            */}
             <p className="max-w-[58ch] text-base leading-relaxed text-canvas/80">
-              O mesmo time responde pelo entendimento do problema, pelo desenho da solução, pelo
-              fornecimento e pela entrega em operação.
+              Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa
+              entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao
+              comissionamento.
             </p>
             <LinkButton href="#metodo" variant="light" size="md" withArrow>
               Conhecer o método

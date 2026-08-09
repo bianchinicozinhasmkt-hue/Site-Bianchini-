@@ -9,8 +9,43 @@ import { Eyebrow, Heading } from '@/components/ui/typography/heading'
 
 import { equipmentCategories } from '@/data/equipment-categories'
 
+import type { ReactNode } from 'react'
+
+interface EquipmentStripSectionProps {
+  compact?: boolean
+  /**
+   * Linha de fecho, à esquerda do CTA. **O default é o texto da V1** e é o que
+   * `/solucoes/cozinhas-industriais` continua renderizando — quem passa um
+   * valor aqui é só a Home.
+   */
+  note?: ReactNode
+  /**
+   * Ação que encerra a seção. Default = o da V1 ("Ver a solução completa"),
+   * preservado para a rota interna; a Home passa a ação comercial.
+   */
+  cta?: { label: string; href: string }
+}
+
 /**
  * Equipamentos — parte da solução, não catálogo.
+ *
+ * ============================================================
+ * COPY POR PROPS, DEFAULTS DA V1 (2026-08-09)
+ * ============================================================
+ *
+ * Esta seção é montada em **duas** rotas: a Home e
+ * `/solucoes/cozinhas-industriais`. A rodada de conteúdo estratégico precisava
+ * mudar o fecho da Home — dizer que a Bianchini **especifica, fornece, instala
+ * e comissiona**, e trocar a ação de navegação ("Ver a solução completa") por
+ * ação comercial ("Solicitar orçamento de equipamentos") —, mas alterar o
+ * texto fixo mudaria a página interna junto, o que estava fora do escopo
+ * autorizado.
+ *
+ * Por isso `note` e `cta` viraram props **com os valores da V1 como default**:
+ * a rota interna renderiza exatamente o que renderizava antes, sem uma linha
+ * de diferença, e só a Home passa valores novos. Enunciado, título, lead,
+ * painel da categoria prioritária e grade das demais não mudaram em nenhuma
+ * das duas.
  *
  * ============================================================
  * O QUE MUDOU
@@ -38,7 +73,11 @@ import { equipmentCategories } from '@/data/equipment-categories'
  * categorias é o catálogo de decisões técnicas que sustentam esse
  * dimensionamento — não um cardápio de produtos.
  */
-export function EquipmentStripSection({ compact = false }: { compact?: boolean } = {}) {
+export function EquipmentStripSection({
+  compact = false,
+  note,
+  cta = { label: 'Ver a solução completa', href: '/solucoes/cozinhas-industriais' },
+}: EquipmentStripSectionProps = {}) {
   const [primary, ...rest] = equipmentCategories
 
   return (
@@ -131,23 +170,21 @@ export function EquipmentStripSection({ compact = false }: { compact?: boolean }
 
         <div className="mt-10 flex flex-col items-start gap-5 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-xl text-base text-canvas/75">
-            O detalhamento por linha de equipamento — incluindo o{' '}
-            <Link
-              href="/linhas-de-produtos/forno-combinado-rational"
-              className="font-semibold text-canvas underline decoration-yellow underline-offset-4 transition-colors hover:text-white"
-            >
-              forno combinado Rational
-            </Link>{' '}
-            — fica na página de linhas.
+            {note ?? (
+              <>
+                O detalhamento por linha de equipamento — incluindo o{' '}
+                <Link
+                  href="/linhas-de-produtos/forno-combinado-rational"
+                  className="font-semibold text-canvas underline decoration-yellow underline-offset-4 transition-colors hover:text-white"
+                >
+                  forno combinado Rational
+                </Link>{' '}
+                — fica na página de linhas.
+              </>
+            )}
           </p>
-          <LinkButton
-            href="/solucoes/cozinhas-industriais"
-            variant="primary"
-            size="md"
-            withArrow
-            className="shrink-0"
-          >
-            Ver a solução completa
+          <LinkButton href={cta.href} variant="primary" size="md" withArrow className="shrink-0">
+            {cta.label}
           </LinkButton>
         </div>
       </Container>

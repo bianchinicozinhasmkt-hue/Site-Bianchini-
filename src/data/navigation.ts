@@ -96,6 +96,30 @@ import type { NavItem } from '@/types'
  *
  * Todas as diferenças são positivas: ler o menu da esquerda para a direita é
  * descer a home do começo ao fim.
+ *
+ * ============================================================
+ * REMEDIDO EM 2026-08-09, DEPOIS DA RODADA DE CONTEÚDO ESTRATÉGICO
+ * ============================================================
+ *
+ * **O array não mudou** — mesmos cinco rótulos, mesmos cinco destinos, mesma
+ * ordem. A remedição é obrigatória mesmo assim (regra 5): a home reordenou uma
+ * seção, e `#pilares` subiu de 6ª para 4ª posição, o que move o alvo de
+ * "Soluções" em ~2.000px.
+ *
+ * Posições medidas em 1440 × 900, no build de produção, **depois** da
+ * reordenação — não deduzidas de `page.tsx`:
+ *
+ *   Equipamentos ..    900px  ↓   (inalterado)
+ *   Projetos ......  2.465px  ↓   (+24px — o fecho de Equipamentos ganhou uma linha)
+ *   Soluções ......  4.082px  ↓   (era 6.062px — `#pilares` subiu duas posições)
+ *   Método ........  9.558px  ↓
+ *   Empresa ....... 13.283px  ↓
+ *
+ * As cinco diferenças continuam positivas e nenhuma inversão apareceu: a
+ * subida de "Soluções" a aproximou de "Projetos" (2.465 → 4.082) sem
+ * ultrapassá-lo, então a ordem do menu segue sendo a ordem da rolagem e o
+ * array não precisou ser tocado. Se `#pilares` subisse mais uma posição — para
+ * antes de `#projetos` —, aí sim os dois teriam de trocar de lugar aqui.
  */
 export const mainNav: NavItem[] = [
   { label: 'Equipamentos', href: '/#equipamentos' },

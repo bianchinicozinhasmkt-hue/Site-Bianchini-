@@ -51,12 +51,29 @@ import type { Project } from '@/types'
  */
 const allRecords = [leadProject, ...featuredProjects]
 
+/**
+ * ============================================================
+ * `lead` POR PROP, DEFAULT DA V1 (2026-08-09)
+ * ============================================================
+ *
+ * A seção é montada na Home e em `/solucoes/cozinhas-industriais`. Na Home ela
+ * vem **logo depois de Equipamentos** e precisa provar aquela afirmação: as
+ * fotografias são de operações que a Bianchini projetou, especificou, fabricou
+ * ou instalou — sem isso, a fileira lê como portfólio de arquitetura e não
+ * sustenta a frente comercial que a antecede. O default continua sendo o texto
+ * da V1, então a rota interna não muda.
+ */
+const DEFAULT_LEAD =
+  'Registros reais de cozinhas, bares, cadeia fria e mobiliário fabricado sob medida — do desenho técnico à cozinha em produção.'
+
 export function ProjectsSection({
   tone = 'graphite',
   compact = false,
+  lead = DEFAULT_LEAD,
 }: {
   tone?: 'graphite' | 'surface'
   compact?: boolean
+  lead?: string
 } = {}) {
   const dark = tone === 'graphite'
 
@@ -82,8 +99,7 @@ export function ProjectsSection({
               dark ? 'text-canvas/75' : 'text-muted',
             )}
           >
-            Registros reais de cozinhas, bares, cadeia fria e mobiliário fabricado sob medida — do
-            desenho técnico à cozinha em produção.
+            {lead}
           </p>
         </div>
 

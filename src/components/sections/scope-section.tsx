@@ -93,10 +93,32 @@ export function ScopeSection() {
             </Heading>
           </div>
 
+          {/*
+            ============================================================
+            ENUNCIADO REESCRITO EM 2026-08-09 — dois defeitos comerciais
+            ============================================================
+
+            Era: "Não é loja de equipamento nem escritório de projeto: a
+            Bianchini entende o negócio inteiro e coordena a transformação da
+            operação — entrando no nível que o diagnóstico indicar."
+
+             1. **Negava a frente principal.** Com Equipamentos como pilar
+                central da V2 (DEC-001) e como segunda seção da página, abrir
+                esta seção negando "loja de equipamento" põe o visitante que
+                acabou de pedir orçamento em dúvida sobre o que a empresa
+                vende. O posicionamento correto é dizer o que a Bianchini é —
+                especialista que integra equipamento, projeto e operação —, não
+                o que ela não é.
+             2. **Impunha a integração.** "Entrando no nível que o diagnóstico
+                indicar" condiciona qualquer contratação a um diagnóstico
+                prévio, contra DEC-003 (integração é oferecida, não imposta).
+                Os cinco níveis existem para quem quiser percorrê-los; entrar
+                por um só é uso previsto, não exceção.
+          */}
           <p className="text-lead text-muted lg:col-span-4 lg:col-start-9">
-            Não é loja de equipamento nem escritório de projeto: a Bianchini entende o negócio
-            inteiro e coordena a transformação da operação — entrando no nível que o diagnóstico
-            indicar.
+            Equipamento, projeto, obra e operação sob a mesma coordenação. Você entra pelo nível
+            que a sua operação precisa — os cinco existem para quem quiser percorrê-los, não como
+            pacote obrigatório.
           </p>
         </div>
 

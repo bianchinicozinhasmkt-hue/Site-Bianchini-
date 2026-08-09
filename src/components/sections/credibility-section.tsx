@@ -67,9 +67,23 @@ export function CredibilitySection() {
               Reconhecimento construído dentro do setor
             </Heading>
           </div>
+          {/*
+            Enunciado trocado em 2026-08-09. Era: "Arquitetura, engenharia,
+            equipamentos, processo e estratégia comercial tratados como um
+            sistema só — **não como frentes separadas**." A ressalva final
+            contradizia a página: as frentes *podem* ser contratadas separadas
+            (DEC-003), e a seção seguinte da home passou a dizer exatamente
+            isso. Além disso, numa seção cuja função é escala e reconhecimento,
+            o enunciado descrevia método — que é assunto de `#metodo`.
+
+            O que entra no lugar é o alcance: 18 anos (dado confirmado,
+            `src/data/site.ts`) e a amplitude real de contratação, do item
+            avulso à cozinha inteira (`src/data/faq.ts`, `kitchensFaq[0]`).
+            Nenhum número novo.
+          */}
           <p className="text-lead text-muted lg:col-span-4 lg:col-start-9">
-            Arquitetura, engenharia, equipamentos, processo e estratégia comercial tratados como um
-            sistema só — não como frentes separadas.
+            Dezoito anos dentro de operações de alimentação — do equipamento avulso à cozinha
+            inteira projetada, fornecida e instalada.
           </p>
         </div>
 

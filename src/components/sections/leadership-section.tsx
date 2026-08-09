@@ -99,9 +99,20 @@ export function LeadershipSection() {
             é credencial nova. Existe para a seção não abrir com um título
             solto sobre 400px de grafite, que era parte do vazio anterior.
           */}
+          {/*
+            Ajuste de uma frase em 2026-08-09, por consistência factual e não
+            por edição de estilo: "as três frentes" nomeava projetos,
+            equipamentos e **operação comercial**, enquanto a seção "As três
+            frentes" (`pillars-section.tsx`) passou a nomear equipamentos,
+            projetos e **consultoria**. A mesma página contava duas trincas
+            diferentes. Aqui a contagem sai — o que a seção precisa dizer é que
+            se fala com quem responde, não quantas frentes existem. A divisão
+            de responsabilidade entre as duas pessoas continua íntegra e vem de
+            `src/data/team.ts`.
+          */}
           <p className="text-lead text-canvas/70 lg:col-span-4 lg:col-start-9">
-            Projetos e equipamentos de um lado, operação comercial do outro — as três frentes
-            respondem a duas pessoas, não a um organograma.
+            Projetos e equipamentos de um lado, operação comercial do outro — você fala com quem
+            responde pela frente que contratou, não com um organograma.
           </p>
         </div>
 
