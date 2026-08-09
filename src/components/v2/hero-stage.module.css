@@ -240,14 +240,42 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
-      to top,
-      rgba(16, 16, 16, 0.78) 0%,
-      rgba(16, 16, 16, 0.36) 15%,
-      rgba(16, 16, 16, 0) 36%
-    ),
-    linear-gradient(
+  background: linear-gradient(
+    to top,
+    rgba(16, 16, 16, 0.78) 0%,
+    rgba(16, 16, 16, 0.36) 15%,
+    rgba(16, 16, 16, 0) 36%
+  );
+}
+
+/*
+  ============================================================
+  DIREÇÃO VISUAL (2026-08-08) — O DEGRADÊ LATERAL GANHA UM TOPO
+  ============================================================
+
+  O degradê "to right" saiu de dentro de `.scrim` para este `::before` sem
+  mudar nenhuma das seis paradas — são as mesmas medidas contra o pior pixel
+  documentado acima, byte a byte. O que muda é que agora ele carrega uma
+  **máscara vertical**: a faixa de leitura (onde a etiqueta, o `h1` e a
+  intenção realmente assentam) começa em 16% da altura do palco e vai até a
+  base — ali a máscara está em preto pleno e a escuridão é idêntica à de
+  antes, píxel a píxel. Acima de 16% (o vão fixo de `lg:pt-14` mais a folga
+  de centralização, medido no pior caso de 1024×768 — texto nunca começa
+  antes de ~19% da altura do palco nesse viewport, o mais baixo da faixa
+  obrigatória) a máscara abre, e o degradê que antes cobria a coluna inteira
+  de cima a baixo — plano, na mesma densidade do rodapé ao teto — deixa a
+  faixa junto ao cabeçalho respirar: menos "véu uniforme", mais luz de cena
+  entrando por cima, exatamente onde nenhum texto precisa de proteção.
+
+  Só a partir de `lg`: no toque a cena vira tira e o texto assenta abaixo
+  dela, em grafite liso — não há degradê lateral ali para mascarar.
+*/
+@media (min-width: 1024px) {
+  .scrim::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
       to right,
       rgba(16, 16, 16, 0.95) 0%,
       rgba(16, 16, 16, 0.93) 28%,
@@ -256,6 +284,21 @@
       rgba(16, 16, 16, 0.12) 71%,
       rgba(16, 16, 16, 0) 78%
     );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.46) 0%,
+      rgba(0, 0, 0, 0.74) 9%,
+      #000 16%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.46) 0%,
+      rgba(0, 0, 0, 0.74) 9%,
+      #000 16%,
+      #000 100%
+    );
+  }
 }
 
 /* ============================================================
@@ -357,11 +400,21 @@
     de 55% para 65% (ver `hero-stage.tsx`); as duas correções juntas põem o
     pior caso das três cenas acima de 4,5:1.
   */
+  /*
+    Direção visual (2026-08-08): a última parada sobe de 0,92 para 0,98 — o
+    suficiente para o degradê chegar praticamente opaco no encontro com a
+    faixa de métricas (`graphite-deep`, sólida) logo abaixo. Com 0,92 sobrava
+    8% de fotografia visível bem na hora em que o painel muda de "gradiente
+    sobre cena" para "superfície opaca": era esse resíduo, não a cor, que
+    fazia o encontro ler como emenda. Só a última parada muda — as duas
+    primeiras (e o pior pixel medido sob o complemento inativo) ficam
+    intactas.
+  */
   background: linear-gradient(
     180deg,
     rgba(12, 13, 14, 0.3) 0%,
     rgba(12, 13, 14, 0.76) 38%,
-    rgba(12, 13, 14, 0.92) 100%
+    rgba(12, 13, 14, 0.98) 100%
   );
 }
 
@@ -415,6 +468,17 @@
   A espessura muda por `transform: scaleY` sobre uma régua de 2px, nunca por
   `height`: altura animada reflui a caixa do botão e mexeria no conteúdo.
 */
+/*
+  Direção visual (2026-08-08): 240ms → 300ms, e o mesmo valor entra no
+  rótulo e no complemento (`hero-stage.tsx`, ambos eram 200ms). As três
+  respostas do clique — foto (crossfade, 380ms), conteúdo (`.enter`, 340ms) e
+  régua/rótulo do seletor — respondiam ao mesmo evento em três velocidades
+  de categorias diferentes (200/240ms, a faixa de hover, contra 340/380ms, a
+  de troca de conteúdo). A régua marca uma **troca de estado**, não uma
+  microinteração de hover, e por isso pertence à faixa 280–450ms como as
+  outras duas — não um efeito novo, só a categoria de tempo certa para o que
+  ela já faz.
+*/
 .railTop {
   position: absolute;
   top: 0;
@@ -425,8 +489,8 @@
   transform: scaleY(0.5);
   transform-origin: top;
   transition:
-    transform 240ms var(--ease-premium),
-    background-color 240ms var(--ease-premium);
+    transform 300ms var(--ease-premium),
+    background-color 300ms var(--ease-premium);
 }
 
 .railItem:hover .railTop,

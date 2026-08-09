@@ -1,0 +1,11 @@
+{
+  "targetUrl": "http://localhost:3200/",
+  "overflowReport": {
+    "1920x1080": 0,
+    "1440x900": 0,
+    "1024x768": 0,
+    "390x844": 0
+  },
+  "consoleErrors": [],
+  "httpErrors": []
+}

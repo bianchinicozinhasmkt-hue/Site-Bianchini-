@@ -735,7 +735,7 @@ export function HeroStage() {
                         <span
                           className={cn(
                             /* `leading` depois do `text-[…]` — ver o `h1`. */
-                            'block font-condensed uppercase tracking-[0.05em] transition-colors duration-200',
+                            'block font-condensed uppercase tracking-[0.05em] transition-colors duration-300',
                             'text-[0.8125rem] leading-tight sm:text-[0.9375rem] lg:text-[1.1875rem]',
                             /*
                               Inativo em `canvas/75`, não num fantasma: o
@@ -771,7 +771,7 @@ export function HeroStage() {
                         */}
                         <span
                           className={cn(
-                            'mt-1.5 hidden text-[0.8125rem] leading-snug transition-colors duration-200 sm:block lg:text-[0.9375rem]',
+                            'mt-1.5 hidden text-[0.8125rem] leading-snug transition-colors duration-300 sm:block lg:text-[0.9375rem]',
                             /*
                               `/65` e `/80`, não `/55` e `/75`: com a faixa do
                               seletor deixando a fotografia aparecer, o pior
@@ -826,12 +826,25 @@ export function HeroStage() {
         confirmado (`site.ts`: 18 anos, abrangência Brasil) mais uma ação.
         Tipografia e um separador; nenhum ícone, cartão ou selo.
       */}
+      {/*
+        Direção visual (2026-08-08): `border-white/[0.14]` → `/[0.06]`, e a
+        régua com `.rail` sobe de 0,92 para 0,98 (ver o módulo CSS) na mesma
+        rodada. As duas mudanças resolvem a mesma emenda: com `.rail` quase
+        opaco na própria base, um traço de 14% ainda lia como corte —
+        "faixa preta" cortando ao meio de "três opções". Mais claro o
+        bastante para continuar marcando a passagem para a superfície sólida,
+        fraco o bastante para não competir com ela.
+
+        `min-h-20` → `min-h-24` e `py-3/4` → `py-4/5`: mais respiro, dentro
+        da faixa de 80–104px já documentada acima — a régua e as métricas
+        deixam de ler como uma tira socada contra o painel de cima.
+      */}
       <div
         data-hero-metrics
-        className="shrink-0 border-t border-white/[0.14] bg-graphite-deep"
+        className="shrink-0 border-t border-white/[0.06] bg-graphite-deep"
       >
         <Container>
-          <div className="flex min-h-20 flex-col justify-center gap-2 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-4">
+          <div className="flex min-h-24 flex-col justify-center gap-2 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-5">
             {/*
               `flex-nowrap` só a partir de `md`. Em `sm` (640px) travar a quebra
               empurrava a lista para fora do container e abria **85px de rolagem
