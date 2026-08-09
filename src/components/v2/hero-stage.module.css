@@ -726,6 +726,86 @@
 }
 
 /* ============================================================
+   TROCA DE ESTADO — O QUE `.enter` DEIXOU DE FAZER
+   ============================================================
+
+   `.enter` acima é a entrada da dobra **no carregamento da página**, e desde
+   2026-08-09 é só isso: o bloco de conteúdo não tem mais `key`, então nada ali
+   desmonta quando o visitante troca de pilar e a animação escalonada não roda
+   de novo. Ver o comentário no `key` removido, em `hero-stage.tsx`.
+
+   O que troca de estado agora é `.swap`, e ele é deliberadamente pequeno:
+
+     · **só `opacity`.** Nada de percurso, nada de escala. O briefing pede uma
+       troca que não mexa na geometria, e um `translateY` — mesmo de 10px —
+       lê como conteúdo entrando do zero, que é exatamente a sensação de
+       recarregamento a eliminar;
+     · **180ms**, dentro da faixa de 160–240 pedida, contra os 340ms + 180 de
+       atraso que a linha de ação levava antes;
+     · **sem escalonamento.** Etiqueta, título e intenção trocam juntos. O
+       escalonamento é vocabulário de entrada, não de troca: aplicado a cada
+       clique, ele fazia a coluna se remontar de cima para baixo.
+
+   Aplicado ao **texto**, não à caixa: quem carrega a `key` é um `<span>` por
+   dentro da etiqueta, do `h1` e da intenção, então as caixas com piso medido
+   (`HEADLINE_MIN` / `INTENT_MIN`) nunca saem do DOM e a moldura não se move.
+   ============================================================ */
+@keyframes swapIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.swap {
+  animation: swapIn 180ms var(--ease-precise) both;
+}
+
+/* ============================================================
+   CELA DOS RÓTULOS DO CTA PRIMÁRIO
+   ============================================================
+
+   Os três rótulos ocupam a mesma célula de grade, então a cela mede sempre o
+   mais longo dos três e a **caixa do botão não muda de largura** quando o
+   pilar troca — é isso que mantém o botão de WhatsApp imóvel ao lado dele.
+
+   Só o ativo é opaco; os outros dois ficam em `opacity: 0` e com `aria-hidden`
+   (ver `hero-stage.tsx`), de modo que o nome acessível do link continua sendo
+   um rótulo só. Nenhum deles desmonta — a troca é crossfade puro, e por isso
+   aqui é `transition`, não `animation`.
+
+   `pointer-events: none` nos inativos: eles ocupam a mesma área do ativo e não
+   podem interceptar o clique.
+   ============================================================ */
+/*
+  `justify-items: center`, e não `start`. A cela mede o rótulo mais longo dos
+  três, então com alinhamento à esquerda os dois rótulos curtos ficavam
+  encostados na borda esquerda com uma faixa de amarelo vazio até o fio da
+  seta — medido em 1920, ~130px sobrando à direita de "Solicitar orçamento".
+  Lia como texto empurrado, não como botão. Centrado, a sobra se divide nos
+  dois lados e a mesma cela lê como recuo generoso do botão.
+*/
+.ctaLabels {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.ctaLabels > * {
+  grid-area: 1 / 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms var(--ease-precise);
+}
+
+.ctaLabels > [data-ativo='true'] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================================
    TABLET E TELEFONE
    ============================================================ */
 @media (max-width: 1023px) {
@@ -824,5 +904,20 @@
 
   .enter {
     animation: none;
+  }
+
+  /*
+    Troca de estado praticamente instantânea, e sem nada invisível: `.swap`
+    perde a animação (o texto novo já entra opaco, porque o `both` que o
+    segurava em `opacity: 0` sai junto) e a cela dos rótulos do CTA troca sem
+    crossfade. O rótulo ativo continua em `opacity: 1` — o que some é o tempo,
+    não o conteúdo.
+  */
+  .swap {
+    animation: none;
+  }
+
+  .ctaLabels > * {
+    transition: none;
   }
 }

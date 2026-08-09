@@ -12,8 +12,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/layout/container'
 import { ArrowRightIcon, WhatsappIcon } from '@/components/ui/icons'
-import { heroSecondary, heroStates, homeHero, homeHeroMetrics } from '@/data/v2/home'
-import { trackEvent, type AnalyticsEvent } from '@/lib/analytics'
+import {
+  heroSecondary,
+  heroStates,
+  homeHero,
+  homeHeroMetrics,
+  type HeroState,
+} from '@/data/v2/home'
+import { trackEvent } from '@/lib/analytics'
 import { whatsappUrl, type WhatsappTopic } from '@/lib/whatsapp'
 import { cn } from '@/lib/utils'
 import styles from './hero-stage.module.css'
@@ -198,6 +204,25 @@ const INTENT_MIN = 'min-h-[4.5em] lg:min-h-[4.8em]'
 
 /** Atraso do hover, dentro da faixa de 120–180ms pedida. */
 const HOVER_INTENT_MS = 150
+
+/**
+ * ============================================================
+ * O QUARTO ESTADO DO BOTÃO — PRESSÃO
+ * ============================================================
+ *
+ * `CLAUDE.md` fixa quatro estados para botão: padrão, hover, `focus-visible` e
+ * **active**. Os dois CTAs da dobra tinham três — a pressão não devolvia nada.
+ * Este é o quarto, e é o mesmo nos dois, para que o par continue lendo como um
+ * par também sob o dedo.
+ *
+ * 1,5% de recuo em 120ms (faixa de resposta, curva `precise`). É `transform`,
+ * então não reflui a linha nem move o botão vizinho — e `motion-reduce` o
+ * cancela, como manda a regra de movimento do projeto.
+ */
+const pressState = cn(
+  'transition-transform duration-[120ms] ease-precise',
+  'active:scale-[0.985] motion-reduce:transition-none motion-reduce:active:scale-100',
+)
 
 export function HeroStage() {
   /* ============================================================
@@ -463,9 +488,32 @@ export function HeroStage() {
         >
           <Container className="w-full">
             {/*
-              `key` no bloco: trocar de estado remonta o conteúdo, e a animação
-              escalonada do módulo CSS roda uma vez por troca — sem estado
-              intermediário e sem temporizador em JavaScript.
+              ============================================================
+              TROCA DE ESTADO (2026-08-09) — O `key` DO BLOCO SAIU
+              ============================================================
+
+              Até aqui este `div` tinha `key={state.id}`: trocar de estado
+              **remontava a coluna inteira** — etiqueta, título, intenção e a
+              linha de ação com os dois CTAs — e a animação escalonada do
+              módulo (`.enter`) rodava de novo do zero a cada clique.
+
+              Medido no build de produção, antes da correção: marcando os nós
+              antes do clique e procurando a marca depois, `[data-hero-cta]` e
+              `[data-hero-cta-wa]` **não sobreviviam** à troca (o seletor e a
+              faixa de métricas sobreviviam, porque estão fora deste bloco). E
+              a linha de ação renderizava `contentIn 340ms com delay 180ms`:
+              como `.enter` usa `both`, ela ficava em `opacity: 0` durante os
+              180ms de atraso e só então subia 10px até aparecer — meio
+              segundo em que o par de botões **sumia e voltava**. Era isso, e
+              não a foto (que já faz crossfade entre camadas montadas), que
+              produzia a sensação de a Hero inteira recarregar.
+
+              Sem `key`, nada aqui desmonta. `.enter` continua no lugar e
+              continua rodando **uma vez, no carregamento da página** — a
+              entrada escalonada da dobra é preservada exatamente como estava.
+              O que muda de estado para estado é só o texto, por dentro
+              (ver `.swap`, abaixo), e o CTA primário, que troca rótulo e
+              destino sem sair do DOM.
 
               **Largura de leitura controlada**, em quatro degraus:
 
@@ -553,7 +601,7 @@ export function HeroStage() {
               O degrau de 1024–1279 **não** muda: é lá que a medição reprovou
               a 560px numa rodada anterior, e 480px segue sendo o valor seguro.
             */}
-            <div key={state.id} className="max-w-[35rem] lg:max-w-[30rem] xl:max-w-[40rem] 2xl:max-w-[48rem]">
+            <div className="max-w-[35rem] lg:max-w-[30rem] xl:max-w-[40rem] 2xl:max-w-[48rem]">
               <p
                 className={cn(
                   styles.enter,
@@ -578,7 +626,19 @@ export function HeroStage() {
                 )}
               >
                 <span aria-hidden="true" className="h-[2px] w-7 shrink-0 bg-yellow" />
-                {state.eyebrow}
+                {/*
+                  ---------- O que troca é o texto, não o elemento ----------
+
+                  A `key` fica no **texto**, que é a menor unidade que
+                  realmente muda de estado para estado. O `<p>` (e o traço
+                  amarelo ao lado dele) permanecem montados, então a troca não
+                  recria a etiqueta: recria a palavra dentro dela, com o
+                  crossfade curto de `.swap`. Mesmo padrão no `h1` e na
+                  intenção, abaixo.
+                */}
+                <span key={state.id} className={styles.swap}>
+                  {state.eyebrow}
+                </span>
               </p>
 
               <h1
@@ -690,7 +750,9 @@ export function HeroStage() {
                   '2xl:text-[3.625rem]',
                 )}
               >
-                {state.headline}
+                <span key={state.id} className={styles.swap}>
+                  {state.headline}
+                </span>
               </h1>
 
               <p
@@ -721,7 +783,9 @@ export function HeroStage() {
                   'text-[0.9375rem] leading-[1.5] lg:text-[1.125rem] lg:leading-[1.6]',
                 )}
               >
-                {state.intent}
+                <span key={state.id} className={styles.swap}>
+                  {state.intent}
+                </span>
               </p>
 
               <div
@@ -747,9 +811,20 @@ export function HeroStage() {
                   (`items-start`), não esticados, para não virar dois blocos
                   cheios num telefone.
                 */
+                /*
+                  ============================================================
+                  TROCA DE ESTADO (2026-08-09) — ESTA LINHA NÃO REAGE MAIS
+                  ============================================================
+
+                  `.enter` continua aqui, mas agora ele roda **uma vez só**, no
+                  carregamento: sem o `key` no bloco de conteúdo (ver acima),
+                  nada nesta linha desmonta quando o pilar muda. Antes, os
+                  180ms de atraso de `.enter` deixavam o par de botões em
+                  `opacity: 0` a cada clique.
+                */
                 className={cn(styles.enter, 'mt-10 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-10 xl:mt-12')}
               >
-                <HeroCta href={state.cta.href} event={state.event} label={state.cta.label} />
+                <HeroCta activeId={state.id} />
                 <HeroWhatsappCta topic={state.id} />
               </div>
             </div>
@@ -1165,22 +1240,57 @@ export function HeroStage() {
  * (14/15/16px → 15/16/17px; caixa 48/54px → 48/58px) para equilibrar o peso
  * contra o `h1` maior desta rodada — sem chegar a competir com ele.
  */
-function HeroCta({ href, event, label }: { href: string; event: AnalyticsEvent; label: string }) {
+function HeroCta({ activeId }: { activeId: HeroState['id'] }) {
+  const state = heroStates.find((item) => item.id === activeId) ?? heroStates[0]
+
   return (
     <Link
-      href={href}
+      href={state.cta.href}
       data-hero-cta
-      onClick={() => trackEvent(event, { origem: 'hero' })}
+      onClick={() => trackEvent(state.event, { origem: 'hero' })}
       className={cn(
         'group/cta relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] bg-yellow sm:min-h-[3.625rem]',
         'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] text-ink sm:text-[1rem] lg:text-[1.0625rem]',
         'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-yellow-bright',
         'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
         'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+        pressState,
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
       )}
     >
-      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-8">{label}</span>
+      {/*
+        ============================================================
+        OS TRÊS RÓTULOS OCUPAM A MESMA CELA — E É ISSO QUE PRENDE O
+        WHATSAPP NO LUGAR
+        ============================================================
+
+        Os três rótulos têm comprimentos bem diferentes ("Solicitar
+        orçamento", "Falar com um projetista", "Agendar diagnóstico"). Com um
+        rótulo só, trocar de pilar mudava a **largura do botão amarelo**, e o
+        botão de WhatsApp — que vem logo depois na mesma linha — deslizava
+        junto. O briefing pede o contrário: o WhatsApp permanece imóvel.
+
+        Aqui os três ficam empilhados na mesma célula de grade
+        (`styles.ctaLabels`), então a cela mede sempre o **mais longo** dos
+        três e a caixa do botão não muda de tamanho em troca nenhuma. O ativo
+        está em `opacity: 1` e os outros dois em `0`, com transição de 180ms —
+        o crossfade curto que o briefing pede, sem desmontar nada e sem tocar
+        na altura.
+
+        Os inativos levam `aria-hidden`, então o nome acessível do link é só o
+        rótulo ativo — não os três concatenados.
+      */}
+      <span className={cn(styles.ctaLabels, 'relative z-10 px-5 sm:px-6 lg:px-8')}>
+        {heroStates.map((item) => (
+          <span
+            key={item.id}
+            aria-hidden={item.id !== state.id ? true : undefined}
+            data-ativo={item.id === state.id ? 'true' : undefined}
+          >
+            {item.cta.label}
+          </span>
+        ))}
+      </span>
       <span
         aria-hidden="true"
         className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-ink/20 sm:w-[3.5rem]"
@@ -1205,22 +1315,33 @@ function HeroCta({ href, event, label }: { href: string; event: AnalyticsEvent; 
  * ícone separada por um fio de tinta. Colocados lado a lado, os dois leem como
  * um par — massa preenchida e contorno — em vez de dois componentes diferentes.
  *
- * **A hierarquia não muda.** O primário continua sendo o único preenchido, em
- * amarelo, que é o acento pleno do sistema sobre grafite; este é contornado, com
- * fundo transparente, então pesa menos por construção e não disputa a
- * prioridade. É alternativa de canal, não uma segunda oferta.
+ * ============================================================
+ * PREENCHIDO, NÃO CONTORNADO (2026-08-09)
+ * ============================================================
  *
- * **O verde é funcional, não decorativo.** `#25D366` é a cor do WhatsApp e já
- * está no projeto (`whatsapp-float.tsx`); ela existe aqui para o canal ser
- * reconhecido antes de o rótulo ser lido. Sobre grafite mede **9,6:1** — passa
- * AA com folga larga. Não entra em fundo claro em nenhum lugar, então a regra do
- * amarelo (`src/styles/colors.ts`) não é contrariada: o verde não substitui o
- * amarelo em papel nenhum, ele marca um canal.
+ * A versão anterior era fundo transparente com contorno verde. Não foi
+ * aprovada: sem massa, ela lia como um link enquadrado ao lado de um botão, e
+ * não como o segundo canal de contato da dobra. Agora o fundo é o verde cheio.
  *
- * **O preenchimento do hover é `scaleY` sobre um `::before`**, exatamente como
- * no primário — a mecânica de botão fixada em `CLAUDE.md`. Aqui o `::before` é
- * um verde a 14% de opacidade: acende a caixa sem virar botão cheio (o que
- * duplicaria a massa do primário) e sem trocar `background-color`.
+ * **A hierarquia continua, e não é mais o preenchimento que a sustenta — é a
+ * cor.** Amarelo é o acento comercial do sistema inteiro (CTA do cabeçalho, da
+ * dobra, do fechamento) e o mais luminoso dos dois: `#F5C64B` tem luminância
+ * relativa 0,60 contra 0,48 do `#25D366`. Some-se a isso a ordem de leitura (o
+ * amarelo vem primeiro) e a massa maior do primário — que a cela dos três
+ * rótulos empilhados fixa na largura do mais longo. Amarelo = ação comercial;
+ * verde = contato rápido. Os dois são preenchidos, mas não são intercambiáveis.
+ *
+ * **O verde é o que já estava no projeto.** `#25D366` é a cor do WhatsApp e já
+ * vinha sendo usada aqui e no `whatsapp-float.tsx` — nenhum matiz novo entrou.
+ * O texto sobre ele é `ink`, e não `canvas`: branco sobre `#25D366` dá **2,1:1**
+ * e reprovaria em AA, enquanto o grafite dá **9,6:1**. É a mesma inversão que o
+ * botão amarelo já faz — massa clara, tinta escura —, o que é justamente o que
+ * faz os dois lerem como um par.
+ *
+ * **O hover não troca de cor: acende.** O `::before` é branco a 18% subindo por
+ * `scaleY` — a mecânica de botão fixada em `CLAUDE.md`, e uma mudança de
+ * luminosidade em vez de um matiz novo. `focus-visible` dispara o mesmo
+ * preenchimento, e `active` usa a mesma pressão do primário (`pressState`).
  *
  * O link sai por `whatsappUrl(topic)` (`lib/whatsapp.ts`), como manda a
  * convenção — nenhuma URL `wa.me` escrita à mão, e o número continua vindo de
@@ -1242,22 +1363,28 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
       onClick={() => trackEvent('whatsapp_iniciado', { origem: 'hero' })}
       className={cn(
         'group/wa relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] sm:min-h-[3.625rem]',
-        /* Fundo transparente e contorno verde — o pedido, e o que mantém a hierarquia. */
-        'border border-[#25D366]/70 bg-transparent',
-        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] text-canvas sm:text-[1rem] lg:text-[1.0625rem]',
-        'transition-colors duration-200 ease-precise hover:border-[#25D366] focus-visible:border-[#25D366]',
-        'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-[#25D366]/[0.14]',
+        /* Massa verde cheia — o pedido desta rodada. Tinta escura, como no primário. */
+        'bg-[#25D366] text-ink',
+        'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] sm:text-[1rem] lg:text-[1.0625rem]',
+        'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-white/[0.18]',
         'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
         'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+        pressState,
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
       )}
     >
       <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-7">Falar no WhatsApp</span>
       <span
         aria-hidden="true"
-        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-[#25D366]/35 sm:w-[3.25rem]"
+        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-ink/20 sm:w-[3.25rem]"
       >
-        <WhatsappIcon size={19} className="text-[#25D366]" />
+        {/*
+          O glifo era verde sobre transparente. Sobre a massa verde ele
+          sumiria, então passa a ser `ink` — a mesma tinta do rótulo e a mesma
+          lógica da seta do botão amarelo. O canal continua reconhecível pela
+          cor da caixa, que agora é o verde inteiro em vez de um contorno.
+        */}
+        <WhatsappIcon size={19} className="text-ink" />
       </span>
     </a>
   )
