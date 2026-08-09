@@ -170,6 +170,28 @@ import styles from './hero-stage.module.css'
    Refaça esta medição se qualquer título/intenção mudar de comprimento ou se
    a coluna mudar de largura de novo.
    ============================================================ */
+/* ============================================================
+   HARMONIZAÇÃO (2026-08-09) — POR QUE O PISO DA INTENÇÃO **NÃO** MUDA
+   ============================================================
+
+   Esta rodada alargou a coluna de leitura em ≥1536px (44rem → 48rem) e tentou
+   baixar o piso da intenção junto, na hipótese de que numa coluna maior os
+   três estados cairiam para 2 linhas e o piso de 3 viraria vazio artificial.
+
+   **A hipótese estava errada, e a medição pegou.** A intenção não é governada
+   pela coluna: ela tem `max-w-[52ch]` (ver o parágrafo, abaixo), então a
+   largura de linha dela é a mesma em 1280 e em 1920 — alargar a coluna não
+   muda uma linha. Com `2xl:min-h-[3.2em]` o resultado medido em 1920 × 1080
+   foi Equipamentos e Consultoria (3 linhas naturais) **estourando** o piso e
+   Projetos (2 linhas) não, o que devolveu um desvio de 14,4px entre estados na
+   etiqueta e no CTA — exatamente o salto que os pisos existem para eliminar.
+
+   Fica o piso de 3 linhas em toda faixa ≥1024. Ele reserva uma linha a mais
+   apenas para Projetos, que é o mínimo possível: 3 linhas é o natural de dois
+   dos três estados, e qualquer piso menor reabre o salto.
+
+   Remeça os dois pisos ao mexer em qualquer título, intenção, `max-w` em `ch`
+   ou corpo de texto. */
 const HEADLINE_MIN = 'min-h-[3.3em] lg:min-h-[3.15em]'
 const INTENT_MIN = 'min-h-[4.5em] lg:min-h-[4.8em]'
 
@@ -400,7 +422,35 @@ export function HeroStage() {
             a faixa e, no estado de Projetos — que é claro —, o `h1` branco caía
             em cima do desenho.
           */
-          className="relative z-10 flex min-h-0 flex-1 items-center pb-10 pt-[calc(var(--media-h)+2rem)] lg:py-14 lg:pt-14"
+          /*
+            ============================================================
+            HARMONIZAÇÃO (2026-08-09) — O VÃO DE 1920 É ASSIMÉTRICO DE PROPÓSITO
+            ============================================================
+
+            `items-center` com `py` igual distribui a sobra em partes iguais, e
+            em telas altas essa sobra é grande: medido no build de produção, em
+            1920 × 1080 sobravam **164,8px acima da etiqueta e 164,8px abaixo do
+            CTA**. O vão de baixo é o que separa o bloco do seu próprio seletor —
+            é ele que fazia a régua ler como "barra solta embaixo" em vez de
+            parte da composição.
+
+            `2xl:pb-8` contra `2xl:pt-24` desloca o conjunto para baixo dentro do
+            mesmo palco: o vão de baixo encolhe e o de cima cresce. A troca é
+            deliberada, e não simétrica por acidente — o vão de cima passa a
+            mostrar o alto da cena (coifa, luminárias, o trecho onde o `.scrim`
+            abre desde 2026-08-08), que é fotografia; o de baixo era grafite
+            liso sem função.
+
+            **`items-center` continua**, e o `py` é constante nos três estados:
+            a correção do salto entre estados (pisos em `em` + centragem) não é
+            afetada — o bloco desce igual nos três.
+
+            Só a partir de `2xl`. Medido, 1366 × 768 e 1024 × 768 já fecham com
+            **sobra zero** (o `py-14` é o espaçamento inteiro ali), então
+            qualquer deslocamento nessas faixas empurraria a faixa de métricas
+            para fora da primeira tela.
+          */
+          className="relative z-10 flex min-h-0 flex-1 items-center pb-10 pt-[calc(var(--media-h)+2rem)] lg:py-14 lg:pt-14 2xl:pb-8 2xl:pt-24"
         >
           <Container className="w-full">
             {/*
@@ -457,7 +507,44 @@ export function HeroStage() {
               linhas — e o parágrafo, medido de novo com a coluna maior,
               continua acima de 4,5:1 (14,7–16,3:1 nos dez viewports).
             */}
-            <div key={state.id} className="max-w-[35rem] lg:max-w-[30rem] xl:max-w-[40rem] 2xl:max-w-[44rem]">
+            {/*
+              ============================================================
+              HARMONIZAÇÃO (2026-08-09) — O QUARTO DEGRAU VAI A 48rem
+              ============================================================
+
+              44rem (704px) numa tela de 1920 é 37% da largura: com o `h1` já
+              no teto do `clamp`, o bloco textual ocupava pouco e o palco lia
+              vazio — o "pouca densidade compositiva" desta rodada.
+
+              ============================================================
+              O TETO DESTE DEGRAU É O CONTRASTE, NÃO A LEITURA
+              ============================================================
+
+              A primeira tentativa foi 52rem (832px) com o `h1` a 3,875rem.
+              Medido no build de produção, isso **reprovou**: o pior pixel sob
+              o `h1` de Equipamentos em 1920 × 1080 foi rgb(130,123,115) e a
+              razão caiu para **3,58:1**, contra 6,96:1 antes da mudança.
+
+              O erro de raciocínio vale registrar, porque é fácil repetir: não
+              basta a coluna terminar **dentro** da área coberta pelo `.scrim`.
+              O degradê horizontal cai de 0,82 (46%) para 0,42 (62%) e a 0
+              (78%); a 832px a última linha do título chegava a x=1132, ou 59%
+              da largura do palco, onde a cobertura já está em ~0,47 — e 0,47
+              não segura o reflexo de inox da linha de cocção que passa
+              exatamente ali. O que importa é a **opacidade naquele x**, não
+              estar antes do ponto zero.
+
+              48rem (768px) põe o fim da coluna em x=1068 (55,6%), onde a
+              cobertura ainda está em ~0,58, e o par corpo × coluna volta a
+              passar com folga — remedido abaixo. O ganho de presença sobre a
+              baseline continua real (coluna +64px, corpo +4px) sem escurecer
+              mais um pixel de fotografia e sem tocar o `.scrim`, que é
+              vocabulário já aprovado por medição.
+
+              O degrau de 1024–1279 **não** muda: é lá que a medição reprovou
+              a 560px numa rodada anterior, e 480px segue sendo o valor seguro.
+            */}
+            <div key={state.id} className="max-w-[35rem] lg:max-w-[30rem] xl:max-w-[40rem] 2xl:max-w-[48rem]">
               <p
                 className={cn(
                   styles.enter,
@@ -563,8 +650,35 @@ export function HeroStage() {
                     `HEADLINE_MIN` foi remedido para os novos tamanhos — ver o
                     bloco no topo do arquivo.
                   */
+                  /*
+                    ============================================================
+                    HARMONIZAÇÃO (2026-08-09) — O TETO SOBE DE 3,375 PARA 3,625rem
+                    ============================================================
+
+                    3,375rem (54px) é o teto do `clamp`, e em 1920 ele **já
+                    estava saturado**: 3,4vw daria 65px, então de 1536px para
+                    cima o título parava de crescer enquanto o palco continuava.
+                    O resultado medido era 170,1px de mancha de título num palco
+                    de 899px de altura — o "vazio excessivo" desta rodada visto
+                    pelo outro lado.
+
+                    3,625rem (58px) com a coluna de 48rem (ver acima) mantém
+                    Equipamentos em **3 linhas**: a linha de quebra mais longa
+                    pede ~756px contra os 768 disponíveis. É o par
+                    corpo × coluna que cresce junto — subir só o corpo tiparia
+                    para 4 linhas, subir só a coluna não daria presença.
+
+                    O par 3,875rem × 52rem foi testado primeiro e **reprovou no
+                    contraste** (3,58:1 sob o `h1` de Equipamentos em 1920);
+                    ver o comentário da coluna, acima, para a medição e o
+                    motivo. O teto desta faixa é o contraste, não a leitura.
+
+                    A copy não é tocada: o teto é variável de layout, o texto
+                    aprovado não (`src/data/v2/home.ts`).
+                  */
                   'text-[clamp(1.75rem,7.8vw,2.375rem)] leading-[1.1]',
                   'lg:text-[clamp(2.375rem,3.4vw,3.375rem)] lg:leading-[1.05]',
+                  '2xl:text-[3.625rem]',
                 )}
               >
                 {state.headline}
@@ -723,7 +837,18 @@ export function HeroStage() {
                         ainda, porque o número saiu (uma linha a menos) e o
                         recuo interno cresceu.
                       */
-                      'min-h-16 py-4 lg:min-h-24 lg:py-6',
+                      /*
+                        Harmonização (2026-08-09): `2xl:min-h-28 2xl:py-8`. Em
+                        1920 a régua media 148,5px numa base de palco de 899 —
+                        uma tira, contra um bloco textual de 421. Dando-lhe
+                        altura própria nessa faixa, o seletor passa a pesar como
+                        a terceira peça da composição (bloco → seletor →
+                        métricas) em vez de uma barra anexada embaixo, e a
+                        ocupação útil do palco sobe sem que a dobra cresça.
+                        Gated em `2xl` porque 1366 e 1024 já fecham com sobra
+                        zero — ver o comentário do `py` do painel.
+                      */
+                      'min-h-16 py-4 lg:min-h-24 lg:py-6 2xl:min-h-28 2xl:py-8',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow',
                     )}
                   >

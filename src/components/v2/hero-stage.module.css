@@ -155,8 +155,45 @@
    saturação, e mais leve que antes (0,86 contra 0,78) — o briefing pede
    preservar brilho, inox e profundidade, não uniformizar.
    ============================================================ */
+/*
+  ============================================================
+  HARMONIZAÇÃO (2026-08-09) — A CORREÇÃO DE PROJETOS ESTAVA CALIBRADA
+  PARA UMA COMPOSIÇÃO QUE NÃO EXISTE MAIS
+  ============================================================
+
+  `brightness(0.92)` nasceu quando Projetos era uma **prancha contida** sobre
+  fundo grafite: ali a superfície escura vinha do palco, o render ocupava 48%
+  da área e quase não precisava de correção. A rodada P1 pôs o render a
+  sangrar o palco inteiro, como os outros dois estados — e o valor de 0,92
+  ficou para trás, calibrado para a composição anterior.
+
+  O resultado, medido no build de produção (luminância média da cena crua,
+  scrim e conteúdo escondidos, amostragem de 1 em 3 pixels sobre a caixa do
+  palco):
+
+    estado         1920 × 1080   1440 × 900
+    equipamentos       102,8        102,1
+    projetos           154,7        155,0   ← 51% acima de Equipamentos
+    consultoria         67,2         65,3
+
+  Ou seja: as duas fotografias vivem entre 65 e 103, e o render estava a 155.
+  Não é uma diferença de assunto nem de enquadramento — é meio tom e meio
+  contra as outras duas, e é isso que fazia Projetos ler como "outro meio
+  colado no mesmo lugar" em vez de um terceiro estado da mesma dobra.
+
+  `brightness(0.70)` põe a média em ~118: **acima** de Equipamentos, porque
+  material de projeto é legitimamente mais claro que uma fotografia de
+  operação e o briefing pede coerência, não uniformização — e dentro da faixa
+  fotográfica, que é o que faltava. `contrast(1.12)` devolve a aresta das
+  bancadas que a redução de luz achata, e a saturação fica quase neutra.
+
+  **Não é o `brightness(0.66) saturate(0.55)` que P1 removeu.** O que tornava
+  aquele tratamento um disfarce era a saturação em 0,55 — quase metade da cor
+  —, somada a uma ampliação de 1,84×. Aqui a cor fica em 0,92 e a luz é
+  corrigida para uma meta medida, não para afogar o arquivo.
+*/
 .gradeProjetos {
-  filter: brightness(0.92) contrast(1.06) saturate(0.94);
+  filter: brightness(0.7) contrast(1.12) saturate(0.92);
 }
 
 .gradeConsultoria {
@@ -419,13 +456,71 @@
 }
 
 /*
-  Grupo centrado, não grade. `justify-content: center` + `gap` são o que faz
-  o seletor ler como três controles com vão visível, e não três colunas
-  esticadas — ver "DIREÇÃO VISUAL (2026-08-08) — DE GRADE PARA GRUPO" acima.
+  Grupo centrado, não grade esticada — ver "DIREÇÃO VISUAL (2026-08-08) — DE
+  GRADE PARA GRUPO" acima.
 
   `flex-wrap: nowrap` é deliberado: as três áreas têm de caber numa linha só
   em toda largura suportada (o recuo/gap encolhem no telefone — ver o bloco
   de tablet/telefone, abaixo — para garantir isso sem rolagem horizontal).
+
+  ============================================================
+  HARMONIZAÇÃO (2026-08-09) — TRILHAS IGUAIS, NÃO CAIXAS DE CONTEÚDO
+  ============================================================
+
+  `justify-content: center` + `gap` igual **já** punha o grupo centrado e os
+  vãos uniformes: medido no build de produção, o centro do grupo caía em
+  x=960,0 num viewport de 1920 (desvio 0,0) e os dois vãos mediam 56,0 e
+  56,0px. O que estava desalinhado não era o grupo — eram as **caixas**.
+
+  Com `flex: 0 1 auto` cada área media a largura do seu próprio conteúdo, e
+  os três complementos têm comprimentos muito diferentes ("Comprar,
+  substituir ou especificar" / "Abrir, reformar ou reorganizar" / "Corrigir
+  gargalos e melhorar resultados"). Medido em 1920:
+
+    EQUIPAMENTOS ... x 432,9 → 746,2   largura 313,3   centro  589,6
+    PROJETOS ....... x 802,2 → 1083,1  largura 280,9   centro  942,7
+    CONSULTORIA .... x 1139,1 → 1487,1 largura 348,0   centro 1313,1
+
+  Ou seja: 67,1px de diferença entre a área mais larga e a mais estreita,
+  centros espaçados de forma desigual (353,1 contra 370,4) e — o defeito mais
+  visível — **a porta do meio 17,3px à esquerda do eixo da composição**. Três
+  caixas de tamanhos diferentes não leem como três portas do mesmo sistema,
+  mesmo com o vão entre elas idêntico.
+
+  A correção é dar às três a **mesma trilha**: `grid-template-columns:
+  repeat(3, var(--rail-col))` com `justify-content: center`. Consequências
+  medidas:
+
+    · largura idêntica nas três (diferença 0,0px);
+    · centros equidistantes por construção (col + gap);
+    · o centro da área do meio passa a coincidir com o eixo da composição;
+    · o grupo fica **mais espalhado** — 1216px em 1920 contra 1054,2 antes —
+      sem encostar nas guias: sobram 52px de cada lado dentro do `Container`.
+
+  Isto **não** é a "grade rígida de 3 colunas ponta a ponta" que a rodada
+  anterior removeu: lá as trilhas eram `minmax(0, 1fr)` e comiam a largura
+  inteira do `Container`, encostando nas guias do `h1` e do CTA. Aqui a
+  trilha é uma **medida fixa** por faixa, o grupo é centrado e sobra vão
+  visível nas duas pontas — o grupo continua sendo um cluster, não uma
+  tabela. Nenhum fundo, pill, borda, número ou divisória entra junto.
+
+  Os valores são medidos contra a área de conteúdo do `Container`
+  (`max-w-container` 1400px menos `px-5/8/10`), com a folga necessária para o
+  complemento mais longo ("Corrigir gargalos e melhorar resultados"):
+
+    faixa      conteúdo   trilha × 3   vão × 2   total   folga/lado
+    ≥1536       1320       22rem        5rem      1216      52
+    1280–1535   1200–1320  22rem        3rem      1152      24–84
+    1024–1279    944–1200  17,5rem      2rem       904      20–148
+    768–1023     704–944   13rem        1,25rem    664      20–140
+    640–767      576–704   11rem        1rem       560       8–72
+
+  Abaixo de 640px a grade **não** entra: ali só o nome aparece (complemento e
+  seta somem, ver `hero-stage.tsx`) e as três áreas continuam medidas pelo
+  conteúdo, com o `gap` em `clamp()`. Medido em 390 e 320, o grupo fecha em
+  316,4 e 310,8px — cabe sem rolagem lateral e sem comprimir nenhum nome, que
+  é o requisito do telefone. Trilha igual ali obrigaria "EQUIPAMENTOS" (a
+  palavra mais larga) a ditar a trilha das três e estouraria 320px.
 */
 .railGroup {
   display: flex;
@@ -434,11 +529,92 @@
   gap: clamp(0.5rem, 4vw, 3.5rem);
 }
 
+@media (min-width: 640px) {
+  .railGroup {
+    --rail-col: 11rem;
+    --rail-gap: 1rem;
+
+    display: grid;
+    grid-template-columns: repeat(3, var(--rail-col));
+    justify-content: center;
+    gap: var(--rail-gap);
+  }
+
+  /*
+    `min-width: 0` **só dentro da grade**, e é obrigatório aqui: é ele que
+    deixa o complemento quebrar em vez de esticar a trilha para além da medida
+    fixa.
+
+    Abaixo de 640px a regra não pode existir. Ali o grupo volta a ser `flex`
+    com áreas medidas pelo conteúdo, e `min-width: 0` autoriza o item a
+    encolher **abaixo** do próprio texto: medido em 320px, o grupo passou de
+    310,8 para 280,0px — exatamente a largura da área de conteúdo —, o que
+    significa nome comprimido. É o oposto do requisito do telefone ("não
+    comprimir nomes"), e `min-width: auto` (o padrão do flex) é o que o
+    garante.
+  */
+  .railItem {
+    min-width: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .railGroup {
+    --rail-col: 13rem;
+    --rail-gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .railGroup {
+    --rail-col: 17.5rem;
+    --rail-gap: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .railGroup {
+    /*
+      22rem, e não 21: medido em 1440 × 900, a 21rem (336px) o complemento mais
+      longo ("Corrigir gargalos e melhorar resultados") **quebrava em duas
+      linhas** enquanto os outros dois ficavam em uma. Ele pede ~255px de
+      texto, mais 48 de recuo, 16 de seta e 16 de vão = 335px — 336 ficava no
+      fio. O vão cai de 4rem para 3rem para o total (1152px) continuar caber
+      na área de conteúdo de 1280px, que é 1200.
+    */
+    --rail-col: 22rem;
+    --rail-gap: 3rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .railGroup {
+    --rail-col: 22rem;
+    --rail-gap: 5rem;
+  }
+}
+
 .railItem {
   position: relative;
   display: flex;
-  flex: 0 1 auto;
-  align-items: center;
+  /*
+    ---------- Alinhamento pelo topo, não pelo centro (2026-08-09) ----------
+
+    Com `align-items: center` os três rótulos deixavam de compartilhar
+    linha-base sempre que um complemento quebrava em duas linhas: a trilha mais
+    alta dita a altura da fileira (a grade estica), e as áreas de uma linha
+    centravam o conteúdo dentro dessa altura maior. Medido em 1440 × 900 antes
+    do ajuste de trilha: "CONSULTORIA" ficava **10,5px acima** de
+    "EQUIPAMENTOS" e "PROJETOS", que é o suficiente para o grupo perder a
+    leitura de fileira.
+
+    Alinhando pelo topo, a distância entre a régua e o rótulo passa a ser
+    constante nas três áreas, e a quebra do complemento cresce para baixo — sem
+    mover o rótulo. Isso vale para toda largura onde o complemento pode quebrar
+    (1024 e 768 quebram por falta de largura, não por fio), então a correção é
+    estrutural e não depende da medida da trilha.
+  */
+  align-items: flex-start;
   cursor: pointer;
   text-align: left;
   transition: color 220ms var(--ease-precise);
