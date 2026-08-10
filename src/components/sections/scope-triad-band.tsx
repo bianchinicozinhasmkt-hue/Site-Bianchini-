@@ -1,160 +1,153 @@
 import Image from 'next/image'
+import { Section } from '@/components/layout/section'
 import { Container } from '@/components/layout/container'
-import { LinkButton } from '@/components/ui/actions/button'
+import { Reveal } from '@/components/animations/reveal'
+import { ArrowLink } from '@/components/ui/actions/button'
 import { Eyebrow, Heading } from '@/components/ui/typography/heading'
-import { scopeTriad } from '@/data/navigation'
-import { methodSteps } from '@/data/diagnosis'
-
-function findMethodStep(title: string) {
-  const step = methodSteps.find((item) => item.title === title)
-  if (!step) throw new Error(`scope-triad-band: methodSteps sem a etapa "${title}"`)
-  return step
-}
-
-const TRANSITION_STEPS = [
-  {
-    number: '01',
-    title: scopeTriad[0],
-    description: findMethodStep('Diagnóstico').description,
-    image: '/images/projects/cozinha-completa.jpg',
-    alt: 'Cozinha profissional completa em operação, com linha de cocção, coifa e bancadas em aço inox',
-    label: 'Leitura da operação',
-  },
-  {
-    number: '02',
-    title: scopeTriad[1],
-    description: findMethodStep('Projeto e especificação').description,
-    image: '/images/projects/projeto-3d-recorte.jpg',
-    alt: 'Estudo tridimensional de cozinha profissional, com bancadas e equipamentos posicionados',
-    label: 'Estudo de projeto',
-    isDocument: true,
-  },
-  {
-    number: '03',
-    title: scopeTriad[2],
-    description: findMethodStep('Fornecimento e instalação').description,
-    image: '/images/hero/bar-em-inox.jpg',
-    alt: 'Estrutura de bar em aço inox instalada, com cuba, apoio refrigerado e prateleiras',
-    label: 'Entrega instalada',
-  },
-] as const
 
 /**
- * Resposta direta aos problemas apresentados na seção anterior.
- * A fotografia participa da superfície inteira e cada etapa reúne evidência,
- * número e explicação no mesmo componente.
+ * ============================================================
+ * A PONTE — NÃO É MAIS UM MÉTODO, É O FECHO DO CAPÍTULO
+ * ============================================================
+ *
+ * Até 2026-08-10 esta faixa era um **segundo sistema processual**: três cartões
+ * com fotografia, numeral `01/02/03`, título e descrição — e as descrições vinham
+ * de `methodSteps`, o mesmo dado que a seção `#metodo` publica logo abaixo. Com
+ * `#atuacao` (cinco níveis) ainda montada entre as duas, a home explicava "como a
+ * Bianchini trabalha" em **três lugares diferentes**, com três numerações
+ * diferentes, no espaço de quatro seções. Era daí que vinha a leitura de manual:
+ * sistema → sistema → sistema.
+ *
+ * A consolidação desta rodada deu a cada seção uma responsabilidade única:
+ *
+ *   `#diagnostico` .... como a causa é encontrada
+ *   `#transicao` ...... **esta** — a ponte da leitura para a execução
+ *   `#metodo` ......... o único lugar que detalha as etapas do trabalho
+ *
+ * Por isso aqui não há mais numeral, cartão, stepper nem descrição por etapa. O
+ * arco diagnóstico → projeto → implantação continua dito — em **uma frase**, com
+ * o vocabulário de `scopeTriad` (`src/data/navigation.ts`) —, e o detalhamento
+ * pertence ao Método. Se um marcador voltar a aparecer aqui (badge, ícone,
+ * círculo, letra), o problema volta com ele: o que se queria era menos sistema
+ * visual, não outro sistema com decoração diferente.
+ *
+ * ============================================================
+ * POR QUE CLARA, E NO MESMO TOM DO DIAGNÓSTICO
+ * ============================================================
+ *
+ * A faixa era grafite. Com `#atuacao` (surface) fora da montagem, ela passaria a
+ * encostar direto em `#industria-do-inox`, também grafite — duas manchas escuras
+ * seguidas, sem transição, contra o teto de fundos escuros do projeto.
+ *
+ * A escolha não foi só "clarear": ela usa **exatamente o `canvas-deep` do
+ * `#diagnostico`**, com uma hairline no topo em vez de troca de tom. Assim a
+ * ponte lê como o parágrafo final do capítulo de diagnóstico — uma continuação
+ * separada por uma régua —, e não como uma segunda página branca empilhada na
+ * primeira. A mudança tonal real fica para a fronteira seguinte, que é onde ela
+ * significa alguma coisa: claro → escuro, entrando em `#industria-do-inox`.
+ *
+ * O `pt-0` é parte disso. A régua encosta na borda da seção, então o vão acima
+ * dela é o `padding-bottom` do diagnóstico e o vão abaixo é o respiro do novo
+ * trecho — a divisão de capítulo fica marcada por uma linha, não por um vazio.
+ *
+ * **`md:pt-0` não é redundante.** `space="sm"` entrega `py-12 md:py-16`, e o
+ * `tailwind-merge` só resolve conflito **dentro da mesma variante**: um `pt-0`
+ * sem breakpoint cancela o `py-12` da base e deixa o `md:py-16` de pé. Medido
+ * antes da correção: em 1440 a régua caía 64px abaixo da borda e o vão entre o
+ * último elemento do diagnóstico e a linha ia a 128px — o dobro do mobile, que
+ * é onde a base valia. Ao sobrescrever padding vindo de `space`, declare a
+ * variante junto.
+ *
+ * ============================================================
+ * UMA IMAGEM, E POR QUE ESTA
+ * ============================================================
+ *
+ * Eram três fotografias; passou a ser uma, subordinada ao texto. A escolha
+ * evitou repetição de vizinhança: `cozinha-completa` abre `#projetos` em faixa
+ * sangrada e reaparece em `#metodo`; `projeto-3d-recorte` e `forno-combinado`
+ * também estão no Método; `bar-em-inox`, `linha-de-fogoes` e
+ * `refrigeradores-verticais` já aparecem em `#projetos` ou nas zonas do
+ * `#diagnostico`. `producao-panificacao` é a única fotografia de operação
+ * instalada do acervo que **não aparece em nenhuma outra seção da home** — o alt
+ * e a legenda são os de `src/data/differentials.ts`, sem atribuição de cliente,
+ * local ou prazo.
  */
 export function ScopeTriadBand() {
   return (
-    <section
+    <Section
       id="transicao"
+      tone="canvas-deep"
+      space="sm"
+      bleed
       aria-labelledby="transicao-titulo"
-      className="on-dark relative isolate overflow-hidden bg-graphite py-14 text-canvas lg:min-h-[700px] lg:py-16"
+      className="pt-0 pb-14 md:pt-0 md:pb-16 lg:pb-20"
     >
-      <Image
-        src="/images/hero/bar-em-inox.jpg"
-        alt=""
-        fill
-        sizes="100vw"
-        /*
-          Qualidade menor que a das fotografias que o site mostra de frente
-          (74–84). Esta não é mostrada: é fundo decorativo, entra a `opacity-45`
-          e ainda fica sob o gradiente da linha seguinte, que cobre de 74% a 98%.
-          O que sobra é atmosfera, não detalhe — e a 1920px de largura a
-          diferença entre q=78 e q=60 não aparece, mas pesa ~80 KB em toda
-          abertura da home. Verificado por diferença de pixel antes de trocar.
-          O valor consta de `images.qualities` em `next.config.ts`.
-        */
-        quality={60}
-        aria-hidden="true"
-        className="-z-20 object-cover object-[60%_42%] opacity-45"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(10,11,12,0.98)_0%,rgba(10,11,12,0.93)_48%,rgba(10,11,12,0.74)_100%)]"
-      />
-
       <Container>
-        <header className="grid gap-6 border-b border-white/20 pb-8 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-10">
-          <div className="lg:col-span-7">
-            <Eyebrow tone="light">Do diagnóstico à instalação</Eyebrow>
-            <Heading
-              as={2}
-              id="transicao-titulo"
-              size="title-1"
-              className="mt-4 max-w-[20ch] text-canvas"
-            >
-              Da leitura da operação à entrega em funcionamento.
-            </Heading>
-          </div>
+        <div className="border-t border-line pt-10 md:pt-12 lg:pt-14">
+          <div className="grid gap-9 lg:grid-cols-12 lg:items-center lg:gap-12">
+            <Reveal className="lg:col-span-6">
+              <Eyebrow>Do diagnóstico à instalação</Eyebrow>
+              <Heading as={2} id="transicao-titulo" size="title-1" className="mt-4 max-w-[20ch]">
+                Da leitura da operação à entrega em funcionamento.
+              </Heading>
 
-          <div className="flex flex-col items-start gap-5 lg:col-span-4 lg:col-start-9">
-            {/*
-              ============================================================
-              TEXTO TROCADO EM 2026-08-09 — era duplicata literal
-              ============================================================
+              {/*
+                O arco inteiro numa frase. Os três termos ganham peso porque são
+                o vocabulário do site (`scopeTriad`), não porque sejam etapas de
+                um percurso numerado — ênfase tipográfica dentro de texto
+                corrido é o oposto de um stepper, e é o teto desta seção.
+              */}
+              <p className="mt-5 max-w-[52ch] text-lead text-muted">
+                O <strong className="font-semibold text-ink">diagnóstico</strong> encontra a
+                prioridade, o <strong className="font-semibold text-ink">projeto</strong> orienta a
+                decisão e a <strong className="font-semibold text-ink">implantação</strong> leva
+                isso à operação.
+              </p>
 
-              Esta faixa e a seção Método (`journey-section.tsx`) publicavam a
-              **mesma frase, palavra por palavra**: "O mesmo time responde pelo
-              entendimento do problema, pelo desenho da solução, pelo
-              fornecimento e pela entrega em operação." Duas seções da mesma
-              página dizendo a mesma coisa é a repetição que faz a home parecer
-              template — e a frase pertence ao Método, que é onde a
-              responsabilidade única é o argumento.
+              {/*
+                Transcrição de `src/data/solutions.ts` — a mesma frase que a
+                faixa já publicava antes desta rodada. Responde à pergunta desta
+                seção (preciso das três para contratar? não), e não à pergunta do
+                Método (como o trabalho acontece).
+              */}
+              <p className="mt-4 max-w-[54ch] text-base leading-relaxed text-muted">
+                Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa
+                entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao
+                comissionamento.
+              </p>
 
-              O que entra aqui responde a outra pergunta, a desta faixa: o
-              visitante precisa das três etapas para contratar? Não.
-              "Sem repasse de culpa entre projetista, fornecedor e instalador"
-              é transcrição de `src/data/solutions.ts`.
-            */}
-            <p className="max-w-[58ch] text-base leading-relaxed text-canvas/80">
-              Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa
-              entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao
-              comissionamento.
-            </p>
-            <LinkButton href="#metodo" variant="light" size="md" withArrow>
-              Conhecer o método
-            </LinkButton>
-          </div>
-        </header>
+              {/*
+                `ArrowLink`, não botão preenchido: o diagnóstico acima fecha com
+                o CTA primário "Solicitar diagnóstico", e um segundo botão cheio
+                a 200px dele disputaria a mesma ação. Este leva para dentro da
+                própria página.
+              */}
+              <ArrowLink href="#metodo" className="mt-6">
+                Conhecer o método
+              </ArrowLink>
+            </Reveal>
 
-        <ol className="mt-8 grid gap-4 md:grid-cols-3 lg:mt-10 lg:gap-5">
-          {TRANSITION_STEPS.map((step) => (
-            <li
-              key={step.title}
-              className="group grid min-h-[27rem] grid-rows-[12rem_1fr] overflow-hidden border border-white/20 bg-graphite/90 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.85)] md:min-h-[25rem] md:grid-rows-[10.5rem_1fr] lg:min-h-[26rem] lg:grid-rows-[12rem_1fr]"
-            >
-              <figure className="relative overflow-hidden bg-graphite-soft">
-                <Image
-                  src={step.image}
-                  alt={step.alt}
-                  fill
-                  sizes="(max-width: 767px) 92vw, 31vw"
-                  quality={82}
-                  className={`object-cover transition-transform duration-[260ms] ease-precise group-hover:scale-[1.02] motion-reduce:transition-none ${'isDocument' in step ? 'saturate-[0.55] contrast-[1.08]' : ''}`}
-                />
-                <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-graphite/70 to-transparent" />
-                <figcaption className="absolute bottom-3 left-3 border-l-2 border-yellow bg-graphite/90 px-3 py-2 text-sm font-semibold text-canvas">
-                  {step.label}
+            <Reveal variant="settle" className="lg:col-span-5 lg:col-start-8">
+              <figure>
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]">
+                  <Image
+                    src="/images/projects/producao-panificacao.jpg"
+                    alt="Área de produção de panificação em operação, com fornos, carros de assadeiras e bancadas em aço inox"
+                    fill
+                    sizes="(max-width: 1023px) 92vw, 38vw"
+                    quality={82}
+                    className="object-cover"
+                  />
+                </div>
+                {/* Keyline amarela: hairline decorativa, o único uso legítimo do amarelo em fundo claro. */}
+                <figcaption className="mt-3 border-l-2 border-yellow pl-3 text-caption text-muted">
+                  Operação de panificação em produção — registro do acervo Bianchini.
                 </figcaption>
               </figure>
-
-              <div className="flex flex-col p-5 lg:p-6">
-                <div className="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
-                  <span className="font-condensed text-sm font-bold tabular-nums text-yellow">
-                    {step.number}
-                  </span>
-                  <span aria-hidden="true" className="h-px flex-1 bg-white/20" />
-                </div>
-                <h3 className="mt-4 font-sans text-2xl font-bold text-canvas">{step.title}</h3>
-                <p className="mt-3 max-w-[56ch] text-base leading-relaxed text-canvas/75">
-                  {step.description}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
+            </Reveal>
+          </div>
+        </div>
       </Container>
-    </section>
+    </Section>
   )
 }

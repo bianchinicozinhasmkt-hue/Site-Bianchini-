@@ -83,9 +83,36 @@ export function LeadershipSection() {
       space="default"
       bleed
       aria-labelledby="quem-conduz-titulo"
-      className="relative isolate overflow-hidden"
+      /*
+        ----------
+        `pt` REDUZIDO EM 2026-08-10 — a segunda parte do capítulo de autoridade
+        ----------
+
+        Ver o bloco equivalente em `leonardo-section.tsx`. Com `#credibilidade`
+        movida para depois desta seção, `#leonardo` e `#quem-conduz` ficaram
+        adjacentes e as duas são grafite: o encontro precisa ler como um capítulo
+        em duas partes, não como duas telas empilhadas. Metade do vão veio de lá,
+        metade daqui, e a régua abaixo marca a divisão sem introduzir superfície
+        nova. Nada do conteúdo desta seção mudou.
+        ----------
+      */
+      className="relative isolate overflow-hidden pt-8 md:pt-10 lg:pt-10"
     >
       <Container>
+        {/*
+          A régua do capítulo. `border-white/12` é a mesma hairline sobre grafite
+          que esta seção já usa no selo do livro — divisor do sistema, não
+          elemento novo.
+
+          A margem inferior é menor que o vão acima da régua (48px contra 80px
+          em desktop) de propósito: a linha fica mais perto do que ela abre do
+          que do que ela fecha, e por isso lê como cabeçalho da segunda parte do
+          capítulo. Somada ao `pb` reduzido de `#leonardo`, ela **cabe dentro**
+          do vão que já existia — o encontro encolheu de 160px para 128px em vez
+          de crescer.
+        */}
+        <hr aria-hidden="true" className="mb-9 border-0 border-t border-white/12 md:mb-10 lg:mb-12" />
+
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-12">
           <div className="lg:col-span-7">
             <Eyebrow tone="light">Quem conduz</Eyebrow>

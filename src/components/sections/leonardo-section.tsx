@@ -49,7 +49,27 @@ export function LeonardoSection() {
       space="default"
       bleed
       aria-labelledby="leonardo-titulo"
-      className="relative isolate overflow-hidden"
+      /*
+        ----------
+        `pb` REDUZIDO EM 2026-08-10 — a base do capítulo de autoridade
+        ----------
+
+        Esta seção passou a ser seguida diretamente por `#quem-conduz`
+        (`credibilidade` desceu para depois dela — ver `src/app/page.tsx`). Duas
+        seções grafite adjacentes, cada uma com `space="default"`, punham 160px
+        de vão vazio entre a última credencial daqui e a etiqueta de lá: no
+        telefone o par lia como duas telas grafite empilhadas, não como um
+        assunto em duas partes.
+
+        As duas metades do vão foram reduzidas — aqui e no `pt` de
+        `leadership-section.tsx`, que ainda ganhou a régua que marca a divisão.
+        O encontro passou de 160px de grafite vazio para 128px **com uma régua
+        dentro**, a 80px daqui e a 48px da etiqueta seguinte: a linha lê como
+        cabeçalho da segunda parte, não como fim de assunto. Só o espaçamento
+        externo mudou; conteúdo, retrato, livro e composição estão intactos.
+        ----------
+      */
+      className="relative isolate overflow-hidden pb-8 md:pb-10 lg:pb-10"
     >
       {/* ----------
           Fragmento de documento ao fundo, **sem borda**.

@@ -6,7 +6,6 @@ import { PillarsSection } from '@/components/sections/pillars-section'
 import { SymptomsSection } from '@/components/sections/symptoms-section'
 import { DiagnosisSection } from '@/components/sections/diagnosis-section'
 import { ScopeTriadBand } from '@/components/sections/scope-triad-band'
-import { ScopeSection } from '@/components/sections/scope-section'
 import { IndustryInoxSection } from '@/components/sections/industry-inox-section'
 import { JourneySection } from '@/components/sections/journey-section'
 import { LeonardoSection } from '@/components/sections/leonardo-section'
@@ -19,12 +18,15 @@ import { FinalCtaSection } from '@/components/sections/final-cta-section'
  * HOME = HERO V2 + SITE V1, E SÓ A ORDEM MUDOU
  * ============================================================
  *
- * Esta página tem exatamente **uma** área redesenhada: a primeira dobra
- * (`HeroStage`). Todo o resto são as **mesmas catorze seções da V1**, nos
- * mesmos componentes, com o mesmo layout, a mesma tipografia, o mesmo motion e
- * o mesmo comportamento responsivo de `v1-final`. Nenhuma delas foi
- * redesenhada, refatorada, harmonizada com a hero ou convertida em componente
- * V2.
+ * Esta página tem **duas** áreas redesenhadas: a primeira dobra (`HeroStage`) e
+ * a ponte `#transicao` (`ScopeTriadBand`), reduzida em 2026-08-10 de um segundo
+ * método a um fecho editorial de capítulo — ver o bloco desta rodada, abaixo.
+ * As outras onze seções são as **mesmas da V1**, nos mesmos componentes, com o
+ * mesmo layout, a mesma tipografia, o mesmo motion e o mesmo comportamento
+ * responsivo de `v1-final`. Nenhuma delas foi redesenhada, refatorada,
+ * harmonizada com a hero ou convertida em componente V2 — `#leonardo`,
+ * `#quem-conduz` e `#credibilidade` receberam apenas ajuste de espaçamento de
+ * encontro, sem tocar em conteúdo, composição ou dados.
  *
  * Os componentes V2 que já ocuparam esta página — `CategoriesShowcase`,
  * `PillarsBand`, `ProjectsDoor`, `ConsultingDoor`, `ProofSection`,
@@ -46,14 +48,13 @@ import { FinalCtaSection } from '@/components/sections/final-cta-section'
  *   4  **as três frentes** canvas       · PROJETOS e CONSULTORIA nomeadas, com porta própria
  *   5  sintomas .......... graphite     · o que trava na operação dele
  *   6  diagnóstico ....... canvas-deep  · CONSULTORIA — como a causa é encontrada
- *   7  entrega ........... graphite     · INTEGRAÇÃO — do diagnóstico à instalação
- *   8  atuação ........... surface      · ESCOPO — os cinco níveis de contratação
- *   9  indústria do inox . graphite     · a frente de fabricação, para fabricantes
- *   10 método ............ canvas→graph.· MÉTODO — como o trabalho acontece
- *   11 leonardo .......... graphite     · AUTORIDADE que sustenta o método
+ *   7  transição ......... canvas-deep  · PONTE curta: da leitura para a execução
+ *   8  indústria do inox . graphite     · a frente de fabricação, para fabricantes
+ *   9  método ............ canvas→graph.· MÉTODO — o único sistema de etapas da página
+ *   10 leonardo .......... graphite     · AUTORIDADE que sustenta o método
+ *   11 quem conduz ....... graphite     · QUEM RESPONDE (+ o livro, em `id="livro"`)
  *   12 credibilidade ..... canvas       · PROVA — números, clientes e depoimentos
- *   13 quem conduz ....... graphite     · QUEM CONDUZ (+ o livro, em `id="livro"`)
- *   14 fechamento ........ graphite     · CONVERSÃO — `FinalCtaSection`, a mesma das rotas internas
+ *   13 fechamento ........ graphite     · CONVERSÃO — `FinalCtaSection`, a mesma das rotas internas
  *
  * O fechamento é `FinalCtaSection`, sem alteração de composição — o mesmo
  * componente que as nove rotas internas usam, com o mesmo painel diagonal e a
@@ -66,48 +67,63 @@ import { FinalCtaSection } from '@/components/sections/final-cta-section'
  * encontrar a frente principal — ele rola uma vez.
  *
  * ============================================================
- * O ÚNICO MOVIMENTO DESTA RODADA (2026-08-09): `#pilares`, DE 6ª PARA 4ª
+ * OS DOIS MOVIMENTOS DESTA RODADA (2026-08-10)
  * ============================================================
  *
- * A rodada de conteúdo estratégico mudou **uma** posição. `#pilares` — que
- * deixou de ser o organograma da empresa e passou a ser "As três frentes",
- * onde Projetos e Consultoria ganham nome, pergunta do cliente e CTA próprio
- * (ver `pillars-section.tsx`) — subiu de 6ª para 4ª, entre `projetos` e
- * `sintomas`.
+ * **1. `#atuacao` saiu da montagem, e `#transicao` deixou de ser um método.**
  *
- * O motivo é de funil, não de estética. Na posição antiga, a página oferecia
- * três caminhos na primeira dobra e só voltava a nomeá-los **depois** de duas
- * seções inteiras de consultoria (`sintomas` + `diagnostico`): quem escolheu
- * "Projetos" ou "Consultoria" lá em cima atravessava ~3.600px sem reencontrar
- * a própria porta. Na 4ª, a sequência fecha o argumento de Equipamentos
- * (seção 2), mostra a prova dele (seção 3) e abre as outras duas frentes antes
- * de a página começar a falar de sintomas — que passam a ser a **entrada** do
- * bloco de consultoria, e não um assunto que aparece antes de a consultoria
- * ter sido nomeada.
+ * A página explicava "como a Bianchini trabalha" em três lugares no espaço de
+ * quatro seções: `#transicao` com três etapas numeradas, `#atuacao` com cinco
+ * níveis numerados e `#metodo` com as etapas completas. Três sistemas, três
+ * numerações, o mesmo arco diagnóstico → projeto → implantação repetido em cada
+ * um — a leitura resultante era "sistema → sistema → sistema", que é o que faz
+ * uma página comercial parecer manual.
+ *
+ * A consolidação deu uma responsabilidade a cada seção: `#diagnostico` mostra
+ * como a causa é encontrada, `#transicao` é a **ponte** da leitura para a
+ * execução (uma frase, sem numeral e sem cartão — ver `scope-triad-band.tsx`) e
+ * `#metodo` passa a ser o **único** lugar da home que detalha etapas.
+ *
+ * `ScopeSection` (`#atuacao`) continua no repositório, com `scope-levels.ts` e
+ * as imagens intactos — o que saiu foi a montagem nesta página. Nenhuma âncora
+ * do site apontava para `#atuacao`, e 80% do conteúdo dela vivia atrás de
+ * estado (aba/accordion): o único nível visível na abertura repetia o que o
+ * `#diagnostico` já tinha dito duas seções antes.
+ *
+ * **2. `#credibilidade` passou para depois de `#quem-conduz`.** Decisão do
+ * gestor. O fim da página lia "autoridade → prova → responsáveis → conversão",
+ * com a prova interrompendo a apresentação das pessoas; agora lê
+ * **autoridade → responsáveis → prova → conversão**, e `#credibilidade` — os
+ * números, os logotipos e os depoimentos — é o último argumento antes do CTA.
+ *
+ * Isso desfaz a razão pela qual `método` caía depois de `autoridade` na ordem
+ * anterior: `credibilidade` estava ali para separar `leonardo` de
+ * `quem conduz`. Sem esse separador, as duas ficam adjacentes de propósito e o
+ * encontro é tratado como **um capítulo em duas partes** — padding reduzido dos
+ * dois lados e uma régua no topo de `quem conduz`, em vez de dois blocos de
+ * grafite empilhados com 160px de vão entre eles. A redundância de conteúdo
+ * entre as duas seções é assunto de outra rodada, não desta.
  *
  * Tudo o mais ficou na mesma posição. `sintomas` continua antes de
  * `diagnostico` pelo motivo de sempre: a primeira faz o visitante reconhecer o
  * problema na operação dele, a segunda mostra como a causa é encontrada, e
  * `sintomas` já aponta para `#diagnostico` no próprio texto.
  *
- * **Por que `método` cai depois de `autoridade`.** Regra da V1, não
- * preferência: `leonardo` e `quem conduz` são duas seções sobre as mesmas
- * pessoas e, adjacentes, a segunda lê como repetição da primeira. Separá-las
- * exige uma seção entre elas, e `credibilidade` é a única que serve sem quebrar
- * o funil. Com isso `método` fica em 10 e `autoridade` em 11 — a única
- * divergência desta ordem em relação ao funil pedido, e ela continua **antes**
- * de quem conduz e da conversão.
- *
  * RITMO DE FUNDO — a restrição que limitou a ordem
  * ------------------------------------------------
  * As seções escuras somam quase metade da página, e três seguidas viram uma
- * mancha sem transição. Nesta ordem há **dois pares escuros adjacentes** —
- * `hero`+`equipamentos` e `quem conduz`+`fechamento` —, o mesmo teto que a V1
- * já respeitava, e o mesmo número de antes do movimento de `#pilares`: ela
- * trocou uma vizinhança clara (`diagnostico`+`pilares`) por outra
- * (`projetos`+`pilares`), sem criar par escuro novo. `sintomas`, `entrega` e
- * `inox` continuam isolados entre seções claras; `método` termina em grafite e
- * entrega para `leonardo`, que é a mesma transição que a V1 fazia.
+ * mancha sem transição. Continuam sendo **dois pares escuros adjacentes** —
+ * `hero`+`equipamentos` e `leonardo`+`quem conduz` —, o mesmo teto de sempre: a
+ * rodada trocou o par `quem conduz`+`fechamento` pelo novo par de autoridade, e
+ * `credibilidade` (canvas) passou a separar `quem conduz` do `fechamento`.
+ *
+ * Foi essa conta que definiu a cor da nova `#transicao`. Grafite, como era, ela
+ * encostaria direto em `#industria-do-inox` — par escuro novo, e o terceiro da
+ * página. Clara, ela fecha o capítulo do diagnóstico (usa o mesmo `canvas-deep`,
+ * separada só por uma régua) e devolve a mudança tonal para onde ela significa
+ * alguma coisa: claro → escuro na entrada do inox. `sintomas` e `inox` seguem
+ * isolados entre seções claras; `método` termina em grafite e entrega para
+ * `leonardo`, que é a mesma transição que a V1 fazia.
  *
  * A ORDEM DO MENU DERIVA DAQUI
  * ----------------------------
@@ -177,12 +193,11 @@ export default function HomePage() {
       <SymptomsSection />
       <DiagnosisSection compact />
       <ScopeTriadBand />
-      <ScopeSection />
       <IndustryInoxSection />
       <JourneySection />
       <LeonardoSection />
-      <CredibilitySection />
       <LeadershipSection />
+      <CredibilitySection />
 
       {/* ==========================================================
           CONVERSÃO — mesmo componente, mesma composição, copy da Home.
