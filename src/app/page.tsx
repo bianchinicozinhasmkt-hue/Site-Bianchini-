@@ -138,18 +138,29 @@ export default function HomePage() {
       <HeroStage />
 
       {/* ==========================================================
-          EQUIPAMENTOS — o fecho da seção passa a ser comercial.
+          EQUIPAMENTOS — a primeira seção recomposta pela direção de arte
+          final (2026-08-10).
 
-          A seção também é montada em `/solucoes/cozinhas-industriais`, e lá o
-          fecho continua sendo o da V1 ("Ver a solução completa"): `note` e
-          `cta` são props com o texto da V1 como default, então a rota interna
-          não mudou. O que a Home diz aqui — especificamos, fornecemos,
-          instalamos e comissionamos; avulso **ou** cozinha inteira — é
-          transcrição de `src/data/faq.ts` (`kitchensFaq[0]` e `[2]`), não
-          afirmação nova.
+          `variant="showcase"` é a vitrine da Home: a fotografia da categoria
+          prioritária vira palco e sangra pela borda direita, o enunciado e o
+          CTA vivem sobre ela, e as outras quatro frentes viram quatro
+          fotografias grandes encostadas sem vão — no lugar das miniaturas de
+          112×135 que a auditoria visual global reprovou. A justificativa
+          completa está em `equipment-strip-section.tsx`.
+
+          A seção também é montada em `/solucoes/cozinhas-industriais`, que
+          **não passa `variant`** e continua recebendo a composição `dossier`
+          da V1, sem uma linha de diferença. `note` e `cta` seguem props com o
+          texto da V1 como default pelo mesmo motivo. O que a Home diz aqui —
+          especificamos, fornecemos, instalamos e comissionamos; avulso **ou**
+          cozinha inteira — é transcrição de `src/data/faq.ts`
+          (`kitchensFaq[0]` e `[2]`), não afirmação nova.
+
+          `compact` deixou de ser passado: a vitrine controla o próprio
+          respiro, bloco a bloco, porque cada um deles sangra.
           ========================================================== */}
       <EquipmentStripSection
-        compact
+        variant="showcase"
         note={
           <>
             Especificamos, fornecemos, instalamos e comissionamos — um equipamento específico ou a
