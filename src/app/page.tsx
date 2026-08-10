@@ -183,8 +183,15 @@ export default function HomePage() {
           isso a fileira lê como portfólio de arquitetura e não sustenta a
           frente comercial que a antecede. Default da prop = texto da V1, que é
           o que `/solucoes/cozinhas-industriais` continua usando.
+
+          `variant="showcase"` é a vitrine da Home: a régua numerada
+          (`01 COZINHA INDUSTRIAL`…) e os três cartões com moldura saíram, e as
+          quatro frentes passaram a ser nomeadas pela etiqueta na base de cada
+          fotografia. A rota interna **não passa `variant`** e continua
+          recebendo a composição `dossier` da V1, sem uma linha de diferença.
           ========================================================== */}
       <ProjectsSection
+        variant="showcase"
         tone="surface"
         compact
         lead="Cozinhas, bares, cadeia fria e mobiliário em inox que a Bianchini projetou, especificou, fabricou ou instalou. As legendas descrevem o que está na imagem — sem cliente, local ou prazo atribuídos."
