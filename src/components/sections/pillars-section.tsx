@@ -4,6 +4,7 @@ import { Reveal } from '@/components/animations/reveal'
 import { ArrowLink, LinkButton } from '@/components/ui/actions/button'
 import { Eyebrow, Heading } from '@/components/ui/typography/heading'
 import { pillars } from '@/data/pillars'
+import { cn } from '@/lib/utils'
 
 /**
  * As três frentes comerciais — a seção onde **Projetos e Consultoria ganham
@@ -22,46 +23,124 @@ import { pillars } from '@/data/pillars'
  * comercial vigente (DEC-001) e nunca nomeava Consultoria — o terceiro caminho
  * que a própria primeira dobra oferece.
  *
- * Agora cada cartão é uma frente contratável: situação → pergunta → o que a
- * Bianchini entrega → ação. E a seção subiu na página (de 6ª para 4ª): quem
- * acabou de ver Equipamentos e a prova fotográfica encontra aqui os outros
- * dois caminhos, **antes** de a página começar a falar de sintomas e
- * diagnóstico.
+ * Agora cada frente é contratável por conta própria: pergunta do cliente → o
+ * que a Bianchini entrega → ação.
  *
  * ============================================================
- * A COMPOSIÇÃO NÃO FOI REDESENHADA
+ * A COMPOSIÇÃO FOI REFEITA (2026-08-09b) — TRÊS PORTAS, UMA COMPOSIÇÃO
  * ============================================================
  *
- * Mesma moldura compartilhada (`gap-px` sobre `bg-line`, três faces de uma
- * estrutura só), mesmo marcador de hairline amarela, mesma escala tipográfica,
- * mesma entrada em `Reveal` escalonada. O que saiu foi a **segunda camada** —
- * a faixa "Quem responde por cada frente" —, e por motivo de conteúdo, não de
- * estética: ela repetia, em tipografia, os dois nomes que "Quem conduz"
- * apresenta com retrato e credencial, e dependia de um campo `responsible` que
- * não pode ser preenchido para Consultoria sem inventar dado sobre pessoa real.
+ * O conteúdo estava certo e a **apresentação** não: a seção era três cartões
+ * numerados dentro de uma moldura compartilhada, com fundo próprio, hover de
+ * fundo e 797px de altura em 1440. Lia como grade de planos de SaaS, não como
+ * a página de uma empresa de engenharia de cozinha. O que a produzia:
+ *
+ *  1. **Caixa.** Moldura externa, `gap-px` desenhando divisórias em cruz e
+ *     `bg-surface` por item sobre `canvas` — três retângulos preenchidos, lado
+ *     a lado, com padding interno de 36px. É o desenho de um cartão.
+ *  2. **Numeração.** `01 / 02 / 03` em três portas que **não são uma
+ *     sequência**: ninguém contrata Equipamentos "antes" de Consultoria. O
+ *     número afirmava uma ordem operacional inexistente.
+ *  3. **Texto demais.** Etiqueta de situação + título + pergunta + descrição
+ *     longa, com a descrição repetindo a lista de categorias (que a seção de
+ *     Equipamentos publica duas seções acima) e a lista de plantas
+ *     complementares (que `/solucoes/arquitetura` publica inteira).
+ *
+ * ------------------------------------------------------------
+ * O QUE SUBSTITUIU
+ * ------------------------------------------------------------
+ *
+ * Uma **composição editorial de três colunas**, sem nenhum retângulo: os três
+ * blocos correm direto sobre o `canvas` da seção, cada um aberto por uma
+ * keyline horizontal na mesma linha, e alinhados por baixo pela ação (`mt-auto`
+ * sobre a linha da grade). O que separa uma frente da outra é **espaço,
+ * keyline e alinhamento** — não borda, não fundo, não sombra, não radius.
+ *
+ * Não há divisória vertical entre as colunas de propósito: keyline horizontal
+ * compartilhada **mais** régua vertical é exatamente o desenho de uma tabela,
+ * que era metade da queixa. A keyline sozinha lê como índice de jornal.
+ *
+ * No telefone a mesma keyline vira o separador entre as frentes — o mecanismo
+ * é um só nos dois breakpoints, e nenhum item ganha caixa, fundo ou padding
+ * próprio ao empilhar.
+ *
+ * ------------------------------------------------------------
+ * REGRA REGISTRADA NESTA RODADA
+ * ------------------------------------------------------------
+ *
+ * **Número só quando existe sequência real, ordem operacional ou progressão.**
+ * Método (`journey-section`) e níveis de atuação (`scope-section`) são
+ * sequências e continuam numerados; três portas paralelas não são, e perderam
+ * o índice. E não se troca número por ornamento equivalente: nenhum selo,
+ * ícone, badge ou marcador entrou no lugar do `01/02/03`. Registro permanente
+ * em `docs/v2/DESIGN_SYSTEM.md` §1 e em `src/data/pillars.ts`.
  *
  * ============================================================
- * PESO ASSIMÉTRICO — E POR QUE ELE É SÓ DO PRIMEIRO CARTÃO
+ * PESO ASSIMÉTRICO — SEM DEFORMAR A GRADE
  * ============================================================
  *
- * DEC-001 pede Equipamentos com peso maior quando os três aparecem juntos. Aqui
- * isso é **posição (01) + preenchimento do CTA**: o de Equipamentos é o botão
- * primário amarelo, os outros dois são `ArrowLink` grafite. Nenhum cartão fica
- * maior, mais claro ou com fotografia — a moldura continua simétrica, porque
- * três faces de tamanhos diferentes leem como erro de montagem, não como
- * hierarquia.
+ * DEC-001 pede Equipamentos com peso maior quando os três aparecem juntos.
+ * Aqui isso é **posição** (primeira coluna), **keyline** (2px grafite contra
+ * 2px `line` nas outras duas) e **preenchimento do CTA** (botão primário
+ * amarelo contra `ArrowLink` editorial). Nenhuma coluna fica mais larga: as
+ * três dividem a linha em partes iguais, porque Projetos e Consultoria são
+ * portas igualmente legítimas — uma coluna maior faria delas apêndices.
  *
- * O amarelo cheio é legítimo em fundo claro: é **preenchimento de CTA**, não
- * texto nem indicador de estado (regra do amarelo, `CLAUDE.md`).
+ * A keyline de destaque é **grafite, não amarela**: ela é marcador com
+ * significado (aponta a frente prioritária) em fundo claro, e a regra do
+ * amarelo (`CLAUDE.md`) reserva o amarelo, em superfície clara, para
+ * preenchimento e hairline decorativa. Por isso as três keylines têm a mesma
+ * espessura (2px) — o que muda é só o valor tonal, e a diferença de espessura
+ * desalinharia os três títulos em 1px.
+ *
+ * O amarelo aparece **uma vez** na seção: o preenchimento do CTA de
+ * Equipamentos. É preenchimento de botão, não texto nem indicador de estado.
+ *
+ * ============================================================
+ * CABEÇALHO — UMA MASSA, NÃO DUAS PONTAS
+ * ============================================================
+ *
+ * O título ocupava as colunas 1–7 e o parágrafo começava na coluna 9: em 1440
+ * isso punha o parágrafo a 906px da margem, com um vazio de ~450px entre o fim
+ * da linha mais longa do título e o começo dele — duas massas nos extremos da
+ * tela, não um cabeçalho. Agora o título ocupa 1–5 e o parágrafo 6–11.
+ *
+ * A coluna do título encolheu **sem** mudar onde o título quebra: `max-w-[24ch]`
+ * resolve para ~450px e continua sendo o limite efetivo dentro dos 526px de
+ * cinco colunas. As três linhas são as mesmas; o que se move é o parágrafo, que
+ * sobe de 906px para 567px e passa a encostar na calha da grade.
+ *
+ * ============================================================
+ * RITMO — O PADDING DESTA SEÇÃO É DAS DUAS TRANSIÇÕES
+ * ============================================================
+ *
+ * `#pilares` fica entre `#projetos` (claro) e `#sintomas` (grafite), e o padding
+ * dela é metade de cada transição. Por isso ele é **assimétrico e declarado
+ * aqui**, em vez de herdado de `space`:
+ *
+ *  · **topo (64px em lg).** A borda com `#projetos` é claro→claro: a mudança de
+ *    tom (`surface` → `canvas`) é sutil e o vão somava 144px com a base de
+ *    Projetos — uma tela vazia entre o botão "Ver todos os projetos" e a
+ *    etiqueta desta seção. A outra metade foi cortada na Home, em `page.tsx`.
+ *  · **base (56px em lg).** A borda com `#sintomas` é claro→grafite, o corte
+ *    tonal mais forte da página inteira. Ele **é** a transição; a área clara
+ *    antes dele só precisa da pausa, não de uma respiração inteira.
  */
 export function PillarsSection() {
   return (
-    <Section id="pilares" tone="canvas" space="default" bleed aria-labelledby="pilares-titulo">
+    <Section
+      id="pilares"
+      tone="canvas"
+      space="sm"
+      className="md:py-14 lg:pt-16 lg:pb-14"
+      bleed
+      aria-labelledby="pilares-titulo"
+    >
       <Container>
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-12">
-          <div className="lg:col-span-7">
+        <div className="grid gap-5 lg:grid-cols-12 lg:items-end lg:gap-10">
+          <div className="lg:col-span-5">
             <Eyebrow>As três frentes</Eyebrow>
-            <Heading as={2} id="pilares-titulo" size="title-1" className="mt-5 max-w-[22ch]">
+            <Heading as={2} id="pilares-titulo" size="title-1" className="mt-4 max-w-[24ch]">
               Equipamentos, projetos e consultoria — separados ou juntos
             </Heading>
           </div>
@@ -72,7 +151,7 @@ export function PillarsSection() {
             resolver. "Sem repasse de culpa entre projetista, fornecedor e
             instalador" é transcrição de `src/data/solutions.ts`.
           */}
-          <p className="text-lead text-muted lg:col-span-4 lg:col-start-9">
+          <p className="text-lead text-muted lg:col-span-6 lg:col-start-6">
             Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa
             entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma
             condição para começar.
@@ -80,64 +159,71 @@ export function PillarsSection() {
         </div>
 
         {/*
-          `as="li"` — o item da grade precisa ser o próprio `li`, não um `div`
-          do `Reveal` com o `li` dentro: além da semântica da lista, é o item
-          da grade que recebe a altura da linha, e um wrapper intermediário
-          quebrava o `gap-px` que desenha a moldura.
+          `ul`, não `ol`: a lista deixou de ser ordenada quando a numeração saiu,
+          e por isso mesmo — três portas paralelas não têm primeira nem terceira.
+          A ordem visual é hierarquia comercial (DEC-001), não sequência.
 
-          Os cartões dividem uma moldura só (`gap-px` sobre `bg-line`): são
-          três faces de uma mesma estrutura, não três objetos soltos — e a
-          junção fica com a espessura exata de um fio, sem o vão irregular que
-          três caixas com borda própria produziam.
+          `as="li"` no `Reveal` — o item da grade precisa ser o próprio `li`, não
+          um `div` com o `li` dentro: além da semântica, é o item da grade que
+          recebe a altura da linha, e um wrapper intermediário quebraria o
+          `mt-auto` que alinha as três ações pela base.
+
+          `gap-y-9` no telefone é a única separação entre as frentes empilhadas
+          (mais a keyline de cada uma); em `lg` ele zera e sobra só o `gap-x-10`,
+          a calha entre as colunas.
         */}
-        <ol className="mt-10 grid gap-px border border-line bg-line lg:mt-14 lg:grid-cols-3">
-          {pillars.map((pillar, index) => (
-            <Reveal
-              key={pillar.number}
-              as="li"
-              delay={index * 90}
-              className="group flex h-full flex-col bg-surface p-7 transition-colors duration-300 ease-smooth hover:bg-canvas-deep lg:p-9"
-            >
-              <div className="flex items-center gap-3">
-                <span
-                  aria-hidden="true"
-                  className="h-[2px] w-6 shrink-0 bg-yellow transition-[width] duration-300 ease-smooth group-hover:w-10"
-                />
-                <span className="font-condensed text-eyebrow font-bold tabular-nums tracking-[0.12em] text-ink/45">
-                  {pillar.number}
-                </span>
-                {/* A mesma frase da régua da primeira dobra — quem escolheu lá reconhece aqui. */}
-                <span className="font-condensed text-eyebrow font-semibold uppercase tracking-[0.09em] text-muted">
-                  {pillar.cue}
-                </span>
-              </div>
+        <ul className="mt-9 grid gap-y-9 lg:mt-12 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-0">
+          {pillars.map((pillar, index) => {
+            const priority = index === 0
 
-              <h3 className="mt-5 font-sans font-bold text-title-2 text-ink">{pillar.title}</h3>
-
-              {/* A pergunta do cliente, não a descrição da empresa. */}
-              <p className="mt-3 max-w-[34ch] font-sans text-body font-semibold text-ink">
-                {pillar.question}
-              </p>
-
-              <p className="mt-3 max-w-[40ch] text-body-sm text-muted">{pillar.description}</p>
-
-              {/*
-                `mt-auto`: os três CTAs ficam na mesma linha de base mesmo com
-                descrições de comprimentos diferentes — sem isso o botão de
-                Equipamentos subiria e a fileira leria desalinhada.
-              */}
-              <div className="mt-auto pt-7">
-                {index === 0 ? (
-                  <LinkButton href={pillar.cta.href} variant="primary" size="md" withArrow>
-                    {pillar.cta.label}
-                  </LinkButton>
-                ) : (
-                  <ArrowLink href={pillar.cta.href}>{pillar.cta.label}</ArrowLink>
+            return (
+              <Reveal
+                key={pillar.title}
+                as="li"
+                delay={index * 90}
+                className={cn(
+                  'flex h-full flex-col border-t-2 pt-5',
+                  priority ? 'border-ink' : 'border-line',
                 )}
-              </div>
-            </Reveal>
-          ))}
-        </ol>
+              >
+                <h3 className="font-sans text-title-2 font-bold text-ink">{pillar.title}</h3>
+
+                {/*
+                  A pergunta do cliente, não a descrição da empresa.
+
+                  `max-w-prose` nos dois parágrafos é medida de leitura, não
+                  composição: em `lg` a coluna tem 413px e o limite nunca pega.
+                  Ele existe para a faixa de 640 a 1023px, onde as três frentes
+                  ainda estão empilhadas e a linha usaria os 704px inteiros do
+                  container — ~94 caracteres. Enquanto havia cartão, o `p-7`
+                  fazia esse papel por acidente; sem caixa, a medida precisa ser
+                  declarada.
+                */}
+                <p className="mt-2.5 max-w-prose font-sans text-body font-semibold text-ink">
+                  {pillar.question}
+                </p>
+
+                <p className="mt-2.5 max-w-prose text-body-sm text-muted">{pillar.description}</p>
+
+                {/*
+                  `mt-auto`: as três ações ficam na mesma linha de base mesmo com
+                  respostas de comprimentos diferentes — é ela que faz as três
+                  colunas lerem como uma composição só, agora que não há mais
+                  moldura desenhando esse alinhamento.
+                */}
+                <div className="mt-auto pt-5 lg:pt-6">
+                  {priority ? (
+                    <LinkButton href={pillar.cta.href} variant="primary" size="md" withArrow>
+                      {pillar.cta.label}
+                    </LinkButton>
+                  ) : (
+                    <ArrowLink href={pillar.cta.href}>{pillar.cta.label}</ArrowLink>
+                  )}
+                </div>
+              </Reveal>
+            )
+          })}
+        </ul>
       </Container>
     </Section>
   )

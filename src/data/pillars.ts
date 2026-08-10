@@ -43,27 +43,47 @@
  * ============================================================
  *
  *   dimensionamento "pelo volume real" ..... `src/data/faq.ts`, `kitchensFaq[1]`
- *   avulso **ou** cozinha inteira .......... `src/data/faq.ts`, `kitchensFaq[0]`
  *   instalação e comissionamento ........... `src/data/faq.ts`, `kitchensFaq[2]`
- *   categorias de equipamento .............. `src/data/equipment-categories.ts`
- *   RDC 216, layout, fluxo, exaustão ....... versão anterior deste arquivo
- *   plantas complementares ................. `src/data/scope-levels.ts`, nível 02
- *   seis frentes do diagnóstico ............ `src/data/diagnosis.ts`
+ *   layout, fluxo, dimensionamento ......... versão anterior deste arquivo
+ *   plantas complementares de infra ........ `src/data/scope-levels.ts`, nível 02
+ *   fluxo, capacidade, processos ........... `src/data/diagnosis.ts`
  *   "termina em prioridades" ............... `src/data/scope-levels.ts`, nível 01
- *   o que não precisa ser comprado ......... `src/data/diagnosis.ts`, `methodSteps[2]`
- *   `cue` de cada frente ................... `src/data/v2/home.ts`, `heroStates[].cue`
  *
- * Os `cue` são **os mesmos rótulos da régua da primeira dobra**, de propósito:
- * quem escolheu um caminho lá em cima reencontra a mesma frase aqui embaixo.
+ * ============================================================
+ * CONDENSAÇÃO DE 2026-08-09b — MAPA DE ENTRADA, NÃO SEGUNDA EXPLICAÇÃO
+ * ============================================================
+ *
+ * A mensagem não mudou; a **quantidade exibida** mudou. `#pilares` é o mapa de
+ * entrada das três frentes — não o lugar de reexplicar cada uma delas, porque
+ * cada uma já tem seção, página ou fecho próprio na mesma home. O que saiu:
+ *
+ *  · **`number` (`01/02/03`).** Equipamentos, Projetos e Consultoria são três
+ *    portas independentes, não três etapas. Numerá-las afirmava uma ordem que
+ *    não existe — e não há substituto: nenhum selo, ícone ou badge entrou no
+ *    lugar. **Número só quando existe sequência real, ordem operacional ou
+ *    progressão** (ver o mesmo registro em `pillars-section.tsx` e em
+ *    `docs/v2/DESIGN_SYSTEM.md` §1).
+ *  · **`cue`.** Era a réplica literal do rótulo da régua da primeira dobra. O
+ *    nome da frente já é o mesmo nos dois lugares (`heroStates[].name`), então
+ *    a ponte de reconhecimento continua de pé sem uma terceira linha de texto
+ *    por coluna.
+ *  · **a lista de categorias de equipamento** — publicada inteira em
+ *    `src/data/equipment-categories.ts` e na seção de Equipamentos, duas
+ *    seções acima;
+ *  · **"elétrica, hidráulica, gás e esgoto" e a RDC 216** — o detalhamento vive
+ *    em `/solucoes/arquitetura`; aqui basta "infraestrutura";
+ *  · **"espaço, custo e demanda"** no fecho de Consultoria — as três frentes
+ *    que restam (fluxo, capacidade instalada, processos) já nomeiam a leitura.
+ *
+ * Perguntas e rótulos de CTA são **intocados**: são eles que fazem o visitante
+ * se reconhecer e a porta ser aberta.
  */
 export interface Pillar {
-  number: string
   /** Nome da frente, como ela é contratada. */
   title: string
-  /** A situação do cliente — mesma redação da régua da primeira dobra. */
-  cue: string
   /** A pergunta concreta que essa frente responde. */
   question: string
+  /** Resposta curta — o que a Bianchini entrega nessa frente, sem repetir a seção dela. */
   description: string
   /** Cada frente tem porta própria: nenhuma depende de contratar as outras. */
   cta: { label: string; href: string }
@@ -71,27 +91,21 @@ export interface Pillar {
 
 export const pillars: Pillar[] = [
   {
-    number: '01',
     title: 'Equipamentos',
-    cue: 'Comprar, substituir ou especificar',
     question: 'Qual equipamento a minha operação precisa — e quem responde pela instalação?',
     description:
-      'Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento. Cocção, refrigeração, mobiliário em inox, exaustão e tecnologia de cocção — um item específico ou a cozinha inteira.',
+      'Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.',
     cta: { label: 'Solicitar orçamento', href: '/contato?intencao=equipamentos' },
   },
   {
-    number: '02',
     title: 'Projetos',
-    cue: 'Abrir, reformar ou reorganizar',
     question: 'Preciso projetar antes de comprar ou de começar a obra?',
     description:
-      'Layout, fluxo de produção, dimensionamento e plantas complementares de elétrica, hidráulica, gás e esgoto, em conformidade com a RDC 216. O desenho define o que comprar e onde instalar — é ele que evita a quebra-quebra depois.',
+      'Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.',
     cta: { label: 'Falar com um projetista', href: '/contato?intencao=arquitetura' },
   },
   {
-    number: '03',
     title: 'Consultoria',
-    cue: 'Corrigir gargalos e melhorar resultados',
     question: 'A operação já roda, mas custa caro e rende pouco. Por onde começar?',
     /*
       O fecho é paráfrase deliberada, não redação livre. A primeira versão
@@ -103,7 +117,7 @@ export const pillars: Pillar[] = [
       a redação, para a página não repetir a si mesma.
     */
     description:
-      'Leitura da operação em funcionamento: espaço, fluxo, capacidade instalada, processos, custo e demanda. O resultado é uma ordem de prioridades, não um orçamento.',
+      'Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento.',
     cta: { label: 'Agendar diagnóstico', href: '/contato?intencao=consultoria' },
   },
 ]

@@ -30,6 +30,14 @@ tem mockup próprio ainda — isso é Gate 2.
   (`MASTER_BIANCHINI.md` §7).
 - Cada seção responde a cinco perguntas antes de existir: qual é a mensagem, qual é a
   prova, qual é a massa visual, qual é a interação, qual é o próximo passo.
+- **Número só quando existe sequência real, ordem operacional ou progressão.** Registrado em
+  2026-08-09 ao corrigir `#pilares`, onde `01 / 02 / 03` numeravam Equipamentos, Projetos e
+  Consultoria — **três portas independentes**, que ninguém contrata em ordem. O índice
+  afirmava uma sequência inexistente e ainda somava uma linha de texto por coluna. Método
+  (`journey-section`) e níveis de atuação (`scope-section`) **são** sequências e continuam
+  numerados. Corolário: quando o número sai, **não entra ornamento no lugar** — nem selo,
+  ícone, badge ou marcador. A hierarquia passa a vir de posição, peso, keyline e
+  preenchimento de CTA.
 
 ## 2. Cores (tokens já existentes, `src/styles/colors.ts`)
 

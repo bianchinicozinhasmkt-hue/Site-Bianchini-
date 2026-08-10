@@ -70,15 +70,32 @@ export function ProjectsSection({
   tone = 'graphite',
   compact = false,
   lead = DEFAULT_LEAD,
+  className,
 }: {
   tone?: 'graphite' | 'surface'
   compact?: boolean
   lead?: string
+  /**
+   * Ajuste de **ritmo entre seções**, não de composição — só padding/margem da
+   * moldura. Existe porque a base desta seção é metade de uma transição, e a
+   * outra metade pertence à seção seguinte, que muda por página: na Home vem
+   * `#pilares` (claro sobre claro, onde o vão precisa ser curto); em
+   * `/solucoes/cozinhas-industriais` vem outra coisa. Sem prop, o padding é o
+   * de `space` e a rota interna não muda.
+   */
+  className?: string
 } = {}) {
   const dark = tone === 'graphite'
 
   return (
-    <Section id="projetos" tone={tone} space={compact ? 'sm' : 'default'} bleed aria-labelledby="projetos-titulo">
+    <Section
+      id="projetos"
+      tone={tone}
+      space={compact ? 'sm' : 'default'}
+      className={className}
+      bleed
+      aria-labelledby="projetos-titulo"
+    >
       <Container>
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
           <div className="lg:col-span-7">

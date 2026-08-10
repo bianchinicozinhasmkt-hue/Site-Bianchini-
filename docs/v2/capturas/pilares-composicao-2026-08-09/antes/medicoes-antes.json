@@ -1,0 +1,222 @@
+{
+  "1440x900": {
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "documento": {
+      "w": 1440,
+      "h": 16285
+    },
+    "overflowHorizontal": 0,
+    "projetos": {
+      "top": 2465,
+      "bottom": 4082,
+      "height": 1617,
+      "left": 0,
+      "width": 1440
+    },
+    "pilares": {
+      "top": 4082,
+      "bottom": 4879,
+      "height": 797,
+      "left": 0,
+      "width": 1440
+    },
+    "sintomas": {
+      "top": 4879,
+      "bottom": 5773,
+      "height": 894,
+      "left": 0,
+      "width": 1440
+    },
+    "ctaProjetos": {
+      "top": 3968,
+      "bottom": 4018,
+      "height": 50,
+      "left": 1144,
+      "width": 237
+    },
+    "eyebrowPilares": null,
+    "h2Pilares": {
+      "top": 4209,
+      "bottom": 4332,
+      "height": 124,
+      "left": 60,
+      "width": 542
+    },
+    "ultimaAcaoPilares": {
+      "texto": "Agendar diagnóstico",
+      "top": 4718,
+      "bottom": 4762,
+      "height": 44,
+      "left": 976,
+      "width": 173
+    },
+    "tituloSintomas": {
+      "top": 4935,
+      "bottom": 5040,
+      "height": 104,
+      "left": 60,
+      "width": 646
+    },
+    "itens": [
+      {
+        "titulo": "Equipamentos",
+        "top": 4389,
+        "bottom": 4798,
+        "height": 409,
+        "left": 61,
+        "width": 439
+      },
+      {
+        "titulo": "Projetos",
+        "top": 4389,
+        "bottom": 4798,
+        "height": 409,
+        "left": 501,
+        "width": 439
+      },
+      {
+        "titulo": "Consultoria",
+        "top": 4389,
+        "bottom": 4798,
+        "height": 409,
+        "left": 940,
+        "width": 439
+      }
+    ],
+    "alvosPequenos": [],
+    "overflow": [
+      "div.pointer-events-none.absolute",
+      "ul.flex.w-max",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain"
+    ],
+    "cortado": [],
+    "reveal": {
+      "revealPendentes": 0,
+      "revealTotal": 17
+    }
+  },
+  "390x844": {
+    "viewport": {
+      "w": 390,
+      "h": 844
+    },
+    "documento": {
+      "w": 390,
+      "h": 26386
+    },
+    "overflowHorizontal": 0,
+    "projetos": {
+      "top": 3255,
+      "bottom": 5776,
+      "height": 2521,
+      "left": 0,
+      "width": 390
+    },
+    "pilares": {
+      "top": 5776,
+      "bottom": 7564,
+      "height": 1789,
+      "left": 0,
+      "width": 390
+    },
+    "sintomas": {
+      "top": 7564,
+      "bottom": 8898,
+      "height": 1333,
+      "left": 0,
+      "width": 390
+    },
+    "ctaProjetos": {
+      "top": 5678,
+      "bottom": 5728,
+      "height": 50,
+      "left": 20,
+      "width": 237
+    },
+    "eyebrowPilares": null,
+    "h2Pilares": {
+      "top": 5886,
+      "bottom": 5985,
+      "height": 99,
+      "left": 20,
+      "width": 350
+    },
+    "ultimaAcaoPilares": {
+      "texto": "Agendar diagnóstico",
+      "top": 7427,
+      "bottom": 7471,
+      "height": 44,
+      "left": 49,
+      "width": 173
+    },
+    "tituloSintomas": {
+      "top": 7620,
+      "bottom": 7719,
+      "height": 99,
+      "left": 20,
+      "width": 350
+    },
+    "itens": [
+      {
+        "titulo": "Equipamentos",
+        "top": 6182,
+        "bottom": 6641,
+        "height": 459,
+        "left": 21,
+        "width": 348
+      },
+      {
+        "titulo": "Projetos",
+        "top": 6642,
+        "bottom": 7094,
+        "height": 452,
+        "left": 21,
+        "width": 348
+      },
+      {
+        "titulo": "Consultoria",
+        "top": 7095,
+        "bottom": 7499,
+        "height": 404,
+        "left": 21,
+        "width": 348
+      }
+    ],
+    "alvosPequenos": [],
+    "overflow": [
+      "ul.flex.w-max",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0",
+      "img.w-auto.object-contain",
+      "li.flex.shrink-0"
+    ],
+    "cortado": [
+      "p#hero-seletor-instrucao :: Escolha o que sua operação precisa resol"
+    ],
+    "reveal": {
+      "revealPendentes": 0,
+      "revealTotal": 17
+    }
+  },
+  "browserErrors": [],
+  "failedRequests": []
+}

@@ -161,6 +161,16 @@ export default function HomePage() {
         tone="surface"
         compact
         lead="Cozinhas, bares, cadeia fria e mobiliário em inox que a Bianchini projetou, especificou, fabricou ou instalou. As legendas descrevem o que está na imagem — sem cliente, local ou prazo atribuídos."
+        /*
+          Só a **base** da seção, e só na Home: a seção seguinte é `#pilares`,
+          e essa borda é claro→claro (`surface` → `canvas`). Com o padding
+          padrão, os 48/64px daqui somavam 144px de vão com os 80px de topo de
+          `#pilares` — uma tela vazia entre o botão "Ver todos os projetos" e a
+          etiqueta da seção seguinte, sem nada acontecendo. Nada da composição
+          de Projetos muda: `/solucoes/cozinhas-industriais` não passa a prop e
+          continua com o padding de `space`.
+        */
+        className="pb-8 md:pb-10"
       />
 
       <PillarsSection />
