@@ -4,9 +4,7 @@ import { Container } from '@/components/layout/container'
 import { Reveal } from '@/components/animations/reveal'
 import { Eyebrow, Heading } from '@/components/ui/typography/heading'
 import { InstagramIcon } from '@/components/ui/icons'
-import { BookCover } from '@/components/ui/book-cover'
 import { leadershipTeam } from '@/data/team'
-import { book } from '@/data/leonardo'
 import { cn } from '@/lib/utils'
 
 const people = [
@@ -56,24 +54,26 @@ const people = [
  *     da faixa, alinhado ao topo do pedestal.
  *
  * ============================================================
- * O LIVRO MORA AQUI (consolidação de 2026-08-04)
+ * ESTA SEÇÃO RESPONDE UMA PERGUNTA SÓ (2026-08-10)
  * ============================================================
  *
- * O livro era um cartão próprio no fim de `credibility-section.tsx`, a ~6.000px
- * de distância do único lugar da home onde Leonardo é apresentado — lia como
- * anúncio de produto encaixado entre depoimentos e o CTA final, e repetia a
- * credencial "autor de…" que já estava nos bullets dele. Agora é um bloco
- * dentro do dossiê de Leonardo: capa real em tamanho legível, e o texto que
- * entra não é a sinopse comercial, é `book.relation` — a ponte entre o método
- * do livro e o método que a Bianchini aplica. É isso que o transforma de
- * produto em **prova de método publicado**.
+ * "Com quem eu estou contratando?" — e nada além disso. O livro, que morou aqui
+ * entre 2026-08-04 e 2026-08-10, mudou para `#leonardo` junto com a âncora
+ * `id="livro"`; a justificativa está no comentário que ficou no lugar dele,
+ * dentro do dossiê. Aqui o efeito é duplo: a seção deixou de carregar prova de
+ * autoria, que não é a pergunta dela, e os dois dossiês passaram a ter peso
+ * equivalente.
  *
- * `id="livro"` continua existindo, agora aqui: é destino de `#livro`
- * (`leonardo-section.tsx`) e de `/#livro` (`data/industry.ts`). Mover o bloco
- * sem mover a âncora quebraria os dois links.
+ * A seção também **não carrega prova institucional**: números, marcas e
+ * depoimentos são de `#credibilidade`, que vem imediatamente depois desde a
+ * reordenação de 2026-08-10. Se algum número voltar a entrar aqui, ele vai
+ * competir com a seção seguinte — foi assim que "17 anos" acabou colidindo com
+ * os "18 anos" de `#credibilidade` (pendência registrada, não resolvida).
  *
- * `book.purchaseUrl` segue `null` e **nenhum CTA de compra é renderizado** —
- * não há link oficial confirmado. Ver `src/data/leonardo.ts`.
+ * Os **dois retratos ficam**. Esta é a seção do par, e a paridade entre
+ * Leonardo e Guilherme depende de os dois aparecerem com o mesmo tratamento —
+ * mesmo pedestal, mesma altura, mesma régua amarela na base. É por isso que o
+ * retrato que saiu foi o de `#leonardo`, e não um dos daqui.
  */
 export function LeadershipSection() {
   return (
@@ -150,7 +150,20 @@ export function LeadershipSection() {
 
             return (
               <Reveal key={person.id} variant="settle">
-                <article className="grid gap-8 lg:grid-cols-12 lg:items-start lg:gap-12">
+                {/*
+                  `lg:items-center`, não `items-start` (2026-08-10). O dossiê era
+                  alinhado ao topo do pedestal porque, com o bloco do livro
+                  dentro, a coluna de Leonardo preenchia os 480px da figura. Sem
+                  o livro ela mede 195px, e o alinhamento ao topo despejava ~288px
+                  de grafite morto sob os bullets — a coluna lia como truncada.
+                  Guilherme já tinha ~200px do mesmo defeito antes desta rodada.
+
+                  Centrado, o vão se distribui acima e abaixo do dossiê e a
+                  coluna lê como composição contra o retrato. É só alinhamento:
+                  nenhum conteúdo foi criado para encher a coluna, e no telefone
+                  (empilhado) nada muda, porque a classe é `lg:`.
+                */}
+                <article className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
                   {/* ---------- Pedestal: a figura apoiada, não flutuando ---------- */}
                   <div
                     className={cn(
@@ -255,43 +268,31 @@ export function LeadershipSection() {
                     </ul>
 
                     {/* ==========================================================
-                        Livro — só no dossiê de Leonardo, como prova de método
-                        publicado. Sem CTA de compra: `book.purchaseUrl` é nulo.
-                        ========================================================== */}
-                    {person.id === 'leonardo' ? (
-                      <div
-                        id="livro"
-                        className="mt-8 scroll-mt-[calc(var(--header-height)+1rem)] border-t border-white/12 pt-8"
-                      >
-                        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
-                          <BookCover className="mx-auto w-[9.5rem] shrink-0 sm:mx-0 lg:w-[11rem]" />
+                        O LIVRO NÃO FICA MAIS AQUI (2026-08-10)
+                        ==========================================================
 
-                          <div className="min-w-0 flex-1">
-                            <p className="font-condensed text-eyebrow font-semibold uppercase tracking-[0.11em] text-yellow">
-                              {book.eyebrow}
-                            </p>
-                            <h4 className="mt-3 max-w-[28ch] font-sans font-bold text-title-3 text-canvas">
-                              {book.headline}
-                            </h4>
-                            <p className="mt-3 max-w-[54ch] text-body-sm text-canvas/70">
-                              {book.relation}
-                            </p>
-                            {/*
-                              Só o selo. A linha anterior repetia `book.title`
-                              inteiro — que já se lê na capa, ao lado — em
-                              condensada caixa-alta a 55% de opacidade: três
-                              linhas de texto pouco legível dizendo o que a
-                              imagem já dizia. O título continua no `alt` da
-                              capa (`BookCover`), então segue disponível para
-                              leitor de tela e para indexação.
-                            */}
-                            <p className="mt-4 border-t border-white/12 pt-3 font-condensed text-caption font-semibold uppercase tracking-[0.07em] text-canvas/70">
-                              {book.seal}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ) : null}
+                        O bloco completo — capa, `eyebrow`, `headline`,
+                        `relation`, selo e a âncora `id="livro"` — mudou para
+                        `#leonardo`, que passou a ser a seção da tese. Duas
+                        razões, nesta ordem:
+
+                         1. **Função.** `book.relation` diz que "a mesma leitura
+                            comercial que estrutura o livro é a que a Bianchini
+                            aplica ao analisar uma operação" — isso é enunciado
+                            de tese, não ficha de responsável. Esta seção
+                            responde "quem responde hoje", e o livro não
+                            responde essa pergunta.
+                         2. **Equilíbrio.** O bloco era a causa isolada do
+                            desequilíbrio entre os dois responsáveis: em 390 o
+                            artigo de Leonardo media 1.260px contra 737px do de
+                            Guilherme, e 540px dessa diferença eram o livro. Sem
+                            ele os dois dossiês passam a ter peso equivalente,
+                            sem que uma linha de Guilherme tenha sido tocada.
+
+                        Nada entrou no lugar, de propósito: `#credibilidade` vem
+                        logo depois com números, marcas e depoimentos, e é ela
+                        que carrega a prova institucional.
+                        ========================================================== */}
                   </div>
                 </article>
               </Reveal>

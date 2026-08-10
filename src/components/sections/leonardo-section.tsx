@@ -1,45 +1,89 @@
-import Link from 'next/link'
 import { Section } from '@/components/layout/section'
 import { Container } from '@/components/layout/container'
 import { Reveal } from '@/components/animations/reveal'
 import { Eyebrow } from '@/components/ui/typography/heading'
 import { LinkButton } from '@/components/ui/actions/button'
-import { ArrowRightIcon } from '@/components/ui/icons'
-import { LeonardoPortrait } from '@/components/ui/leonardo-portrait'
+import { BookCover } from '@/components/ui/book-cover'
 import { book, leonardo } from '@/data/leonardo'
 
 /**
- * Leonardo — o ápice humano e de autoridade da home.
- *
  * ============================================================
- * DOIS DEFEITOS CORRIGIDOS NESTA PASSAGEM
+ * A TESE — E SÓ A TESE (consolidação de 2026-08-10)
  * ============================================================
  *
- *  1. **Aresta retangular visível.** O fragmento do estudo 3D entrava como um
- *     `<div>` posicionado com `opacity-[0.07]` — e a borda desse retângulo
- *     aparecia como um degrau de luminosidade no meio do grafite, atravessando
- *     o título. Um plano de fundo que se anuncia como retângulo não é
- *     profundidade, é um erro de composição. Agora o fragmento é dissolvido
- *     por `mask-image` radial: não existe borda para ver.
+ * Até esta rodada a seção era **duas coisas ao mesmo tempo**: a tese de
+ * trabalho de Leonardo e um dossiê biográfico comprimido — retrato de busto,
+ * três parágrafos de biografia, quatro marcos de trajetória, três frentes de
+ * atuação e uma menção ao livro. O dossiê era o problema: `#quem-conduz`, logo
+ * abaixo, publica as mesmas credenciais em bullets, e `/leonardo-bianchini`
+ * publica a versão completa (6 marcos de trajetória contra 4, `skillMap` de 11
+ * frentes contra 3). A home tinha um resumo da página interna colado ao lado de
+ * uma seção que dizia o mesmo em outro formato.
  *
- *  2. **"Retrato de um lado, texto do outro".** Era exatamente a estrutura que
- *     a direção de arte pediu para eliminar — duas colunas independentes com
- *     um vão preto entre elas. Agora o retrato e o texto **se sobrepõem**: a
- *     coluna de texto começa dentro da faixa do retrato (`-ml` negativo em
- *     `xl`) e o nome de Leonardo é uma faixa que atravessa a base da figura.
- *     São planos que se cruzam, não colunas encostadas.
+ * Depois que `#credibilidade` desceu para depois de `#quem-conduz`, as duas
+ * seções de autoridade ficaram adjacentes e a repetição virou leitura direta:
+ * o **mesmo arquivo** de retrato duas vezes em 600px de desktop e 2.100px de
+ * telefone, e o livro citado aqui para ser mostrado inteiro logo abaixo.
+ *
+ * A divisão passou a ser:
+ *
+ *   `#leonardo` ...... por que essa forma de pensar a cozinha é diferente
+ *   `#quem-conduz` ... quem responde hoje pelas frentes contratadas
+ *   `#credibilidade` . a prova — números, marcas e depoimentos
+ *
+ * O que saiu daqui, e por quê:
+ *
+ *   · **retrato de busto** — `leonardo-bianchini.png` continua na home, uma vez
+ *     só, em `#quem-conduz`, que é a seção do par de responsáveis e onde a
+ *     paridade com Guilherme depende dos dois retratos lado a lado. Nenhuma
+ *     fotografia entrou no lugar: os `fieldRecords` de `leonardo.ts` são
+ *     recortes de ~190px nativos, marcados no próprio dado como pendentes de
+ *     fotografia profissional, e não sustentam um slot grande.
+ *   · **trajetória (4 marcos)** e **frentes de atuação (3 competências)** —
+ *     restadas como bullets em `#quem-conduz` e publicadas completas em
+ *     `/leonardo-bianchini`, alcançável pelo CTA que continua no fim desta
+ *     seção. Nenhum dado foi apagado: `leonardo.trajectory`, `home.competencies`
+ *     e `skillMap` seguem intactos e em uso na página interna.
+ *   · **link "Autor de…"** — o livro passou a viver aqui, então o link virou
+ *     auto-referência.
+ *   · **primeiro parágrafo de `home.paragraphs`** — "atua no setor … desde
+ *     2008, conectando conhecimento técnico, operação, equipamentos e estratégia
+ *     comercial" é trajetória e enumeração de competências, as duas restadas nos
+ *     bullets de `#quem-conduz`. O marco temporal não se perdeu: "No setor desde
+ *     2008" continua na assinatura, logo acima. Os parágrafos 2 e 3 ficam
+ *     inteiros e **não foram reescritos** — o 2 define a visão integrada e o 3 é
+ *     o que a liga ao método da Bianchini, que é a razão da seção existir.
  *
  * ============================================================
- * O QUE A SEÇÃO PRECISA COMUNICAR
+ * COMPOSIÇÃO — A TESE DOMINA, O LIVRO APOIA
  * ============================================================
  *
- * Quem conduz o diagnóstico · experiência desde 2008 · especialidade ·
- * visão de negócio · frentes de atuação · trajetória · o livro.
+ * Sem o retrato, a tese ocupa a largura inteira em vez de sete das doze
+ * colunas: o H2 em `text-display` é o maior elemento da seção e nada disputa com
+ * ele. O espaço aberto **não foi preenchido** — não entrou textura, citação
+ * decorativa, ícone nem cartão. O que existe abaixo do enunciado é uma banda de
+ * duas colunas: a visão à esquerda, o livro à direita, em escala subordinada.
  *
- * Tudo isso já existia em `src/data/leonardo.ts` — nada foi escrito aqui.
- * O que mudou é a hierarquia: a tese domina, a assinatura atravessa o
- * retrato, e trajetória/frentes/livro descem como uma **faixa de credenciais
- * agrupada**, não como três blocos soltos.
+ * A **assinatura perdeu a superfície** e virou linha editorial sobre hairline.
+ * A faixa `bg-graphite-soft` existia para atravessar a base do retrato e costurar
+ * os dois planos da composição antiga; sem retrato, ela seria só uma barra cinza
+ * flutuando. As três informações — nome, papel e "No setor desde 2008" — são as
+ * mesmas, na mesma ordem.
+ *
+ * O **livro entra como prova da tese**, não como anúncio: sem moldura, sem
+ * sombra, sem CTA de compra (`book.purchaseUrl` continua `null`), separado por
+ * hairline e com a capa em escala menor que a do bloco anterior. A ordem de
+ * leitura no telefone é tese → visão → livro → CTA, que é a progressão do
+ * argumento: o livro é a evidência de que essa forma de pensar foi
+ * sistematizada, e o CTA leva a quem quer a trajetória inteira.
+ *
+ * `id="livro"` mora aqui agora — é destino de `/#livro` (`data/industry.ts`) e
+ * é a **única** ocorrência na home. Mover o bloco sem mover a âncora quebraria
+ * o link do inox.
+ *
+ * O fragmento de documento ao fundo continua: ele nunca ocupou o lugar do
+ * retrato (fica no canto superior direito, o retrato ficava à esquerda) e é a
+ * única variação de textura do grafite. Sem ele a seção fica chapada.
  */
 export function LeonardoSection() {
   return (
@@ -50,26 +94,12 @@ export function LeonardoSection() {
       bleed
       aria-labelledby="leonardo-titulo"
       /*
-        ----------
-        `pb` REDUZIDO EM 2026-08-10 — a base do capítulo de autoridade
-        ----------
-
-        Esta seção passou a ser seguida diretamente por `#quem-conduz`
-        (`credibilidade` desceu para depois dela — ver `src/app/page.tsx`). Duas
-        seções grafite adjacentes, cada uma com `space="default"`, punham 160px
-        de vão vazio entre a última credencial daqui e a etiqueta de lá: no
-        telefone o par lia como duas telas grafite empilhadas, não como um
-        assunto em duas partes.
-
-        As duas metades do vão foram reduzidas — aqui e no `pt` de
-        `leadership-section.tsx`, que ainda ganhou a régua que marca a divisão.
-        O encontro passou de 160px de grafite vazio para 128px **com uma régua
-        dentro**, a 80px daqui e a 48px da etiqueta seguinte: a linha lê como
-        cabeçalho da segunda parte, não como fim de assunto. Só o espaçamento
-        externo mudou; conteúdo, retrato, livro e composição estão intactos.
-        ----------
+        Encontro com `#quem-conduz` remedido nesta rodada — ver o `pt` e a régua
+        em `leadership-section.tsx`. A seção encolheu bastante, então os valores
+        da rodada anterior não foram preservados por já terem sido ajustados:
+        foram medidos de novo contra as alturas novas.
       */
-      className="relative isolate overflow-hidden pb-8 md:pb-10 lg:pb-10"
+      className="relative isolate overflow-hidden pb-10 md:pb-12 lg:pb-12"
     >
       {/* ----------
           Fragmento de documento ao fundo, **sem borda**.
@@ -95,149 +125,105 @@ export function LeonardoSection() {
 
       <Container className="relative">
         {/* ==========================================================
-            Retrato e tese sobrepostos.
-
-            `lg:-ml-16 xl:-ml-24` na coluna de texto: ela **entra por cima**
-            da faixa do retrato em vez de começar depois dele. O `z-10` e o
-            `pl` compensatório garantem que o texto continue legível — o que
-            se sobrepõe é a caixa, não as letras sobre a figura.
+            ENUNCIADO — o maior elemento da seção, sem nada ao lado.
             ========================================================== */}
-        {/*
-          `lg:row-start-1` nos **dois** filhos é obrigatório. Sem ele, o grid
-          vê duas peças com `col-start` explícito que se sobrepõem na coluna 5
-          e joga a segunda para a linha seguinte — foi exatamente o que
-          aconteceu na primeira tentativa: o texto desabou para baixo do
-          retrato e a seção cresceu 397px. Com a linha declarada, as duas
-          ocupam a mesma faixa e a sobreposição acontece de verdade.
-        */}
-        <div className="lg:grid lg:grid-cols-12 lg:items-end">
-          <Reveal
-            variant="settle"
-            className="relative lg:col-span-5 lg:col-start-1 lg:row-start-1"
+        <Reveal>
+          <Eyebrow tone="light" as="p">
+            {leonardo.home.eyebrow}
+          </Eyebrow>
+
+          <h2
+            id="leonardo-titulo"
+            className="mt-5 max-w-[19ch] font-sans font-extrabold text-display text-canvas"
           >
-            <div className="mx-auto max-w-[20rem] pl-[3px] sm:max-w-[24rem] lg:max-w-none">
-              <LeonardoPortrait
-                frame="bust"
-                sizes="(max-width: 639px) 84vw, (max-width: 1023px) 56vw, 38vw"
-              />
-            </div>
-          </Reveal>
+            {leonardo.thesis.title}
+          </h2>
 
-          <div className="relative z-10 mt-8 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:mt-0">
-            <Eyebrow tone="light" as="p">
-              {leonardo.home.eyebrow}
-            </Eyebrow>
+          <p className="mt-6 max-w-[58ch] text-lead text-canvas/75">{leonardo.thesis.lead}</p>
 
-            <h2
-              id="leonardo-titulo"
-              className="mt-5 max-w-[17ch] font-sans font-extrabold text-display text-canvas"
-            >
-              {leonardo.thesis.title}
-            </h2>
-
-            <p className="mt-6 max-w-[52ch] text-lead text-canvas/75">{leonardo.thesis.lead}</p>
-
-            {/* ----------
-                Assinatura como **faixa que atravessa** a base do retrato:
-                superfície própria (`graphite-soft`), sangrando para a
-                esquerda por cima da figura. É o único elemento que cruza os
-                dois planos — e é ele que costura a composição.
-
-                Só a faixa cruza, de propósito. A primeira tentativa fez a
-                **coluna de texto inteira** avançar sobre o retrato, e o
-                resultado foi título e parágrafo por cima do rosto e do
-                braço: ilegíveis os dois. Sobreposição em composição vale
-                para uma peça, não para o bloco de leitura.
-                ---------- */}
-            <div className="mt-8 flex flex-wrap items-baseline gap-x-5 gap-y-1 bg-graphite-soft px-5 py-4 lg:-ml-20 lg:pl-20 xl:-ml-28 xl:pl-28">
-              <span className="font-sans text-title-3 font-bold text-canvas">{leonardo.name}</span>
-              <span className="text-body-sm text-canvas/70">{leonardo.role}</span>
-              <span className="font-condensed text-caption uppercase tracking-[0.08em] text-yellow">
-                No setor desde {leonardo.since}
-              </span>
-            </div>
+          {/* ----------
+              Assinatura: linha editorial sobre hairline, não faixa com
+              superfície própria. Mesmas três informações da versão anterior —
+              nome, papel e o marco temporal, que é dado único da home.
+              ---------- */}
+          <div className="mt-8 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-t border-white/15 pt-5">
+            <span className="font-sans text-title-3 font-bold text-canvas">{leonardo.name}</span>
+            <span className="text-body-sm text-canvas/70">{leonardo.role}</span>
+            <span className="font-condensed text-caption uppercase tracking-[0.08em] text-yellow">
+              No setor desde {leonardo.since}
+            </span>
           </div>
-        </div>
+        </Reveal>
 
         {/* ==========================================================
-            FAIXA DE CREDENCIAIS — trajetória, frentes e livro agrupados
-            numa superfície só, não em três blocos soltos.
+            BANDA DE APOIO — visão à esquerda, livro à direita.
+
+            Não são duas caixas: nenhuma das duas colunas tem moldura,
+            preenchimento ou sombra. O que as separa é a coluna vazia do grid e,
+            no livro, a hairline que o abre.
             ========================================================== */}
-        <div className="mt-10 grid gap-x-10 gap-y-8 lg:mt-12 lg:grid-cols-12">
-          <div className="flex flex-col gap-4 text-body-sm text-canvas/75 lg:col-span-5">
-            {leonardo.home.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="max-w-[54ch]">
+        <div className="mt-10 grid gap-x-10 gap-y-10 lg:mt-14 lg:grid-cols-12">
+          <Reveal className="flex flex-col gap-4 text-body-sm text-canvas/75 lg:col-span-6">
+            {/*
+              `slice(1)`: o primeiro parágrafo é trajetória e enumeração de
+              competências, as duas restadas nos bullets de `#quem-conduz`. Os
+              dois que ficam são a visão integrada e a ligação dela com o
+              método — o argumento desta seção. O dado não foi tocado.
+            */}
+            {leonardo.home.paragraphs.slice(1).map((paragraph) => (
+              <p key={paragraph} className="max-w-[56ch]">
                 {paragraph}
               </p>
             ))}
-          </div>
+          </Reveal>
 
-          <div className="lg:col-span-6 lg:col-start-7">
-            {/* Trajetória — quatro marcos, ligados por trilha contínua. */}
-            <p className="font-condensed text-eyebrow font-semibold uppercase text-canvas/55">
-              Trajetória
-            </p>
-            <ol className="relative mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
-              {[
-                leonardo.trajectory[0],
-                leonardo.trajectory[1],
-                leonardo.trajectory[2],
-                leonardo.trajectory[4],
-              ].map((moment) => (
-                <li key={moment.id} className="border-t-2 border-yellow/60 pt-3">
-                  <p className="font-condensed text-caption font-semibold uppercase tracking-[0.06em] text-yellow/85">
-                    {moment.marker}
-                  </p>
-                  <p className="mt-1 max-w-[24ch] text-body-sm font-semibold text-canvas">
-                    {moment.title}
-                  </p>
-                </li>
-              ))}
-            </ol>
+          {/* ----------
+              O livro como evidência da tese.
 
-            <p className="mt-8 font-condensed text-eyebrow font-semibold uppercase text-canvas/55">
-              Frentes de atuação
-            </p>
-            <p className="mt-2 text-body-sm font-semibold text-canvas">
-              {leonardo.home.competencies.map((item) => item.title).join(' · ')}
-            </p>
+              `id` no wrapper, não no `Reveal`: o primitive não expõe `id`, e
+              pôr a âncora dentro dele deixaria o alvo do link sujeito ao
+              estado de revelação. O `scroll-mt` compensa o cabeçalho fixo.
+              ---------- */}
+          <div
+            id="livro"
+            className="scroll-mt-[calc(var(--header-height)+1rem)] lg:col-span-5 lg:col-start-8"
+          >
+            <Reveal
+              variant="settle"
+              className="flex flex-col gap-5 border-t border-white/15 pt-6 sm:flex-row sm:items-start sm:gap-6 lg:border-t-0 lg:pt-0"
+            >
+              <BookCover className="w-[8.5rem] shrink-0 sm:w-[9.5rem] lg:w-[10rem]" />
 
-            {/* Livro como evidência de autoria, ligado à seção própria. */}
-            <div className="mt-8 flex flex-col gap-4 border-t border-white/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <Link
-                href="#livro"
-                className="group flex items-center gap-3 text-left"
-              >
-                <span
-                  aria-hidden="true"
-                  className="h-9 w-[0.5rem] shrink-0 bg-yellow transition-transform duration-200 ease-precise group-hover:scale-y-105"
-                />
-                <span>
-                  <span className="block font-condensed text-[0.6875rem] font-semibold uppercase tracking-[0.09em] text-canvas/50">
-                    Autor de
-                  </span>
-                  <span className="block max-w-[34ch] text-body-sm font-semibold text-canvas group-hover:text-canvas/80">
-                    {book.title}
-                  </span>
-                </span>
-                <ArrowRightIcon
-                  size={16}
-                  className="shrink-0 text-canvas/60 transition-transform duration-200 ease-precise group-hover:translate-x-1"
-                />
-              </Link>
-
-              <LinkButton
-                href={leonardo.home.cta.href}
-                variant="light-outline"
-                size="md"
-                withArrow
-                className="shrink-0"
-              >
-                {leonardo.home.cta.label}
-              </LinkButton>
-            </div>
+              <div className="min-w-0 flex-1">
+                <p className="font-condensed text-eyebrow font-semibold uppercase tracking-[0.11em] text-yellow">
+                  {book.eyebrow}
+                </p>
+                <h3 className="mt-2 max-w-[26ch] font-sans font-bold text-title-3 text-canvas">
+                  {book.headline}
+                </h3>
+                <p className="mt-3 max-w-[48ch] text-body-sm text-canvas/70">{book.relation}</p>
+                {/*
+                  Só o selo. O título do livro se lê na capa, ao lado, e continua
+                  no `alt` dela (`BookCover`) para leitor de tela e indexação.
+                */}
+                <p className="mt-4 border-t border-white/12 pt-3 font-condensed text-caption font-semibold uppercase tracking-[0.07em] text-canvas/70">
+                  {book.seal}
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
+
+        {/*
+          O CTA fecha a seção, depois da evidência: tese → visão → livro → quem
+          quiser a trajetória inteira vai para a página dela. É o único CTA da
+          região de autoridade.
+        */}
+        <Reveal className="mt-10 lg:mt-12">
+          <LinkButton href={leonardo.home.cta.href} variant="light-outline" size="md" withArrow>
+            {leonardo.home.cta.label}
+          </LinkButton>
+        </Reveal>
       </Container>
     </Section>
   )
