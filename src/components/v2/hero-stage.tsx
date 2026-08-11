@@ -146,8 +146,45 @@ import styles from './hero-stage.module.css'
    onde o bloco se centra.
    ============================================================ */
 
-/** Atraso do hover, dentro da faixa de 120–180ms pedida. */
-const HOVER_INTENT_MS = 150
+/**
+ * ============================================================
+ * A COREOGRAFIA DA TROCA — SAÍDA, PASSAGEM, ENTRADA
+ * ============================================================
+ *
+ * Duas correções, nesta ordem, e vale registrar as duas porque a segunda existe
+ * por causa da primeira.
+ *
+ * **1. O crossfade simétrico produzia dupla exposição.** As duas cenas
+ * partilhavam `transition: opacity 380ms`, então a meio caminho as duas estavam
+ * em ~0,5 — uma planta técnica atravessando um rosto por ~6 quadros.
+ *
+ * **2. Separar os tempos produziu apagão.** A correção seguinte tirou a
+ * simultaneidade (saída em 170ms, entrada com 150ms de atraso) e derrubou a
+ * sobreposição para 0,002 — mas entre ~150 e ~200ms **as duas cenas estavam
+ * perto de zero ao mesmo tempo**, e a dobra piscava para quase preto no meio de
+ * cada troca. Zero de sobreposição e zero de imagem são a mesma medição.
+ *
+ * A troca agora é **espacial, não cromática**: a cena nova é revelada por uma
+ * máscara que corre da esquerda para a direita, e a antiga continua inteira por
+ * baixo até ser coberta (ver o bloco da ponte em `hero-stage.module.css`). Cada
+ * pixel mostra exatamente uma cena o tempo todo — nem duas somadas, nem nenhuma.
+ *
+ *   t=0        o controle responde (é o único elemento imediato)
+ *   0–210ms    a copy sai, 6px para cima
+ *   0–520ms    a revelação atravessa o palco (20% em 150ms, 50% em 260, 85% em 400)
+ *   0–720ms    a cena nova assenta de 1,016 para 1
+ *   250–490ms  a copy nova entra, 8px de baixo para cima
+ *   +220ms     no estado de Consultoria, a camada vetorial entra por último
+ *
+ * `COPY_OUT_MS` é o único número que precisa viver no JavaScript: é o atraso
+ * entre a escolha e a **substituição do texto no DOM**, e é o que dá à copy uma
+ * saída de verdade em vez do corte seco que a remontagem por `key` produz. Ele
+ * subiu de 150 para 210ms nesta rodada para que a troca de cena sob a coluna de
+ * texto caia no **vão entre as duas copies** — medido no quadro, com 150ms a
+ * copy antiga ainda estava na tela quando a cena nova chegava embaixo dela.
+ * Todo o resto da coreografia é CSS.
+ */
+const COPY_OUT_MS = 210
 
 /**
  * ============================================================
@@ -170,78 +207,90 @@ const pressState = cn(
 
 export function HeroStage() {
   /* ============================================================
-     DOIS ESTADOS, E NÃO UM — A ESCOLHA FIXADA E A PRÉVIA
+     UM ESTADO SÓ — A PRÉVIA POR HOVER SAIU (2026-08-11)
      ============================================================
 
-     `pinned` é a escolha do visitante: começa em Equipamentos e só muda por
-     clique, `Enter`/`Espaço`, seta, `Home` ou `End`. `preview` é o que o
-     ponteiro está antecipando no desktop. O que está na tela é
-     `preview ?? pinned`, então **retirar o mouse devolve a escolha fixada** —
-     que é o comportamento pedido, e o que a versão anterior não fazia: lá o
-     `onMouseEnter` gravava direto no único estado e a escolha se perdia ao
-     atravessar a fileira.
+     Havia dois estados: `pinned` (a escolha) e `preview` (o que o ponteiro
+     antecipava, fixado depois de 150ms de intenção). O que estava na tela era
+     `preview ?? pinned`.
+
+     **Os dois comportamentos foram comparados nesta rodada**, e o de hover
+     perde por três razões — a última é a que decide:
+
+       · **custo de atenção.** Atravessar a fileira para alcançar a terceira
+         porta trocava a cena inteira no caminho. O atraso de intenção reduzia a
+         frequência, não o efeito: o visitante que hesita 200ms sobre Projetos
+         vê a Hero inteira mudar sem ter escolhido nada;
+       · **o controle passava a reagir à passagem**, e um controle que muda de
+         assunto ao ser sobrevoado lê como gráfico animado, não como botão;
+       · **e agora a troca tem direção de arte.** Com a coreografia de saída →
+         passagem → entrada (ver `COPY_OUT_MS`, acima) mais o `ambient motion`
+         da cena e a camada vetorial de Consultoria, uma troca custa ~450ms de
+         composição deliberada. Disparar isso por passagem de mouse gasta a
+         coreografia em algo que o visitante não pediu — e, pior, faz o retorno
+         do ponteiro **desfazer** a cena no meio da entrada.
+
+     A regra desta rodada é a que o briefing nomeia: **hover anima o próprio
+     controle; clique, toque e teclado trocam a cena.** O hover ficou mais
+     expressivo justamente porque não tem mais de antecipar conteúdo — ele é
+     confirmação de alvo, e é só isso.
+
+     Some com a prévia o `useRef` do temporizador, a checagem de ponteiro fino,
+     o `onMouseLeave` da fileira e o `onFocusCapture` que existia só para
+     resolver a incoerência entre `aria-selected` (que seguia a prévia) e
+     `tabindex` (que seguia a escolha). Nenhum deles tem função quando só existe
+     um estado — e o par ARIA passa a ser coerente por construção.
   */
   const [pinned, setPinned] = useState(0)
-  const [preview, setPreview] = useState<number | null>(null)
-  const active = preview ?? pinned
-  const state = heroStates[active]
+  const active = pinned
+  /** A cena segue a escolha **imediatamente**: é ela que abre a coreografia. */
+  const scene = heroStates[active]
+
+  /* ============================================================
+     A COPY ANDA MEIO PASSO ATRÁS DA CENA
+     ============================================================
+
+     `copyIndex` é o estado que a **coluna de texto** mostra, e ele chega
+     `COPY_OUT_MS` depois de `active`. Esse atraso é o que dá à copy uma saída
+     de verdade: durante ele o bloco inteiro sai (opacidade e 6px para cima, ver
+     `.copyBlock` no módulo) e só então o texto é substituído no DOM.
+
+     Sem ele, a remontagem por `key` produzia um **corte seco** — o texto antigo
+     desaparecia no mesmo quadro em que o novo começava a aparecer. Era a parte
+     de "motion rígido" que não estava na fotografia.
+
+     `prefers-reduced-motion` curto-circuita o atraso: ali a troca é imediata,
+     sem saída, sem entrada e sem passagem.
+  */
+  const [copyIndex, setCopyIndex] = useState(0)
+  const [copyOut, setCopyOut] = useState(false)
+  const copy = heroStates[copyIndex]
+
+  useEffect(() => {
+    if (copyIndex === active) return
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCopyIndex(active)
+      setCopyOut(false)
+      return
+    }
+
+    setCopyOut(true)
+    const timer = window.setTimeout(() => {
+      setCopyIndex(active)
+      setCopyOut(false)
+    }, COPY_OUT_MS)
+    /*
+      A limpeza cobre o clique rápido: trocar de porta antes dos 150ms cancela
+      o temporizador pendente e reinicia a saída a partir do estado novo. A copy
+      nunca fica presa num índice intermediário.
+    */
+    return () => window.clearTimeout(timer)
+  }, [active, copyIndex])
 
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([])
-  const hoverTimer = useRef<number | undefined>(undefined)
 
-  /*
-    Antecipação por ponteiro **só onde existe ponteiro fino**. No toque o
-    `hover` fica preso depois do gesto e a cena passaria a mudar sem que
-    ninguém tivesse escolhido nada.
-  */
-  const canPreview = useRef(false)
-  useEffect(() => {
-    canPreview.current = window.matchMedia('(hover: hover) and (pointer: fine)').matches
-    return () => {
-      if (hoverTimer.current) window.clearTimeout(hoverTimer.current)
-    }
-  }, [])
-
-  const clearHoverTimer = () => {
-    if (hoverTimer.current) window.clearTimeout(hoverTimer.current)
-    hoverTimer.current = undefined
-  }
-
-  /** Atraso de intenção: atravessar a fileira não deve trocar a cena três vezes. */
-  const onItemEnter = (index: number) => {
-    if (!canPreview.current) return
-    clearHoverTimer()
-    hoverTimer.current = window.setTimeout(() => setPreview(index), HOVER_INTENT_MS)
-  }
-
-  /** Sai do seletor inteiro, não de uma área: volta à escolha fixada. */
-  const onRailLeave = () => {
-    clearHoverTimer()
-    setPreview(null)
-  }
-
-  /**
-   * O foco cancela a prévia do ponteiro.
-   *
-   * Sem isto, um visitante que passa o mouse por "Consultoria" e depois aperta
-   * `Tab` chega a um seletor incoerente: `aria-selected` está em Consultoria
-   * (que é o que a prévia mostra) e `tabindex="0"` está na escolha fixada. São
-   * dois estados diferentes anunciados ao mesmo tempo, e o teclado passa a agir
-   * a partir de um item que a tela não indica.
-   *
-   * A regra é simples: **ponteiro antecipa, teclado decide.** Assim que o foco
-   * entra, a prévia cai e o que está na tela volta a ser a escolha fixada.
-   */
-  const onRailFocus = () => {
-    clearHoverTimer()
-    setPreview(null)
-  }
-
-  const select = (index: number) => {
-    clearHoverTimer()
-    setPreview(null)
-    setPinned(index)
-  }
+  const select = (index: number) => setPinned(index)
 
   /**
    * Navegação por seta, como manda o padrão de `tablist`: a seta move a seleção
@@ -253,7 +302,6 @@ export function HeroStage() {
       return
     event.preventDefault()
 
-    setPreview(null)
     setPinned((current) => {
       const last = heroStates.length - 1
       const next =
@@ -302,7 +350,33 @@ export function HeroStage() {
           <div
             key={item.id}
             aria-hidden={index !== active}
-            className={cn(styles.frame, index === active && styles.frameActive)}
+            className={cn(
+              styles.frame,
+              index === active && styles.frameActive,
+              /*
+                ============================================================
+                CONSULTORIA TEM UMA APRESENTAÇÃO PRÓPRIA (2026-08-10)
+                ============================================================
+
+                O arquivo é o mesmo e não foi tocado. O que muda é **como ele
+                é apresentado**: em `lg` para cima a cena de Consultoria deixa
+                de se comportar como `cover` de sangria e passa a ser uma
+                figura ancorada à direita e à base, em escala reduzida, sobre
+                o próprio fundo de estúdio estendido. A medição, o motivo e os
+                números estão no módulo CSS (`.frameConsultoria`).
+
+                Abaixo de `lg` nada muda: ali a cena é uma tira no alto do
+                palco e o retrato já não domina composição nenhuma.
+              */
+              item.id === 'consultoria' && styles.frameConsultoria,
+              /*
+                Só para o `ambient motion`: cada cena deriva numa direção
+                própria (ver o bloco de ambient no módulo). Projetos avança para
+                a prancha quase sem percurso lateral; Equipamentos entra no
+                corredor; Consultoria fica quase parada.
+              */
+              item.id === 'projetos' && styles.frameProjetos,
+            )}
           >
             {/*
               ---------- Uma cena de sangria, sempre — os três estados iguais ----------
@@ -318,32 +392,79 @@ export function HeroStage() {
               `src/data/v2/home.ts`, bloco "PROJETOS"), e essa perda de nitidez
               é o que a correção aceita em troca de voltar a ser um palco.
             */}
-            <Image
-              src={item.media.src}
-              alt={item.media.alt}
-              fill
-              /*
-                Só a cena inicial é `priority`: ela é o LCP da página. As
-                outras duas ficam `lazy` — estão na janela, então o navegador
-                as busca assim que sobra banda, depois da que foi
-                pré-carregada. Marcá-las `eager` as poria disputando a
-                primeira pintura com o LCP.
-              */
-              priority={index === 0}
-              loading={index === 0 ? undefined : 'lazy'}
-              /* O palco é de largura inteira: `100vw` descreve a caixa real. */
-              sizes="100vw"
-              quality={86}
-              style={{ objectPosition: item.media.objectPosition }}
-              /*
-                Sem correção tonal por estado desde 2026-08-09. As três cenas
-                novas chegam com 12 pontos de amplitude de luminância entre si
-                (eram 87 no conjunto anterior), então `.gradeProjetos` e
-                `.gradeConsultoria` deixaram de fechar um desvio e passariam a
-                criar um — a tabela medida está no cabeçalho do módulo CSS.
-              */
-              className="object-cover"
-            />
+            {/*
+              A caixa da cena. Nos dois primeiros estados ela é `inset: 0` e
+              não faz nada — existe para que Consultoria possa ter geometria
+              própria **sem** disputar com os estilos em linha que o
+              `next/image` grava no `<img>` quando `fill` está ligado
+              (`position`, `inset`, `width` e `height` são inline e venceriam
+              qualquer classe). Com o invólucro, quem carrega a geometria é um
+              elemento nosso, e o `<img>` continua sendo `cover` de `inset: 0`
+              dentro dele — mesmo contrato nos três estados.
+            */}
+            <div className={styles.sceneBox}>
+              <Image
+                src={item.media.src}
+                alt={item.media.alt}
+                fill
+                /*
+                  Só a cena inicial é `priority`: ela é o LCP da página. As
+                  outras duas ficam `lazy` — estão na janela, então o navegador
+                  as busca assim que sobra banda, depois da que foi
+                  pré-carregada. Marcá-las `eager` as poria disputando a
+                  primeira pintura com o LCP.
+                */
+                priority={index === 0}
+                loading={index === 0 ? undefined : 'lazy'}
+                /* O palco é de largura inteira: `100vw` descreve a caixa real. */
+                sizes="100vw"
+                quality={86}
+                style={{ objectPosition: item.media.objectPosition }}
+                /*
+                  Sem correção tonal por estado desde 2026-08-09. As três cenas
+                  novas chegam com 12 pontos de amplitude de luminância entre si
+                  (eram 87 no conjunto anterior), então `.gradeProjetos` e
+                  `.gradeConsultoria` deixaram de fechar um desvio e passariam a
+                  criar um — a tabela medida está no cabeçalho do módulo CSS.
+                */
+                className="object-cover"
+              />
+            </div>
+
+            {/*
+              ============================================================
+              A CAMADA VETORIAL DE CONSULTORIA SAIU (2026-08-11)
+              ============================================================
+
+              Havia aqui um `ConsultingOverlay`: um grafo SVG — entradas,
+              convergência, zona de análise com colchetes, priorização e um nó
+              de decisão amarelo — desenhado sobre o canto superior direito da
+              cena, com pulso e halo em laço. Ele existia para responder à
+              queixa de "cena vazia" depois que o retrato foi reduzido.
+
+              Ele saiu inteiro, e a razão é de direção de arte, não de
+              implementação: **aquilo era um fluxograma**. O briefing desta
+              rodada proíbe explicitamente "visual de dashboard, gráfico,
+              fluxograma ou circuito eletrônico", e a camada era as quatro
+              coisas ao mesmo tempo. Somava-se a isso o defeito de composição —
+              ela flutuava no alto, sem relação com a figura nem com a coluna de
+              texto, e não tocava nenhum dos dois: um desenho colado por cima da
+              fotografia, que é o que o gestor viu.
+
+              **O vazio não se resolve com desenho, resolve-se com luz.** A cena
+              de Consultoria é um retrato de estúdio, e o que falta nela é
+              profundidade fotográfica, não informação gráfica. Quem responde
+              por isso agora é `.frameConsultoria` no módulo CSS: a figura ganha
+              escala (o campo vazio encolhe pela própria composição) e o fundo
+              sintetizado ganha um plano de piso e uma queda de luz lateral, de
+              modo que o que sobra do palco lê como **espaço**, e não como
+              retângulo escuro à espera de um enfeite.
+
+              Com a camada, saíram do módulo as ~190 linhas de `.consulting*` —
+              o grafo, o pulso em laço de 10s e o halo em laço de 7s. Os dois
+              laços eram, além disso, a única animação permanente da dobra, e
+              "nada em laço" é regra do projeto (`CLAUDE.md`).
+            */}
           </div>
         ))}
 
@@ -358,7 +479,13 @@ export function HeroStage() {
         <div
           id="hero-painel"
           role="tabpanel"
-          aria-labelledby={`hero-aba-${state.id}`}
+          /*
+            O painel é rotulado pela aba **selecionada**, não pela copy visível:
+            durante os 150ms de saída da copy o que a tela mostra já é a cena
+            nova, e o leitor de tela não pode ficar meio passo atrás do estado
+            real do `tablist`.
+          */
+          aria-labelledby={`hero-aba-${scene.id}`}
           /*
             `items-center`, e não `items-end`. Ancorado pela base, cada linha a
             menos no título empurrava o bloco inteiro para baixo — era metade da
@@ -462,7 +589,43 @@ export function HeroStage() {
             do seletor — ambos acima do vão de 16px que o próprio par de CTAs
             usa entre si nessa largura.
           */
-          className="relative z-10 flex min-h-0 flex-1 items-center pb-8 pt-[calc(var(--media-h)+1.5rem)] lg:py-12 lg:pt-12 xl:py-14 xl:pt-14 2xl:pb-6 2xl:pt-32"
+          /*
+            ============================================================
+            RECOMPOSIÇÃO P1 (2026-08-10) — O VÃO DE BAIXO ENCOLHE PELOS
+            DOIS LADOS
+            ============================================================
+
+            Com `items-center`, o vão abaixo do par de CTAs vale
+            `pb + sobra/2`, e a sobra é `altura do painel − altura do bloco −
+            pt − pb`. Ou seja: **`pb` entra duas vezes na conta de baixo e `pt`
+            só uma**. Reduzir `pb` e compensar em `pt` move o conjunto para
+            baixo sem mexer na altura de nada.
+
+            Medido no build de produção, vão entre a base do par de CTAs e a
+            aresta superior da chapa, na cena de Equipamentos:
+
+              viewport   antes desta rodada   primeira montagem   agora
+              1920           114,2px              145,5px         117,5px
+              1440           107,2px              135,7px         112,0px
+
+            A coluna do meio é a plataforma nova antes deste ajuste: a chapa
+            passou a ser mais compacta que a faixa que ela substituiu (168px
+            contra 190 em 1920) e a diferença caiu inteira no vão. Os dois
+            ajustes que fecham a conta são este `pb`/`pt` e a altura própria da
+            baia (ver `min-h` no botão, abaixo).
+
+            **E o que sobra de vão agora é cena, não grafite.** A máscara do
+            `.scrim` abre a partir de 68% da altura do palco, que é onde este
+            vão começa — o trecho entre a ação e a decisão passou a mostrar o
+            piso, o rodapé da linha de cocção e a fuga do corredor. Zerar o vão
+            seria socar o conteúdo contra o controle, que é o que o briefing
+            proíbe; o que ele pedia era que o espaço deixasse de ser morto.
+
+            Abaixo de `lg` a conta é outra (o palco é fluxo vertical, não
+            centragem): ali os cortes são diretos e estão medidos no bloco de
+            altura do telefone, mais abaixo.
+          */
+          className="relative z-10 flex min-h-0 flex-1 items-center pb-4 pt-[calc(var(--media-h)+1rem)] lg:py-12 lg:pt-12 xl:py-14 xl:pb-8 xl:pt-16 2xl:pb-0 2xl:pt-36"
         >
           <Container className="w-full">
             {/*
@@ -579,7 +742,22 @@ export function HeroStage() {
               O degrau de 1024–1279 **não** muda: é lá que a medição reprovou
               a 560px numa rodada anterior, e 480px segue sendo o valor seguro.
             */}
-            <div className="max-w-[35rem] lg:max-w-[30rem] xl:max-w-[40rem] 2xl:max-w-[48rem]">
+            {/*
+              `data-saindo` é a **saída** do bloco inteiro — etiqueta, título,
+              intenção e a linha de ação, juntos. Ele fica ligado durante os
+              `COPY_OUT_MS` que separam a escolha da substituição do texto no
+              DOM, e é o que faz a mensagem sair antes de a nova chegar em vez
+              de ser cortada no mesmo quadro. A entrada é dos filhos (`.swap`),
+              não daqui: assim o bloco volta inteiro e cada linha ainda sobe os
+              seus 8px.
+            */}
+            <div
+              data-saindo={copyOut ? 'true' : undefined}
+              className={cn(
+                styles.copyBlock,
+                'max-w-[35rem] lg:max-w-[30rem] xl:max-w-[40rem] 2xl:max-w-[48rem]',
+              )}
+            >
               <p
                 className={cn(
                   styles.enter,
@@ -607,7 +785,29 @@ export function HeroStage() {
                     cima — 1440 e 1920 ficam byte a byte como estavam, que é o
                     requisito desta rodada.
                   */
-                  'flex items-center gap-3 font-condensed font-semibold uppercase tracking-[0.16em] text-yellow lg:inline-flex',
+                  /*
+                    ============================================================
+                    INVENTÁRIO DE AMARELO (2026-08-10) — A ETIQUETA CEDE O TOM
+                    ============================================================
+
+                    A primeira dobra tinha **seis** regiões amarelas
+                    simultâneas: a marca, o CTA do cabeçalho, o traço e o texto
+                    da etiqueta, o CTA da dobra, o acento do estado ativo e a
+                    seta da porta ativa. Amarelo que aparece seis vezes não é
+                    acento, é cor de fundo distribuída.
+
+                    A hierarquia que o projeto fixa é marca > ação > estado, e o
+                    que perde força primeiro é o decorativo. A etiqueta não é
+                    nenhum dos três — é um rótulo — então é ela que cede: o
+                    **texto** passa a `canvas/80` e o **traço** continua amarelo,
+                    como hairline. A leitura não muda (o traço é o que marca a
+                    etiqueta como etiqueta) e o CTA amarelo, quarenta linhas
+                    abaixo, deixa de disputar com um rótulo de 13px.
+
+                    Isto não toca a identidade nem a logo, e é reversível numa
+                    linha se a direção preferir a etiqueta amarela de volta.
+                  */
+                  'flex items-center gap-3 font-condensed font-semibold uppercase tracking-[0.16em] text-canvas/80 lg:inline-flex',
                   /* `leading` explícita e depois do `text-[…]` — ver o `h1`. */
                   'text-[0.75rem] leading-[1.3] sm:text-[0.8125rem]',
                   /*
@@ -638,8 +838,8 @@ export function HeroStage() {
                   crossfade curto de `.swap`. Mesmo padrão no `h1` e na
                   intenção, abaixo.
                 */}
-                <span key={state.id} className={styles.swap}>
-                  {state.eyebrow}
+                <span key={copy.id} className={cn(styles.swap, 'block')}>
+                  {copy.eyebrow}
                 </span>
               </p>
 
@@ -751,8 +951,8 @@ export function HeroStage() {
                   '2xl:text-[3.625rem]',
                 )}
               >
-                <span key={state.id} className={styles.swap}>
-                  {state.headline}
+                <span key={copy.id} className={cn(styles.swap, 'block')}>
+                  {copy.headline}
                 </span>
               </h1>
 
@@ -783,8 +983,8 @@ export function HeroStage() {
                   'text-[0.9375rem] leading-[1.5] lg:text-[1.125rem] lg:leading-[1.6]',
                 )}
               >
-                <span key={state.id} className={styles.swap}>
-                  {state.intent}
+                <span key={copy.id} className={cn(styles.swap, 'block')}>
+                  {copy.intent}
                 </span>
               </p>
 
@@ -874,12 +1074,19 @@ export function HeroStage() {
                 */
                 className={cn(
                   styles.enter,
-                  'mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4',
+                  /*
+                    `mt-8` → `mt-6` abaixo de `lg` (2026-08-10): parte dos 45px
+                    que a chapa nova pede de volta no telefone — ver o bloco de
+                    altura no módulo. 24px continuam separando ler de agir, e
+                    continuam acima do vão de 12px que o próprio par usa entre
+                    os dois botões nessa largura. `lg:mt-10` e `xl:mt-12` ficam.
+                  */
+                  'mt-6 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4',
                   'lg:mt-10 lg:w-max lg:gap-3 xl:mt-12 xl:w-auto xl:gap-4',
                 )}
               >
-                <HeroCta activeId={state.id} />
-                <HeroWhatsappCta topic={state.id} />
+                <HeroCta activeId={copy.id} />
+                <HeroWhatsappCta topic={copy.id} />
               </div>
             </div>
           </Container>
@@ -920,7 +1127,33 @@ export function HeroStage() {
           dados, não interface morta, e apagá-los seria mexer num arquivo que
           esta rodada não deve tocar.
         */}
-        <div className={cn(styles.base, 'shrink-0')}>
+        {/*
+          ============================================================
+          A PLATAFORMA DE DECISÃO (2026-08-10)
+          ============================================================
+
+          A régua de 2026-08-09 estava reprovada visualmente: três nomes soltos
+          numa faixa que fechava em 0,98 de preto — "um rodapé dentro da Hero",
+          nas palavras do gestor. O diagnóstico completo, com as medições, está
+          no módulo CSS. O que entra no lugar é **um objeto**: uma chapa com
+          aresta própria, dividida em três baias, na largura útil da composição.
+
+          A árvore é `.deck` → `Container` → `.plate` → cabeça + baias, e cada
+          nível tem uma função que os outros não podem cumprir:
+
+            `.deck` .. transição tonal de largura inteira. Nunca chega a opaco,
+                       então a cena continua visível através da chapa — é o que
+                       a faz nascer do palco em vez de ser colada nele;
+            `.plate` . a chapa. Largura do `Container` mais o próprio recuo, o
+                       que põe o texto da primeira baia **na guia do `h1`**;
+            cabeça ... a instrução, que deixa de ser legenda e vira o rótulo do
+                       painel;
+            baias .... três zonas, rebaixadas no inativo e salientes no ativo.
+
+          O `role="tablist"` e toda a mecânica de teclado continuam iguais: o
+          que mudou é o corpo do controle, não o contrato de acessibilidade.
+        */}
+        <div className={cn(styles.deck, 'shrink-0')}>
           {/*
             Legenda do render — só Projetos tem (`DEC-008`: material de projeto
             nunca aparece sem se declarar como tal).
@@ -936,385 +1169,264 @@ export function HeroStage() {
             Sai abaixo de `lg`: no palco em faixa do toque não sobra altura para
             uma linha extra sem invadir o texto que assenta logo abaixo da cena.
           */}
-          {state.media.caption ? (
+          {scene.media.caption ? (
             <p
-              key={state.id}
+              key={scene.id}
               className={cn(
                 styles.mediaCaption,
                 styles.swap,
                 'hidden font-condensed text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-canvas/70 lg:block',
               )}
             >
-              {state.media.caption}
+              {scene.media.caption}
             </p>
           ) : null}
 
           <Container>
             {/*
-              ---------- Instrução do seletor ----------
-
-              É o rótulo do controle, não uma linha de texto solta: fica colada
-              à régua, num corpo que não disputa com os três nomes.
-
-              Abaixo de `sm` ela vira `sr-only` em vez de `hidden`: em 390px a
-              linha inteira está no limite da coluna e os três rótulos precisam
-              do espaço, mas `display:none` tiraria o elemento da árvore de
-              acessibilidade e o `aria-describedby` do seletor ficaria apontando
-              para o nada.
-
-              Direção visual (2026-08-08): `sm:pt-3` → `sm:pt-5`. O seletor
-              lia colado à faixa de conteúdo acima dele — mais respiro aqui
-              separa as duas zonas sem precisar de um divisor.
-
               ============================================================
-              CENTRADA, E NÃO NA GUIA ESQUERDA (2026-08-09)
+              A CHAPA FECHADA SAIU — TRÊS PORTAS, COM VÃO (2026-08-11)
               ============================================================
 
-              Ela era alinhada à esquerda do `Container`. O grupo dos três
-              pilares, porém, é um **cluster centrado** com folga nas duas
-              pontas: medido em 1920, a instrução começava em x=300 e a primeira
-              trilha só em x=352. O olho lia uma legenda pendurada à esquerda,
-              acima de "Equipamentos" — legenda do primeiro pilar, não do
-              conjunto.
+              O desenho anterior era **uma chapa** dividida em três baias
+              encostadas, com fio divisório entre elas, e a instrução numa linha
+              de cabeça dentro do mesmo objeto. Estava correto de gramática e
+              reprovado de leitura: uma superfície contínua subdividida por
+              fios, com um rótulo em cima e três células iguais embaixo, é a
+              forma de um painel administrativo — e era assim que estava sendo
+              lida.
 
-              `text-center` resolve por composição, sem ornamento: o grupo já é
-              centrado no mesmo eixo do `Container` (centro em x=960 nos dois),
-              então centrar a instrução a põe exatamente sobre o eixo do
-              conjunto. Ela passa a valer para os três porque está no meio dos
-              três, não em cima de um.
+              O que muda não é o acabamento das baias; é a **topologia**:
 
-              ============================================================
-              A OPACIDADE SOBE JUNTO — 50% → 65%
-              ============================================================
+                · a chapa comum acaba. Cada porta passa a ser um objeto próprio,
+                  com aresta própria, separada das vizinhas por vão real (ver
+                  `.doors` no módulo). É por esse vão que o palco reaparece
+                  **entre** os controles — a fotografia deixa de ser interrompida
+                  por uma barra e passa a atravessar o sistema;
+                · a instrução sai de dentro do objeto e sobe para uma linha
+                  própria, com respiro medido até as portas. Ela deixa de ser
+                  cabeçalho de tabela e passa a ser o que o briefing pede: a
+                  micro-headline que **manda escolher**;
+                · a altura cai de 96/112/128px para 80/88/96 — o controle fica
+                  mais baixo e mais horizontal, e a altura devolvida vai para o
+                  palco.
 
-              Centrar teve um custo que só a medição pega. À esquerda, a
-              instrução assentava onde o degradê horizontal do `.scrim` está em
-              0,95 — praticamente preto. No centro ele já caiu para ~0,5, e a
-              fotografia aparece muito mais por trás do texto.
-
-              Medido no build de produção, pior pixel sob a caixa real das
-              letras (um `Range` sobre o nó de texto — a caixa do `<p>` engana,
-              porque ela ocupa a largura inteira do `Container` e inclui a
-              fotografia clara da direita, onde texto nenhum assenta):
-
-                50% ... 3,92:1  ← reprova, e era o valor que vinha da posição
-                                  antiga
-                60% ... 4,92:1
-                65% ... ~5,5:1  ← escolhido
-                70% ... 6,09:1
-
-              65% dá margem sobre o piso de 4,5 sem que a instrução chegue perto
-              dos três nomes: ela tem 11px em `medium` contra 19px em `bold`, e
-              a diferença de corpo é que carrega a hierarquia — não a opacidade.
+              O `role="tablist"`, a navegação por seta, o `tabindex` rotativo e
+              o par `aria-selected`/`aria-controls` continuam idênticos: mudou o
+              corpo do controle, não o contrato de acessibilidade.
             */}
-            <p
-              className="sr-only sm:not-sr-only sm:block sm:pt-5 sm:text-center sm:font-condensed sm:text-[0.6875rem] sm:font-medium sm:uppercase sm:tracking-[0.14em] sm:text-canvas/65"
-              id="hero-seletor-instrucao"
-            >
-              {homeHero.railHint}
-            </p>
+            <div className={styles.decision}>
+              {/*
+                ---------- A instrução, agora numa linha só dela ----------
 
-            <div
-              role="tablist"
-              aria-label="Frentes da Bianchini"
-              aria-describedby="hero-seletor-instrucao"
-              aria-orientation="horizontal"
-              onKeyDown={onKeyDown}
-              onMouseLeave={onRailLeave}
-              onFocusCapture={onRailFocus}
-              /*
-                ============================================================
-                DIREÇÃO VISUAL (2026-08-08) — DE GRADE PARA GRUPO
-                ============================================================
+                Três coisas a tiram de "legenda" sem que ela chegue perto de
+                disputar com o `h1` (15px contra 58, condensada caixa-alta contra
+                sans de leitura):
 
-                Até aqui os três controles eram `grid-template-columns:
-                repeat(3, minmax(0, 1fr))` — três células esticadas de guia a
-                guia do `Container`, sem vão visível entre elas. O gestor
-                apontou o resultado pelo nome certo: leitura de planilha, três
-                colunas de tabela, não três portas de navegação. A malha que
-                alinhava o número de Equipamentos e a seta de Consultoria às
-                mesmas guias do `h1` (documentada no módulo CSS, "A CORREÇÃO DE
-                MALHA DE 2026-08-08") é abandonada nesta rodada — era ela,
-                esticando as células ponta a ponta, que produzia a leitura de
-                tabela.
+                  · **corpo e peso** — 15px `bold` de `lg` para cima, contra os
+                    13px `semibold` de antes;
+                  · **tracking menor** — 0,2em caía como código técnico e
+                    obrigava o olho a soletrar. 0,12em devolve a frase como
+                    frase, que é o que o briefing pede explicitamente;
+                  · **um traço amarelo à esquerda**, na guia. Ele não é
+                    ornamento: é o mesmo traço da etiqueta do `h1`, no mesmo
+                    eixo, e é o que liga a instrução ao bloco de conteúdo em vez
+                    de deixá-la pousada sobre os controles.
 
-                `styles.railGroup` substitui `styles.railGrid`: `flex` com
-                `justify-content: center` e um `gap` generoso — os três
-                controles agora têm largura própria (a do conteúdo mais um
-                respiro fixo, não a de uma célula de grade) e ficam centrados
-                como grupo dentro do `Container`, com vão visível nas duas
-                pontas. Cada `.railTop` (a régua de estado) passa a cobrir só a
-                largura do seu próprio controle — não mais um segmento de uma
-                linha contínua de guia a guia.
-              */
-              /*
-                `sm:pt-3` → `sm:pt-6` (2026-08-09). Centrar a instrução resolveu
-                o alinhamento com o conjunto, mas com 12px até as réguas ela
-                passou a encostar na trilha do meio — trocou "legenda do
-                primeiro pilar" por "legenda do pilar do meio". O que a faz ler
-                como rótulo **do grupo** é a soma das duas coisas: estar no eixo
-                do conjunto e estar destacada dele. 24px é o suficiente para ela
-                flutuar acima dos três traços sem pertencer a nenhum.
-              */
-              className={cn(styles.railGroup, 'sm:pt-6')}
-            >
-              {heroStates.map((item, index) => {
-                const selected = index === active
-                return (
-                  <button
-                    key={item.id}
-                    ref={(node) => {
-                      tabsRef.current[index] = node
-                    }}
-                    type="button"
-                    role="tab"
-                    id={`hero-aba-${item.id}`}
-                    aria-selected={selected}
-                    aria-controls="hero-painel"
-                    /* Tabindex rotativo: o seletor inteiro é uma parada de `Tab`. */
-                    tabIndex={index === pinned ? 0 : -1}
-                    onClick={() => select(index)}
-                    onMouseEnter={() => onItemEnter(index)}
-                    className={cn(
-                      'group/aba',
-                      styles.railItem,
-                      /*
-                        Não pinta mais fundo nenhum: o único efeito de
-                        `railItemActive` hoje é acender a régua de 2px da área
-                        selecionada (ver o módulo).
-                      */
-                      selected && styles.railItemActive,
-                      /*
-                        ============================================================
-                        DIREÇÃO VISUAL (2026-08-08) — ALTURA E RECUO, AUTÔNOMOS
-                        ============================================================
+                A régua que fechava a linha de cabeça até a aresta da chapa saiu
+                junto com a chapa — sem objeto para fechar, ela voltaria a ser
+                moldura.
+              */}
+              <div className={styles.decisionHead}>
+                <span aria-hidden="true" className={styles.decisionTick} />
+                <p
+                  id="hero-seletor-instrucao"
+                  /*
+                    ============================================================
+                    DE RÓTULO A COMANDO (2026-08-11) — E A CONDENSADA SAI
+                    ============================================================
 
-                        Até aqui a altura mirava um teto de grade (96–112px, o
-                        "não estourar a célula") e o recuo horizontal só existia
-                        **entre** as áreas (as pontas encostavam nas guias do
-                        `h1`/CTA — ver "A CORREÇÃO DE MALHA DE 2026-08-08" no
-                        módulo). As duas contas mudam porque a área deixou de
-                        ser uma célula de grade: agora é um controle
-                        autocontido, com o próprio recuo nas quatro bordas
-                        (`.railItem` no módulo) e sem teto de altura importado
-                        de uma grade que não existe mais. `min-h` aqui é só o
-                        piso de toque: 44px de sobra é o mínimo pedido, 64/96
-                        já cobria isso e continua cobrindo com folga maior
-                        ainda, porque o número saiu (uma linha a menos) e o
-                        recuo interno cresceu.
-                      */
-                      /*
-                        Harmonização (2026-08-09): `2xl:min-h-28 2xl:py-8`. Em
-                        1920 a régua media 148,5px numa base de palco de 899 —
-                        uma tira, contra um bloco textual de 421. Dando-lhe
-                        altura própria nessa faixa, o seletor passa a pesar como
-                        a terceira peça da composição (bloco → seletor →
-                        métricas) em vez de uma barra anexada embaixo, e a
-                        ocupação útil do palco sobe sem que a dobra cresça.
-                        Gated em `2xl` porque 1366 e 1024 já fecham com sobra
-                        zero — ver o comentário do `py` do painel.
-                      */
-                      /*
-                        `2xl:min-h-32 2xl:py-9` (2026-08-09): com a faixa de
-                        métricas fora da dobra, sobraram ~96px de folga no palco
-                        em 1920 × 1080, e boa parte deles caía no vão entre o
-                        par de CTAs e o seletor — grafite sem função. Dar altura
-                        ao seletor nessa faixa converte parte dessa folga em
-                        presença do controle, que é o que o briefing pede, em
-                        vez de deixá-la como vão morto. Gated em `2xl`: 1440 e
-                        1024 não têm essa folga.
-                      */
-                      /*
-                        ============================================================
-                        ALTURA RESPONSIVA (2026-08-09) — O PISO DO TELEFONE ERA
-                        FOLGA, NÃO CONTEÚDO
-                        ============================================================
+                    Copy travada. O que muda é o que a fazia continuar lendo como
+                    legenda mesmo depois de ganhar linha própria:
 
-                        `min-h-16` (64px) contra um conteúdo real de **48,3px**
-                        em 390 × 844 — recuo de 16px em cima e embaixo mais a
-                        linha do rótulo. Os 15,7px de diferença eram piso de
-                        caixa sem nada dentro: nem texto, nem respiro declarado.
+                      · **a família.** Oswald condensada em caixa alta é o rótulo
+                        comercial curto do projeto — botão, etiqueta, numeral,
+                        cota. Numa frase de 42 caracteres ela obriga o olho a
+                        soletrar letra a letra, e foi exatamente o sintoma
+                        relatado. Manrope é a família de **leitura** do projeto
+                        (`CLAUDE.md`: sans para H1…H4, parágrafos, navegação), e
+                        é o que devolve a frase como frase. Isto **aproxima** a
+                        tipografia da regra do projeto, não a afasta;
+                      · **a caixa.** Sai o `uppercase`, entra a caixa que a copy
+                        tem na origem (`railHint`, em `src/data/v2/home.ts`). O
+                        texto não foi tocado — o que saiu foi a transformação
+                        CSS que o estava deformando;
+                      · **o `tracking`.** De 0,12em para 0,005em. Espaçamento de
+                        rótulo em frase corrida é o que produz leitura de código
+                        de peça;
+                      · **o corpo.** 15px → 17px no desktop, dentro da faixa de
+                        16–18 pedida, e 16px no telefone.
 
-                        `min-h-[3.5rem]` (56px) devolve 8px e mantém 7,7px de
-                        folga sobre o conteúdo — a área de toque continua em
-                        56px, doze acima do piso de 44 que o projeto exige, e o
-                        seletor não perde presença: o que encolhe é a reserva
-                        vazia, não o controle.
+                    Continua sem disputar com o `h1`: 17px contra 58, peso 600
+                    contra 700, e a 300px de distância vertical.
+                  */
+                  className={cn(
+                    'font-sans font-bold text-canvas',
+                    /*
+                      14 / 16 / 19px. O degrau do telefone é medido, não
+                      estético: a frase mede ~330px a 16px, e em 390 sobram 310
+                      entre o traço e a margem — ela quebrava em duas linhas e a
+                      dobra crescia 26,6px. A 14px ela mede ~289 e fecha numa
+                      linha só.
 
-                        Nada muda de 1024 para cima — `lg:min-h-24` e
-                        `2xl:min-h-32` seguem intactos.
-                      */
-                      'min-h-[3.5rem] py-4 lg:min-h-24 lg:py-6 2xl:min-h-32 2xl:py-9',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow',
-                    )}
-                  >
-                    {/* Linha superior própria da opção — nunca contínua entre elas. */}
-                    <span aria-hidden="true" className={styles.railTop} />
+                      ---------- 17 → 19px e `semibold` → `bold` (2026-08-11) ----------
 
-                    {/*
-                      ============================================================
-                      HARMONIA (2026-08-09) — O CONTEÚDO PASSA A SER CENTRADO
-                      ============================================================
+                      O briefing pede que a instrução seja "nitidamente
+                      percebida como instrução de escolha", e a 17px `semibold`
+                      ela ainda era o menor texto de uma dobra que tem um `h1` de
+                      58px logo acima. 19px `bold` a põe **acima do corpo de
+                      leitura da página** (16px) em vez de abaixo dele: quem
+                      varre a dobra encontra três massas nesta ordem — título,
+                      ação, instrução —, e não título, ação, legenda.
 
-                      Antes: `flex w-full items-center` com o bloco de texto em
-                      `flex-1` e a seta em `shrink-0`. Isso empurrava o texto
-                      contra a borda esquerda da trilha e a seta contra a
-                      direita — medido em 1920, o centro do conteúdo caía a
-                      0,0px do centro da trilha só por coincidência de soma,
-                      mas visualmente o rótulo começava a 24px da borda e a seta
-                      terminava a 24px da outra, com até 190px de vazio entre os
-                      dois. Era isso que fazia a área ler como "trilha solta"
-                      em vez de porta resolvida: o conteúdo não ocupava o
-                      próprio componente, ficava pendurado nas duas pontas.
+                      O teto continua sendo o `h1`: 19 contra 58, peso 700 contra
+                      700 mas em corpo três vezes menor, e a 300px de distância
+                      vertical. Não há disputa possível.
+                    */
+                    'text-[0.875rem] leading-snug tracking-[0.005em]',
+                    'sm:text-[1rem] lg:text-[1.1875rem]',
+                  )}
+                >
+                  {homeHero.railHint}
+                </p>
+              </div>
 
-                      Agora o conteúdo é uma coluna centrada, e a seta entra
-                      **na linha do rótulo** — ela passa a conversar com o
-                      texto (é o "vá por aqui" do nome que está ao lado) em vez
-                      de ser um glifo no canto. O complemento fica centrado
-                      abaixo, na mesma medida.
-
-                      `text-center` é o que o briefing autorizou explicitamente,
-                      e aqui ele resolve: com trilhas de largura igual (desde
-                      2026-08-09) e três textos de comprimentos diferentes,
-                      centrar é a única distribuição que dá o mesmo acabamento
-                      às três áreas.
-                    */}
-                    {/*
-                      ============================================================
-                      BASE INTEGRADA (2026-08-09) — CENTRADO DE FATO, NÃO SÓ NA CONTA
-                      ============================================================
-
-                      A caixa já estava matematicamente centrada, mas o conteúdo
-                      não **parecia** centrado: a seta dividia a linha com o
-                      rótulo, então o que ficava no eixo da trilha era o conjunto
-                      "rótulo + vão + seta". Medido em 1920, isso jogava o
-                      **rótulo** 13px à esquerda do centro da trilha nas três
-                      portas — e o complemento, esse sim centrado, ficava
-                      visivelmente desalinhado em relação ao nome logo acima.
-
-                      A seta sai do fluxo: `position: absolute` em `left: 100%`
-                      da linha do rótulo. Ela continua encostada no nome (não
-                      volta a ser glifo de canto, que foi o defeito corrigido na
-                      rodada passada), mas deixa de entrar na conta da largura —
-                      então rótulo e complemento passam a compartilhar o mesmo
-                      eixo, que é o eixo da trilha.
-                    */}
-                    <span
+              <div
+                role="tablist"
+                aria-label="Frentes da Bianchini"
+                aria-describedby="hero-seletor-instrucao"
+                aria-orientation="horizontal"
+                onKeyDown={onKeyDown}
+                className={styles.doors}
+              >
+                {heroStates.map((item, index) => {
+                  const selected = index === active
+                  return (
+                    <button
+                      key={item.id}
+                      ref={(node) => {
+                        tabsRef.current[index] = node
+                      }}
+                      type="button"
+                      role="tab"
+                      id={`hero-aba-${item.id}`}
+                      aria-selected={selected}
+                      aria-controls="hero-painel"
+                      /* Tabindex rotativo: o seletor inteiro é uma parada de `Tab`. */
+                      tabIndex={selected ? 0 : -1}
+                      onClick={() => select(index)}
                       className={cn(
-                        styles.railContent,
-                        'flex w-full min-w-0 flex-col items-center gap-1.5 text-center',
+                        'group/porta',
+                        styles.door,
+                        selected && styles.doorActive,
+                        /*
+                          `min-h` é piso, e a altura real vem do conteúdo mais o
+                          recuo do módulo. 56px no telefone (contra o mínimo de
+                          44 de toque) e 80/88/96 no desktop — a faixa que o
+                          briefing pede, contra os 96/112/128 do desenho
+                          anterior. São 32px devolvidos ao palco em 1920.
+                        */
+                        /*
+                          Subiu um degrau em 2026-08-11 junto com o recuo
+                          interno: 60px no telefone e 88/96/104 no desktop. A
+                          altura devolvida não sai do palco — sai do vão morto
+                          que havia entre o par de CTAs e o seletor, medido em
+                          112px em 1440 e agora em ~88.
+                        */
+                        'min-h-[3.75rem] lg:min-h-[5.5rem] xl:min-h-24 2xl:min-h-[6.5rem]',
+                        /*
+                          O anel de foco é desenhado por `.door::after` no
+                          módulo: `ring` do Tailwind é `box-shadow`, e sombra
+                          fica abaixo dos pseudo-elementos do próprio botão — a
+                          superfície da porta o cobriria. Medido na rodada
+                          anterior, o anel amarelo saía rgb(96,86,52) por isso.
+                        */
+                        'focus-visible:outline-none',
                       )}
                     >
-                      <span className="relative flex min-w-0 max-w-full items-center justify-center">
-                        <span
-                          className={cn(
-                            /* `leading` depois do `text-[…]` — ver o `h1`. */
-                            'font-condensed uppercase tracking-[0.05em] transition-colors duration-300',
-                            'text-[0.8125rem] leading-tight sm:text-[0.9375rem] lg:text-[1.1875rem]',
-                            /*
-                              Inativo em `canvas/75`, não num fantasma: o
-                              briefing pede que ele continue legível e não
-                              pareça desabilitado. 75% de `#EFEDEB` sobre a
-                              faixa dá 9,5:1 — passa AA com folga larga.
-
-                              **`/75` e não `/72`**: 72 não existe na escala de
-                              opacidade do Tailwind 3 e a classe simplesmente
-                              não seria gerada — a armadilha já registrada em
-                              `CLAUDE.md` (o scrim que sumiu por usar `/88`).
-                            */
-                            /*
-                              O preenchimento do ativo saiu (ver o módulo), e
-                              com ele o único retorno visual do hover. Ele volta
-                              aqui, na tinta do rótulo: passar o ponteiro
-                              acende o nome, e a régua amarela confirma. É
-                              resposta sem deslocar nada.
-                            */
-                            selected
-                              ? 'font-bold text-canvas'
+                      <span className={styles.doorInner}>
+                        <span className={styles.doorLine}>
+                          <span
+                            className={cn(
+                              /* `leading` depois do `text-[…]` — ver o `h1`. */
+                              'font-condensed uppercase transition-colors duration-200',
                               /*
-                                Inativo desce de `/75` para `/70` (2026-08-09).
-                                A presença do ativo é **relativa**: sem tocar no
-                                ativo (que já é `font-bold` em `canvas` cheio),
-                                afastar o inativo um degrau aumenta a distância
-                                percebida entre os dois. Cinco pontos é pouco
-                                para o inativo parecer desabilitado — o briefing
-                                pede que ele continue claramente clicável — e o
-                                bastante para o ativo destacar-se mais.
+                                Subiu um degrau em `lg` para cima (17 → 19px,
+                                19 → 21 em 2xl). O nome da frente é o que a
+                                porta **é**; a 17px ele ficava do tamanho da
+                                situação logo abaixo (14px) e as duas linhas
+                                liam como um parágrafo de duas linhas em vez de
+                                título + complemento.
                               */
-                              : 'font-semibold text-canvas/70 group-hover/aba:text-canvas group-focus-visible/aba:text-canvas',
-                          )}
-                        >
-                          {item.name}
+                              'text-[0.8125rem] leading-tight tracking-[0.04em]',
+                              'sm:text-[1rem] lg:text-[1.1875rem] 2xl:text-[1.3125rem]',
+                              /*
+                                A escala de opacidade do projeto é de 5 em 5
+                                (`tailwind.config.ts`): `text-canvas/78` não é
+                                gerada, o elemento fica sem `color` e herda a
+                                tinta escura do documento. Mesma família da
+                                armadilha de `cn()` registrada em `CLAUDE.md` —
+                                some sem erro de build e sem aviso.
+                              */
+                              selected
+                                ? 'font-bold text-canvas'
+                                : 'font-semibold text-canvas/85 group-hover/porta:text-canvas group-focus-visible/porta:text-canvas',
+                            )}
+                          >
+                            {item.name}
+                          </span>
+
+                          {/*
+                            A seta é o sinal de clicabilidade que **não depende
+                            de cor nem de cursor** — que é o teste que o briefing
+                            impõe, e o único que sobrevive no toque.
+
+                            Some abaixo de 420px de janela, e o corte é medido:
+                            em 320px cada porta tem ~99px úteis e "EQUIPAMENTOS"
+                            a 12px pede ~81. A partir de 420px a porta passa de
+                            132px e o par nome + seta cabe.
+                          */}
+                          <ArrowRightIcon
+                            size={18}
+                            aria-hidden="true"
+                            className={cn(
+                              styles.doorArrow,
+                              'hidden shrink-0 transition-colors duration-200 min-[420px]:block',
+                              selected ? 'text-yellow' : 'text-canvas/60',
+                            )}
+                          />
                         </span>
 
                         {/*
-                          Seta — o sinal permanente de que a área é um controle,
-                          e não um parágrafo. Ela existe nos três estados.
-
-                          **Fora do fluxo desde 2026-08-09** (`absolute` em
-                          `left-full`): encostada no rótulo, como desde a rodada
-                          passada, mas sem entrar na largura da linha — ver o
-                          comentário do bloco de conteúdo, acima. É o que faz o
-                          rótulo ficar de fato no eixo da trilha.
-
-                          A da porta ativa é amarela e fica 2px à frente o tempo
-                          todo (ver `.railArrow` no módulo): ela aponta, não só
-                          muda de cor. A inativa sobe de `/45` para `/55` — o
-                          briefing pede que o estado inativo continue presente e
-                          claramente clicável, e a 45% ela lia como desabilitada.
+                          Complemento — a situação do cliente, em uma linha. Sai
+                          abaixo de `sm`: em 390px cada porta tem ~120px e a
+                          frase mais longa quebraria em quatro linhas. Quem cobre
+                          essa ausência no telefone é a instrução, que nesta
+                          composição é visível em todas as larguras.
                         */}
-                        <ArrowRightIcon
-                          size={16}
-                          aria-hidden="true"
+                        <span
                           className={cn(
-                            styles.railArrow,
-                            'absolute left-full ml-2 hidden shrink-0 transition-colors duration-200 sm:block lg:ml-2.5',
-                            selected ? 'text-yellow' : 'text-canvas/55',
+                            'hidden text-[0.8125rem] leading-snug transition-colors duration-200 sm:block lg:text-[0.9375rem]',
+                            selected ? 'text-canvas/90' : 'text-canvas/70',
                           )}
-                        />
+                        >
+                          {item.cue}
+                        </span>
                       </span>
-
-                      {/*
-                        Complemento — a situação do cliente, em uma linha. Sai
-                        abaixo de `sm`: em 390px as três áreas têm ~110px e a
-                        frase quebraria em quatro linhas, empurrando o seletor
-                        para dentro do palco.
-                      */}
-                      <span
-                        className={cn(
-                          'hidden text-[0.8125rem] leading-snug transition-colors duration-300 sm:block lg:text-[0.9375rem]',
-                          /*
-                            `/65` e `/80`, não `/55` e `/75`: com a faixa do
-                            seletor deixando a fotografia aparecer, o pior
-                            pixel sob esta linha subiu e o complemento inativo
-                            caiu para 3,92:1 em Equipamentos. Ver a medição em
-                            `.base`, no módulo — o perfil de escuridão foi
-                            preservado ali quando o degradê mudou de dono, e
-                            remedido depois.
-                          */
-                          /*
-                            Ativo sobe de `/80` para `/95` (2026-08-09): o
-                            briefing pede "complemento com contraste superior"
-                            como parte da assinatura do estado ativo. A
-                            distância entre 65% e 95% é visível de relance; a
-                            de 65% para 80% não era.
-                          */
-                          /*
-                            Inativo desce de `/65` para `/60` na mesma lógica do
-                            rótulo, acima. Remedido depois: o pior pixel sob
-                            esta linha põe o complemento inativo em ~6,6:1 nas
-                            três cenas, bem acima do piso de 4,5:1 — a margem
-                            que o degradê da base garante.
-                          */
-                          selected ? 'text-canvas' : 'text-canvas/60',
-                        )}
-                      >
-                        {item.cue}
-                      </span>
-                    </span>
-                  </button>
-                )
-              })}
+                    </button>
+                  )
+                })}
+              </div>
             </div>
           </Container>
 
@@ -1519,8 +1631,26 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
       )}
     >
-      {/* `lg:px-5 xl:px-7` e cela `lg:w-12` — ver o comentário da linha de ação. */}
-      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-5 xl:px-7">
+      {/*
+        `lg:px-5 xl:px-5` e cela `lg:w-12` — ver o comentário da linha de ação.
+
+        ============================================================
+        MASSA (2026-08-10) — O RECUO DE `xl` CAI DE 28 PARA 20px
+        ============================================================
+
+        O briefing pede que o CTA contextual **domine** o de WhatsApp, e manda
+        reavaliar tamanho, massa e largura — não rótulo nem destino, que estão
+        travados. Medido em 1920 × 1080, antes: 326,0px de amarelo contra 266,8
+        de verde, razão **1,22**. Depois: 250,8 de verde, razão **1,30**.
+
+        Oito pixels de recuo de cada lado é o ajuste mais barato disponível: não
+        toca altura (os dois continuam com 58px, e o par continua lendo como um
+        par), não toca o rótulo, não toca a cela do glifo e não muda o
+        posicionamento de nada — só tira massa de onde ela não estava dizendo
+        nada. A hierarquia continua sustentada principalmente pela luminância
+        (0,603 do amarelo contra 0,123 do verde) e pela ordem de leitura.
+      */}
+      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-5 xl:px-5">
         Falar no WhatsApp
       </span>
       <span

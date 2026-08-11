@@ -156,27 +156,517 @@
   background-color: #101010;
 }
 
-/* ----------
-   As três cenas, empilhadas no mesmo lugar. Só a ativa é opaca.
+/* ============================================================
+   A PONTE — REVELAÇÃO DIRECIONAL NO LUGAR DO APAGÃO (2026-08-11)
+   ============================================================
 
-   **Sem ampliação de entrada.** A versão anterior escalava a cena de 1,03 a 1 em
-   640ms a cada troca; somado ao crossfade, o palco inteiro respirava a cada
-   clique. O briefing pede crossfade, e só: 380ms, dentro da faixa de 300–450.
+   Esta é a **segunda** correção de motion desta hero, e ela existe porque a
+   primeira resolveu um defeito criando outro. Vale registrar as duas.
 
-   Ficam as três no DOM porque a troca precisa ser imediata — montar a imagem no
-   clique produziria um quadro vazio no meio da transição. O custo é controlado
-   do lado do `next/image`: só a cena inicial é `priority`.
-   ---------- */
+   ------------------------------------------------------------
+   1. O crossfade simétrico — dupla exposição
+   ------------------------------------------------------------
+
+   As três cenas partilhavam `transition: opacity 380ms`, então a que sai e a
+   que entra percorriam a mesma curva ao mesmo tempo, em sentidos opostos. A
+   meio caminho as duas estavam perto de 0,5. Medido em Projetos → Consultoria:
+   em t=190ms, planta 0,42 e retrato 0,58 — **uma planta técnica atravessando
+   um rosto por ~6 quadros**.
+
+   ------------------------------------------------------------
+   2. A saída → passagem → entrada — apagão perceptivo
+   ------------------------------------------------------------
+
+   A correção seguinte tirou a simultaneidade: saída em 170ms sem atraso,
+   entrada em 300ms com 150ms de atraso. A sobreposição caiu de ~0,50 para
+   **0,002**, e o ghosting acabou de fato.
+
+   Só que a conta de sobreposição estava medindo a coisa errada. Entre ~150 e
+   ~200ms **as duas cenas estavam perto de zero ao mesmo tempo**, e o que a
+   janela mostrava nesse intervalo era o fundo do palco: a dobra piscava para
+   quase preto no meio de cada troca. Zero de sobreposição e zero de imagem são
+   a mesma medição — e só uma delas é o objetivo.
+
+   ------------------------------------------------------------
+   3. O modelo desta rodada — o palco nunca se apaga
+   ------------------------------------------------------------
+
+   O objetivo real não é `overlap = 0`; é **nenhuma competição entre assuntos
+   reconhecíveis**. As duas coisas deixam de ser sinônimas quando a troca para
+   de ser cromática e passa a ser **espacial**:
+
+     · a cena nova entra por uma **revelação direcional**, da direita para a
+       esquerda, com aresta suave;
+     · a cena velha **não perde opacidade durante a revelação** — ela continua
+       inteira por baixo, sendo coberta;
+     · quando a revelação fecha, a velha é retirada, já invisível.
+
+   O resultado é que **cada pixel da janela mostra exatamente uma cena, o tempo
+   todo**. Não há instante com duas imagens somadas (o defeito 1) nem instante
+   com nenhuma (o defeito 2): a luminância da área de mídia evolui de forma
+   contínua do começo ao fim.
+
+   ------------------------------------------------------------
+   4. Por que da esquerda para a direita, e não o contrário
+   ------------------------------------------------------------
+
+   A primeira montagem desta rodada apostou no sentido oposto, pelo raciocínio
+   de que a coluna de texto vive à esquerda e deveria ser a última a mudar. **A
+   inspeção de quadros mostrou que o certo é o inverso**, e a razão é a ordem em
+   que copy e cena se encontram:
+
+     · a copy **sai primeiro** (0–210ms) e a nova entra depois (250–490ms);
+     · revelando da esquerda, o trecho sob o texto troca de cena **no vão entre
+       as duas copies** — a antiga já saiu, a nova ainda não entrou. Quando a
+       nova copy aparece, a cena embaixo dela já é a nova;
+     · revelando da direita, a coluna seria a última a mudar e a copy nova
+       entraria **sobre a cena antiga** — que é um dos dois pares proibidos.
+
+   Medido no quadro: com o sentido invertido, a copy de Consultoria aparecia
+   sobre a praça de cocção de Equipamentos.
+
+   ------------------------------------------------------------
+   5. A rampa é estreita, e isso não é acabamento
+   ------------------------------------------------------------
+
+   `clip-path` daria uma aresta **dura** — uma cortina, que é o "slide" que o
+   briefing proíbe. O que corre aqui é uma máscara de gradiente cuja **posição**
+   é animada (`mask-position`), não as paradas: paradas de gradiente não são
+   interpoláveis sem `@property`, posição de máscara é. A máscara mede 300% da
+   largura, então a rampa atravessa a janela inteira sem que o gradiente mude.
+
+   A largura da rampa é o parâmetro crítico, e a primeira montagem errou nele.
+   Com rampa larga (22% da largura, na primeira tentativa) **as duas cenas voltam
+   a se somar** — não na tela inteira como no crossfade, mas numa faixa de 300px
+   que atravessa a composição. É dupla exposição espacialmente graduada, e a
+   inspeção de quadros a pegou.
+
+   A rampa agora vale **8% da largura** (2,67% em coordenadas de máscara, ×3 pela
+   escala de 300%): em 1440 são 115px de aresta suave — o bastante para não ler
+   como cortina, pouco o bastante para nunca haver dois assuntos reconhecíveis no
+   mesmo lugar. E a região opaca cobre 34% da máscara, contra os 33,33% que o
+   elemento ocupa em repouso: sem essa folga a aresta direita da cena ficaria
+   permanentemente esmaecida.
+
+   ------------------------------------------------------------
+   6. A curva é `precise`, e não `premium`
+   ------------------------------------------------------------
+
+   `--ease-premium` (0.16, 1, 0.3, 1) é fortemente adiantada: cobre **63% da
+   largura nos primeiros 19% do tempo**. Numa revelação isso é um estalo — e foi
+   o que pôs a cena nova debaixo da copy que ainda estava saindo. `--ease-precise`
+   (0.4, 0, 0.2, 1) é simétrica: 20% em t=150ms, 50% em t=260, 85% em t=400. É a
+   curva certa para varredura, e continua sendo uma das três do projeto.
+
+   A escala continua em `premium`, e mais longa que a revelação (720ms contra
+   520): o movimento segue um instante depois de a imagem já estar inteira, que é
+   o que faz a troca terminar como gesto e não como corte.
+
+   `-webkit-mask-*` acompanha por causa do Safari, que ainda pede o prefixo para
+   `mask-position`.
+
+   ------------------------------------------------------------
+   6. A retirada da cena velha é um degrau, não uma transição
+   ------------------------------------------------------------
+
+   `transition: opacity 0ms linear 520ms` na regra base. Duração zero com atraso
+   quer dizer: **segura o valor anterior até 520ms e então troca de uma vez**.
+   Aos 520ms a revelação já fechou e a cena velha está inteiramente coberta, de
+   modo que o degrau não é visível em nenhum pixel. É de propósito que ela não
+   esmaeça: qualquer esmaecimento durante a revelação reabriria a soma de duas
+   imagens no trecho ainda não coberto — que é o defeito 1.
+   ============================================================ */
+/* ============================================================
+   7. A RIGIDEZ QUE SOBROU, E DE ONDE ELA VINHA (2026-08-11)
+   ============================================================
+
+   A revelação direcional resolveu os dois defeitos anteriores (dupla exposição
+   e apagão) e continuou sendo descrita como "rígida". A causa não estava na
+   curva nem na duração: estava em **a cena revelada estar parada**.
+
+   Uma máscara correndo sobre uma imagem imóvel é, literalmente, uma cortina
+   abrindo — o olho lê o movimento da aresta, não a chegada da cena. O que falta
+   é a cena **também se mover enquanto é revelada**, que é o que separa um corte
+   de montagem de uma troca de plano.
+
+   Três ajustes, nesta ordem de importância:
+
+     1. **a cena entra derivando.** Era só `scale(1.016) → 1`. Agora
+        `scale(1.03) translateX(1.2%) → nenhum`: a imagem chega de fora,
+        acompanhando o sentido da revelação, e assenta. É um movimento de
+        câmera, não um zoom — e é ele que faz a troca ler como plano novo;
+     2. **a rampa alarga de 8% para 12% da largura** (2,67% → 4% em coordenadas
+        de máscara). Em 1440 são 173px de aresta suave contra 115. Continua bem
+        abaixo dos 22% que reabriram a dupla exposição na primeira montagem, e o
+        limite que importa é o mesmo: dentro da rampa nunca pode haver dois
+        assuntos reconhecíveis;
+     3. **660ms no lugar de 520.** Mais lento é mais suave desde que a curva
+        continue simétrica.
+
+   `--ease-precise` **continua**, e a razão é a mesma que a escolheu: ela é a
+   única das três que não é adiantada. `--ease-smooth` (0.22, 1, 0.36, 1) cobre
+   ~55% da largura nos primeiros 10% do tempo, e a coluna de texto vive
+   justamente no trecho revelado primeiro — com ela, a cena nova aparece sob a
+   copy que ainda está saindo, que é o par proibido. A suavidade vem da deriva e
+   da rampa; a curva é a que protege a ordem de leitura.
+
+   O `transform` só é seguro porque `.stage` é `overflow: hidden` — deslocamento
+   por transform conta como área rolável, e é a armadilha registrada em
+   `CLAUDE.md`.
+   ============================================================ */
 .frame {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 380ms var(--ease-smooth);
-  will-change: opacity;
+  transform: scale(1.03) translateX(1.2%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 34%,
+    rgba(0, 0, 0, 0) 38%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 34%,
+    rgba(0, 0, 0, 0) 38%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  transition:
+    opacity 0ms linear 660ms,
+    transform 0ms linear 660ms,
+    -webkit-mask-position 0ms linear 660ms,
+    mask-position 0ms linear 660ms;
+  will-change: mask-position, opacity, transform;
 }
 
 .frameActive {
   opacity: 1;
+  transform: none;
+  z-index: 1;
+  -webkit-mask-position: 0% 0;
+  mask-position: 0% 0;
+  transition:
+    opacity 0ms linear,
+    -webkit-mask-position 660ms var(--ease-precise),
+    mask-position 660ms var(--ease-precise),
+    transform 980ms var(--ease-premium);
+}
+
+/* ============================================================
+   AMBIENT MOTION — UM POR CENA, PORQUE CADA CENA PEDE OUTRA COISA
+   ============================================================
+
+   A deriva anterior era única e comum às três (1,1% em 16s). No vídeo ela era
+   **imperceptível** — o que, para uma cena parada por vários segundos, é
+   indistinguível de não existir. Sobe para 1,4–1,6% em 11–13s, e passa a ter
+   direção própria por assunto:
+
+     equipamentos .. avança para dentro do corredor, deslocando à esquerda: é a
+                     fuga da praça de cocção que ganha profundidade;
+     projetos ...... aproxima-se da prancha, quase sem percurso lateral — o
+                     documento não pode sair do enquadramento;
+     consultoria ... **quase parada**, 0,6% e nenhum percurso. Uma pessoa que
+                     deriva lê como recorte flutuando; a vida desta cena vem do
+                     framework vetorial, não do retrato.
+
+   A conta que mantém isto abaixo do limiar de percepção continua valendo: a
+   1,6% em 12s de ida, o deslocamento por quadro em 1920 é de ~0,09px. O
+   visitante não vê a cena se mexer; ele deixa de sentir que ela é um `<img>`
+   parado. É o oposto de Ken Burns — não há destino, a cena volta ao ponto de
+   partida a cada ciclo.
+
+   **Só na cena ativa.** As inativas estão em `opacity: 0`; animá-las seria
+   compor camadas invisíveis a 60Hz sem nada na tela.
+   ============================================================ */
+@keyframes ambienteEquipamentos {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.015) translate3d(-7px, -2px, 0);
+  }
+}
+
+@keyframes ambienteProjetos {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.016) translate3d(-2px, -3px, 0);
+  }
+}
+
+@keyframes ambienteConsultoria {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.006) translate3d(0, 0, 0);
+  }
+}
+
+.frameActive .sceneBox {
+  animation: ambienteEquipamentos 12s var(--ease-smooth) infinite alternate;
+}
+
+.frameActive.frameProjetos .sceneBox {
+  animation-name: ambienteProjetos;
+  animation-duration: 13s;
+}
+
+/*
+  `transform-origin` próprio: a figura de Consultoria é ancorada à direita e à
+  base, e escalar do centro descolaria a aresta direita dela do limite do palco
+  — sobraria uma fresta escura piscando a cada ciclo.
+*/
+.frameActive.frameConsultoria .sceneBox {
+  animation-name: ambienteConsultoria;
+  animation-duration: 11s;
+}
+
+.frameConsultoria .sceneBox {
+  transform-origin: right bottom;
+}
+
+/*
+  A caixa da cena dentro do quadro. Neutra por padrão — ver o comentário no
+  `hero-stage.tsx`: ela existe para que um estado possa ter geometria própria
+  sem brigar com os estilos em linha do `next/image`.
+*/
+.sceneBox {
+  position: absolute;
+  inset: 0;
+}
+
+/* ============================================================
+   CONSULTORIA — A FIGURA DEIXA DE SANGRAR O PALCO (2026-08-10)
+   ============================================================
+
+   **O defeito, medido.** Nas três cenas o palco é o mesmo e a fotografia é
+   `cover` de sangria. Isso funciona para Equipamentos e Projetos, que são
+   cenas de ambiente; para Consultoria não, porque o arquivo é um **retrato de
+   estúdio** — fundo liso, sujeito recortado da cintura para cima. Sangrado no
+   palco inteiro, o retrato vira a composição.
+
+   Medido no build de produção, sobre a cena composta (scrim aplicado, painel
+   e plataforma escondidos), pixels acima de 140 de luminância — a massa de
+   pele, camisa e luz de estúdio:
+
+     estado          1920      1440      1024
+     equipamentos    3,1%      3,7%      4,9%
+     projetos        8,8%      8,7%      8,4%
+     consultoria    11,5%     12,2%     14,0%
+
+   E, o que mais pesa, **na faixa da plataforma** (a banda que a chapa cobre),
+   a proporção de pixels claros por trás dela:
+
+     equipamentos   0,42%   projetos   1,82%   consultoria   4,17%
+
+   Dez vezes mais luz branca por trás do mesmo controle. É isso que o gestor
+   viu como "camisa/pele/luz interferindo na plataforma inferior": a baia de
+   Consultoria — justamente a que está ativa nesse estado — ficava lavada, e
+   as três baias deixavam de parecer o mesmo material.
+
+   Geometricamente, o retrato também invadia a coluna de leitura: em 1440 a
+   massa clara começava em x=686 e a coluna termina em x=700.
+
+   ============================================================
+   O QUE **NÃO** FOI FEITO, E POR QUÊ
+   ============================================================
+
+   O arquivo não foi tocado: nenhuma correção tonal, nenhuma dessaturação,
+   nenhum escurecimento de pele, nenhuma imagem nova. `filter` sobre um retrato
+   de pessoa real é exatamente o que a rodada de 2026-08-09 já removera daqui,
+   e pela mesma razão — a correção era estética, não medida, e distorcia a cor
+   de pele de alguém.
+
+   O que muda é **apresentação**: a mesma fotografia, em outra escala, em outro
+   lugar do palco.
+
+   ============================================================
+   A COMPOSIÇÃO ADOTADA
+   ============================================================
+
+   Em `lg` para cima, a cena de Consultoria passa a ser uma **figura ancorada à
+   direita e à base**, com altura própria (`--cena-h` da altura do palco) e a
+   proporção nativa do arquivo (1672 × 941). O que sobra do palco à esquerda e
+   acima é o **fundo de estúdio do próprio arquivo, estendido** — e não um
+   retângulo de grafite.
+
+   Números em 1920 × 1080 (palco de 996px), com `--cena-h: 80%`:
+
+                             antes (cover)   agora
+     altura renderizada        1080,5px       796,8px    (−26,3%)
+     área renderizada          proporção 1      0,54     (−46%)
+     x onde a massa clara começa   920         1182      (+262px)
+     topo da cabeça               y=174         y=357    (183px mais baixo)
+
+   A coluna de leitura termina em x=1068: antes o ombro entrava 148px dentro
+   dela, agora a figura começa 114px depois dela.
+
+   **Uma escala menor foi testada e outra maior também.** `--cena-h: 84%`
+   resolvia a colisão com a coluna mas deixava a figura ainda grande demais
+   para o que o briefing pede; abaixo de 76% o retrato começa a boiar num campo
+   escuro grande demais e perde a autoridade que precisa manter. 76/78/80% é o
+   ponto em que as duas coisas se sustentam.
+
+   ============================================================
+   POR QUE ANCORADA NA BASE, E NÃO CENTRADA
+   ============================================================
+
+   Ancorar na base é o que **elimina a emenda horizontal**: a fotografia
+   continua descendo até o fim do palco, como nos outros dois estados, e quem
+   fecha a base continua sendo a plataforma. Ancorada no topo ou centrada, a
+   aresta inferior cairia em cena aberta e precisaria ser dissolvida — e o que
+   está na base do arquivo são os braços cruzados, que não podem esmaecer sem
+   virar fantasma.
+
+   Sobram duas emendas, as duas em fundo liso do arquivo:
+
+     · **à esquerda**, dissolvida em 11% da largura da figura. Em 1920 são
+       156px de rampa (x 504 → 660) e a massa clara só começa em x=1182 — a
+       rampa inteira cai em fundo de estúdio, onde não há detalhe a perder;
+     · **no topo**, dissolvida em 7% da altura. Em 1920 são 56px (y 283 → 339)
+       e o alto da cabeça está em y=357 — a rampa termina 18px antes de tocar a
+       figura. 7% é medido contra o arquivo: a cabeça começa a 9,25% da altura
+       dele.
+
+   O campo que recebe as duas rampas reproduz o fundo do arquivo, amostrado
+   nele: rgb(21,23,30) na aresta esquerda, rgb(33,35,42) a 25% da largura,
+   rgb(44,47,54) a 45%, com o clarão do estúdio atrás da cabeça. Daí o par
+   radial + linear abaixo — não é um degradê escolhido a olho, são os tons do
+   próprio arquivo continuados para fora dele.
+
+   ============================================================
+   `--cena-h` É RESPONSIVO PORQUE A LARGURA DO PALCO NÃO É
+   ============================================================
+
+   A caixa tem proporção fixa, então a altura decide a largura
+   (`altura × 1,777`). Em telas mais quadradas essa largura passa da janela e a
+   rampa da esquerda sairia da tela:
+
+     viewport      --cena-h   largura da figura   sobra à esquerda
+     1920 × 1080     80%           1416px             504px
+     1440 × 900      78%           1137px             303px
+     1366 × 768      78%            954px             412px
+     1024 × 768      76%            934px              90px
+
+   Abaixo de `lg` nada disto se aplica: ali a cena é uma tira de 30svh no alto
+   do palco (ver o bloco de telefone) e o corte é lateral — o retrato não tem
+   como dominar uma composição de que ocupa 30%.
+   ============================================================ */
+/* ============================================================
+   O CAMPO DE CONSULTORIA VIRA ESPAÇO (2026-08-11)
+   ============================================================
+
+   O que havia aqui era a continuação tonal do arquivo — um radial atrás da
+   cabeça mais um linear horizontal — e era **correto e chapado**: reproduzia a
+   cor do fundo do estúdio sem reproduzir a profundidade dele. Sobrava um
+   retângulo escuro grande à esquerda da figura, e foi para tapar esse retângulo
+   que a camada vetorial nasceu (ver `hero-stage.tsx`).
+
+   Com o vetor fora, o vazio é resolvido por onde deveria: **luz**. Três camadas
+   novas, todas fotográficas, nenhuma gráfica:
+
+     · **plano de piso.** Uma faixa mais clara nos 34% de baixo, que morre antes
+       das laterais. É o que dá à figura um chão — sem ele o retrato flutua, que
+       é o mesmo defeito de "recorte sem pedestal" já corrigido em
+       `leadership-section.tsx`;
+     · **queda de luz lateral.** Um radial largo e baixo à esquerda da figura,
+       a 4%, no tom frio do fundo. Ele não ilumina nada: ele **modela** o vazio,
+       de modo que a metade esquerda deixe de ter valor único e passe a ter
+       gradiente próprio — que é a diferença entre campo escuro e espaço escuro;
+     · **vinheta de topo.** Os 22% de cima fecham em quase preto. Isso empurra o
+       olho para a faixa central (onde a coluna de texto e a cabeça da figura
+       vivem) e recompõe a hierarquia que a camada vetorial disputava.
+
+   O radial atrás da cabeça continua, com um ponto a mais de intensidade: é o
+   clarão do próprio arquivo, e é o que costura a figura ao campo sintetizado.
+   ============================================================ */
+@media (min-width: 1024px) {
+  .frameConsultoria {
+    background:
+      /* vinheta de topo — fecha o alto e devolve o olho ao centro */
+      linear-gradient(180deg, rgba(8, 9, 11, 0.72) 0%, rgba(8, 9, 11, 0) 22%),
+      /* plano de piso — o chão sob a figura, dissolvido nas laterais */
+      radial-gradient(
+        120% 44% at 62% 104%,
+        rgba(92, 97, 110, 0.28) 0%,
+        rgba(48, 51, 60, 0.14) 44%,
+        rgba(16, 17, 20, 0) 76%
+      ),
+      /* clarão do estúdio atrás da cabeça — o tom do próprio arquivo */
+      radial-gradient(
+        74% 58% at 74% 30%,
+        rgba(76, 81, 93, 0.52) 0%,
+        rgba(38, 41, 49, 0.3) 46%,
+        rgba(16, 17, 20, 0) 78%
+      ),
+      /* queda de luz à esquerda — modela o vazio em vez de preenchê-lo */
+      radial-gradient(
+        58% 62% at 16% 62%,
+        rgba(58, 63, 75, 0.22) 0%,
+        rgba(24, 26, 32, 0.08) 52%,
+        rgba(15, 16, 19, 0) 80%
+      ),
+      linear-gradient(90deg, rgb(14, 15, 18) 0%, rgb(21, 23, 29) 46%, rgb(25, 27, 34) 100%);
+  }
+
+  .frameConsultoria .sceneBox {
+    /*
+      78/84/86%, contra os 76/78/80 anteriores. A figura cresce o bastante para
+      o campo vazio encolher por composição, e **não mais que isso**: o teto de
+      cada degrau é a distância até a coluna de leitura, que é o que a rodada
+      anterior mediu e o que não pode voltar a colidir. Medido, folga entre o
+      fim da coluna e o começo da massa clara da camisa:
+
+        1024 × 768 ... 78%, folga 16px  → mantido baixo de propósito; é o
+                       viewport em que a coluna e a figura mais se aproximam
+        1440 × 900 ... 84%, folga 105px  (era 147px a 78%)
+        1920 × 1080 .. 86%, folga  55px  (era 110px a 80%)
+
+      A folga menor não reabre o contraste do parágrafo: quem protege o texto é
+      o `.scrim`, e ele não mudou. O que a folga protege é a **composição** — a
+      coluna não pode nascer em cima do ombro.
+    */
+    --cena-h: 78%;
+
+    inset: auto 0 0 auto;
+    height: var(--cena-h);
+    width: auto;
+    aspect-ratio: 1672 / 941;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 11%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 11%);
+  }
+
+  /*
+    A rampa do topo vai no `<img>`, e não na caixa: as duas máscaras se
+    multiplicam por aninhamento, sem depender de `mask-composite`.
+  */
+  .frameConsultoria .sceneBox img {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 7%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 7%);
+  }
+}
+
+@media (min-width: 1280px) {
+  .frameConsultoria .sceneBox {
+    --cena-h: 84%;
+  }
+}
+
+@media (min-width: 1536px) {
+  .frameConsultoria .sceneBox {
+    --cena-h: 86%;
+  }
 }
 
 /* ============================================================
@@ -294,583 +784,811 @@
 }
 
 /* ============================================================
-   SCRIM — LOCAL, ONDE O TEXTO ASSENTA
+   SCRIM — SOMBRA DIRIGIDA, NÃO UM MURO
    ============================================================
 
    Dois degradês, e nenhum véu uniforme:
 
-     · um lateral, que fecha a **coluna esquerda**, onde o conteúdo vive, e
-       chega a zero antes dos 74% da largura — o terço direito da fotografia
+     · um lateral, que assenta a **coluna esquerda**, onde o conteúdo vive, e
+       chega a zero antes dos 79% da largura — o quinto direito da fotografia
        fica sem cobertura nenhuma;
-     · um inferior curto, que assenta a régua sobre a imagem sem transformá-la
-       numa faixa opaca.
+     · um inferior curto, que dissolve a base da cena na plataforma sem
+       transformá-la numa faixa opaca.
 
    ============================================================
    OS VALORES SÃO MEDIDOS, NÃO ESCOLHIDOS A OLHO
    ============================================================
 
-   Uma primeira tentativa afrouxou o degradê (0,93 → 0,90 na origem, 0,52 → 0,44
-   no meio) apostando que o texto tinha ganhado contraste por outro caminho — o
-   título encurtou e a coluna estreitou. **Não tinha.** Amostragem de pixel do
-   pior caso (o ponto mais claro da fotografia dentro da caixa de cada texto),
-   sobre a cena de Equipamentos:
+   Uma tentativa antiga afrouxou o degradê a olho e **reprovou** — 2,92:1 sob a
+   intenção em 1024. Desde então nenhum valor entra aqui sem amostragem do pior
+   pixel (o ponto mais claro da fotografia dentro da caixa real das letras).
 
-     viewport   h1        intenção
-     1586        3,27:1    5,0:1
-     1440        3,47:1    4,6:1
-     1366        3,56:1    4,0:1   ← reprova
-     1024        2,92:1    2,48:1  ← reprova por larga margem
+   ============================================================
+   RECOMPOSIÇÃO P1 (2026-08-10) — O MURO DA ESQUERDA SAI
+   ============================================================
 
-   1024 é o pior caso por dois motivos somados: a coluna de texto vai até 51% da
-   tela (contra 46% em 1440) e o recorte da fotografia ali cai justamente sobre a
-   parede clara ao fundo.
+   O perfil anterior era 0,95 na origem, 0,93 até 28% e 0,82 a 46%. Ele passava
+   em AA com **muita folga** — e essa folga era o defeito. Medido no build de
+   produção, pior pixel sob o `h1`:
 
-   Os valores abaixo foram remedidos até que o **pior pixel** sob o corpo de
-   texto passe 4,5:1 em todos os viewports e nas três cenas. O degradê continua
-   chegando a zero antes de 78% — o quarto direito da fotografia, onde estão a
-   linha de cocção, a coifa e o inox, segue sem cobertura nenhuma.
+     viewport / cena          antes      teto AA
+     1920 equipamentos       11,71:1      4,5:1
+     1920 projetos           15,79:1      4,5:1
+     1920 consultoria        15,66:1      4,5:1
+     1440 equipamentos        9,59:1      4,5:1
+
+   Onze contra quatro e meio não é margem de segurança: é fotografia apagada. O
+   fundo sob o `h1` media rgb(48,45,43) numa cena cuja banda correspondente tem
+   média 60–70 e picos de 250 — ou seja, o scrim estava devolvendo grafite liso
+   onde havia inox, reflexo e um corredor de serviço em fuga.
+
+   **A conta que fixa o novo perfil.** Luminância da cena crua por faixa de 10%
+   da largura do palco (média/máximo, amostragem de 1 em 4 pixels, scrim e
+   conteúdo escondidos, 1920 × 1080):
+
+     faixa    equipamentos   projetos    consultoria
+     0–10%       49/208        38/51        25/31
+     10–20%      71/250        41/57        31/35
+     20–30%      50/185        42/63        36/42
+     30–40%      62/251        45/167       42/49
+     40–50%      68/254        66/177       56/232
+     50–60%      60/252        81/179      133/251
+     60–70%      82/246       100/184      159/248
+     70–80%      92/248        97/183      159/251
+
+   Quem manda na esquerda é **equipamentos**: média baixa (49–71) mas com
+   **picos especulares de 185–254** — as luminárias e a quina do armário. É por
+   causa desses picos, e não da média, que o pior pixel exige cobertura; a
+   média baixa é a razão de a mesma cobertura apagar tudo o mais.
+
+   O novo perfil separa as duas coisas:
+
+     · **0–12%: a cobertura cai de 0,95 para 0,38–0,58.** Não há texto nenhum
+       ali (a coluna começa em x=300, 15,6% de 1920), então cada ponto de
+       cobertura ali era perda pura. É esta faixa que devolve o corredor em
+       sombra de equipamentos, a parede da sala de projetos e o fundo de estúdio
+       de consultoria — profundidade, não decoração;
+     · **15–56%: 0,68–0,73**, contra os 0,82–0,93 anteriores. É a faixa da
+       coluna de leitura, e o valor é o que a conta do pior caso permite:
+       pico de 252 sob a cobertura de 0,70 dá rgb(87) e **6,0:1**; a 0,55 daria
+       rgb(122) e 3,6:1, que reprova. 0,70 é o piso com margem, não o valor
+       confortável;
+     · **a queda começa em 56%, não em 46%.** A coluna de leitura mais larga
+       (48rem) termina em x=1068, 55,6% de 1920. Descer antes disso é cortar
+       proteção debaixo da última linha do título — o erro que já custou uma
+       reprovação de 3,58:1 nesta mesma dobra.
+
+   ============================================================
+   A MÁSCARA VERTICAL ABRE EM CIMA **E** EMBAIXO
+   ============================================================
+
+   A máscara existia para abrir a faixa junto ao cabeçalho. Agora ela abre nas
+   duas pontas, e a de baixo é a correção do "grande vazio vertical":
+
+     · **topo (0–9%)**: 0,34 → 1,0. Mais aberta que antes (era 0,46 → 1,0 em
+       16%), e mais curta. O cabeçalho é uma faixa opaca de grafite e a dobra
+       começava com 0,95 de scrim logo abaixo dele — duas superfícies pretas
+       coladas, sem plano nenhum entre elas. Com a cena chegando cedo, a emenda
+       ganha fotografia em vez de uma segunda faixa preta.
+
+       **Os 9% são medidos, e o pior caso é 1024 × 768.** A rampa fecha antes do
+       texto mais alto de qualquer viewport: a etiqueta de 1024 assenta a
+       **11,3%** da altura do palco (o palco ali tem 691px e o bloco é o mais
+       comprido em proporção), contra 16,5% em 1440 e 22,0% em 1920. Uma
+       tentativa com a rampa em 17% reprovou exatamente ali — a luminária do
+       teto (225 de luminância crua) caía sob a etiqueta com a máscara ainda em
+       0,73, e a cobertura efetiva de 0,53 devolveu rgb(115) e **3,26:1**;
+     · **base (68–100%)**: 1,0 → 0,44. Entre o fim do par de CTAs (76% da
+       altura do palco em 1920) e o topo da plataforma havia 172px de grafite
+       liso. A máscara devolve a cena exatamente ali. 68% é medido: a intenção
+       mais baixa das três termina a 62,2% da altura do palco, e os 6 pontos de
+       folga cobrem a variação entre estados (o bloco é centrado, então cada
+       copy assenta numa altura própria — ver o cabeçalho de `hero-stage.tsx`).
 
    No telefone a coluna some (o conteúdo é de largura inteira e assenta abaixo da
    cena), então o lateral é substituído por um vertical curto — ver o bloco de
    telefone, mais abaixo.
    ============================================================ */
+/*
+  ============================================================
+  `z-index: 2` — E ELE NÃO É ACABAMENTO (2026-08-11)
+  ============================================================
+
+  A ponte de revelação precisa que a cena que entra pinte **acima** da que sai,
+  e isso foi resolvido com `z-index: 1` em `.frameActive`. Efeito colateral que
+  a medição pegou e a captura não: o scrim é irmão posterior das cenas, mas sem
+  `z-index` próprio ele perdia para a cena promovida — **a fotografia passou a
+  cobrir a sombra dirigida**.
+
+  Medido no build de produção, pior pixel sob o `h1` de Equipamentos:
+
+    viewport     com o defeito      corrigido
+    1280 × 800      1,00:1           (ver relatório)
+    1024 × 768      1,00:1
+    1680 × 1050     1,00:1
+
+  1,00:1 é o fundo tendo exatamente a cor do texto: o `h1` branco caindo sobre o
+  inox iluminado, sem nada entre os dois. A dobra continuava "bonita" na captura
+  porque a fotografia estava mais aberta — era uma reprovação de acessibilidade
+  disfarçada de melhoria estética.
+
+  A ordem de pintura correta do palco, de baixo para cima: cenas inativas
+  (`auto`) → cena ativa (1) → **scrim (2)** → plataforma (10) → conteúdo (10).
+  ============================================================
+*/
 .scrim {
   position: absolute;
   inset: 0;
+  z-index: 2;
   pointer-events: none;
+  /*
+    A base vem mais leve que antes (0,78 → 0,52 na aresta): a plataforma tem
+    superfície própria desde 2026-08-10 e não precisa mais de uma faixa preta
+    pintada por baixo dela para segurar o texto do seletor. Ver `.deck`.
+  */
   background: linear-gradient(
     to top,
-    rgba(16, 16, 16, 0.78) 0%,
-    rgba(16, 16, 16, 0.36) 15%,
-    rgba(16, 16, 16, 0) 36%
+    rgba(16, 16, 16, 0.52) 0%,
+    rgba(16, 16, 16, 0.18) 13%,
+    rgba(16, 16, 16, 0) 31%
   );
 }
 
 /*
   ============================================================
-  DIREÇÃO VISUAL (2026-08-08) — O DEGRADÊ LATERAL GANHA UM TOPO
+  A ABERTURA DA ESQUERDA É ANCORADA NA GUIA, NÃO EM PERCENTUAL
   ============================================================
 
-  O degradê "to right" saiu de dentro de `.scrim` para este `::before` sem
-  mudar nenhuma das seis paradas — são as mesmas medidas contra o pior pixel
-  documentado acima, byte a byte. O que muda é que agora ele carrega uma
-  **máscara vertical**: a faixa de leitura (onde a etiqueta, o `h1` e a
-  intenção realmente assentam) começa em 16% da altura do palco e vai até a
-  base — ali a máscara está em preto pleno e a escuridão é idêntica à de
-  antes, píxel a píxel. Acima de 16% (o vão fixo de `lg:pt-14` mais a folga
-  de centralização, medido no pior caso de 1024×768 — texto nunca começa
-  antes de ~19% da altura do palco nesse viewport, o mais baixo da faixa
-  obrigatória) a máscara abre, e o degradê que antes cobria a coluna inteira
-  de cima a baixo — plano, na mesma densidade do rodapé ao teto — deixa a
-  faixa junto ao cabeçalho respirar: menos "véu uniforme", mais luz de cena
-  entrando por cima, exatamente onde nenhum texto precisa de proteção.
+  Primeira tentativa desta rodada: a cobertura subia de 0,38 na aresta para 0,68
+  em **15%** da largura, pela conta de que a coluna de texto começa em x=300
+  numa janela de 1920 — 15,6%.
 
-  Só a partir de `lg`: no toque a cena vira tira e o texto assenta abaixo
-  dela, em grafite liso — não há degradê lateral ali para mascarar.
+  **Reprovou, e o erro é instrutivo.** 15,6% é a guia de 1920 e de mais nenhum
+  viewport. O `Container` tem `max-w` de 1400px: enquanto a janela é menor que
+  isso, a guia é o próprio gutter (40px em `lg`), e só acima de 1400 ela cresce
+  com a sobra. Medido no build de produção, pior pixel sob o texto, cena de
+  equipamentos:
+
+     viewport   x da guia   % da largura   h1        etiqueta
+     1920         300px        15,6%       11,4:1     9,8:1
+     1440          60px         4,2%        5,36:1    5,62:1
+     1024          40px         3,9%        3,25:1    2,46:1   ← REPROVA
+
+  Em 1024 o `h1` começava a 3,9% da largura, dentro da rampa de abertura, e a
+  luminária do teto (pico de 138 medido no fundo composto) caía debaixo da
+  primeira linha. O `h1` em 1440 passou por sorte: a cena ali é mais escura no
+  mesmo x, não porque a cobertura fosse suficiente.
+
+  `--guia` reproduz a aresta interna do `Container` — a mesma expressão que
+  `.mediaCaption` já usa — e as paradas da rampa passam a ser calculadas a
+  partir dela:
+
+     0                        0,40   aresta da janela
+     calc(var(--guia) * 0.5)  0,58
+     var(--guia)              0,72   ← a partir daqui há texto
+     30% … 56%                0,73 … 0,70
+     64% … 79%                0,40 … 0
+
+  Com isso a abertura existe **na medida em que existe margem para ela**: 300px
+  de rampa em 1920, 60 em 1440, 40 em 1024. Não é o mesmo desenho encolhido —
+  é o mesmo princípio (não cobrir onde não há texto) aplicado à geometria real
+  de cada largura.
+
+  As paradas do meio continuam em percentual de propósito: elas acompanham o
+  **fim** da coluna de leitura, que é uma fração da largura (a coluna vai a
+  48rem em ≥1536, 40rem em 1280–1535 e 30rem em 1024–1279 — sempre entre 48% e
+  56% da janela), e não a guia.
 */
 @media (min-width: 1024px) {
   .scrim::before {
+    --guia: max(2.5rem, calc((100% - 1400px) / 2 + 2.5rem));
+
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to right,
-      rgba(16, 16, 16, 0.95) 0%,
-      rgba(16, 16, 16, 0.93) 28%,
-      rgba(16, 16, 16, 0.82) 46%,
-      rgba(16, 16, 16, 0.42) 62%,
-      rgba(16, 16, 16, 0.12) 71%,
-      rgba(16, 16, 16, 0) 78%
+      rgba(16, 16, 16, 0.4) 0,
+      rgba(16, 16, 16, 0.58) calc(var(--guia) * 0.5),
+      rgba(16, 16, 16, 0.72) var(--guia),
+      rgba(16, 16, 16, 0.73) 30%,
+      rgba(16, 16, 16, 0.72) 46%,
+      rgba(16, 16, 16, 0.7) 56%,
+      rgba(16, 16, 16, 0.4) 64%,
+      rgba(16, 16, 16, 0.12) 72%,
+      rgba(16, 16, 16, 0) 79%
     );
     -webkit-mask-image: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.46) 0%,
-      rgba(0, 0, 0, 0.74) 9%,
-      #000 16%,
-      #000 100%
+      rgba(0, 0, 0, 0.34) 0%,
+      rgba(0, 0, 0, 0.7) 5%,
+      #000 9%,
+      #000 68%,
+      rgba(0, 0, 0, 0.62) 82%,
+      rgba(0, 0, 0, 0.44) 100%
     );
     mask-image: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.46) 0%,
-      rgba(0, 0, 0, 0.74) 9%,
-      #000 16%,
-      #000 100%
+      rgba(0, 0, 0, 0.34) 0%,
+      rgba(0, 0, 0, 0.7) 5%,
+      #000 9%,
+      #000 68%,
+      rgba(0, 0, 0, 0.62) 82%,
+      rgba(0, 0, 0, 0.44) 100%
     );
   }
 }
 
 /* ============================================================
-   O SELETOR DOS TRÊS CAMINHOS
+   A DECISÃO — TRÊS PORTAS SEPARADAS, E NÃO UMA CHAPA SUBDIVIDIDA
    ============================================================
 
-   Um seletor de intenção, não três textos soltos sobre a foto. O que o torna
-   legível como controle:
+   **O histórico curto.** Este lugar da dobra já foi quatro coisas: três rótulos
+   soltos sobre a fotografia (reprovado — não parecia controle), três células de
+   grade encostadas (reprovado — leitura de planilha), três rótulos boiando com
+   vão largo (reprovado — voltou a não parecer controle) e, na rodada anterior,
+   **uma chapa com três baias rebaixadas**.
 
-     · uma **faixa própria** com fundo grafite semitransparente e borda superior,
-       integrada à base do palco;
-     · **título, complemento, seta e indicador** em cada uma;
-     · a área inteira clicável, com cursor de interação;
-     · linha superior amarela **exclusiva da opção ativa** — nunca um traço
-       contínuo correndo por cima das três.
-
-   Semitransparente e nada mais: sem `backdrop-filter`, sem vidro, sem sombra
-   genérica, sem canto arredondado.
-
-   ============================================================
-   P2 (2026-08-08) — SAEM AS DIVISÓRIAS VERTICAIS
-   ============================================================
-
-   `.railItem + .railItem::after` desenhava um traço vertical de 1px entre as
-   três áreas. A revisão visual da rodada P1 apontou que ele reintroduzia
-   leitura de tabela — três células fechadas — mesmo sem fundo nem borda
-   própria por área. A régua compartilhada (`.railTop`, abaixo) já separa as
-   áreas por peso, cor e posição do trecho ativo; a divisória vertical era
-   redundante com ela e o custo, não o benefício. Removida sem substituto:
-   nenhum fundo, pill ou borda entra no lugar.
+   A chapa resolveu o que as três tentativas anteriores não resolveram: as
+   portas passaram a ter matéria, plano, lábio e um estado ativo que se lê de
+   longe. E foi reprovada por outra razão, que nenhuma medição pega e a captura
+   pega na hora: uma superfície contínua, com um rótulo de cabeça e três células
+   iguais separadas por fio, **tem a forma de um painel administrativo**. Não é
+   acabamento; é a topologia que está errada.
 
    ============================================================
-   A CORREÇÃO DE MALHA DE 2026-08-08 (SUPERADA — VER ABAIXO)
+   O QUE MUDA, E O QUE NÃO MUDA
    ============================================================
 
-   O seletor estava fora da grade da própria dobra: número/seta das pontas
-   não caíam nas mesmas guias do `h1`/CTA/métricas. A correção da época
-   esticou as três áreas em `grid-template-columns: repeat(3, minmax(0, 1fr))`
-   (trilhas iguais, ponta a ponta do `Container`) e fez as pontas encostarem
-   nas guias, tirando o recuo lateral só delas.
+   Não muda: as três portas continuam baixas, horizontais e diretas; continuam
+   com nome, complemento e seta; continuam sendo `tablist` com seta, `Home`/`End`
+   e `tabindex` rotativo; e Equipamentos continua liderando por posição, não por
+   área — as três colunas são idênticas.
+
+   Muda a topologia:
+
+     · **a chapa comum acaba.** Cada porta é um objeto próprio, com aresta
+       própria, e entre elas há **vão real** — 14px em `lg` para cima. É por esse
+       vão que o palco reaparece entre os controles: a fotografia deixa de ser
+       interrompida por uma barra de ponta a ponta e passa a atravessar o
+       sistema. Era este o pedido — "o palco deve continuar aparecendo entre/atrás
+       do sistema";
+     · **a instrução sai de dentro do objeto.** Ela era a linha de cabeça da
+       chapa, que é literalmente o cabeçalho de uma tabela. Agora tem linha
+       própria, respiro medido até as portas e o mesmo traço amarelo da etiqueta
+       do `h1` — ver `.decisionHead`;
+     · **a altura cai** de 96/112/128px para 80/88/96. O controle fica mais
+       horizontal e devolve 32px de palco em 1920.
 
    ============================================================
-   DIREÇÃO VISUAL (2026-08-08) — DE GRADE PARA GRUPO
+   O VÃO É DE 14px, E O NÚMERO TEM UMA CONTA
    ============================================================
 
-   A malha resolveu o desalinhamento, mas trocou de defeito: três células
-   esticadas de guia a guia, sem vão visível entre elas, é exatamente a
-   "leitura de planilha" que o gestor apontou depois de ver a composição
-   funcionando — três colunas de tabela, não três portas de navegação.
+   O briefing dá 12–18px como ponto de partida em desktop. O que fecha em 14 é o
+   pior caso de largura, não o gosto: em 1024 cada porta tem 341px e o
+   complemento mais longo ("Corrigir gargalos e melhorar resultados") ocupa duas
+   linhas a partir de ~300px úteis. A 18px de vão sobram 296 úteis por porta e a
+   frase passa a três linhas, o que empurraria a dobra. A 14px sobram 301.
 
-   A correção agora é abandonar a grade, não realinhá-la de novo:
-
-     · `.railGroup` substitui `.railGrid` — `flex` com `justify-content:
-       center` e um `gap` generoso entre as três áreas, que passam a ter
-       **largura própria** (a do conteúdo mais um recuo fixo) em vez da
-       largura de uma célula de grade;
-     · o grupo inteiro fica centrado dentro do `Container`, com vão visível
-       nas duas pontas — as guias do `h1`/CTA/métricas deixam de reger o
-       seletor, que agora é lido como um cluster de controles à parte, não
-       como uma extensão da grade de conteúdo;
-     · o recuo interno de cada área deixa de depender de ser primeira/última
-       (`.railItem:first-child`/`:last-child` saem) porque não há mais guia
-       a alcançar — as quatro bordas de cada área têm o mesmo recuo.
-
-   Trade-off assumido: número de Equipamentos e seta de Consultoria não
-   caem mais em x=60/x=1380. É a troca deliberada desta rodada — alinhamento
-   de guia por presença de tabela.
-
-   ============================================================
-   DE CAIXA PREENCHIDA PARA RÉGUA COMPARTILHADA
-   ============================================================
-
-   O ativo era uma **caixa preenchida com deslocamento de 2px no hover** —
-   removida ainda na rodada da correção de malha. Fica a mecânica que a V1 já
-   usava no seletor de pilares: uma régua de 2px no topo de cada área, com o
-   ativo marcado por peso + contraste + régua. Com o grupo espaçado desta
-   rodada, cada régua cobre só a largura da sua própria área — três traços
-   curtos e distintos, não mais uma linha contínua de guia a guia (essa leitura
-   só fazia sentido quando as áreas encostavam umas nas outras).
-
-   Sinais do estado ativo, três e um deles não-cromático: régua de 2px
-   (posição/espessura), peso do rótulo (bold contra semibold) e cor.
+   No telefone o vão cai para 4px, e a conta é a mesma pelo outro lado: em 320px
+   a porta tem 102,7px e "EQUIPAMENTOS" a 12px pede ~81. Com 6px de vão e o
+   recuo interno de 12px sobrariam 78,7 e o nome comprimiria — que é o que o
+   briefing proíbe explicitamente para o telefone. Com 4px de vão e recuo de
+   10px sobram 84.
    ============================================================ */
+
 /* ============================================================
-   A BASE — A SUPERFÍCIE QUE ASSENTA O SELETOR SOBRE A CENA
+   `.deck` — A TRANSIÇÃO TONAL, AGORA MUITO MAIS ABERTA
    ============================================================
 
-   Esta caixa já foi três coisas em três rodadas, e vale registrar por quê:
+   Com a chapa fechada, o `.deck` precisava carregar pouco: a chapa tinha
+   matéria própria e protegia o texto dela. Sem chapa, o vão entre as portas é
+   fotografia crua, e é o `.deck` que faz esse trecho pertencer à dobra em vez
+   de virar um retalho de imagem entre três objetos.
 
-     1. era `.rail`, e pintava só a faixa do seletor. Abaixo dela vinha a faixa
-        de métricas, com `bg-graphite-deep` sólido e `border-t` — duas
-        superfícies coladas, e o olho lia a segunda como rodapé;
-     2. virou `.base` e passou a conter seletor **e** métricas, com o degradê
-        remapeado para a altura maior, para que as duas lessem como uma coisa
-        só sobre a fotografia;
-     3. **agora as métricas saíram da dobra** (decisão do gestor — ver o
-        comentário em `hero-stage.tsx`), e a base volta a conter só o seletor.
+   As paradas caem em relação ao desenho anterior (era 0,30 → 0,84):
 
-   Com isso as paradas voltam ao perfil original, que é o que foi **medido**
-   contra o pior pixel das três cenas: 0,30 no topo, 0,76 a 38% e 0,98 na base.
-   Na etapa 2 elas tinham sido convertidas para percentual de uma caixa mais
-   alta (0,76 a 23%, 0,97 a 58%) justamente para preservar essa densidade na
-   mesma altura física; desfeita a causa, desfaz-se a conversão.
+     0%    0,16   a emenda com o palco, quase aberta — é aqui que a cena
+                  atravessa, e é isso que dá "vida" ao trecho;
+     26%   0,38   a faixa da instrução. Ver a medição de contraste no relatório;
+     58%   0,54   o alto das portas;
+     100%  0,86   a base. Continua fechando escuro: é a emenda com
+                  `EquipmentStripSection`, e resíduo de fotografia ali reabre o
+                  "corte em seco" que a rodada anterior corrigiu.
 
-   Remedido depois de voltar: o pior pixel sob o complemento inativo fica em
-   6,9–7,2:1 nas três cenas, contra o piso de 4,5:1.
-
-   A última parada em 0,98 continua tendo função: é ela que fecha o encontro
-   entre a dobra e a primeira seção da home sem deixar um resíduo de fotografia
-   aparecendo na emenda.
+   A parada de baixo é a única que **não** pode afrouxar. As de cima podem
+   porque agora cada porta tem superfície própria e não depende do `.deck` para
+   segurar o texto que assenta nela.
    ============================================================ */
-.base {
+/*
+  ---------- A emenda do topo (2026-08-11) ----------
+
+  A primeira parada era `rgba(10,11,12,0.16) 0%`: um degradê que **começa em
+  0,16 de opacidade** produz um degrau de 16% de preto na aresta superior do
+  elemento, e esse degrau é uma linha horizontal atravessando a fotografia de
+  ponta a ponta. Ela estava visível nos três estados — mais em Consultoria, onde
+  cai sobre a camisa branca — e é o tipo de defeito que se lê como "montagem",
+  não como composição.
+
+  A rampa passa a nascer em 0 e a subir cedo (0,18 já aos 14%): a cobertura útil
+  sobre as portas não muda em pixel nenhum, e a aresta desaparece.
+*/
+.deck {
   position: relative;
   z-index: 10;
   background: linear-gradient(
     180deg,
-    rgba(12, 13, 14, 0.3) 0%,
-    rgba(12, 13, 14, 0.76) 38%,
-    rgba(12, 13, 14, 0.98) 100%
+    rgba(10, 11, 12, 0) 0%,
+    rgba(10, 11, 12, 0.18) 14%,
+    rgba(10, 11, 12, 0.4) 34%,
+    rgba(10, 11, 12, 0.56) 62%,
+    rgba(10, 11, 12, 0.86) 100%
   );
+  padding-bottom: 0.375rem;
 }
 
+@media (min-width: 1024px) {
+  /*
+    24px, e não os 14 da primeira montagem: com as portas rentes à aresta
+    inferior da dobra o conjunto voltava a ler como faixa de rodapé, que é
+    exatamente o que esta rodada desmonta. O respiro faz a fileira ser um objeto
+    **pousado no palco**. Não custa altura de dobra: o painel de conteúdo é
+    `flex-1` e cede os 10px, então a dobra continua fechando na janela em todos
+    os viewports de desktop medidos.
+  */
+  .deck {
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* ============================================================
+   `.decision` — O AGRUPAMENTO, SEM SUPERFÍCIE
+   ============================================================
+
+   Não é objeto: é só o que mantém instrução e portas no mesmo eixo e no mesmo
+   ritmo. Qualquer fundo, borda ou sombra aqui reconstituiria a chapa que esta
+   rodada está desmontando.
+   ============================================================ */
 /*
-  ---------- `.rail` deixou de existir (2026-08-09) ----------
+  ---------- O vão entre as portas dobra (2026-08-11) ----------
 
-  Ele era o `<div>` que embrulhava o seletor e pintava o degradê. Com o seletor
-  e as métricas na mesma superfície, esse embrulho virava uma caixa sem função:
-  o degradê subiu para `.base` (remapeado para a altura maior — ver acima) e o
-  `Container` do seletor passou a ser filho direto dela.
+  Era 0,25 / 0,5 / 0,875rem. Em 1440 isso dava **14px** entre uma porta e a
+  seguinte, contra 20px de recuo interno de cada uma: o vão era menor que o
+  respiro do texto dentro do objeto, e três superfícies a essa distância
+  voltam a ler como uma faixa subdividida — que é exatamente a chapa que a
+  rodada anterior desmontou, reconstituída por proximidade.
 
-  As paradas originais — 0,30 / 0,76 / 0,98 — foram medidas contra o pior pixel
-  das três cenas, com o complemento inativo em `canvas/65`; com 0,32 / 0,68 /
-  0,88 o pior caso fechava em 3,92:1 e reprovava em AA. Esse perfil não foi
-  descartado: está preservado na `.base`, na mesma altura física, e foi
-  remedido depois da mudança.
+  Agora 0,5 / 0,875 / 1,5 / 1,75rem. Em 1440 são **24px**, mais que o recuo
+  interno: cada porta passa a ter mais espaço em volta do que dentro, e é essa
+  relação — não a aresta — que faz três objetos lerem como três escolhas. O
+  palco reaparece por entre elas numa largura que se vê.
 */
+.decision {
+  --door-pad: 1rem;
+  --door-gap: 0.5rem;
 
-/*
-  Grupo centrado, não grade esticada — ver "DIREÇÃO VISUAL (2026-08-08) — DE
-  GRADE PARA GRUPO" acima.
-
-  `flex-wrap: nowrap` é deliberado: as três áreas têm de caber numa linha só
-  em toda largura suportada (o recuo/gap encolhem no telefone — ver o bloco
-  de tablet/telefone, abaixo — para garantir isso sem rolagem horizontal).
-
-  ============================================================
-  HARMONIZAÇÃO (2026-08-09) — TRILHAS IGUAIS, NÃO CAIXAS DE CONTEÚDO
-  ============================================================
-
-  `justify-content: center` + `gap` igual **já** punha o grupo centrado e os
-  vãos uniformes: medido no build de produção, o centro do grupo caía em
-  x=960,0 num viewport de 1920 (desvio 0,0) e os dois vãos mediam 56,0 e
-  56,0px. O que estava desalinhado não era o grupo — eram as **caixas**.
-
-  Com `flex: 0 1 auto` cada área media a largura do seu próprio conteúdo, e
-  os três complementos têm comprimentos muito diferentes ("Comprar,
-  substituir ou especificar" / "Abrir, reformar ou reorganizar" / "Corrigir
-  gargalos e melhorar resultados"). Medido em 1920:
-
-    EQUIPAMENTOS ... x 432,9 → 746,2   largura 313,3   centro  589,6
-    PROJETOS ....... x 802,2 → 1083,1  largura 280,9   centro  942,7
-    CONSULTORIA .... x 1139,1 → 1487,1 largura 348,0   centro 1313,1
-
-  Ou seja: 67,1px de diferença entre a área mais larga e a mais estreita,
-  centros espaçados de forma desigual (353,1 contra 370,4) e — o defeito mais
-  visível — **a porta do meio 17,3px à esquerda do eixo da composição**. Três
-  caixas de tamanhos diferentes não leem como três portas do mesmo sistema,
-  mesmo com o vão entre elas idêntico.
-
-  A correção é dar às três a **mesma trilha**: `grid-template-columns:
-  repeat(3, var(--rail-col))` com `justify-content: center`. Consequências
-  medidas:
-
-    · largura idêntica nas três (diferença 0,0px);
-    · centros equidistantes por construção (col + gap);
-    · o centro da área do meio passa a coincidir com o eixo da composição;
-    · o grupo fica **mais espalhado** — 1216px em 1920 contra 1054,2 antes —
-      sem encostar nas guias: sobram 52px de cada lado dentro do `Container`.
-
-  Isto **não** é a "grade rígida de 3 colunas ponta a ponta" que a rodada
-  anterior removeu: lá as trilhas eram `minmax(0, 1fr)` e comiam a largura
-  inteira do `Container`, encostando nas guias do `h1` e do CTA. Aqui a
-  trilha é uma **medida fixa** por faixa, o grupo é centrado e sobra vão
-  visível nas duas pontas — o grupo continua sendo um cluster, não uma
-  tabela. Nenhum fundo, pill, borda, número ou divisória entra junto.
-
-  Os valores são medidos contra a área de conteúdo do `Container`
-  (`max-w-container` 1400px menos `px-5/8/10`), com a folga necessária para o
-  complemento mais longo ("Corrigir gargalos e melhorar resultados"):
-
-    faixa      conteúdo   trilha × 3   vão × 2   total   folga/lado
-    ≥1536       1320       22rem        5rem      1216      52
-    1280–1535   1200–1320  22rem        3rem      1152      24–84
-    1024–1279    944–1200  17,5rem      2rem       904      20–148
-    768–1023     704–944   13rem        1,25rem    664      20–140
-    640–767      576–704   11rem        1rem       560       8–72
-
-  Abaixo de 640px a grade **não** entra: ali só o nome aparece (complemento e
-  seta somem, ver `hero-stage.tsx`) e as três áreas continuam medidas pelo
-  conteúdo, com o `gap` em `clamp()`. Medido em 390 e 320, o grupo fecha em
-  316,4 e 310,8px — cabe sem rolagem lateral e sem comprimir nenhum nome, que
-  é o requisito do telefone. Trilha igual ali obrigaria "EQUIPAMENTOS" (a
-  palavra mais larga) a ditar a trilha das três e estouraria 320px.
-*/
-.railGroup {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  gap: clamp(0.5rem, 4vw, 3.5rem);
+  position: relative;
+  padding-top: 0.625rem;
 }
 
 @media (min-width: 640px) {
-  .railGroup {
-    --rail-col: 11rem;
-    --rail-gap: 1rem;
-
-    display: grid;
-    grid-template-columns: repeat(3, var(--rail-col));
-    justify-content: center;
-    gap: var(--rail-gap);
-  }
-
-  /*
-    `min-width: 0` **só dentro da grade**, e é obrigatório aqui: é ele que
-    deixa o complemento quebrar em vez de esticar a trilha para além da medida
-    fixa.
-
-    Abaixo de 640px a regra não pode existir. Ali o grupo volta a ser `flex`
-    com áreas medidas pelo conteúdo, e `min-width: 0` autoriza o item a
-    encolher **abaixo** do próprio texto: medido em 320px, o grupo passou de
-    310,8 para 280,0px — exatamente a largura da área de conteúdo —, o que
-    significa nome comprimido. É o oposto do requisito do telefone ("não
-    comprimir nomes"), e `min-width: auto` (o padrão do flex) é o que o
-    garante.
-  */
-  .railItem {
-    min-width: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .railGroup {
-    --rail-col: 13rem;
-    --rail-gap: 1.25rem;
+  .decision {
+    --door-pad: 1.125rem;
+    --door-gap: 0.875rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .railGroup {
-    --rail-col: 17.5rem;
-    --rail-gap: 2rem;
-  }
-}
+  .decision {
+    --door-pad: 1.25rem;
+    --door-gap: 1.5rem;
 
-@media (min-width: 1280px) {
-  .railGroup {
-    /*
-      22rem, e não 21: medido em 1440 × 900, a 21rem (336px) o complemento mais
-      longo ("Corrigir gargalos e melhorar resultados") **quebrava em duas
-      linhas** enquanto os outros dois ficavam em uma. Ele pede ~255px de
-      texto, mais 48 de recuo, 16 de seta e 16 de vão = 335px — 336 ficava no
-      fio. O vão cai de 4rem para 3rem para o total (1152px) continuar caber
-      na área de conteúdo de 1280px, que é 1200.
-    */
-    --rail-col: 22rem;
-    --rail-gap: 3rem;
+    padding-top: 1rem;
   }
 }
 
 @media (min-width: 1536px) {
-  .railGroup {
-    --rail-col: 22rem;
-    --rail-gap: 5rem;
+  .decision {
+    --door-pad: 1.5rem;
+    --door-gap: 1.75rem;
   }
 }
 
-.railItem {
-  position: relative;
+/* ============================================================
+   `.decisionHead` — A INSTRUÇÃO VIRA ORDEM, NÃO LEGENDA
+   ============================================================
+
+   A frase é copy travada ("Escolha o que sua operação precisa resolver") e a
+   posição — na guia, acima das portas — já estava certa. O que a mantinha
+   lendo como legenda eram três coisas, e as três saem aqui:
+
+     · **estava dentro do controle.** Como linha de cabeça de uma chapa
+       subdividida, ela era o rótulo de uma tabela por definição. Fora do
+       objeto, com espaço próprio, ela vira o que manda fazer;
+     · **`tracking` 0,2em.** Numa frase de 44 caracteres em caixa alta
+       condensada, esse espaçamento obriga o olho a soletrar e o resultado lê
+       como código de peça. Cai para 0,12em — ainda condensada, ainda caixa
+       alta, mas outra vez uma **frase**;
+     · **a régua que fechava a linha até a aresta da chapa.** Sem chapa não há
+       aresta a alcançar, e uma régua atravessando o vazio volta a ser moldura.
+       Saiu. No lugar dela entra o traço curto **à esquerda** — o mesmo traço
+       amarelo da etiqueta do `h1`, no mesmo eixo. Ele não fecha nada: ancora.
+
+   O respiro até as portas é o que sustenta a hierarquia INSTRUÇÃO ↓ ESCOLHAS:
+   18px no telefone e 26px em `lg` para cima, contra os 0 de quando ela era
+   cabeça de chapa (só o sulco separava).
+   ============================================================ */
+/*
+  ---------- A instrução ganha peso e ar (2026-08-11) ----------
+
+  A frase estava certa de família, de caixa e de posição, e continuava sendo
+  lida como legenda. O que faltava era **presença física**: 17px sobre um vão
+  de 26px até as portas é um rótulo pousado sobre controles, não uma ordem.
+
+  Três coisas mudam, e nenhuma delas é a copy:
+
+    · o vão até as portas passa de 26 para **36px** em `lg`. A instrução deixa
+      de encostar no que ela comanda — e é a distância, mais que o corpo, que
+      separa "título de um grupo" de "etiqueta de uma barra";
+    · o traço à esquerda cresce de 28 para 40px e ganha 1px de espessura. Ele é
+      o mesmo traço da etiqueta do `h1`, no mesmo eixo — engrossá-lo aqui é o
+      que faz a instrução ler como **par** daquela etiqueta, e não como uma
+      linha menor de outra família;
+    · o corpo sobe um degrau no `hero-stage.tsx` (17 → 19px em `lg`), com peso
+      700.
+
+  Continua sem chegar perto do `h1`: 19px contra 58, e a 300px dele.
+*/
+.decisionHead {
   display: flex;
-  /*
-    ---------- Alinhamento pelo topo, não pelo centro (2026-08-09) ----------
-
-    Com `align-items: center` os três rótulos deixavam de compartilhar
-    linha-base sempre que um complemento quebrava em duas linhas: a trilha mais
-    alta dita a altura da fileira (a grade estica), e as áreas de uma linha
-    centravam o conteúdo dentro dessa altura maior. Medido em 1440 × 900 antes
-    do ajuste de trilha: "CONSULTORIA" ficava **10,5px acima** de
-    "EQUIPAMENTOS" e "PROJETOS", que é o suficiente para o grupo perder a
-    leitura de fileira.
-
-    Alinhando pelo topo, a distância entre a régua e o rótulo passa a ser
-    constante nas três áreas, e a quebra do complemento cresce para baixo — sem
-    mover o rótulo. Isso vale para toda largura onde o complemento pode quebrar
-    (1024 e 768 quebram por falta de largura, não por fio), então a correção é
-    estrutural e não depende da medida da trilha.
-  */
-  align-items: flex-start;
-  /*
-    ---------- Conteúdo centrado na própria trilha (2026-08-09) ----------
-
-    `justify-content: center` + `text-align: center`. Com trilhas de largura
-    igual e três textos de comprimentos bem diferentes, centrar é a única
-    distribuição que dá o mesmo acabamento às três áreas — alinhado à esquerda,
-    o rótulo curto ("PROJETOS") deixava um vazio grande à direita dentro da
-    própria trilha, e a área lia como trilha solta em vez de porta resolvida.
-    Ver o comentário do conteúdo em `hero-stage.tsx`.
-  */
-  justify-content: center;
-  cursor: pointer;
-  text-align: center;
-  transition: color 220ms var(--ease-precise);
-
-  /*
-    Recuo autocontido nas quatro bordas — não há mais guia de `Container` a
-    alcançar (ver "DE GRADE PARA GRUPO", acima), então a primeira e a última
-    área têm o mesmo recuo que as do meio.
-  */
-  padding-inline: 1rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
 @media (min-width: 1024px) {
-  .railItem {
-    padding-inline: 1.5rem;
+  .decisionHead {
+    gap: 1rem;
+    margin-bottom: 2.25rem;
+  }
+}
+
+.decisionTick {
+  height: 2px;
+  width: 1.75rem;
+  flex: 0 0 auto;
+  background-color: rgb(245, 198, 75);
+}
+
+@media (min-width: 1024px) {
+  .decisionTick {
+    height: 3px;
+    width: 2.5rem;
+  }
+}
+
+/* ============================================================
+   `.doors` — TRÊS COLUNAS IGUAIS, COM VÃO
+   ============================================================
+
+   `repeat(3, minmax(0, 1fr))` continua, e continua pela mesma razão de sempre:
+   uma porta maior que as outras duas não lê como prioridade — lê como as outras
+   duas terem sobrado. A liderança de Equipamentos vive nos cinco mecanismos que
+   não dependem de área (estado inicial, `h1`, primeira porta, primeira parada
+   do teclado, ação do fechamento).
+
+   O `margin-inline` negativo é o que põe o **texto** da primeira porta na guia
+   do `h1`: a fileira transborda o recuo do `Container` exatamente na medida do
+   recuo interno da porta. Medido em 1920, o nome "EQUIPAMENTOS" começa em
+   x=300 — o mesmo x da etiqueta, do título, do parágrafo e dos dois CTAs.
+   ============================================================ */
+.doors {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--door-gap);
+  margin-inline: calc(-1 * var(--door-pad));
+}
+
+/* ============================================================
+   `.door` — UM OBJETO, NÃO UMA CÉLULA
+   ============================================================
+
+   **Direção de arte: gráfica/editorial.** A porta não é uma tecla de máquina
+   nem um cartão: é uma **entrada de capítulo**. O que a desenha é a régua
+   superior mais a tipografia; a superfície existe só o suficiente para o texto
+   ter onde assentar, e é translúcida de propósito — a cena continua atravessando
+   cada porta, não só o vão entre elas.
+
+   Camadas, de baixo para cima:
+
+     superfície .. um degradê escuro translúcido, mais fechado embaixo. Não é
+                   opaco: medido, a cena continua legível através dela;
+     régua ....... 2px no topo, de ponta a ponta da porta. É ela que dá aresta
+                   ao objeto sem lhe dar moldura — não há borda nas laterais nem
+                   embaixo, e não há canto arredondado, sombra projetada, vidro
+                   nem desfoque em lugar nenhum;
+     conteúdo .... nome em condensada caixa-alta, complemento em sans, seta na
+                   aresta direita.
+
+   ============================================================
+   O INATIVO PARECE DISPONÍVEL, NÃO DESATIVADO
+   ============================================================
+
+   O teste do briefing é o de `cursor: default` — sem cursor e sem hover, ainda
+   dá para saber que aquilo se clica? O que responde por isso, e nenhum deles é
+   cor:
+
+     · **a régua de 2px** no topo de cada porta. Régua é aresta de objeto, e
+       objeto com aresta é coisa, não texto;
+     · **a superfície própria**, separada das vizinhas por vão — três planos,
+       não uma faixa;
+     · **a seta** na aresta direita de cada uma, em `canvas/55`;
+     · **a instrução**, logo acima, que diz literalmente para escolher.
+
+   O inativo fica em `canvas/85` no nome — legível, nunca fantasma.
+   ============================================================ */
+/*
+  ---------- O chanfro saiu (2026-08-11) ----------
+
+  Cada porta tinha o canto superior direito cortado a 45° por `clip-path`
+  (`--chanfro`, 12px no telefone e 16px no desktop). O corte era o único
+  ornamento do objeto e era o que o datava: um canto chanfrado repetido três
+  vezes, sob um rótulo em condensada caixa-alta, é a gramática de painel de
+  máquina — "tech demais", que é o que o briefing proíbe. Ele também brigava
+  com a régua superior, que é o elemento que **deve** desenhar a porta: a régua
+  morria 16px antes da aresta direita e o objeto ficava com a aresta aberta
+  justamente onde a seta pede fechamento.
+
+  Sem chanfro a porta é um retângulo puro, aberto embaixo e nas laterais, com
+  uma régua no topo. Nenhum canto arredondado entrou no lugar — o vocabulário
+  do site não tem radius, e trocar um ornamento por outro não era a correção.
+
+  ---------- E o recuo cresce ----------
+
+  12/14px verticais e 20px horizontais eram apertados para duas linhas de texto
+  de tamanhos diferentes: o par nome + situação encostava nas duas arestas e a
+  porta lia como célula preenchida até a borda. Agora 18px verticais em `lg`,
+  com a coluna interna respirando 8px entre as duas linhas (era 5).
+*/
+.door {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  text-align: left;
+  padding: 0.875rem var(--door-pad);
+  transition: transform 260ms var(--ease-smooth);
+}
+
+@media (min-width: 1024px) {
+  .door {
+    padding: 1.125rem var(--door-pad) 1.1875rem;
   }
 }
 
 /*
-  ---------- A régua de cada porta ----------
-
-  Existe nas três áreas o tempo todo: 1px discreto no inativo, 2px amarelo no
-  ativo e no hover — desde a direção visual de 2026-08-08, três traços
-  distintos (um por área, com o vão do `.railGroup` entre eles), não uma
-  linha contínua de guia a guia (ver "DE GRADE PARA GRUPO", acima).
-
-  A espessura muda por `transform: scaleY` sobre uma régua de 2px, nunca por
-  `height`: altura animada reflui a caixa do botão e mexeria no conteúdo.
+  A superfície vive num `::before` e não no próprio botão porque é ela que
+  ganha o realce; mexer no fundo do botão obrigaria a repetir o cálculo do
+  recuo em cada estado.
 */
 /*
-  Direção visual (2026-08-08): 240ms → 300ms, e o mesmo valor entra no
-  rótulo e no complemento (`hero-stage.tsx`, ambos eram 200ms). As três
-  respostas do clique — foto (crossfade, 380ms), conteúdo (`.enter`, 340ms) e
-  régua/rótulo do seletor — respondiam ao mesmo evento em três velocidades
-  de categorias diferentes (200/240ms, a faixa de hover, contra 340/380ms, a
-  de troca de conteúdo). A régua marca uma **troca de estado**, não uma
-  microinteração de hover, e por isso pertence à faixa 280–450ms como as
-  outras duas — não um efeito novo, só a categoria de tempo certa para o que
-  ela já faz.
+  ---------- O inativo escurece, e é isso que acende o ativo (2026-08-11) ----------
+
+  O par estava comprimido: inativo em rgb(38,38,41) e ativo em rgb(66,61,48) —
+  28 pontos de luminância entre "não escolhido" e "escolhido", num controle que
+  vive sobre fotografia. De longe as três portas liam como a mesma superfície
+  com uma régua diferente numa delas.
+
+  A correção não é clarear o ativo (o teto dele é a hierarquia do amarelo: três
+  massas amarelas na mesma vertical desmontam marca > ação > estado). É
+  **afundar o inativo**, que ainda por cima é o comportamento certo: porta
+  fechada é mais escura que porta aberta.
+
+  Inativo passa a rgb(20,21,23) a 0,90 — mais fundo que o `.deck` sob ele, e
+  translúcido o bastante para a cena continuar atravessando. O delta contra o
+  ativo passa de 28 para **48 pontos**, e o nome inativo em `canvas/85` ganha
+  contraste no caminho (medido sobre a nova superfície: 11,2:1, contra 8,4:1).
 */
-/*
-  ============================================================
-  BASE INTEGRADA (2026-08-09) — A RÉGUA GANHA UM PERCURSO
-  ============================================================
-
-  A régua inativa era um traço uniforme a 14% de branco na largura inteira da
-  trilha, e a ativa o mesmo traço em amarelo, mais grosso. Correto, e sem
-  assinatura: três linhas iguais com texto embaixo.
-
-  Duas mudanças, nenhuma delas ornamento novo:
-
-    · **a inativa deixa de ser uniforme.** Vira um degradê que nasce a 20% de
-      branco à esquerda e morre a 6% à direita. Ela deixa de ler como "borda de
-      célula" e passa a ler como um traço desenhado, com começo e fim;
-    · **a ativa fica cheia e chapada.** Amarelo sólido de ponta a ponta da
-      trilha, contra o traço que se dissolve das outras duas. A diferença entre
-      "traço que morre" e "traço que atravessa" é legível de relance, antes de
-      o olho ler cor ou peso do rótulo.
-
-  A espessura continua mudando por `scaleY` sobre uma régua de 2px (1px no
-  inativo, 2px no ativo), nunca por `height` — altura animada refluiria a caixa
-  do botão. Medido: inativo `scaleY(0.5)`, ativo `scaleY(1)`.
-*/
-.railTop {
+.door::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
+  inset: 0;
   background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.06) 100%
+    180deg,
+    rgba(28, 29, 32, 0.9) 0%,
+    rgba(17, 17, 19, 0.93) 62%,
+    rgba(20, 20, 22, 0.93) 100%
   );
-  transform: scaleY(0.5);
-  transform-origin: top left;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
   transition:
-    transform 300ms var(--ease-premium),
-    background 300ms var(--ease-premium);
+    background 260ms var(--ease-smooth),
+    box-shadow 200ms var(--ease-smooth);
 }
 
 /*
-  Hover e foco acendem a régua em amarelo **sem engrossá-la**: a espessura de
-  2px é só do estado ativo.
+  ---------- Hover e foco: o controle responde, a cena não ----------
 
-  Na prática isso é uma resposta de transição, não um estado estável: em
-  ponteiro fino, passar o mouse fixa a prévia depois de 150ms
-  (`HOVER_INTENT_MS` em `hero-stage.tsx`) e a porta *vira* a ativa — daí em
-  diante ela tem a régua cheia, o rótulo em peso e o conteúdo levantado. O que
-  este bloco cobre são os 150ms antes disso, e o caso do teclado, onde
-  `:focus-visible` pode cair numa porta que ainda não foi escolhida.
+  Desde 2026-08-11 o hover **não troca mais a cena** (a prévia por ponteiro
+  saiu — ver `hero-stage.tsx`). Isso liberta o hover para ser expressivo: ele
+  passou a ser a confirmação de alvo, e é a única coisa que ele faz.
+
+  Três respostas, todas em 200ms ou menos: a superfície clareia e esquenta, a
+  régua acende de `0,20` para `0,42`, e a porta inteira sobe 2px. A subida é
+  `transform`, então a fileira não reflui e as vizinhas não se movem.
 */
-.railItem:hover .railTop,
-.railItem:focus-visible .railTop {
+.door:hover::before,
+.door:focus-visible::before {
   background: linear-gradient(
-    90deg,
-    rgba(245, 198, 75, 0.85) 0%,
-    rgba(245, 198, 75, 0.25) 100%
+    180deg,
+    rgba(52, 53, 58, 0.93) 0%,
+    rgba(31, 31, 35, 0.95) 62%,
+    rgba(36, 36, 40, 0.95) 100%
   );
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
 }
 
-.railItemActive .railTop {
-  background: rgb(245, 198, 75);
-  transform: scaleY(1);
+.door:hover,
+.door:focus-visible {
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   A PORTA ACIONADA
+   ============================================================
+
+   Cinco sinais, e o briefing pede que um deles não seja cromático:
+
+     1. **régua cheia em amarelo, 3px** — era 2px em branco a 0,20. É a mudança
+        que se lê primeiro e de mais longe;
+     2. **a superfície esquenta e clareia.** Não vira amarela: o que muda é a
+        temperatura da base (grafite frio → grafite quente) mais um derrame do
+        acento nos primeiros 30% da altura, a 8% de opacidade. Medido, isso
+        desloca o topo da superfície em 4 pontos de matiz — o suficiente para o
+        olho ler "a luz vem daquela régua", longe de ler "esta porta é amarela".
+        O amarelo cheio **foi testado** como preenchimento da porta ativa e
+        reprovou: com o CTA amarelo da dobra 100px acima e o CTA amarelo do
+        cabeçalho na mesma coluna, três massas amarelas na mesma vertical
+        desmontam a hierarquia marca > ação > estado que o projeto fixa;
+     3. **a porta sobe 3px** e fica lá. É o sinal espacial, e o único que não é
+        cor nem peso;
+     4. **o nome vai a `bold` e a `canvas` cheio**, contra `semibold` em
+        `canvas/85`;
+     5. **a seta fica amarela** e 2px à frente.
+
+   Nenhum deles é sombra projetada, brilho, vidro ou canto arredondado.
+   ============================================================ */
+.doorActive::before {
+  background:
+    linear-gradient(180deg, rgba(245, 198, 75, 0.14) 0%, rgba(245, 198, 75, 0) 38%),
+    linear-gradient(180deg, rgba(70, 65, 51, 0.95) 0%, rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96) 100%);
+  box-shadow:
+    inset 0 3px 0 rgb(245, 198, 75),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
 }
 
 /*
-  ============================================================
-  BASE INTEGRADA (2026-08-09) — A PORTA ATIVA SOBE
-  ============================================================
-
-  A assinatura do estado ativo era cromática e tipográfica: régua amarela, peso
-  do rótulo, cor do complemento. Faltava a ela um sinal **espacial** — algo que
-  dissesse "esta porta está aberta" antes de o olho ler cor ou peso.
-
-  O conteúdo da porta ativa sobe 3px em direção à própria régua. É o
-  microdeslocamento que o briefing autorizou, e é `transform`, então não reflui
-  a fileira nem move as outras duas: as trilhas continuam com a mesma caixa, o
-  mesmo centro e a mesma altura.
-
-  No hover de uma porta inativa o mesmo conteúdo sobe 1px — um décimo do gesto,
-  o suficiente para a superfície responder ao ponteiro sem se confundir com a
-  seleção.
+  6px, e não 3. A subida é o único sinal de estado que não é cor nem peso, e a
+  3px ela era detectável mas não legível — some sob o vão de 24px que agora
+  separa as portas. A 6px a aresta superior da ativa fica visivelmente fora da
+  linha das outras duas, e é isso que faz a fileira ler como **uma escolhida
+  entre três** mesmo em escala de cinza.
 */
-.railContent {
-  transition: transform 200ms var(--ease-precise);
+.doorActive {
+  transform: translateY(-6px);
 }
 
-.railItem:hover .railContent,
-.railItem:focus-visible .railContent {
-  transform: translateY(-1px);
+.doorActive:hover::before,
+.doorActive:focus-visible::before {
+  background:
+    linear-gradient(180deg, rgba(245, 198, 75, 0.18) 0%, rgba(245, 198, 75, 0) 38%),
+    linear-gradient(180deg, rgba(84, 78, 61, 0.95) 0%, rgba(43, 40, 33, 0.96) 62%, rgba(51, 47, 38, 0.96) 100%);
+  box-shadow:
+    inset 0 3px 0 rgb(245, 198, 75),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.doorActive:hover,
+.doorActive:focus-visible {
+  transform: translateY(-6px);
+}
+
+/* ============================================================
+   O ANEL DE FOCO PRECISA DE UMA CAMADA PRÓPRIA
+   ============================================================
+
+   `ring-*` do Tailwind é `box-shadow`, e sombra — inclusive `inset` — é pintada
+   na camada de fundo do elemento, **abaixo dos pseudo-elementos dele**. Com a
+   superfície da porta em `::before` cobrindo `inset: 0`, o anel saía por baixo
+   dela: medido na captura de teclado da rodada anterior, o pixel do anel era
+   rgb(96,86,52) em vez do `#F5C64B`. Um anel que muda de cor conforme a porta
+   está ativa ou não é falha de acessibilidade, não acabamento.
+
+   `::after` com `z-index: 2` resolve (o `::before` é 0 e o `.doorInner` é 1).
+   Continua `inset` porque a porta agora sobe 3px quando ativa e um anel externo
+   sairia da caixa de recorte junto com ela.
+   ============================================================ */
+.door::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 2px transparent;
+  transition: box-shadow 140ms var(--ease-precise);
+}
+
+.door:focus-visible::after {
+  box-shadow: inset 0 0 0 2px rgb(245, 198, 75);
+}
+
+.doorInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.125rem;
+}
+
+@media (min-width: 1024px) {
+  .doorInner {
+    gap: 0.5rem;
+  }
+}
+
+.doorLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .doorLine {
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
 }
 
 /*
-  4px, e não 3 (2026-08-09): com o seletor mais alto em 1920 — a folga que a
-  saída da faixa de métricas devolveu — 3px lia curto dentro de uma trilha de
-  128px. Continua sendo `transform`, então a fileira não reflui e as outras
-  duas portas não se movem.
+  A seta é o sinal de clicabilidade que sobrevive sem cor e sem cursor — no
+  toque não existe nenhum dos dois. Por isso ela é o último elemento que pode
+  esmaecer, e por isso o inativo é `canvas/55` e não menos.
+
+  ---------- A caixa em volta dela saiu (2026-08-11) ----------
+
+  A seta vinha dentro de um quadrado de 26px com borda de 1px em branco a 0,16,
+  que virava borda amarela com preenchimento quando a porta ficava ativa. Três
+  quadradinhos contornados alinhados à direita de três superfícies são a
+  assinatura de barra de ferramentas — e, com o chanfro removido logo acima,
+  eram o último ornamento sobrando no objeto.
+
+  A seta fica **nua e maior** (16 → 18px). Ela não perde nenhuma das funções:
+  continua sendo o sinal não-cromático de clicabilidade, continua ficando
+  amarela quando ativa e continua avançando no hover. O que ela perde é a
+  moldura, que não estava dizendo nada que a seta já não dissesse.
 */
-.railItemActive .railContent,
-.railItemActive:hover .railContent {
-  transform: translateY(-4px);
+.doorArrow {
+  transition: transform 260ms var(--ease-smooth);
 }
 
-/*
-  Seta: 4px no hover e no foco. A da porta ativa fica permanentemente 2px à
-  frente — ela aponta o tempo todo, e o hover ainda a empurra mais.
-*/
-.railArrow {
-  transition:
-    transform 220ms var(--ease-precise),
-    opacity 220ms var(--ease-precise);
+.doorActive .doorArrow {
+  transform: translateX(3px);
 }
 
-.railItemActive .railArrow {
-  transform: translateX(2px);
+.door:hover .doorArrow,
+.door:focus-visible .doorArrow {
+  transform: translateX(5px);
 }
 
-.railItem:hover .railArrow,
-.railItem:focus-visible .railArrow {
-  transform: translateX(4px);
-}
-
-.railItemActive:hover .railArrow,
-.railItemActive:focus-visible .railArrow {
-  transform: translateX(6px);
+.doorActive:hover .doorArrow,
+.doorActive:focus-visible .doorArrow {
+  transform: translateX(8px);
 }
 
 /* ============================================================
@@ -926,17 +1644,82 @@
    dentro da etiqueta, do `h1` e da intenção, então as caixas com piso medido
    (`HEADLINE_MIN` / `INTENT_MIN`) nunca saem do DOM e a moldura não se move.
    ============================================================ */
+/* ============================================================
+   A COPY GANHA SAÍDA (2026-08-11)
+   ============================================================
+
+   `.swap` sozinho tem um defeito estrutural que nenhum ajuste de duração
+   resolve: ele é a animação de **entrada** de um nó que a `key` do React acabou
+   de montar. O nó antigo não é animado — ele simplesmente deixa de existir no
+   mesmo quadro. Ou seja, a copy tinha entrada e **não tinha saída**: sumia num
+   corte e voltava com um fade. Era essa a "rigidez" que sobrava depois de a
+   fotografia estar resolvida.
+
+   A saída passa a ser do **bloco**, e não do texto: `.copyBlock` recebe
+   `data-saindo` durante os 150ms que separam a escolha da substituição do nó
+   (ver `COPY_OUT_MS` em `hero-stage.tsx`). Etiqueta, título, intenção e a linha
+   de ação saem juntos, 6px para cima.
+
+   A volta é assimétrica de propósito, e o mecanismo é o mesmo do `.frame`: a
+   transição declarada na regra de `[data-saindo]` rege a **ida** (150ms,
+   `precise`, seca) e a declarada na regra base rege a **volta** (240ms,
+   `premium`, com 20ms de atraso — o tempo de o nó novo já estar no DOM).
+
+   Sobre a volta do bloco, cada linha ainda sobe os seus 8px por `.swap`. As duas
+   coisas se somam: o bloco reaparece e o texto assenta. Fim da coreografia em
+   ~450ms depois do clique.
+
+   ============================================================
+   O `display` NÃO PODE VIVER AQUI — E A PRIMEIRA TENTATIVA VIVEU
+   ============================================================
+
+   `.swap` anima `transform`, e transform **não se aplica a caixa de nível
+   inline**: nos `<span>` da etiqueta, do `h1` e da intenção a regra seria
+   silenciosamente ignorada e só o `opacity` valeria. A correção óbvia é
+   declarar `display: block` aqui — e ela **reprovou por efeito colateral**.
+
+   `.swap` também veste a legenda do render de Projetos, que é `hidden lg:block`
+   (só existe no desktop, onde há altura para uma linha extra acima da
+   plataforma). CSS Module é emitido **depois** das utilidades do Tailwind, então
+   `display: block` daqui vencia o `display: none` do `hidden` e a legenda
+   passava a aparecer no telefone. Medido: em 320 × 720 ela reprovou AA com
+   **4,44:1** (fundo rgb(79,78,77) sob `canvas/70`), e em 390 aparecia sobre a
+   fotografia sem a proteção que só existe em `lg`.
+
+   Mesma família das armadilhas que `CLAUDE.md` já registra para `cn()`: some
+   sem erro de build, sem aviso, e só aparece quando alguém mede.
+
+   Por isso o `display` fica com **quem precisa dele** — a classe `block` do
+   Tailwind nos três `<span>` de texto, onde participa do merge e pode ser
+   sobrescrita —, e `.swap` carrega só a animação.
+   ============================================================ */
 @keyframes swapIn {
   from {
     opacity: 0;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
+    transform: none;
   }
 }
 
 .swap {
-  animation: swapIn 180ms var(--ease-precise) both;
+  animation: swapIn 280ms var(--ease-premium) 40ms both;
+}
+
+.copyBlock {
+  transition:
+    opacity 240ms var(--ease-premium) 20ms,
+    transform 240ms var(--ease-premium) 20ms;
+}
+
+.copyBlock[data-saindo='true'] {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 150ms var(--ease-precise),
+    transform 150ms var(--ease-precise);
 }
 
 /* ============================================================
@@ -981,6 +1764,7 @@
   pointer-events: auto;
 }
 
+
 /* ============================================================
    TABLET E TELEFONE
    ============================================================ */
@@ -1023,76 +1807,192 @@
     );
   }
 
-  /*
-    ---------- O seletor no toque ----------
+  /* ============================================================
+     AS TRÊS PORTAS NO TOQUE — MESMO SISTEMA, OUTRO PROJETO
+     ============================================================
 
-    **Grupo centrado, e nenhuma rolagem horizontal.** Abaixo de `sm` só o
-    nome aparece (complemento e seta somem — ver `hero-stage.tsx`), então
-    cada área é só recuo + rótulo. `.railGroup` já encolhe o `gap` por
-    `clamp()` nas larguras estreitas (ver o bloco do seletor, acima); aqui o
-    recuo interno de cada área encolhe junto, para a soma das três caber em
-    320px sem recorrer à rolagem lateral ("somente se indispensável") nem a
-    indicador de "há mais" — medido no navegador nesta rodada (ver
-    `docs/v2/capturas/` da direção visual de 2026-08-08).
+     Aqui as portas não assentam sobre fotografia: abaixo de `lg` a cena é uma
+     tira de 30svh no alto do palco e tudo o mais é grafite liso. O `.deck`, que
+     no desktop é a transição tonal que revela a cena entre as portas, não teria
+     o que revelar — vira um véu claríssimo, só para que a base da dobra não
+     seja exatamente o mesmo preto da seção seguinte.
+
+     Três decisões, e nenhuma é "reduzir o desktop":
+
+       1. **a fileira sangra a janela.** `--door-pad` é igual ao gutter do
+          `Container` nesta faixa, então o `margin-inline` negativo encosta as
+          portas das pontas nas duas bordas e o nome da primeira continua caindo
+          na guia (x=20 em 390, x=32 em 768);
+       2. **as três continuam lado a lado.** Empilhar em três linhas daria mais
+          affordance e custaria ~130px numa dobra que em 390 fecha exatamente na
+          janela — e viraria a "tela por pilar" que o briefing proíbe. As três
+          portas continuam visíveis ao mesmo tempo, que é o requisito;
+       3. **o complemento sai e a instrução manda.** Em 390 cada porta tem
+          ~120px: "Corrigir gargalos e melhorar resultados" quebraria em quatro
+          linhas. A instrução é visível em todas as larguras e é ela que diz o
+          que as três portas são.
+
+     ---------- E o vão devolve altura em vez de custar ----------
+
+     A composição nova é **mais baixa** que a chapa que ela substitui, e é isso
+     que paga o vão: a chapa tinha aresta, cabeça, três baias e base num objeto
+     só de 106px; aqui a instrução tem linha própria (com respiro real) e as
+     portas medem 56, sem aresta comum nem base. Medido em 390, a dobra fica em
+     843,4px contra os 845,6 da rodada anterior — dentro da janela, e pela
+     primeira vez desde que a plataforma existe.
   */
-  .railItem {
-    padding-inline: 0.625rem;
+  .deck {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.012) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
   }
 
-  /* Sem ponteiro não há hover; o realce por passagem só confundiria o toque. */
-  .railItem:hover .railTop {
-    background: rgba(255, 255, 255, 0.14);
-    transform: scaleY(0.5);
+  /*
+    Sem ponteiro não há hover: o realce por passagem fica preso depois do gesto
+    e o toque passaria a ver uma porta "quase acionada" que não é a escolhida.
+  */
+  .door:hover::before {
+    background: linear-gradient(
+      180deg,
+      rgba(38, 38, 41, 0.94) 0%,
+      rgba(23, 23, 26, 0.96) 62%,
+      rgba(28, 28, 31, 0.96) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.13),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.55);
   }
 
-  .railItemActive:hover .railTop {
-    background: rgb(245, 198, 75);
-    transform: scaleY(1);
-  }
-
-  .railItem:hover .railArrow {
+  .door:hover {
     transform: none;
   }
+
+  .doorActive:hover::before {
+    background:
+      linear-gradient(180deg, rgba(245, 198, 75, 0.12) 0%, rgba(245, 198, 75, 0) 34%),
+      linear-gradient(180deg, rgba(66, 61, 48, 0.95) 0%, rgba(33, 31, 26, 0.96) 62%, rgba(41, 38, 31, 0.96) 100%);
+    box-shadow:
+      inset 0 2px 0 rgb(245, 198, 75),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .doorActive:hover {
+    transform: translateY(-3px);
+  }
+
+  .door:hover .doorArrow {
+    transform: none;
+  }
+
+  .doorActive:hover .doorArrow {
+    transform: translateX(2px);
+  }
 }
+
+/* ============================================================
+   TELEFONE ESTREITO — A PORTA CENTRA E O NOME MANDA
+   ============================================================
+
+   Abaixo de `sm` a porta mostra só o nome (o complemento sai — ver
+   `hero-stage.tsx`), e um nome sozinho encostado na borda esquerda de uma caixa
+   de ~103px lê como sobra, não como centro de uma porta. Aqui ele centra.
+
+   O recuo lateral cai para 0,625rem pela conta do pior caso: em 320px cada
+   porta tem 102,7px e "EQUIPAMENTOS" a 12px pede ~81. Com 10px dos dois lados
+   sobram 82,7 — que é o mínimo em que o nome não comprime, e comprimir é o que
+   o briefing proíbe explicitamente para o telefone.
+   ============================================================ */
+@media (max-width: 639px) {
+  .door {
+    justify-content: center;
+    padding-inline: 0.625rem;
+    text-align: center;
+  }
+
+  /*
+    ---------- A conta de altura do telefone ----------
+
+    A dobra de 390 fechava 2px além da janela desde que a plataforma passou a
+    existir (845,6 contra 844). Esta composição devolve esses 2px e mais um
+    pouco sem tocar em fotografia, corpo de texto, copy ou área de toque — que é
+    a ordem de preferência do briefing:
+
+      aresta e base da chapa, que deixaram de existir ..... −8
+      recuo do agrupamento (`.decision`, 10px de topo) .... +10
+      respiro da instrução até as portas (18px) ............ +4
+      cabeça da chapa, que virou linha própria ............. −8
+      ─────────────────────────────────────────────────────────
+                                                            −2
+
+    Medido: 843,4px em 390 × 844 e 806,0 em 320 × 720. O segundo continua além
+    da janela, como já estava antes desta rodada — 320 × 720 não comporta a
+    dobra inteira desde que a plataforma existe, e o briefing aceita a quebra
+    ali desde que nada comprima nem se sobreponha, o que se confere na captura.
+  */
+  .decision {
+    padding-top: 0.1875rem;
+  }
+
+  .decisionHead {
+    margin-bottom: 0.6875rem;
+  }
+}
+
+/*
+  A visibilidade da seta por faixa de largura vive em `hero-stage.tsx`
+  (`hidden min-[420px]:block`), com a medição que fixa o corte — não há regra
+  aqui para não haver dois donos da mesma decisão.
+*/
 
 /* ============================================================
    `prefers-reduced-motion` — requisito, não cortesia
    ============================================================
 
-   Troca imediata: sem crossfade, sem escalonamento, sem percurso, sem
-   deslocamento de seta. Nenhum conteúdo fica invisível e nenhuma camada
-   permanece fechada — a cena ativa continua opaca, as inativas continuam
-   transparentes, e a linha superior da opção ativa continua desenhada (ela vira
-   `scaleX(1)` instantâneo, não some).
+   Cai **tudo** o que esta rodada acrescentou de movimento, e a conferência
+   importa porque agora há mais a desligar do que antes:
+
+     · a coreografia de troca vira um corte — a cena nova aparece opaca, sem
+       saída, sem passagem e sem entrada. O atraso de 150ms da copy é
+       curto-circuitado no JavaScript (ver `COPY_OUT_MS` em `hero-stage.tsx`),
+       então o texto troca no mesmo quadro;
+     · o **ambient motion** da cena ativa é desligado. Ele é o único movimento
+       permanente da dobra, e "permanente" é exatamente o que reduced-motion
+       existe para eliminar;
+     · a camada vetorial de Consultoria aparece **pronta e parada**: o desenho
+       das linhas não é animado, o pulso não corre e o halo não respira. Ela
+       continua visível — o requisito é que nada fique invisível nem preso
+       fechado, não que a camada suma.
+
+   O que sobra do estado ativo, todo estático: régua amarela de 3px, superfície
+   quente e mais clara, derrame do acento, nome em `bold`/`canvas` e seta
+   amarela. O relevo de 3px é o único sinal que se perde aqui, e sobram quatro —
+   um deles (a superfície) não é cromático.
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .frame,
-  .railItem,
-  .railTop,
-  .railArrow,
-  .railContent {
+  .door,
+  .door::before,
+  .door::after,
+  .doorArrow,
+  .copyBlock {
     transition: none;
   }
 
-  /*
-    Todo deslocamento do seletor cai: o avanço da seta (hover, foco e o de 2px
-    permanente do ativo) e a subida do conteúdo da porta ativa. O que sobra é
-    o que não se move — régua amarela, peso do rótulo, cor do rótulo e do
-    complemento, cor da seta —, e são quatro sinais, mais que os três que o
-    projeto exige para estado ativo.
-  */
-  .railItem:hover .railArrow,
-  .railItem:focus-visible .railArrow,
-  .railItemActive .railArrow,
-  .railItemActive:hover .railArrow,
-  .railItemActive:focus-visible .railArrow {
+  .door:hover,
+  .door:focus-visible,
+  .doorActive,
+  .doorActive:hover,
+  .doorActive:focus-visible {
     transform: none;
   }
 
-  .railItem:hover .railContent,
-  .railItem:focus-visible .railContent,
-  .railItemActive .railContent,
-  .railItemActive:hover .railContent {
+  .door:hover .doorArrow,
+  .door:focus-visible .doorArrow,
+  .doorActive .doorArrow,
+  .doorActive:hover .doorArrow,
+  .doorActive:focus-visible .doorArrow {
     transform: none;
   }
 
@@ -1101,11 +2001,31 @@
   }
 
   /*
-    Troca de estado praticamente instantânea, e sem nada invisível: `.swap`
-    perde a animação (o texto novo já entra opaco, porque o `both` que o
-    segurava em `opacity: 0` sai junto) e a cela dos rótulos do CTA troca sem
-    crossfade. O rótulo ativo continua em `opacity: 1` — o que some é o tempo,
-    não o conteúdo.
+    A cena ativa perde a ponte e o ambient — mas continua opaca, em escala 1 e
+    com a **máscara aberta**. É o ponto que exige atenção: a revelação
+    direcional é uma máscara, e máscara parada no meio do caminho esconderia
+    metade da cena para sempre. Aqui ela é forçada a `0% 0` nos dois estados,
+    então nada fica preso fechado.
+
+    A cena inativa continua transparente e a troca é um corte — sem revelação,
+    sem apagão, sem crossfade.
+  */
+  .frameActive,
+  .frame {
+    transform: none;
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+
+  .frameActive .sceneBox,
+  .frameActive.frameProjetos .sceneBox,
+  .frameActive.frameConsultoria .sceneBox {
+    animation: none;
+  }
+
+  /*
+    `.swap` perde a animação e o texto novo entra opaco e no lugar — o `both`
+    que o segurava em `opacity: 0` e 8px abaixo sai junto.
   */
   .swap {
     animation: none;
