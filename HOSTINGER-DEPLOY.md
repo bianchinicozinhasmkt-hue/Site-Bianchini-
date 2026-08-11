@@ -1,84 +1,112 @@
-# Deploy na Hostinger
+# Deploy na Hostinger — painel de Implantações
 
 STATUS: ACTIVE · procedimento operacional.
 
-O site é **estático**. A pasta gerada *é* o site: joga no painel, substitui o anterior,
-funciona. Sem Node, sem instalar dependência, sem comando de start.
+O painel **Implantações** é um pipeline de build: você sobe um zip do **código-fonte**, ele
+roda `npm install` → `npm run build` → `npm start`. Quem compila é o host, não a sua máquina.
 
-## O que usar
+Isso é o oposto de subir arquivos prontos, e foi o que derrubou as duas primeiras tentativas:
 
-| artefato | o que é |
-| --- | --- |
-| `bianchini-hostinger.zip` | **envie este** — 20,7 MB, 151 arquivos |
-| `deploy-hostinger/` | a mesma coisa descompactada, para arrastar por FTP |
+| tentativa | o que foi enviado | erro |
+| --- | --- | --- |
+| 1ª | build `standalone` | `Couldn't find any pages or app directory` |
+| 2ª | site estático (`out/`) | mesmo erro no build |
+| **3ª** | **código-fonte** | ✅ |
 
-Gerados por `npm run pacote:hostinger` e não versionados.
+## O que enviar
+
+```
+C:\Users\gabri\Desktop\Coisas\Projeto-Bianchini\bianchini-hostinger.zip
+```
+
+20,2 MB · 194 arquivos · gerado por `npm run pacote:hostinger`.
+
+Dentro: `src/`, `public/`, `package.json`, `package-lock.json` e os arquivos de configuração.
+Sem `node_modules`, sem `.next`, sem `out`, sem `docs`, sem `.git`.
 
 ## Passo a passo
 
-1. No hPanel, abra o **Gerenciador de Arquivos** e entre em `public_html`.
-2. **Apague tudo o que está lá** (o site v1).
-3. Envie `bianchini-hostinger.zip` e extraia **dentro de `public_html`**.
-4. Confirme que `index.html` ficou na **raiz** de `public_html`, e não dentro de uma
-   subpasta. Se o extrator criar `public_html/deploy-hostinger/`, mova o conteúdo um nível
-   acima.
-5. Ative o **"Mostrar arquivos ocultos"** e confirme que o **`.htaccess` está lá**. Ele
-   carrega os redirects de link antigo, os cabeçalhos de segurança e as regras de cache — se
-   sumir no upload, o site funciona, mas perde essas três coisas.
-6. Abra o domínio. Aparece na hora.
+**1. Variáveis de ambiente — faça isto ANTES de implantar.**
+No menu lateral, em **Variáveis de ambiente**:
 
-## Validação rápida
+| nome | valor |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | `https://bianchinicozinhas.com.br` |
 
-- `/` — a primeira dobra com as três portas
-- `/contato/` — WhatsApp **+55 21 96469-0650**
-- `/sitemap.xml` — URLs começando com o seu domínio, nunca com `localhost`
-- `/forno-combinado-rational` — redireciona para `/linhas-de-produtos/forno-combinado-rational/`
+Ela é lida durante o build. Sem ela o build passa em silêncio, mas `sitemap.xml`,
+`robots.txt`, as canônicas e o Open Graph saem apontando para `http://localhost:3000` — falha
+que só aparece depois de indexada.
+
+**2. Implantações › Arquivos de origem** → *Carregar novos arquivos* → envie o ZIP.
+
+**3. Configuração de compilação:**
+
+| campo | valor |
+| --- | --- |
+| Configuração predefinida | `Next.js` |
+| Versão do node | `22.x` |
+| Diretório raiz | `./` |
+| Comando de instalação | `npm ci` (ou `npm install`) |
+| Comando de compilação | `npm run build` |
+| Comando de início | `npm start` |
+| Diretório de saída | `.next` |
+
+Se algum desses campos não existir no seu painel, é porque o preset Next.js já o preenche.
+
+**4. Salve e implante.** O primeiro build leva alguns minutos (instala ~366 pacotes e compila
+19 rotas). Acompanhe em **Logs de execução**.
+
+## Validação
+
+- `/` — primeira dobra com as três portas
+- `/contato` — WhatsApp **+55 21 96469-0650**
+- `/sitemap.xml` — URLs com o seu domínio, nunca `localhost`
+- `/forno-combinado-rational` — redireciona para `/linhas-de-produtos/forno-combinado-rational`
+
+## Testado antes de entregar
+
+O ZIP foi extraído numa pasta limpa e submetido à mesma sequência do painel:
+
+- `npm install` → 366 pacotes;
+- `npm run build` → compila e gera as 19 rotas, exit 0;
+- `npm start` → sobe.
+
+Com o servidor no ar: 10 rotas em 200, redirect legado em 308, cabeçalhos de segurança
+emitidos, WhatsApp `5521964690650`, sitemap com o domínio real, e `/_next/image` devolvendo
+**AVIF de 32 KB** — a otimização de imagem funciona, porque aqui existe servidor.
+
+## Avisos esperados no log
+
+**`5 high severity vulnerabilities` depois do `npm install`.** Vêm de dependências de
+desenvolvimento (eslint 8 e transitivas) e de `sharp <0.35.0`. Nenhuma executa em produção
+servindo páginas. **Não rode `npm audit fix --force`**: ele sobe o `sharp` para fora da faixa
+que o Next 15.5.22 declara e altera dependências que não foram validadas contra este build.
+
+**Avisos de `deprecated`** (`inflight`, `glob@7`, `rimraf@3`, `@humanwhocodes/*`) são
+transitivos do eslint. Ruído de instalação, não erro.
+
+## Se der "Falha ao salvar as configurações de implantação"
+
+É erro do formulário do painel, não do pacote. Verifique, nesta ordem:
+
+1. algum campo obrigatório da *Configuração de compilação* em branco — preencha com a tabela
+   acima;
+2. o upload do ZIP concluiu antes de você salvar;
+3. tente salvar as **Variáveis de ambiente** primeiro, separadamente, e depois a configuração
+   de compilação.
 
 ## Se o domínio for outro
 
-O domínio é **embutido no build**. Trocar exige regerar o pacote, não editar arquivo no
-servidor:
-
-```bash
-NEXT_PUBLIC_SITE_URL=https://o-dominio-certo.com.br npm run pacote:hostinger
-```
-
-O pacote atual foi gerado com `https://bianchinicozinhas.com.br`.
-
-## O que este modelo custa — e o que foi compensado
-
-Sem servidor, o Next perde três recursos. Dois foram recuperados no `.htaccess`; um não tem
-como.
-
-| recurso | situação |
-| --- | --- |
-| Redirects de link antigo | ✅ recuperado — `RedirectPermanent` no `.htaccess` |
-| Cabeçalhos de segurança (5) | ✅ recuperado — `mod_headers` no `.htaccess` |
-| Otimização de imagem | ❌ **perdido** — ver abaixo |
-
-**A perda real:** o `next/image` deixa de gerar AVIF/WebP e de redimensionar por breakpoint.
-Cada imagem passa a ser servida como está em `public/`. Medido na home, em 1440×900:
-**8,3 MB transferidos, dos quais 7,4 MB são imagem** — contra ~1,5 MB com otimização ligada.
-
-Isso não quebra nada e o site continua correto em todos os testes, mas pesa no carregamento,
-principalmente em 4G. As duas saídas, quando houver tempo:
-
-1. **comprimir os arquivos de origem** em `public/images/` (o `consultoria.png` sozinho tem
-   1,7 MB) e regerar o pacote — resolve a maior parte sem mudar código;
-2. migrar para um plano com Node, que devolve a otimização automática.
-
-## O que NÃO subir
-
-`src/` · `docs/` · `node_modules/` · `.git/` · `out/` · `deploy-hostinger/` como subpasta ·
-capturas de tela · o repositório inteiro.
+Basta trocar `NEXT_PUBLIC_SITE_URL` em Variáveis de ambiente e reimplantar. Como o build roda
+no host, **não é preciso regerar o ZIP**.
 
 ## Variáveis de ambiente
 
-Uma só, usada **no build**, e não é segredo:
+Uma só, e não é segredo:
 
-| variável | valor |
-| --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | a URL pública, sem barra final |
+| variável | quando | valor |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | build | a URL pública, sem barra final |
 
 Nenhuma chave, token ou credencial é usada pelo projeto — o formulário de contato não tem
 backend: monta a mensagem e abre WhatsApp ou e-mail.
