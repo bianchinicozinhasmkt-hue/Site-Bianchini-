@@ -26,31 +26,51 @@ export const site = {
   ],
   locale: 'pt-BR',
   /**
-   * Domínio ainda não confirmado para publicação. Definir NEXT_PUBLIC_SITE_URL
-   * no ambiente de deploy — metadataBase, sitemap e robots leem essa variável.
+   * ============================================================
+   * DOMÍNIO DE PUBLICAÇÃO — CONFIRMADO (2026-08-11)
+   * ============================================================
+   *
+   * `bianchinicozinhas.com.br`, confirmado pelo gestor. É o domínio publicado,
+   * o do e-mail comercial e o que `CLAUDE.md` já registrava como identidade
+   * oficial da marca.
+   *
+   * **O padrão deixou de ser `http://localhost:3000`, e a mudança tem causa
+   * concreta.** Enquanto o domínio era desconhecido, cair em localhost e gritar
+   * no log era o comportamento defensável: um domínio inventado é pior que um
+   * óbvio erro de configuração.
+   *
+   * Só que o primeiro deploy real provou o custo desse desenho. O host compila
+   * o projeto, a variável precisa ser cadastrada no painel dele, ela não foi, e
+   * o site subiu **funcionando** com `canonical`, `og:url` e as 14 URLs do
+   * `sitemap.xml` apontando para `http://localhost:3000`. O aviso saiu no log —
+   * dezenas de vezes — e passou despercebido no meio da saída do build, que é
+   * exatamente o que um aviso não-fatal faz num pipeline automatizado.
+   *
+   * Com o domínio confirmado, o padrão correto é ele. `NEXT_PUBLIC_SITE_URL`
+   * continua tendo precedência, e é o que se usa para publicar num subdomínio de
+   * teste sem tocar no código.
    */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bianchinicozinhas.com.br',
 } as const
 
 /*
-  Sem a variável, `site.url` cai em `http://localhost:3000` e o build **passa
-  em silêncio** — mas `sitemap.xml`, `robots.txt`, as canônicas e as imagens de
-  Open Graph saem todas apontando para localhost. É o tipo de falha que só
-  aparece depois de indexada.
+  O aviso agora é sobre **divergência**, não sobre ausência: se a variável
+  estiver definida e apontar para outro domínio que não o de produção, quem lê o
+  log de deploy vê qual dos dois venceu. Ausência deixou de ser problema — o
+  padrão é o domínio real.
 
-  O aviso é deliberadamente **não fatal**: derrubar o build puniria um host que
-  monte as variáveis só em runtime. Ele grava uma linha no log de deploy, que é
-  onde alguém vai procurar. A verificação fica atrás de `typeof window` para
-  não rodar no navegador, e de `NODE_ENV` para não poluir o `npm run dev`.
+  Continua atrás de `typeof window` para não rodar no navegador, e de
+  `NODE_ENV` para não poluir o `npm run dev`.
 */
 if (
   typeof window === 'undefined' &&
   process.env.NODE_ENV === 'production' &&
-  !process.env.NEXT_PUBLIC_SITE_URL
+  process.env.NEXT_PUBLIC_SITE_URL &&
+  process.env.NEXT_PUBLIC_SITE_URL !== 'https://bianchinicozinhas.com.br'
 ) {
   console.warn(
-    '\n[bianchini] NEXT_PUBLIC_SITE_URL não definida — sitemap, robots, canonical e Open Graph ' +
-      'vão apontar para http://localhost:3000. Defina o domínio real antes de publicar.\n',
+    `\n[bianchini] NEXT_PUBLIC_SITE_URL define ${process.env.NEXT_PUBLIC_SITE_URL} — ` +
+      'sitemap, robots, canonical e Open Graph vão usar esse domínio, não bianchinicozinhas.com.br.\n',
   )
 }
 
