@@ -4,7 +4,8 @@
     "next-env.d.ts",
     "_entrega_chatgpt/**",
     "docs/archive/**",
-    "deploy-hostinger/**"
+    "deploy-hostinger/**",
+    "out/**"
   ],
   "rules": {
     "react/no-unescaped-entities": "off"

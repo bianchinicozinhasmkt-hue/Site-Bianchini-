@@ -5,8 +5,9 @@
  * ============================================================
  *
  * Monta `deploy-hostinger/` e `bianchini-hostinger.zip` a partir de um build
- * `output: 'standalone'` (ver `next.config.ts` para por que este site **não** é
- * um export estático).
+ * `output: 'export'`. O resultado é uma **pasta de site estático**: joga-se no
+ * painel da Hostinger e ela substitui o site anterior, sem processo Node, sem
+ * instalar dependência e sem comando de start.
  *
  * Uso:
  *
@@ -37,14 +38,18 @@
  * servidor.
  *
  * ------------------------------------------------------------
- * PLATAFORMA
+ * O QUE VAI DENTRO
  * ------------------------------------------------------------
  *
- * O `node_modules` rastreado pelo standalone inclui binários nativos da
- * máquina de build (`sharp`, usado pelo otimizador de imagem). Gerado no
- * Windows, ele **não roda** num host Linux. Por isso o pacote traz
- * `package.json` e o lockfile: no servidor, `npm ci --omit=dev` reinstala as
- * dependências para a plataforma certa. O aviso aparece no fim da execução.
+ * O conteúdo de `out/` mais um `.htaccess` gerado aqui. Nenhum `package.json`,
+ * nenhum `node_modules`, nenhum `server.js` — num site estático eles não teriam
+ * função, e a versão anterior deste script quebrou o deploy justamente por
+ * enviar um `package.json` que fez o painel da Hostinger tentar compilar o
+ * pacote.
+ *
+ * O `.htaccess` carrega o que o export estático não consegue emitir sozinho:
+ * os dois redirects de link antigo e os cinco cabeçalhos de segurança, que
+ * saíram do `next.config.ts` nesta rodada.
  */
 import { cp, mkdir, rm, readFile, writeFile, readdir, stat } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
@@ -57,10 +62,6 @@ const raiz = process.cwd()
 const destino = path.join(raiz, 'deploy-hostinger')
 const zip = path.join(raiz, 'bianchini-hostinger.zip')
 const require_ = createRequire(import.meta.url)
-const pkgProjeto = JSON.parse(await readFile(path.join(raiz, 'package.json'), 'utf8'))
-
-/** Versão exata que este build usou — não a faixa declarada no projeto. */
-const versaoInstalada = (nome) => require_(`${nome}/package.json`).version
 
 const passo = (n, t) => console.log(`\n[${n}/6] ${t}`)
 const erro = (m) => {
@@ -90,7 +91,7 @@ await rm(destino, { recursive: true, force: true })
 await rm(zip, { force: true })
 
 /* ---------- 2. build de produção ---------- */
-passo(2, 'Build de produção (next build, output: standalone)')
+passo(2, 'Build de produção (next build, output: export)')
 /*
   O binário do Next é invocado **direto pelo Node**, e não por `npm run build`.
   No Windows, `execFileSync` recusa executar um `.cmd` sem `shell: true` (é a
@@ -109,150 +110,77 @@ try {
   erro('O build falhou. Pacote não gerado.')
 }
 
-const standalone = path.join(raiz, '.next', 'standalone')
-if (!existsSync(path.join(standalone, 'server.js')))
-  erro('.next/standalone/server.js não existe. `output: "standalone"` está em next.config.ts?')
+const out = path.join(raiz, 'out')
+if (!existsSync(path.join(out, 'index.html')))
+  erro('out/index.html não existe. `output: "export"` está em next.config.ts?')
 
 /* ============================================================
-   3. MONTAGEM — SEM `node_modules`, COM MANIFESTO DE RUNTIME
+   3. MONTAGEM — A PASTA É O SITE
    ============================================================
 
-   O `standalone` monta um `node_modules` rastreado, e a tentação é enviá-lo:
-   o pacote fica autocontido e o servidor só precisaria de `node server.js`.
-   **Não funciona neste caso, por duas razões independentes.**
+   O export do Next já produz exatamente o que a hospedagem espera: HTML, CSS,
+   JS e assets, com `index.html` na raiz. A montagem é uma cópia, mais o
+   `.htaccess`.
 
-   ------------------------------------------------------------
-   1. Binário nativo é da plataforma de build
-   ------------------------------------------------------------
-
-   `sharp` — que o otimizador do `next/image` usa — traz binário por sistema
-   operacional. Medido, o pacote gerado aqui carregava 20 MB de
-   `@img/sharp-win32-x64`, que **não carrega** num host Linux. O sintoma não
-   seria erro no deploy: seria imagem quebrada em produção.
-
-   ------------------------------------------------------------
-   2. O painel da Hostinger roda `npm install` + `npm run build`
-   ------------------------------------------------------------
-
-   Isto foi descoberto **em produção**, e é o que quebrou o primeiro deploy. A
-   versão anterior deste script enviava o `package.json` **do projeto**, com
-   `"build": "next build"` e as devDependencies inteiras. O painel:
-
-     · rodou `npm install` → instalou 365 pacotes, incluindo eslint e
-       typescript, que não têm nenhuma função em runtime;
-     · rodou `npm run build` → `next build` procurou `src/app`, que
-       deliberadamente não existe num pacote **já compilado**, e abortou com
-       "Couldn't find any `pages` or `app` directory".
-
-   Brigar com essa automação é frágil. O certo é o pacote **ser** o que a
-   automação espera: um app Node comum, com um `package.json` que declara só o
-   runtime e cujo `build` não tem nada a fazer.
-
-   ------------------------------------------------------------
-   A montagem, então
-   ------------------------------------------------------------
-
-   Um caminho só, igual em qualquer plataforma de build: **nenhum
-   `node_modules` viaja**. O pacote leva `server.js`, `.next/`, `public/` e um
-   manifesto mínimo; o host instala as quatro dependências de runtime para a
-   própria arquitetura. Fica maior no primeiro deploy e correto em todos.
+   **Por que existe um `.htaccess`.** Com `output: 'export'` o Next deixa de
+   aplicar `redirects()` e `headers()` — os dois dependem de servidor. Em vez de
+   perdê-los, eles são reescritos aqui na linguagem do Apache/LiteSpeed, que é o
+   que roda na Hostinger. Ver o comentário em `next.config.ts`: aquele arquivo
+   deixou de ser a fonte deles, este passou a ser.
    ============================================================ */
 passo(3, 'Montando deploy-hostinger/')
 await mkdir(destino, { recursive: true })
-console.log('   sem node_modules — o host instala as dependências de runtime')
+await cp(out, destino, { recursive: true })
 
-// 3a. o servidor standalone, sem o node_modules rastreado
-await cp(standalone, destino, {
-  recursive: true,
-  filter: (src) => !path.relative(standalone, src).split(path.sep).includes('node_modules'),
-})
+const htaccess = `# Gerado por scripts/gerar-pacote-hostinger.mjs — nao editar a mao.
+# Regerar com: npm run pacote:hostinger
 
-// 3b. o Next NÃO copia estes dois — é comportamento documentado, não defeito
-await cp(path.join(raiz, '.next', 'static'), path.join(destino, '.next', 'static'), {
-  recursive: true,
-})
-await cp(path.join(raiz, 'public'), path.join(destino, 'public'), { recursive: true })
+# ---------- Links antigos ----------
+# Substituem os redirects() do next.config.ts, que o export estatico ignora.
+RedirectPermanent /forno-combinado-rational /linhas-de-produtos/forno-combinado-rational/
+RedirectPermanent /construcao-e-reformas /solucoes/arquitetura/
 
-/* ============================================================
-   3c. O MANIFESTO DE RUNTIME
-   ============================================================
+# ---------- Cabecalhos de seguranca ----------
+# Substituem os headers() do next.config.ts, pela mesma razao.
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()"
+</IfModule>
 
-   Escrito do zero, e **não** copiado do projeto. O `package.json` do
-   repositório descreve como *desenvolver* o site; este descreve como *executar*
-   o que já foi compilado. São documentos diferentes, e enviar o primeiro no
-   lugar do segundo foi o que quebrou o primeiro deploy.
+# ---------- Pagina de erro ----------
+ErrorDocument 404 /404.html
 
-   As quatro dependências saem de fatos verificáveis, não de estimativa:
+# ---------- Cache ----------
+# Os arquivos de /_next/static/ carregam hash no nome: mudou o conteudo, mudou a
+# URL. Por isso podem ser cacheados por um ano com seguranca. O HTML nao pode:
+# a URL dele nao muda, e um HTML cacheado seguraria a versao antiga do site no
+# navegador de quem ja visitou.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
 
-     next, react, react-dom  `.next/standalone/server.js` faz
-                             `require('next')` e
-                             `require('next/dist/server/lib/start-server')`, e o
-                             render das páginas precisa do par react
-     sharp                   otimizador de imagem do `next/image`. É
-                             `optionalDependency` do próprio Next, mas fica
-                             **explícita** aqui: se o npm a pular por qualquer
-                             razão, o sintoma é imagem quebrada em produção, e
-                             uma dependência declarada falha alto em vez de
-                             falhar em silêncio
-
-   Versões travadas nas que este build usou. Não são faixas (`^`) de propósito:
-   o pacote foi testado contra estas, e um `npm install` no servidor daqui a três
-   meses não deve trazer uma minor diferente da validada.
-
-   Fora ficam `clsx` e `tailwind-merge` — o compilador do Next as embute nos
-   chunks — e todo o bloco de desenvolvimento (eslint, typescript, tailwind,
-   postcss, autoprefixer, @types/*), que não executa nada em produção.
-
-   `scripts.build` é um **no-op declarado**. O painel da Hostinger o executa
-   automaticamente depois do install; como o app já vem compilado, a resposta
-   correta é dizer isso e sair com 0. Deixá-lo como `next build` é o que
-   produziu "Couldn't find any `pages` or `app` directory".
-   ============================================================ */
-const manifesto = {
-  name: 'bianchini-cozinhas',
-  version: pkgProjeto.version,
-  private: true,
-  description: 'Site institucional da Bianchini — pacote de produção pré-compilado',
-  scripts: {
-    build: 'node -e "console.log(\'Aplicação já compilada no pacote — nada a fazer.\')"',
-    start: 'node server.js',
-  },
-  dependencies: {
-    next: pkgProjeto.dependencies.next.replace(/^[\^~]/, ''),
-    react: versaoInstalada('react'),
-    'react-dom': versaoInstalada('react-dom'),
-    sharp: versaoInstalada('sharp'),
-  },
-  /*
-    ---------- `overrides` viaja junto (2026-08-11) ----------
-
-    O projeto declara `overrides: { postcss: "^8.5.25" }` para forçar uma versão
-    corrigida de uma dependência **transitiva** do Next. Sem ele no manifesto, o
-    `npm install` do servidor resolvia `postcss` pela faixa do próprio Next e
-    trazia uma versão vulnerável — medido: `npm audit` acusava
-    `postcss <=8.5.22, severity high` no pacote instalado.
-
-    Isto não é uma decisão nova de dependência: é a decisão que o repositório já
-    tomou, que o `package.json` do projeto registra, e que eu tinha deixado para
-    trás ao escrever o manifesto do zero. Copiar o bloco inteiro em vez de
-    reescrevê-lo garante que qualquer override futuro acompanhe sem outra
-    correção aqui.
-  */
-  ...(pkgProjeto.overrides ? { overrides: pkgProjeto.overrides } : {}),
-  engines: pkgProjeto.engines,
-}
-await writeFile(
-  path.join(destino, 'package.json'),
-  JSON.stringify(manifesto, null, 2) + '\n',
-  'utf8',
-)
-
-/*
-  Nenhum lockfile é enviado. O do projeto descreve a árvore de desenvolvimento
-  inteira e não bate com este manifesto — `npm ci` abortaria por dessincronia.
-  Sem lockfile, `npm install` resolve as quatro dependências travadas acima, que
-  é exatamente o que o painel da Hostinger executa.
-*/
+# ---------- Compressao ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+`
+await writeFile(path.join(destino, '.htaccess'), htaccess, 'utf8')
+console.log('   .htaccess escrito (2 redirects + 5 cabecalhos + cache + gzip)')
 
 /* ---------- 4. poda o que não é runtime ---------- */
 passo(4, 'Removendo o que não é necessário em produção')
@@ -356,9 +284,11 @@ console.log(`  deploy-hostinger/        ${arquivos} arquivos · ${mb(bytes)}`)
 console.log(`  bianchini-hostinger.zip  ${mb(zipBytes)}`)
 console.log(`  domínio embutido:        ${siteUrl}`)
 console.log(
-  `\n  No servidor, dentro da pasta:\n` +
-    `      npm install      (4 dependências de runtime, na arquitetura do host)\n` +
-    `      npm start        (= node server.js)\n\n` +
-    `  O painel da Hostinger faz o install e chama "npm run build" sozinho —\n` +
-    `  o build deste pacote é um no-op declarado, porque o app já vem compilado.`,
+  [
+    '',
+    '  Site estático: a pasta É o site.',
+    '  Envie o conteúdo de deploy-hostinger/ para public_html — inclusive o',
+    '  arquivo .htaccess, que costuma ficar oculto nos gerenciadores de arquivo.',
+    '  Não há nada a instalar nem a iniciar.',
+  ].join('\n'),
 )

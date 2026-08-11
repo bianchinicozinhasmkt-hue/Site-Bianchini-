@@ -5,115 +5,82 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   /*
     ============================================================
-    PACOTE DE PRODUÇÃO — `standalone` (2026-08-11)
+    SITE ESTÁTICO — `export` (2026-08-11)
     ============================================================
 
-    **Este site não é estático, e a tentativa de exportá-lo seria uma conversão
-    arquitetural.** `output: 'export'` desligaria três coisas que o projeto usa
-    hoje e que não são opcionais:
+    **Decisão do gestor, e ela define a arquitetura de entrega.** A hospedagem é
+    a mesma que servia a V1: uma pasta jogada no painel da Hostinger, sem
+    processo Node rodando. Um build `standalone` — que foi o que esta rodada
+    tentou primeiro — não funciona ali por construção: ele produz um
+    `server.js` que **alguém precisa executar**, e não há quem execute.
 
-      · os `redirects()` abaixo (`/forno-combinado-rational` e
-        `/construcao-e-reformas`) — em export eles são simplesmente ignorados,
-        com aviso de build, e os links antigos passariam a dar 404;
-      · os `headers()` de segurança — `X-Content-Type-Options`,
-        `X-Frame-Options`, `Referrer-Policy`, `Strict-Transport-Security` e
-        `Permissions-Policy` deixariam de ser emitidos;
-      · a otimização de imagem do `next/image`, que exigiria
-        `images.unoptimized: true`. Com AVIF/WebP desligados, os PNG da primeira
-        dobra passariam a ser servidos no tamanho original em toda largura de
-        tela — regressão direta de performance na dobra que é o LCP.
+    Export estático é, portanto, o único modelo compatível com o host. O que ele
+    custa está registrado abaixo, com a compensação de cada item:
 
-    `standalone` **não muda nada disso**: mesma renderização, mesmas rotas,
-    mesmas imagens, mesmos cabeçalhos. Ele só altera o **formato do artefato de
-    build**, montando em `.next/standalone/` um servidor autocontido com apenas
-    as dependências que o rastreamento de módulos comprova serem necessárias.
-    É por isso que ele entra numa rodada de fechamento: é mudança de empacotamento,
-    não de arquitetura.
+      · **`redirects()` deixam de existir no Next.** Os dois links antigos
+        (`/forno-combinado-rational` e `/construcao-e-reformas`) passam a ser
+        resolvidos por `RedirectPermanent` no `.htaccess` que o script de pacote
+        gera. Continuam 301, continuam para o mesmo destino;
+      · **`headers()` deixam de existir no Next.** Os cinco cabeçalhos de
+        segurança passam para o mesmo `.htaccess`, via `mod_headers`. Continuam
+        sendo emitidos, agora pelo Apache/LiteSpeed;
+      · **`next/image` perde a otimização.** É a única perda sem compensação
+        possível sem servidor: `unoptimized: true` desliga AVIF/WebP e o
+        redimensionamento por breakpoint, e cada imagem passa a ser servida no
+        arquivo original. Está medido e reportado no `HOSTINGER-DEPLOY.md` —
+        é o preço de não ter Node, não um descuido.
 
-    O que o `standalone` **não** copia, e o script de pacote copia à mão (é o
-    comportamento documentado do Next, não um defeito):
-
-      `.next/static/`  → `.next/standalone/.next/static/`
-      `public/`        → `.next/standalone/public/`
-
-    `sharp` é a única dependência de runtime que precisa de atenção: o
-    otimizador de imagem a usa em produção e ela traz binário por plataforma. O
-    rastreamento a inclui a partir do `node_modules` da máquina de build, então
-    **o pacote gerado no Windows só serve para host Windows**. Para a Hostinger
-    (Linux), o passo `npm ci --omit=dev` no servidor resolve — ver
-    `HOSTINGER-DEPLOY.md`.
+    `trailingSlash: true` **não é preferência de URL**: é o que faz o export
+    gerar `sobre/index.html` em vez de `sobre.html`. Apache serve o primeiro
+    nativamente em `/sobre/`; o segundo dependeria de `MultiViews` ou de regra
+    de reescrita, que nem toda hospedagem compartilhada tem ligada. Com ele, a
+    pasta funciona ao ser simplesmente copiada — que é o requisito.
   */
-  output: 'standalone',
+  output: 'export',
+  trailingSlash: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
     /*
-      A partir do Next 16 todo `quality` usado precisa estar declarado aqui.
-      Sem a lista, cada <Image> com qualidade customizada emite um aviso no
-      console em desenvolvimento. Os valores abaixo são exatamente os usados
-      no projeto — ao introduzir um novo, acrescente-o à lista.
+      `unoptimized` é imposto pelo `output: 'export'`: sem servidor não há
+      otimizador, e o build falha se ele não estiver ligado. Consequência real,
+      registrada para não ser esquecida: `formats` (AVIF/WebP) e `qualities`
+      deixam de ter efeito, e cada `<Image>` passa a servir o arquivo original
+      de `public/`, no tamanho original, em qualquer largura de tela.
+
+      `sizes`, `priority` e `loading` continuam valendo — o navegador ainda
+      decide o que baixar primeiro. O que se perde é a reamostragem e a
+      recodificação.
     */
-    qualities: [60, 70, 72, 74, 76, 78, 80, 82, 84, 86],
-  },
-  async redirects() {
-    return [
-      {
-        source: '/forno-combinado-rational',
-        destination: '/linhas-de-produtos/forno-combinado-rational',
-        permanent: true,
-      },
-      {
-        /*
-          "Construção e Reformas" saiu do escopo (decisão do gestor,
-          2026-08-03) — não existe mais como seção, card ou âncora. O redirect
-          permanece só por compatibilidade de link antigo, direto para a
-          página real que cobre o conteúdo (layout, fluxo, readequação e
-          ampliação): um salto só, sem passar por `/projetos-arquitetonicos`.
-        */
-        source: '/construcao-e-reformas',
-        destination: '/solucoes/arquitetura',
-        permanent: true,
-      },
-    ]
+    unoptimized: true,
   },
   /*
-    Cabeçalhos de segurança.
+    ============================================================
+    `redirects()` E `headers()` SAÍRAM DAQUI (2026-08-11)
+    ============================================================
 
-    Não há `Content-Security-Policy` aqui de propósito: o `layout.tsx` injeta
-    dois `<script>` inline (a flag `data-js`, que precisa rodar antes da
-    primeira pintura, e o JSON-LD), então uma CSP útil exige nonce por
-    requisição — o que tira as páginas do pré-render estático. É melhoria de
-    V2, com medição, não algo para entrar às vésperas da publicação.
+    Não foram removidos do produto: foram **transferidos**. Com
+    `output: 'export'` o Next ignora os dois e emite aviso de build — eles
+    dependem de um servidor que não existe nesta hospedagem.
 
-    `Strict-Transport-Security` só tem efeito sobre HTTPS; em `localhost` o
-    navegador ignora. Um ano, com subdomínios, sem `preload` — entrar na lista
-    de preload é decisão de domínio, não de aplicação, e é difícil de desfazer.
+    Os dois passaram para o `.htaccess` que `scripts/gerar-pacote-hostinger.mjs`
+    escreve dentro do pacote, onde o Apache/LiteSpeed da Hostinger os aplica:
+
+      · `/forno-combinado-rational` → `/linhas-de-produtos/forno-combinado-rational/`
+      · `/construcao-e-reformas`    → `/solucoes/arquitetura/`
+        (fora do escopo por decisão do gestor em 2026-08-03; o redirect existe
+        só por compatibilidade de link antigo, e vai direto à página que cobre
+        o conteúdo, sem salto intermediário)
+
+      · X-Content-Type-Options, X-Frame-Options, Referrer-Policy,
+        Strict-Transport-Security e Permissions-Policy
+
+    Não há `Content-Security-Policy`, e continua sendo de propósito: o
+    `layout.tsx` injeta dois `<script>` inline (a flag `data-js`, que precisa
+    rodar antes da primeira pintura, e o JSON-LD), então uma CSP útil exigiria
+    nonce por requisição — impossível em arquivo estático.
+
+    **Ao mexer em qualquer um dos dois, mexa no script do pacote.** Este arquivo
+    deixou de ser a fonte deles.
   */
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains',
-          },
-          /*
-            O site não usa câmera, microfone, geolocalização nem pagamento.
-            Negar explicitamente impede que um script de terceiro incluído no
-            futuro (pixel, chat) peça essas permissões em nome do domínio.
-          */
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()',
-          },
-          { key: 'X-DNS-Prefetch-Control', value: 'on' },
-        ],
-      },
-    ]
-  },
 }
 
 export default nextConfig

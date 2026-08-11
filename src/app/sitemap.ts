@@ -1,6 +1,15 @@
 import type { MetadataRoute } from 'next'
 import { site } from '@/data/site'
 
+/*
+  `force-static` é exigido por `output: 'export'`: sem ele o Next trata esta
+  rota como dinâmica e o build aborta com "export const dynamic =
+  force-static not configured on route". O conteúdo já era estático — a
+  função não lê requisição, cookie nem cabeçalho —, então a diretiva só declara
+  o que sempre foi verdade, e o arquivo passa a ser gerado no export.
+*/
+export const dynamic = 'force-static'
+
 /**
  * Rotas indexáveis. `/obrigado` fica fora de propósito — é página de
  * confirmação e está marcada como noindex.
@@ -25,7 +34,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
 
   return routes.map((route) => ({
-    url: `${site.url}${route.path}`,
+    /*
+      Barra final obrigatória, e ela não é estética: `trailingSlash: true`
+      (`next.config.ts`) faz o export gerar `sobre/index.html`, servido em
+      `/sobre/`. Um sitemap apontando para `/sobre` faria o Apache responder
+      301 para `/sobre/` em cada URL da lista — um salto inútil em toda página
+      indexada, e uma canônica divergente da URL anunciada.
+
+      A raiz já é `/`, então recebe tratamento próprio para não virar `//`.
+    */
+    url: `${site.url}${route.path === '/' ? '/' : `${route.path}/`}`,
     lastModified: now,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
