@@ -65,17 +65,25 @@ export function Header() {
             Marca. `shrink-0` nos dois níveis: sem ele o logotipo é um item
             flexível dentro de outro e encolhe abaixo da altura pedida.
 
-            Altura fixa, não proporcional à faixa: o logotipo oficial é
-            um lockup de duas linhas ("BIANCHINI" + "COZINHAS PROFISSIONAIS") e
-            abaixo de ~34px a segunda linha deixa de ser legível. São 34px no
-            mobile e 40px do tablet para cima — dentro da faixa de 38–44px, com
-            ~140px de largura resultante.
+            Altura fixa, não proporcional à faixa: o logotipo é um lockup de
+            duas linhas ("BIANCHINI" + "KITCHEN PRO") e a segunda linha é o que
+            fixa o piso.
 
-            A margem negativa que cancelava a folga transparente do PNG antigo
-            saiu junto com ele: o arquivo oficial não tem folga lateral.
+            ---------- REMEDIDO NA RESTAURAÇÃO DO LOCKUP (2026-08-11) ----------
+
+            Era 34/40px, medido contra o lockup de 3,5:1 que saiu. O lockup
+            restaurado é 2,27:1 e traz um símbolo à esquerda, então a mesma
+            altura entrega uma segunda linha bem menor: "KITCHEN PRO" ocupa ~9%
+            da altura do arquivo e a 34px renderiza a ~3px de caixa-alta.
+
+            Passa a 40px no telefone e 48px de `md` para cima. Cabe: a faixa é
+            64px no telefone (40 + 24 de respiro) e 76–96 em tablet/desktop. E
+            **não estoura na horizontal** — a 48px o logotipo mede ~109px de
+            largura, contra os ~140px que o lockup anterior ocupava a 40px. O
+            cabeçalho ficou com mais folga, não menos.
             ---------- */}
         <span className="flex shrink-0 items-center">
-          <Logo priority variant="light" className="h-[2.125rem] shrink-0 md:h-10" />
+          <Logo priority variant="light" className="h-10 shrink-0 md:h-12" />
         </span>
 
         <nav

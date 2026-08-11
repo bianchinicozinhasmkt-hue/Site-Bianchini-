@@ -69,7 +69,14 @@ export function Footer() {
       <Container className="py-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(3,1fr)] lg:gap-10">
           <div className="max-w-sm">
-            <Logo asLink={false} variant="light" className="h-9" />
+            {/*
+              36 → 44px na restauração do lockup (2026-08-11): mesma razão do
+              cabeçalho — a proporção passou de 3,5:1 para 2,27:1 e a segunda
+              linha do lockup precisa de mais altura para continuar legível.
+              A largura resultante (~100px) é menor que a anterior, então nada
+              se desloca na coluna do rodapé.
+            */}
+            <Logo asLink={false} variant="light" className="h-11" />
 
             <p className="mt-5 text-body-sm leading-relaxed text-canvas/70">
               {positioning.essence}

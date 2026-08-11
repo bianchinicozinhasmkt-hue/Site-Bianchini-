@@ -13,49 +13,86 @@ interface LogoProps {
 }
 
 /**
- * Logotipo institucional — a marca **oficial** da Bianchini.
+ * ============================================================
+ * LOGOTIPO — O LOCKUP ANTERIOR, RESTAURADO (2026-08-11)
+ * ============================================================
  *
- * O arquivo é o `LOGOMARCA-1.png` publicado em bianchinicozinhas.com.br
- * (452 × 129), o mesmo declarado como logo da organização no schema.org do
- * site, e é o lockup que aparece no mockup aprovado:
- * "BIANCHINI / COZINHAS PROFISSIONAIS".
+ * "BIANCHINI KITCHEN PRO" (1200 × 528), com o símbolo da chama em hexágono.
+ * É o lockup que o repositório usava até `04c20f7`, recuperado de `a6603b3`
+ * por decisão explícita do gestor nesta rodada.
  *
- * O original vem com o fundo escuro achatado no bitmap, sem canal alfa. As duas
- * versões usadas aqui foram geradas a partir dele derivando o alfa da própria
- * luminância — nada foi redesenhado, reposicionado nem reescalado:
+ * ------------------------------------------------------------
+ * O QUE ESTAVA AQUI ANTES, E POR QUE SAIU
+ * ------------------------------------------------------------
  *
- *   `light` ... amarelo da marca (#F3CC4D), para o grafite do cabeçalho e do
- *               rodapé. É praticamente o mesmo `yellow` do sistema (#F5C64B) —
- *               o logotipo confirma a paleta.
- *   `default` . grafite, para superfície clara.
+ * `logo-bianchini-oficial.png` (452 × 129) — o `LOGOMARCA-1.png` publicado em
+ * bianchinicozinhas.com.br, lockup "BIANCHINI / COZINHAS PROFISSIONAIS", em
+ * amarelo da marca. Os dois arquivos **continuam em `public/images/brand/`** e
+ * continuam sendo o logotipo declarado no schema.org (`src/lib/schema.ts`), que
+ * não foi tocado: o dado estruturado aponta para a marca publicada no domínio
+ * oficial, e mudar isso sem confirmação seria alterar a identidade que o site
+ * declara a buscadores.
  *
- * O lockup anterior do repositório ("BIANCHINI KITCHEN PRO", 1200 × 528) foi
- * removido de `public/images/brand/` na preparação da V1 (2026-08-05): não é a
- * marca oficial, não era referenciado por nenhum componente e ia junto no
- * bundle de deploy, já que `public/` é copiada inteira. Estava versionado —
- * `git show HEAD:public/images/brand/logo-bianchini.png` o recupera.
+ * ------------------------------------------------------------
+ * DIVERGÊNCIA REGISTRADA — não é esquecimento
+ * ------------------------------------------------------------
  *
- * A proporção é 3,5:1 — bem mais larga que o lockup antigo (2,3:1). Ao definir
- * altura, lembre que a largura resultante é ~3,5× maior.
+ * Esta restauração contraria dois pontos escritos no repositório, e os dois
+ * ficam registrados aqui em vez de serem apagados:
+ *
+ *   · `CLAUDE.md` diz que o azul-marinho `#000E1E` e o bordô `#7E0F29` saíram
+ *     do projeto em 2026-08-01 e "não devem voltar". O lockup restaurado é
+ *     navy + carmim;
+ *   · a versão anterior deste comentário registrava que KITCHEN PRO "não é a
+ *     marca oficial".
+ *
+ * **Na prática o navy e o carmim não aparecem em tela.** Os dois únicos pontos
+ * de uso — cabeçalho (`header.tsx`) e rodapé (`footer.tsx`) — chamam
+ * `variant="light"`, que é o arquivo **monocromático branco**. O `default`
+ * colorido não é referenciado por nenhum componente. O efeito visível da troca
+ * é, portanto, o descritor ("KITCHEN PRO" no lugar de "COZINHAS PROFISSIONAIS")
+ * e a proporção.
+ *
+ * ------------------------------------------------------------
+ * A PROPORÇÃO MUDOU, E ELA DITA A ALTURA
+ * ------------------------------------------------------------
+ *
+ * 2,27:1, contra os 3,5:1 do lockup que saiu. Duas consequências, as duas
+ * medidas e já compensadas em `header.tsx` e `footer.tsx`:
+ *
+ *   1. **na mesma altura o logotipo fica mais estreito** — a 34px eram 119px de
+ *      largura e passam a 77px. Não há risco de estouro em nenhuma largura;
+ *   2. **a segunda linha exige mais altura.** "KITCHEN PRO" ocupa ~9% da altura
+ *      do arquivo: a 34px a caixa-alta dela renderiza a ~3px e some. O lockup
+ *      anterior era de duas linhas curtas numa caixa achatada e sobrevivia a
+ *      34px; este não. Daí as alturas terem subido para 40/48px no cabeçalho e
+ *      36px no rodapé — os mesmos valores que o header usava quando este
+ *      logotipo estava em produção (`h-10 sm:h-11 lg:h-14`, ajustado para a
+ *      faixa de altura do cabeçalho atual, que é mais baixa que a de então).
+ *
+ * A faixa do cabeçalho **não mudou**: continua o token responsivo por `clamp()`
+ * de `globals.css` (64px no telefone, 76–88 em tablet, 90–96 em desktop amplo).
+ * O que mudou foi só a altura da imagem dentro dela.
  */
 export function Logo({ className, asLink = true, priority = false, variant = 'default' }: LogoProps) {
   const image = (
     <Image
       src={
         variant === 'light'
-          ? '/images/brand/logo-bianchini-oficial.png'
-          : '/images/brand/logo-bianchini-oficial-grafite.png'
+          ? '/images/brand/logo-bianchini-light.png'
+          : '/images/brand/logo-bianchini.png'
       }
       alt={`${site.brand} — cozinhas profissionais`}
-      width={452}
-      height={129}
+      width={1200}
+      height={528}
       priority={priority}
       /*
         `sizes` acompanha a largura real de renderização, senão o preload baixa
-        uma candidata diferente da usada e o console avisa. A 40px de altura o
-        logotipo tem ~140px de largura; 176px cobre o desktop com folga.
+        uma candidata diferente da usada e o console avisa. A 48px de altura
+        (o maior degrau, no desktop) o logotipo tem ~109px de largura; 128px
+        cobre com folga e continua bem abaixo do que a proporção anterior pedia.
       */
-      sizes="(max-width: 767px) 132px, 176px"
+      sizes="(max-width: 767px) 96px, 128px"
       className={cn('w-auto object-contain', className)}
     />
   )
