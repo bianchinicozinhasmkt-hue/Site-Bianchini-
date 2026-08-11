@@ -97,30 +97,36 @@ depoimentos, certificações, resultados, prazos ou dados técnicos.
 
 Dados confirmados como reais:
 
-- 18 anos de atuação
+- **17 anos de atuação** (confirmado pelo comercial em 2026-08-11 — ver abaixo)
 - mais de 3.000 projetos entregues (métrica com pendência de confirmação numérica exata —
-  ver `docs/v1-release/04-pendencias-externas.md` item 5 e `src/data/site.ts` linhas 108–113)
+  ver `docs/v1-release/04-pendencias-externas.md` item 5 e `src/data/site.ts`)
+- **WhatsApp `+55 21 96469-0650`** (confirmado pelo comercial em 2026-08-11 — ver abaixo)
 - E-mail `comercial@bianchinicozinhas.com.br`
 - Rio de Janeiro · RJ · Brasil
 - 15 logotipos em `public/images/clients/` (10 aprovados para exibição)
 - 2 depoimentos identificáveis em `src/data/testimonials.ts`
 - fotos de operações entregues em `public/images/projects/` e `public/images/hero/`
 
-**WhatsApp — divergência não resolvida, não tratar nenhum dos dois como confirmado até
-confirmação comercial:**
+### As duas divergências de dado comercial foram encerradas em 2026-08-11
 
-| Onde | Valor |
-| --- | --- |
-| `src/data/site.ts` (`contact.phoneDisplay`, em uso no site) | `+55 21 99518-1918` |
-| Versão anterior deste arquivo (até 2026-08-07) | `+55 21 96469-0650` |
+Estavam abertas desde a auditoria de V1 e **não podiam ser resolvidas por inferência**. As
+duas vieram por confirmação escrita do gestor, que é o que a regra sempre exigiu.
 
-Até 2026-08-07 este arquivo listava `96469-0650` na lista de dados confirmados — isso
-**apresentava como fato** um número que a própria auditoria (`docs/v1-release/04-pendencias-externas.md`,
-`docs/v1-release/06-publicacao.md`) já registrava como divergente e não confirmado
-comercialmente. A correção aqui é remover essa afirmação, não substituí-la pelo número do
-código: o código é a única fonte técnica em uso hoje, mas "em uso" não é o mesmo que
-"confirmado pelo comercial como definitivo" (`MASTER_BIANCHINI.md` §21). Não alterar
-`src/data/site.ts` nem este número por inferência — exige confirmação comercial explícita.
+| dado | valor confirmado | o que estava no código antes |
+| --- | --- | --- |
+| tempo de atuação | **17 anos** | "18 anos" em `site.ts`/`differentials.ts`/`credibility-section.tsx`, contra "17 anos" em `team.ts` |
+| WhatsApp comercial | **+55 21 96469-0650** (`5521964690650`) | `+55 21 99518-1918` |
+
+**Fonte única, nos dois casos.** O telefone vive em `contact.phoneDisplay` /
+`contact.phoneE164` (`src/data/site.ts`) e todo consumidor deriva dali — `lib/whatsapp.ts`,
+`lib/schema.ts`, rodapé, menu mobile e `/contato`. Nenhum número é escrito à mão em lugar
+nenhum, e **não deve voltar a ser**. A idade vive em `heroMetrics` / `scopeMetrics` no mesmo
+arquivo; as ocorrências em prosa (`differentials.ts`, `credibility-section.tsx`,
+`app/sobre/page.tsx`, `site.description`) são texto editorial e foram alinhadas junto —
+`grep -rn "17 anos" src/` encontra todas se o número mudar outra vez.
+
+Os valores antigos (`99518-1918`, "18 anos") estão **zerados no produto**. Se reaparecerem,
+é regressão, não alternativa.
 
 Deliberadamente **ausentes**, por não terem base verificável:
 

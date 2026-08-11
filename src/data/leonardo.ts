@@ -16,7 +16,9 @@ import type { CareerMovement, FieldRecord, SkillDomain } from '@/types'
  *
  * O site oficial diz "mais de 17 anos" e "desde 2008". Aqui a contagem de anos
  * não é repetida: a marca temporal é **2008**, que não envelhece no código. Os
- * "18 anos" seguem apenas no hero, onde já estavam aprovados.
+ * anos aparecem a partir de `heroMetrics`/`scopeMetrics` (`src/data/site.ts`),
+ * confirmados em **17** pelo comercial em 2026-08-11 — o mesmo que o site
+ * oficial publica.
  */
 export const leonardo = {
   name: 'Leonardo Bianchini',

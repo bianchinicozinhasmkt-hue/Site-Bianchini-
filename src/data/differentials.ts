@@ -38,7 +38,7 @@ export const differentials: Differential[] = [
   },
   {
     number: '06',
-    title: '18 anos dentro de operações de alimentação',
+    title: '17 anos dentro de operações de alimentação',
     description:
       'Mais de 3.000 projetos entregues em hospitais, hotéis, restaurantes, redes e operações institucionais em todo o Brasil. Experiência acumulada em campo, não em teoria.',
   },

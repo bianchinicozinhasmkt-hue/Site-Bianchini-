@@ -43,7 +43,8 @@ import { heroMetrics } from '@/data/site'
  * ============================================================
  *
  * `heroMetrics` (`src/data/site.ts`) traz três entradas. Duas são fatos
- * confirmados e continuam: **18 anos de atuação** e **abrangência Brasil**
+ * confirmados e continuam: **17 anos de atuação** (confirmado pelo comercial
+ * em 2026-08-11) e **abrangência Brasil**
  * (`CLAUDE.md`, "Dados confirmados como reais"; `contact.coverage`).
  *
  * A terceira — **"3.000+ projetos entregues"** — foi removida na origem: desde
@@ -480,7 +481,7 @@ export const homeProofSection = {
   /**
    * Rótulo e ressalva transcritos da afirmação que a V1 **já publica** sobre os
    * mesmos logos (`trust-section.tsx`: "Marcas de operações atendidas ao longo
-   * de 18 anos — exibidas mediante autorização"). Uma versão anterior deste
+   * de 17 anos — exibidas mediante autorização"). Uma versão anterior deste
    * arquivo dizia "Organizações atendidas", que afirma um pouco mais (que toda
    * marca da faixa é uma organização atendida, e não uma marca de operação
    * atendida) e omitia a ressalva de autorização. Reusar o texto vigente evita

@@ -69,8 +69,11 @@ const people = [
  * A seção também **não carrega prova institucional**: números, marcas e
  * depoimentos são de `#credibilidade`, que vem imediatamente depois desde a
  * reordenação de 2026-08-10. Se algum número voltar a entrar aqui, ele vai
- * competir com a seção seguinte — foi assim que "17 anos" acabou colidindo com
- * os "18 anos" de `#credibilidade` (pendência registrada, não resolvida).
+ * competir com a seção seguinte — foi assim que "17 anos" daqui acabou
+ * colidindo com os "18 anos" que `#credibilidade` publicava. **A colisão foi
+ * encerrada em 2026-08-11**: o gestor confirmou 17 anos, e todo o site foi
+ * alinhado a partir de `heroMetrics`/`scopeMetrics` (`src/data/site.ts`). O
+ * princípio continua valendo — número institucional é de `#credibilidade`.
  *
  * Os **dois retratos ficam**. Esta é a seção do par, e a paridade entre
  * Leonardo e Guilherme depende de os dois aparecerem com o mesmo tratamento —

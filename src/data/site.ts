@@ -13,7 +13,7 @@ export const site = {
     'Bianchini — Diagnóstico, Projeto e Implantação de Cozinhas Industriais',
   shortTitle: 'Bianchini',
   description:
-    'Diagnosticamos, estruturamos e transformamos operações de food service. Cozinhas industriais completas, arquitetura e fluxo, especificação de equipamentos, implantação e consultoria operacional. 18 anos e mais de 3.000 projetos entregues.',
+    'Diagnosticamos, estruturamos e transformamos operações de food service. Cozinhas industriais completas, arquitetura e fluxo, especificação de equipamentos, implantação e consultoria operacional. 17 anos e mais de 3.000 projetos entregues.',
   keywords: [
     'cozinha industrial',
     'projeto de cozinha industrial',
@@ -86,21 +86,22 @@ export const heroPhotoCaption =
 export const contact = {
   /**
    * ============================================================
-   * TELEFONE — FONTE ÚNICA, PENDENTE DE CONFIRMAÇÃO COMERCIAL
+   * TELEFONE — FONTE ÚNICA, CONFIRMADO PELO COMERCIAL (2026-08-11)
    * ============================================================
    *
-   * **Divergência aberta, não resolvida por decisão técnica.** Há dois números
-   * documentados e nenhum confirmado pelo comercial (`CLAUDE.md`, "Regras de
-   * conteúdo"; `docs/v1-release/04-pendencias-externas.md`):
+   * **Divergência encerrada.** O gestor confirmou por escrito, nesta data, o
+   * número comercial oficial:
    *
-   *   +55 21 99518-1918 .... o que está em uso aqui, e portanto no ar
-   *   +55 21 96469-0650 .... registrado em versão anterior do `CLAUDE.md`
+   *   +55 21 96469-0650   ← confirmado, em uso aqui
+   *   +55 21 99518-1918   ← o que estava em uso até 2026-08-11; **não usar**
    *
-   * "Em uso" **não** é o mesmo que "confirmado". Nenhum agente deve escolher
-   * entre os dois: a decisão é comercial e precisa vir por escrito.
+   * O número confirmado é justamente o que versões anteriores do `CLAUDE.md`
+   * registravam e que a auditoria de V1 apontava como divergente
+   * (`docs/v1-release/04-pendencias-externas.md`). A escolha **não** foi
+   * técnica: veio do comercial, que é o que a regra sempre exigiu.
    *
-   * QUANDO O NÚMERO CORRETO CHEGAR, ALTERE **SÓ ESTES DOIS CAMPOS**
-   * --------------------------------------------------------------
+   * SE O NÚMERO MUDAR DE NOVO, ALTERE **SÓ ESTES DOIS CAMPOS**
+   * ---------------------------------------------------------
    * `phoneDisplay` (formatado, o que o visitante lê) e `phoneE164` (só
    * dígitos, com país e DDD, sem `+` — é o formato que o `wa.me` exige).
    * Mantenha os dois apontando para o mesmo número.
@@ -118,8 +119,8 @@ export const contact = {
    *   `layout/mobile-menu.tsx`  texto exibido + `tel:`
    *   `app/contato/page.tsx` .. texto exibido + `tel:`
    */
-  phoneDisplay: '+55 21 99518-1918',
-  phoneE164: '5521995181918',
+  phoneDisplay: '+55 21 96469-0650',
+  phoneE164: '5521964690650',
   email: 'comercial@bianchinicozinhas.com.br',
   city: 'Rio de Janeiro',
   state: 'RJ',
@@ -134,9 +135,28 @@ export const contact = {
 } as const
 
 /**
- * Números confirmados como reais no projeto (CLAUDE.md e site anterior):
- * 18 anos de experiência e mais de 3.000 projetos entregues. As demais
- * entradas são contagens verificáveis nos próprios dados do repositório.
+ * ============================================================
+ * TEMPO DE ATUAÇÃO — 17 ANOS, CONFIRMADO (2026-08-11)
+ * ============================================================
+ *
+ * **Divergência encerrada.** O projeto publicava "18 anos" aqui e em
+ * `differentials.ts`/`credibility-section.tsx`, e "17 anos" em `team.ts`
+ * (dossiê de Leonardo) — a mesma página contava duas idades. A colisão estava
+ * registrada como pendência aberta em `leadership-section.tsx` e não podia ser
+ * resolvida por dedução, porque escolher entre dois números de negócio é
+ * decisão comercial.
+ *
+ * O gestor confirmou por escrito, nesta data: **17 anos**. É também o que o
+ * site oficial publica ("mais de 17 anos", "desde 2008" — ver
+ * `src/data/leonardo.ts`), então a correção alinha o site ao domínio e ao
+ * dossiê ao mesmo tempo.
+ *
+ * `heroMetrics` e `scopeMetrics` são a **fonte única** do valor. Nenhuma seção
+ * deve escrever a idade à mão: as ocorrências em prosa que existem hoje
+ * (`differentials.ts`, `credibility-section.tsx`, `app/sobre/page.tsx`,
+ * `site.description`) foram todas alinhadas a 17 nesta rodada e continuam
+ * sendo texto editorial — se a idade mudar de novo, elas precisam ser
+ * remedidas junto, e `grep -rn "17 anos" src/` as encontra.
  *
  * FONTE ÚNICA da métrica de projetos/cozinhas entregues: "3.000+", usada aqui
  * e em `scopeMetrics` abaixo — nenhum outro valor deve ser introduzido em
@@ -146,13 +166,13 @@ export const contact = {
  * todo lugar hoje, mas o valor final ainda não foi validado pelo comercial).
  */
 export const heroMetrics: Metric[] = [
-  { value: '18', label: 'anos de atuação' },
+  { value: '17', label: 'anos de atuação' },
   { value: '3.000+', label: 'projetos entregues' },
   { value: 'Brasil', label: 'abrangência de atendimento' },
 ]
 
 export const scopeMetrics: Metric[] = [
-  { value: '18 anos', label: 'Atuação dentro de operações de alimentação' },
+  { value: '17 anos', label: 'Atuação dentro de operações de alimentação' },
   { value: '3.000+', label: 'Projetos entregues em todo o Brasil' },
   { value: '8 linhas', label: 'Equipamentos especificados dentro do projeto' },
 ]

@@ -22,7 +22,7 @@ import { cn } from '@/lib/utils'
  *
  * Só entram logos com arquivo real no repositório e marcados como aprovados em
  * `src/data/clients.ts`. Os números exibidos vêm de `scopeMetrics`
- * (`src/data/site.ts`): 18 anos, projetos entregues e linhas de equipamento.
+ * (`src/data/site.ts`): 17 anos, projetos entregues e linhas de equipamento.
  *
  * A faixa desliza por `transform`, e o lazy loading nativo não carrega o que
  * está fora da viewport horizontal: por isso os logos usam `loading="eager"`.
@@ -83,7 +83,7 @@ export function TrustSection() {
       <div className="mt-10 lg:mt-14">
         <Container>
           <TechLabel className="max-w-xl">
-            Marcas de operações atendidas ao longo de 18 anos — exibidas mediante autorização
+            Marcas de operações atendidas ao longo de 17 anos — exibidas mediante autorização
           </TechLabel>
         </Container>
 

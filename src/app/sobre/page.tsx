@@ -19,7 +19,7 @@ const path = '/sobre'
 export const metadata: Metadata = pageMetadata({
   title: 'Sobre a Bianchini',
   description:
-    '18 anos dentro de operações de alimentação e mais de 3.000 projetos entregues. Arquitetura, engenharia, equipamentos, processo e estratégia comercial tratados como um sistema só.',
+    '17 anos dentro de operações de alimentação e mais de 3.000 projetos entregues. Arquitetura, engenharia, equipamentos, processo e estratégia comercial tratados como um sistema só.',
   path,
 })
 
@@ -60,7 +60,7 @@ export default function AboutPage() {
           <div>
             <Eyebrow>História</Eyebrow>
             <Heading as={2} id="historia-titulo" size="title-1" className="mt-5">
-              18 anos dentro de operações de alimentação
+              17 anos dentro de operações de alimentação
             </Heading>
           </div>
 

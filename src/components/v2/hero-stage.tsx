@@ -1112,9 +1112,10 @@ export function HeroStage() {
 
           Consequências de conteúdo, registradas de propósito:
 
-            · **`18 anos` continua na página** — `differentials.ts` ("18 anos
+            · **a idade continua na página** — `differentials.ts` ("17 anos
               dentro de operações de alimentação") e `credibility-section.tsx`
-              ("ao longo de 18 anos");
+              ("ao longo de 17 anos"). Eram "18" até 2026-08-11, quando o
+              comercial confirmou 17;
             · **`Brasil / abrangência de atendimento` deixa de aparecer na
               home.** Era exibido só aqui. Nada foi inventado nem alterado em
               `site.ts`: o dado continua lá, sem consumidor na V2;

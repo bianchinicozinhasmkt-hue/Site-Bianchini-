@@ -76,13 +76,14 @@ export function CredibilitySection() {
             isso. Além disso, numa seção cuja função é escala e reconhecimento,
             o enunciado descrevia método — que é assunto de `#metodo`.
 
-            O que entra no lugar é o alcance: 18 anos (dado confirmado,
+            O que entra no lugar é o alcance: 17 anos (dado confirmado pelo
+            comercial em 2026-08-11 —
             `src/data/site.ts`) e a amplitude real de contratação, do item
             avulso à cozinha inteira (`src/data/faq.ts`, `kitchensFaq[0]`).
             Nenhum número novo.
           */}
           <p className="text-lead text-muted lg:col-span-4 lg:col-start-9">
-            Dezoito anos dentro de operações de alimentação — do equipamento avulso à cozinha
+            Dezessete anos dentro de operações de alimentação — do equipamento avulso à cozinha
             inteira projetada, fornecida e instalada.
           </p>
         </div>
@@ -117,7 +118,7 @@ export function CredibilitySection() {
       <div className="mt-10 lg:mt-12">
         <Container>
           <TechLabel className="max-w-xl">
-            Marcas de operações atendidas ao longo de 18 anos — exibidas mediante autorização
+            Marcas de operações atendidas ao longo de 17 anos — exibidas mediante autorização
           </TechLabel>
         </Container>
 
