@@ -194,15 +194,28 @@ console.log('   sem node_modules, sem .next, sem out, sem .git, sem docs, sem .e
    contiver contrabarra. Uma checagem de três linhas contra um erro que só
    aparece em produção.
    ============================================================ */
+/* ---------- e nada de `.` como caminho ----------
+
+   Compactar passando `.` faz o arquivador nomear **toda** entrada com prefixo
+   `./` — `./package.json`, `./src/app/page.tsx`. É válido pela especificação, e
+   o `unzip` extrai certo, mas o detector de framework da Hostinger procura
+   `package.json` na raiz do arquivo por nome exato: com o prefixo ele não acha,
+   e o painel recusa antes mesmo de tentar compilar, com "Estrutura de projeto
+   inválida ou framework não compatível".
+
+   Passando os itens pelo nome, as entradas ficam limpas (`package.json`,
+   `src/…`) e a detecção funciona. A verificação abaixo cobre este caso também.
+*/
+const itensNoDestino = (await readdir(destino)).sort()
 passo(5, 'Gerando bianchini-hostinger.zip')
 try {
   if (process.platform === 'win32') {
-    execFileSync('C:\\Windows\\System32\\tar.exe', ['-a', '-c', '-f', zip, '.'], {
+    execFileSync('C:\\Windows\\System32\\tar.exe', ['-a', '-c', '-f', zip, ...itensNoDestino], {
       cwd: destino,
       stdio: 'inherit',
     })
   } else {
-    execFileSync('zip', ['-rq', zip, '.'], { cwd: destino, stdio: 'inherit' })
+    execFileSync('zip', ['-rq', zip, ...itensNoDestino], { cwd: destino, stdio: 'inherit' })
   }
 } catch {
   erro('Falha ao compactar. A pasta deploy-hostinger/ está pronta e pode ser enviada por FTP.')
@@ -229,7 +242,23 @@ if (tortas.length) {
 if (!entradas.some((n) => n.includes('src/components/layout/'))) {
   erro('O ZIP não contém src/components/layout/ — a estrutura de pastas se perdeu.')
 }
-console.log(`   ${entradas.length} entradas, todas com separador correto`)
+
+/*
+  As três entradas que o detector de framework da Hostinger procura, por nome
+  exato e na raiz do arquivo. Se qualquer uma aparecer com prefixo (`./…`) ou
+  aninhada numa pasta, o painel responde "Estrutura de projeto inválida ou
+  framework não compatível" antes de tentar compilar.
+*/
+for (const exigido of ['package.json', 'next.config.ts', 'src/app/page.tsx']) {
+  if (!entradas.includes(exigido)) {
+    erro(
+      `"${exigido}" não está na raiz do ZIP com esse nome exato.\n` +
+        `  Encontrado no lugar: ${entradas.filter((n) => n.endsWith(exigido)).join(', ') || '(nada)'}\n\n` +
+        '  O detector da Hostinger recusaria o pacote. Ver o comentário acima.',
+    )
+  }
+}
+console.log(`   ${entradas.length} entradas · separador correto · raiz limpa`)
 
 const zipBytes = (await stat(zip)).size
 
