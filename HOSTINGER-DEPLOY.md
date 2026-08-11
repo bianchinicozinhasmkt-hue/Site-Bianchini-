@@ -11,7 +11,13 @@ Isso é o oposto de subir arquivos prontos, e foi o que derrubou as duas primeir
 | --- | --- | --- |
 | 1ª | build `standalone` | `Couldn't find any pages or app directory` |
 | 2ª | site estático (`out/`) | mesmo erro no build |
-| **3ª** | **código-fonte** | ✅ |
+| 3ª | código-fonte, zip do PowerShell | `Can't resolve '@/components/…'` |
+| **4ª** | **código-fonte, zip do bsdtar** | ✅ |
+
+A 3ª falha não tinha nada a ver com o conteúdo: o `Compress-Archive` do PowerShell
+grava os caminhos com **contrabarra**, o que o Windows tolera e o Linux não. O
+script passou a compactar com `bsdtar` e a **verificar** cada entrada do zip antes
+de terminar — se aparecer uma contrabarra, ele aborta.
 
 ## O que enviar
 

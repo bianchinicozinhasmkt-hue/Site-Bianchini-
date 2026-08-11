@@ -53,7 +53,7 @@
  * apontando para `http://localhost:3000` — e o build **passa em silêncio**, só
  * gravando um aviso no log. O script avisa disso no fim.
  */
-import { cp, mkdir, rm, readdir, stat } from 'node:fs/promises'
+import { cp, mkdir, rm, readdir, readFile, stat } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { createRequire } from 'node:module'
@@ -164,25 +164,73 @@ const mb = (n) => (n / 1024 / 1024).toFixed(1) + ' MB'
 console.log(`   ${arquivos} arquivos · ${mb(bytes)}`)
 console.log('   sem node_modules, sem .next, sem out, sem .git, sem docs, sem .env')
 
-/* ---------- 5. zip ---------- */
+/* ============================================================
+   5. ZIP — E A ARMADILHA QUE DERRUBOU UM DEPLOY
+   ============================================================
+
+   **Nunca usar `Compress-Archive` do PowerShell aqui.**
+
+   Ele grava os caminhos das entradas com **contrabarra** (`src\\components\\…`).
+   A especificação ZIP (APPNOTE 4.4.17.1) exige barra normal como separador, e a
+   diferença é invisível no Windows — os extratores da plataforma toleram, e o
+   pacote abre e compila normalmente numa máquina local.
+
+   No Linux não. O `unzip` trata a contrabarra como **caractere do nome**, e o
+   que era `src/components/layout/container.tsx` vira um arquivo chamado
+   literalmente `src\\components\\layout\\container.tsx`, solto na raiz. O build
+   do host então acha `src/app` (as poucas entradas sem separador sobrevivem) e
+   falha ao resolver tudo que vem de `@/components/*`:
+
+     Module not found: Can't resolve '@/components/layout/container'
+
+   Foi exatamente esse o erro do segundo deploy real, e ele custou um ciclo
+   inteiro porque o teste local **passava** — o Windows escondia o defeito.
+
+   `bsdtar` (`C:\\Windows\\System32\\tar.exe`, presente desde o Windows 10 1803)
+   grava barra normal. Em outras plataformas, o `zip` do sistema faz o mesmo.
+
+   A verificação abaixo é o que garante que isto não volte: o zip recém-criado é
+   lido de novo, entrada por entrada, e o script **aborta** se qualquer nome
+   contiver contrabarra. Uma checagem de três linhas contra um erro que só
+   aparece em produção.
+   ============================================================ */
 passo(5, 'Gerando bianchini-hostinger.zip')
 try {
   if (process.platform === 'win32') {
-    execFileSync(
-      'powershell',
-      [
-        '-NoProfile',
-        '-Command',
-        `Compress-Archive -Path '${destino}\\*' -DestinationPath '${zip}' -CompressionLevel Optimal -Force`,
-      ],
-      { stdio: 'inherit' },
-    )
+    execFileSync('C:\\Windows\\System32\\tar.exe', ['-a', '-c', '-f', zip, '.'], {
+      cwd: destino,
+      stdio: 'inherit',
+    })
   } else {
     execFileSync('zip', ['-rq', zip, '.'], { cwd: destino, stdio: 'inherit' })
   }
 } catch {
-  erro('Falha ao compactar. A pasta deploy-hostinger/ está pronta.')
+  erro('Falha ao compactar. A pasta deploy-hostinger/ está pronta e pode ser enviada por FTP.')
 }
+
+/* ---------- a verificação que impede a regressão ---------- */
+const bruto = await readFile(zip)
+const entradas = []
+for (let i = 0; i < bruto.length - 4; i++) {
+  if (bruto.readUInt32LE(i) === 0x02014b50) {
+    const n = bruto.readUInt16LE(i + 28)
+    entradas.push(bruto.toString('utf8', i + 46, i + 46 + n))
+    i += 45 + n
+  }
+}
+const tortas = entradas.filter((n) => n.includes(String.fromCharCode(92)))
+if (tortas.length) {
+  erro(
+    `${tortas.length} entradas do ZIP usam contrabarra como separador.\n` +
+      `  Exemplo: ${tortas[0]}\n\n` +
+      '  Isso funciona no Windows e quebra no Linux. Ver o comentário acima.',
+  )
+}
+if (!entradas.some((n) => n.includes('src/components/layout/'))) {
+  erro('O ZIP não contém src/components/layout/ — a estrutura de pastas se perdeu.')
+}
+console.log(`   ${entradas.length} entradas, todas com separador correto`)
+
 const zipBytes = (await stat(zip)).size
 
 console.log('\n✓ Pacote pronto')
