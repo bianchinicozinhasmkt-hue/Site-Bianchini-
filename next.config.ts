@@ -3,6 +3,47 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  /*
+    ============================================================
+    PACOTE DE PRODUÇÃO — `standalone` (2026-08-11)
+    ============================================================
+
+    **Este site não é estático, e a tentativa de exportá-lo seria uma conversão
+    arquitetural.** `output: 'export'` desligaria três coisas que o projeto usa
+    hoje e que não são opcionais:
+
+      · os `redirects()` abaixo (`/forno-combinado-rational` e
+        `/construcao-e-reformas`) — em export eles são simplesmente ignorados,
+        com aviso de build, e os links antigos passariam a dar 404;
+      · os `headers()` de segurança — `X-Content-Type-Options`,
+        `X-Frame-Options`, `Referrer-Policy`, `Strict-Transport-Security` e
+        `Permissions-Policy` deixariam de ser emitidos;
+      · a otimização de imagem do `next/image`, que exigiria
+        `images.unoptimized: true`. Com AVIF/WebP desligados, os PNG da primeira
+        dobra passariam a ser servidos no tamanho original em toda largura de
+        tela — regressão direta de performance na dobra que é o LCP.
+
+    `standalone` **não muda nada disso**: mesma renderização, mesmas rotas,
+    mesmas imagens, mesmos cabeçalhos. Ele só altera o **formato do artefato de
+    build**, montando em `.next/standalone/` um servidor autocontido com apenas
+    as dependências que o rastreamento de módulos comprova serem necessárias.
+    É por isso que ele entra numa rodada de fechamento: é mudança de empacotamento,
+    não de arquitetura.
+
+    O que o `standalone` **não** copia, e o script de pacote copia à mão (é o
+    comportamento documentado do Next, não um defeito):
+
+      `.next/static/`  → `.next/standalone/.next/static/`
+      `public/`        → `.next/standalone/public/`
+
+    `sharp` é a única dependência de runtime que precisa de atenção: o
+    otimizador de imagem a usa em produção e ela traz binário por plataforma. O
+    rastreamento a inclui a partir do `node_modules` da máquina de build, então
+    **o pacote gerado no Windows só serve para host Windows**. Para a Hostinger
+    (Linux), o passo `npm ci --omit=dev` no servidor resolve — ver
+    `HOSTINGER-DEPLOY.md`.
+  */
+  output: 'standalone',
   images: {
     formats: ['image/avif', 'image/webp'],
     /*

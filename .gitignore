@@ -55,3 +55,9 @@ Thumbs.db
 # São milhares de arquivos do navegador, não do projeto.
 .tmp-edge-cdp/
 .tmp-edge-cdp*/
+
+# artefatos do pacote de produção (scripts/gerar-pacote-hostinger.mjs)
+# São gerados a partir do build e não são versionados: o que é versionado é o
+# script que os recria. Regerar com `npm run pacote:hostinger`.
+/deploy-hostinger/
+/bianchini-hostinger.zip
