@@ -3,7 +3,8 @@
   "ignorePatterns": [
     "next-env.d.ts",
     "_entrega_chatgpt/**",
-    "docs/archive/**"
+    "docs/archive/**",
+    "deploy-hostinger/**"
   ],
   "rules": {
     "react/no-unescaped-entities": "off"
