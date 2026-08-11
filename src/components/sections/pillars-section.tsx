@@ -137,10 +137,26 @@ export function PillarsSection() {
       aria-labelledby="pilares-titulo"
     >
       <Container>
-        <div className="grid gap-5 lg:grid-cols-12 lg:items-end lg:gap-10">
-          <div className="lg:col-span-5">
+        {/*
+          ----------
+          O CABEÇALHO PERDEU O VÃO CENTRAL (2026-08-11)
+          ----------
+
+          Título nas colunas 1–5 e parágrafo em 6–11 punha, em 1440, o fim da
+          linha mais longa do título em x=450 e o começo do parágrafo em x=625:
+          175px de nada no meio de um cabeçalho, com as duas massas alinhadas
+          pela base e sem nada as ligando. Lia como duas colunas de um documento,
+          não como uma abertura.
+
+          Agora o parágrafo entra em 7–12 e é **alinhado ao topo** do bloco do
+          título, com uma régua curta sobre ele: as duas massas passam a partir
+          da mesma linha horizontal, e é essa linha compartilhada — não a
+          proximidade — que as faz ler como um cabeçalho só.
+        */}
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-x-10">
+          <div className="lg:col-span-6">
             <Eyebrow>As três frentes</Eyebrow>
-            <Heading as={2} id="pilares-titulo" size="title-1" className="mt-4 max-w-[24ch]">
+            <Heading as={2} id="pilares-titulo" size="title-1" className="mt-4 max-w-[22ch]">
               Equipamentos, projetos e consultoria — separados ou juntos
             </Heading>
           </div>
@@ -150,8 +166,28 @@ export function PillarsSection() {
             precisa comprar a narrativa inteira para agir na frente que veio
             resolver. "Sem repasse de culpa entre projetista, fornecedor e
             instalador" é transcrição de `src/data/solutions.ts`.
+
+            ----------
+            COLUNAS 7–12, E ALINHADO PELA BASE (2026-08-11)
+            ----------
+
+            Era 6–11: o parágrafo começava em x=625 e terminava em x=1245,
+            deixando **155px de sobra à direita** enquanto o vão no meio do
+            cabeçalho já era grande. A massa ficava suspensa entre as duas
+            margens, sem encostar em nenhuma.
+
+            Em 7–12 ele fecha na margem direita do container — a mesma em que a
+            terceira coluna de frentes fecha, logo abaixo. O cabeçalho passa a
+            ter as duas âncoras que um cabeçalho precisa: título na guia da
+            esquerda, apoio na guia da direita.
+
+            `items-end` (e não `start`): as duas massas fecham na mesma linha de
+            base, e é ela que as faz ler como um cabeçalho só em vez de duas
+            colunas de documento. Alinhadas pelo topo, o parágrafo — três linhas
+            contra as três muito maiores do título — sobrava alto e o vão entre
+            elas virava o assunto.
           */}
-          <p className="text-lead text-muted lg:col-span-6 lg:col-start-6">
+          <p className="text-lead text-muted lg:col-span-6 lg:col-start-7">
             Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa
             entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma
             condição para começar.
@@ -172,7 +208,46 @@ export function PillarsSection() {
           (mais a keyline de cada uma); em `lg` ele zera e sobra só o `gap-x-10`,
           a calha entre as colunas.
         */}
-        <ul className="mt-9 grid gap-y-9 lg:mt-12 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-0">
+        {/* ==========================================================
+            A HIERARQUIA DENTRO DA COLUNA FOI INVERTIDA (2026-08-11)
+            ==========================================================
+
+            **O diagnóstico.** A seção estava correta de conteúdo e lida como
+            documento impresso. O que a produzia não era a falta de moldura — era
+            a **ausência de contraste de escala**: nome em 24px, pergunta em 16px
+            e resposta em 15px, três degraus quase iguais, três vezes, sobre
+            fundo liso e sem uma única imagem. Numa página em que todas as outras
+            seções são fotográficas, a única inteiramente tipográfica precisa
+            resolver a presença na tipografia, e ela não estava resolvendo.
+
+            **A inversão.** O nome da frente vira **rótulo** — condensada
+            caixa-alta, 13px, que é exatamente o papel que `CLAUDE.md` reserva
+            para a condensada (rótulo comercial curto) e exatamente a forma que a
+            mesma palavra tem nas três portas da primeira dobra. A **pergunta do
+            cliente** vira o título da coluna, em sans a ~26px. E a resposta fica
+            onde estava, pequena e em `muted`.
+
+            Três ganhos, e nenhum deles é ornamento:
+
+              1. **escala.** O degrau entre o maior e o menor texto da coluna
+                 passa de 24→15 (1,6×) para 26→15 (1,73×) **com o topo mudando de
+                 natureza**: o que domina agora é uma frase, não uma palavra. Uma
+                 coluna cuja maior massa é uma pergunta lê como argumento; uma
+                 cujo maior elemento é um substantivo lê como verbete;
+              2. **rima com a primeira dobra.** "EQUIPAMENTOS · Comprar,
+                 substituir ou especificar" na porta da hero e "EQUIPAMENTOS ·
+                 Qual equipamento a minha operação precisa…" aqui são a mesma
+                 gramática. Quem escolheu uma porta lá em cima reencontra o
+                 mesmo objeto aqui — que é a coerência entre sistemas que faltava;
+              3. **comercial.** A pergunta é o que o visitante reconhece como
+                 sendo o problema *dele*. Ela estava em terceiro plano.
+
+            **O que não entrou:** nenhuma caixa, nenhum fundo por item, nenhum
+            número (três portas paralelas não são sequência — regra registrada em
+            `docs/v2/DESIGN_SYSTEM.md` §1), nenhum ícone e nenhuma fotografia. A
+            seção continua sendo três colunas abertas sobre o fundo da seção.
+            ========================================================== */}
+        <ul className="mt-10 grid gap-y-10 lg:mt-14 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-0">
           {pillars.map((pillar, index) => {
             const priority = index === 0
 
@@ -182,28 +257,67 @@ export function PillarsSection() {
                 as="li"
                 delay={index * 90}
                 className={cn(
-                  'flex h-full flex-col border-t-2 pt-5',
-                  priority ? 'border-ink' : 'border-line',
+                  'flex h-full flex-col',
+                  /*
+                    A régua de prioridade passa de 2/2px para **3px grafite
+                    contra 1px `line`**. Com as duas em 2px o que distinguia a
+                    frente prioritária era só o valor tonal, e a 2px sobre
+                    `surface` essa diferença some a dois metros da tela. Em 3
+                    contra 1 a hierarquia se lê de longe e continua sendo
+                    grafite — marcador com significado em fundo claro nunca é
+                    amarelo (`CLAUDE.md`).
+
+                    ----------
+                    O RECUO COMPENSA A ESPESSURA — medido, não deduzido
+                    ----------
+
+                    `border-top` faz parte da caixa (`box-sizing: border-box`
+                    é global aqui), então régua mais grossa empurra o conteúdo
+                    para baixo: com `pt-5` nos três, o rótulo de Equipamentos
+                    assentava **2px abaixo** dos outros dois. Dois pixels são
+                    invisíveis isolados e perfeitamente visíveis quando três
+                    rótulos idênticos estão lado a lado — foi o que a captura
+                    pegou (y=319 contra 317).
+
+                    O recuo passa a ser o complemento da régua para o mesmo
+                    total de 21px: 18 + 3 na prioritária, 20 + 1 nas outras
+                    duas. Se a espessura de qualquer uma das duas mudar, este
+                    par tem de ser remedido junto.
+                  */
+                  priority
+                    ? 'border-t-[3px] border-ink pt-[1.125rem]'
+                    : 'border-t border-line pt-5',
                 )}
               >
-                <h3 className="font-sans text-title-2 font-bold text-ink">{pillar.title}</h3>
-
                 {/*
-                  A pergunta do cliente, não a descrição da empresa.
-
-                  `max-w-prose` nos dois parágrafos é medida de leitura, não
-                  composição: em `lg` a coluna tem 413px e o limite nunca pega.
-                  Ele existe para a faixa de 640 a 1023px, onde as três frentes
-                  ainda estão empilhadas e a linha usaria os 704px inteiros do
-                  container — ~94 caracteres. Enquanto havia cartão, o `p-7`
-                  fazia esse papel por acidente; sem caixa, a medida precisa ser
-                  declarada.
+                  O nome da frente como rótulo — a mesma forma que ele tem nas
+                  três portas da primeira dobra. `text-ink`, não amarelo: em
+                  superfície clara o amarelo só entra como preenchimento ou
+                  hairline decorativa, e este é um rótulo com significado.
                 */}
-                <p className="mt-2.5 max-w-prose font-sans text-body font-semibold text-ink">
-                  {pillar.question}
+                <p className="font-condensed text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-ink">
+                  {pillar.title}
                 </p>
 
-                <p className="mt-2.5 max-w-prose text-body-sm text-muted">{pillar.description}</p>
+                {/*
+                  A pergunta do cliente é o título da coluna.
+
+                  `h3` mantém a hierarquia de documento (a seção tem um `h2`, e
+                  cada frente continua sendo um nível abaixo dele) — o que mudou
+                  foi qual texto ocupa o nível, não a estrutura. O nome da frente
+                  continua sendo o primeiro texto lido em cada coluna, então nem
+                  a leitura visual nem a de leitor de tela perde a etiqueta.
+
+                  `max-w-prose` é medida de leitura, não composição: em `lg` a
+                  coluna tem 413px e o limite nunca pega. Ele existe para a faixa
+                  de 640 a 1023px, onde as três frentes ainda estão empilhadas e
+                  a linha usaria os 704px inteiros do container — ~94 caracteres.
+                */}
+                <h3 className="mt-3 max-w-prose font-sans text-[1.375rem] font-bold leading-[1.24] tracking-[-0.014em] text-ink lg:text-[1.625rem]">
+                  {pillar.question}
+                </h3>
+
+                <p className="mt-4 max-w-prose text-body-sm text-muted">{pillar.description}</p>
 
                 {/*
                   `mt-auto`: as três ações ficam na mesma linha de base mesmo com
@@ -211,7 +325,7 @@ export function PillarsSection() {
                   colunas lerem como uma composição só, agora que não há mais
                   moldura desenhando esse alinhamento.
                 */}
-                <div className="mt-auto pt-5 lg:pt-6">
+                <div className="mt-auto pt-6 lg:pt-8">
                   {priority ? (
                     <LinkButton href={pillar.cta.href} variant="primary" size="md" withArrow>
                       {pillar.cta.label}

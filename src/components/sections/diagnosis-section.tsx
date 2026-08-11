@@ -145,7 +145,15 @@ export function DiagnosisSection({ compact = false }: { compact?: boolean } = {}
                   eram distinguíveis, o que tornava o selo decoração em vez de
                   mapa. O contraste também subiu, pelo mesmo motivo.
                 */}
-                <div className="absolute bottom-3 left-3 h-[4.5rem] w-[7rem] overflow-hidden rounded-sm border border-white/50 shadow-[0_6px_16px_-6px_rgba(0,0,0,0.6)] sm:h-20 sm:w-32">
+                {/*
+                  `rounded-sm` e a sombra projetada saíram em 2026-08-11. O
+                  vocabulário do site não tem raio de canto nem sombra
+                  projetada em lugar nenhum, e este selo era a única ocorrência
+                  das duas coisas na home — lia como um cartão colado sobre a
+                  fotografia. O que separa o selo do fundo continua sendo o
+                  contorno branco, que agora é o único recurso e ganha 1px.
+                */}
+                <div className="absolute bottom-3 left-3 h-[4.5rem] w-[7rem] overflow-hidden border-2 border-white/60 sm:h-20 sm:w-32">
                   <Image
                     src="/images/projects/planta-executiva-recorte.jpg"
                     alt="Planta executiva em CAD de uma cozinha profissional, com salão de atendimento cotado, linha de produção e área de retaguarda"
@@ -216,13 +224,37 @@ export function DiagnosisSection({ compact = false }: { compact?: boolean } = {}
                     tabIndex={selected ? 0 : -1}
                     onClick={() => setActive(index)}
                     onKeyDown={onTabKeyDown}
+                    /* ==========================================================
+                       A MOLDURA INTEIRA SAI, FICA A RÉGUA (2026-08-11)
+                       ==========================================================
+
+                       As três zonas eram retângulos com borda nos quatro lados.
+                       Três retângulos contornados lado a lado sob uma fotografia
+                       são a forma de uma barra de abas genérica — "botões que
+                       parecem tabs sem presença", que é o que o briefing desta
+                       rodada manda eliminar.
+
+                       A correção é a mesma gramática que as três portas da
+                       primeira dobra passaram a usar nesta rodada, transposta
+                       para superfície clara: **régua no topo, laterais e base
+                       abertas**. Não é uma escolha estética repetida por acaso —
+                       são dois seletores de zona/frente na mesma página, e eles
+                       precisavam ler como o mesmo tipo de objeto.
+
+                       Os sinais do estado ativo continuam sendo quatro, e um
+                       deles não é cor: preenchimento grafite (inversão de
+                       luminância), régua de 3px contra 1, índice amarelo
+                       (legítimo — o fundo do item ativo é escuro) e o traço na
+                       base. Como em `#pilares`, o recuo compensa a espessura da
+                       régua para que os três rótulos assentem na mesma linha.
+                       ========================================================== */
                     className={cn(
-                      'group relative flex flex-col items-start gap-1.5 border px-3 py-2.5 text-left',
+                      'group relative flex flex-col items-start gap-1.5 px-3 pb-2.5 text-left',
                       'transition-[background-color,border-color,color] duration-[220ms] ease-precise',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas-deep',
                       selected
-                        ? 'border-ink bg-ink text-canvas'
-                        : 'border-line bg-surface text-ink hover:border-ink/45 hover:bg-canvas',
+                        ? 'border-t-[3px] border-ink bg-ink pt-[0.5rem] text-canvas'
+                        : 'border-t border-line bg-surface pt-2.5 text-ink hover:border-ink/45 hover:bg-canvas',
                     )}
                   >
                     <span

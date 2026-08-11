@@ -3,8 +3,7 @@ import { Container } from '@/components/layout/container'
 import { Reveal } from '@/components/animations/reveal'
 import { Eyebrow } from '@/components/ui/typography/heading'
 import { LinkButton } from '@/components/ui/actions/button'
-import { BookCover } from '@/components/ui/book-cover'
-import { book, leonardo } from '@/data/leonardo'
+import { leonardo } from '@/data/leonardo'
 
 /**
  * ============================================================
@@ -125,101 +124,137 @@ export function LeonardoSection() {
 
       <Container className="relative">
         {/* ==========================================================
-            ENUNCIADO — o maior elemento da seção, sem nada ao lado.
+            O ENUNCIADO E O ARGUMENTO, LADO A LADO (2026-08-11)
+            ==========================================================
+
+            A composição anterior era vertical: enunciado em largura inteira,
+            assinatura em largura inteira, e só então uma banda de duas colunas
+            com a visão à esquerda e o livro à direita. Com o livro fora daqui
+            (ver o bloco abaixo), a coluna da direita ficaria **vazia** e a seção
+            voltaria a ser o que a rodada anterior corrigiu em `#quem-conduz`:
+            uma metade de tela com texto e a outra com grafite.
+
+            Medido em 1440 × 900 antes desta rodada: o título de `display`
+            terminava em x=690 e nada ocupava os 690px seguintes até a margem —
+            e, mais abaixo, os parágrafos terminavam em x=620 com a mesma sobra.
+            Duas faixas de vazio à direita, uma sobre a outra.
+
+            Agora é um **spread editorial**: o enunciado (etiqueta → título de
+            `display` → assinatura) ocupa as colunas 1–6 e o argumento (lead +
+            os dois parágrafos) as colunas 8–12, alinhados pelo topo. A seção
+            passa a compor a tela nos dois eixos, e o vazio que sobra fica onde
+            vazio funciona — abaixo, antes do CTA.
             ========================================================== */}
-        <Reveal>
-          <Eyebrow tone="light" as="p">
-            {leonardo.home.eyebrow}
-          </Eyebrow>
-
-          <h2
-            id="leonardo-titulo"
-            className="mt-5 max-w-[19ch] font-sans font-extrabold text-display text-canvas"
-          >
-            {leonardo.thesis.title}
-          </h2>
-
-          <p className="mt-6 max-w-[58ch] text-lead text-canvas/75">{leonardo.thesis.lead}</p>
-
-          {/* ----------
-              Assinatura: linha editorial sobre hairline, não faixa com
-              superfície própria. Mesmas três informações da versão anterior —
-              nome, papel e o marco temporal, que é dado único da home.
-              ---------- */}
-          <div className="mt-8 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-t border-white/15 pt-5">
-            <span className="font-sans text-title-3 font-bold text-canvas">{leonardo.name}</span>
-            <span className="text-body-sm text-canvas/70">{leonardo.role}</span>
-            <span className="font-condensed text-caption uppercase tracking-[0.08em] text-yellow">
-              No setor desde {leonardo.since}
-            </span>
-          </div>
-        </Reveal>
-
-        {/* ==========================================================
-            BANDA DE APOIO — visão à esquerda, livro à direita.
-
-            Não são duas caixas: nenhuma das duas colunas tem moldura,
-            preenchimento ou sombra. O que as separa é a coluna vazia do grid e,
-            no livro, a hairline que o abre.
-            ========================================================== */}
-        <div className="mt-10 grid gap-x-10 gap-y-10 lg:mt-14 lg:grid-cols-12">
-          <Reveal className="flex flex-col gap-4 text-body-sm text-canvas/75 lg:col-span-6">
+        <div className="grid gap-x-10 gap-y-9 lg:grid-cols-12 lg:items-start">
+          <Reveal className="lg:col-span-6">
             {/*
-              `slice(1)`: o primeiro parágrafo é trajetória e enumeração de
-              competências, as duas restadas nos bullets de `#quem-conduz`. Os
-              dois que ficam são a visão integrada e a ligação dela com o
-              método — o argumento desta seção. O dado não foi tocado.
+              `thesis.eyebrow` ("Tese de trabalho"), e não `home.eyebrow`
+              ("Quem conduz o diagnóstico").
+
+              ----------
+              A DUPLICAÇÃO DE RÓTULO (2026-08-11)
+              ----------
+
+              Esta seção e `#quem-conduz`, imediatamente abaixo e no mesmo
+              grafite, abriam **as duas** anunciando quem conduz: "QUEM CONDUZ O
+              DIAGNÓSTICO" aqui e "QUEM CONDUZ" ali. Era essa a "duplicação
+              perceptiva" relatada — dois cabeçalhos consecutivos prometendo a
+              mesma coisa e entregando conteúdos diferentes, o que faz o leitor
+              procurar a relação entre eles em vez de ler o argumento.
+
+              A correção não inventa copy: `leonardo.thesis.eyebrow` já existe em
+              `src/data/leonardo.ts` desde antes desta rodada, foi escrita para
+              este bloco e é o rótulo correto — a seção **é** a tese, e o título
+              que ela já usava (`thesis.title`) vem do mesmo objeto. O que havia
+              era um par etiqueta/título de origens trocadas.
+
+              Com a troca, as duas seções passam a dizer coisas diferentes:
+              `#leonardo` é a tese, `#quem-conduz` são as pessoas.
             */}
-            {leonardo.home.paragraphs.slice(1).map((paragraph) => (
-              <p key={paragraph} className="max-w-[56ch]">
-                {paragraph}
-              </p>
-            ))}
+            <Eyebrow tone="light" as="p">
+              {leonardo.thesis.eyebrow}
+            </Eyebrow>
+
+            <h2
+              id="leonardo-titulo"
+              className="mt-5 max-w-[16ch] font-sans font-extrabold text-display text-canvas"
+            >
+              {leonardo.thesis.title}
+            </h2>
+
+            {/* ----------
+                Assinatura: linha editorial sobre hairline, não faixa com
+                superfície própria. Mesmas três informações da versão anterior —
+                nome, papel e o marco temporal, que é dado único da home.
+                ---------- */}
+            <div className="mt-8 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-t border-white/15 pt-5">
+              <span className="font-sans text-title-3 font-bold text-canvas">{leonardo.name}</span>
+              <span className="text-body-sm text-canvas/70">{leonardo.role}</span>
+              <span className="font-condensed text-caption uppercase tracking-[0.08em] text-yellow">
+                No setor desde {leonardo.since}
+              </span>
+            </div>
           </Reveal>
 
           {/* ----------
-              O livro como evidência da tese.
-
-              `id` no wrapper, não no `Reveal`: o primitive não expõe `id`, e
-              pôr a âncora dentro dele deixaria o alvo do link sujeito ao
-              estado de revelação. O `scroll-mt` compensa o cabeçalho fixo.
+              O argumento. `lg:pt-*` alinha a primeira linha do lead com a
+              primeira linha do título de `display`, e não com o topo da caixa
+              dele: as duas colunas têm corpos muito diferentes e alinhar
+              caixas deixaria o lead visivelmente alto.
               ---------- */}
-          <div
-            id="livro"
-            className="scroll-mt-[calc(var(--header-height)+1rem)] lg:col-span-5 lg:col-start-8"
-          >
-            <Reveal
-              variant="settle"
-              className="flex flex-col gap-5 border-t border-white/15 pt-6 sm:flex-row sm:items-start sm:gap-6 lg:border-t-0 lg:pt-0"
-            >
-              <BookCover className="w-[8.5rem] shrink-0 sm:w-[9.5rem] lg:w-[10rem]" />
+          <Reveal variant="side" className="lg:col-span-5 lg:col-start-8 lg:pt-14">
+            <p className="max-w-[46ch] text-lead text-canvas/85">{leonardo.thesis.lead}</p>
 
-              <div className="min-w-0 flex-1">
-                <p className="font-condensed text-eyebrow font-semibold uppercase tracking-[0.11em] text-yellow">
-                  {book.eyebrow}
+            <div className="mt-6 flex flex-col gap-4 text-body-sm text-canvas/75">
+              {/*
+                `slice(1)`: o primeiro parágrafo é trajetória e enumeração de
+                competências, as duas restadas nos bullets de `#quem-conduz`. Os
+                dois que ficam são a visão integrada e a ligação dela com o
+                método — o argumento desta seção. O dado não foi tocado.
+              */}
+              {leonardo.home.paragraphs.slice(1).map((paragraph) => (
+                <p key={paragraph} className="max-w-[52ch]">
+                  {paragraph}
                 </p>
-                <h3 className="mt-2 max-w-[26ch] font-sans font-bold text-title-3 text-canvas">
-                  {book.headline}
-                </h3>
-                <p className="mt-3 max-w-[48ch] text-body-sm text-canvas/70">{book.relation}</p>
-                {/*
-                  Só o selo. O título do livro se lê na capa, ao lado, e continua
-                  no `alt` dela (`BookCover`) para leitor de tela e indexação.
-                */}
-                <p className="mt-4 border-t border-white/12 pt-3 font-condensed text-caption font-semibold uppercase tracking-[0.07em] text-canvas/70">
-                  {book.seal}
-                </p>
-              </div>
-            </Reveal>
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
 
+        {/* ==========================================================
+            O LIVRO SAIU DAQUI, E VOLTOU PARA JUNTO DO RETRATO (2026-08-11)
+            ==========================================================
+
+            O bloco completo — capa, `eyebrow`, `headline`, `relation`, selo e a
+            âncora `id="livro"` — foi para o dossiê de Leonardo em
+            `#quem-conduz` (`leadership-section.tsx`). Ele já tinha morado lá
+            até 2026-08-10, e a volta é pedido explícito do gestor nesta rodada:
+            "fazer a referência ao livro acontecer junto à foto principal do
+            Leonardo, de forma coerente e integrada".
+
+            A razão de composição confirma o pedido. Aqui o livro era **um
+            objeto solto**: uma capa de 160px com quatro linhas de texto ao lado,
+            numa coluna própria, sem relação visual com nada em volta — "o livro
+            parece um elemento separado demais", nas palavras do briefing. E era
+            a terceira aparição de Leonardo em menos de 1.200px de rolagem, já
+            que a capa traz uma fotografia dele: cena de Consultoria na primeira
+            dobra, capa aqui, retrato logo abaixo.
+
+            Junto do retrato ele deixa de ser objeto e passa a ser **credencial**:
+            a capa fica ao lado da pessoa que a assina, o `relation` explica a
+            ligação com o método, e as duas coisas se sustentam mutuamente em vez
+            de disputar. De quebra resolve o vazio medido no dossiê de Leonardo
+            (~288px de grafite morto sob os bullets).
+
+            `id="livro"` foi junto — é destino de `/#livro` (`data/industry.ts`)
+            e continua sendo a **única** ocorrência na home.
+            ========================================================== */}
+
         {/*
-          O CTA fecha a seção, depois da evidência: tese → visão → livro → quem
-          quiser a trajetória inteira vai para a página dela. É o único CTA da
-          região de autoridade.
+          O CTA fecha a seção, depois do argumento: tese → visão → quem quiser a
+          trajetória inteira vai para a página dela.
         */}
-        <Reveal className="mt-10 lg:mt-12">
+        <Reveal className="mt-12 lg:mt-14">
           <LinkButton href={leonardo.home.cta.href} variant="light-outline" size="md" withArrow>
             {leonardo.home.cta.label}
           </LinkButton>

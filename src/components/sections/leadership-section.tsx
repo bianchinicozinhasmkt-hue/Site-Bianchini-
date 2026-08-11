@@ -4,6 +4,8 @@ import { Container } from '@/components/layout/container'
 import { Reveal } from '@/components/animations/reveal'
 import { Eyebrow, Heading } from '@/components/ui/typography/heading'
 import { InstagramIcon } from '@/components/ui/icons'
+import { BookCover } from '@/components/ui/book-cover'
+import { book } from '@/data/leonardo'
 import { leadershipTeam } from '@/data/team'
 import { cn } from '@/lib/utils'
 
@@ -268,31 +270,71 @@ export function LeadershipSection() {
                     </ul>
 
                     {/* ==========================================================
-                        O LIVRO NÃO FICA MAIS AQUI (2026-08-10)
+                        O LIVRO VOLTA PARA O DOSSIÊ DE LEONARDO (2026-08-11)
                         ==========================================================
 
-                        O bloco completo — capa, `eyebrow`, `headline`,
-                        `relation`, selo e a âncora `id="livro"` — mudou para
-                        `#leonardo`, que passou a ser a seção da tese. Duas
-                        razões, nesta ordem:
+                        Ele morou aqui até 2026-08-10, mudou para `#leonardo` e
+                        volta agora — a pedido explícito do gestor ("fazer a
+                        referência ao livro acontecer junto à foto principal do
+                        Leonardo, de forma coerente e integrada") e porque a
+                        composição confirma o pedido.
 
-                         1. **Função.** `book.relation` diz que "a mesma leitura
-                            comercial que estrutura o livro é a que a Bianchini
-                            aplica ao analisar uma operação" — isso é enunciado
-                            de tese, não ficha de responsável. Esta seção
-                            responde "quem responde hoje", e o livro não
-                            responde essa pergunta.
-                         2. **Equilíbrio.** O bloco era a causa isolada do
-                            desequilíbrio entre os dois responsáveis: em 390 o
-                            artigo de Leonardo media 1.260px contra 737px do de
-                            Guilherme, e 540px dessa diferença eram o livro. Sem
-                            ele os dois dossiês passam a ter peso equivalente,
-                            sem que uma linha de Guilherme tenha sido tocada.
+                        **O que a mudança de 2026-08-10 acertou e o que ela não
+                        previu.** Ela acertou o diagnóstico de desequilíbrio: com
+                        o bloco antigo — capa de 160px, `eyebrow`, `headline`,
+                        `relation` e selo empilhados — o artigo de Leonardo media
+                        1.260px contra 737 de Guilherme em 390px de largura. Só
+                        que a solução foi mover, e mover criou dois defeitos
+                        novos: em `#leonardo` o livro virou objeto solto numa
+                        coluna própria, sem relação visual com nada, e o dossiê
+                        daqui ficou com ~288px de grafite morto sob os bullets —
+                        quatro linhas de credencial ao lado de um retrato de
+                        480px.
 
-                        Nada entrou no lugar, de propósito: `#credibilidade` vem
-                        logo depois com números, marcas e depoimentos, e é ela
-                        que carrega a prova institucional.
+                        **A forma é que estava errada, não o lugar.** O que volta
+                        não é o bloco antigo: é uma **linha de credencial**
+                        — capa pequena à esquerda, `relation` e selo à direita,
+                        aberta por hairline. Sem `eyebrow` ("Autor e especialista
+                        do setor" repete o que o cargo e os bullets já dizem) e
+                        sem `headline` (o argumento de tese vive em `#leonardo`,
+                        que é a seção da tese). Medido, o acréscimo é de ~190px
+                        no artigo de Leonardo em 390px, contra os 540 do bloco
+                        antigo — e ele cai exatamente no vazio que já existia,
+                        então o desequilíbrio corrigido em 2026-08-10 não volta.
+
+                        `book.purchaseUrl` continua `null` e **nenhum CTA de
+                        compra é renderizado** — a regra de `CLAUDE.md` não muda.
                         ========================================================== */}
+                    {/*
+                      `id` no `div`, não no `Reveal`: o primitive não expõe `id`,
+                      e pôr a âncora dentro dele deixaria o alvo do link sujeito
+                      ao estado de revelação. O `scroll-mt` compensa o cabeçalho
+                      fixo.
+                    */}
+                    {person.id === 'leonardo' ? (
+                      <div
+                        id="livro"
+                        className="mt-7 scroll-mt-[calc(var(--header-height)+1rem)] border-t border-white/15 pt-6"
+                      >
+                        <div className="flex items-start gap-5">
+                          <BookCover className="w-[5.5rem] shrink-0 sm:w-[6.25rem]" />
+
+                          <div className="min-w-0 flex-1">
+                            <p className="max-w-[46ch] text-body-sm leading-relaxed text-canvas/75">
+                              {book.relation}
+                            </p>
+                            {/*
+                              Só o selo. O título do livro se lê na capa, ao
+                              lado, e continua no `alt` dela (`BookCover`) para
+                              leitor de tela e indexação.
+                            */}
+                            <p className="mt-3 font-condensed text-caption font-semibold uppercase tracking-[0.07em] text-yellow">
+                              {book.seal}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                 </article>
               </Reveal>

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Section } from '@/components/layout/section'
 import { Container } from '@/components/layout/container'
 import { Eyebrow, Heading } from '@/components/ui/typography/heading'
@@ -7,9 +6,12 @@ import { industry } from '@/data/industry'
 
 /**
  * Indústria do inox — seção própria e separada dos três pilares (público é o
- * fabricante, não o operador de cozinha). A fotografia é decorativa
- * (`aria-hidden`, sem legenda): produto genérico do acervo, sem cliente, obra
- * ou fábrica identificada — ver `src/data/industry.ts`.
+ * fabricante, não o operador de cozinha).
+ *
+ * **Sem fotografia desde 2026-08-11** — a justificativa completa está no
+ * comentário do cabeçalho, dentro do componente. `industry.image` continua no
+ * dado (`src/data/industry.ts`) porque a mesma entrada alimenta a capa de
+ * `manufacturersPage` em `pages.ts`; o que saiu foi o uso aqui.
  */
 export function IndustryInoxSection() {
   return (
@@ -21,46 +23,57 @@ export function IndustryInoxSection() {
       aria-labelledby="industria-do-inox-titulo"
     >
       <Container>
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
-          <div className="lg:col-span-7">
+        {/* ==========================================================
+            A FOTO DE PRODUTO SAIU (2026-08-11)
+            ==========================================================
+
+            `estante-inox.jpg` é uma peça isolada sobre fundo branco de estúdio,
+            e ocupava aqui uma caixa de proporção 4/3 com canto arredondado,
+            preenchimento `graphite-soft`, contorno interno de 1px e uma vinheta
+            radial por cima — tudo isso para tentar impedir que um retângulo
+            branco explodisse no meio de uma seção grafite. O comentário anterior
+            descrevia o resultado com precisão: "lê como card de produto". Era
+            esse o problema, não a solução.
+
+            Três razões somadas para removê-la, e não para tratá-la melhor:
+
+              1. **é o único canto arredondado da home.** O vocabulário do site
+                 não tem `radius`; a caixa existia só para acomodar o arquivo;
+              2. **não carrega informação.** `aria-hidden`, `alt=""`, sem
+                 legenda, produto genérico do acervo — a própria seção a
+                 declarava decorativa;
+              3. **o motivo já está publicado duas vezes acima.** Mobiliário em
+                 inox aparece em `#equipamentos` (vitrine, "Mobiliário em inox")
+                 e no mosaico de `#projetos`. Esta seria a terceira peça de inox
+                 em fundo neutro da mesma página — a "duplicação de motivo
+                 visual" que o briefing manda eliminar. O mesmo diagnóstico já
+                 tinha sido feito para este arquivo em `src/data/differentials.ts`,
+                 onde ele foi substituído por outra fotografia pela razão idêntica.
+
+            **Nada entrou no lugar, e o espaço não sobrou.** O cabeçalho passa a
+            ser uma banda de duas colunas — título à esquerda, texto à direita,
+            fechando na margem —, que é a mesma gramática de `#pilares` e de
+            `#credibilidade`. Medido, a seção encolheu 214px em 1440 e o vão
+            morto sob o parágrafo (~130px, entre o fim do texto e a régua dos
+            entregáveis) desapareceu junto.
+            ========================================================== */}
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-x-10">
+          <div className="lg:col-span-6">
             <Eyebrow tone="light">{industry.eyebrow}</Eyebrow>
             <Heading
               as={2}
               id="industria-do-inox-titulo"
               size="title-1"
-              className="mt-5 max-w-[20ch] text-canvas"
+              className="mt-5 max-w-[16ch] text-canvas"
             >
               {industry.title}
             </Heading>
-            <p className="mt-5 max-w-[58ch] text-lead text-canvas/75">{industry.text}</p>
           </div>
 
-          {/*
-            `estante-inox.jpg` é foto de produto em fundo branco de estúdio —
-            direto sobre o grafite ela virava um retângulo branco evidente.
-            O tratamento abaixo é uma superfície integrada: um painel com a
-            própria paleta da seção (`graphite-soft` + borda sutil) em vez de
-            recortar ou mascarar o arquivo, com a foto centralizada e uma
-            moldura de respiro — lê como card de produto, não como acidente
-            de renderização. Continua decorativo, sem legenda.
-          */}
-          <div aria-hidden="true" className="lg:col-span-5">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-graphite-soft p-8 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] sm:p-10">
-              <Image
-                src={industry.image.src}
-                alt=""
-                fill
-                sizes="(max-width: 1023px) 76vw, 30vw"
-                quality={80}
-                className="object-contain object-center p-4"
-              />
-              {/* Vinheta: funde o branco de estúdio da foto à moldura grafite. */}
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_58%,rgba(16,16,16,0.75)_100%)]" />
-            </div>
-          </div>
+          <p className="text-lead text-canvas/75 lg:col-span-6 lg:col-start-7">{industry.text}</p>
         </div>
 
-        <ol className="mt-10 grid gap-8 border-t border-white/15 pt-10 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-10 lg:pt-14">
+        <ol className="mt-10 grid gap-8 border-t border-white/15 pt-10 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-10 lg:pt-12">
           {industry.deliverables.map((item) => (
             <li key={item.number}>
               <p className="font-condensed text-caption font-bold tabular-nums text-yellow">
