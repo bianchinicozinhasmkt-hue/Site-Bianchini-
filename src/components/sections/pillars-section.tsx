@@ -187,9 +187,27 @@ export function PillarsSection() {
             contra as três muito maiores do título — sobrava alto e o vão entre
             elas virava o assunto.
           */}
+          {/*
+            ----------
+            R0-D (2026-08-12) — A ORAÇÃO DO MEIO SAIU POR SER LITERAL EM OUTRA SEÇÃO
+            ----------
+
+            "Juntas, não há repasse de culpa entre projetista, fornecedor e
+            instalador" é **a mesma frase**, palavra por palavra, que
+            `#transicao` publica 2.650px abaixo (`scope-triad-band.tsx`, segundo
+            parágrafo) — as duas transcrevendo `src/data/solutions.ts`. Uma
+            varredura do texto renderizado da home pegava a oração duas vezes.
+
+            Quem cede é esta, não a de `#transicao`: lá a frase **é** o conteúdo
+            do fecho de capítulo (a seção tem 3 blocos e o blueprint a chama de
+            exemplo correto de densidade); aqui ela era o meio de um apoio de
+            três orações, entre duas que dizem o essencial. O que sobra é o par
+            que a seção precisa dizer e mais nada: cada frente sozinha, e a
+            integração como vantagem — que é a função narrativa da seção
+            (DEC-003, "integrar é opção, não condição").
+          */}
           <p className="text-lead text-muted lg:col-span-6 lg:col-start-7">
-            Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa
-            entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma
+            Cada frente resolve um problema por conta própria. Integrar é uma vantagem, não uma
             condição para começar.
           </p>
         </div>

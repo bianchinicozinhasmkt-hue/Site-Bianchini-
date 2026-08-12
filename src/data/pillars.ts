@@ -93,6 +93,14 @@ export const pillars: Pillar[] = [
   {
     title: 'Equipamentos',
     question: 'Qual equipamento a minha operação precisa — e quem responde pela instalação?',
+    /*
+      **Intocada em R0-D, e não por esquecimento.** É a única das três respostas
+      sem redundância a cortar: "dimensionada pelo volume real de produção" é o
+      critério que diferencia a especificação (fonte: `faq.ts`, `kitchensFaq[1]`)
+      e os quatro verbos respondem à segunda metade da pergunta — "quem responde
+      pela instalação". Cortar aqui encurtaria justamente a frente prioritária e
+      achataria a assimetria que DEC-001 pede que a seção expresse.
+    */
     description:
       'Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.',
     cta: { label: 'Solicitar orçamento', href: '/contato?intencao=equipamentos' },
@@ -100,8 +108,16 @@ export const pillars: Pillar[] = [
   {
     title: 'Projetos',
     question: 'Preciso projetar antes de comprar ou de começar a obra?',
+    /*
+      R0-D: −27 caracteres, sem perder entregável nem resposta. Saíram
+      "de produção" depois de `fluxo` (o termo já está qualificado pela lista, e
+      "fluxo de produção" é publicado inteiro em `/solucoes/arquitetura`) e
+      "complementares" (adjetivo sem informação — a planta de infraestrutura já
+      é, por definição, complementar ao layout). A oração final fica: é ela que
+      responde à pergunta, e sem ela o item vira lista de entregáveis.
+    */
     description:
-      'Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.',
+      'Layout, fluxo, dimensionamento e plantas de infraestrutura — o desenho define o que comprar e onde instalar.',
     cta: { label: 'Falar com um projetista', href: '/contato?intencao=arquitetura' },
   },
   {
@@ -116,8 +132,16 @@ export const pillars: Pillar[] = [
       home. A afirmação é a mesma e continua vindo da mesma fonte; o que muda é
       a redação, para a página não repetir a si mesma.
     */
+    /*
+      R0-D: −33 caracteres. "em funcionamento" saiu porque a **pergunta acima já
+      diz** "A operação já roda" — repetir a condição na resposta é o item 3 da
+      prioridade de corte. E "O resultado é uma ordem de prioridades, não um
+      orçamento" virou "Termina em prioridades, não em orçamento": é a mesma
+      afirmação, na redação de `src/data/scope-levels.ts` (nível 01), que já era
+      a fonte citada no mapa de origem no topo deste arquivo.
+    */
     description:
-      'Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento.',
+      'Leitura da operação: fluxo, capacidade instalada e processos. Termina em prioridades, não em orçamento.',
     cta: { label: 'Agendar diagnóstico', href: '/contato?intencao=consultoria' },
   },
 ]

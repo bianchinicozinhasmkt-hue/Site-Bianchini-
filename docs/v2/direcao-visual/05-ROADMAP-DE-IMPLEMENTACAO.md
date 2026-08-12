@@ -124,12 +124,19 @@ raio de 3px contra os 2px do sistema, preenchimento por `scaleX` em vez de `scal
 
 ---
 
-### R0-D — As três seções no alvo
+### R0-D — As três seções no alvo · **CONCLUÍDA em 2026-08-12**
 
-- `#pilares` — cortar ~300 caracteres de descrição de apoio;
-- `#transicao` — remover o card residual;
-- `#fechamento` — reduzir de 5 para ≤3 regiões amarelas (o CTA de WhatsApp já foi tratado
-  em G-2).
+- ~~`#pilares` — cortar ~300 caracteres de descrição de apoio;~~ **feito como −140**: o
+  alvo de 300 vinha de 1.505, número superado por `bdca4a5` — o valor real em `48e1b65`
+  era 844, já dentro do teto. Cortou-se por critério editorial, não por aritmética
+  (S-08 fechado, 704 caracteres);
+- ~~`#transicao` — remover o card residual;~~ **feito** — era o `bg-canvas` da caixa da
+  fotografia; saiu sem substituto (S-15 fechado);
+- ~~`#fechamento` — reduzir de 5 para ≤3 regiões amarelas~~ **feito** — cederam o texto da
+  etiqueta e o traço do rótulo de atendimento, pela ordem de precedência de doc 01 §6.2
+  (S-31 fechado). O CTA de WhatsApp já tinha sido tratado em G-2.
+
+Evidência: `docs/v2/capturas/secoes-r0d-2026-08-12/`. **Com ela a R0 está encerrada.**
 
 ---
 

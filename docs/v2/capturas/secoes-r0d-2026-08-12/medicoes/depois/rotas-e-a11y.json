@@ -1,0 +1,560 @@
+{
+ "rotas": {
+  "/": {
+   "h": 705,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 467182,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 20997,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Diga o que a sua operação precisa resolver.",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+     "href": "/contato?intencao=equipamentos",
+     "w": 375,
+     "h": 56,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/sobre": {
+   "h": 637,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 422139,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 14152,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Sua operação pode produzir mais com escolhas melhores.",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR DIAGNÓSTICO",
+     "href": "/contato",
+     "w": 251,
+     "h": 56.4,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20diagn%C3%B3stico%20da%20minha%20opera%C3%A7%C3%A3o%20com%20a%20Bianchini.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/projetos": {
+   "h": 678,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 449411,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 14152,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Quer um projeto com esse nível de acabamento na sua operação",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR DIAGNÓSTICO",
+     "href": "/contato",
+     "w": 251,
+     "h": 56.4,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20conhecer%20mais%20projetos%20entregues%20pela%20Bianchini.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/solucoes": {
+   "h": 637,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 422139,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 14152,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Sua operação pode produzir mais com escolhas melhores.",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR DIAGNÓSTICO",
+     "href": "/contato",
+     "w": 251,
+     "h": 56.4,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20diagn%C3%B3stico%20da%20minha%20opera%C3%A7%C3%A3o%20com%20a%20Bianchini.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/solucoes/arquitetura": {
+   "h": 705,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 467182,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 17000,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Tem um espaço, uma planta ou uma obra em andamento?",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR ANÁLISE DO PROJETO",
+     "href": "/contato?intencao=arquitetura",
+     "w": 303.6,
+     "h": 56,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20um%20projeto%20de%20arquitetura%20e%20fluxo%20para%20a%20minha%20opera%C3%A7%C3%A3o.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/solucoes/cozinhas-industriais": {
+   "h": 678,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 449411,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 13605,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Vamos dimensionar a sua cozinha antes de orçar qualquer equi",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR ORÇAMENTO",
+     "href": "/contato?intencao=equipamentos",
+     "w": 241.3,
+     "h": 56.4,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Quero%20conversar%20sobre%20uma%20cozinha%20industrial%20completa.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/solucoes/consultoria-para-restaurantes": {
+   "h": 746,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 494454,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 19220,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Vamos olhar a sua operação antes de recomendar qualquer inve",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "RECEBER DIAGNÓSTICO OPERACIONAL",
+     "href": "/contato?intencao=consultoria",
+     "w": 343.2,
+     "h": 56,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Tenho%20uma%20opera%C3%A7%C3%A3o%20em%20funcionamento%20e%20quero%20avaliar%20uma%20consultoria%20operacional.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/solucoes/consultoria-para-fabricantes": {
+   "h": 705,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 467182,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 15155,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Vamos conversar sobre a sua fábrica?",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "FALAR COM UM CONSULTOR",
+     "href": "/contato?intencao=fabricantes",
+     "w": 270.6,
+     "h": 56,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Represento%20uma%20f%C3%A1brica%20de%20cozinhas%20e%20quero%20falar%20sobre%20consultoria.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/linhas-de-produtos": {
+   "h": 637,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 422139,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 14152,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "A especificação certa começa no diagnóstico",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR DIAGNÓSTICO",
+     "href": "/contato",
+     "w": 251,
+     "h": 56.4,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "/leonardo-bianchini": {
+   "h": 678,
+   "nAmarelos": 3,
+   "amarelos": [
+    {
+     "via": "fundo",
+     "area": 449411,
+     "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:"
+    },
+    {
+     "via": "fundo",
+     "area": 56,
+     "cls": "h-[2px] w-7 shrink-0 bg-yellow"
+    },
+    {
+     "via": "fundo",
+     "area": 14152,
+     "cls": "group relative isolate inline-flex items-center ju"
+    }
+   ],
+   "titulo": "Transforme experiência em decisões melhores para sua operaçã",
+   "etiqueta": "PRÓXIMO PASSO",
+   "corEtiqueta": "rgba(239, 237, 235, 0.8)",
+   "acoes": [
+    {
+     "txt": "SOLICITAR DIAGNÓSTICO",
+     "href": "/contato",
+     "w": 251,
+     "h": 56.4,
+     "bg": "rgb(245, 198, 75)"
+    },
+    {
+     "txt": "CONVERSAR PELO WHATSAPP",
+     "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20diagn%C3%B3stico%20da%20minha%20opera%C3%A7%C3%A3o%20com%20a%20Bianchini.",
+     "w": 297.8,
+     "h": 56.4,
+     "bg": "rgba(0, 0, 0, 0)"
+    }
+   ],
+   "auxiliar": "RETORNO EM ATÉ 1 DIA ÚTIL · SEGUNDA A SEXTA, 8H ÀS 18H · ATENDIMENTO EM TODO O BRASIL",
+   "consoleErrors": [],
+   "httpFailures": []
+  }
+ },
+ "a11y": {
+  "foco": [
+   {
+    "secao": "pilares",
+    "txt": "SOLICITAR ORÇAMENTO",
+    "focoVisivel": true,
+    "outline": "2px",
+    "sombra": true,
+    "w": 223.1,
+    "h": 48
+   },
+   {
+    "secao": "pilares",
+    "txt": "Falar com um projetista",
+    "focoVisivel": true,
+    "outline": "2px",
+    "sombra": true,
+    "w": 191.7,
+    "h": 44
+   },
+   {
+    "secao": "pilares",
+    "txt": "Agendar diagnóstico",
+    "focoVisivel": true,
+    "outline": "2px",
+    "sombra": true,
+    "w": 173,
+    "h": 44
+   },
+   {
+    "secao": "transicao",
+    "txt": "Conhecer o método",
+    "focoVisivel": true,
+    "outline": "2px",
+    "sombra": true,
+    "w": 166.3,
+    "h": 44
+   },
+   {
+    "secao": "fechamento",
+    "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTO",
+    "focoVisivel": true,
+    "outline": "2px",
+    "sombra": true,
+    "w": 375,
+    "h": 56
+   },
+   {
+    "secao": "fechamento",
+    "txt": "CONVERSAR PELO WHATSAPP",
+    "focoVisivel": true,
+    "outline": "2px",
+    "sombra": true,
+    "w": 297.8,
+    "h": 56.4
+   }
+  ],
+  "toque": [
+   {
+    "secao": "pilares",
+    "txt": "SOLICITAR ORÇAMENTO",
+    "w": 223.1,
+    "h": 48,
+    "ok": true
+   },
+   {
+    "secao": "pilares",
+    "txt": "Falar com um projetista",
+    "w": 191.7,
+    "h": 44,
+    "ok": true
+   },
+   {
+    "secao": "pilares",
+    "txt": "Agendar diagnóstico",
+    "w": 173,
+    "h": 44,
+    "ok": true
+   },
+   {
+    "secao": "transicao",
+    "txt": "Conhecer o método",
+    "w": 166.3,
+    "h": 44,
+    "ok": true
+   },
+   {
+    "secao": "fechamento",
+    "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTO",
+    "w": 350,
+    "h": 80.8,
+    "ok": true
+   },
+   {
+    "secao": "fechamento",
+    "txt": "CONVERSAR PELO WHATSAPP",
+    "w": 350,
+    "h": 56.4,
+    "ok": true
+   }
+  ],
+  "reducedMotion": []
+ },
+ "regressao": {
+  "header": {
+   "ctaLabel": "SOLICITAR ORÇAMENTO",
+   "ctaHref": "/contato?intencao=equipamentos",
+   "raio": "2px",
+   "sombra": "none",
+   "alturaFaixa": 80
+  },
+  "guia": {
+   "xMarca": 72,
+   "xH1": 72
+  },
+  "hero": {
+   "h1": "Equipamentos para cozinha profissional, especificados para a",
+   "portas": 13,
+   "alturaDobra": 820
+  },
+  "botoes": {
+   "total": 11,
+   "foraDaNorma": 0,
+   "exemplos": []
+  }
+ }
+}

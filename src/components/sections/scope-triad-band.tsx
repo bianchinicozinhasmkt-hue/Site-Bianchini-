@@ -129,7 +129,28 @@ export function ScopeTriadBand() {
 
             <Reveal variant="settle" className="lg:col-span-5 lg:col-start-8">
               <figure>
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]">
+                {/*
+                  ----------
+                  R0-D (2026-08-12) — O CARD RESIDUAL ERA ESTE `bg-canvas` (S-15)
+                  ----------
+
+                  A caixa da fotografia carregava `bg-canvas` (#EFEDEB) dentro de
+                  uma seção `canvas-deep` (#E6E3DE). Isso é, pela definição do
+                  sistema (doc 01 §7.3), a construção de um **card**: superfície
+                  própria, distinta da superfície da seção, com conteúdo dentro —
+                  e era o único card que o inventário de 2026-08-10 achava na
+                  home inteira fora de `#equipamentos`, `#projetos` e
+                  `#diagnostico`. Numa faixa que foi reduzida de "segundo método"
+                  a fecho editorial justamente para não ter cartão, sobrar a
+                  superfície do cartão contradiz a redução.
+
+                  **Removido, não substituído.** Nada entrou no lugar — nem
+                  borda, nem régua, nem moldura, nem `bg` mais próximo do tom da
+                  seção. A fotografia é `fill` + `object-cover`, então preenche a
+                  caixa inteira e o fundo nunca aparecia depois do carregamento:
+                  a composição renderizada é idêntica, e o que sai é a caixa.
+                */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden lg:aspect-[5/4]">
                   <Image
                     src="/images/projects/producao-panificacao.jpg"
                     alt="Área de produção de panificação em operação, com fornos, carros de assadeiras e bancadas em aço inox"

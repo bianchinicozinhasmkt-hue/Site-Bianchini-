@@ -78,7 +78,35 @@ export function FinalCtaSection({
 
       <Container className="relative py-20 md:py-24 lg:py-section-lg">
         <div className="max-w-2xl lg:max-w-xl">
-          <Eyebrow tone="light">{eyebrow}</Eyebrow>
+          {/*
+            ==========================================================
+            R0-D (2026-08-12) — A ETIQUETA CEDE O TOM (S-31, doc 01 §6.2)
+            ==========================================================
+
+            A seção tinha **cinco** regiões amarelas simultâneas: a keyline
+            diagonal, o texto da etiqueta, o traço da etiqueta, o CTA primário e
+            o traço do rótulo de atendimento. O teto do sistema é três.
+
+            §6.2 fixa quem cede quando o teto estoura — a função de menor
+            precedência, na ordem `MARCA > AÇÃO > ESTADO` —, e traz o caso
+            resolvido: na primeira dobra, que tinha seis, **a etiqueta cedeu o
+            texto e manteve o traço**, porque etiqueta não é nenhuma das três,
+            é rótulo. Aqui a decisão é a mesma, com o mesmo valor
+            (`canvas/80`) da hero congelada: ver o inventário de amarelo em
+            `v2/hero-stage.tsx`. Não é uma segunda opinião sobre o assunto, é a
+            aplicação da primeira.
+
+            O que sobra são os três com função: a **keyline** (geometria do
+            mockup, o segundo e último uso da diagonal na página), o **CTA
+            primário** (a ação que a página inteira preparou) e o **traço da
+            etiqueta**, hairline de 56px² — abaixo do piso de relevância de
+            §6.2 e a metade que o precedente manda preservar.
+
+            Reversível numa linha, como lá.
+          */}
+          <Eyebrow tone="light" className="text-canvas/80">
+            {eyebrow}
+          </Eyebrow>
 
           <h2 id="cta-final-titulo" className="mt-6 font-sans font-bold text-title-1 text-canvas">
             {title}
@@ -103,7 +131,19 @@ export function FinalCtaSection({
           </div>
 
           <div className="mt-10 border-t border-white/15 pt-6">
-            <TechLabel tone="light">
+            {/*
+              `rule={false}` — o segundo amarelo que cede em R0-D. Esta linha é o
+              **último** item da hierarquia de leitura da seção (mensagem →
+              PRIMARY → WhatsApp → informação auxiliar): um acento decorativo
+              sobre o item de menor prioridade é o candidato natural quando o
+              orçamento de cor pede duas subtrações. A régua acima (`border-t`)
+              já separa o bloco, então nada se perde de estrutura — sai um traço
+              de 48px², não um sinal.
+
+              A copy, o dado e o destino não mudaram: continua vindo de
+              `contact` em `src/data/site.ts`.
+            */}
+            <TechLabel tone="light" rule={false}>
               {contact.responseTime} · {contact.hours} · {contact.coverage}
             </TechLabel>
           </div>

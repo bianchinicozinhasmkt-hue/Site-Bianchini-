@@ -1,0 +1,2458 @@
+{
+ "baseUrl": "http://127.0.0.1:3210",
+ "quando": "2026-08-12T20:45:16.060Z",
+ "viewports": {
+  "320x568": {
+   "doc": {
+    "h": 22899,
+    "w": 320,
+    "vw": 320
+   },
+   "secoes": {
+    "pilares": {
+     "y": 5409,
+     "h": 1558,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "48px / 48px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "transicao": {
+     "y": 10197,
+     "h": 875,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 56px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 280,
+       "h": 210,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 39,
+       "area": 78,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 280,
+       "h": 210,
+       "natural": "294x294",
+       "completo": true,
+       "area": 58800
+      }
+     ],
+     "areaImagemPct": 21,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 57
+    },
+    "cta-final": {
+     "y": 20174,
+     "h": 804,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [
+      {
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[2px] font-conden",
+       "w": 280,
+       "h": 80.8,
+       "bg": "rgb(245, 198, 75)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 0,
+       "raio": "2px",
+       "motivo": "superficie"
+      },
+      {
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[2px] font-conden",
+       "w": 280,
+       "h": 82.8,
+       "bg": "rgba(0, 0, 0, 0)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 4,
+       "raio": "2px",
+       "motivo": "borda-fechada"
+      }
+     ],
+     "nCards": 2,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 280,
+       "h": 80.8,
+       "area": 22619,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 4,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 320,
+       "h": 804.4,
+       "natural": "320x440",
+       "completo": true,
+       "area": 257410
+      }
+     ],
+     "areaImagemPct": 100,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 280,
+       "h": 80.8,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 280,
+       "h": 82.8,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 0
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 3225,
+     "h": 2184
+    },
+    "pilares": {
+     "y": 5409,
+     "h": 1558
+    },
+    "sintomas": {
+     "y": 6967,
+     "h": 1397
+    },
+    "diagnostico": {
+     "y": 8365,
+     "h": 1832
+    },
+    "transicao": {
+     "y": 10197,
+     "h": 875
+    },
+    "inox": {
+     "y": 11071,
+     "h": 1312
+    },
+    "credibilidade": {
+     "y": 18079,
+     "h": 2095
+    },
+    "fechamento": {
+     "y": 20174,
+     "h": 804
+    },
+    "footer": {
+     "y": 20978,
+     "h": 1921
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "390x844": {
+   "doc": {
+    "h": 21639,
+    "w": 390,
+    "vw": 390
+   },
+   "secoes": {
+    "pilares": {
+     "y": 5773,
+     "h": 1367,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "48px / 48px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "transicao": {
+     "y": 10070,
+     "h": 875,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 56px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 350,
+       "h": 262.5,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 39,
+       "area": 78,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 350,
+       "h": 262.5,
+       "natural": "358x358",
+       "completo": true,
+       "area": 91875
+      }
+     ],
+     "areaImagemPct": 26.9,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "cta-final": {
+     "y": 19074,
+     "h": 732,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [
+      {
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[2px] font-conden",
+       "w": 350,
+       "h": 80.8,
+       "bg": "rgb(245, 198, 75)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 0,
+       "raio": "2px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 350,
+       "h": 80.8,
+       "area": 28273,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 4,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 390,
+       "h": 732.1,
+       "natural": "331x457",
+       "completo": true,
+       "area": 285529
+      }
+     ],
+     "areaImagemPct": 100,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 350,
+       "h": 80.8,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 350,
+       "h": 56.4,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 0
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 3386,
+     "h": 2387
+    },
+    "pilares": {
+     "y": 5773,
+     "h": 1367
+    },
+    "sintomas": {
+     "y": 7140,
+     "h": 1333
+    },
+    "diagnostico": {
+     "y": 8474,
+     "h": 1597
+    },
+    "transicao": {
+     "y": 10070,
+     "h": 875
+    },
+    "inox": {
+     "y": 10946,
+     "h": 1190
+    },
+    "credibilidade": {
+     "y": 17256,
+     "h": 1818
+    },
+    "fechamento": {
+     "y": 19074,
+     "h": 732
+    },
+    "footer": {
+     "y": 19806,
+     "h": 1833
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "768x1024": {
+   "doc": {
+    "h": 19681,
+    "w": 768,
+    "vw": 768
+   },
+   "secoes": {
+    "pilares": {
+     "y": 4529,
+     "h": 1176,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "56px / 56px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 64
+    },
+    "transicao": {
+     "y": 8690,
+     "h": 1042,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 64px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 691.2,
+       "h": 518.4,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 19.5,
+       "area": 39,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 691.2,
+       "h": 518.4,
+       "natural": "706x706",
+       "completo": true,
+       "area": 358305
+      }
+     ],
+     "areaImagemPct": 44.8,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 64
+    },
+    "cta-final": {
+     "y": 17404,
+     "h": 609,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 375,
+       "h": 56,
+       "area": 20997,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 4,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 768,
+       "h": 609.3,
+       "natural": "504x695",
+       "completo": true,
+       "area": 467952
+      }
+     ],
+     "areaImagemPct": 100,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 375,
+       "h": 56,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 297.8,
+       "h": 56.4,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 0
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 2906,
+     "h": 1623
+    },
+    "pilares": {
+     "y": 4529,
+     "h": 1176
+    },
+    "sintomas": {
+     "y": 5705,
+     "h": 1407
+    },
+    "diagnostico": {
+     "y": 7112,
+     "h": 1578
+    },
+    "transicao": {
+     "y": 8690,
+     "h": 1042
+    },
+    "inox": {
+     "y": 9732,
+     "h": 861
+    },
+    "credibilidade": {
+     "y": 15899,
+     "h": 1505
+    },
+    "fechamento": {
+     "y": 17404,
+     "h": 609
+    },
+    "footer": {
+     "y": 18013,
+     "h": 1668
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1024x768": {
+   "doc": {
+    "h": 13830,
+    "w": 1024,
+    "vw": 1024
+   },
+   "secoes": {
+    "pilares": {
+     "y": 3690,
+     "h": 701,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "64px / 56px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "transicao": {
+     "y": 6381,
+     "h": 506,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 80px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 356,
+       "h": 284.8,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 39,
+       "area": 78,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 356,
+       "h": 284.8,
+       "natural": "389x389",
+       "completo": true,
+       "area": 101388
+      }
+     ],
+     "areaImagemPct": 19.6,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 88
+    },
+    "cta-final": {
+     "y": 12288,
+     "h": 702,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 471,
+       "h": 701.6,
+       "bg": "rgb(245, 198, 75)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 471,
+       "h": 701.6,
+       "area": 330458,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 375,
+       "h": 56,
+       "area": 20997,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 5,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 471,
+       "h": 701.6,
+       "natural": "309x426",
+       "completo": true,
+       "area": 330458
+      }
+     ],
+     "areaImagemPct": 46,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 375,
+       "h": 56,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 297.8,
+       "h": 56.4,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 0
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 2413,
+     "h": 1278
+    },
+    "pilares": {
+     "y": 3690,
+     "h": 701
+    },
+    "sintomas": {
+     "y": 4391,
+     "h": 998
+    },
+    "diagnostico": {
+     "y": 5390,
+     "h": 991
+    },
+    "transicao": {
+     "y": 6381,
+     "h": 506
+    },
+    "inox": {
+     "y": 6887,
+     "h": 686
+    },
+    "credibilidade": {
+     "y": 11120,
+     "h": 1168
+    },
+    "fechamento": {
+     "y": 12288,
+     "h": 702
+    },
+    "footer": {
+     "y": 12990,
+     "h": 840
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1366x768": {
+   "doc": {
+    "h": 13206,
+    "w": 1366,
+    "vw": 1366
+   },
+   "secoes": {
+    "pilares": {
+     "y": 3486,
+     "h": 655,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "64px / 56px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "transicao": {
+     "y": 6100,
+     "h": 556,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 80px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 484.3,
+       "h": 387.4,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 19.5,
+       "area": 39,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 484.3,
+       "h": 387.4,
+       "natural": "519x519",
+       "completo": true,
+       "area": 187594
+      }
+     ],
+     "areaImagemPct": 24.7,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 81
+    },
+    "cta-final": {
+     "y": 11672,
+     "h": 714,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 628.4,
+       "h": 713.7,
+       "bg": "rgb(245, 198, 75)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 628.4,
+       "h": 713.7,
+       "area": 448452,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 375,
+       "h": 56,
+       "area": 20997,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 5,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 628.4,
+       "h": 713.7,
+       "natural": "412x569",
+       "completo": true,
+       "area": 448452
+      }
+     ],
+     "areaImagemPct": 46,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 375,
+       "h": 56,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 297.8,
+       "h": 56.4,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 0
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 2099,
+     "h": 1387
+    },
+    "pilares": {
+     "y": 3486,
+     "h": 655
+    },
+    "sintomas": {
+     "y": 4141,
+     "h": 888
+    },
+    "diagnostico": {
+     "y": 5029,
+     "h": 1071
+    },
+    "transicao": {
+     "y": 6100,
+     "h": 556
+    },
+    "inox": {
+     "y": 6655,
+     "h": 650
+    },
+    "credibilidade": {
+     "y": 10605,
+     "h": 1067
+    },
+    "fechamento": {
+     "y": 11672,
+     "h": 714
+    },
+    "footer": {
+     "y": 12386,
+     "h": 820
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1440x900": {
+   "doc": {
+    "h": 13496,
+    "w": 1440,
+    "vw": 1440
+   },
+   "secoes": {
+    "pilares": {
+     "y": 3701,
+     "h": 657,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "64px / 56px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "transicao": {
+     "y": 6352,
+     "h": 578,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 80px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 512,
+       "h": 409.6,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 19.5,
+       "area": 39,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 512,
+       "h": 409.6,
+       "natural": "547x547",
+       "completo": true,
+       "area": 209712
+      }
+     ],
+     "areaImagemPct": 25.2,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 80
+    },
+    "cta-final": {
+     "y": 11958,
+     "h": 718,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 662.4,
+       "h": 717.9,
+       "bg": "rgb(245, 198, 75)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 662.4,
+       "h": 717.9,
+       "area": 475534,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 375,
+       "h": 56,
+       "area": 20997,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 5,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 662.4,
+       "h": 717.9,
+       "natural": "435x600",
+       "completo": true,
+       "area": 475534
+      }
+     ],
+     "areaImagemPct": 46,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 375,
+       "h": 56,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 297.8,
+       "h": 56.4,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 0
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 2279,
+     "h": 1422
+    },
+    "pilares": {
+     "y": 3701,
+     "h": 657
+    },
+    "sintomas": {
+     "y": 4358,
+     "h": 894
+    },
+    "diagnostico": {
+     "y": 5252,
+     "h": 1100
+    },
+    "transicao": {
+     "y": 6352,
+     "h": 578
+    },
+    "inox": {
+     "y": 6930,
+     "h": 655
+    },
+    "credibilidade": {
+     "y": 10884,
+     "h": 1074
+    },
+    "fechamento": {
+     "y": 11958,
+     "h": 718
+    },
+    "footer": {
+     "y": 12676,
+     "h": 820
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1600x900": {
+   "doc": {
+    "h": 13843,
+    "w": 1600,
+    "vw": 1600
+   },
+   "secoes": {
+    "pilares": {
+     "y": 3908,
+     "h": 651,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "64px / 56px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "transicao": {
+     "y": 6561,
+     "h": 613,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 80px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 555.3,
+       "h": 444.3,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 19.5,
+       "area": 39,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 555.3,
+       "h": 444.3,
+       "natural": "608x608",
+       "completo": true,
+       "area": 246705
+      }
+     ],
+     "areaImagemPct": 25.2,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 80
+    },
+    "cta-final": {
+     "y": 12293,
+     "h": 730,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 736,
+       "h": 729.7,
+       "bg": "rgb(245, 198, 75)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 736,
+       "h": 729.7,
+       "area": 537050,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 375,
+       "h": 56,
+       "area": 20997,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 5,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 736,
+       "h": 729.7,
+       "natural": "483x666",
+       "completo": true,
+       "area": 537050
+      }
+     ],
+     "areaImagemPct": 46,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 375,
+       "h": 56,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 297.8,
+       "h": 56.4,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 1
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 2367,
+     "h": 1542
+    },
+    "pilares": {
+     "y": 3908,
+     "h": 651
+    },
+    "sintomas": {
+     "y": 4559,
+     "h": 884
+    },
+    "diagnostico": {
+     "y": 5443,
+     "h": 1118
+    },
+    "transicao": {
+     "y": 6561,
+     "h": 613
+    },
+    "inox": {
+     "y": 7174,
+     "h": 664
+    },
+    "credibilidade": {
+     "y": 11229,
+     "h": 1064
+    },
+    "fechamento": {
+     "y": 12293,
+     "h": 730
+    },
+    "footer": {
+     "y": 13022,
+     "h": 820
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1920x1080": {
+   "doc": {
+    "h": 14521,
+    "w": 1920,
+    "vw": 1920
+   },
+   "secoes": {
+    "pilares": {
+     "y": 4337,
+     "h": 659,
+     "bg": "rgb(239, 237, 235)",
+     "padding": "64px / 56px",
+     "blocosTexto": 11,
+     "caracteres": 844,
+     "textos": [
+      "Equipamentos, projetos e consultoria — separados ou juntos",
+      "Cada frente resolve um problema por conta própria. Juntas, não há repasse de culpa entre projetista, fornecedor e instalador — mas integrar é uma vantagem, não uma condição para começar.",
+      "EQUIPAMENTOS",
+      "Qual equipamento a minha operação precisa — e quem responde pela instalação?",
+      "Especificação dimensionada pelo volume real de produção, fornecimento, instalação e comissionamento.",
+      "PROJETOS",
+      "Preciso projetar antes de comprar ou de começar a obra?",
+      "Layout, fluxo de produção, dimensionamento e plantas complementares de infraestrutura — o desenho define o que comprar e onde instalar.",
+      "CONSULTORIA",
+      "A operação já roda, mas custa caro e rende pouco. Por onde começar?",
+      "Leitura da operação em funcionamento: fluxo, capacidade instalada e processos. O resultado é uma ordem de prioridades, não um orçamento."
+     ],
+     "cards": [],
+     "nCards": 0,
+     "hairlines": 4,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 223.1,
+       "h": 48,
+       "area": 10707,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [],
+     "areaImagemPct": 0,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO",
+       "href": "/contato?intencao=equipamentos",
+       "w": 223.1,
+       "h": 48,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Falar com um projetista",
+       "href": "/contato?intencao=arquitetura",
+       "w": 191.7,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "Agendar diagnóstico",
+       "href": "/contato?intencao=consultoria",
+       "w": 173,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 56
+    },
+    "transicao": {
+     "y": 7046,
+     "h": 613,
+     "bg": "rgb(230, 227, 222)",
+     "padding": "0px / 80px",
+     "blocosTexto": 3,
+     "caracteres": 326,
+     "textos": [
+      "Da leitura da operação à entrega em funcionamento.",
+      "O diagnóstico encontra a prioridade, o projeto orienta a decisão e a implantação leva isso à operação.",
+      "Cada etapa pode ser contratada por si. Quando vêm juntas, não há repasse de culpa entre projetista, fornecedor e instalador — é a mesma empresa do desenho ao comissionamento."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "relative aspect-[4/3] w-full overflow-hidden bg-canvas lg:aspect-[5/4]",
+       "w": 555.3,
+       "h": 444.3,
+       "bg": "rgb(239, 237, 235)",
+       "paiBg": "rgb(230, 227, 222)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 3,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(217, 166, 27)"
+      },
+      {
+       "via": "borda-left",
+       "tag": "figcaption",
+       "cls": "mt-3 border-l-2 border-yellow pl-3 text-caption text-muted",
+       "w": 2,
+       "h": 19.5,
+       "area": 39,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 2,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 555.3,
+       "h": 444.3,
+       "natural": "729x729",
+       "completo": true,
+       "area": 246705
+      }
+     ],
+     "areaImagemPct": 21,
+     "acoes": [
+      {
+       "txt": "Conhecer o método",
+       "href": "#metodo",
+       "w": 166.3,
+       "h": 44,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      }
+     ],
+     "vazioBase": 80
+    },
+    "cta-final": {
+     "y": 12932,
+     "h": 769,
+     "bg": "rgb(16, 16, 16)",
+     "padding": "0px / 0px",
+     "blocosTexto": 2,
+     "caracteres": 182,
+     "textos": [
+      "Diga o que a sua operação precisa resolver.",
+      "Um equipamento específico, um projeto completo ou a leitura de uma operação que já está rodando — o retorno parte do que você precisa hoje."
+     ],
+     "cards": [
+      {
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 883.2,
+       "h": 768.6,
+       "bg": "rgb(245, 198, 75)",
+       "paiBg": "rgb(16, 16, 16)",
+       "bordas": 0,
+       "raio": "0px",
+       "motivo": "superficie"
+      }
+     ],
+     "nCards": 1,
+     "hairlines": 5,
+     "amarelos": [
+      {
+       "via": "fundo",
+       "tag": "div",
+       "cls": "diag-keyline absolute inset-0 hidden bg-yellow lg:block",
+       "w": 883.2,
+       "h": 768.6,
+       "area": 678840,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "texto",
+       "tag": "span",
+       "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+       "w": 146.6,
+       "h": 15.6,
+       "area": 2286,
+       "cor": "rgb(245, 198, 75)",
+       "txt": "PRÓXIMO PASSO"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+       "w": 28,
+       "h": 2,
+       "area": 56,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "a",
+       "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+       "w": 375,
+       "h": 56,
+       "area": 20997,
+       "cor": "rgb(245, 198, 75)"
+      },
+      {
+       "via": "fundo",
+       "tag": "span",
+       "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+       "w": 24,
+       "h": 2,
+       "area": 48,
+       "cor": "rgb(245, 198, 75)"
+      }
+     ],
+     "nAmarelos": 5,
+     "imagens": [
+      {
+       "src": "image",
+       "w": 883.2,
+       "h": 768.6,
+       "natural": "444x613",
+       "completo": true,
+       "area": 678840
+      }
+     ],
+     "areaImagemPct": 46,
+     "acoes": [
+      {
+       "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+       "href": "/contato?intencao=equipamentos",
+       "w": 375,
+       "h": 56,
+       "bg": "rgb(245, 198, 75)",
+       "borda": "0px rgb(220, 217, 212)",
+       "cor": "rgb(16, 16, 16)"
+      },
+      {
+       "txt": "CONVERSAR PELO WHATSAPP",
+       "href": "https://wa.me/5521964690650?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20a%20especifica%C3%A7%C3%A3o%20e%20o%20or%C3%A7amento%20de%20equipamentos.",
+       "w": 297.8,
+       "h": 56.4,
+       "bg": "rgba(0, 0, 0, 0)",
+       "borda": "1px rgba(255, 255, 255, 0.35)",
+       "cor": "rgb(239, 237, 235)"
+      }
+     ],
+     "vazioBase": 0
+    }
+   },
+   "vizinhas": {
+    "projetos": {
+     "y": 2651,
+     "h": 1686
+    },
+    "pilares": {
+     "y": 4337,
+     "h": 659
+    },
+    "sintomas": {
+     "y": 4996,
+     "h": 927
+    },
+    "diagnostico": {
+     "y": 5923,
+     "h": 1123
+    },
+    "transicao": {
+     "y": 7046,
+     "h": 613
+    },
+    "inox": {
+     "y": 7659,
+     "h": 669
+    },
+    "credibilidade": {
+     "y": 11808,
+     "h": 1125
+    },
+    "fechamento": {
+     "y": 12932,
+     "h": 769
+    },
+    "footer": {
+     "y": 13701,
+     "h": 820
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  }
+ }
+}

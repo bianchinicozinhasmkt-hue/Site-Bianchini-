@@ -27,25 +27,41 @@ import { cn } from '@/lib/utils'
 export function TechLabel({
   children,
   tone = 'default',
+  rule = true,
   className,
 }: {
   children: ReactNode
   /** `light` em fundo escuro — o texto clareia e o traço fica amarelo pleno. */
   tone?: 'default' | 'light'
+  /**
+   * O traço amarelo. `true` em todo uso existente — a régua faz parte do rótulo
+   * desde o mockup e **este parâmetro não é um estilo alternativo**.
+   *
+   * Ele existe para uma situação só: quando o orçamento de cor da seção estoura
+   * (doc 01 §6.2, teto de três regiões amarelas) e este traço é o acento de
+   * menor precedência presente — nem marca, nem ação, nem estado. Foi o caso do
+   * `#fechamento` em R0-D, onde o rótulo veste a linha de atendimento, que é o
+   * último item da hierarquia de leitura da seção. Desligar a régua por
+   * preferência, com o orçamento cumprido, é regressão.
+   */
+  rule?: boolean
   className?: string
 }) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-3 font-condensed text-caption font-medium uppercase tracking-[0.08em]',
+        'inline-flex items-center font-condensed text-caption font-medium uppercase tracking-[0.08em]',
+        rule && 'gap-3',
         tone === 'light' ? 'text-canvas/80' : 'text-muted',
         className,
       )}
     >
-      <span
-        aria-hidden="true"
-        className={cn('h-[2px] w-6 shrink-0', tone === 'light' ? 'bg-yellow' : 'bg-yellow-deep')}
-      />
+      {rule ? (
+        <span
+          aria-hidden="true"
+          className={cn('h-[2px] w-6 shrink-0', tone === 'light' ? 'bg-yellow' : 'bg-yellow-deep')}
+        />
+      ) : null}
       {children}
     </span>
   )

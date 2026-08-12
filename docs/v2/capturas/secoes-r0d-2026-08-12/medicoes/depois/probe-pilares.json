@@ -1,0 +1,186 @@
+{
+ "390x844": {
+  "hSecao": 1314,
+  "padding": "48px / 48px",
+  "hCabecalho": 244.6,
+  "linhasTitulo": 3,
+  "hApoio": 79.2,
+  "linhasApoio": 3,
+  "hUl": 933.4,
+  "vaoCabecalhoLista": 40,
+  "itens": [
+   {
+    "nome": "EQUIPAMENTOS",
+    "hLi": 296.2,
+    "hPergunta": 81.8,
+    "linhasPergunta": 3,
+    "hDescricao": 72,
+    "linhasDescricao": 3,
+    "folgaAteAcao": 0,
+    "hAcao": 72,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "PROJETOS",
+    "hLi": 265,
+    "hPergunta": 54.5,
+    "linhasPergunta": 2,
+    "hDescricao": 72,
+    "linhasDescricao": 3,
+    "folgaAteAcao": 0,
+    "hAcao": 68,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "CONSULTORIA",
+    "hLi": 292.2,
+    "hPergunta": 81.8,
+    "linhasPergunta": 3,
+    "hDescricao": 72,
+    "linhasDescricao": 3,
+    "folgaAteAcao": 0,
+    "hAcao": 68,
+    "minHeight": "auto"
+   }
+  ],
+  "maisAlto": "EQUIPAMENTOS"
+ },
+ "1024x768": {
+  "hSecao": 701,
+  "padding": "64px / 56px",
+  "hCabecalho": 141.4,
+  "linhasTitulo": 3,
+  "hApoio": 52.8,
+  "linhasApoio": 2,
+  "hUl": 383.6,
+  "vaoCabecalhoLista": 56,
+  "itens": [
+   {
+    "nome": "EQUIPAMENTOS",
+    "hLi": 383.6,
+    "hPergunta": 161.2,
+    "linhasPergunta": 5,
+    "hDescricao": 72,
+    "linhasDescricao": 3,
+    "folgaAteAcao": 0,
+    "hAcao": 80,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "PROJETOS",
+    "hLi": 383.6,
+    "hPergunta": 96.7,
+    "linhasPergunta": 3,
+    "hDescricao": 72,
+    "linhasDescricao": 3,
+    "folgaAteAcao": 68.5,
+    "hAcao": 76,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "CONSULTORIA",
+    "hLi": 383.6,
+    "hPergunta": 128.9,
+    "linhasPergunta": 4,
+    "hDescricao": 72,
+    "linhasDescricao": 3,
+    "folgaAteAcao": 36.2,
+    "hAcao": 76,
+    "minHeight": "auto"
+   }
+  ],
+  "maisAlto": "EQUIPAMENTOS"
+ },
+ "1440x900": {
+  "hSecao": 637,
+  "padding": "64px / 56px",
+  "hCabecalho": 165.9,
+  "linhasTitulo": 3,
+  "hApoio": 52.8,
+  "linhasApoio": 2,
+  "hUl": 295.1,
+  "vaoCabecalhoLista": 56,
+  "itens": [
+   {
+    "nome": "EQUIPAMENTOS",
+    "hLi": 295.1,
+    "hPergunta": 96.7,
+    "linhasPergunta": 3,
+    "hDescricao": 48,
+    "linhasDescricao": 2,
+    "folgaAteAcao": 0,
+    "hAcao": 80,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "PROJETOS",
+    "hLi": 295.1,
+    "hPergunta": 64.5,
+    "linhasPergunta": 2,
+    "hDescricao": 72,
+    "linhasDescricao": 3,
+    "folgaAteAcao": 12.2,
+    "hAcao": 76,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "CONSULTORIA",
+    "hLi": 295.1,
+    "hPergunta": 96.7,
+    "linhasPergunta": 3,
+    "hDescricao": 48,
+    "linhasDescricao": 2,
+    "folgaAteAcao": 4,
+    "hAcao": 76,
+    "minHeight": "auto"
+   }
+  ],
+  "maisAlto": "EQUIPAMENTOS"
+ },
+ "1920x1080": {
+  "hSecao": 658.7,
+  "padding": "64px / 56px",
+  "hCabecalho": 187.6,
+  "linhasTitulo": 3,
+  "hApoio": 59.4,
+  "linhasApoio": 2,
+  "hUl": 295.1,
+  "vaoCabecalhoLista": 56,
+  "itens": [
+   {
+    "nome": "EQUIPAMENTOS",
+    "hLi": 295.1,
+    "hPergunta": 96.7,
+    "linhasPergunta": 3,
+    "hDescricao": 48,
+    "linhasDescricao": 2,
+    "folgaAteAcao": 0,
+    "hAcao": 80,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "PROJETOS",
+    "hLi": 295.1,
+    "hPergunta": 64.5,
+    "linhasPergunta": 2,
+    "hDescricao": 48,
+    "linhasDescricao": 2,
+    "folgaAteAcao": 36.2,
+    "hAcao": 76,
+    "minHeight": "auto"
+   },
+   {
+    "nome": "CONSULTORIA",
+    "hLi": 295.1,
+    "hPergunta": 64.5,
+    "linhasPergunta": 2,
+    "hDescricao": 48,
+    "linhasDescricao": 2,
+    "folgaAteAcao": 36.2,
+    "hAcao": 76,
+    "minHeight": "auto"
+   }
+  ],
+  "maisAlto": "EQUIPAMENTOS"
+ }
+}

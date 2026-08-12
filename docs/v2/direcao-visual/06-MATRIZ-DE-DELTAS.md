@@ -2,7 +2,7 @@
 
 ```text
 STATUS: ACTIVE — rastreamento de conformidade
-DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A · R0-B · R0-C · R0-C.1)
+DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A · R0-B · R0-C · R0-C.1 · R0-D)
 DEPENDE DE: 01-CONSTITUICAO-VISUAL.md · 03-BLUEPRINT-HOME.md · 04-CRITERIOS-DE-APROVACAO.md
 NATUREZA: rastreamento vivo. O levantamento original não alterou produto;
           a partir de R0-A esta matriz registra também o que já foi fechado.
@@ -24,6 +24,12 @@ severidade, à rodada que a implementa e ao critério que fecha.
 | `docs/v2/capturas/auditoria-visual-global-2026-08-10/inventario-global.json` | contagens por seção (caracteres, blocos, cards, hairlines, amarelos, altura, % de imagem) |
 
 Números de seção são de 1440 × 900, salvo onde indicado.
+
+> **Os números de seção têm data, e a data importa.** Eles vêm de um inventário de
+> 2026-08-10 no HEAD `1f96a1f`; qualquer commit posterior que toque a seção os torna
+> velhos. Foi o que aconteceu com S-08 — ver a nota de R0-D em §3. **Remeça a seção antes
+> de cobrar o teto dela**, e prove o contador contra `#transicao` (326/3) e `#fechamento`
+> (182/2), que são os dois valores de referência desta tabela.
 
 ### Legenda de severidade
 
@@ -262,14 +268,14 @@ relatório da rodada.
 | **S-05** | projetos | silhueta **D** friso — doc 03 §1.1 | **B**, repetindo vizinhas | corrente de editoriais | `P1 · COMPOSIÇÃO` | **R2** | silhueta D; ≥1 imagem rompendo o container |
 | **S-06** | projetos | ≤4 cards, ≤6 hairlines, ≤3 amarelos | 6 cards, 9 hairlines, 8 amarelos | leitura de grade | `P2 · ESTÉTICA` | **R2** | dentro dos tetos |
 | **S-07** | projetos | altura ≤1.100px; ≥70% de imagem | 1.593px; 55% | seção mais alta da página | `P2 · COMPOSIÇÃO` | **R2** | ≤1.100px, ≥70% |
-| **S-08** | pilares | ≤1.200 caracteres | 1.505 | +25% | `P3 · CONTEÚDO` | **R0-D** | ≤1.200 |
+| ~~**S-08**~~ | pilares | ≤1.200 caracteres | ~~1.505~~ → **medido 844 em `48e1b65`; o número da linha era de antes de `bdca4a5`** → **704** depois do corte editorial | **FECHADO em R0-D** (2026-08-12) | `P3 · CONTEÚDO` | **R0-D** | ✅ 704 caracteres, 41% abaixo do teto; corte só em redundância, com ANTES→DEPOIS registrado; três frentes e assimetria a favor de Equipamentos preservadas |
 | **S-09** | sintomas | ≤3 amarelos | 8 | orçamento de cor | `P2 · ESTÉTICA` | **R3** | ≤3 |
 | **S-10** | sintomas | sem moldura fechada — doc 01 §7.3 | `border border-white/15` na fileira de capítulos | moldura de painel | `P3 · ESTÉTICA` | **R3** | sem borda fechada |
 | **S-11** | diagnóstico | ≤6 hairlines | **12** — o maior da página | leitura de PDF | `P1 · ESTÉTICA` | **R4** | ≤6 |
 | **S-12** | diagnóstico | ≤12 blocos; zero card | 20 blocos, 3 cards | densidade | `P2 · CONTEÚDO` | **R4** | ≤12, zero cards |
 | **S-13** | diagnóstico | nenhuma lista com maioria inerte — doc 01 §4.2 | 6 frentes, 2 ativas e 4 esmaecidas | tabela de relatório | `P2 · UX` | **R4** | item só tem forma de item se ativo, ou todos no mesmo estado |
 | **S-14** | diagnóstico | silhueta **E** sequência | **B**, repetindo `#sintomas` | dupla consecutiva | `P2 · COMPOSIÇÃO` | **R4** | silhueta E |
-| **S-15** | transição | zero card | 1 card residual | contradiz a redução a fecho editorial | `P3 · COMPOSIÇÃO` | **R0-D** | zero cards |
+| ~~**S-15**~~ | transição | zero card | ~~1 card residual: `bg-canvas` na caixa da fotografia, dentro de seção `canvas-deep`~~ → superfície removida, nada no lugar | **FECHADO em R0-D** (2026-08-12) | `P3 · COMPOSIÇÃO` | **R0-D** | ✅ zero cards nas 8 larguras; nenhuma substituição ornamental; altura idêntica em todas (a foto é `cover` e o fundo nunca aparecia) |
 | **S-16** | indústria | ≥60% de imagem; silhueta **A** | **15%** | argumento é material, e não há material visível | `P1 · ASSET` | **R6** | ≥60%, palco de textura |
 | **S-17** | indústria | ≤12 blocos; ≤3 amarelos | 18 blocos, 6 amarelos | densidade e cor | `P2` | **R3**/**R6** | dentro dos tetos |
 | **S-18** | indústria | todo numeral com origem rastreável — DEC-006 | 4 numerais visíveis | **verificar origem de cada um** | `P2 · CONTEÚDO` | **R6** | origem confirmada ou numeral removido |
@@ -285,7 +291,67 @@ relatório da rodada.
 | **S-28** | quem conduz | sem redundância com `#leonardo` | parcial (etiqueta corrigida em 2026-08-11) | conteúdo ainda se sobrepõe | `P2 · CONTEÚDO` | **R5** | sem sobreposição temática |
 | **S-29** | credibilidade | ≤1.200 caracteres | 1.403 | — | `P2 · CONTEÚDO` | **R3** | ≤1.200 |
 | **S-30** | credibilidade | par de numerais confirmados em escala — doc 03 ficha 12 | 17 anos e 3.000+ no mesmo corpo dos rótulos | prova numérica sem hierarquia | `P2 · COMPOSIÇÃO` | **R3** | os dois numerais em escala `numeral`, crescendo juntos |
-| **S-31** | fechamento | ≤3 amarelos | 5 | — | `P3 · ESTÉTICA` | **R0-D** | ≤3 |
+| ~~**S-31**~~ | fechamento | ≤3 amarelos | ~~5: keyline, texto da etiqueta, traço da etiqueta, CTA primário, traço do rótulo de atendimento~~ → **3**: keyline (MARCA), CTA primário (AÇÃO), traço da etiqueta (hairline) | **FECHADO em R0-D** (2026-08-12) | `P3 · ESTÉTICA` | **R0-D** | ✅ 3 em ≥1024 e 2 abaixo, nas 8 larguras **e nas 10 rotas** que montam o componente; duas massas removidas, zero opacidade reduzida; PRIMARY inequívoco |
+
+### R0-D — as três seções de conformidade, e o número que não se sustentou
+
+Rodada de 2026-08-12. Evidência completa — medições cruas antes/depois nas oito larguras,
+sonda de altura, varredura das 10 rotas, acessibilidade e capturas — em
+`docs/v2/capturas/secoes-r0d-2026-08-12/`.
+
+**Nenhuma das três foi redesenhada.** A rodada é subtração: uma oração repetida, uma
+superfície de card e dois acentos amarelos. Zero estrutura nova, zero CTA novo, zero asset
+novo, zero mudança de destino.
+
+**S-08 obrigou a corrigir a própria matriz.** O contador desta rodada foi validado contra a
+auditoria de 2026-08-10 antes de ser usado — ele devolve **exatamente** os números
+publicados por ela em `#transicao` (326/3) e `#fechamento` (182/2). Com o mesmo contador,
+`#pilares` mede **844 caracteres**, não 1.505. A explicação está na própria declaração de
+origem desta matriz: o inventário é de `1f96a1f`, e `bdca4a5` reescreveu a seção no dia
+seguinte. Conferido no código daquele commit, a seção já tinha os mesmos 11 blocos — ou
+seja, **o teto de 1.200 já estava cumprido antes de R0-D**, e a linha S-08 cobrava uma
+distância que não existia mais.
+
+O corte foi feito assim mesmo, pelo critério editorial e não pela aritmética antiga: −140
+caracteres (−16,6%), todos em redundância. O maior deles é uma oração que a home publicava
+**duas vezes** — "não há repasse de culpa entre projetista, fornecedor e instalador",
+idêntica em `#pilares` e em `#transicao`. Cedeu a de `#pilares`. A resposta de Equipamentos
+ficou intacta: é a única sem redundância a cortar, e encurtar a frente prioritária
+achataria a assimetria que DEC-001 pede que a seção expresse.
+
+**A altura de `#pilares` não cai acima de 1024, e isso foi investigado, não presumido.**
+`min-height` é `auto` nas três colunas; a linha é ditada pela coluna mais alta, que em toda
+largura de desktop é Equipamentos — a que não foi cortada. Não havia altura artificial nem
+espaçamento decorrente a corrigir (`vazioBase` = 56px antes e depois). Onde o corte muda a
+caixa, muda de verdade: **−124px em 320** e −53px em 390, que é onde MB-1 dói.
+
+**S-15 era uma superfície, não uma moldura.** O card residual da transição era o
+`bg-canvas` da caixa da fotografia sobre uma seção `canvas-deep` — superfície própria
+distinta da seção, que é a construção de card em doc 01 §7.3. Saiu sem substituto: nem
+borda, nem régua, nem fundo mais próximo do tom. Como a foto é `cover`, o fundo nunca
+aparecia depois do carregamento, e a altura é idêntica nas oito larguras.
+
+**S-31 não escolheu quem cede — §6.2 já tinha escolhido.** A ordem é `MARCA > AÇÃO >
+ESTADO`, e a norma traz o caso resolvido na primeira dobra: com seis regiões, **a etiqueta
+cedeu o texto e manteve o traço**, por não ser nenhuma das três. O fechamento repete a
+decisão, com o mesmo `canvas/80` da hero congelada; o segundo corte é o traço do rótulo de
+atendimento, acento decorativo sobre o último item da hierarquia de leitura da seção.
+Sobram três com função: keyline (geometria do mockup), CTA primário e o traço da etiqueta —
+hairline de 56px², abaixo do piso de relevância que §6.2 define.
+
+**As 10 rotas que montam `FinalCtaSection` foram medidas, não presumidas.** Todas marcam
+3 amarelos, 2 ações e a mesma etiqueta em `rgba(239,237,235,0.8)`, com zero erro de console.
+Composição, copy, destinos e contagem de ações não mudaram em nenhuma: o que se propaga é a
+conformidade de cor, que é ganho normativo e não regressão. A ficha 13 pedia validação nas
+nove internas justamente por isso.
+
+**Uma divergência da ficha 13, declarada e não resolvida aqui.** O bloco CTA daquela ficha
+prevê `PRIMARY + WhatsApp + 2 SECONDARY nomeados` (projetista, diagnóstico), e o produto
+tem **duas** ações, não quatro. As três necessidades são nomeadas na *copy* — decisão
+registrada em `src/app/page.tsx` —, não em botões. Isso **não é delta**: não há norma dos
+documentos 01/03 violada por ter menos CTA, e criar duas ações novas seria composição nova,
+que R0-D está proibida de fazer. Fica para a direção decidir se a ficha se alinha ao
+produto ou o contrário.
 
 ---
 
@@ -302,21 +368,22 @@ relatório da rodada.
 
 ## 5. Contagem
 
-Atualizado em 2026-08-12, ao fim de **R0-C.1**. O total é **41**: G-6 entrou como delta
-novo em R0-C e fechou em R0-C.1.
+Atualizado em 2026-08-12, ao fim de **R0-D** — que encerra a R0. O total é **41**: G-6
+entrou como delta novo em R0-C e fechou em R0-C.1.
 
 | severidade | total | fechados | **abertos** |
 | --- | ---: | ---: | ---: |
 | **P0** | 0 | 0 | **0** |
 | **P1** | 10 | **7** | **3** |
 | **P2** | 20 | **3** | **17** |
-| **P3** | 11 | **3** | **8** |
-| **TOTAL** | 41 | **13** | **28** |
+| **P3** | 11 | **6** | **5** |
+| **TOTAL** | 41 | **16** | **25** |
 
 Fechados em R0-A: **G-1**, **G-1b**, **G-2** e **D-3** (que é G-2 aplicado à dobra).
 Fechados em R0-B: **D-1**, **D-2**, **D-4** e **D-5**.
 Fechados em R0-C: **H-1**, **H-2**, **H-3** e **H-4**. Aberto por R0-C: **G-6**.
 Fechados em R0-C.1: **G-6**.
+Fechados em R0-D: **S-08**, **S-15** e **S-31**.
 
 **Todos os sistemas globais estão conformes** — G-1, G-1b, G-2 e G-6 fechados; G-3 e G-4
 já eram. Sobra **G-5** (orçamento de cor), que é contagem por seção e vive nas fichas.
@@ -324,8 +391,12 @@ já eram. Sobra **G-5** (orçamento de cor), que é contagem por seção e vive 
 
 **A hero** tem zero delta aberto e selo `CONGELADA` (ficha em `03-BLUEPRINT-HOME.md` §2).
 **O cabeçalho** fechou os quatro dele e está `CONGELADO DEFINITIVAMENTE`, sem dependência.
+**`#pilares`, `#transicao` e `#fechamento`** fecharam os três de R0-D e receberam selo
+`CONGELADA` nas fichas 4, 7 e 13.
 
-Sobram em R0: `#pilares`, `#transicao` e `#fechamento` (**R0-D**).
+**A R0 está encerrada.** Nada sobra na fase de conformidade: sistemas globais, hero,
+cabeçalho, sistema de botões e as três seções estão conformes e selados. O que resta na
+matriz pertence a R1–R7, e a próxima é **R1 — `#equipamentos`** (S-01 a S-04).
 
 **Zero P0.** Nenhum delta bloqueia publicação — o produto no ar é funcional, acessível e
 sem dado inventado. Os itens restantes são distância entre o que está no ar e o que a norma
@@ -338,7 +409,7 @@ pede.
 | **R0-A** | ~~2 — G-2/D-3, e os globais G-1/G-1b~~ **fechados** |
 | **R0-B** | ~~2 — D-1, D-2~~ **fechados** |
 | **R0-C** | ~~1 — H-1~~ **fechado** |
-| **R0-D** | 0 |
+| **R0-D** | 0 — os três deltas dela (S-08, S-15, S-31) são P3, e **fecharam** |
 | R1 | 1 — S-01 |
 | R2 | 1 — S-05 |
 | R3 | 1 — S-26 |

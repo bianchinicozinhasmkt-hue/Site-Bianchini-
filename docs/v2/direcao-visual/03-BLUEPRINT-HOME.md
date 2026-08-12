@@ -643,6 +643,15 @@ Aprovada + validada + sem P0/P1.
 
 ## [4] AS TRÊS FRENTES — `#pilares`
 
+```text
+STATUS: CONGELADA
+DATA: 2026-08-12 (R0-D)
+RODADA: R0-D
+COMMIT: `feat(v2): conclui conformidade das secoes r0`, filho direto de `48e1b65`
+EVIDÊNCIA: docs/v2/capturas/secoes-r0d-2026-08-12/
+DELTA ABERTO: nenhum (S-08 fechado)
+```
+
 ### FUNÇÃO COMERCIAL
 Porta própria para Projetos e Consultoria (DEC-002). Quem não veio por equipamento
 encontra o caminho aqui.
@@ -666,9 +675,14 @@ Equipamentos com peso maior (DEC-005: peso assimétrico), Projetos e Consultoria
 legítimos e iguais entre si.
 
 ### TEXTO
-**Teto de 1.200.** Hoje: 1.505 em 14 blocos. As perguntas do cliente
+**Teto de 1.200. Hoje: 704 em 11 blocos** (R0-D, medido em 1440). As perguntas do cliente
 (`pillars.question`) são o ativo desta seção e devem crescer, não encolher — o que corta
-é a descrição de apoio.
+é a descrição de apoio, e foi só o que R0-D cortou.
+
+> Esta linha dizia "1.505 em 14 blocos", número herdado do inventário de 2026-08-10 e
+> superado por `bdca4a5` no dia seguinte. Medido em `48e1b65` com o contador validado da
+> matriz, o valor real era **844** — o teto já estava cumprido antes de R0-D. Ver a nota
+> da rodada em `06-MATRIZ-DE-DELTAS.md` §3.
 
 ### IMAGEM
 **Nenhuma, deliberadamente.** É a única seção onde 0% de imagem é a decisão certa: ela é
@@ -691,16 +705,23 @@ lado é a leitura de tabela que já foi removida uma vez.
 Três blocos verticais. **Os três nomes e os três CTAs nunca somem.**
 
 ### ELEMENTOS A REMOVER
-- 2 dos 14 blocos de texto (descrição de apoio redundante com a pergunta).
+- ~~2 dos 14 blocos de texto (descrição de apoio redundante com a pergunta).~~
+  **Feito em R0-D como redução, não como remoção de bloco:** os 11 blocos continuam (tirar
+  2 dos 3 pares pergunta/resposta deixaria a lista com maioria em estado diferente, o que
+  doc 01 §4.2 proíbe). Saíram **140 caracteres** de descrição de apoio — a maior parte uma
+  oração publicada **literalmente igual** por `#transicao`.
 
 ### ELEMENTOS A PRESERVAR
 - a ausência de fotografia;
+- **a resposta de Equipamentos, intacta.** É a única sem redundância a cortar, e encurtar
+  a frente prioritária achataria a assimetria que DEC-001 pede (registro em R0-D);
 - a troca de papel visual entre nome e pergunta (2026-08-11);
 - a assimetria de peso a favor de Equipamentos;
 - a ausência de moldura por item.
 
 ### PROBLEMAS ATUAIS
-`P3 · DENSIDADE` 1.505 caracteres, pouco acima do teto.
+**Nenhum.** ~~`P3 · DENSIDADE` 1.505 caracteres, pouco acima do teto~~ — o número era
+velho e o teto já estava cumprido; R0-D cortou 140 caracteres de redundância mesmo assim.
 
 ### DIREÇÃO DEFINITIVA
 Manter. **Esta é a seção mais próxima do alvo em toda a página** — silhueta correta,
@@ -717,8 +738,9 @@ Nenhuma.
 favor de Equipamentos.
 
 ### CRITÉRIO DE CONGELAMENTO
-Congela em **R0-D**, com o corte de texto. **Esta é a seção mais próxima do alvo em toda
-a página** e serve de referência interna para as outras.
+~~Congela em **R0-D**, com o corte de texto.~~ **CONGELADA em R0-D** (selo no topo desta
+ficha). **Esta é a seção mais próxima do alvo em toda a página** e serve de referência
+interna para as outras.
 
 ---
 
@@ -876,6 +898,15 @@ Nenhuma.
 
 ## [7] TRANSIÇÃO — `#transicao`
 
+```text
+STATUS: CONGELADA
+DATA: 2026-08-12 (R0-D)
+RODADA: R0-D
+COMMIT: `feat(v2): conclui conformidade das secoes r0`, filho direto de `48e1b65`
+EVIDÊNCIA: docs/v2/capturas/secoes-r0d-2026-08-12/
+DELTA ABERTO: nenhum (S-15 fechado)
+```
+
 ### FUNÇÃO COMERCIAL
 Nenhuma direta. É ponte.
 
@@ -919,16 +950,22 @@ terceiro par escuro com `#industria-do-inox`.
 Empilha. Nada some.
 
 ### ELEMENTOS A REMOVER
-- o card único.
+- ~~o card único.~~ **Removido em R0-D.** Era o `bg-canvas` da caixa da fotografia dentro
+  de uma seção `canvas-deep` — superfície própria distinta da seção, que é a construção de
+  card em doc 01 §7.3, e não uma moldura visível. Saiu sem substituto e sem alterar a
+  altura em nenhuma das oito larguras (a foto é `cover` e cobria o fundo).
 
 ### ELEMENTOS A PRESERVAR
 - a brevidade (é a virtude da seção);
+- **a caixa da fotografia sem superfície própria** — se um `bg-*` voltar a essa caixa, o
+  card volta com ele;
 - a ausência de numeral e de cartão — foi reduzida de "segundo método" a fecho editorial
   em 2026-08-10, de propósito;
 - a cor clara.
 
 ### PROBLEMAS ATUAIS
-`P3 · COMPOSIÇÃO` o card residual contradiz a decisão de reduzi-la a fecho editorial.
+**Nenhum.** ~~`P3 · COMPOSIÇÃO` o card residual contradiz a decisão de reduzi-la a fecho
+editorial~~ — fechado em R0-D.
 
 ### DIREÇÃO DEFINITIVA
 Friso curto: uma frase na guia, uma imagem em faixa, uma régua. Nada mais.
@@ -942,7 +979,9 @@ Nenhuma.
 ≤400 caracteres · zero cards · zero CTA · altura ≤600px.
 
 ### CRITÉRIO DE CONGELAMENTO
-Congela em **R0-D**, depois de R0-A, com a remoção do card.
+~~Congela em **R0-D**, depois de R0-A, com a remoção do card.~~ **CONGELADA em R0-D** —
+selo no topo desta ficha. Medido: 326 caracteres em 3 blocos, zero card, zero CTA,
+altura 578px em 1440 (todos dentro do critério de aprovação acima).
 
 ---
 
@@ -1392,6 +1431,19 @@ o protagonista da seção no teste da miniatura.
 
 ## [13] FECHAMENTO — `FinalCtaSection`
 
+```text
+STATUS: CONGELADA
+DATA: 2026-08-12 (R0-D)
+RODADA: R0-D
+COMMIT: `feat(v2): conclui conformidade das secoes r0`, filho direto de `48e1b65`
+EVIDÊNCIA: docs/v2/capturas/secoes-r0d-2026-08-12/
+DELTA ABERTO: nenhum (S-31 fechado)
+RESSALVA REGISTRADA: o bloco CTA desta ficha prevê 2 SECONDARY nomeados que o produto
+                     não tem — ver a nota de R0-D em `06-MATRIZ-DE-DELTAS.md` §3. Não é
+                     delta (nenhuma norma de 01/03 é violada) e o congelamento não a
+                     resolve: alinhar ficha e produto é decisão de direção.
+```
+
 ### FUNÇÃO COMERCIAL
 **Conversão.** Prioridade máxima.
 
@@ -1424,7 +1476,11 @@ Painel diagonal com fotografia; conteúdo convergindo para a ação.
 (projetista, diagnóstico).
 
 ### COR
-`graphite`. 5 amarelos — reduzir para ≤3.
+`graphite`. ~~5 amarelos — reduzir para ≤3.~~ **3 em ≥1024 e 2 abaixo** (R0-D): keyline
+(MARCA), CTA primário (AÇÃO) e o traço da etiqueta (hairline de 56px²). Cederam o **texto**
+da etiqueta — aplicação direta do caso já resolvido em doc 01 §6.2, com o mesmo `canvas/80`
+da hero — e o **traço do rótulo de atendimento**, acento decorativo sobre o último item da
+hierarquia de leitura.
 
 ### SUPERFÍCIE
 Escura. Fecha a página.
@@ -1436,7 +1492,9 @@ Entrada única, `premium`.
 Painel diagonal vira massa. **Título, CTA primário e WhatsApp nunca somem.**
 
 ### ELEMENTOS A REMOVER
-- 2 das 5 regiões amarelas.
+- ~~2 das 5 regiões amarelas.~~ **Feito em R0-D**, por subtração de massa/acento — nenhuma
+  opacidade foi reduzida para simular a queda. Efeito medido: a linha de atendimento passa
+  de duas linhas para uma e a seção encolhe 13px em toda largura de desktop.
 
 ### ELEMENTOS A PRESERVAR
 - **a regra das pontas**: a dobra abre com orçamento de equipamentos e o fechamento
@@ -1451,7 +1509,7 @@ Painel diagonal vira massa. **Título, CTA primário e WhatsApp nunca somem.**
   arestas deixam de ser paralelas e sobra uma cunha amarela.**
 
 ### PROBLEMAS ATUAIS
-`P3 · COR` 5 amarelos.
+**Nenhum.** ~~`P3 · COR` 5 amarelos~~ — fechado em R0-D.
 
 ### DIREÇÃO DEFINITIVA
 Manter. É a segunda seção mais próxima do alvo na página inteira.
@@ -1466,7 +1524,10 @@ composição precisa ser validada nelas também.
 ≤3 amarelos · as 9 rotas internas inalteradas · regra das pontas mantida.
 
 ### CRITÉRIO DE CONGELAMENTO
-Congela em **R0-D**, com a redução de amarelo e o CTA de WhatsApp já convertido em R0-A.
+~~Congela em **R0-D**, com a redução de amarelo e o CTA de WhatsApp já convertido em
+R0-A.~~ **CONGELADA em R0-D** — selo no topo desta ficha. As 9 rotas internas foram
+medidas uma a uma: 3 amarelos, 2 ações e a mesma etiqueta em todas, sem mudança de
+composição, copy ou destino.
 
 ---
 
@@ -1481,10 +1542,13 @@ Congela em **R0-D**, com a redução de amarelo e o CTA de WhatsApp já converti
 | **Recomposição** | `#projetos` · `#diagnostico` · `#quem-conduz` |
 | **Recomposição + asset novo** | `#equipamentos` · `#industria-do-inox` |
 
-**A hero e o cabeçalho estão no alvo desde 2026-08-12.** Os cinco deltas da hero fecharam
-em R0-B (§2.12, selo no topo de §2) e os quatro do cabeçalho em R0-C (selo em
-`06-MATRIZ-DE-DELTAS.md` §2, com dependência declarada de G-6). O que sobra em R0 são as
-três seções de conformidade: `#pilares`, `#transicao` e `#fechamento` — rodada **R0-D**.
+**A R0 fechou em 2026-08-12.** Os cinco deltas da hero fecharam em R0-B (§2.12, selo no
+topo de §2), os quatro do cabeçalho em R0-C (selo em `06-MATRIZ-DE-DELTAS.md` §2), G-6 em
+R0-C.1, e os três das seções de conformidade — `#pilares` (S-08), `#transicao` (S-15) e
+`#fechamento` (S-31) — em **R0-D**, com selo `CONGELADA` nas fichas 4, 7 e 13.
+
+**Cinco itens estão fora da fila de trabalho:** sistemas globais, hero, cabeçalho, sistema
+de botões e essas três seções. A próxima rodada é **R1 — `#equipamentos`**.
 
 ### 4.2 Os cinco itens de maior retorno
 
