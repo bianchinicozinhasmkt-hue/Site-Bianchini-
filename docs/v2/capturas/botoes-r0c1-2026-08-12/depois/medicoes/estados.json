@@ -1,0 +1,1234 @@
+[
+  {
+    "rota": "home",
+    "papel": "NAV CTA",
+    "texto": "Solicitar orçamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 178.3,
+        "h": 39.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/"
+      }
+    ]
+  },
+  {
+    "rota": "home",
+    "papel": "PRIMARY",
+    "texto": "Solicitar orçamento de equipamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 348.4,
+        "h": 48,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 348.4,
+        "h": 48,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 348.4,
+        "h": 48,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 343.2,
+        "h": 47.3,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/"
+      }
+    ]
+  },
+  {
+    "rota": "home",
+    "papel": "SECONDARY",
+    "texto": "Ver todos os projetos",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 236.5,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)"
+      },
+      {
+        "estado": "hover",
+        "w": 236.5,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 236.5,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 233,
+        "h": 49.3,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/"
+      }
+    ]
+  },
+  {
+    "rota": "home",
+    "papel": "WHATSAPP",
+    "texto": "Conversar pelo WhatsApp",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)"
+      },
+      {
+        "estado": "hover",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 293.4,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/"
+      }
+    ]
+  },
+  {
+    "rota": "contato",
+    "papel": "NAV CTA",
+    "texto": "Solicitar orçamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 178.3,
+        "h": 39.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/contato"
+      }
+    ]
+  },
+  {
+    "rota": "contato",
+    "papel": "WHATSAPP",
+    "texto": "Enviar pelo WhatsApp",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 249,
+        "h": 56,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 249,
+        "h": 56,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 249,
+        "h": 56,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 245.3,
+        "h": 55.2,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/contato"
+      }
+    ]
+  },
+  {
+    "rota": "contato",
+    "papel": "SECONDARY",
+    "texto": "Enviar por e-mail",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 187.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)"
+      },
+      {
+        "estado": "hover",
+        "w": 187.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 187.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 185,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/contato"
+      }
+    ]
+  },
+  {
+    "rota": "solucoes-cozinhas",
+    "papel": "NAV CTA",
+    "texto": "Solicitar orçamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 178.3,
+        "h": 39.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/solucoes/cozinhas-industriais"
+      }
+    ]
+  },
+  {
+    "rota": "solucoes-cozinhas",
+    "papel": "PRIMARY",
+    "texto": "Solicitar orçamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 241.3,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 241.3,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 241.3,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 237.6,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/solucoes/cozinhas-industriais"
+      }
+    ]
+  },
+  {
+    "rota": "solucoes-cozinhas",
+    "papel": "SECONDARY",
+    "texto": "Ver projetos",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 151.1,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)"
+      },
+      {
+        "estado": "hover",
+        "w": 151.1,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 151.1,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 148.8,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/solucoes/cozinhas-industriais"
+      }
+    ]
+  },
+  {
+    "rota": "solucoes-cozinhas",
+    "papel": "WHATSAPP",
+    "texto": "Conversar pelo WhatsApp",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)"
+      },
+      {
+        "estado": "hover",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 293.4,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/solucoes/cozinhas-industriais"
+      }
+    ]
+  },
+  {
+    "rota": "projetos",
+    "papel": "NAV CTA",
+    "texto": "Solicitar orçamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 178.3,
+        "h": 39.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/projetos"
+      }
+    ]
+  },
+  {
+    "rota": "projetos",
+    "papel": "PRIMARY",
+    "texto": "Solicitar diagnóstico",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 251,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 251,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 251,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 247.2,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/projetos"
+      }
+    ]
+  },
+  {
+    "rota": "projetos",
+    "papel": "SECONDARY",
+    "texto": "Ver soluções",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 153.7,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)"
+      },
+      {
+        "estado": "hover",
+        "w": 153.7,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 153.7,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 151.4,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/projetos"
+      }
+    ]
+  },
+  {
+    "rota": "projetos",
+    "papel": "WHATSAPP",
+    "texto": "Conversar pelo WhatsApp",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)"
+      },
+      {
+        "estado": "hover",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 293.4,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/projetos"
+      }
+    ]
+  },
+  {
+    "rota": "linhas",
+    "papel": "NAV CTA",
+    "texto": "Solicitar orçamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 178.3,
+        "h": 39.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/linhas-de-produtos"
+      }
+    ]
+  },
+  {
+    "rota": "linhas",
+    "papel": "PRIMARY",
+    "texto": "Falar sobre esta linha",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 237.8,
+        "h": 48,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 237.8,
+        "h": 48,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 237.8,
+        "h": 48,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 234.3,
+        "h": 47.3,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/linhas-de-produtos"
+      }
+    ]
+  },
+  {
+    "rota": "linhas",
+    "papel": "SECONDARY",
+    "texto": "Ver destaque técnico",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 197.8,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)"
+      },
+      {
+        "estado": "hover",
+        "w": 197.8,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 197.8,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 194.8,
+        "h": 49.3,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/linhas-de-produtos"
+      }
+    ]
+  },
+  {
+    "rota": "linhas",
+    "papel": "WHATSAPP",
+    "texto": "Conversar pelo WhatsApp",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)"
+      },
+      {
+        "estado": "hover",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 297.8,
+        "h": 56.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(255, 255, 255, 0.35)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 293.4,
+        "h": 55.5,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(239, 237, 235)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/linhas-de-produtos"
+      }
+    ]
+  },
+  {
+    "rota": "obrigado",
+    "papel": "NAV CTA",
+    "texto": "Solicitar orçamento",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 181,
+        "h": 40,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 178.3,
+        "h": 39.4,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/obrigado"
+      }
+    ]
+  },
+  {
+    "rota": "obrigado",
+    "papel": "PRIMARY",
+    "texto": "Ver projetos entregues",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 243.5,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "hover",
+        "w": 243.5,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 243.5,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 239.8,
+        "h": 49.3,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgb(245, 198, 75)",
+        "borda": "rgb(220, 217, 212)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/obrigado"
+      }
+    ]
+  },
+  {
+    "rota": "obrigado",
+    "papel": "SECONDARY",
+    "texto": "Voltar para a home",
+    "estados": [
+      {
+        "estado": "repouso",
+        "w": 185.1,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 0, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(16, 16, 16)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)"
+      },
+      {
+        "estado": "hover",
+        "w": 185.1,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "focus-visible",
+        "w": 185.1,
+        "h": 50,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "rgb(239, 237, 235) 0px 0px 0px 2px, rgb(16, 16, 16) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "transform": "none",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgba(16, 16, 16, 0.7)",
+        "focusVisible": true
+      },
+      {
+        "estado": "active",
+        "w": 182.3,
+        "h": 49.3,
+        "fill": "matrix(1, 0, 0, 1, 0, 0)",
+        "sombra": "none",
+        "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+        "cor": "rgb(239, 237, 235)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "borda": "rgb(16, 16, 16)"
+      },
+      {
+        "estado": "rota após medir",
+        "rota": "/obrigado"
+      }
+    ]
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "viewport": 1024,
+    "largura": 170.7,
+    "altura": 40,
+    "x": 802.1,
+    "temIcone": false,
+    "raio": "2px",
+    "vaoNavCta": 30.7,
+    "faixa": 76.4,
+    "marcaX": 51.2,
+    "h1X": 51.2,
+    "folgaDireita": 51.2,
+    "overflow": 0
+  },
+  {
+    "viewport": 1366,
+    "largura": 181,
+    "altura": 40,
+    "x": 1116.7,
+    "temIcone": false,
+    "raio": "2px",
+    "vaoNavCta": 41,
+    "faixa": 80,
+    "marcaX": 68.3,
+    "h1X": 68.3,
+    "folgaDireita": 68.3,
+    "overflow": 0
+  },
+  {
+    "viewport": 1440,
+    "largura": 181,
+    "altura": 40,
+    "x": 1187,
+    "temIcone": false,
+    "raio": "2px",
+    "vaoNavCta": 43.2,
+    "faixa": 80,
+    "marcaX": 72,
+    "h1X": 72,
+    "folgaDireita": 72,
+    "overflow": 0
+  },
+  {
+    "viewport": 1600,
+    "largura": 181,
+    "altura": 40,
+    "x": 1319,
+    "temIcone": false,
+    "raio": "2px",
+    "vaoNavCta": 48,
+    "faixa": 80,
+    "marcaX": 100,
+    "h1X": 100,
+    "folgaDireita": 100,
+    "overflow": 0
+  },
+  {
+    "viewport": 1920,
+    "largura": 181,
+    "altura": 40,
+    "x": 1479,
+    "temIcone": false,
+    "raio": "2px",
+    "vaoNavCta": 48,
+    "faixa": 84,
+    "marcaX": 260,
+    "h1X": 260,
+    "folgaDireita": 260,
+    "overflow": 0
+  }
+]

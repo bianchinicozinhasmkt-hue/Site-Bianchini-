@@ -1329,8 +1329,26 @@ Três razões, e nenhuma é estética:
   DEC-003 proíbe, na posição mais persistente do site.
 
 **O layout do cabeçalho não muda.** Altura, proporções internas (logo a 52%, CTA a 46%),
-tipografia fixa de 15px na navegação e a ausência do Instagram continuam como estão. O
-que muda é rótulo e destino.
+tipografia fixa de 15px na navegação e a ausência do Instagram continuam como estão.
+
+#### O que "o layout não muda" quer dizer — resolvido em 2026-08-12 (R0-C.1)
+
+Esta frase e a tabela de §8 se contradiziam na prática: §8 sempre listou o papel 5
+(NAV CTA) como **sem ícone**, e o CTA do cabeçalho tinha uma seta. Enquanto as duas
+conviveram, cada rodada podia escolher a que preferisse — que é exatamente o tipo de
+ambiguidade que o documento 04 existe para eliminar.
+
+**A direção decidiu em favor de §8: o NAV CTA não usa ícone.** Razões, e nenhuma é de
+gosto: o papel 5 tem anatomia própria, mais compacta que a do PRIMARY de seção; o
+cabeçalho disputa espaço com a marca e com a navegação; e a ação persistente não precisa
+repetir a anatomia da ação de seção para ser reconhecida.
+
+Daqui para frente, **"o layout do cabeçalho não muda" significa**: estrutura, posição,
+altura, guias, navegação e comportamento responsivo. **Não** significa preservar um ícone
+que a própria tabela de papéis excluía.
+
+Medido na implementação: o CTA passou de 209 × 40 para **181 × 40** em ≥1366 (170,7 em
+1024). A largura devolvida **não** foi recomposta com recuo — a anatomia é a do papel 5.
 
 ### 17.5 A regra das pontas
 

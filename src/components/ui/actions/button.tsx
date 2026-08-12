@@ -37,53 +37,90 @@ import { ArrowRightIcon, WhatsappIcon } from '../icons'
 type Variant = 'primary' | 'secondary' | 'light' | 'light-outline' | 'whatsapp' | 'whatsapp-light'
 type Size = 'sm' | 'md' | 'lg'
 
-/*
-  `rounded-[3px]`: o mesmo raio medido nos dois CTAs do mockup. Cantos
-  discretos, coerentes com o caráter industrial — não é pílula.
+/* ============================================================
+   G-6 (R0-C.1 · 2026-08-12) — UMA GRAMÁTICA, NÃO SEIS
+   ============================================================
 
-  `font-condensed uppercase`: a condensada da marca (Oswald), restrita a
-  rótulo curto. Ver `src/styles/typography.ts`.
+   Até aqui o sistema compartilhado divergia da própria norma em três pontos, e
+   as variantes divergiam **entre si** num quarto. Como ele veste 36 botões
+   renderizados em 15 rotas, cada divergência era multiplicada por 36.
+
+     ponto            era                          é (doc 01)
+     raio             3px                          **2px** (§7.1: o único do sistema)
+     preenchimento    `scaleX` da esquerda em      **`scaleY` da base, 220ms
+                      `primary`/`light`;            `precise`** em todas (§8)
+                      `scaleY` da base nas outras
+     sombra           `shadow-cta` (18px de raio   **nenhuma** — 18px a 45% está
+                      a 45%) em `primary`/`light`   fora da whitelist de §14.1
+     pressão          `translate-y` em umas,       **`scale(0.985)` em 120ms
+                      `bg-yellow-deep` noutras      `precise`** em todas (§8)
+
+   **A elevação de hover saiu junto com a sombra**, pela mesma razão de H-4: as
+   duas eram um gesto só — o objeto levanta, a sombra prova que levantou. A
+   tabela de estados de §8 lista, no hover, apenas o preenchimento.
+
+   **`active:bg-yellow-deep` saiu porque §8 proíbe.** Trocar `background-color`
+   como sinal de estado é exatamente o mecanismo que a norma descarta em favor
+   do preenchimento por `transform`.
+
+   `font-condensed uppercase`: a condensada da marca (Oswald), restrita a
+   rótulo curto. Ver `src/styles/typography.ts`.
 */
-const base =
-  'group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[3px] font-condensed font-semibold uppercase tracking-[0.045em] transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-precise disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45'
 
-/* Camada de preenchimento comum: presente, parada, atrás do rótulo. */
-const fill =
-  'before:absolute before:inset-0 before:-z-10 before:transition-transform before:duration-[280ms] before:ease-smooth before:content-[""]'
+/**
+ * O preenchimento, igual para todos os papéis: sobe da base, 220ms `precise`, e
+ * `focus-visible` dispara **exatamente o mesmo** que o hover (§8). Só a tinta
+ * muda por variante.
+ */
+const fill = cn(
+  'before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0',
+  'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
+  'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+)
+
+/**
+ * O quarto estado — pressão. `scale(0.985)` em 120ms `precise`, cancelado por
+ * `motion-reduce`. É `transform`, então não reflui a linha nem move o vizinho.
+ *
+ * O corte global de `prefers-reduced-motion` (globals.css) já zera a duração de
+ * toda transição; `motion-reduce:active:scale-100` é o que cancela o **valor**,
+ * e não só o tempo.
+ */
+const press = 'active:scale-[0.985] motion-reduce:active:scale-100'
+
+/*
+  A transição tem **duas velocidades de propósito**: cor e borda respondem em
+  200ms (troca de estado) e a pressão em 120ms (resposta). Um único
+  `transition-*` do Tailwind não expressa isso — e encadear dois utilitários
+  não funciona, porque ambos escrevem `transition-property` e o merge mantém só
+  o último. Daí a propriedade arbitrária.
+*/
+const base = cn(
+  'group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[2px]',
+  'font-condensed font-semibold uppercase tracking-[0.045em]',
+  '[transition:color_200ms_var(--ease-precise),border-color_200ms_var(--ease-precise),transform_120ms_var(--ease-precise)]',
+  press,
+  'disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45',
+)
 
 const variants: Record<Variant, string> = {
-  /* Horizontal, da esquerda: o preenchimento acompanha a leitura. */
-  primary: cn(
-    'bg-yellow text-ink shadow-cta',
-    fill,
-    'before:origin-left before:scale-x-0 before:bg-yellow-bright',
-    'hover:-translate-y-[2px] hover:shadow-cta-hover hover:before:scale-x-100',
-    'focus-visible:before:scale-x-100',
-    'active:translate-y-0 active:bg-yellow-deep active:shadow-none',
-  ),
-  /* De baixo: o grafite sobe e o rótulo inverte. */
+  /* Massa amarela — o único papel preenchido do par (§8, papel 1). */
+  primary: cn('bg-yellow text-ink', fill, 'before:bg-yellow-bright'),
+  /* Contorno grafite: o grafite sobe e o rótulo inverte. */
   secondary: cn(
     'border border-ink/70 bg-transparent text-ink hover:text-canvas focus-visible:text-canvas',
     fill,
-    'before:origin-bottom before:scale-y-0 before:bg-ink',
-    'hover:border-ink hover:before:scale-y-100 focus-visible:before:scale-y-100',
-    'active:translate-y-px',
+    'before:bg-ink',
+    'hover:border-ink',
   ),
-  light: cn(
-    'bg-canvas text-ink shadow-cta',
-    fill,
-    'before:origin-left before:scale-x-0 before:bg-white',
-    'hover:-translate-y-[2px] hover:shadow-cta-hover hover:before:scale-x-100',
-    'focus-visible:before:scale-x-100',
-    'active:translate-y-0 active:shadow-none',
-  ),
+  /* O primário em superfície escura: massa clara. */
+  light: cn('bg-canvas text-ink', fill, 'before:bg-white'),
   /* Par do primário em fundo escuro: contorno claro que se preenche. */
   'light-outline': cn(
     'border border-white/35 text-canvas hover:text-ink focus-visible:text-ink',
     fill,
-    'before:origin-bottom before:scale-y-0 before:bg-canvas',
-    'hover:border-canvas hover:before:scale-y-100 focus-visible:before:scale-y-100',
-    'active:translate-y-px',
+    'before:bg-canvas',
+    'hover:border-canvas',
   ),
   /* ==========================================================
      WHATSAPP — CANAL SECUNDÁRIO (doc 01 §8 papel 3, delta G-2)
@@ -106,16 +143,14 @@ const variants: Record<Variant, string> = {
   whatsapp: cn(
     'border border-ink/70 bg-transparent text-ink hover:text-canvas focus-visible:text-canvas',
     fill,
-    'before:origin-bottom before:scale-y-0 before:bg-ink',
-    'hover:border-ink hover:before:scale-y-100 focus-visible:before:scale-y-100',
-    'active:translate-y-px',
+    'before:bg-ink',
+    'hover:border-ink',
   ),
   'whatsapp-light': cn(
     'border border-white/35 bg-transparent text-canvas hover:text-ink focus-visible:text-ink',
     fill,
-    'before:origin-bottom before:scale-y-0 before:bg-canvas',
-    'hover:border-canvas hover:before:scale-y-100 focus-visible:before:scale-y-100',
-    'active:translate-y-px',
+    'before:bg-canvas',
+    'hover:border-canvas',
   ),
 }
 
@@ -272,64 +307,51 @@ export function Button({
 }
 
 /**
- * ============================================================
- * O QUARTO ESTADO — PRESSÃO (doc 01 §8)
- * ============================================================
- *
- * `scale(0.985)` em 120ms `precise`, cancelado por `motion-reduce`. É
- * `transform`, então não reflui a linha nem move o vizinho.
- *
- * A dobra já carrega esta mesma gramática (`pressState` em `hero-stage.tsx`).
- * **A duplicação é deliberada nesta rodada**: a hero está congelada desde
- * 2026-08-12 e importar daqui exigiria editá-la, o que R0-C não pode fazer.
- * Unificar as duas é dívida registrada, não esquecimento.
- */
-const pressState =
-  'transition-transform duration-[120ms] ease-precise active:scale-[0.985] motion-reduce:transition-none motion-reduce:active:scale-100'
-
-/**
  * CTA do cabeçalho — papel 5 do sistema, **NAV CTA** (doc 01 §8).
  *
  * A altura acompanha a faixa reduzida (46% dela, com piso de 40px) em vez dos
  * pixels do mockup, pelo mesmo motivo do cabeçalho (ver `header.tsx`).
  *
  * ============================================================
- * R0-C (2026-08-12) — CONFORMIDADE: H-2, H-3 e H-4
+ * R0-C — CONFORMIDADE (H-2, H-3, H-4)
  * ============================================================
  *
- * Três mecanismos mudaram, e nenhum deles é preferência — os três tinham norma
- * fixada e implementação divergente:
+ * Raio 3px → **2px** (§7.1: o único raio do sistema); preenchimento de `scaleX`
+ * da esquerda em 280ms `smooth` para **`scaleY` da base em 220ms `precise`**
+ * (§8, para todos os papéis); e a **sombra de hover saiu** — `0 8px 16px -10px`
+ * a 0,8 de preto é a "sombra dramática" da blacklist de §14.2.
  *
- *   · **H-2 · raio 3px → 2px.** Doc 01 §7.1: o raio de 2px é o **único** raio
- *     do sistema, e existe para evitar aliasing de canto absoluto em massa
- *     preenchida — não é decisão estética e não deve crescer;
- *   · **H-3 · o preenchimento troca de eixo.** Era `scaleX` da esquerda, em
- *     280ms `smooth`. Doc 01 §8 fixa `scaleY` da base, 220ms `precise`, para
- *     **todos** os papéis de botão — é o mesmo gesto dos dois CTAs da dobra, e
- *     ter o cabeçalho num eixo próprio fazia a ação persistente responder
- *     diferente da ação que ela repete;
- *   · **H-4 · a sombra de hover saiu.** `0 8px 16px -10px` a 0,8 de preto é a
- *     "sombra dramática" da blacklist (doc 01 §14.2): contradiz a aresta viva e
- *     produz cartão flutuante, que é gramática de SaaS.
+ * A elevação de 1px saiu junto com a sombra: as duas eram um gesto só, e a
+ * tabela de estados de §8 lista, no hover, apenas o preenchimento. O `active`
+ * foi refeito pela mesma razão — as cláusulas antigas desfaziam elevação e
+ * sombra que deixaram de existir, e uma delas trocava `background-color`, que
+ * §8 proíbe.
  *
- * **A elevação de 1px saiu junto com a sombra, e isso é consequência, não
- * escopo novo.** `hover:-translate-y-px` + `hover:shadow-…` eram **um** gesto:
- * o objeto levanta e a sombra prova que levantou. Removida a sombra, o que
- * sobraria é um salto de 1px sem causa — e a tabela de estados de §8 lista, no
- * hover, só o preenchimento.
+ * ============================================================
+ * R0-C.1 — O ÍCONE SAI, E A DUPLICAÇÃO TAMBÉM
+ * ============================================================
  *
- * Pelo mesmo motivo o `active` foi refeito: as três cláusulas antigas
- * (`translate-y-0`, `bg-yellow-deep`, `shadow-none`) existiam para desfazer a
- * elevação e a sombra que deixaram de existir, e a troca de `background-color`
- * é o que §8 proíbe explicitamente. No lugar entra a pressão normativa do
- * sistema — ver `pressState`, acima.
+ * **Sem seta.** Doc 01 §8 sempre listou o papel 5 como "sem ícone", e §17.4
+ * dizia que "o layout do cabeçalho não muda" — as duas afirmações conviviam no
+ * mesmo documento e a seta ficava no meio. A direção resolveu em favor de §8:
+ * o NAV CTA tem anatomia própria, mais compacta que a do PRIMARY de seção, e
+ * uma seta ali só somava massa numa faixa que disputa espaço com a marca e com
+ * a navegação. "O layout não muda" passa a significar estrutura, posição,
+ * altura, guias, navegação e comportamento responsivo — não a preservação de um
+ * ícone que a própria norma excluía.
  *
- * O anel de foco continua sendo o global: o cabeçalho é `on-dark`, então
- * `:focus-visible` rende anel amarelo de 2px com offset de 2px sobre grafite
- * (globals.css), que é exatamente o que §8 pede. **Ele não é sombra estética e
- * não foi tocado por H-4.**
+ * Com o ícone, sai também o `gap-3`, que não tem mais o que separar.
  *
- * Altura, recuo, largura, tipografia e posição continuam idênticos.
+ * **E o botão passa a compor a gramática compartilhada** (`fill` e `press`, no
+ * topo do arquivo) em vez de repeti-la. Enquanto o sistema global divergia da
+ * norma, esta cópia local era a única forma de o cabeçalho estar conforme;
+ * agora que G-6 alinhou o `primary`, manter duas expressões do mesmo gesto só
+ * criaria caminho para elas voltarem a divergir.
+ *
+ * O que continua próprio é o que **é** próprio do papel 5: altura amarrada à
+ * faixa, recuo compacto e escala de rótulo menor. O anel de foco é o global —
+ * o cabeçalho é `on-dark`, então `:focus-visible` rende anel amarelo de 2px com
+ * offset de 2px sobre grafite, que é o que §8 pede.
  */
 export function HeaderCta({
   href,
@@ -344,26 +366,45 @@ export function HeaderCta({
     <Link
       href={href}
       className={cn(
-        'group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-[2px] bg-yellow font-condensed font-semibold uppercase tracking-[0.05em] text-ink',
+        'group relative isolate inline-flex items-center justify-center overflow-hidden whitespace-nowrap rounded-[2px] bg-yellow font-condensed font-semibold uppercase tracking-[0.05em] text-ink',
         'h-11 px-[1.15rem] text-[0.8125rem] xl:text-[0.875rem]',
         'lg:h-[max(2.5rem,calc(var(--header-height)*0.46))]',
-        'before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0 before:bg-yellow-bright before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
-        'hover:before:scale-y-100 focus-visible:before:scale-y-100',
-        pressState,
+        '[transition:transform_120ms_var(--ease-precise)]',
+        fill,
+        'before:bg-yellow-bright',
+        press,
         className,
       )}
     >
       {label}
-      <ArrowRightIcon
-        size={16}
-        aria-hidden="true"
-        className="shrink-0 transition-transform duration-200 ease-precise group-hover:translate-x-[3px] group-focus-visible:translate-x-[3px]"
-      />
     </Link>
   )
 }
 
 /**
+ * ============================================================
+ * ⚠ CÓDIGO ÓRFÃO DA V1 — FORA DO ESCOPO DE G-6 (2026-08-12)
+ * ============================================================
+ *
+ * `HeroPrimaryCta` e `HeroSecondaryCta` são consumidos **apenas** por
+ * `sections/hero-section.tsx`, que é a primeira dobra da **V1** e não é
+ * importada por rota nenhuma desde que a V2 passou a usar `v2/hero-stage.tsx`.
+ * Verificado por varredura: zero instâncias renderizadas.
+ *
+ * Por isso os dois **não** foram alinhados em R0-C.1 e ainda carregam a
+ * gramática antiga — raio de 3px, preenchimento por `scaleX` e `shadow-cta`.
+ * São, hoje, as duas únicas referências vivas a esse token no projeto.
+ *
+ * A razão de não tocá-los é de processo, não de gosto: `CLAUDE.md` congela a V1
+ * (só correções críticas) enquanto a V2 é desenvolvida, e mexer neles não muda
+ * um pixel do que está no ar. **Se a V1 for removida, `shadow-cta` e
+ * `shadow-cta-hover` saem de `styles/shadows.ts` junto** — ficam sem consumidor.
+ *
+ * Nada abaixo desta marca descreve o sistema vigente. Para a gramática atual,
+ * ver `fill`, `press` e `base`, no topo do arquivo.
+ *
+ * ============================================================
+ *
  * CTAs da primeira dobra. Ambos retangulares, com 68px de altura no desktop
  * (4.25rem):
  *

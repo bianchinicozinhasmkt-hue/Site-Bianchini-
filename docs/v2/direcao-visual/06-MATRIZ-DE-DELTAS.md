@@ -2,7 +2,7 @@
 
 ```text
 STATUS: ACTIVE — rastreamento de conformidade
-DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A · R0-B · R0-C)
+DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A · R0-B · R0-C · R0-C.1)
 DEPENDE DE: 01-CONSTITUICAO-VISUAL.md · 03-BLUEPRINT-HOME.md · 04-CRITERIOS-DE-APROVACAO.md
 NATUREZA: rastreamento vivo. O levantamento original não alterou produto;
           a partir de R0-A esta matriz registra também o que já foi fechado.
@@ -43,7 +43,7 @@ Números de seção são de 1440 × 900, salvo onde indicado.
 | **G-3** | Três curvas de motion, sem laço — doc 01 §13 | conforme, exceto o marquee (ver M-1) | — | — | — | — | — |
 | **G-4** | Escala tipográfica registrada em `tailwind-merge` — doc 01 §5 | conforme | — | — | — | — | — |
 | **G-5** | Orçamento de cor: ≤3 amarelos por viewport — doc 01 §6.2 | violado em 6 seções | ver seções | `P1`/`P2` | **R3** | nenhuma | contagem ≤3 por seção |
-| **G-6** | Base comum de botão: raio 2px · preenchimento por `scaleY` da base · sem sombra de projeção — doc 01 §7.1, §8, §14.1/§14.2 | `ui/actions/button.tsx`: `base` tem `rounded-[3px]`; `primary`/`light` preenchem por `scale-x` da esquerda e carregam `shadow-cta` (`0 8px 18px -10px` a 45%) e `shadow-cta-hover` | o **sistema compartilhado** diverge da própria norma em três pontos; atinge 25 instâncias `primary` + 4 `light` em 15 rotas | `P2 · ESTÉTICA/MOTION` | **a definir** | nenhuma | raio 2px na base; `scaleY` com origem na base em `primary`/`light`; sombra dentro da whitelist de §14.1 (≤8px de raio, ≤20%) ou removida |
+| ~~**G-6**~~ | Base comum de botão: raio 2px · preenchimento por `scaleY` da base · sem sombra de projeção — doc 01 §7.1, §8, §14.1/§14.2 | ~~`base` com `rounded-[3px]`; `primary`/`light` por `scale-x` da esquerda com `shadow-cta`~~ → **uma gramática só**: raio 2px na base, `scaleY` da base em 220ms `precise` em todos os papéis, zero sombra, pressão `scale(0.985)` | **FECHADO em R0-C.1** (2026-08-12) | `P2 · ESTÉTICA/MOTION` | **R0-C.1** | nenhuma | ✅ **0 fora da norma** em 41 botões renderizados × 6 rotas × 2 viewports; foco dispara o mesmo preenchimento do hover em 100% dos alvos; caixa não muda ao interagir (Δ 0,0 em todos) |
 
 ### R0-A — o que foi implementado, e o que ficou aberto
 
@@ -219,14 +219,30 @@ passa a bloquear — a decisão é da direção, não desta rodada.
 ### Selo do cabeçalho
 
 ```text
-STATUS: CONGELADO (com dependência declarada de G-6)
-DATA: 2026-08-12
-RODADA: R0-C
-COMMIT: o commit de R0-C em `v2` — `feat(v2): consolida conversão e estados do header`,
-        filho direto de `46e7ef2`
+STATUS: CONGELADO DEFINITIVAMENTE
+DATA: 2026-08-12 (R0-C) · dependência removida em R0-C.1, no mesmo dia
+RODADA: R0-C + R0-C.1
+COMMIT: R0-C — `feat(v2): consolida conversão e estados do header`, filho direto
+        de `46e7ef2`
+        R0-C.1 — `refactor(v2): consolida sistema global de botoes`, filho direto
+        de `b7b456a`
 EVIDÊNCIA: docs/v2/capturas/header-r0c-2026-08-12/
-DEPENDÊNCIA ABERTA: G-6 (sistema global de botão)
+           docs/v2/capturas/botoes-r0c1-2026-08-12/
+DEPENDÊNCIA ABERTA: nenhuma
 ```
+
+**A dependência de G-6 foi removida, não dispensada.** Quando o selo foi dado em R0-C, o
+`Button` compartilhado ainda divergia da norma e atravessava a superfície do cabeçalho
+pelo CTA do painel do telefone — doc 04 §4.1.2 podia ser lido como bloqueio. R0-C.1
+fechou G-6, e a revalidação dos dezesseis critérios de R0-C foi refeita sobre o sistema
+novo. O CTA do painel passou de raio 3px com sombra de contato para raio 2px sem sombra,
+com o mesmo preenchimento do resto.
+
+**O NAV CTA perdeu a seta** (doc 01 §17.4, decisão registrada em R0-C.1). A contradição
+documental que R0-C reportou sem resolver — §8 listava o papel 5 como "sem ícone"
+enquanto §17.4 dizia que o layout não muda — passou a ter **uma** regra. Medido: o CTA foi
+de 209 × 40 para 181 × 40 em ≥1366, sem recomposição de recuo, sem mudança de altura de
+faixa e sem alterar a guia (marca = `h1` nos oito viewports).
 
 O formato de referência ao commit é o mesmo adotado no selo da hero, e pela mesma razão:
 o selo vive no commit que ele sela, e um commit não pode conter o próprio hash. A
@@ -286,24 +302,28 @@ relatório da rodada.
 
 ## 5. Contagem
 
-Atualizado em 2026-08-12, ao fim de **R0-C**. O total sobe de 40 para **41**: G-6 é delta
-novo, encontrado pela verificação de §19 durante R0-C.
+Atualizado em 2026-08-12, ao fim de **R0-C.1**. O total é **41**: G-6 entrou como delta
+novo em R0-C e fechou em R0-C.1.
 
 | severidade | total | fechados | **abertos** |
 | --- | ---: | ---: | ---: |
 | **P0** | 0 | 0 | **0** |
 | **P1** | 10 | **7** | **3** |
-| **P2** | 20 | **2** | **18** |
+| **P2** | 20 | **3** | **17** |
 | **P3** | 11 | **3** | **8** |
-| **TOTAL** | 41 | **12** | **29** |
+| **TOTAL** | 41 | **13** | **28** |
 
 Fechados em R0-A: **G-1**, **G-1b**, **G-2** e **D-3** (que é G-2 aplicado à dobra).
 Fechados em R0-B: **D-1**, **D-2**, **D-4** e **D-5**.
 Fechados em R0-C: **H-1**, **H-2**, **H-3** e **H-4**. Aberto por R0-C: **G-6**.
+Fechados em R0-C.1: **G-6**.
 
-**A hero está com zero delta aberto** e recebeu o selo `CONGELADA` em 2026-08-12 (ficha em
-`03-BLUEPRINT-HOME.md` §2). **O cabeçalho fechou os seus quatro** e recebeu o selo em §2
-desta matriz, com dependência declarada de G-6.
+**Todos os sistemas globais estão conformes** — G-1, G-1b, G-2 e G-6 fechados; G-3 e G-4
+já eram. Sobra **G-5** (orçamento de cor), que é contagem por seção e vive nas fichas.
+É o pré-requisito de doc 04 §4.1.2 para congelar seção, e ele está cumprido.
+
+**A hero** tem zero delta aberto e selo `CONGELADA` (ficha em `03-BLUEPRINT-HOME.md` §2).
+**O cabeçalho** fechou os quatro dele e está `CONGELADO DEFINITIVAMENTE`, sem dependência.
 
 Sobram em R0: `#pilares`, `#transicao` e `#fechamento` (**R0-D**).
 

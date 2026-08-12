@@ -1,0 +1,64 @@
+{
+  "saude": [
+    {
+      "viewport": 320,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    },
+    {
+      "viewport": 390,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    },
+    {
+      "viewport": 768,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    },
+    {
+      "viewport": 1024,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    },
+    {
+      "viewport": 1366,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    },
+    {
+      "viewport": 1440,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    },
+    {
+      "viewport": 1600,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    },
+    {
+      "viewport": 1920,
+      "overflow": 0,
+      "imagens": 0,
+      "hrefVazio": 0,
+      "ancoras": 0
+    }
+  ],
+  "notes": {
+    "console": [],
+    "http": []
+  }
+}
