@@ -109,6 +109,32 @@ em 14.490px de página rompem o container de 1400px.
 
 ## 2. HERO — blueprint detalhado
 
+```text
+STATUS: CONGELADA
+DATA: 2026-08-12
+RODADA: R0-B
+COMMIT: o commit de R0-B em `v2` — `feat(v2): consolida hierarquia e estados da hero`,
+        filho direto de `2b622a7`
+EVIDÊNCIA: docs/v2/capturas/hero-r0b-2026-08-12/
+```
+
+**Por que o selo referencia o commit pelo pai e pela mensagem, e não pelo hash.** O selo
+vive no mesmo commit que ele sela, e um commit não pode conter o próprio hash. As duas
+saídas seriam gravar um hash errado (o de antes de um `--amend`) ou abrir um segundo
+commit só para o selo. A referência acima é inequívoca — há um único filho de `2b622a7`
+em `v2` — e o hash consta do relatório da rodada. **Quem for congelar a próxima seção
+deve usar este mesmo formato**, para que o critério de doc 04 §4.1 continue verificável.
+
+A hero cumpre as cinco condições de doc 04 §4.1: implementa esta ficha, tem **zero delta
+aberto** em `06-MATRIZ-DE-DELTAS.md` (D-1 a D-5 fechados), passa nos doze testes do doc 04
+§1 e nos oito critérios de §2.11 abaixo, foi validada em desktop e mobile com captura
+arquivada, e não tem defeito P0 nem P1 aberto. Os sistemas globais que a atravessam
+fecharam em R0-A, como exige §4.1.2.
+
+**Ela sai da fila.** Só reabre pelas cinco razões de doc 04 §4.3 — e "uma ideia talvez
+mais bonita" não é uma delas. O cabeçalho **não** está congelado: ele tem quatro deltas
+abertos (H-1 a H-4) e é escopo de R0-C.
+
 A hero é a peça de maior retorno e a mais reaberta. Esta seção fecha os valores.
 
 ### 2.1 O que está congelado conceitualmente
@@ -131,9 +157,10 @@ Reabri-los é regressão, não melhoria:
 | Copy | travada, aprovada, **não é variável de layout** |
 | Mobile | `min-height`, cena em faixa, três portas sempre nomeadas |
 
-**Congelado conceitualmente ≠ conforme.** Três sistemas da dobra têm norma fechada e
-**delta aberto** no produto — estado ativo da porta, proporção do seletor e construção do
-CTA de WhatsApp. Eles estão em §2.12 e a hero **não congela antes de eles fecharem**.
+**Congelado conceitualmente ≠ conforme.** Três sistemas da dobra tinham norma fechada e
+delta aberto no produto — estado ativo da porta, proporção do seletor e construção do CTA
+de WhatsApp. O terceiro fechou em R0-A; os dois primeiros, em R0-B (§2.12). **A ficha
+inteira está conforme desde 2026-08-12**, e por isso o selo no topo.
 
 ### 2.2 Gutters e guias
 
@@ -319,7 +346,7 @@ estado de Projetos (que é claro) o `h1` branco cairia sobre o desenho.
 | | Equipamentos | Projetos | Consultoria |
 | --- | --- | --- | --- |
 | ordem | 1ª, inicial | 2ª | 3ª |
-| área no seletor | **1,2fr** (norma; faixa 1,15–1,3) — **delta D-2** | 1fr | 1fr |
+| área no seletor | **1,15fr** de `lg` para cima (faixa 1,15–1,3; iguais abaixo) | 1fr | 1fr |
 | CTA | Solicitar orçamento | Falar com um projetista | Agendar diagnóstico |
 | destino | `?intencao=equipamentos` | `?intencao=arquitetura` | `?intencao=consultoria` |
 | evento | `hero_equipamentos_click` | `hero_projetos_click` | `hero_consultoria_click` |
@@ -340,12 +367,25 @@ lidera pelos seis mecanismos do documento 01 §9.2.
 7. foco por teclado visível nas três portas e nos dois CTAs;
 8. sem JS: Equipamentos íntegro, três caminhos nomeados.
 
-### 2.12 Deltas da hero contra este blueprint — escopo da R0
+### 2.12 Deltas da hero contra este blueprint — **os cinco fecharam**
 
-**A hero não é redesenhada.** O que segue é conformidade: cada item tem norma já fixada
-e implementação divergente. Nenhuma decisão estética nova é tomada aqui.
+**A hero não foi redesenhada.** O que segue foi conformidade: cada item tinha norma já
+fixada e implementação divergente. Nenhuma decisão estética nova foi tomada.
 
-Medido no código em 2026-08-12.
+Levantado no código em 2026-08-12. **D-3 fechou em R0-A; D-1, D-2, D-4 e D-5 em R0-B**,
+no mesmo dia. O registro completo de cada fechamento, com as medições, está em
+`06-MATRIZ-DE-DELTAS.md` §2 e em `docs/v2/capturas/hero-r0b-2026-08-12/`.
+
+O texto de cada delta é preservado abaixo **como diagnóstico**, não como pendência — é o
+que impede reabrir por engano um mecanismo que já foi medido e removido.
+
+| delta | fechado em | o que entrou no lugar |
+| --- | --- | --- |
+| **D-1** superfície tingida | R0-B | superfícies no eixo neutro; croma composto 0–1 |
+| **D-2** seletor 1fr/1fr/1fr | R0-B | `1.15fr 1fr 1fr` de `lg` para cima; +15,0% de área |
+| **D-3** WhatsApp massa verde | R0-A | contorno com glifo verde; razão 1,300 em ≥1366 |
+| **D-4** bisel | R0-B | `box-shadow: none`; a régua virou `border-top` |
+| **D-5** comentário divergente | R0-B | os dois itens catalogados, mais nove achados na varredura |
 
 ---
 
@@ -414,11 +454,12 @@ levou a registrar 1,2fr como implementado).
 
 ---
 
-**RISCO DE IMPLEMENTAÇÃO: baixo.** Os cinco deltas são localizados, nenhum toca a
-coreografia, o scrim, o `--u`, o contrato ARIA ou a copy. D-1 e D-4 são subtração; D-2 é
-uma linha de grade; D-3 é troca de construção de um botão.
+**RISCO DE IMPLEMENTAÇÃO: baixo — e a previsão se confirmou.** Os cinco deltas eram
+localizados e nenhum tocou a coreografia, o scrim, o `--u`, o contrato ARIA ou a copy. Ao
+fim de R0-B o diff da hero soma duas linhas de declaração nova (a grade de `.doors` e a
+`border-top` da régua), quatro superfícies reescritas e a remoção de seis `box-shadow`.
 
-**A hero só congela quando D-1 a D-4 fecharem** e os oito critérios de §2.11 passarem.
+**Os cinco fecharam e os oito critérios de §2.11 passaram** — ver o selo no topo de §2.
 
 ---
 
@@ -1440,8 +1481,9 @@ Congela em **R0-D**, com a redução de amarelo e o CTA de WhatsApp já converti
 | **Recomposição** | `#projetos` · `#diagnostico` · `#quem-conduz` |
 | **Recomposição + asset novo** | `#equipamentos` · `#industria-do-inox` |
 
-**A hero não está "no alvo".** Ela tem norma fechada e cinco deltas abertos (§2.12).
-Congelar antes de fechá-los é o que o documento 04 §4.1.1 proíbe.
+**A hero está no alvo desde 2026-08-12.** Os cinco deltas fecharam (§2.12) e ela recebeu
+o selo `CONGELADA` — ver o topo de §2. O que sobra em R0 é o Header (H-1 a H-4, rodada
+R0-C) e as três seções de conformidade: `#pilares`, `#transicao` e `#fechamento`.
 
 ### 4.2 Os cinco itens de maior retorno
 

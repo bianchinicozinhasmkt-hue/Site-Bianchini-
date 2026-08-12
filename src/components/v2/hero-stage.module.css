@@ -72,8 +72,8 @@
     `42vw` (o valor anterior) resolvia para 163,8px em 390 × 844 — 19% da
     altura da dobra. A auditoria chamou isso pelo nome certo: a fotografia
     virou uma faixa decorativa, ~80% da tela ficava grafite liso, e parte
-    do vazio sobrando ia para reserva de altura de outros estados (ver
-    `HEADLINE_MIN`/`INTENT_MIN` em `hero-stage.tsx`), não para a cena.
+    do vazio sobrando ia para os pisos de altura que o título e a intenção
+    tinham então (removidos em 2026-08-09), não para a cena.
 
     `69vw` mira o meio da faixa pedida (30–35% da altura inicial da dobra) no
     viewport de referência do tráfego móvel:
@@ -491,8 +491,9 @@
      projetos ...... aproxima-se da prancha, quase sem percurso lateral — o
                      documento não pode sair do enquadramento;
      consultoria ... **quase parada**, 0,6% e nenhum percurso. Uma pessoa que
-                     deriva lê como recorte flutuando; a vida desta cena vem do
-                     framework vetorial, não do retrato.
+                     deriva lê como recorte flutuando; o que dá vida a esta cena
+                     é a luz do campo sintetizado (ver `.frameConsultoria`), e
+                     não o movimento do retrato.
 
    A conta que mantém isto abaixo do limiar de percepção continua valendo: a
    1,6% em 12s de ida, o deslocamento por quadro em 1920 é de ~0,09px. O
@@ -1177,20 +1178,19 @@
        horizontal e devolve 32px de palco em 1920.
 
    ============================================================
-   O VÃO É DE 14px, E O NÚMERO TEM UMA CONTA
+   O VÃO TEM DE SER MAIOR QUE O RECUO INTERNO
    ============================================================
 
-   O briefing dá 12–18px como ponto de partida em desktop. O que fecha em 14 é o
-   pior caso de largura, não o gosto: em 1024 cada porta tem 341px e o
-   complemento mais longo ("Corrigir gargalos e melhorar resultados") ocupa duas
-   linhas a partir de ~300px úteis. A 18px de vão sobram 296 úteis por porta e a
-   frase passa a três linhas, o que empurraria a dobra. A 14px sobram 301.
+   Esta é a relação normativa (doc 01 §9.1), e é ela — não a aresta — que faz
+   três objetos lerem como três escolhas. Em 1440: **24px de vão contra 20px de
+   recuo**. Inverter a relação reconstitui a chapa por proximidade, que foi
+   exatamente o que a primeira montagem desta topologia fez (14px de vão contra
+   20 de recuo) e o que a rodada de 2026-08-11 corrigiu.
 
-   No telefone o vão cai para 4px, e a conta é a mesma pelo outro lado: em 320px
-   a porta tem 102,7px e "EQUIPAMENTOS" a 12px pede ~81. Com 6px de vão e o
-   recuo interno de 12px sobrariam 78,7 e o nome comprimiria — que é o que o
-   briefing proíbe explicitamente para o telefone. Com 4px de vão e recuo de
-   10px sobram 84.
+   No telefone a conta é pelo outro lado, e o limite é a **legibilidade do
+   nome**: em 320px cada porta tem ~99px e "EQUIPAMENTOS" a 13px pede ~81, então
+   o vão cai para 8px e o recuo para 10 — abaixo disso o nome comprimiria, que é
+   o que o blueprint proíbe explicitamente ali.
    ============================================================ */
 
 /* ============================================================
@@ -1332,9 +1332,9 @@
        Saiu. No lugar dela entra o traço curto **à esquerda** — o mesmo traço
        amarelo da etiqueta do `h1`, no mesmo eixo. Ele não fecha nada: ancora.
 
-   O respiro até as portas é o que sustenta a hierarquia INSTRUÇÃO ↓ ESCOLHAS:
-   18px no telefone e 26px em `lg` para cima, contra os 0 de quando ela era
-   cabeça de chapa (só o sulco separava).
+   O respiro até as portas é o que sustenta a hierarquia INSTRUÇÃO ↓ ESCOLHAS —
+   contra os 0 de quando ela era cabeça de chapa, onde só o sulco separava. Os
+   valores estão nas regras abaixo, e o de `lg` tem conta própria.
    ============================================================ */
 /*
   ---------- A instrução ganha peso e ar (2026-08-11) ----------
@@ -1392,25 +1392,56 @@
 }
 
 /* ============================================================
-   `.doors` — TRÊS COLUNAS IGUAIS, COM VÃO
+   `.doors` — A PRIMEIRA PORTA TEM MASSA MAIOR (R0-B · delta D-2)
    ============================================================
 
-   `repeat(3, minmax(0, 1fr))` continua, e continua pela mesma razão de sempre:
-   uma porta maior que as outras duas não lê como prioridade — lê como as outras
-   duas terem sobrado. A liderança de Equipamentos vive nos cinco mecanismos que
-   não dependem de área (estado inicial, `h1`, primeira porta, primeira parada
-   do teclado, ação do fechamento).
+   Até aqui eram três colunas iguais, e o comentário que estava neste lugar
+   defendia a igualdade — "uma porta maior lê como as outras duas terem
+   sobrado". **A norma decide o contrário** (doc 01 §9.2): a área é o quarto dos
+   seis mecanismos pelos quais Equipamentos lidera, e sem ela sobram cinco.
+   Enquanto a linha dizia `repeat(3, 1fr)`, o comentário de `hero-stage.tsx`
+   afirmava 1,2fr — era essa contradição que a matriz registrava como D-2 + D-5.
+
+   **1,15fr, e não 1,2.** A faixa autorizada é 1,15–1,3, e o critério é a menor
+   diferença que torne a prioridade inequívoca. Medido no build de produção:
+
+     viewport   equipamentos   projetos = consultoria   diferença
+     1024          333,5px            290,0px            +15,0%
+     1366          445,9              387,8              +15,0%
+     1440          470,2              408,9              +15,0%
+     1600          508,2              441,9              +15,0%
+     1920          508,2              441,9              +15,0%
+
+   Sessenta pixels a mais em 1440 é uma diferença que se vê na primeira leitura
+   sem que as outras duas encolham a ponto de parecerem restos: a 1,2fr a
+   primeira porta ganharia 80px e Projetos/Consultoria cairiam para 402,5 —
+   ainda legítimo, mas já é a diferença procurando ser notada em vez de ser lida.
+   1,15 é o menor delta suficiente, e por isso é o escolhido.
+
+   **A partir de `lg`, e só.** Abaixo de 1024 as três colunas continuam iguais
+   (doc 03 §2.12, conformidade de D-2): em 320px cada porta tem ~99px e o nome
+   "EQUIPAMENTOS" pede ~81 — encolher Projetos e Consultoria ali custaria
+   legibilidade de nome, que é o que o blueprint proíbe explicitamente para o
+   telefone. No tablet (640–1023) o `cue` já está em duas linhas e a mesma conta
+   se aproxima do limite. Nessas larguras Equipamentos continua liderando pelos
+   outros cinco mecanismos.
 
    O `margin-inline` negativo é o que põe o **texto** da primeira porta na guia
    do `h1`: a fileira transborda o recuo do `Container` exatamente na medida do
    recuo interno da porta. Medido em 1920, o nome "EQUIPAMENTOS" começa em
-   x=300 — o mesmo x da etiqueta, do título, do parágrafo e dos dois CTAs.
+   x=260 — o mesmo x da etiqueta, do título, do parágrafo e dos dois CTAs.
    ============================================================ */
 .doors {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--door-gap);
   margin-inline: calc(-1 * var(--door-pad));
+}
+
+@media (min-width: 1024px) {
+  .doors {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
 }
 
 /* ============================================================
@@ -1446,7 +1477,7 @@
        objeto com aresta é coisa, não texto;
      · **a superfície própria**, separada das vizinhas por vão — três planos,
        não uma faixa;
-     · **a seta** na aresta direita de cada uma, em `canvas/55`;
+     · **a seta** na aresta direita de cada uma, em `canvas/60`;
      · **a instrução**, logo acima, que diz literalmente para escolher.
 
    O inativo fica em `canvas/85` no nome — legível, nunca fantasma.
@@ -1501,40 +1532,57 @@
   ganha o realce; mexer no fundo do botão obrigaria a repetir o cálculo do
   recuo em cada estado.
 */
-/*
-  ---------- O inativo escurece, e é isso que acende o ativo (2026-08-11) ----------
+/* ============================================================
+   A SUPERFÍCIE É NEUTRA, E A ARESTA É A RÉGUA (R0-B · deltas D-1 e D-4)
+   ============================================================
 
-  O par estava comprimido: inativo em rgb(38,38,41) e ativo em rgb(66,61,48) —
-  28 pontos de luminância entre "não escolhido" e "escolhido", num controle que
-  vive sobre fotografia. De longe as três portas liam como a mesma superfície
-  com uma régua diferente numa delas.
+   Dois mecanismos saíram daqui nesta rodada, e os dois eram construção, não
+   acabamento.
 
-  A correção não é clarear o ativo (o teto dele é a hierarquia do amarelo: três
-  massas amarelas na mesma vertical desmontam marca > ação > estado). É
-  **afundar o inativo**, que ainda por cima é o comportamento certo: porta
-  fechada é mais escura que porta aberta.
+   **1. O tingimento (D-1).** O par era inativo `rgb(28,29,32)` contra ativo
+   `rgb(70,65,51)` com `rgba(245,198,75,0.14)` derramado por cima. A base ativa
+   estava deslocada para o **quente** e recebia amarelo translúcido: a soma é
+   cáqui/oliva, e é o oposto do material que a marca representa. A norma (doc 01
+   §9.4) é explícita em que não existe dose segura — o defeito é a mistura.
 
-  Inativo passa a rgb(20,21,23) a 0,90 — mais fundo que o `.deck` sob ele, e
-  translúcido o bastante para a cena continuar atravessando. O delta contra o
-  ativo passa de 28 para **48 pontos**, e o nome inativo em `canvas/85` ganha
-  contraste no caminho (medido sobre a nova superfície: 11,2:1, contra 8,4:1).
-*/
+   Agora os dois estados vivem no **eixo neutro** (r = g = b em todas as
+   paradas), e o amarelo é gesto **sobre** a superfície — régua e seta —, nunca
+   dentro dela.
+
+     estado    topo   62%    base    o que era
+     inativo    28     17      20    28,29,32 / 17,17,19 / 20,20,22
+     ativo      78     46      54    70,65,51 / 35,33,27 / 43,40,32 + amarelo
+
+   O delta de luminância que a norma pede (~48 pontos) é preservado, e agora ele
+   é **puramente neutro**: 78 × 0,95 contra 28 × 0,90 dá 47,4 pontos no topo da
+   porta, contra os 47,8 que antes só existiam porque o derrame de amarelo
+   clareava o topo do ativo. Em escala de cinza a diferença é a mesma; em cor,
+   nenhuma das duas superfícies tem matiz.
+
+   **2. O bisel (D-4).** `inset 0 2px 0 branco` no topo com `inset 0 -2px 0
+   preto` na base é a construção clássica de bevel — relevo simulado, gramática
+   de painel de máquina antigo. Os dois saíram, e **nada entrou no lugar da
+   sombra de baixo**: a norma diz que a porta é um retângulo plano e que quem
+   lhe dá aresta é a régua.
+
+   A régua deixa de ser sombra interna e passa a ser `border-top` — uma aresta
+   desenhada de verdade, e não um realce que sugere volume. `canvas` a 20% no
+   inativo (doc 01 §9.4, sinal 1), 42% no hover, 3px de amarelo cheio no ativo.
+   ============================================================ */
 .door::before {
   content: '';
   position: absolute;
   inset: 0;
+  border-top: 2px solid rgba(239, 237, 235, 0.2);
   background: linear-gradient(
     180deg,
-    rgba(28, 29, 32, 0.9) 0%,
-    rgba(17, 17, 19, 0.93) 62%,
-    rgba(20, 20, 22, 0.93) 100%
+    rgba(28, 28, 28, 0.9) 0%,
+    rgba(17, 17, 17, 0.93) 62%,
+    rgba(20, 20, 20, 0.93) 100%
   );
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
   transition:
     background 260ms var(--ease-smooth),
-    box-shadow 200ms var(--ease-smooth);
+    border-color 200ms var(--ease-smooth);
 }
 
 /*
@@ -1544,21 +1592,24 @@
   saiu — ver `hero-stage.tsx`). Isso liberta o hover para ser expressivo: ele
   passou a ser a confirmação de alvo, e é a única coisa que ele faz.
 
-  Três respostas, todas em 200ms ou menos: a superfície clareia e esquenta, a
-  régua acende de `0,20` para `0,42`, e a porta inteira sobe 2px. A subida é
-  `transform`, então a fileira não reflui e as vizinhas não se movem.
+  Três respostas, todas em 200ms ou menos: a superfície clareia, a régua acende
+  de `0,20` para `0,42`, e a porta inteira sobe 3px. A subida é `transform`,
+  então a fileira não reflui e as vizinhas não se movem.
+
+  **Clareia, e não "esquenta"** (R0-B · D-1): o hover também vive no eixo
+  neutro. E o teto dele é a porta ativa — 48 no topo contra os 78 do ativo, de
+  modo que sobrevoar uma porta fechada nunca produz uma superfície mais forte
+  que a escolhida.
 */
 .door:hover::before,
 .door:focus-visible::before {
+  border-top-color: rgba(239, 237, 235, 0.42);
   background: linear-gradient(
     180deg,
-    rgba(52, 53, 58, 0.93) 0%,
-    rgba(31, 31, 35, 0.95) 62%,
-    rgba(36, 36, 40, 0.95) 100%
+    rgba(48, 48, 48, 0.93) 0%,
+    rgba(31, 31, 31, 0.95) 62%,
+    rgba(36, 36, 36, 0.95) 100%
   );
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.34),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
 }
 
 .door:hover,
@@ -1572,32 +1623,35 @@
 
    Cinco sinais, e o briefing pede que um deles não seja cromático:
 
-     1. **régua cheia em amarelo, 3px** — era 2px em branco a 0,20. É a mudança
-        que se lê primeiro e de mais longe;
-     2. **a superfície esquenta e clareia.** Não vira amarela: o que muda é a
-        temperatura da base (grafite frio → grafite quente) mais um derrame do
-        acento nos primeiros 30% da altura, a 8% de opacidade. Medido, isso
-        desloca o topo da superfície em 4 pontos de matiz — o suficiente para o
-        olho ler "a luz vem daquela régua", longe de ler "esta porta é amarela".
-        O amarelo cheio **foi testado** como preenchimento da porta ativa e
-        reprovou: com o CTA amarelo da dobra 100px acima e o CTA amarelo do
-        cabeçalho na mesma coluna, três massas amarelas na mesma vertical
-        desmontam a hierarquia marca > ação > estado que o projeto fixa;
-     3. **a porta sobe 3px** e fica lá. É o sinal espacial, e o único que não é
+     1. **régua cheia em amarelo, 3px** — era 2px em `canvas` a 0,20. É a
+        mudança que se lê primeiro e de mais longe;
+     2. **a superfície clareia, no eixo neutro.** Grafite profundo → grafite
+        perceptivelmente mais claro, sem trocar de matiz: 28 → 78 no topo, 17 →
+        46 no meio, 20 → 54 na base. **Não há tingimento** — ver o bloco de
+        `.door::before`, acima, para o mecanismo que saiu em R0-B e por quê;
+     3. **a porta sobe 6px** e fica lá. É o sinal espacial, e o único que não é
         cor nem peso;
      4. **o nome vai a `bold` e a `canvas` cheio**, contra `semibold` em
         `canvas/85`;
-     5. **a seta fica amarela** e 2px à frente.
+     5. **a seta fica amarela** e 3px à frente.
 
-   Nenhum deles é sombra projetada, brilho, vidro ou canto arredondado.
+   O amarelo aparece em dois lugares e nos dois é **gesto sobre** a superfície,
+   nunca preenchimento dela: a régua e a seta. O amarelo cheio como massa da
+   porta ativa foi testado e reprovou — com o CTA amarelo da dobra 100px acima e
+   o do cabeçalho na mesma coluna, três massas amarelas na mesma vertical
+   desmontam a hierarquia marca > ação > estado.
+
+   Nenhum deles é sombra projetada, brilho, vidro, bisel ou canto arredondado.
    ============================================================ */
 .doorActive::before {
-  background:
-    linear-gradient(180deg, rgba(245, 198, 75, 0.14) 0%, rgba(245, 198, 75, 0) 38%),
-    linear-gradient(180deg, rgba(70, 65, 51, 0.95) 0%, rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96) 100%);
-  box-shadow:
-    inset 0 3px 0 rgb(245, 198, 75),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+  border-top-width: 3px;
+  border-top-color: rgb(245, 198, 75);
+  background: linear-gradient(
+    180deg,
+    rgba(78, 78, 78, 0.95) 0%,
+    rgba(46, 46, 46, 0.96) 62%,
+    rgba(54, 54, 54, 0.96) 100%
+  );
 }
 
 /*
@@ -1611,14 +1665,18 @@
   transform: translateY(-6px);
 }
 
+/*
+  O hover da porta já escolhida clareia mais um degrau, e continua no eixo
+  neutro. A régua não muda — ela já está no valor cheio.
+*/
 .doorActive:hover::before,
 .doorActive:focus-visible::before {
-  background:
-    linear-gradient(180deg, rgba(245, 198, 75, 0.18) 0%, rgba(245, 198, 75, 0) 38%),
-    linear-gradient(180deg, rgba(84, 78, 61, 0.95) 0%, rgba(43, 40, 33, 0.96) 62%, rgba(51, 47, 38, 0.96) 100%);
-  box-shadow:
-    inset 0 3px 0 rgb(245, 198, 75),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    180deg,
+    rgba(92, 92, 92, 0.95) 0%,
+    rgba(55, 55, 55, 0.96) 62%,
+    rgba(64, 64, 64, 0.96) 100%
+  );
 }
 
 .doorActive:hover,
@@ -1638,8 +1696,14 @@
    está ativa ou não é falha de acessibilidade, não acabamento.
 
    `::after` com `z-index: 2` resolve (o `::before` é 0 e o `.doorInner` é 1).
-   Continua `inset` porque a porta agora sobe 3px quando ativa e um anel externo
+   Continua `inset` porque a porta sobe 6px quando ativa e um anel externo
    sairia da caixa de recorte junto com ela.
+
+   **Este `inset` não é o bisel que D-4 removeu** (R0-B): bisel é um par de
+   realces claro-no-topo/escuro-na-base simulando volume, e ele saiu de
+   `.door::before`. Aqui a sombra desenha um **anel de foco** de quatro lados,
+   em amarelo cheio, e é requisito de acessibilidade — sem relevo, sem
+   gradiente e sem leitura de relevo.
    ============================================================ */
 .door::after {
   content: '';
@@ -1689,7 +1753,7 @@
 /*
   A seta é o sinal de clicabilidade que sobrevive sem cor e sem cursor — no
   toque não existe nenhum dos dois. Por isso ela é o último elemento que pode
-  esmaecer, e por isso o inativo é `canvas/55` e não menos.
+  esmaecer, e por isso o inativo é `canvas/60` e não menos.
 
   ---------- A caixa em volta dela saiu (2026-08-11) ----------
 
@@ -1726,13 +1790,13 @@
    MOTION DO CONTEÚDO
    ============================================================
 
-   O bloco é remontado a cada troca (chave de React), então a animação abaixo
-   roda uma vez por estado — sem estado intermediário e sem `setTimeout`.
+   `.enter` é a entrada da dobra **no carregamento da página**, e só isso — o
+   bloco de conteúdo não tem `key`, então nada aqui remonta quando o visitante
+   troca de pilar (ver o bloco seguinte). Quem responde pela troca é `.swap`.
 
    Escalonamento: etiqueta 0ms, título 60ms, intenção 120ms, ação 180ms.
    Percurso de 10px, dentro da faixa de 8–12 pedida. Nada aqui altera altura de
-   caixa: só `opacity` e `transform`. As caixas do título e da intenção têm piso
-   medido (ver `hero-stage.tsx`), então nenhum elemento se move entre estados.
+   caixa: só `opacity` e `transform`.
    ============================================================ */
 @keyframes contentIn {
   from {
@@ -1772,8 +1836,8 @@
        clique, ele fazia a coluna se remontar de cima para baixo.
 
    Aplicado ao **texto**, não à caixa: quem carrega a `key` é um `<span>` por
-   dentro da etiqueta, do `h1` e da intenção, então as caixas com piso medido
-   (`HEADLINE_MIN` / `INTENT_MIN`) nunca saem do DOM e a moldura não se move.
+   dentro da etiqueta, do `h1` e da intenção, então os elementos-caixa nunca
+   saem do DOM e a troca não remonta a coluna.
    ============================================================ */
 /* ============================================================
    A COPY GANHA SAÍDA (2026-08-11)
@@ -1983,17 +2047,20 @@
   /*
     Sem ponteiro não há hover: o realce por passagem fica preso depois do gesto
     e o toque passaria a ver uma porta "quase acionada" que não é a escolhida.
+    Por isso as duas regras abaixo **restauram a superfície de repouso** — elas
+    não são um hover mais discreto, são o cancelamento dele.
+
+    Os valores acompanham os de `.door::before` / `.doorActive::before` (eixo
+    neutro desde R0-B). Se um dos dois mudar lá, muda aqui junto.
   */
   .door:hover::before {
+    border-top-color: rgba(239, 237, 235, 0.2);
     background: linear-gradient(
       180deg,
-      rgba(38, 38, 41, 0.94) 0%,
-      rgba(23, 23, 26, 0.96) 62%,
-      rgba(28, 28, 31, 0.96) 100%
+      rgba(28, 28, 28, 0.9) 0%,
+      rgba(17, 17, 17, 0.93) 62%,
+      rgba(20, 20, 20, 0.93) 100%
     );
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.13),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.55);
   }
 
   .door:hover {
@@ -2001,16 +2068,17 @@
   }
 
   .doorActive:hover::before {
-    background:
-      linear-gradient(180deg, rgba(245, 198, 75, 0.12) 0%, rgba(245, 198, 75, 0) 34%),
-      linear-gradient(180deg, rgba(66, 61, 48, 0.95) 0%, rgba(33, 31, 26, 0.96) 62%, rgba(41, 38, 31, 0.96) 100%);
-    box-shadow:
-      inset 0 2px 0 rgb(245, 198, 75),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+    border-top-color: rgb(245, 198, 75);
+    background: linear-gradient(
+      180deg,
+      rgba(78, 78, 78, 0.95) 0%,
+      rgba(46, 46, 46, 0.96) 62%,
+      rgba(54, 54, 54, 0.96) 100%
+    );
   }
 
   .doorActive:hover {
-    transform: translateY(-3px);
+    transform: translateY(-6px);
   }
 
   .door:hover .doorArrow {
@@ -2091,15 +2159,15 @@
      · o **ambient motion** da cena ativa é desligado. Ele é o único movimento
        permanente da dobra, e "permanente" é exatamente o que reduced-motion
        existe para eliminar;
-     · a camada vetorial de Consultoria aparece **pronta e parada**: o desenho
-       das linhas não é animado, o pulso não corre e o halo não respira. Ela
-       continua visível — o requisito é que nada fique invisível nem preso
-       fechado, não que a camada suma.
+     · a **cena de Consultoria** aparece pronta e parada: a figura ancorada não
+       deriva e o campo sintetizado não se move. Ela continua visível — o
+       requisito é que nada fique invisível nem preso fechado.
 
    O que sobra do estado ativo, todo estático: régua amarela de 3px, superfície
-   quente e mais clara, derrame do acento, nome em `bold`/`canvas` e seta
-   amarela. O relevo de 3px é o único sinal que se perde aqui, e sobram quatro —
-   um deles (a superfície) não é cromático.
+   neutra mais clara, nome em `bold`/`canvas` e seta amarela. A elevação de 6px
+   é o único dos cinco sinais que se perde aqui, e sobram quatro — dois deles (a
+   luminância da superfície e o peso do nome) não são cromáticos, que é o que
+   mantém o teste de escala de cinza válido também com movimento desligado.
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .frame,

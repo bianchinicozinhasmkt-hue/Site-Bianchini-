@@ -40,27 +40,36 @@ import styles from './hero-stage.module.css'
  *   │   cena (fotografia de sangria ou prancha de projeto)  │
  *   │   scrim local — fecha só a coluna esquerda e a base   │
  *   │   coluna de conteúdo, centrada verticalmente          │
- *   │     etiqueta → h1 → intenção → CTA                    │
- *   ├ SELETOR ──────────────────────────────────────────────┤
- *   │   01 Equipamentos │ 02 Projetos │ 03 Consultoria      │
- *   ├ MÉTRICAS ─────────────────────────────────────────────┤
- *   │   18 anos · Brasil                    ação secundária │
+ *   │     etiqueta → h1 → intenção → CTA + WhatsApp         │
+ *   ├ DECISÃO ──────────────────────────────────────────────┤
+ *   │   instrução ("Escolha o que sua operação…")           │
+ *   │   ┌ EQUIPAMENTOS ─┐ ┌ PROJETOS ┐ ┌ CONSULTORIA ┐      │
  *   └───────────────────────────────────────────────────────┘
  *
- * Os três blocos compartilham o **mesmo `Container`** do cabeçalho e de toda
- * seção do site: um eixo vertical único da marca até a régua.
+ * **Não há mais faixa de métricas.** `18 anos · Brasil` e a ação secundária
+ * saíram da dobra em 2026-08-09, por decisão do gestor — o registro de por quê
+ * e do que aconteceu com cada dado está no comentário da base, mais abaixo.
+ * As portas também não têm numeral: o que cada uma mostra é nome, situação e
+ * seta.
+ *
+ * Os dois blocos compartilham o **mesmo `Container`** do cabeçalho e de toda
+ * seção do site: um eixo vertical único da marca até a última porta.
  *
  * ============================================================
  * COMO EQUIPAMENTOS LIDERA
  * ============================================================
  *
- * Por posição na narrativa e por peso na malha, nunca por tratamento de imagem:
+ * Por posição na narrativa e por peso na malha, nunca por tratamento de imagem
+ * (doc 01 §9.2 — seis mecanismos, nenhum deles estético):
  *
  *   1. é o **estado inicial** — o que a página mostra a quem chega, e o único
  *      que o servidor entrega;
  *   2. o `h1` da página é a copy dele;
- *   3. é a primeira área do seletor e a primeira parada do teclado;
- *   4. a área dele no seletor é **1,2fr** contra 1fr das outras duas;
+ *   3. é a primeira porta e a primeira parada do teclado;
+ *   4. a área dele no seletor é **1,15fr** contra 1fr das outras duas, de
+ *      `lg` para cima (a faixa autorizada é 1,15–1,3; a conta que escolheu o
+ *      piso da faixa está em `.doors`, no módulo CSS). Abaixo de 1024 as três
+ *      são iguais e sobram os outros cinco mecanismos;
  *   5. a ação da faixa de fechamento também é de equipamentos;
  *   6. permanece selecionado até o visitante escolher outra coisa — nenhuma
  *      rotação, nenhum autoplay, nenhuma troca sozinha.
@@ -1225,29 +1234,25 @@ export function HeroStage() {
         */}
         {/*
           ============================================================
-          A PLATAFORMA DE DECISÃO (2026-08-10)
+          A BASE DA DOBRA — A ÁRVORE E A FUNÇÃO DE CADA NÍVEL
           ============================================================
 
-          A régua de 2026-08-09 estava reprovada visualmente: três nomes soltos
-          numa faixa que fechava em 0,98 de preto — "um rodapé dentro da Hero",
-          nas palavras do gestor. O diagnóstico completo, com as medições, está
-          no módulo CSS. O que entra no lugar é **um objeto**: uma chapa com
-          aresta própria, dividida em três baias, na largura útil da composição.
+          `.deck` → `Container` → `.decision` → instrução + três portas.
 
-          A árvore é `.deck` → `Container` → `.plate` → cabeça + baias, e cada
-          nível tem uma função que os outros não podem cumprir:
+            `.deck` ..... transição tonal de largura inteira. **Nunca chega a
+                          opaco**, e é isso que faz a base nascer do palco em
+                          vez de ser colada nele — a cena continua atravessando
+                          o vão entre as portas;
+            `Container` . a casca comum do site, que põe a instrução e o texto
+                          da primeira porta na guia do `h1`;
+            `.decision` . só agrupa; **qualquer superfície aqui reconstituiria
+                          a chapa** que a rodada de 2026-08-11 desmontou;
+            portas ...... três objetos separados por vão real.
 
-            `.deck` .. transição tonal de largura inteira. Nunca chega a opaco,
-                       então a cena continua visível através da chapa — é o que
-                       a faz nascer do palco em vez de ser colada nele;
-            `.plate` . a chapa. Largura do `Container` mais o próprio recuo, o
-                       que põe o texto da primeira baia **na guia do `h1`**;
-            cabeça ... a instrução, que deixa de ser legenda e vira o rótulo do
-                       painel;
-            baias .... três zonas, rebaixadas no inativo e salientes no ativo.
-
-          O `role="tablist"` e toda a mecânica de teclado continuam iguais: o
-          que mudou é o corpo do controle, não o contrato de acessibilidade.
+          O histórico das cinco topologias que este lugar já teve está no módulo
+          CSS, junto das medições que reprovaram cada uma. O que ele não deve
+          voltar a ser: uma chapa subdividida por fios, com a instrução como
+          linha de cabeça — a forma de um painel administrativo.
         */}
         <div className={cn(styles.deck, 'shrink-0')}>
           {/*
@@ -1319,11 +1324,12 @@ export function HeroStage() {
                 disputar com o `h1` (15px contra 58, condensada caixa-alta contra
                 sans de leitura):
 
-                  · **corpo e peso** — 15px `bold` de `lg` para cima, contra os
-                    13px `semibold` de antes;
+                  · **corpo e peso** — subiu dois degraus desde os 13px
+                    `semibold` de quando ela era cabeça de chapa; o valor
+                    vigente e a razão dele estão no `<p>`, logo abaixo;
                   · **tracking menor** — 0,2em caía como código técnico e
-                    obrigava o olho a soletrar. 0,12em devolve a frase como
-                    frase, que é o que o briefing pede explicitamente;
+                    obrigava o olho a soletrar, e o valor vigente é bem menor
+                    que isso (ver o `<p>`): a frase volta a ser frase;
                   · **um traço amarelo à esquerda**, na guia. Ele não é
                     ornamento: é o mesmo traço da etiqueta do `h1`, no mesmo
                     eixo, e é o que liga a instrução ao bloco de conteúdo em vez
@@ -1427,17 +1433,15 @@ export function HeroStage() {
                         selected && styles.doorActive,
                         /*
                           `min-h` é piso, e a altura real vem do conteúdo mais o
-                          recuo do módulo. 56px no telefone (contra o mínimo de
-                          44 de toque) e 80/88/96 no desktop — a faixa que o
-                          briefing pede, contra os 96/112/128 do desenho
-                          anterior. São 32px devolvidos ao palco em 1920.
-                        */
-                        /*
-                          Subiu um degrau em 2026-08-11 junto com o recuo
-                          interno: 60px no telefone e 88/96/104 no desktop. A
-                          altura devolvida não sai do palco — sai do vão morto
-                          que havia entre o par de CTAs e o seletor, medido em
-                          112px em 1440 e agora em ~88.
+                          recuo do módulo. 60px no telefone (contra o mínimo de
+                          44 de alvo de toque) e 88/96/104 no desktop — a
+                          geometria normativa de doc 01 §9.3.
+
+                          A altura veio do **vão morto** entre o par de CTAs e o
+                          seletor (medido em 112px em 1440, hoje ~88), não do
+                          palco. O teto é a leitura: portas mais altas voltam a
+                          ler como barra de navegação interna, que é o defeito
+                          que custou as topologias anteriores.
                         */
                         'min-h-[3.75rem] lg:min-h-[5.5rem] xl:min-h-24 2xl:min-h-[6.5rem]',
                         /*

@@ -1,0 +1,109 @@
+{
+  "teclado": [
+    {
+      "nome": "foco inicial",
+      "estado": {
+        "sel": 0,
+        "foco": 0,
+        "tabindex": "0,-1,-1",
+        "anel": "rgba(0, 0, 0, 0) 0px 0px 0px 2px inset"
+      }
+    },
+    {
+      "nome": "ArrowRight",
+      "estado": {
+        "sel": 1,
+        "foco": 1,
+        "tabindex": "-1,0,-1",
+        "anel": "rgb(245, 198, 75) 0px 0px 0px 2px inset"
+      }
+    },
+    {
+      "nome": "ArrowRight",
+      "estado": {
+        "sel": 2,
+        "foco": 2,
+        "tabindex": "-1,-1,0",
+        "anel": "rgb(245, 198, 75) 0px 0px 0px 2px inset"
+      }
+    },
+    {
+      "nome": "ArrowRight (volta ao início)",
+      "estado": {
+        "sel": 0,
+        "foco": 0,
+        "tabindex": "0,-1,-1",
+        "anel": "rgb(245, 198, 75) 0px 0px 0px 2px inset"
+      }
+    },
+    {
+      "nome": "End",
+      "estado": {
+        "sel": 2,
+        "foco": 2,
+        "tabindex": "-1,-1,0",
+        "anel": "rgb(245, 198, 75) 0px 0px 0px 2px inset"
+      }
+    },
+    {
+      "nome": "ArrowLeft",
+      "estado": {
+        "sel": 1,
+        "foco": 1,
+        "tabindex": "-1,0,-1",
+        "anel": "rgb(245, 198, 75) 0px 0px 0px 2px inset"
+      }
+    },
+    {
+      "nome": "Home",
+      "estado": {
+        "sel": 0,
+        "foco": 0,
+        "tabindex": "0,-1,-1",
+        "anel": "rgb(245, 198, 75) 0px 0px 0px 2px inset"
+      }
+    }
+  ],
+  "hover": {
+    "antes": {
+      "sel": 0,
+      "cena": 0
+    },
+    "durante": {
+      "sel": 0,
+      "hoverTransform": "matrix(1, 0, 0, 1, 0, -3)",
+      "hoverSurface": "linear-gradient(rgba(52, 53, 58, 0.93), rgba(31, 31, 35, 0.95) 62%, rgba(36, 36, 40, 0.95))",
+      "hoverShadow": "rgba(255, 255, 255, 0.34) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+      "ativoTransform": "matrix(1, 0, 0, 1, 0, -6)",
+      "alturaFila": "96,96,96",
+      "yFila": "774,777,780"
+    }
+  },
+  "reduzido": {
+    "ativoTransform": "none",
+    "ativoSuperficie": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 3",
+    "ativoRegua": "rgb(229, 231, 235) 0px",
+    "ativoShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+    "cenas": [
+      {
+        "opacity": "1",
+        "mask": "0px 0px",
+        "transform": "none",
+        "anim": "none"
+      },
+      {
+        "opacity": "0",
+        "mask": "0px 0px",
+        "transform": "none",
+        "anim": "none"
+      },
+      {
+        "opacity": "0",
+        "mask": "0px 0px",
+        "transform": "none",
+        "anim": "none"
+      }
+    ],
+    "invisiveis": 4
+  }
+}

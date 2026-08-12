@@ -2,7 +2,7 @@
 
 ```text
 STATUS: ACTIVE — rastreamento de conformidade
-DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A implementada)
+DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A) · 2026-08-12 (R0-B)
 DEPENDE DE: 01-CONSTITUICAO-VISUAL.md · 03-BLUEPRINT-HOME.md · 04-CRITERIOS-DE-APROVACAO.md
 NATUREZA: rastreamento vivo. O levantamento original não alterou produto;
           a partir de R0-A esta matriz registra também o que já foi fechado.
@@ -87,15 +87,66 @@ Nenhuma rampa precisou ceder.
 
 | id | regra normativa | estado atual | delta | sev. | rodada | dependência | critério de saída |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| **D-1** | Porta ativa: grafite **neutro** mais claro; amarelo só em régua e seta — doc 01 §9.4 | `.doorActive::before` derrama `rgba(245,198,75,0.14)` sobre base quente `rgb(70,65,51)` | superfície tingida → cáqui/oliva | `P1 · ESTÉTICA` | **R0-B** | nenhuma | zero tingimento; delta de luminância ~48pt no eixo neutro; ativo legível em escala de cinza <1s |
-| **D-2** | Seletor `1,2fr / 1fr / 1fr` (faixa 1,15–1,3) — doc 01 §9.2 | `grid-template-columns: repeat(3, minmax(0,1fr))` | Equipamentos **não** tem área maior; comentário do código afirma o contrário | `P1 · COMPOSIÇÃO` | **R0-B** | nenhuma | `1.2fr 1fr 1fr` a partir de `lg`; três portas iguais abaixo de `sm`; nenhum rótulo quebra |
-| ~~**D-3**~~ | = G-2, aplicado à dobra | **FECHADO em R0-A** (2026-08-12) junto com G-2 | ver a nota de R0-A | `P1 · CONVERSÃO` | **R0-A** | G-2 | ✅ ver G-2 |
-| **D-4** | Sem bisel; a aresta é a régua — doc 01 §7.2, §14.2 | `.door::before` com `inset 0 2px 0 rgba(255,255,255,0.16)` + `inset 0 -2px 0 rgba(0,0,0,0.5)` | construção de bevel | `P2 · ESTÉTICA` | **R0-B** | nenhuma | sem realce superior; régua de 2/3px permanece o único desenho de aresta |
-| **D-5** | Comentário descreve o código que acompanha | `hero-stage.tsx:47` mostra faixa `18 anos · Brasil` removida em 2026-08-09; `:63` afirma 1,2fr inexistente | documentação interna induz a erro | `P3 · CONTEÚDO` | **R0-B** | D-2 | comentários batem com o código |
+| ~~**D-1**~~ | Porta ativa: grafite **neutro** mais claro; amarelo só em régua e seta — doc 01 §9.4 | ~~derrame de `rgba(245,198,75,0.14)` sobre base quente `rgb(70,65,51)`~~ → superfícies no **eixo neutro**, `rgba(28,28,28,.90)` → `rgba(78,78,78,.95)` | **FECHADO em R0-B** (2026-08-12) | `P1 · ESTÉTICA` | **R0-B** | nenhuma | ✅ croma composto **0–1** nos dois estados em 6 larguras (era 29–35 no ativo); delta declarado de 48,9pt no eixo neutro; grayscale Δ 40,6–43,5 — **não caiu** ao tirar o amarelo |
+| ~~**D-2**~~ | Seletor `1,2fr / 1fr / 1fr` (faixa 1,15–1,3) — doc 01 §9.2 | ~~`repeat(3, minmax(0,1fr))`~~ → **`1.15fr 1fr 1fr`** a partir de `lg` | **FECHADO em R0-B** (2026-08-12) | `P1 · COMPOSIÇÃO` | **R0-B** | nenhuma | ✅ +15,0% de área nas 5 larguras de desktop; iguais abaixo de `lg`; `scrollWidth === clientWidth` em todo nome, nos 8 viewports; `heroBottom` e alturas **idênticos** ao baseline (isolado) |
+| ~~**D-3**~~ | = G-2, aplicado à dobra | **FECHADO em R0-A** (2026-08-12) junto com G-2 | ver a nota de R0-A | `P1 · CONVERSÃO` | **R0-A** | G-2 | ✅ ver G-2; **reverificado em R0-B** sem alteração — ver a nota abaixo |
+| ~~**D-4**~~ | Sem bisel; a aresta é a régua — doc 01 §7.2, §14.2 | ~~`inset 0 2px 0 rgba(255,255,255,0.16)` + `inset 0 -2px 0 rgba(0,0,0,0.5)`~~ → `box-shadow: none`; a régua é `border-top` | **FECHADO em R0-B** (2026-08-12) | `P2 · ESTÉTICA` | **R0-B** | nenhuma | ✅ `boxShadow` computado = `none` na superfície, nos 8 viewports; nada entrou no lugar da sombra de base; demais bordas `0px`, raio `0px` |
+| ~~**D-5**~~ | Comentário descreve o código que acompanha | ~~`hero-stage.tsx:47` mostrava a faixa `18 anos · Brasil` removida em 2026-08-09; `:63` afirmava 1,2fr inexistente~~ | **FECHADO em R0-B** (2026-08-12) | `P3 · CONTEÚDO` | **R0-B** | D-2 | ✅ os dois corrigidos, mais nove outros achados na varredura — ver a nota abaixo |
 | **H-1** | Header CTA "Solicitar orçamento" → `/contato?intencao=equipamentos` — doc 01 §17.4 | `label = 'Solicitar diagnóstico'`, `href="/contato"` | ação persistente aponta para o 3º pilar, contra DEC-001/DEC-003 | `P1 · CONVERSÃO` | **R0-C** | nenhuma | rótulo e destino conformes; **altura, proporções internas e tipografia do cabeçalho inalteradas** (a guia horizontal é G-1b, em R0-A) |
 | **H-2** | Raio do sistema = 2px — doc 01 §7.1 | `rounded-[3px]` no `HeaderCta` | 1px fora do sistema | `P3 · ESTÉTICA` | **R0-C** | nenhuma | raio 2px |
 | **H-3** | Preenchimento de hover por `scaleY`, origem na base — doc 01 §8 | `before:origin-left before:scale-x-0` | eixo divergente do resto do sistema | `P3 · MOTION` | **R0-C** | nenhuma | `scaleY` com origem na base |
 | **H-4** | Sem sombra projetada — doc 01 §14.2 | `hover:shadow-[0_8px_16px_-10px_...]` | sombra dramática em hover | `P2 · ESTÉTICA` | **R0-C** | nenhuma | zero `box-shadow` de projeção |
+
+### R0-B — o que foi implementado
+
+Rodada de 2026-08-12. Evidência completa — baseline `2b622a7` **construído e medido em
+paralelo**, harness, medições cruas e capturas antes/depois — em
+`docs/v2/capturas/hero-r0b-2026-08-12/`.
+
+**A hero não foi redesenhada.** Nenhum item da lista de congelados conceituais (doc 03
+§2.1) foi tocado: scrim, `--u`, coreografia, ARIA, copy, `h1`, largura de leitura,
+posição vertical, cenas, assets, alturas de porta, vãos e preload seguem como estavam.
+
+**D-1 e D-4 são subtração, e as duas se pagam.** O tingimento saiu com a base quente
+junto; o bisel saiu inteiro e **nada entrou no lugar** da sombra de base. A régua deixou
+de ser `box-shadow: inset` e passou a `border-top` — a diferença não é de acabamento: uma
+sombra interna clara no topo com uma escura embaixo *é* a construção de bevel, e uma
+aresta desenhada não é.
+
+O achado que vale registrar: **o Δ em escala de cinza não caiu ao tirar o amarelo**
+(40,6–43,5 depois, contra 37,9–43,5 antes; em 390 e 768 subiu). Ou seja, o derrame não
+estava sustentando hierarquia nenhuma — era poluição cromática pura, e o sinal de estado
+sempre viveu na luminância, na elevação e no peso.
+
+**D-2 escolheu o piso da faixa autorizada.** `1.15fr`, não `1.2fr`: a norma pede a menor
+diferença que torne a prioridade inequívoca, e 1,15 entrega +15,0% de área (61,3px em
+1440) sem que Projetos e Consultoria leiam como restos. Medido, a proporção **não custou
+um pixel de altura** — `heroBottom` e as alturas das portas são idênticos ao baseline nas
+cinco larguras de desktop, isolando a variável no mesmo carregamento.
+
+Abaixo de `lg` as três portas continuam iguais, conforme doc 03 §2.12: em 320px cada
+porta tem ~99px e o nome pede ~81, e ali a área cedida custaria legibilidade de nome.
+
+**D-5 encontrou mais do que os dois itens catalogados.** Além do diagrama com a faixa de
+métricas e da afirmação de 1,2fr, a varredura achou nove comentários descrevendo
+mecanismos que já não existem: a árvore `.plate` da chapa fechada, dois blocos de valores
+de altura e de vão superados, referências a `HEADLINE_MIN`/`INTENT_MIN` (removidos em
+2026-08-09), a afirmação de que o bloco de conteúdo remonta a cada troca (o `key` saiu na
+mesma data), a camada vetorial de Consultoria como fonte de vida da cena (removida em
+2026-08-11) e duas opacidades de seta desatualizadas. Todos corrigidos ou removidos; a
+regra aplicada foi comprimir, não ampliar.
+
+**D-3 foi reverificado, não alterado.** A razão de largura do par PRIMARY × WhatsApp
+continua **1,300** em 1366/1440/1600/1920 e 1,18–1,22 de 320 a 1024 — valor idêntico ao
+medido em R0-A, com a ressalva daquela rodada intacta. A subordinação por construção (uma
+massa, um contorno) é o mecanismo, e ele está de pé. Nada em G-2 foi tocado.
+
+**Uma correção de coerência, dentro das regras reescritas.** No bloco de toque
+(`max-width: 1023px`) a porta escolhida caía para `translateY(-3px)` sob hover preso,
+contra os `-6px` que a norma fixa como sinal de elevação (doc 01 §9.4, sinal 3) — um
+degrau que a rodada de 2026-08-11 não acompanhou. Como aquelas regras existem para
+**cancelar** o hover e estavam sendo reescritas de qualquer forma, elas passam a restaurar
+exatamente a superfície de repouso, elevação incluída.
 
 ---
 
@@ -150,17 +201,22 @@ Nenhuma rampa precisou ceder.
 
 ## 5. Contagem
 
-Atualizado em 2026-08-12, ao fim de **R0-A**.
+Atualizado em 2026-08-12, ao fim de **R0-B**.
 
 | severidade | total | fechados | **abertos** |
 | --- | ---: | ---: | ---: |
 | **P0** | 0 | 0 | **0** |
-| **P1** | 10 | **4** | **6** |
-| **P2** | 19 | 0 | **19** |
-| **P3** | 11 | 0 | **11** |
-| **TOTAL** | 40 | **4** | **36** |
+| **P1** | 10 | **6** | **4** |
+| **P2** | 19 | **1** | **18** |
+| **P3** | 11 | **1** | **10** |
+| **TOTAL** | 40 | **8** | **32** |
 
 Fechados em R0-A: **G-1**, **G-1b**, **G-2** e **D-3** (que é G-2 aplicado à dobra).
+Fechados em R0-B: **D-1**, **D-2**, **D-4** e **D-5**.
+
+**A hero está com zero delta aberto** — os cinco deltas de doc 03 §2.12 fecharam. Ela
+recebeu o selo `CONGELADA` em 2026-08-12 (ver a ficha em `03-BLUEPRINT-HOME.md` §2).
+O cabeçalho continua com quatro deltas abertos e é escopo de **R0-C**.
 
 **Zero P0.** Nenhum delta bloqueia publicação — o produto no ar é funcional, acessível e
 sem dado inventado. Os itens restantes são distância entre o que está no ar e o que a norma
@@ -171,7 +227,8 @@ pede.
 | rodada | P1 |
 | --- | ---: |
 | **R0-A** | ~~2 — G-2/D-3, e os globais G-1/G-1b~~ **fechados** |
-| **R0** (B+C+D) | 3 — D-1, D-2, H-1 |
+| **R0-B** | ~~2 — D-1, D-2~~ **fechados** |
+| **R0** (C+D) | 1 — H-1 |
 | R1 | 1 — S-01 |
 | R2 | 1 — S-05 |
 | R3 | 1 — S-26 |

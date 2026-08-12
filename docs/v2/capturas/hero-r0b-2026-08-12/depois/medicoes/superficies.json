@@ -1,0 +1,3926 @@
+[
+  {
+    "viewport": 390,
+    "escolhido": 0,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            70,
+            70,
+            70
+          ],
+          "cinza": 71.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            50,
+            50,
+            50
+          ],
+          "cinza": 53.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 390,
+    "escolhido": 1,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            69,
+            69,
+            69
+          ],
+          "cinza": 70.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            50,
+            50,
+            50
+          ],
+          "cinza": 53.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 390,
+    "escolhido": 2,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            69,
+            69,
+            69
+          ],
+          "cinza": 70.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            50,
+            50,
+            50
+          ],
+          "cinza": 53.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 390,
+    "escolhido": 0,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            70,
+            70,
+            70
+          ],
+          "cinza": 71.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            50,
+            50,
+            50
+          ],
+          "cinza": 53.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 390,
+    "escolhido": 1,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            69,
+            69,
+            69
+          ],
+          "cinza": 70.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            50,
+            50,
+            50
+          ],
+          "cinza": 53.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 390,
+    "escolhido": 2,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            24,
+            24
+          ],
+          "cinza": 30.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            69,
+            69,
+            69
+          ],
+          "cinza": 70.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            50,
+            50,
+            50
+          ],
+          "cinza": 53.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 768,
+    "escolhido": 0,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            71,
+            71,
+            71
+          ],
+          "cinza": 72.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 768,
+    "escolhido": 1,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            70,
+            70,
+            70
+          ],
+          "cinza": 71.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 768,
+    "escolhido": 2,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            71,
+            71,
+            71
+          ],
+          "cinza": 72.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 768,
+    "escolhido": 0,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            71,
+            71,
+            71
+          ],
+          "cinza": 72.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 768,
+    "escolhido": 1,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            70,
+            70,
+            70
+          ],
+          "cinza": 71.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 768,
+    "escolhido": 2,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            71,
+            71,
+            71
+          ],
+          "cinza": 72.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "escolhido": 0,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            74,
+            74,
+            73
+          ],
+          "cinza": 75.3,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            52,
+            51,
+            51
+          ],
+          "cinza": 54.4,
+          "croma": 1,
+          "quente": 1
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            26,
+            26
+          ],
+          "cinza": 32.1,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            19,
+            20,
+            19
+          ],
+          "cinza": 26.5,
+          "croma": 1,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            62,
+            62
+          ],
+          "cinza": 64.6,
+          "croma": 2,
+          "quente": 2
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            28,
+            27,
+            27
+          ],
+          "cinza": 33,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            19,
+            20,
+            20
+          ],
+          "cinza": 26.5,
+          "croma": 1,
+          "quente": -1
+        },
+        "regua": {
+          "rgb": [
+            65,
+            63,
+            63
+          ],
+          "cinza": 65.6,
+          "croma": 2,
+          "quente": 2
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "escolhido": 1,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            26
+          ],
+          "cinza": 31.1,
+          "croma": 1,
+          "quente": -1
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            73,
+            73
+          ],
+          "cinza": 74.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            32,
+            31,
+            31
+          ],
+          "cinza": 36.5,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            67,
+            66,
+            66
+          ],
+          "cinza": 68.1,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "escolhido": 2,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            29,
+            29,
+            30
+          ],
+          "cinza": 34.6,
+          "croma": 1,
+          "quente": -1
+        },
+        "base": {
+          "rgb": [
+            20,
+            21,
+            21
+          ],
+          "cinza": 27.4,
+          "croma": 1,
+          "quente": -1
+        },
+        "regua": {
+          "rgb": [
+            65,
+            64,
+            64
+          ],
+          "cinza": 66.3,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            77,
+            77,
+            77
+          ],
+          "cinza": 78.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            52,
+            52,
+            51
+          ],
+          "cinza": 55,
+          "croma": 1,
+          "quente": 1
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "escolhido": 0,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            74,
+            74,
+            74
+          ],
+          "cinza": 75.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            26,
+            26
+          ],
+          "cinza": 31.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            27
+          ],
+          "cinza": 32.8,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "escolhido": 1,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            73,
+            73
+          ],
+          "cinza": 74.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            31,
+            31,
+            31
+          ],
+          "cinza": 36.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            66,
+            66,
+            66
+          ],
+          "cinza": 67.9,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "escolhido": 2,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            29,
+            29,
+            29
+          ],
+          "cinza": 34.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            21,
+            21,
+            21
+          ],
+          "cinza": 27.6,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            64,
+            64
+          ],
+          "cinza": 66.1,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            77,
+            77,
+            77
+          ],
+          "cinza": 78.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            52,
+            52,
+            52
+          ],
+          "cinza": 55.1,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "escolhido": 0,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            72,
+            72
+          ],
+          "cinza": 73.7,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            26,
+            26
+          ],
+          "cinza": 31.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            20,
+            19
+          ],
+          "cinza": 26.5,
+          "croma": 1,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            27
+          ],
+          "cinza": 32.8,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            20,
+            19
+          ],
+          "cinza": 26.5,
+          "croma": 1,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            65,
+            63,
+            63
+          ],
+          "cinza": 65.6,
+          "croma": 2,
+          "quente": 2
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "escolhido": 1,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            18,
+            19,
+            19
+          ],
+          "cinza": 25.7,
+          "croma": 1,
+          "quente": -1
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            73,
+            72
+          ],
+          "cinza": 74.4,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            32,
+            31,
+            31
+          ],
+          "cinza": 36.5,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            18,
+            19,
+            19
+          ],
+          "cinza": 25.7,
+          "croma": 1,
+          "quente": -1
+        },
+        "regua": {
+          "rgb": [
+            67,
+            66,
+            66
+          ],
+          "cinza": 68.1,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "escolhido": 2,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            25,
+            26
+          ],
+          "cinza": 30.9,
+          "croma": 2,
+          "quente": -2
+        },
+        "base": {
+          "rgb": [
+            18,
+            19,
+            19
+          ],
+          "cinza": 25.7,
+          "croma": 1,
+          "quente": -1
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            26
+          ],
+          "cinza": 31.1,
+          "croma": 1,
+          "quente": -1
+        },
+        "base": {
+          "rgb": [
+            18,
+            19,
+            19
+          ],
+          "cinza": 25.7,
+          "croma": 1,
+          "quente": -1
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            63
+          ],
+          "cinza": 64.5,
+          "croma": 1,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            76,
+            76,
+            76
+          ],
+          "cinza": 77.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            52,
+            52,
+            52
+          ],
+          "cinza": 55.1,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "escolhido": 0,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            72,
+            72,
+            72
+          ],
+          "cinza": 73.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            26,
+            26
+          ],
+          "cinza": 31.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            27
+          ],
+          "cinza": 32.8,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "escolhido": 1,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            73,
+            73
+          ],
+          "cinza": 74.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            31,
+            31,
+            31
+          ],
+          "cinza": 36.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            66,
+            66,
+            66
+          ],
+          "cinza": 67.9,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "escolhido": 2,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            76,
+            76,
+            76
+          ],
+          "cinza": 77.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            52,
+            52,
+            52
+          ],
+          "cinza": 55.1,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "escolhido": 0,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            72,
+            72,
+            72
+          ],
+          "cinza": 73.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            26,
+            26
+          ],
+          "cinza": 32.1,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            19,
+            20,
+            19
+          ],
+          "cinza": 26.5,
+          "croma": 1,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            27
+          ],
+          "cinza": 32.8,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            20,
+            19
+          ],
+          "cinza": 26.5,
+          "croma": 1,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            65,
+            63,
+            63
+          ],
+          "cinza": 65.6,
+          "croma": 2,
+          "quente": 2
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "escolhido": 1,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            25,
+            26
+          ],
+          "cinza": 31.3,
+          "croma": 1,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            62,
+            62
+          ],
+          "cinza": 64.6,
+          "croma": 2,
+          "quente": 2
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            72,
+            72,
+            72
+          ],
+          "cinza": 73.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            26
+          ],
+          "cinza": 32.7,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            66,
+            65,
+            65
+          ],
+          "cinza": 67.2,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "escolhido": 2,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            25,
+            25
+          ],
+          "cinza": 30.9,
+          "croma": 1,
+          "quente": -1
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            26
+          ],
+          "cinza": 31.1,
+          "croma": 1,
+          "quente": -1
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            63
+          ],
+          "cinza": 64.5,
+          "croma": 1,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            75,
+            73,
+            73
+          ],
+          "cinza": 74.8,
+          "croma": 2,
+          "quente": 2
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "escolhido": 0,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            72,
+            72,
+            72
+          ],
+          "cinza": 73.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            26,
+            26
+          ],
+          "cinza": 31.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            27
+          ],
+          "cinza": 32.8,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "escolhido": 1,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            72,
+            72,
+            72
+          ],
+          "cinza": 73.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            27
+          ],
+          "cinza": 32.8,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            65,
+            65,
+            65
+          ],
+          "cinza": 67,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "escolhido": 2,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            73,
+            73
+          ],
+          "cinza": 74.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "escolhido": 0,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            73,
+            73
+          ],
+          "cinza": 74.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            26,
+            26
+          ],
+          "cinza": 31.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            63
+          ],
+          "cinza": 65.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            26
+          ],
+          "cinza": 32.7,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            19,
+            20,
+            19
+          ],
+          "cinza": 26.5,
+          "croma": 1,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            65,
+            63,
+            63
+          ],
+          "cinza": 65.6,
+          "croma": 2,
+          "quente": 2
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "escolhido": 1,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            25,
+            26
+          ],
+          "cinza": 31.3,
+          "croma": 1,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            64,
+            63,
+            62
+          ],
+          "cinza": 65.3,
+          "croma": 2,
+          "quente": 2
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            72,
+            72,
+            72
+          ],
+          "cinza": 73.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            31,
+            30,
+            30
+          ],
+          "cinza": 35.6,
+          "croma": 1,
+          "quente": 1
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            67,
+            66,
+            66
+          ],
+          "cinza": 68.1,
+          "croma": 1,
+          "quente": 1
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "escolhido": 2,
+    "cinza": false,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            24,
+            25,
+            26
+          ],
+          "cinza": 30.9,
+          "croma": 2,
+          "quente": -2
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            62
+          ],
+          "cinza": 64.4,
+          "croma": 1,
+          "quente": 1
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            26
+          ],
+          "cinza": 31.1,
+          "croma": 1,
+          "quente": -1
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            62,
+            63
+          ],
+          "cinza": 64.5,
+          "croma": 1,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            76,
+            75,
+            74
+          ],
+          "cinza": 76.4,
+          "croma": 2,
+          "quente": 2
+        },
+        "base": {
+          "rgb": [
+            52,
+            52,
+            52
+          ],
+          "cinza": 55.1,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            245,
+            198,
+            75
+          ],
+          "cinza": 202.6,
+          "croma": 170,
+          "quente": 170
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "escolhido": 0,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            73,
+            73,
+            73
+          ],
+          "cinza": 74.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            26,
+            26,
+            26
+          ],
+          "cinza": 31.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            27,
+            27,
+            27
+          ],
+          "cinza": 32.8,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            20,
+            20,
+            20
+          ],
+          "cinza": 26.7,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "escolhido": 1,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            63,
+            63,
+            63
+          ],
+          "cinza": 65.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            72,
+            72,
+            72
+          ],
+          "cinza": 73.5,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            51,
+            51,
+            51
+          ],
+          "cinza": 54.2,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            30,
+            30,
+            30
+          ],
+          "cinza": 35.4,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            66,
+            66,
+            66
+          ],
+          "cinza": 67.9,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "escolhido": 2,
+    "cinza": true,
+    "portas": [
+      {
+        "id": "hero-aba-equipamentos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-projetos",
+        "selected": false,
+        "topo": {
+          "rgb": [
+            25,
+            25,
+            25
+          ],
+          "cinza": 31,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            19,
+            19,
+            19
+          ],
+          "cinza": 25.9,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            62,
+            62,
+            62
+          ],
+          "cinza": 64.2,
+          "croma": 0,
+          "quente": 0
+        }
+      },
+      {
+        "id": "hero-aba-consultoria",
+        "selected": true,
+        "topo": {
+          "rgb": [
+            75,
+            75,
+            75
+          ],
+          "cinza": 76.3,
+          "croma": 0,
+          "quente": 0
+        },
+        "base": {
+          "rgb": [
+            52,
+            52,
+            52
+          ],
+          "cinza": 55.1,
+          "croma": 0,
+          "quente": 0
+        },
+        "regua": {
+          "rgb": [
+            199,
+            199,
+            199
+          ],
+          "cinza": 197.7,
+          "croma": 0,
+          "quente": 0
+        }
+      }
+    ]
+  }
+]

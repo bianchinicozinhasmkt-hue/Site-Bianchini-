@@ -1,0 +1,2942 @@
+[
+  {
+    "viewport": 1024,
+    "estado": "equipamentos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Equipamentos",
+        "x": 51.2,
+        "y": 134,
+        "w": 144.6,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.44,
+        "piorPx": [
+          19,
+          18,
+          17
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Equipamentos para cozinha profissional, espe",
+        "x": 51.2,
+        "y": 162.9,
+        "w": 480,
+        "h": 159.6,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 38,
+        "fontWeight": "700",
+        "pior": 6.69,
+        "piorPx": [
+          82,
+          82,
+          82
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Da especificação à instalação e ao comission",
+        "x": 51.2,
+        "y": 342.4,
+        "w": 480,
+        "h": 86.4,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 6.26,
+        "piorPx": [
+          73,
+          71,
+          69
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 107.2,
+        "y": 590.8,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 10.31,
+        "piorPx": [
+          56,
+          54,
+          51
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 51.2,
+        "y": 675.3,
+        "w": 127.8,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.74,
+        "piorPx": [
+          65,
+          65,
+          65
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 51.2,
+        "y": 707,
+        "w": 293.5,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.19,
+        "piorPx": [
+          51,
+          50,
+          50
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 408.7,
+        "y": 681.3,
+        "w": 81.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.13,
+        "piorPx": [
+          24,
+          25,
+          25
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 408.7,
+        "y": 713,
+        "w": 250,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.09,
+        "piorPx": [
+          20,
+          21,
+          21
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 722.8,
+        "y": 670.9,
+        "w": 113.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 10.92,
+        "piorPx": [
+          27,
+          27,
+          27
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 722.8,
+        "y": 702.7,
+        "w": 250,
+        "h": 41.3,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.04,
+        "piorPx": [
+          22,
+          22,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "estado": "projetos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Projetos para food service",
+        "x": 51.2,
+        "y": 158.8,
+        "w": 254.9,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 9.95,
+        "piorPx": [
+          26,
+          25,
+          24
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Abrir, reformar ou reorganizar começa pelo p",
+        "x": 51.2,
+        "y": 187.7,
+        "w": 480,
+        "h": 119.7,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 38,
+        "fontWeight": "700",
+        "pior": 15.03,
+        "piorPx": [
+          26,
+          25,
+          24
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Layout, fluxo, infraestrutura e dimensioname",
+        "x": 51.2,
+        "y": 327.4,
+        "w": 480,
+        "h": 57.6,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 11.19,
+        "piorPx": [
+          25,
+          24,
+          23
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 107.2,
+        "y": 571.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 9.01,
+        "piorPx": [
+          68,
+          62,
+          58
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 51.2,
+        "y": 662.3,
+        "w": 125.5,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 51.2,
+        "y": 694.1,
+        "w": 293.5,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.17,
+        "piorPx": [
+          18,
+          19,
+          19
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 408.7,
+        "y": 656.3,
+        "w": 83.5,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 9.02,
+        "piorPx": [
+          63,
+          63,
+          63
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 408.7,
+        "y": 688.1,
+        "w": 250,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.1,
+        "piorPx": [
+          51,
+          51,
+          51
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 722.8,
+        "y": 652,
+        "w": 113.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 10.51,
+        "piorPx": [
+          31,
+          31,
+          31
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 722.8,
+        "y": 683.8,
+        "w": 250,
+        "h": 41.3,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 7.94,
+        "piorPx": [
+          24,
+          24,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1024,
+    "estado": "consultoria",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Diagnóstico operacional",
+        "x": 51.2,
+        "y": 164.4,
+        "w": 235,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.52,
+        "piorPx": [
+          16,
+          17,
+          18
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Encontre a causa antes de investir na soluçã",
+        "x": 51.2,
+        "y": 193.3,
+        "w": 480,
+        "h": 79.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 38,
+        "fontWeight": "700",
+        "pior": 14.76,
+        "piorPx": [
+          26,
+          27,
+          29
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "A Bianchini analisa fluxo, capacidade, proce",
+        "x": 51.2,
+        "y": 293.1,
+        "w": 480,
+        "h": 86.4,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 10.71,
+        "piorPx": [
+          28,
+          29,
+          32
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 107.2,
+        "y": 571.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 14.75,
+        "piorPx": [
+          26,
+          27,
+          30
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 51.2,
+        "y": 662.3,
+        "w": 125.5,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.24,
+        "piorPx": [
+          22,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 51.2,
+        "y": 694.1,
+        "w": 293.5,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.21,
+        "piorPx": [
+          17,
+          18,
+          18
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 408.7,
+        "y": 662.3,
+        "w": 81.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 408.7,
+        "y": 694.1,
+        "w": 250,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.05,
+        "piorPx": [
+          21,
+          22,
+          22
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 722.8,
+        "y": 646,
+        "w": 115.9,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 7.7,
+        "piorPx": [
+          73,
+          73,
+          74
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 722.8,
+        "y": 677.8,
+        "w": 250,
+        "h": 41.3,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.24,
+        "piorPx": [
+          58,
+          58,
+          58
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "estado": "equipamentos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Equipamentos",
+        "x": 68.3,
+        "y": 153.6,
+        "w": 144.6,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 8.79,
+        "piorPx": [
+          40,
+          38,
+          35
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Equipamentos para cozinha profissional, espe",
+        "x": 68.3,
+        "y": 182.3,
+        "w": 640,
+        "h": 146.3,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 46.444,
+        "fontWeight": "700",
+        "pior": 6.59,
+        "piorPx": [
+          83,
+          83,
+          83
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Da especificação à instalação e ao comission",
+        "x": 68.3,
+        "y": 348.3,
+        "w": 578.8,
+        "h": 85.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 17.7889,
+        "fontWeight": "500",
+        "pior": 5.6,
+        "piorPx": [
+          80,
+          79,
+          77
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 124.3,
+        "y": 586.6,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.56,
+        "piorPx": [
+          69,
+          66,
+          61
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 68.3,
+        "y": 663.6,
+        "w": 127.8,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.47,
+        "piorPx": [
+          67,
+          67,
+          67
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 68.3,
+        "y": 695.4,
+        "w": 405.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.35,
+        "piorPx": [
+          49,
+          49,
+          49
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 538.2,
+        "y": 669.6,
+        "w": 81.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.11,
+        "piorPx": [
+          25,
+          25,
+          25
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 538.2,
+        "y": 701.4,
+        "w": 347.8,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.13,
+        "piorPx": [
+          19,
+          20,
+          20
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 949.9,
+        "y": 669.6,
+        "w": 113.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.02,
+        "piorPx": [
+          26,
+          26,
+          25
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 949.9,
+        "y": 701.4,
+        "w": 347.7,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.12,
+        "piorPx": [
+          20,
+          20,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "estado": "projetos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Projetos para food service",
+        "x": 68.3,
+        "y": 192.2,
+        "w": 254.9,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 9.95,
+        "piorPx": [
+          26,
+          25,
+          23
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Abrir, reformar ou reorganizar começa pelo p",
+        "x": 68.3,
+        "y": 220.9,
+        "w": 640,
+        "h": 97.5,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 46.444,
+        "fontWeight": "700",
+        "pior": 15.18,
+        "piorPx": [
+          25,
+          24,
+          23
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Layout, fluxo, infraestrutura e dimensioname",
+        "x": 68.3,
+        "y": 338.2,
+        "w": 578.8,
+        "h": 56.9,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 17.7889,
+        "fontWeight": "500",
+        "pior": 11.2,
+        "piorPx": [
+          25,
+          24,
+          22
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 124.3,
+        "y": 586.6,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 15.71,
+        "piorPx": [
+          23,
+          20,
+          17
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 68.3,
+        "y": 669.6,
+        "w": 125.5,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.21,
+        "piorPx": [
+          24,
+          24,
+          23
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 68.3,
+        "y": 701.4,
+        "w": 405.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.17,
+        "piorPx": [
+          18,
+          19,
+          19
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 538.2,
+        "y": 663.6,
+        "w": 83.5,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.71,
+        "piorPx": [
+          66,
+          65,
+          65
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 538.2,
+        "y": 695.4,
+        "w": 347.8,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.23,
+        "piorPx": [
+          50,
+          50,
+          49
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 949.9,
+        "y": 669.6,
+        "w": 113.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 10.64,
+        "piorPx": [
+          29,
+          30,
+          29
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 949.9,
+        "y": 701.4,
+        "w": 347.7,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.05,
+        "piorPx": [
+          21,
+          22,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1366,
+    "estado": "consultoria",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Diagnóstico operacional",
+        "x": 68.3,
+        "y": 192.2,
+        "w": 235,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.52,
+        "piorPx": [
+          16,
+          17,
+          18
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Encontre a causa antes de investir na soluçã",
+        "x": 68.3,
+        "y": 220.9,
+        "w": 640,
+        "h": 97.5,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 46.444,
+        "fontWeight": "700",
+        "pior": 15.21,
+        "piorPx": [
+          23,
+          24,
+          26
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "A Bianchini analisa fluxo, capacidade, proce",
+        "x": 68.3,
+        "y": 338.2,
+        "w": 578.8,
+        "h": 56.9,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 17.7889,
+        "fontWeight": "500",
+        "pior": 11.28,
+        "piorPx": [
+          23,
+          23,
+          25
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 124.3,
+        "y": 586.6,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 15.66,
+        "piorPx": [
+          20,
+          21,
+          22
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 68.3,
+        "y": 669.6,
+        "w": 125.5,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.29,
+        "piorPx": [
+          23,
+          23,
+          23
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 68.3,
+        "y": 701.4,
+        "w": 405.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.21,
+        "piorPx": [
+          17,
+          18,
+          18
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 538.2,
+        "y": 669.6,
+        "w": 81.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.2,
+        "piorPx": [
+          24,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 538.2,
+        "y": 701.4,
+        "w": 347.8,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.04,
+        "piorPx": [
+          21,
+          22,
+          23
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 949.9,
+        "y": 663.6,
+        "w": 115.9,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.21,
+        "piorPx": [
+          69,
+          69,
+          69
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 949.9,
+        "y": 695.4,
+        "w": 347.7,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.1,
+        "piorPx": [
+          51,
+          51,
+          51
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "estado": "equipamentos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Equipamentos",
+        "x": 72,
+        "y": 214,
+        "w": 144.6,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 4.98,
+        "piorPx": [
+          82,
+          82,
+          81
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Equipamentos para cozinha profissional, espe",
+        "x": 72,
+        "y": 242.9,
+        "w": 640,
+        "h": 154.2,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 48.96,
+        "fontWeight": "700",
+        "pior": 7,
+        "piorPx": [
+          80,
+          79,
+          78
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Da especificação à instalação e ao comission",
+        "x": 72,
+        "y": 417,
+        "w": 585.9,
+        "h": 86.4,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 5.99,
+        "piorPx": [
+          76,
+          74,
+          73
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 128,
+        "y": 717.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 7.03,
+        "piorPx": [
+          83,
+          78,
+          75
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 72,
+        "y": 795.3,
+        "w": 127.8,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.48,
+        "piorPx": [
+          67,
+          67,
+          66
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 72,
+        "y": 827.1,
+        "w": 430.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.22,
+        "piorPx": [
+          50,
+          50,
+          50
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 566.2,
+        "y": 801.3,
+        "w": 81.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.04,
+        "piorPx": [
+          25,
+          26,
+          25
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 566.2,
+        "y": 833.1,
+        "w": 368.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.09,
+        "piorPx": [
+          20,
+          21,
+          21
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 999.1,
+        "y": 801.3,
+        "w": 113.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.02,
+        "piorPx": [
+          26,
+          26,
+          25
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 999.1,
+        "y": 833.1,
+        "w": 368.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.13,
+        "piorPx": [
+          19,
+          20,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "estado": "projetos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Projetos para food service",
+        "x": 72,
+        "y": 228.4,
+        "w": 254.9,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 9.95,
+        "piorPx": [
+          26,
+          25,
+          23
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Abrir, reformar ou reorganizar começa pelo p",
+        "x": 72,
+        "y": 257.3,
+        "w": 640,
+        "h": 154.2,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 48.96,
+        "fontWeight": "700",
+        "pior": 15.04,
+        "piorPx": [
+          26,
+          25,
+          23
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Layout, fluxo, infraestrutura e dimensioname",
+        "x": 72,
+        "y": 431.5,
+        "w": 585.9,
+        "h": 57.6,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 11.28,
+        "piorPx": [
+          24,
+          23,
+          22
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 128,
+        "y": 717.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 14.62,
+        "piorPx": [
+          32,
+          27,
+          22
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 72,
+        "y": 801.3,
+        "w": 125.5,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 72,
+        "y": 833.1,
+        "w": 430.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.17,
+        "piorPx": [
+          18,
+          19,
+          19
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 566.2,
+        "y": 795.3,
+        "w": 83.5,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.62,
+        "piorPx": [
+          66,
+          66,
+          65
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 566.2,
+        "y": 827.1,
+        "w": 368.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.19,
+        "piorPx": [
+          51,
+          50,
+          50
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 999.1,
+        "y": 801.3,
+        "w": 113.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 10.72,
+        "piorPx": [
+          29,
+          29,
+          29
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 999.1,
+        "y": 833.1,
+        "w": 368.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.04,
+        "piorPx": [
+          22,
+          22,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "estado": "consultoria",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Diagnóstico operacional",
+        "x": 72,
+        "y": 254.1,
+        "w": 235,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.46,
+        "piorPx": [
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Encontre a causa antes de investir na soluçã",
+        "x": 72,
+        "y": 283,
+        "w": 640,
+        "h": 102.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 48.96,
+        "fontWeight": "700",
+        "pior": 15.03,
+        "piorPx": [
+          25,
+          25,
+          27
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "A Bianchini analisa fluxo, capacidade, proce",
+        "x": 72,
+        "y": 405.8,
+        "w": 585.9,
+        "h": 57.6,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 11.19,
+        "piorPx": [
+          24,
+          24,
+          26
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 128,
+        "y": 717.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 15.35,
+        "piorPx": [
+          22,
+          23,
+          26
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 72,
+        "y": 801.3,
+        "w": 125.5,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.31,
+        "piorPx": [
+          22,
+          23,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 72,
+        "y": 833.1,
+        "w": 430.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.21,
+        "piorPx": [
+          17,
+          18,
+          18
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 566.2,
+        "y": 801.3,
+        "w": 81.8,
+        "h": 23.8,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 19,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 566.2,
+        "y": 833.1,
+        "w": 368.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.05,
+        "piorPx": [
+          21,
+          22,
+          22
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 999.1,
+        "y": 795.3,
+        "w": 115.9,
+        "h": 23.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.34,
+        "piorPx": [
+          68,
+          68,
+          68
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 999.1,
+        "y": 827.1,
+        "w": 368.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.97,
+        "piorPx": [
+          52,
+          52,
+          52
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1600,
+    "estado": "equipamentos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Equipamentos",
+        "x": 100,
+        "y": 251.7,
+        "w": 144.6,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 8.54,
+        "piorPx": [
+          44,
+          40,
+          39
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Equipamentos para cozinha profissional, espe",
+        "x": 100,
+        "y": 280.6,
+        "w": 768,
+        "h": 182.7,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 58,
+        "fontWeight": "700",
+        "pior": 7.09,
+        "piorPx": [
+          80,
+          78,
+          76
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Da especificação à instalação e ao comission",
+        "x": 100,
+        "y": 483.3,
+        "w": 585.9,
+        "h": 86.4,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 6.42,
+        "piorPx": [
+          72,
+          69,
+          68
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 156,
+        "y": 709.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 8.35,
+        "piorPx": [
+          72,
+          67,
+          64
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 100,
+        "y": 790.1,
+        "w": 141.2,
+        "h": 26.3,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 21,
+        "fontWeight": "700",
+        "pior": 8.61,
+        "piorPx": [
+          66,
+          66,
+          66
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 100,
+        "y": 824.3,
+        "w": 460.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.35,
+        "piorPx": [
+          49,
+          49,
+          49
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 636.2,
+        "y": 796.1,
+        "w": 90.4,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.11,
+        "piorPx": [
+          25,
+          25,
+          25
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 636.2,
+        "y": 830.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.12,
+        "piorPx": [
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 1106.1,
+        "y": 796.1,
+        "w": 125.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.04,
+        "piorPx": [
+          25,
+          26,
+          25
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 1106.1,
+        "y": 830.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.14,
+        "piorPx": [
+          19,
+          20,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1600,
+    "estado": "projetos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Projetos para food service",
+        "x": 100,
+        "y": 266.1,
+        "w": 254.9,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.02,
+        "piorPx": [
+          25,
+          24,
+          23
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Abrir, reformar ou reorganizar começa pelo p",
+        "x": 100,
+        "y": 295,
+        "w": 768,
+        "h": 182.7,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 58,
+        "fontWeight": "700",
+        "pior": 15.18,
+        "piorPx": [
+          25,
+          24,
+          23
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Layout, fluxo, infraestrutura e dimensioname",
+        "x": 100,
+        "y": 497.7,
+        "w": 585.9,
+        "h": 57.6,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 7.57,
+        "piorPx": [
+          62,
+          57,
+          53
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 156,
+        "y": 709.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 15.28,
+        "piorPx": [
+          26,
+          23,
+          20
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 100,
+        "y": 796.1,
+        "w": 138.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 100,
+        "y": 830.3,
+        "w": 460.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.18,
+        "piorPx": [
+          18,
+          19,
+          18
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 636.2,
+        "y": 790.1,
+        "w": 92.3,
+        "h": 26.3,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 21,
+        "fontWeight": "700",
+        "pior": 8.75,
+        "piorPx": [
+          65,
+          65,
+          64
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 636.2,
+        "y": 824.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.32,
+        "piorPx": [
+          50,
+          49,
+          49
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 1106.1,
+        "y": 796.1,
+        "w": 125.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 10.72,
+        "piorPx": [
+          29,
+          29,
+          29
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 1106.1,
+        "y": 830.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.05,
+        "piorPx": [
+          21,
+          22,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1600,
+    "estado": "consultoria",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Diagnóstico operacional",
+        "x": 100,
+        "y": 296.6,
+        "w": 235,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.51,
+        "piorPx": [
+          17,
+          17,
+          19
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Encontre a causa antes de investir na soluçã",
+        "x": 100,
+        "y": 325.5,
+        "w": 768,
+        "h": 121.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 58,
+        "fontWeight": "700",
+        "pior": 14.91,
+        "piorPx": [
+          25,
+          26,
+          28
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "A Bianchini analisa fluxo, capacidade, proce",
+        "x": 100,
+        "y": 467.3,
+        "w": 585.9,
+        "h": 57.6,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 11.37,
+        "piorPx": [
+          22,
+          22,
+          24
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 156,
+        "y": 709.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 15.64,
+        "piorPx": [
+          20,
+          21,
+          24
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 100,
+        "y": 796.1,
+        "w": 138.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.31,
+        "piorPx": [
+          22,
+          23,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 100,
+        "y": 830.3,
+        "w": 460.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.21,
+        "piorPx": [
+          17,
+          18,
+          18
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 636.2,
+        "y": 796.1,
+        "w": 90.4,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 636.2,
+        "y": 830.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.05,
+        "piorPx": [
+          21,
+          22,
+          22
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 1106.1,
+        "y": 790.1,
+        "w": 128.1,
+        "h": 26.3,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 21,
+        "fontWeight": "700",
+        "pior": 8.34,
+        "piorPx": [
+          68,
+          68,
+          68
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 1106.1,
+        "y": 824.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.1,
+        "piorPx": [
+          51,
+          51,
+          51
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "estado": "equipamentos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Equipamentos",
+        "x": 260,
+        "y": 343.7,
+        "w": 144.6,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 9.06,
+        "piorPx": [
+          37,
+          35,
+          34
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Equipamentos para cozinha profissional, espe",
+        "x": 260,
+        "y": 372.6,
+        "w": 768,
+        "h": 182.7,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 58,
+        "fontWeight": "700",
+        "pior": 7.52,
+        "piorPx": [
+          77,
+          74,
+          73
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Da especificação à instalação e ao comission",
+        "x": 260,
+        "y": 575.3,
+        "w": 585.9,
+        "h": 86.4,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 6.52,
+        "piorPx": [
+          71,
+          68,
+          66
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 316,
+        "y": 889.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 6.21,
+        "piorPx": [
+          91,
+          86,
+          82
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 260,
+        "y": 970.1,
+        "w": 141.2,
+        "h": 26.3,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 21,
+        "fontWeight": "700",
+        "pior": 8.61,
+        "piorPx": [
+          66,
+          66,
+          66
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 260,
+        "y": 1004.3,
+        "w": 460.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.35,
+        "piorPx": [
+          49,
+          49,
+          49
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 796.2,
+        "y": 976.1,
+        "w": 90.4,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.11,
+        "piorPx": [
+          25,
+          25,
+          25
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 796.2,
+        "y": 1010.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.13,
+        "piorPx": [
+          19,
+          20,
+          20
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 1266.1,
+        "y": 976.1,
+        "w": 125.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.11,
+        "piorPx": [
+          25,
+          25,
+          25
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 1266.1,
+        "y": 1010.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.14,
+        "piorPx": [
+          19,
+          20,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "estado": "projetos",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Projetos para food service",
+        "x": 260,
+        "y": 358.1,
+        "w": 254.9,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.02,
+        "piorPx": [
+          25,
+          24,
+          23
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Abrir, reformar ou reorganizar começa pelo p",
+        "x": 260,
+        "y": 387,
+        "w": 768,
+        "h": 182.7,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 58,
+        "fontWeight": "700",
+        "pior": 15.18,
+        "piorPx": [
+          25,
+          24,
+          23
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "Layout, fluxo, infraestrutura e dimensioname",
+        "x": 260,
+        "y": 589.7,
+        "w": 585.9,
+        "h": 57.6,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 8.62,
+        "piorPx": [
+          53,
+          47,
+          43
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 316,
+        "y": 889.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 14.46,
+        "piorPx": [
+          33,
+          28,
+          24
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 260,
+        "y": 976.1,
+        "w": 138.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 260,
+        "y": 1010.3,
+        "w": 460.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.17,
+        "piorPx": [
+          18,
+          19,
+          19
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 796.2,
+        "y": 970.1,
+        "w": 92.3,
+        "h": 26.3,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 21,
+        "fontWeight": "700",
+        "pior": 8.75,
+        "piorPx": [
+          65,
+          65,
+          64
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 796.2,
+        "y": 1004.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.35,
+        "piorPx": [
+          49,
+          49,
+          49
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 1266.1,
+        "y": 976.1,
+        "w": 125.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 10.82,
+        "piorPx": [
+          28,
+          28,
+          28
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 1266.1,
+        "y": 1010.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.05,
+        "piorPx": [
+          21,
+          22,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "estado": "consultoria",
+    "textos": [
+      {
+        "i": 0,
+        "nome": "etiqueta",
+        "tag": "P",
+        "texto": "Diagnóstico operacional",
+        "x": 260,
+        "y": 388.6,
+        "w": 235,
+        "h": 16.9,
+        "color": "rgba(239, 237, 235, 0.8)",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "pior": 10.44,
+        "piorPx": [
+          18,
+          18,
+          20
+        ]
+      },
+      {
+        "i": 1,
+        "nome": "h1",
+        "tag": "H1",
+        "texto": "Encontre a causa antes de investir na soluçã",
+        "x": 260,
+        "y": 417.5,
+        "w": 768,
+        "h": 121.8,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 58,
+        "fontWeight": "700",
+        "pior": 14.91,
+        "piorPx": [
+          25,
+          26,
+          28
+        ]
+      },
+      {
+        "i": 2,
+        "nome": "intencao",
+        "tag": "P",
+        "texto": "A Bianchini analisa fluxo, capacidade, proce",
+        "x": 260,
+        "y": 559.3,
+        "w": 585.9,
+        "h": 57.6,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 18,
+        "fontWeight": "500",
+        "pior": 11.3,
+        "piorPx": [
+          22,
+          23,
+          25
+        ]
+      },
+      {
+        "i": 3,
+        "nome": "instrucao",
+        "tag": "P",
+        "texto": "Escolha o que sua operação precisa resolver",
+        "x": 316,
+        "y": 889.9,
+        "w": 408.5,
+        "h": 26.1,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 19,
+        "fontWeight": "700",
+        "pior": 15.35,
+        "piorPx": [
+          22,
+          23,
+          26
+        ]
+      },
+      {
+        "i": 4,
+        "nome": "porta0-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Equipamentos",
+        "x": 260,
+        "y": 976.1,
+        "w": 138.7,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.31,
+        "piorPx": [
+          22,
+          23,
+          24
+        ]
+      },
+      {
+        "i": 5,
+        "nome": "porta0-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Comprar, substituir ou especificar",
+        "x": 260,
+        "y": 1010.3,
+        "w": 460.2,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.21,
+        "piorPx": [
+          17,
+          18,
+          18
+        ]
+      },
+      {
+        "i": 6,
+        "nome": "porta1-nome-inativa",
+        "tag": "SPAN",
+        "texto": "Projetos",
+        "x": 796.2,
+        "y": 976.1,
+        "w": 90.4,
+        "h": 26.3,
+        "color": "rgba(239, 237, 235, 0.85)",
+        "fontSize": 21,
+        "fontWeight": "600",
+        "pior": 11.22,
+        "piorPx": [
+          23,
+          24,
+          24
+        ]
+      },
+      {
+        "i": 7,
+        "nome": "porta1-cue-inativa",
+        "tag": "SPAN",
+        "texto": "Abrir, reformar ou reorganizar",
+        "x": 796.2,
+        "y": 1010.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.7)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 8.05,
+        "piorPx": [
+          21,
+          22,
+          22
+        ]
+      },
+      {
+        "i": 8,
+        "nome": "porta2-nome-ativa",
+        "tag": "SPAN",
+        "texto": "Consultoria",
+        "x": 1266.1,
+        "y": 970.1,
+        "w": 128.1,
+        "h": 26.3,
+        "color": "rgb(239, 237, 235)",
+        "fontSize": 21,
+        "fontWeight": "700",
+        "pior": 8.34,
+        "piorPx": [
+          68,
+          68,
+          68
+        ]
+      },
+      {
+        "i": 9,
+        "nome": "porta2-cue-ativa",
+        "tag": "SPAN",
+        "texto": "Corrigir gargalos e melhorar resultados",
+        "x": 1266.1,
+        "y": 1004.3,
+        "w": 393.9,
+        "h": 20.6,
+        "color": "rgba(239, 237, 235, 0.9)",
+        "fontSize": 15,
+        "fontWeight": "400",
+        "pior": 9.1,
+        "piorPx": [
+          51,
+          51,
+          51
+        ]
+      }
+    ]
+  }
+]

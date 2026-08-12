@@ -1,0 +1,1574 @@
+{
+  "rows": [
+    {
+      "viewport": 320,
+      "altura": 568,
+      "rootW": 320,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 20,
+      "porta0x": 14,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 4,
+          "y": 701.7,
+          "w": 98.7,
+          "h": 60,
+          "padL": 10,
+          "padT": 14,
+          "padB": 14,
+          "util": 78.7,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 16.3,
+            "lineHeight": 16.3,
+            "linhas": 1,
+            "fontSize": 13,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 87,
+            "clientW": 87
+          },
+          "cue": {
+            "h": 0,
+            "lineHeight": 17.9,
+            "linhas": 0,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 0,
+            "clientW": 0
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": "oculta"
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 110.7,
+          "y": 707.7,
+          "w": 98.7,
+          "h": 60,
+          "padL": 10,
+          "padT": 14,
+          "padB": 14,
+          "util": 78.7,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 16.3,
+            "lineHeight": 16.3,
+            "linhas": 1,
+            "fontSize": 13,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 56,
+            "clientW": 56
+          },
+          "cue": {
+            "h": 0,
+            "lineHeight": 17.9,
+            "linhas": 0,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 0,
+            "clientW": 0
+          },
+          "nomeTexto": "Projetos",
+          "seta": "oculta"
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 217.3,
+          "y": 707.7,
+          "w": 98.7,
+          "h": 60,
+          "padL": 10,
+          "padT": 14,
+          "padB": 14,
+          "util": 78.7,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 16.3,
+            "lineHeight": 16.3,
+            "linhas": 1,
+            "fontSize": 13,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 78,
+            "clientW": 78
+          },
+          "cue": {
+            "h": 0,
+            "lineHeight": 17.9,
+            "linhas": 0,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 0,
+            "clientW": 0
+          },
+          "nomeTexto": "Consultoria",
+          "seta": "oculta"
+        }
+      ],
+      "larguras": [
+        98.7,
+        98.7,
+        98.7
+      ],
+      "razao": 1,
+      "gap": 8,
+      "filaBottom": 773.7,
+      "heroBottom": 773.7,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 2446.3,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 269.8,
+        "whatsapp": 228.1,
+        "razao": 1.183,
+        "primaryH": 48,
+        "whatsappH": 48,
+        "empilhados": true,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": 390,
+      "altura": 844,
+      "rootW": 390,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 20,
+      "porta0x": 14,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 4,
+          "y": 775.8,
+          "w": 122,
+          "h": 60,
+          "padL": 10,
+          "padT": 14,
+          "padB": 14,
+          "util": 102,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 16.3,
+            "lineHeight": 16.3,
+            "linhas": 1,
+            "fontSize": 13,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 87,
+            "clientW": 87
+          },
+          "cue": {
+            "h": 0,
+            "lineHeight": 17.9,
+            "linhas": 0,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 0,
+            "clientW": 0
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": "oculta"
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 134,
+          "y": 781.8,
+          "w": 122,
+          "h": 60,
+          "padL": 10,
+          "padT": 14,
+          "padB": 14,
+          "util": 102,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 16.3,
+            "lineHeight": 16.3,
+            "linhas": 1,
+            "fontSize": 13,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 56,
+            "clientW": 56
+          },
+          "cue": {
+            "h": 0,
+            "lineHeight": 17.9,
+            "linhas": 0,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 0,
+            "clientW": 0
+          },
+          "nomeTexto": "Projetos",
+          "seta": "oculta"
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 264,
+          "y": 781.8,
+          "w": 122,
+          "h": 60,
+          "padL": 10,
+          "padT": 14,
+          "padB": 14,
+          "util": 102,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 16.3,
+            "lineHeight": 16.3,
+            "linhas": 1,
+            "fontSize": 13,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 78,
+            "clientW": 78
+          },
+          "cue": {
+            "h": 0,
+            "lineHeight": 17.9,
+            "linhas": 0,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 0,
+            "clientW": 0
+          },
+          "nomeTexto": "Consultoria",
+          "seta": "oculta"
+        }
+      ],
+      "larguras": [
+        122,
+        122,
+        122
+      ],
+      "razao": 1,
+      "gap": 8,
+      "filaBottom": 847.8,
+      "heroBottom": 847.8,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 2448.9,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 269.8,
+        "whatsapp": 228.1,
+        "razao": 1.183,
+        "primaryH": 48,
+        "whatsappH": 48,
+        "empilhados": true,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": 768,
+      "altura": 1024,
+      "rootW": 768,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 38.4,
+      "porta0x": 38.4,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 20.4,
+          "y": 926.3,
+          "w": 233.1,
+          "h": 85.8,
+          "padL": 18,
+          "padT": 14,
+          "padB": 14,
+          "util": 197.1,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 20,
+            "lineHeight": 20,
+            "linhas": 1,
+            "fontSize": 16,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 108,
+            "clientW": 108
+          },
+          "cue": {
+            "h": 35.8,
+            "lineHeight": 17.9,
+            "linhas": 2,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 197,
+            "clientW": 197
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": {
+            "w": 18,
+            "color": "rgb(245, 198, 75)"
+          }
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 267.5,
+          "y": 932.3,
+          "w": 233.1,
+          "h": 85.8,
+          "padL": 18,
+          "padT": 14,
+          "padB": 14,
+          "util": 197.1,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 20,
+            "lineHeight": 20,
+            "linhas": 1,
+            "fontSize": 16,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 69,
+            "clientW": 69
+          },
+          "cue": {
+            "h": 17.9,
+            "lineHeight": 17.9,
+            "linhas": 1,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 197,
+            "clientW": 197
+          },
+          "nomeTexto": "Projetos",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 514.5,
+          "y": 932.3,
+          "w": 233.1,
+          "h": 85.8,
+          "padL": 18,
+          "padT": 14,
+          "padB": 14,
+          "util": 197.1,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 20,
+            "lineHeight": 20,
+            "linhas": 1,
+            "fontSize": 16,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 96,
+            "clientW": 96
+          },
+          "cue": {
+            "h": 35.8,
+            "lineHeight": 17.9,
+            "linhas": 2,
+            "fontSize": 13,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 197,
+            "clientW": 197
+          },
+          "nomeTexto": "Consultoria",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        }
+      ],
+      "larguras": [
+        233.1,
+        233.1,
+        233.1
+      ],
+      "razao": 1,
+      "gap": 14,
+      "filaBottom": 1024,
+      "heroBottom": 1024,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 3145.9,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 297.9,
+        "whatsapp": 249.4,
+        "razao": 1.194,
+        "primaryH": 58,
+        "whatsappH": 58,
+        "empilhados": true,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": 1024,
+      "altura": 768,
+      "rootW": 1024,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 51.2,
+      "porta0x": 51.2,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 31.2,
+          "y": 646.9,
+          "w": 304.5,
+          "h": 110,
+          "padL": 20,
+          "padT": 18,
+          "padB": 19,
+          "util": 264.5,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 128,
+            "clientW": 128
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 265,
+            "clientW": 265
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": {
+            "w": 18,
+            "color": "rgb(245, 198, 75)"
+          }
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 359.7,
+          "y": 652.9,
+          "w": 304.5,
+          "h": 110,
+          "padL": 20,
+          "padT": 18,
+          "padB": 19,
+          "util": 264.5,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 82,
+            "clientW": 82
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 265,
+            "clientW": 265
+          },
+          "nomeTexto": "Projetos",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 688.3,
+          "y": 652.9,
+          "w": 304.5,
+          "h": 110,
+          "padL": 20,
+          "padT": 18,
+          "padB": 19,
+          "util": 264.5,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 114,
+            "clientW": 114
+          },
+          "cue": {
+            "h": 41.3,
+            "lineHeight": 20.6,
+            "linhas": 2,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 265,
+            "clientW": 265
+          },
+          "nomeTexto": "Consultoria",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        }
+      ],
+      "larguras": [
+        304.5,
+        304.5,
+        304.5
+      ],
+      "razao": 1,
+      "gap": 24,
+      "filaBottom": 786.9,
+      "heroBottom": 786.9,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 2651.7,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 289.9,
+        "whatsapp": 237.4,
+        "razao": 1.221,
+        "primaryH": 58,
+        "whatsappH": 58,
+        "empilhados": false,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": 1366,
+      "altura": 768,
+      "rootW": 1366,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 68.3,
+      "porta0x": 68.3,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 48.3,
+          "y": 642.3,
+          "w": 407.1,
+          "h": 96,
+          "padL": 20,
+          "padT": 17.7889,
+          "padB": 18.7772,
+          "util": 367.1,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 128,
+            "clientW": 128
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 367,
+            "clientW": 367
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": {
+            "w": 18,
+            "color": "rgb(245, 198, 75)"
+          }
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 479.4,
+          "y": 648.3,
+          "w": 407.1,
+          "h": 96,
+          "padL": 20,
+          "padT": 17.7889,
+          "padB": 18.7772,
+          "util": 367.1,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 82,
+            "clientW": 82
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 367,
+            "clientW": 367
+          },
+          "nomeTexto": "Projetos",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 910.5,
+          "y": 648.3,
+          "w": 407.1,
+          "h": 96,
+          "padL": 20,
+          "padT": 17.7889,
+          "padB": 18.7772,
+          "util": 367.1,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 114,
+            "clientW": 114
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 367,
+            "clientW": 367
+          },
+          "nomeTexto": "Consultoria",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        }
+      ],
+      "larguras": [
+        407.1,
+        407.1,
+        407.1
+      ],
+      "razao": 1,
+      "gap": 24,
+      "filaBottom": 768,
+      "heroBottom": 768,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 3148.7,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 326,
+        "whatsapp": 250.8,
+        "razao": 1.3,
+        "primaryH": 57.3,
+        "whatsappH": 57.3,
+        "empilhados": false,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": 1440,
+      "altura": 900,
+      "rootW": 1440,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 72,
+      "porta0x": 72,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 52,
+          "y": 774,
+          "w": 429.3,
+          "h": 96,
+          "padL": 20,
+          "padT": 18,
+          "padB": 19,
+          "util": 389.3,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 128,
+            "clientW": 128
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 389,
+            "clientW": 389
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": {
+            "w": 18,
+            "color": "rgb(245, 198, 75)"
+          }
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 505.3,
+          "y": 780,
+          "w": 429.3,
+          "h": 96,
+          "padL": 20,
+          "padT": 18,
+          "padB": 19,
+          "util": 389.3,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 82,
+            "clientW": 82
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 389,
+            "clientW": 389
+          },
+          "nomeTexto": "Projetos",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 958.7,
+          "y": 780,
+          "w": 429.3,
+          "h": 96,
+          "padL": 20,
+          "padT": 18,
+          "padB": 19,
+          "util": 389.3,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 23.8,
+            "lineHeight": 23.8,
+            "linhas": 1,
+            "fontSize": 19,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 114,
+            "clientW": 114
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 389,
+            "clientW": 389
+          },
+          "nomeTexto": "Consultoria",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        }
+      ],
+      "larguras": [
+        429.3,
+        429.3,
+        429.3
+      ],
+      "razao": 1,
+      "gap": 24,
+      "filaBottom": 900,
+      "heroBottom": 900,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 3149.3,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 326,
+        "whatsapp": 250.8,
+        "razao": 1.3,
+        "primaryH": 58,
+        "whatsappH": 58,
+        "empilhados": false,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": 1600,
+      "altura": 900,
+      "rootW": 1600,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 100,
+      "porta0x": 100,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 76,
+          "y": 766,
+          "w": 464,
+          "h": 104,
+          "padL": 24,
+          "padT": 18,
+          "padB": 19,
+          "util": 416,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 26.3,
+            "lineHeight": 26.3,
+            "linhas": 1,
+            "fontSize": 21,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 141,
+            "clientW": 141
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 416,
+            "clientW": 416
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": {
+            "w": 18,
+            "color": "rgb(245, 198, 75)"
+          }
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 568,
+          "y": 772,
+          "w": 464,
+          "h": 104,
+          "padL": 24,
+          "padT": 18,
+          "padB": 19,
+          "util": 416,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 26.3,
+            "lineHeight": 26.3,
+            "linhas": 1,
+            "fontSize": 21,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 90,
+            "clientW": 90
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 416,
+            "clientW": 416
+          },
+          "nomeTexto": "Projetos",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 1060,
+          "y": 772,
+          "w": 464,
+          "h": 104,
+          "padL": 24,
+          "padT": 18,
+          "padB": 19,
+          "util": 416,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 26.3,
+            "lineHeight": 26.3,
+            "linhas": 1,
+            "fontSize": 21,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 126,
+            "clientW": 126
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 416,
+            "clientW": 416
+          },
+          "nomeTexto": "Consultoria",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        }
+      ],
+      "larguras": [
+        464,
+        464,
+        464
+      ],
+      "razao": 1,
+      "gap": 28,
+      "filaBottom": 900,
+      "heroBottom": 900,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 3149.3,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 326,
+        "whatsapp": 250.8,
+        "razao": 1.3,
+        "primaryH": 58,
+        "whatsappH": 58,
+        "empilhados": false,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    },
+    {
+      "viewport": 1920,
+      "altura": 1080,
+      "rootW": 1920,
+      "scrollbar": 0,
+      "guia": "max(clamp(20px,5vw,72px),calc((100cqw - 1400px) / 2))",
+      "h1x": 260,
+      "porta0x": 260,
+      "portas": [
+        {
+          "id": "hero-aba-equipamentos",
+          "selected": true,
+          "x": 236,
+          "y": 946,
+          "w": 464,
+          "h": 104,
+          "padL": 24,
+          "padT": 18,
+          "padB": 19,
+          "util": 416,
+          "transform": "matrix(1, 0, 0, 1, 0, -6)",
+          "beforeBoxShadow": "rgb(245, 198, 75) 0px 3px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(245, 198, 75, 0.14), rgba(245, 198, 75, 0) 38%), linear-gradient(rgba(70, 65, 51, 0.95), rgba(35, 33, 27, 0.96) 62%, rgba(43, 40, 32, 0.96))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 26.3,
+            "lineHeight": 26.3,
+            "linhas": 1,
+            "fontSize": 21,
+            "fontWeight": "700",
+            "color": "rgb(239, 237, 235)",
+            "scrollW": 141,
+            "clientW": 141
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.9)",
+            "scrollW": 416,
+            "clientW": 416
+          },
+          "nomeTexto": "Equipamentos",
+          "seta": {
+            "w": 18,
+            "color": "rgb(245, 198, 75)"
+          }
+        },
+        {
+          "id": "hero-aba-projetos",
+          "selected": false,
+          "x": 728,
+          "y": 952,
+          "w": 464,
+          "h": 104,
+          "padL": 24,
+          "padT": 18,
+          "padB": 19,
+          "util": 416,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 26.3,
+            "lineHeight": 26.3,
+            "linhas": 1,
+            "fontSize": 21,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 90,
+            "clientW": 90
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 416,
+            "clientW": 416
+          },
+          "nomeTexto": "Projetos",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        },
+        {
+          "id": "hero-aba-consultoria",
+          "selected": false,
+          "x": 1220,
+          "y": 952,
+          "w": 464,
+          "h": 104,
+          "padL": 24,
+          "padT": 18,
+          "padB": 19,
+          "util": 416,
+          "transform": "none",
+          "beforeBoxShadow": "rgba(255, 255, 255, 0.16) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.5) 0px -2px 0px 0px inset",
+          "beforeBorderTop": "0px solid rgb(229, 231, 235)",
+          "beforeBorderRest": "0px/0px/0px",
+          "beforeBg": "linear-gradient(rgba(28, 29, 32, 0.9), rgba(17, 17, 19, 0.93) 62%, rgba(20, 20, 22, 0.93))",
+          "borderRadius": "0px",
+          "nome": {
+            "h": 26.3,
+            "lineHeight": 26.3,
+            "linhas": 1,
+            "fontSize": 21,
+            "fontWeight": "600",
+            "color": "rgba(239, 237, 235, 0.85)",
+            "scrollW": 126,
+            "clientW": 126
+          },
+          "cue": {
+            "h": 20.6,
+            "lineHeight": 20.6,
+            "linhas": 1,
+            "fontSize": 15,
+            "fontWeight": "400",
+            "color": "rgba(239, 237, 235, 0.7)",
+            "scrollW": 416,
+            "clientW": 416
+          },
+          "nomeTexto": "Consultoria",
+          "seta": {
+            "w": 18,
+            "color": "rgba(239, 237, 235, 0.6)"
+          }
+        }
+      ],
+      "larguras": [
+        464,
+        464,
+        464
+      ],
+      "razao": 1,
+      "gap": 28,
+      "filaBottom": 1080,
+      "heroBottom": 1080,
+      "overflowDoc": 0,
+      "overflowBody": 0,
+      "worst": {
+        "right": 3151,
+        "tag": "UL",
+        "cls": "flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion"
+      },
+      "ctaPair": {
+        "primary": 326,
+        "whatsapp": 250.8,
+        "razao": 1.3,
+        "primaryH": 58,
+        "whatsappH": 58,
+        "empilhados": false,
+        "primaryBg": "rgb(245, 198, 75)",
+        "whatsappBg": "rgba(16, 16, 16, 0.7)",
+        "whatsappBorder": "rgba(239, 237, 235, 0.35)"
+      },
+      "brokenImgs": 0,
+      "emptyHref": 0,
+      "brokenAnchors": [],
+      "aria": {
+        "tablistRole": "tablist",
+        "describedby": "hero-seletor-instrucao",
+        "orientation": "horizontal",
+        "instrucaoExiste": true,
+        "painelRole": "tabpanel",
+        "painelLabelledby": "hero-aba-equipamentos",
+        "tabs": [
+          {
+            "role": "tab",
+            "sel": "true",
+            "controls": "hero-painel",
+            "tabindex": "0"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          },
+          {
+            "role": "tab",
+            "sel": "false",
+            "controls": "hero-painel",
+            "tabindex": "-1"
+          }
+        ]
+      }
+    }
+  ],
+  "notes": {
+    "console": [],
+    "http": []
+  }
+}
