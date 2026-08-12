@@ -140,7 +140,29 @@ export function Header() {
             o Instagram como item rotulado de navegação, com área de toque
             própria — não como ícone solto.
           */}
-          <HeaderCta href="/contato" className="hidden lg:inline-flex" />
+          {/* ----------
+              H-1 — A AÇÃO PERSISTENTE APONTA PARA A FRENTE PRINCIPAL
+
+              Era "Solicitar diagnóstico" → `/contato`. Doc 01 §17.4 fixa
+              "Solicitar orçamento" → `/contato?intencao=equipamentos`, e as
+              três razões são comerciais, não estéticas:
+
+                · DEC-001 põe Equipamentos como frente principal, e a ação
+                  visível o tempo todo não pode apontar para o terceiro pilar;
+                · a regra das pontas (§17.5): a dobra abre com orçamento e o
+                  fechamento repete a ação — o cabeçalho tem de ser **a mesma
+                  ação**, não uma quarta;
+                · "diagnóstico" no cabeçalho pede ao visitante de alta intenção
+                  que aceite um diagnóstico antes de cotar. É a integração
+                  imposta que DEC-003 proíbe, na posição mais persistente do
+                  site.
+
+              O destino não é novo: `?intencao=equipamentos` já é lido por
+              `contact-form.tsx`, que pré-seleciona a necessidade. O mesmo par
+              rótulo + destino está no menu do telefone (`mobile-menu.tsx`) —
+              uma ação comercial, uma copy.
+              ---------- */}
+          <HeaderCta href="/contato?intencao=equipamentos" className="hidden lg:inline-flex" />
 
           <MobileMenu items={mobileNav} />
         </div>

@@ -132,8 +132,8 @@ arquivada, e não tem defeito P0 nem P1 aberto. Os sistemas globais que a atrave
 fecharam em R0-A, como exige §4.1.2.
 
 **Ela sai da fila.** Só reabre pelas cinco razões de doc 04 §4.3 — e "uma ideia talvez
-mais bonita" não é uma delas. O cabeçalho **não** está congelado: ele tem quatro deltas
-abertos (H-1 a H-4) e é escopo de R0-C.
+mais bonita" não é uma delas. **O cabeçalho também fechou** — H-1 a H-4 em R0-C, no mesmo
+dia, com selo e dependência declarada de G-6 registrados em `06-MATRIZ-DE-DELTAS.md` §2.
 
 A hero é a peça de maior retorno e a mais reaberta. Esta seção fecha os valores.
 
@@ -1481,9 +1481,10 @@ Congela em **R0-D**, com a redução de amarelo e o CTA de WhatsApp já converti
 | **Recomposição** | `#projetos` · `#diagnostico` · `#quem-conduz` |
 | **Recomposição + asset novo** | `#equipamentos` · `#industria-do-inox` |
 
-**A hero está no alvo desde 2026-08-12.** Os cinco deltas fecharam (§2.12) e ela recebeu
-o selo `CONGELADA` — ver o topo de §2. O que sobra em R0 é o Header (H-1 a H-4, rodada
-R0-C) e as três seções de conformidade: `#pilares`, `#transicao` e `#fechamento`.
+**A hero e o cabeçalho estão no alvo desde 2026-08-12.** Os cinco deltas da hero fecharam
+em R0-B (§2.12, selo no topo de §2) e os quatro do cabeçalho em R0-C (selo em
+`06-MATRIZ-DE-DELTAS.md` §2, com dependência declarada de G-6). O que sobra em R0 são as
+três seções de conformidade: `#pilares`, `#transicao` e `#fechamento` — rodada **R0-D**.
 
 ### 4.2 Os cinco itens de maior retorno
 

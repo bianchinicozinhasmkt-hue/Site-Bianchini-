@@ -2,7 +2,7 @@
 
 ```text
 STATUS: ACTIVE — rastreamento de conformidade
-DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A) · 2026-08-12 (R0-B)
+DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A · R0-B · R0-C)
 DEPENDE DE: 01-CONSTITUICAO-VISUAL.md · 03-BLUEPRINT-HOME.md · 04-CRITERIOS-DE-APROVACAO.md
 NATUREZA: rastreamento vivo. O levantamento original não alterou produto;
           a partir de R0-A esta matriz registra também o que já foi fechado.
@@ -43,6 +43,7 @@ Números de seção são de 1440 × 900, salvo onde indicado.
 | **G-3** | Três curvas de motion, sem laço — doc 01 §13 | conforme, exceto o marquee (ver M-1) | — | — | — | — | — |
 | **G-4** | Escala tipográfica registrada em `tailwind-merge` — doc 01 §5 | conforme | — | — | — | — | — |
 | **G-5** | Orçamento de cor: ≤3 amarelos por viewport — doc 01 §6.2 | violado em 6 seções | ver seções | `P1`/`P2` | **R3** | nenhuma | contagem ≤3 por seção |
+| **G-6** | Base comum de botão: raio 2px · preenchimento por `scaleY` da base · sem sombra de projeção — doc 01 §7.1, §8, §14.1/§14.2 | `ui/actions/button.tsx`: `base` tem `rounded-[3px]`; `primary`/`light` preenchem por `scale-x` da esquerda e carregam `shadow-cta` (`0 8px 18px -10px` a 45%) e `shadow-cta-hover` | o **sistema compartilhado** diverge da própria norma em três pontos; atinge 25 instâncias `primary` + 4 `light` em 15 rotas | `P2 · ESTÉTICA/MOTION` | **a definir** | nenhuma | raio 2px na base; `scaleY` com origem na base em `primary`/`light`; sombra dentro da whitelist de §14.1 (≤8px de raio, ≤20%) ou removida |
 
 ### R0-A — o que foi implementado, e o que ficou aberto
 
@@ -92,10 +93,10 @@ Nenhuma rampa precisou ceder.
 | ~~**D-3**~~ | = G-2, aplicado à dobra | **FECHADO em R0-A** (2026-08-12) junto com G-2 | ver a nota de R0-A | `P1 · CONVERSÃO` | **R0-A** | G-2 | ✅ ver G-2; **reverificado em R0-B** sem alteração — ver a nota abaixo |
 | ~~**D-4**~~ | Sem bisel; a aresta é a régua — doc 01 §7.2, §14.2 | ~~`inset 0 2px 0 rgba(255,255,255,0.16)` + `inset 0 -2px 0 rgba(0,0,0,0.5)`~~ → `box-shadow: none`; a régua é `border-top` | **FECHADO em R0-B** (2026-08-12) | `P2 · ESTÉTICA` | **R0-B** | nenhuma | ✅ `boxShadow` computado = `none` na superfície, nos 8 viewports; nada entrou no lugar da sombra de base; demais bordas `0px`, raio `0px` |
 | ~~**D-5**~~ | Comentário descreve o código que acompanha | ~~`hero-stage.tsx:47` mostrava a faixa `18 anos · Brasil` removida em 2026-08-09; `:63` afirmava 1,2fr inexistente~~ | **FECHADO em R0-B** (2026-08-12) | `P3 · CONTEÚDO` | **R0-B** | D-2 | ✅ os dois corrigidos, mais nove outros achados na varredura — ver a nota abaixo |
-| **H-1** | Header CTA "Solicitar orçamento" → `/contato?intencao=equipamentos` — doc 01 §17.4 | `label = 'Solicitar diagnóstico'`, `href="/contato"` | ação persistente aponta para o 3º pilar, contra DEC-001/DEC-003 | `P1 · CONVERSÃO` | **R0-C** | nenhuma | rótulo e destino conformes; **altura, proporções internas e tipografia do cabeçalho inalteradas** (a guia horizontal é G-1b, em R0-A) |
-| **H-2** | Raio do sistema = 2px — doc 01 §7.1 | `rounded-[3px]` no `HeaderCta` | 1px fora do sistema | `P3 · ESTÉTICA` | **R0-C** | nenhuma | raio 2px |
-| **H-3** | Preenchimento de hover por `scaleY`, origem na base — doc 01 §8 | `before:origin-left before:scale-x-0` | eixo divergente do resto do sistema | `P3 · MOTION` | **R0-C** | nenhuma | `scaleY` com origem na base |
-| **H-4** | Sem sombra projetada — doc 01 §14.2 | `hover:shadow-[0_8px_16px_-10px_...]` | sombra dramática em hover | `P2 · ESTÉTICA` | **R0-C** | nenhuma | zero `box-shadow` de projeção |
+| ~~**H-1**~~ | Header CTA "Solicitar orçamento" → `/contato?intencao=equipamentos` — doc 01 §17.4 | ~~`label = 'Solicitar diagnóstico'`, `href="/contato"`~~ → **"Solicitar orçamento"** → `/contato?intencao=equipamentos`, no cabeçalho **e** no menu do telefone | **FECHADO em R0-C** (2026-08-12) | `P1 · CONVERSÃO` | **R0-C** | nenhuma | ✅ rótulo e destino conformes nos 8 viewports; altura, guia, tipografia e navegação inalteradas; o formulário chega com `equipamentos` pré-selecionado (medido ponta a ponta) |
+| ~~**H-2**~~ | Raio do sistema = 2px — doc 01 §7.1 | ~~`rounded-[3px]`~~ → `rounded-[2px]` no `HeaderCta` | **FECHADO em R0-C** (2026-08-12) | `P3 · ESTÉTICA` | **R0-C** | nenhuma | ✅ `borderRadius` computado = `2px` nos 8 viewports |
+| ~~**H-3**~~ | Preenchimento de hover por `scaleY`, origem na base — doc 01 §8 | ~~`before:origin-left before:scale-x-0`, 280ms `smooth`~~ → `origin-bottom`, `scale-y-0`, **220ms `precise`** | **FECHADO em R0-C** (2026-08-12) | `P3 · MOTION` | **R0-C** | nenhuma | ✅ `transformOrigin` na base; `matrix(1,0,0,0,…)` em repouso e `matrix(1,0,0,1,…)` em hover **e** em `focus-visible` — o mesmo preenchimento, como §8 exige |
+| ~~**H-4**~~ | Sem sombra projetada — doc 01 §14.2 | ~~`hover:shadow-[0_8px_16px_-10px_rgba(0,0,0,0.8)]`~~ → `box-shadow: none` | **FECHADO em R0-C** (2026-08-12) | `P2 · ESTÉTICA` | **R0-C** | nenhuma | ✅ zero sombra de projeção em default/hover/active; o anel de foco (2px amarelo + offset grafite) permanece íntegro |
 
 ### R0-B — o que foi implementado
 
@@ -147,6 +148,90 @@ contra os `-6px` que a norma fixa como sinal de elevação (doc 01 §9.4, sinal 
 degrau que a rodada de 2026-08-11 não acompanhou. Como aquelas regras existem para
 **cancelar** o hover e estavam sendo reescritas de qualquer forma, elas passam a restaurar
 exatamente a superfície de repouso, elevação incluída.
+
+### R0-C — o cabeçalho, e o que ele expôs
+
+Rodada de 2026-08-12. Evidência em `docs/v2/capturas/header-r0c-2026-08-12/`.
+
+**H-1 vale pelos outros três somados.** A ação visível o tempo todo deixou de pedir
+diagnóstico e passa a pedir orçamento de Equipamentos — o pilar que DEC-001 fixa como
+principal. O destino não é novo (`?intencao=equipamentos` já era lido por
+`contact-form.tsx`), e a prova é ponta a ponta: clicando pelo menu do telefone, o
+formulário abre com a necessidade **já selecionada**.
+
+**O menu do telefone entrou no escopo de H-1, e tinha de entrar.** Ele carrega o mesmo
+CTA persistente. Deixá-lo dizendo "Solicitar diagnóstico" enquanto o desktop diz
+"Solicitar orçamento" criaria duas copies para a mesma ação e manteria o defeito vivo
+justamente no tráfego móvel. Só o par rótulo + destino mudou ali: estrutura, abertura,
+Escape, backdrop e retenção de foco não foram tocados, e foram testados um a um.
+
+**H-3 mudou mais que o eixo.** Além de `scaleX`→`scaleY` com origem na base, a duração
+foi de 280ms `smooth` para **220ms `precise`**, que é o que doc 01 §8 fixa para todos os
+papéis — é o mesmo gesto dos dois CTAs da dobra. Medido, `focus-visible` dispara
+exatamente o mesmo preenchimento do hover.
+
+**A elevação de 1px saiu junto com a sombra de H-4, e o `active` foi refeito.** Os dois
+eram um gesto só (o objeto levanta, a sombra prova que levantou), e as três cláusulas
+antigas de `active` existiam para desfazer elevação e sombra que deixaram de existir —
+uma delas trocando `background-color`, que §8 proíbe. No lugar entra a pressão normativa
+do sistema: `scale(0.985)` em 120ms `precise`, cancelada por `motion-reduce`.
+
+**O que R0-C deliberadamente não fez.** Doc 01 §17.4 é explícito em que o layout do
+cabeçalho não muda, e o briefing da rodada listou "demais CTAs da página" como
+intocáveis. Nada de altura, guia, logo, navegação, breakpoints ou estrutura do menu foi
+alterado — medido, a marca continua no mesmo `x` do `h1` nos oito viewports, que é o
+resultado de G-1b.
+
+### G-6 — a verificação de §19 achou o problema um nível acima
+
+O briefing de R0-C mandou, antes de escrever CSS próprio do cabeçalho, checar se o
+`Button` compartilhado já satisfazia H-2/H-3/H-4. **Ele não satisfazia — porque ele
+próprio diverge**, nos mesmos três pontos:
+
+| | norma | `ui/actions/button.tsx` |
+| --- | --- | --- |
+| raio | 2px, o **único** do sistema (§7.1) | `rounded-[3px]` na `base` |
+| preenchimento | `scaleY`, origem na base (§8) | `primary` e `light` usam `scale-x` da esquerda |
+| sombra | contato ≤8px de raio e ≤20% (§14.1) | `shadow-cta` = `0 8px 18px -10px` a **45%** |
+
+Então o `HeaderCta` **continua sendo componente próprio**, e isso é o resultado correto
+da verificação, não uma exceção de conveniência: adotar a variante global teria importado
+os três defeitos.
+
+**Por que G-6 não foi corrigido em R0-C.** O briefing lista "demais CTAs da página" como
+intocáveis, e a mudança atinge 25 instâncias `primary` mais 4 `light` em 15 rotas — a
+validação visual que §19 exige para mexer no compartilhado é, em extensão, uma rodada
+inteira. Fazê-la aqui seria o oposto de "cirúrgica, sem redesign".
+
+**Onde isso aparece hoje:** o CTA do painel do telefone (`LinkButton` `primary`) mantém
+raio de 3px e a sombra de contato fora da whitelist. Ele recebeu H-1 (rótulo e destino) e
+**não** recebeu H-2/H-4, que são escopados ao `HeaderCta` pela própria matriz.
+
+**Consequência para o congelamento, declarada e não escondida.** Doc 04 §4.1.2 diz que
+nenhuma seção congela antes de os sistemas globais que a atravessam estarem conformes. O
+cabeçalho fecha os quatro deltas que lhe pertencem, mas G-6 atravessa a superfície dele
+pelo CTA do painel. O selo abaixo é dado com essa dependência **explícita**: se a direção
+entender que §4.1.2 pesa mais que o recorte do briefing, o selo cai com uma linha e G-6
+passa a bloquear — a decisão é da direção, não desta rodada.
+
+---
+
+### Selo do cabeçalho
+
+```text
+STATUS: CONGELADO (com dependência declarada de G-6)
+DATA: 2026-08-12
+RODADA: R0-C
+COMMIT: o commit de R0-C em `v2` — `feat(v2): consolida conversão e estados do header`,
+        filho direto de `46e7ef2`
+EVIDÊNCIA: docs/v2/capturas/header-r0c-2026-08-12/
+DEPENDÊNCIA ABERTA: G-6 (sistema global de botão)
+```
+
+O formato de referência ao commit é o mesmo adotado no selo da hero, e pela mesma razão:
+o selo vive no commit que ele sela, e um commit não pode conter o próprio hash. A
+referência é inequívoca — há um único filho de `46e7ef2` em `v2` — e o hash consta do
+relatório da rodada.
 
 ---
 
@@ -201,22 +286,26 @@ exatamente a superfície de repouso, elevação incluída.
 
 ## 5. Contagem
 
-Atualizado em 2026-08-12, ao fim de **R0-B**.
+Atualizado em 2026-08-12, ao fim de **R0-C**. O total sobe de 40 para **41**: G-6 é delta
+novo, encontrado pela verificação de §19 durante R0-C.
 
 | severidade | total | fechados | **abertos** |
 | --- | ---: | ---: | ---: |
 | **P0** | 0 | 0 | **0** |
-| **P1** | 10 | **6** | **4** |
-| **P2** | 19 | **1** | **18** |
-| **P3** | 11 | **1** | **10** |
-| **TOTAL** | 40 | **8** | **32** |
+| **P1** | 10 | **7** | **3** |
+| **P2** | 20 | **2** | **18** |
+| **P3** | 11 | **3** | **8** |
+| **TOTAL** | 41 | **12** | **29** |
 
 Fechados em R0-A: **G-1**, **G-1b**, **G-2** e **D-3** (que é G-2 aplicado à dobra).
 Fechados em R0-B: **D-1**, **D-2**, **D-4** e **D-5**.
+Fechados em R0-C: **H-1**, **H-2**, **H-3** e **H-4**. Aberto por R0-C: **G-6**.
 
-**A hero está com zero delta aberto** — os cinco deltas de doc 03 §2.12 fecharam. Ela
-recebeu o selo `CONGELADA` em 2026-08-12 (ver a ficha em `03-BLUEPRINT-HOME.md` §2).
-O cabeçalho continua com quatro deltas abertos e é escopo de **R0-C**.
+**A hero está com zero delta aberto** e recebeu o selo `CONGELADA` em 2026-08-12 (ficha em
+`03-BLUEPRINT-HOME.md` §2). **O cabeçalho fechou os seus quatro** e recebeu o selo em §2
+desta matriz, com dependência declarada de G-6.
+
+Sobram em R0: `#pilares`, `#transicao` e `#fechamento` (**R0-D**).
 
 **Zero P0.** Nenhum delta bloqueia publicação — o produto no ar é funcional, acessível e
 sem dado inventado. Os itens restantes são distância entre o que está no ar e o que a norma
@@ -228,7 +317,8 @@ pede.
 | --- | ---: |
 | **R0-A** | ~~2 — G-2/D-3, e os globais G-1/G-1b~~ **fechados** |
 | **R0-B** | ~~2 — D-1, D-2~~ **fechados** |
-| **R0** (C+D) | 1 — H-1 |
+| **R0-C** | ~~1 — H-1~~ **fechado** |
+| **R0-D** | 0 |
 | R1 | 1 — S-01 |
 | R2 | 1 — S-05 |
 | R3 | 1 — S-26 |

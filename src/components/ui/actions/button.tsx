@@ -272,19 +272,68 @@ export function Button({
 }
 
 /**
- * CTA do cabeçalho — o retângulo amarelo do mockup, com rótulo grafite em
- * condensada e seta simples.
+ * ============================================================
+ * O QUARTO ESTADO — PRESSÃO (doc 01 §8)
+ * ============================================================
+ *
+ * `scale(0.985)` em 120ms `precise`, cancelado por `motion-reduce`. É
+ * `transform`, então não reflui a linha nem move o vizinho.
+ *
+ * A dobra já carrega esta mesma gramática (`pressState` em `hero-stage.tsx`).
+ * **A duplicação é deliberada nesta rodada**: a hero está congelada desde
+ * 2026-08-12 e importar daqui exigiria editá-la, o que R0-C não pode fazer.
+ * Unificar as duas é dívida registrada, não esquecimento.
+ */
+const pressState =
+  'transition-transform duration-[120ms] ease-precise active:scale-[0.985] motion-reduce:transition-none motion-reduce:active:scale-100'
+
+/**
+ * CTA do cabeçalho — papel 5 do sistema, **NAV CTA** (doc 01 §8).
  *
  * A altura acompanha a faixa reduzida (46% dela, com piso de 40px) em vez dos
  * pixels do mockup, pelo mesmo motivo do cabeçalho (ver `header.tsx`).
  *
- * O movimento é o do primário, em escala menor: camada `yellow-bright`
- * entrando da esquerda, seta avançando 3px, elevação de 1px e tom fechado na
- * pressão. Sem brilho, sem pulsação, sem animação permanente.
+ * ============================================================
+ * R0-C (2026-08-12) — CONFORMIDADE: H-2, H-3 e H-4
+ * ============================================================
+ *
+ * Três mecanismos mudaram, e nenhum deles é preferência — os três tinham norma
+ * fixada e implementação divergente:
+ *
+ *   · **H-2 · raio 3px → 2px.** Doc 01 §7.1: o raio de 2px é o **único** raio
+ *     do sistema, e existe para evitar aliasing de canto absoluto em massa
+ *     preenchida — não é decisão estética e não deve crescer;
+ *   · **H-3 · o preenchimento troca de eixo.** Era `scaleX` da esquerda, em
+ *     280ms `smooth`. Doc 01 §8 fixa `scaleY` da base, 220ms `precise`, para
+ *     **todos** os papéis de botão — é o mesmo gesto dos dois CTAs da dobra, e
+ *     ter o cabeçalho num eixo próprio fazia a ação persistente responder
+ *     diferente da ação que ela repete;
+ *   · **H-4 · a sombra de hover saiu.** `0 8px 16px -10px` a 0,8 de preto é a
+ *     "sombra dramática" da blacklist (doc 01 §14.2): contradiz a aresta viva e
+ *     produz cartão flutuante, que é gramática de SaaS.
+ *
+ * **A elevação de 1px saiu junto com a sombra, e isso é consequência, não
+ * escopo novo.** `hover:-translate-y-px` + `hover:shadow-…` eram **um** gesto:
+ * o objeto levanta e a sombra prova que levantou. Removida a sombra, o que
+ * sobraria é um salto de 1px sem causa — e a tabela de estados de §8 lista, no
+ * hover, só o preenchimento.
+ *
+ * Pelo mesmo motivo o `active` foi refeito: as três cláusulas antigas
+ * (`translate-y-0`, `bg-yellow-deep`, `shadow-none`) existiam para desfazer a
+ * elevação e a sombra que deixaram de existir, e a troca de `background-color`
+ * é o que §8 proíbe explicitamente. No lugar entra a pressão normativa do
+ * sistema — ver `pressState`, acima.
+ *
+ * O anel de foco continua sendo o global: o cabeçalho é `on-dark`, então
+ * `:focus-visible` rende anel amarelo de 2px com offset de 2px sobre grafite
+ * (globals.css), que é exatamente o que §8 pede. **Ele não é sombra estética e
+ * não foi tocado por H-4.**
+ *
+ * Altura, recuo, largura, tipografia e posição continuam idênticos.
  */
 export function HeaderCta({
   href,
-  label = 'Solicitar diagnóstico',
+  label = 'Solicitar orçamento',
   className,
 }: {
   href: string
@@ -295,14 +344,12 @@ export function HeaderCta({
     <Link
       href={href}
       className={cn(
-        'group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-[3px] bg-yellow font-condensed font-semibold uppercase tracking-[0.05em] text-ink',
+        'group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden whitespace-nowrap rounded-[2px] bg-yellow font-condensed font-semibold uppercase tracking-[0.05em] text-ink',
         'h-11 px-[1.15rem] text-[0.8125rem] xl:text-[0.875rem]',
         'lg:h-[max(2.5rem,calc(var(--header-height)*0.46))]',
-        'transition-[background-color,box-shadow,transform] duration-200 ease-precise',
-        'before:absolute before:inset-0 before:-z-10 before:origin-left before:scale-x-0 before:bg-yellow-bright before:transition-transform before:duration-[280ms] before:ease-smooth before:content-[""]',
-        'hover:-translate-y-px hover:shadow-[0_8px_16px_-10px_rgba(0,0,0,0.8)] hover:before:scale-x-100',
-        'focus-visible:before:scale-x-100',
-        'active:translate-y-0 active:bg-yellow-deep active:shadow-none',
+        'before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0 before:bg-yellow-bright before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
+        'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+        pressState,
         className,
       )}
     >

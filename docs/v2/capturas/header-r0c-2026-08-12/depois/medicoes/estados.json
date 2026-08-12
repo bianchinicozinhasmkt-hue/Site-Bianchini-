@@ -1,0 +1,87 @@
+[
+  {
+    "viewport": 1440,
+    "estado": "default",
+    "pior": 11.84,
+    "piorPx": [
+      245,
+      198,
+      75
+    ],
+    "fill": "matrix(1, 0, 0, 0, 0, 0)",
+    "shadow": "none",
+    "transform": "none",
+    "outline": "3px",
+    "w": 209,
+    "h": 40,
+    "x": 1159,
+    "y": 19.5
+  },
+  {
+    "viewport": 1440,
+    "estado": "hover",
+    "pior": 14.96,
+    "piorPx": [
+      255,
+      227,
+      121
+    ],
+    "fill": "matrix(1, 0, 0, 1, 0, 0)",
+    "shadow": "none",
+    "transform": "none",
+    "outline": "3px",
+    "w": 209,
+    "h": 40,
+    "x": 1159,
+    "y": 19.5
+  },
+  {
+    "viewport": 1440,
+    "estado": "focus-visible",
+    "pior": 14.96,
+    "piorPx": [
+      255,
+      227,
+      121
+    ],
+    "fill": "matrix(1, 0, 0, 1, 0, 0)",
+    "shadow": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+    "transform": "none",
+    "outline": "2px",
+    "w": 209,
+    "h": 40,
+    "x": 1159,
+    "y": 19.5,
+    "alcancadoPorTab": 8,
+    "ordemDeTabulacao": [
+      "A:Pular para o conteúdo",
+      "A:",
+      "A:Equipamentos",
+      "A:Projetos",
+      "A:Soluções",
+      "A:Método",
+      "A:Empresa",
+      "A:Solicitar orçamento"
+    ],
+    "focusVisible": true,
+    "ring": "rgb(16, 16, 16) 0px 0px 0px 2px, rgb(245, 198, 75) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px | outline: rgba(0, 0, 0, 0) solid 2px"
+  },
+  {
+    "viewport": 1440,
+    "estado": "active",
+    "pior": 14.96,
+    "piorPx": [
+      255,
+      227,
+      121
+    ],
+    "fill": "matrix(1, 0, 0, 1, 0, 0)",
+    "shadow": "none",
+    "transform": "matrix(0.985, 0, 0, 0.985, 0, 0)",
+    "outline": "3px",
+    "w": 205.8,
+    "h": 39.4,
+    "x": 1160.6,
+    "y": 19.8
+  }
+]

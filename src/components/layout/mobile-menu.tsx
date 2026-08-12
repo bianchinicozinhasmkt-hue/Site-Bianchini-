@@ -126,9 +126,29 @@ export function MobileMenu({ items }: MobileMenuProps) {
         </nav>
 
         <div className="flex flex-col gap-3 px-5 py-6">
-          {/* CTA retangular, igual ao do cabeçalho no mockup aprovado. */}
-          <LinkButton href="/contato" onClick={close} className="w-full rounded-[3px]" withArrow>
-            Solicitar diagnóstico
+          {/* ----------
+              CTA retangular, igual ao do cabeçalho no mockup aprovado.
+
+              ---------- H-1 (R0-C · 2026-08-12) ----------
+
+              Rótulo e destino acompanham o CTA do cabeçalho, e **têm de
+              acompanhar**: é a mesma ação comercial persistente, vista por
+              quem está no telefone. Deixar "Solicitar diagnóstico" aqui
+              enquanto o desktop diz "Solicitar orçamento" criaria duas copies
+              para a mesma ação e manteria vivo, justamente no tráfego móvel, o
+              defeito que doc 01 §17.4 nomeia — a ação persistente apontando
+              para o terceiro pilar.
+
+              Só o par rótulo + destino mudou. Estrutura do painel,
+              abertura, Escape, backdrop e retenção de foco não foram tocados.
+              ---------- */}
+          <LinkButton
+            href="/contato?intencao=equipamentos"
+            onClick={close}
+            className="w-full rounded-[3px]"
+            withArrow
+          >
+            Solicitar orçamento
           </LinkButton>
           <LinkButton
             href={whatsappUrl('diagnostico')}

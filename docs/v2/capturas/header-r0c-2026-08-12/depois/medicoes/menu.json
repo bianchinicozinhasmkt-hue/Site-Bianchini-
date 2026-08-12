@@ -1,0 +1,205 @@
+{
+  "320": [
+    {
+      "passo": "fechado",
+      "expanded": "false",
+      "hidden": true,
+      "bodyOverflow": "",
+      "foco": "outro",
+      "focoTag": "BODY:Pular para o conteúdoEqu",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 0,
+      "backdropVisivel": "0"
+    },
+    {
+      "passo": "aberto (clique)",
+      "expanded": "true",
+      "hidden": false,
+      "bodyOverflow": "hidden",
+      "foco": "painel",
+      "focoTag": "A:Equipamentos",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 48,
+      "backdropVisivel": "1"
+    },
+    {
+      "passo": "Escape",
+      "expanded": "false",
+      "hidden": true,
+      "bodyOverflow": "",
+      "foco": "gatilho",
+      "focoTag": "BUTTON:",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 0,
+      "backdropVisivel": "0"
+    },
+    {
+      "passo": "reaberto",
+      "expanded": "true",
+      "hidden": false,
+      "bodyOverflow": "hidden",
+      "foco": "painel",
+      "focoTag": "A:Equipamentos",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 48,
+      "backdropVisivel": "1"
+    },
+    {
+      "passo": "fechado pelo botão",
+      "expanded": "false",
+      "hidden": true,
+      "bodyOverflow": "",
+      "foco": "gatilho",
+      "focoTag": "BUTTON:",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 0,
+      "backdropVisivel": "0"
+    },
+    {
+      "passo": "backdrop não aplicável",
+      "backdrop": {
+        "painelBottom": 568,
+        "painelH": 504,
+        "viewportH": 568,
+        "areaExposta": 0,
+        "painelRolavel": true
+      },
+      "nota": "o painel preenche a janela e rola por dentro; não há área de backdrop exposta",
+      "expanded": "true",
+      "hidden": false,
+      "bodyOverflow": "hidden",
+      "foco": "painel",
+      "focoTag": "A:Equipamentos",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 48,
+      "backdropVisivel": "1"
+    },
+    {
+      "passo": "aberto + Tab",
+      "expanded": "true",
+      "hidden": false,
+      "bodyOverflow": "hidden",
+      "foco": "painel",
+      "focoTag": "A:Projetos",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 48,
+      "backdropVisivel": "1"
+    },
+    {
+      "passo": "clique no CTA",
+      "de": "/",
+      "para": "/contato?intencao=equipamentos",
+      "bodyOverflow": "",
+      "classe": false,
+      "intencaoSelecionada": "equipamentos"
+    }
+  ],
+  "390": [
+    {
+      "passo": "fechado",
+      "expanded": "false",
+      "hidden": true,
+      "bodyOverflow": "",
+      "foco": "outro",
+      "focoTag": "BODY:Pular para o conteúdoEqu",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 0,
+      "backdropVisivel": "0"
+    },
+    {
+      "passo": "aberto (clique)",
+      "expanded": "true",
+      "hidden": false,
+      "bodyOverflow": "hidden",
+      "foco": "painel",
+      "focoTag": "A:Equipamentos",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 48,
+      "backdropVisivel": "1"
+    },
+    {
+      "passo": "Escape",
+      "expanded": "false",
+      "hidden": true,
+      "bodyOverflow": "",
+      "foco": "gatilho",
+      "focoTag": "BUTTON:",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 0,
+      "backdropVisivel": "0"
+    },
+    {
+      "passo": "reaberto",
+      "expanded": "true",
+      "hidden": false,
+      "bodyOverflow": "hidden",
+      "foco": "painel",
+      "focoTag": "A:Equipamentos",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 48,
+      "backdropVisivel": "1"
+    },
+    {
+      "passo": "fechado pelo botão",
+      "expanded": "false",
+      "hidden": true,
+      "bodyOverflow": "",
+      "foco": "gatilho",
+      "focoTag": "BUTTON:",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 0,
+      "backdropVisivel": "0"
+    },
+    {
+      "passo": "fechado pelo backdrop",
+      "backdrop": {
+        "painelBottom": 648,
+        "painelH": 584,
+        "viewportH": 844,
+        "areaExposta": 196,
+        "painelRolavel": false
+      },
+      "expanded": "false",
+      "hidden": true,
+      "bodyOverflow": "",
+      "foco": "outro",
+      "focoTag": "BODY:Pular para o conteúdoEqu",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 0,
+      "backdropVisivel": "0"
+    },
+    {
+      "passo": "aberto + Tab",
+      "expanded": "true",
+      "hidden": false,
+      "bodyOverflow": "hidden",
+      "foco": "painel",
+      "focoTag": "A:Projetos",
+      "ctaTexto": "Solicitar orçamento",
+      "ctaHref": "/contato?intencao=equipamentos",
+      "ctaAlvo": 48,
+      "backdropVisivel": "1"
+    },
+    {
+      "passo": "clique no CTA",
+      "de": "/",
+      "para": "/contato?intencao=equipamentos",
+      "bodyOverflow": "",
+      "classe": false,
+      "intencaoSelecionada": "equipamentos"
+    }
+  ]
+}
