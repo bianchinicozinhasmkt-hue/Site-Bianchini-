@@ -354,7 +354,7 @@ function ProjectsShowcase({
           horizontal que separa as provas entre si, e é isso que faz as quatro
           fotografias lerem como uma composição só.
           ========================================================== */}
-      <Container className="2xl:max-w-wide">
+      <Container className="2xl:[--container-max:var(--container-wide)]">
         {/*
           As larguras desiguais (35 / 30 / 35) só entram em `xl`. Entre 1024 e
           1279 as três colunas são iguais: ali a coluna estreita cairia para
@@ -727,8 +727,14 @@ function ProjectsDossier({
             className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-graphite via-graphite/70 to-transparent"
           />
 
-          <figcaption className="absolute inset-x-0 bottom-0 px-5 pb-6 md:px-8 lg:px-10 lg:pb-8">
-            <div className="mx-auto flex w-full max-w-container flex-col gap-3 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          {/*
+            A fotografia sangra; a legenda **não herda a sangria**. Ela assenta
+            na mesma guia de todo texto da página — por isso a casca, e não um
+            recuo próprio. Era `px-5 md:px-8 lg:px-10` + `max-w-container`, a
+            guia reconstruída à mão (delta G-1).
+          */}
+          <figcaption className="absolute inset-x-0 bottom-0 pb-6 lg:pb-8">
+            <div className="container-shell flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
               <span>
                 <span className="inline-flex items-center gap-2.5 font-condensed text-eyebrow font-semibold uppercase text-yellow">
                   <span aria-hidden="true" className="h-[2px] w-5 shrink-0 bg-yellow" />

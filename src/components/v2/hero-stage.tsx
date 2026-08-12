@@ -625,9 +625,37 @@ export function HeroStage() {
             centragem): ali os cortes são diretos e estão medidos no bloco de
             altura do telefone, mais abaixo.
           */
-          className="relative z-10 flex min-h-0 flex-1 items-center pb-4 pt-[calc(var(--media-h)+1rem)] lg:py-12 lg:pt-12 xl:py-14 xl:pb-8 xl:pt-16 2xl:pb-0 2xl:pt-36"
+          /*
+            ============================================================
+            OS RECUOS DE DESKTOP SÃO `--u`, NÃO `rem` (2026-08-11)
+            ============================================================
+
+            Eram `lg:py-12 xl:py-14 xl:pb-8 xl:pt-16 2xl:pb-0 2xl:pt-36`, e os
+            números continuam os mesmos em tela alta — 48/48, 64/32 e 144/0.
+            O que muda é que agora comprimem com a janela: `2xl:pt-36` sozinho
+            são 144px que nunca encolhiam, e era o maior item da altura natural
+            de 864px que punha a fileira de portas fora da tela em janelas
+            baixas. Ver o bloco `--u` no módulo para a medição completa.
+
+            Abaixo de `lg` nada disto se aplica: ali o palco é fluxo vertical,
+            `--u` vale 1px e `pb-4` / `pt-[calc(var(--media-h)+1rem)]` ficam
+            exatamente como estavam.
+          */
+          className={cn(
+            'relative z-10 flex min-h-0 flex-1 items-center pb-4 pt-[calc(var(--media-h)+1rem)]',
+            'lg:pb-[calc(48*var(--u))] lg:pt-[calc(48*var(--u))]',
+            'xl:pb-[calc(32*var(--u))] xl:pt-[calc(64*var(--u))]',
+            '2xl:pb-0 2xl:pt-[calc(144*var(--u))]',
+          )}
         >
-          <Container className="w-full">
+          {/*
+            Sem `w-full`: desde G-1 a casca resolve a **própria** largura
+            (`width: min(teto, 100% − 2 × gutter)`). Um `w-full` aqui venceria
+            por ordem de camada — utilities vêm depois de components — e
+            devolveria a coluna à largura inteira do palco, levando o `h1` para
+            a aresta da janela.
+          */}
+          <Container>
             {/*
               ============================================================
               TROCA DE ESTADO (2026-08-09) — O `key` DO BLOCO SAIU
@@ -867,7 +895,12 @@ export function HeroStage() {
                       título → intenção .... 20px  (mesma voz, outra frase)
                       intenção → ação ...... 40px  (de ler para agir)
                   */
-                  'mt-3 font-sans font-bold tracking-[-0.025em] text-canvas',
+                  /*
+                    `lg:mt-[calc(12*var(--u))]` — os mesmos 12px em tela alta,
+                    comprimindo com a dobra abaixo do limiar. Ver o bloco `--u`
+                    no módulo.
+                  */
+                  'mt-3 font-sans font-bold tracking-[-0.025em] text-canvas lg:mt-[calc(12*var(--u))]',
                   /*
                     ============================================================
                     `leading-*` DEPOIS de `text-[…]`, NUNCA ANTES
@@ -946,9 +979,57 @@ export function HeroStage() {
                     A copy não é tocada: o teto é variável de layout, o texto
                     aprovado não (`src/data/v2/home.ts`).
                   */
+                  /*
+                    ============================================================
+                    O CORPO DO `h1` ENTRA NA COMPRESSÃO (2026-08-11)
+                    ============================================================
+
+                    Era `lg:text-[clamp(2.375rem,3.4vw,3.375rem)]` e
+                    `2xl:text-[3.625rem]`, e **os valores em tela alta são
+                    exatamente os mesmos**: `max(38u, min(3.4vw, 54u))` com
+                    `--u` saturado em 1px é, termo a termo, o `clamp` anterior.
+
+                    O bloco do título é o maior item da coluna (182,7px em
+                    1536 × 864, três linhas a 58px), então comprimir vãos sem
+                    comprimir o corpo não fecharia a conta de altura em janela
+                    baixa — seria vão espremido ao redor de um título intacto,
+                    que é o oposto de composição proporcional. A entrelinha é
+                    unitária (1,05), então ela acompanha o corpo sozinha.
+
+                    O teto continua sendo o **contraste**, não a leitura: o par
+                    corpo × coluna de 3,625rem × 48rem está medido no comentário
+                    acima e não sobe. Comprimir só desce, e descer afasta a
+                    última linha da borda direita do `.scrim` — o lado seguro.
+
+                    `leading-*` continua **depois** do `text-[…]` — a armadilha
+                    de `tailwind-merge` documentada logo acima vale igual aqui.
+                  */
                   'text-[clamp(1.75rem,7.8vw,2.375rem)] leading-[1.1]',
-                  'lg:text-[clamp(2.375rem,3.4vw,3.375rem)] lg:leading-[1.05]',
-                  '2xl:text-[3.625rem]',
+                  /*
+                    ---------- O teto em `--u` é por degrau, e tem conta ----------
+
+                    `3.4vw` é o termo de **largura** e continua mandando em tela
+                    alta: em 1024 ele rende 34,8px, em 1440 rende 48,96 e em
+                    1535 rende 52,2 — sempre abaixo do teto em `--u`, que por
+                    isso não aparece. É a única forma de o corpo continuar
+                    idêntico ao `clamp` anterior acima do limiar.
+
+                    O teto de cada degrau é o **menor valor que ainda fica acima
+                    do maior `3.4vw` daquela faixa**, para que a altura comece a
+                    morder assim que a janela aperta, e não só em compressão
+                    extrema:
+
+                      lg  1024–1279 ... 3,4vw chega a 43,5px → teto 44u
+                      xl  1280–1535 ... 3,4vw chega a 52,2px → teto 53u
+
+                    Com o teto anterior (54u nos dois) a altura só mordia abaixo
+                    de u≈0,80, e a dobra continuava ~32px além da janela no meio
+                    das duas faixas. Em `2xl` não há termo de largura: o corpo é
+                    fixo em 58px desde 1536, então ele é múltiplo puro de `--u`.
+                  */
+                  'lg:text-[max(calc(38*var(--u)),min(3.4vw,calc(44*var(--u))))] lg:leading-[1.05]',
+                  'xl:text-[max(calc(38*var(--u)),min(3.4vw,calc(53*var(--u))))]',
+                  '2xl:text-[calc(58*var(--u))]',
                 )}
               >
                 <span key={copy.id} className={cn(styles.swap, 'block')}>
@@ -969,7 +1050,7 @@ export function HeroStage() {
                     `leading-[1.5]` **depois** do `text-[…]` — ver o bloco do
                     `h1` acima; aqui valia o mesmo descarte silencioso.
                   */
-                  'mt-4 max-w-[52ch] font-sans font-medium text-canvas/85 lg:mt-5',
+                  'mt-4 max-w-[52ch] font-sans font-medium text-canvas/85 lg:mt-[calc(20*var(--u))]',
                   /*
                     Direção visual (2026-08-08): o bump é só no desktop
                     (17px → 18px). Testado em 16px no mobile também — em
@@ -980,7 +1061,17 @@ export function HeroStage() {
                     a "leitura mais editorial" pedida vale onde há coluna
                     para sustentá-la sem custar linha.
                   */
-                  'text-[0.9375rem] leading-[1.5] lg:text-[1.125rem] lg:leading-[1.6]',
+                  /*
+                    18px em tela alta, comprimindo com a dobra — com **piso de
+                    15px**, que é o corpo que este mesmo parágrafo já usa abaixo
+                    de `lg`. O piso é o que impede a compressão de levar o corpo
+                    de leitura abaixo do que a V1 aceita em qualquer superfície;
+                    quando ele morde, quem continua cedendo são os vãos.
+
+                    `leading-[1.6]` é unitário e acompanha o corpo. Ordem
+                    `text-` → `leading-` preservada de propósito.
+                  */
+                  'text-[0.9375rem] leading-[1.5] lg:text-[max(0.9375rem,calc(18*var(--u)))] lg:leading-[1.6]',
                 )}
               >
                 <span key={copy.id} className={cn(styles.swap, 'block')}>
@@ -1082,7 +1173,11 @@ export function HeroStage() {
                     os dois botões nessa largura. `lg:mt-10` e `xl:mt-12` ficam.
                   */
                   'mt-6 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4',
-                  'lg:mt-10 lg:w-max lg:gap-3 xl:mt-12 xl:w-auto xl:gap-4',
+                  /*
+                    40/48px em tela alta — o vão "de ler para agir", o maior da
+                    coluna. Comprime com a dobra; ver o bloco `--u` no módulo.
+                  */
+                  'lg:mt-[calc(40*var(--u))] lg:w-max lg:gap-3 xl:mt-[calc(48*var(--u))] xl:w-auto xl:gap-4',
                 )}
               >
                 <HeroCta activeId={copy.id} />
@@ -1469,7 +1564,13 @@ function HeroCta({ activeId }: { activeId: HeroState['id'] }) {
       data-hero-cta
       onClick={() => trackEvent(state.event, { origem: 'hero' })}
       className={cn(
-        'group/cta relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] bg-yellow sm:min-h-[3.625rem]',
+        /*
+          `lg:min-h-[…]` — 58px em tela alta, comprimindo com a dobra, com piso
+          de 44px (o mínimo de alvo do projeto). Os dois CTAs carregam a mesma
+          expressão porque eles são um par e precisam continuar com a mesma
+          altura em qualquer janela. Ver o bloco `--u` no módulo.
+        */
+        'group/cta relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] bg-yellow sm:min-h-[3.625rem] lg:min-h-[max(2.75rem,calc(58*var(--u)))]',
         /*
           `lg:text-[1rem] xl:text-[1.0625rem]` (2026-08-09): um degrau a menos
           **só em 1024–1279**, a faixa onde o par de CTAs não cabia numa linha.
@@ -1544,62 +1645,50 @@ function HeroCta({ activeId }: { activeId: HeroState['id'] }) {
  * um par — massa preenchida e contorno — em vez de dois componentes diferentes.
  *
  * ============================================================
- * PREENCHIDO, NÃO CONTORNADO (2026-08-09)
+ * CONTORNO, NÃO MASSA (R0-A · 2026-08-12 · delta G-2)
  * ============================================================
  *
- * A versão anterior era fundo transparente com contorno verde. Não foi
- * aprovada: sem massa, ela lia como um link enquadrado ao lado de um botão, e
- * não como o segundo canal de contato da dobra. Agora o fundo é o verde cheio.
+ * **O histórico importa aqui, porque este botão já foi as duas coisas.** Em
+ * 2026-08-09 ele era contorno verde, virou massa `#25D366`, depois `#1DA851` e
+ * fechou em `#2A6F44` — um verde dessaturado e fundo, com tinta clara. Cada
+ * passo resolveu um sintoma real: o contorno da época lia como link enquadrado,
+ * e o verde de tela competia pelo primeiro olhar.
  *
- * **A hierarquia continua, e não é mais o preenchimento que a sustenta — é a
- * cor.** Amarelo é o acento comercial do sistema inteiro (CTA do cabeçalho, da
- * dobra, do fechamento) e o mais luminoso dos dois: `#F5C64B` tem luminância
- * relativa 0,60 contra 0,48 do `#25D366`. Some-se a isso a ordem de leitura (o
- * amarelo vem primeiro) e a massa maior do primário — que a cela dos três
- * rótulos empilhados fixa na largura do mais longo. Amarelo = ação comercial;
- * verde = contato rápido. Os dois são preenchidos, mas não são intercambiáveis.
+ * O que nenhum daqueles passos resolveu é o defeito que a constituição nomeia
+ * (doc 01 §6.4, §8): **duas massas preenchidas lado a lado, com a mesma altura
+ * e a mesma construção, leem como dois botões-irmãos.** A hierarquia ficava
+ * inteiramente por conta da luminância (0,603 do amarelo contra 0,123 do
+ * verde), e forma vence tom. Escurecer mais o verde não resolveria — só
+ * reduziria a massa a uma mancha escura, ainda irmã.
  *
- * ============================================================
- * O VERDE EM TRÊS PASSOS — E POR QUE O TERCEIRO É O CERTO
- * ============================================================
+ * A subordinação agora é de **construção**:
  *
- * `#25D366` → `#1DA851` → **`#2A6F44`**, tudo em 2026-08-09.
+ *     PRIMARY    massa amarela cheia      ← a única massa preenchida do par
+ *     WHATSAPP   contorno + glifo verde
  *
- * O primeiro passo (contornado → preenchido) resolveu a forma. O segundo
- * escureceu o verde de tela do WhatsApp mantendo matiz e saturação, e derrubou a
- * luminância de 0,48 para 0,29. Não bastou: com **tinta escura sobre massa
- * clara**, o botão verde reproduzia a mesma construção do amarelo e continuava
- * disputando o primeiro olhar — a hierarquia dependia só de qual dos dois era
- * mais luminoso, e 0,29 contra 0,60 ainda deixava os dois na mesma família.
+ * O que **não** mudou, de propósito: altura (a mesma expressão comprimível),
+ * raio de 2px, escala de rótulo, cela de ícone separada por fio, alvo de toque,
+ * rótulo, destino, evento e posição. Os dois continuam sendo um par — é isso
+ * que os faz pertencer ao mesmo sistema. Eles só deixaram de ser simétricos.
  *
- * `#2A6F44` muda a **construção**, não só o tom:
+ * A caixa é grafite translúcido com contorno claro, não transparente pura: o
+ * botão vive sobre fotografia, e o plano 4 do sistema de profundidade exige
+ * superfície própria (doc 01 §15.1) — sem ela, o contorno lê como adesivo
+ * colado na imagem. É a mesma leitura das portas logo abaixo, que também
+ * cruzam a cena com superfície translúcida e aresta própria.
  *
- *   · matiz **142°**, o mesmo dos dois anteriores — é o verde do WhatsApp;
- *   · saturação de 70% para **45%**, e luminosidade de 48,6% para **30%**. É a
- *     dessaturação que tira o "neon" sem tirar o verde;
- *   · luminância relativa **0,123**, contra 0,603 do amarelo — o amarelo tem
- *     quase cinco vezes a luz do verde, e é ele que o olho pega primeiro;
- *   · **a tinta inverte para `canvas`.** Sobre `#2A6F44` o claro mede **5,2:1**
- *     e passa AA (o grafite daria 3,4:1 e reprovaria). Com isso o par deixa de
- *     ser "duas massas claras com tinta escura" e passa a ser **massa clara com
- *     tinta escura** (o primário) ao lado de **massa escura com tinta clara** (o
- *     secundário). A subordinação passa a ser estrutural, não só cromática.
+ * **O verde não sumiu: mudou de lugar.** Ele saiu da caixa e ficou no glifo,
+ * que é o que torna o canal reconhecível. Ver a cela do ícone, abaixo.
  *
- * O botão continua cheio, continua verde e continua reconhecível pelo par cor +
- * glifo. O que ele não faz mais é competir.
+ * `whatsapp-float.tsx` continua com `#25D366` em disco: lá o verde é uma
+ * superfície de 28px sem nada com que competir. Não é divergência — é a mesma
+ * cor em dois pesos, e a norma prevê os dois.
  *
- * Contra o fundo da dobra o verde mede 3,1:1 — ele continua lendo como uma massa
- * preenchida e recortada sobre o grafite, e não como um contorno.
- *
- * `whatsapp-float.tsx` continua com `#25D366`: lá o verde é um disco de 28px
- * sobre fundo claro, não uma massa de 267px na dobra. A escala é outra e o
- * problema de competição não existe — não é divergência, é a mesma cor em dois
- * pesos.
- *
- * **O hover não troca de cor: acende.** O `::before` é branco a 18% subindo por
- * `scaleY` — a mecânica de botão fixada em `CLAUDE.md`, e uma mudança de
- * luminosidade em vez de um matiz novo. `focus-visible` dispara o mesmo
- * preenchimento, e `active` usa a mesma pressão do primário (`pressState`).
+ * **O hover é o do contorno que se preenche:** `::before` em `canvas` subindo
+ * por `scaleY` a partir da base, 220ms, com o rótulo invertendo para `ink` — a
+ * mecânica de `secondary`/`light-outline`, e a mesma direção do primário.
+ * `focus-visible` dispara o mesmo preenchimento, e `active` usa a mesma pressão
+ * do primário (`pressState`).
  *
  * O link sai por `whatsappUrl(topic)` (`lib/whatsapp.ts`), como manda a
  * convenção — nenhuma URL `wa.me` escrita à mão, e o número continua vindo de
@@ -1620,14 +1709,29 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
       */
       onClick={() => trackEvent('whatsapp_iniciado', { origem: 'hero' })}
       className={cn(
-        'group/wa relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] sm:min-h-[3.625rem]',
-        /* Massa verde funda e dessaturada, com tinta clara — ver acima. */
-        'bg-[#2A6F44] text-canvas',
+        /* Mesma altura comprimível do primário — ver o comentário lá. */
+        'group/wa relative inline-flex min-h-12 items-stretch overflow-hidden rounded-[2px] sm:min-h-[3.625rem] lg:min-h-[max(2.75rem,calc(58*var(--u)))]',
+        /*
+          Contorno com superfície própria, e não massa — ver o bloco acima.
+          O grafite translúcido é o **plano 2** do sistema de profundidade: o
+          botão está sobre fotografia, e um contorno sem superfície leria como
+          adesivo colado na imagem. Ele é opaco o bastante para segurar o
+          rótulo e transparente o bastante para não ler como massa preenchida.
+        */
+        'border border-canvas/35 bg-graphite/70 text-canvas',
+        'hover:border-canvas hover:text-ink focus-visible:border-canvas focus-visible:text-ink',
         /* `lg:text-[1rem] xl:…` — mesmo degrau do primário; o par continua um par. */
         'font-condensed text-[0.9375rem] font-semibold uppercase tracking-[0.05em] sm:text-[1rem] lg:text-[1rem] xl:text-[1.0625rem]',
-        'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-white/[0.14]',
+        /*
+          O preenchimento é o mesmo movimento do primário (sobe por `scaleY`,
+          origem na base, 220ms) — o que muda é o destino: `canvas`, e não um
+          clareamento do próprio verde. É o contorno que se preenche, a mecânica
+          já normatizada de `secondary` / `light-outline`.
+        */
+        'before:absolute before:inset-0 before:origin-bottom before:scale-y-0 before:bg-canvas',
         'before:transition-transform before:duration-[220ms] before:ease-precise before:content-[""]',
         'hover:before:scale-y-100 focus-visible:before:scale-y-100',
+        'transition-[color,border-color] duration-[220ms] ease-precise',
         pressState,
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-canvas focus-visible:ring-offset-2 focus-visible:ring-offset-graphite',
       )}
@@ -1651,19 +1755,45 @@ function HeroWhatsappCta({ topic }: { topic: WhatsappTopic }) {
         nada. A hierarquia continua sustentada principalmente pela luminância
         (0,603 do amarelo contra 0,123 do verde) e pela ordem de leitura.
       */}
-      <span className="relative z-10 flex items-center px-5 sm:px-6 lg:px-5 xl:px-5">
+      {/* ----------
+          O RECUO ABSORVE A BORDA — A MASSA NÃO PODE CRESCER
+
+          Os valores são os de 2026-08-10 **menos 1px de cada lado**: 20→19 e
+          24→23. Não é ajuste estético. A caixa passou a ter borda de 1px em
+          R0-A, e `border-box` a soma à largura: medido em 1920, o botão ia de
+          250,8 para 252,8px e a razão contra o primário caía de **1,300 para
+          1,290** — abaixo do piso de 1,30 que a norma fixa a favor do primário
+          (doc 01 §8, critério de saída de G-2).
+
+          Descontar a borda do recuo devolve exatamente a largura anterior: o
+          contorno entrou sem que o WhatsApp ganhasse um pixel de massa. É a
+          mesma lógica do corte de 28→20 daquela rodada — o recuo é a variável
+          barata, porque não toca altura, rótulo, cela do glifo nem posição.
+          ---------- */}
+      <span className="relative z-10 flex items-center px-[19px] sm:px-[23px] lg:px-[19px] xl:px-[19px]">
         Falar no WhatsApp
       </span>
       <span
         aria-hidden="true"
-        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-canvas/25 sm:w-[3.25rem] lg:w-12 xl:w-[3.25rem]"
+        className="relative z-10 flex w-12 shrink-0 items-center justify-center border-l border-canvas/25 transition-colors duration-[220ms] ease-precise group-hover/wa:border-ink/25 group-focus-visible/wa:border-ink/25 sm:w-[3.25rem] lg:w-12 xl:w-[3.25rem]"
       >
         {/*
-          O glifo segue a tinta do rótulo, como a seta segue a do botão amarelo:
-          era `ink` sobre a massa clara, e é `canvas` agora que a massa é escura.
-          O canal continua reconhecível pelo par cor da caixa + glifo.
+          ---------- O GLIFO É O QUE CARREGA O VERDE (G-2) ----------
+
+          A caixa deixou de ser verde; o glifo passou a ser. É a inversão que a
+          norma pede: o verde identifica o **canal**, não a hierarquia — e uma
+          massa verde ao lado da massa amarela lia como dois botões-irmãos.
+
+          Dois tons, um matiz: `--whatsapp` (#25D366) em repouso, sobre o
+          grafite translúcido; `--whatsapp-deep` (#2A6F44) quando o
+          preenchimento `canvas` sobe e a superfície inverte. Nenhum tom novo
+          — os dois já existiam no produto (o segundo era a massa que saiu, o
+          primeiro é o disco do botão flutuante).
         */}
-        <WhatsappIcon size={19} className="text-canvas" />
+        <WhatsappIcon
+          size={19}
+          className="text-[var(--whatsapp)] transition-colors duration-[220ms] ease-precise group-hover/wa:text-[var(--whatsapp-deep)] group-focus-visible/wa:text-[var(--whatsapp-deep)]"
+        />
       </span>
     </a>
   )

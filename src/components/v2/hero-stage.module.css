@@ -151,9 +151,126 @@
   */
   --media-h: clamp(9.5rem, min(74vw, 30svh), 20rem);
 
+  /*
+    Fallback da unidade da dobra — ver o bloco `--u`, logo abaixo. Abaixo de
+    `lg` o palco é fluxo vertical e não há composição a comprimir, então a
+    unidade vale o pixel cheio e todo `calc(N * var(--u))` rende N pixels.
+  */
+  --u: 1px;
+
   position: relative;
   overflow: hidden;
   background-color: #101010;
+}
+
+/* ============================================================
+   `--u` — A DOBRA COMPRIME EM VEZ DE TRANSBORDAR (2026-08-11)
+   ============================================================
+
+   **O defeito, medido no build de produção.** A composição de desktop tinha
+   uma altura natural fixa, em `rem`, que não dependia da janela. Quando a
+   janela era mais baixa que ela, a dobra crescia para além da tela (a `section`
+   é `min-h-[100svh]`, e crescer é o comportamento correto dela) e o que ficava
+   abaixo da linha de corte era **a fileira de portas** — o seletor dos três
+   pilares, que é a navegação principal da dobra:
+
+     largura   altura natural   janela onde as portas somem
+     1366          771px            < 772
+     1440          779px            < 740
+     1536          864px            < 800
+     1920          868px            < 820
+
+   Em 1536 × 730 as portas mediam y 729,6–839,6: começavam exatamente na borda
+   inferior da janela, e o visitante via a dobra inteira **sem nenhum dos três
+   caminhos**. É o relato de campo que abriu esta rodada — "os botões da hero
+   somem a 100% de zoom e voltam a 90%". A 90% o viewport ganha ~11% de altura
+   em pixels CSS (730 → 811), o que cruzava o limiar; não havia nada de errado
+   com o zoom, e sim com a dobra não caber.
+
+   **Por que 1536 é o pior degrau.** O painel de conteúdo salta de `xl:pt-16`
+   (64px) para `2xl:pt-36` (144px). São 80px de recuo que entram de uma vez e
+   nunca encolhiam — é o que leva a altura natural de 779 para 864.
+
+   ============================================================
+   O MODELO É O `--u` DA V1, E NÃO UM CONJUNTO DE MEDIA QUERIES
+   ============================================================
+
+   A hero V1 já resolve exatamente este problema (`CLAUDE.md`, "A primeira
+   dobra tem uma unidade só: `--u`"): toda medida da dobra é um múltiplo de uma
+   unidade que encolhe com a altura disponível, de modo que tipografia e vãos
+   comprimem **juntos e na mesma proporção**, nunca por corte nem por
+   `overflow: hidden`. A diferença aqui é que a V2 não deriva de um mockup de
+   pixel fixo, então `--u` não vale "1px do mockup": vale **o fator de
+   compressão da dobra**, expresso como comprimento para que
+   `calc(N * var(--u))` continue sendo uma multiplicação por número — a mesma
+   razão pela qual a V1 divide por número e nunca por comprimento.
+
+   A conta é a mesma nos três degraus:
+
+     --u = (altura livre − parte que não comprime) / (parte que comprime)
+
+   `min(…, 1px)` é o que garante que **nada muda em tela alta**: acima do
+   limiar a unidade satura em 1px e cada `calc(N * var(--u))` rende os mesmos N
+   pixels de hoje. O piso de 0,75px impede que uma janela absurdamente baixa
+   dissolva a composição; abaixo dele a dobra volta a crescer, que é o
+   comportamento de sempre e continua correto.
+
+   **A parte que não comprime**, medida elemento a elemento no build de
+   produção: a etiqueta do `h1` (17px — corpo de 13px, abaixo do qual um rótulo
+   em condensada deixa de ler), a linha da instrução do seletor (16px) e o
+   conteúdo interno das portas (nome + situação: 73px em `2xl`, 65px nos outros
+   dois degraus). Tudo o mais da dobra passou a ser múltiplo de `--u`.
+
+     degrau        altura natural   não comprime   comprime
+     lg  1024–1279     682px            98px         584
+     xl  1280–1535     695px            98px         597
+     2xl 1536+         780px           106px         674
+
+   As alturas são do **palco**, já descontado o cabeçalho — daí o
+   `- var(--header-height)` na conta.
+
+   ============================================================
+   POR QUE ISTO NÃO REABRE O CONTRASTE DO `.scrim`
+   ============================================================
+
+   A rampa de abertura do `.scrim` é percentual sobre a altura do palco (0–9%
+   no topo), e a medição que a fixou depende de onde o texto assenta nessa
+   escala. Como palco e composição encolhem juntos, a posição relativa é
+   preservada, e a pequena deriva que sobra (as partes que não comprimem) vai
+   para **baixo** — para dentro da faixa de cobertura plena, nunca para dentro
+   da rampa.
+
+   Remedido pelo método do módulo — pior pixel real sob a caixa das letras, com
+   o texto escondido, no build de produção, nos três estados. Comparando cada
+   largura comprimida contra ela mesma sem compressão:
+
+     viewport          h1                     etiqueta
+     1536 × 864 (u=1)  7,17:1  equipamentos   12,48:1
+     1536 × 730 (u≈0,80) 7,29:1               12,86:1   ← comprimido
+     1920 × 1080 (u=1) 7,52:1                 14,22:1
+     1920 × 790 (u≈0,88) 8,88:1               12,81:1   ← comprimido
+
+   Ou seja: comprimir **sobe** o contraste, e o motivo é geométrico — a
+   composição desce na escala do palco e o texto acaba mais fundo na faixa de
+   cobertura. O pior caso de toda a matriz (6 viewports × 3 estados) é 6,59:1,
+   em 1024 × 660 no estado de Equipamentos, contra o piso de 4,5:1.
+   ============================================================ */
+@media (min-width: 1024px) {
+  .stage {
+    --u: clamp(0.75px, calc((100svh - var(--header-height) - 98px) / 584), 1px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .stage {
+    --u: clamp(0.75px, calc((100svh - var(--header-height) - 98px) / 597), 1px);
+  }
+}
+
+@media (min-width: 1536px) {
+  .stage {
+    --u: clamp(0.75px, calc((100svh - var(--header-height) - 106px) / 674), 1px);
+  }
 }
 
 /* ============================================================
@@ -757,23 +874,17 @@
   elemento da dobra fora do eixo que a marca, o título, os CTAs e a régua
   compartilham.
 
-  `max()` reproduz exatamente a aresta interna do `Container`
-  (`mx-auto w-full max-w-container px-5 md:px-8 lg:px-10`, com
-  `max-w-container` = 1400px em `src/styles/theme.ts`): 40px de recuo enquanto a
-  janela couber no container, e a metade da sobra somada a esses 40px quando ela
-  passar de 1400px.
+  ---------- R0-A (2026-08-12) ----------
 
-  **`100%`, não `100vw`.** O pai é o palco, de largura inteira, e é o mesmo
-  bloco que dimensiona o `Container`. `100vw` incluiria a barra de rolagem e
-  deslocaria a legenda alguns pixels à direita do eixo — o mesmo motivo pelo
-  qual a primeira dobra da V1 não usa `vw`.
-
-  A legenda só existe a partir de `lg`, então o recuo usa o gutter de `lg`
-  (40px) sem precisar de media query.
+  A expressão local saiu. Ela reproduzia à mão a aresta interna do `Container`
+  da época (`max-w-container` + `px-10`), e era uma das cinco cópias
+  divergentes da guia que o delta G-1 fechou. `--guia` é agora a definição
+  única, publicada em `globals.css` e herdada por toda a árvore de `main` —
+  o valor muda com o sistema, não com esta linha.
 */
 .mediaCaption {
   position: absolute;
-  right: max(2.5rem, calc((100% - 1400px) / 2 + 2.5rem));
+  right: var(--guia);
   bottom: 100%;
   margin-bottom: 0.75rem;
   z-index: 1;
@@ -959,9 +1070,8 @@
   primeira linha. O `h1` em 1440 passou por sorte: a cena ali é mais escura no
   mesmo x, não porque a cobertura fosse suficiente.
 
-  `--guia` reproduz a aresta interna do `Container` — a mesma expressão que
-  `.mediaCaption` já usa — e as paradas da rampa passam a ser calculadas a
-  partir dela:
+  `--guia` é a aresta interna do `Container`, e as paradas da rampa passam a ser
+  calculadas a partir dela:
 
      0                        0,40   aresta da janela
      calc(var(--guia) * 0.5)  0,58
@@ -978,11 +1088,17 @@
   **fim** da coluna de leitura, que é uma fração da largura (a coluna vai a
   48rem em ≥1536, 40rem em 1280–1535 e 30rem em 1024–1279 — sempre entre 48% e
   56% da janela), e não a guia.
+
+  ---------- R0-A (2026-08-12) ----------
+
+  A declaração local de `--guia` saiu daqui: o token é global desde G-1
+  (`globals.css`) e chega por herança. A rampa continua **ancorada na guia** —
+  e passa a acompanhá-la automaticamente quando ela muda, que é exatamente o
+  que aconteceu nesta rodada. Os valores de cobertura foram remedidos depois da
+  mudança; ver o registro da rodada.
 */
 @media (min-width: 1024px) {
   .scrim::before {
-    --guia: max(2.5rem, calc((100% - 1400px) / 2 + 2.5rem));
-
     content: '';
     position: absolute;
     inset: 0;
@@ -1137,7 +1253,8 @@
     os viewports de desktop medidos.
   */
   .deck {
-    padding-bottom: 1.5rem;
+    /* 24px em tela alta; comprime com a dobra — ver o bloco `--u`. */
+    padding-bottom: calc(24 * var(--u));
   }
 }
 
@@ -1183,7 +1300,8 @@
     --door-pad: 1.25rem;
     --door-gap: 1.5rem;
 
-    padding-top: 1rem;
+    /* 16px em tela alta; comprime com a dobra — ver o bloco `--u`. */
+    padding-top: calc(16 * var(--u));
   }
 }
 
@@ -1249,7 +1367,13 @@
 @media (min-width: 1024px) {
   .decisionHead {
     gap: 1rem;
-    margin-bottom: 2.25rem;
+    /*
+      36px em tela alta — o vão que faz a instrução ler como ordem e não como
+      etiqueta da barra (ver o bloco acima). É o maior vão isolado da base, e
+      por isso comprime junto com a dobra em vez de empurrar as portas para
+      fora da janela.
+    */
+    margin-bottom: calc(36 * var(--u));
   }
 }
 
@@ -1361,7 +1485,14 @@
 
 @media (min-width: 1024px) {
   .door {
-    padding: 1.125rem var(--door-pad) 1.1875rem;
+    /*
+      18/19px em tela alta. **Só o recuo vertical comprime**: o horizontal é
+      `--door-pad`, que resolve a largura útil do nome e da situação, e o
+      conteúdo interno (nome + situação) fica em corpo fixo — é ele a "parte
+      que não comprime" da conta de `--u`. Uma porta é alvo de clique, então o
+      que cede aqui é o ar, não o rótulo.
+    */
+    padding: calc(18 * var(--u)) var(--door-pad) calc(19 * var(--u));
   }
 }
 

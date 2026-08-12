@@ -10,17 +10,19 @@ export const theme = {
   colors,
   ...typography,
   /*
-    Revisado em 2026-08-03: `container` era 1280px e, com o `px-10` (40px de
-    cada lado) do `Container`, sobrava conteúdo de só 1200px em qualquer tela
-    a partir de 1280px — em 1586px de viewport isso é 75,7% da largura, com
-    vazios laterais grandes. Os novos valores mantêm exatamente o mesmo
-    mecanismo (`w-full max-w-* mx-auto` + padding do `Container`), só com teto
-    mais alto: em 1366/1440px o conteúdo passa a ocupar ~90–94% da viewport
-    (o teto só "trava" de fato acima de ~1400/1520px), e o texto corrido
-    continua limitado pelos `max-w-[Nch]` de cada parágrafo — não por este
-    valor. Ajustar aqui, não em `Container` ou em wrappers individuais.
+    ---------- R0-A (2026-08-12) — os tetos da casca saíram daqui ----------
+
+    `container` (1400px) e `wide` (1520px) eram consumidos como `max-w-*` pelo
+    `Container` e por quatro wrappers manuais. Desde o delta **G-1** a casca é
+    `width: min(--container-max, 100% − 2 × --gutter)` — um `max-width` não
+    serve mais, porque era exatamente ele, somado a um `padding` interno, que
+    prendia o conteúdo em 1320px em qualquer janela ≥1400. Os dois tetos viraram
+    custom properties em `globals.css`, que é onde o sistema horizontal mora
+    inteiro. **Não reintroduzir `max-w-container` / `max-w-wide`.**
+
+    `prose` fica: é medida de leitura de parágrafo, não casca de página.
   */
-  maxWidth: { container: '1400px', wide: '1520px', prose: '68ch' },
+  maxWidth: { prose: '68ch' },
   spacing: { section: spacing.section, 'section-lg': spacing.sectionLg },
   borderRadius: radius,
   boxShadow: {

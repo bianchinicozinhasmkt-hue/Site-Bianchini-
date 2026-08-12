@@ -1,8 +1,24 @@
 # V2-02 — Home: Direção Visual (Gate 2)
 
 ```text
-STATUS: PROPOSTA PARA REVISÃO — não aprovado, não implementar
+STATUS: SUPERSEDED — substituído por docs/v2/direcao-visual/ em 2026-08-12
 ```
+
+> **Este documento não governa a implementação atual.**
+>
+> Ele descreve uma Home de **9 seções** que nunca foi construída. A Home que está no ar
+> tem **13 seções** (hero V2 + 12 seções V1 reordenadas), e o Gate 2 aqui proposto nunca
+> foi aprovado — o cabeçalho anterior dizia `PROPOSTA PARA REVISÃO — não aprovado, não
+> implementar`.
+>
+> A direção visual vigente é a pasta **`docs/v2/direcao-visual/`**:
+> `01-CONSTITUICAO-VISUAL.md` (sistema), `02-BENCHMARK-VISUAL.md` (referências),
+> `03-BLUEPRINT-HOME.md` (ficha por seção), `04-CRITERIOS-DE-APROVACAO.md` (porta de
+> qualidade), `05-ROADMAP-DE-IMPLEMENTACAO.md` (ordem) e `06-MATRIZ-DE-DELTAS.md`
+> (produto × norma).
+>
+> Preservado para rastreabilidade do raciocínio, conforme a regra do repositório: conteúdo
+> `SUPERSEDED` é contexto de como se chegou à decisão atual, **nunca requisito**.
 
 **Branch:** `v2`. Nenhum código, componente, CSS ou asset alterado por esta tarefa — apenas
 os dois documentos em `docs/v2/wireframes/`.

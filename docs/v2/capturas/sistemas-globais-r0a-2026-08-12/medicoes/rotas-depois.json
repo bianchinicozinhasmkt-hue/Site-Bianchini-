@@ -1,0 +1,643 @@
+[
+  {
+    "rota": "/",
+    "W": 1440,
+    "overflow": 1695.884765625,
+    "culpado": "UL.flex w-max animate-marquee items-center gap-14 pr-14 [animat",
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [],
+    "wa": {
+      "bg": "rgba(16, 16, 16, 0.7)",
+      "borda": "rgba(239, 237, 235, 0.35)",
+      "w": 250.8,
+      "h": 58
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar orçamentoFalar c",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar orçamento de equ",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar orçamento",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "01Espaço e fluxo",
+        "bg": "rgb(26, 26, 26)"
+      },
+      {
+        "t": "Zona 01Salão de atendiment",
+        "bg": "rgb(16, 16, 16)"
+      },
+      {
+        "t": "Zona 02Linha de produção",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "Zona 03Retaguarda e apoio",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "Agendar diagnóstico",
+        "bg": "rgb(239, 237, 235)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar orçamento de equ",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/contato",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(16, 16, 16, 0.7)",
+      "w": 466.3,
+      "h": 50
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Enviar pelo WhatsApp",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/projetos",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/sobre",
+    "W": 1440,
+    "overflow": 1692.528678894043,
+    "culpado": "UL.flex w-max animate-marquee items-center gap-14 pr-14 [animat",
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/solucoes",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Preciso montar ou reformar",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "O espaço não acompanha a o",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "A operação existe, mas cus",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "A operação melhorou, mas f",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/solucoes/arquitetura",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar análise do proje",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar análise do proje",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/solucoes/consultoria-para-fabricantes",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar com um consultor",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar com um consultor",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/solucoes/consultoria-para-restaurantes",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Receber diagnóstico operac",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Zona 01Salão de atendiment",
+        "bg": "rgb(16, 16, 16)"
+      },
+      {
+        "t": "Zona 02Linha de produção",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "Zona 03Retaguarda e apoio",
+        "bg": "rgb(255, 255, 255)"
+      },
+      {
+        "t": "Receber diagnóstico operac",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/solucoes/cozinhas-industriais",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#pilares",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar orçamento",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Ver a solução completa",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Ver todos os projetos",
+        "bg": "rgb(239, 237, 235)"
+      },
+      {
+        "t": "Solicitar orçamento",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/leonardo-bianchini",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgba(255, 255, 255, 0.35)",
+      "w": 297.8,
+      "h": 56.4
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/linhas-de-produtos",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgb(245, 198, 75)",
+      "borda": "rgb(220, 217, 212)",
+      "w": 237.8,
+      "h": 48
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Falar sobre esta linha",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/linhas-de-produtos/forno-combinado-rational",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgb(245, 198, 75)",
+      "borda": "rgb(220, 217, 212)",
+      "w": 241.3,
+      "h": 56
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar orçamento",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar orçamento",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/obrigado",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgb(220, 217, 212)",
+      "w": 160.9,
+      "h": 44
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Ver projetos entregues",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  },
+  {
+    "rota": "/politica-de-privacidade",
+    "W": 1440,
+    "overflow": 0,
+    "culpado": null,
+    "imgs": 0,
+    "vazios": 0,
+    "ancoras": [
+      "#equipamentos",
+      "#projetos",
+      "#pilares",
+      "#metodo",
+      "#quem-conduz"
+    ],
+    "wa": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "borda": "rgb(220, 217, 212)",
+      "w": 160.9,
+      "h": 44
+    },
+    "massas": [
+      {
+        "t": "Pular para o conteúdo",
+        "bg": "rgb(245, 198, 75)"
+      },
+      {
+        "t": "Solicitar diagnóstico",
+        "bg": "rgb(245, 198, 75)"
+      }
+    ],
+    "console": [],
+    "http": []
+  }
+]

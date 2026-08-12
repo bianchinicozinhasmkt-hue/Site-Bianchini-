@@ -90,7 +90,14 @@ export function FinalCtaSection({
             <LinkButton href={primaryHref} variant="primary" size="lg" withArrow>
               {primaryLabel}
             </LinkButton>
-            <LinkButton href={whatsappUrl(topic)} variant="light-outline" size="lg">
+            {/*
+              `whatsapp-light`, não `light-outline`: a construção de superfície
+              é a mesma que já estava aqui (contorno claro que se preenche de
+              baixo) — o que faltava era o **glifo verde**, que é o que torna o
+              canal reconhecível antes da leitura do rótulo (delta G-2).
+              Composição, copy, ordem e destino não mudaram.
+            */}
+            <LinkButton href={whatsappUrl(topic)} variant="whatsapp-light" size="lg">
               Conversar pelo WhatsApp
             </LinkButton>
           </div>

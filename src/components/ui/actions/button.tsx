@@ -34,7 +34,7 @@ import { ArrowRightIcon, WhatsappIcon } from '../icons'
  * `width`/`height` — a camada não força layout. `isolate` + `-z-10` mantêm a
  * camada atrás do rótulo sem precisar de `z-index` no texto.
  */
-type Variant = 'primary' | 'secondary' | 'light' | 'light-outline' | 'whatsapp'
+type Variant = 'primary' | 'secondary' | 'light' | 'light-outline' | 'whatsapp' | 'whatsapp-light'
 type Size = 'sm' | 'md' | 'lg'
 
 /*
@@ -85,6 +85,24 @@ const variants: Record<Variant, string> = {
     'hover:border-canvas hover:before:scale-y-100 focus-visible:before:scale-y-100',
     'active:translate-y-px',
   ),
+  /* ==========================================================
+     WHATSAPP — CANAL SECUNDÁRIO (doc 01 §8 papel 3, delta G-2)
+     ==========================================================
+
+     Duas variantes, uma construção. `whatsapp` é para superfície clara e
+     `whatsapp-light` para superfície escura — o mesmo par de nomes de
+     `secondary`/`light-outline`, onde "light" quer dizer "tinta clara, sobre
+     fundo escuro".
+
+     As duas são **contorno**, nunca massa. É a regra de par do sistema: quando
+     PRIMARY e WHATSAPP aparecem lado a lado eles compartilham altura, raio e
+     escala de rótulo — e **não** compartilham construção de superfície. Uma
+     massa e um contorno; a hierarquia é lida antes da cor.
+
+     O verde fica no **glifo**, que é o que torna o canal reconhecível. Ele
+     inverte junto com a superfície no hover, para não ficar preso contra o
+     preenchimento que sobe: ver `Content`.
+     ========================================================== */
   whatsapp: cn(
     'border border-ink/70 bg-transparent text-ink hover:text-canvas focus-visible:text-canvas',
     fill,
@@ -92,7 +110,16 @@ const variants: Record<Variant, string> = {
     'hover:border-ink hover:before:scale-y-100 focus-visible:before:scale-y-100',
     'active:translate-y-px',
   ),
+  'whatsapp-light': cn(
+    'border border-white/35 bg-transparent text-canvas hover:text-ink focus-visible:text-ink',
+    fill,
+    'before:origin-bottom before:scale-y-0 before:bg-canvas',
+    'hover:border-canvas hover:before:scale-y-100 focus-visible:before:scale-y-100',
+    'active:translate-y-px',
+  ),
 }
+
+const isWhatsapp = (variant: Variant) => variant === 'whatsapp' || variant === 'whatsapp-light'
 
 const sizes: Record<Size, string> = {
   sm: 'min-h-[2.75rem] px-4 py-2.5 text-body-sm',
@@ -120,7 +147,35 @@ function Content({
 }: Pick<CommonProps, 'children' | 'withArrow' | 'variant'>) {
   return (
     <>
-      {variant === 'whatsapp' ? <WhatsappIcon size={19} /> : null}
+      {/* ----------
+          A CELA DO GLIFO — FIO DE TINTA, E O VERDE QUE INVERTE
+
+          O glifo do WhatsApp ganha cela própria, separada do rótulo por um fio
+          — é o acabamento que o papel 3 do sistema pede, e o mesmo que o CTA
+          da dobra já usava. `self-stretch` faz o fio acompanhar a altura do
+          conteúdo sem depender do `py-*` de cada tamanho.
+
+          **O verde troca de tom com a superfície, não de cor.** Em repouso a
+          caixa é contorno e o glifo é o verde de tela (`--whatsapp`) sobre
+          escuro ou o fechado (`--whatsapp-deep`) sobre claro; no hover o
+          preenchimento sobe e inverte a superfície, então os dois trocam de
+          lugar. É o mesmo matiz nos quatro estados — o que muda é o fundo
+          debaixo dele.
+          ---------- */}
+      {variant && isWhatsapp(variant) ? (
+        <span
+          aria-hidden="true"
+          className={cn(
+            'flex shrink-0 items-center self-stretch pr-3',
+            variant === 'whatsapp'
+              ? 'border-r border-ink/25 text-[var(--whatsapp-deep)] group-hover:border-canvas/25 group-hover:text-[var(--whatsapp)] group-focus-visible:border-canvas/25 group-focus-visible:text-[var(--whatsapp)]'
+              : 'border-r border-canvas/25 text-[var(--whatsapp)] group-hover:border-ink/25 group-hover:text-[var(--whatsapp-deep)] group-focus-visible:border-ink/25 group-focus-visible:text-[var(--whatsapp-deep)]',
+            'transition-colors duration-200 ease-precise',
+          )}
+        >
+          <WhatsappIcon size={19} />
+        </span>
+      ) : null}
       {children}
       {withArrow ? (
         <ArrowRightIcon

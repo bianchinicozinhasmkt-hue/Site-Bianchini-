@@ -1263,8 +1263,14 @@ export function HeroSection() {
           </div>
 
           {/* ---------- Fotografia + navegação dos pilares no mobile ---------- */}
+          {/*
+            A sangria é a guia, com o sinal invertido — não `-mx-5`/`-mx-8`.
+            Aqueles dois valores eram o recuo interno do `Container` da época,
+            copiado à mão; desde G-1 (R0-A) a casca não tem recuo interno, e a
+            distância entre a aresta da janela e a aresta do conteúdo é `--guia`.
+          */}
           <div
-            className="relative -mx-5 mt-7 md:-mx-8 lg:hidden"
+            className="relative mx-[calc(-1*var(--guia))] mt-7 lg:hidden"
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >

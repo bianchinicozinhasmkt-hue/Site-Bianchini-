@@ -44,6 +44,74 @@
 
     --header-height: 4rem;
 
+    /* ==========================================================
+       LAYOUT — GUTTER, CASCA E GUIA: TRÊS GRANDEZAS, TRÊS NOMES
+       ==========================================================
+
+       Fonte única do sistema horizontal (doc `01-CONSTITUICAO-VISUAL.md` §3.1,
+       delta G-1). Antes de R0-A a guia estava escrita à mão em cinco lugares
+       que não concordavam entre si — `Container`, `.scrim::before`,
+       `.mediaCaption`, a sangria de `equipment-strip-section` e o cabeçalho.
+       Todos passam a ler daqui.
+
+       As três grandezas **não são a mesma coisa** e não devem voltar a ser
+       confundidas:
+
+         A · gutter de viewport ... `--gutter`. Piso de segurança entre a aresta
+                                    da janela e qualquer conteúdo contido.
+         B · recuo interno ........ **zero**. A casca não tem `padding`.
+         C · guia de conteúdo ..... `--guia`. O `x` real da primeira letra.
+
+       A guia é sempre **uma** das duas primeiras, nunca a soma:
+
+           C = max( A , (largura − --container-max) / 2 )
+
+       Abaixo de 1544px (= 1400 + 2 × 72) manda o gutter; acima, manda a sobra
+       do teto da casca. 1544 não é breakpoint e não deve virar um — quem
+       implementa escreve o `max()`, nunca o número.
+
+       **Por que o recuo interno é zero.** Um gutter aplicado como `padding`
+       dentro de uma casca com teto sempre morde: não desaparece quando o teto
+       assume, passa a ser descontado da largura de conteúdo. Com casca de 1400
+       e recuo de 40 o conteúdo ficava preso em 1320px em qualquer janela ≥1400
+       — 51,6% da tela em 2560. Como `margin` (via `min()` na largura) ele se
+       comporta como a definição manda: é piso enquanto há aperto e some quando
+       deixa de haver.
+
+       **Por que `5vw`.** É a única constante que passa pelos três pontos que a
+       direção já tinha fixado à mão: piso de 20px até 400px de janela, teto de
+       72px exatamente em 1440, e progressão contínua entre os dois. Em 320 e
+       390 o valor não muda em nada em relação ao produto anterior.
+       ========================================================== */
+    --gutter: clamp(20px, 5vw, 72px);
+    --container-max: 1400px;
+    --container-wide: 1520px;
+
+    /* ==========================================================
+       VERDE — CANAL, NÃO COR DE SISTEMA (doc 01 §6.4, delta G-2)
+       ==========================================================
+
+       Os dois tons já estavam no produto, escritos à mão em três arquivos.
+       Ficam aqui por serem um par com função declarada — e **fora da paleta
+       Tailwind** de propósito: o verde não é cor da marca, é o identificador
+       de um canal de contato. Nenhum tom novo foi inventado nesta rodada.
+
+         --whatsapp ....... #25D366, o verde de tela do WhatsApp. Usado sobre
+                            superfície **escura** (glifo na dobra, glifo sobre
+                            o preenchimento grafite, disco do botão flutuante)
+         --whatsapp-deep .. #2A6F44, o mesmo matiz dessaturado e fechado. Usado
+                            como glifo sobre superfície **clara**, onde o
+                            #25D366 não alcança contraste
+
+       **O verde vive no glifo.** Ele não é superfície de botão: uma massa verde
+       ao lado da massa amarela produz dois botões-irmãos, e nenhuma diferença
+       de matiz corrige uma equivalência de forma. A caixa do CTA de WhatsApp é
+       neutra — grafite ou contorno. A única superfície verde do site é o disco
+       de 28px do botão flutuante, onde não há competição de escala.
+       ========================================================== */
+    --whatsapp: #25d366;
+    --whatsapp-deep: #2a6f44;
+
     /* ----------
        Curvas. Três, e só três — ver `src/styles/animations.ts`.
        `--ease-smooth` e `--ease-precise` mantêm os nomes antigos porque são
@@ -101,6 +169,44 @@
     @apply overflow-x-hidden;
   }
 
+  /* ----------
+     `--guia` RESOLVIDA — POR QUE `cqw` E NÃO `%` NEM `vw`
+
+     `--guia` precisa ser um comprimento que qualquer descendente possa ler,
+     inclusive de dentro do container (a sangria de `#equipamentos` é o caso).
+     As duas alternativas óbvias falham:
+
+       · `%` — custom property é substituição de tokens, não valor computado:
+         o `100%` resolveria contra a caixa de **quem lê**, não contra a
+         janela. Funciona só para elemento de largura total (era assim que
+         `.scrim` e `.mediaCaption` acertavam, e a sangria errava);
+       · `vw` — inclui a barra de rolagem. Era essa a diferença de ~7px entre
+         a sangria de `#equipamentos` e as outras três expressões da guia.
+
+     `cqw` resolve contra a **área de conteúdo** do container mais próximo —
+     sem barra de rolagem — e é um comprimento válido em qualquer posição da
+     árvore. Daí `container-type: inline-size` em `main`.
+
+     A declaração fica em `main > *`, não em `main`: um elemento não consulta o
+     próprio container, e `100cqw` declarado no próprio `main` cairia para
+     `100svw` (de volta ao problema da barra de rolagem). Um nível abaixo, o
+     valor computa certo e **herda** para a árvore inteira.
+
+     `contain` faz de `main` bloco contenedor de descendentes `fixed`. Não há
+     nenhum: cabeçalho, menu mobile e botão flutuante são irmãos de `main`, não
+     filhos. Ao introduzir um `position: fixed` dentro de `main`, remedir.
+
+     O cabeçalho fica fora de `main` e **não usa** `--guia`: ele usa a própria
+     casca (`.container-shell`), que é o mesmo cálculo. Ver `header.tsx`.
+     ---------- */
+  main {
+    container-type: inline-size;
+  }
+
+  main > * {
+    --guia: max(var(--gutter), calc((100cqw - var(--container-max)) / 2));
+  }
+
   /*
     Títulos usam a grotesca de leitura, não a condensada. A condensada é da
     marca, mas em título longo ela custa legibilidade — fica nos elementos
@@ -143,6 +249,27 @@
    Componentes utilitários
    ============================================================ */
 @layer components {
+  /* ----------
+     A CASCA — UMA IMPLEMENTAÇÃO, TODOS OS CONSUMIDORES
+
+     `width` com `min()`, não `max-width` com `padding`: é o que faz o gutter se
+     comportar como margem (some quando o teto assume) em vez de morder a
+     largura de conteúdo para sempre. Ver o bloco de layout em `:root`.
+
+     `--container-max` é a única variável a mexer para trocar de casca. O
+     `Container` faz isso por `size`, e um consumidor pontual pode fazer por
+     variante responsiva (`2xl:[--container-max:var(--container-wide)]` no
+     mosaico de `#projetos`). **`wide` é degrau de mídia, nunca segunda guia de
+     texto** — parágrafo assenta sempre na casca padrão.
+
+     Quem usa: `Container` (toda seção), o cabeçalho (G-1b) e os dois wrappers
+     manuais que sobraram fora do componente.
+     ---------- */
+  .container-shell {
+    width: min(var(--container-max), 100% - 2 * var(--gutter));
+    margin-inline: auto;
+  }
+
   /*
     Fica fora da viewport até receber foco. Usa `top` negativo em vez de
     `translate`, que deixava uma fresta visível no topo por arredondamento.

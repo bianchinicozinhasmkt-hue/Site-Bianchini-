@@ -88,7 +88,7 @@ const sections = [
 
 export default function PrivacyPage() {
   return (
-    <Container className="max-w-3xl py-16 pt-[calc(var(--header-height)+3rem)] md:py-20">
+    <Container size="narrow" className="py-16 pt-[calc(var(--header-height)+3rem)] md:py-20">
       <Eyebrow>Privacidade</Eyebrow>
 
       <Heading as={1} size="title-1" className="mt-5">

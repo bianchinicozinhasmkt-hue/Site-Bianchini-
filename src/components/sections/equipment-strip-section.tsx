@@ -205,12 +205,27 @@ function EquipmentShowcase({
           </div>
 
           {/* ----------
-              A fotografia vai da coluna 6 até a borda direita da janela. O
-              cálculo tira a metade do vão do container (`100vw` menos a largura
-              máxima, dividido por dois) mais o gutter de 40px — assim a sangria
-              vale em qualquer largura, sem breakpoint por viewport.
+              A fotografia vai da coluna 6 até a borda direita da janela.
+
+              A sangria é **exatamente a guia**, com o sinal invertido: a guia é
+              a distância da aresta da janela até a aresta interna do container,
+              então recuá-la devolve a imagem ao vidro. Sem breakpoint, e sem
+              recalcular a guia.
+
+              ---------- R0-A (2026-08-12) ----------
+
+              Era `calc((100vw − min(100vw,1400px))/2 + 2.5rem)` — a guia
+              reconstruída à mão, e a única das cinco cópias que usava `100vw`.
+              `vw` inclui a barra de rolagem, então a fotografia terminava ~7px
+              **além** do vidro (invisível, porque `body` recorta o eixo
+              horizontal) e desalinhada das outras três expressões. `--guia`
+              resolve por `cqw`, que ignora a barra — ver o bloco em
+              `globals.css`.
+
+              É sangria, não guia de texto: o cálculo é **derivado** da guia,
+              como manda a separação entre eixo de mídia e eixo de conteúdo.
               ---------- */}
-          <div className="lg:col-span-7 lg:-mr-[calc((100vw-min(100vw,1400px))/2+2.5rem)]">
+          <div className="lg:col-span-7 lg:mr-[calc(-1*var(--guia))]">
             {/*
               `figure`, não `PhotoReveal` direto: no telefone a legenda **sai**
               de cima da fotografia e passa a correr abaixo dela. A 390px de

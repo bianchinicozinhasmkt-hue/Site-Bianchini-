@@ -84,9 +84,16 @@ export function FinalCta() {
               </ul>
 
               <div className="flex flex-col gap-2 border-t border-white/12 pt-4">
+                {/*
+                  `whatsapp-light` pelo mesmo motivo do fechamento montado: o
+                  canal precisa do glifo verde para ser reconhecido (G-2). Este
+                  componente está **fora da montagem** desde a restauração de
+                  2026-08-08 — a troca entra para que ele não volte um dia
+                  carregando a gramática antiga.
+                */}
                 <LinkButton
                   href={whatsappUrl('equipamentos')}
-                  variant="light-outline"
+                  variant="whatsapp-light"
                   size="md"
                   className="w-full lg:w-auto"
                 >

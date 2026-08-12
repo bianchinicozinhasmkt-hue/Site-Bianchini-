@@ -1,0 +1,158 @@
+[
+  {
+    "viewport": 1024,
+    "W": 1024,
+    "guia": null,
+    "stripFoto": {
+      "left": 455.2,
+      "right": 1024,
+      "width": 568.8
+    },
+    "stripFotoSobra": 0,
+    "legendaProjetos": {
+      "left": 51.2,
+      "right": 972.8,
+      "width": 921.6
+    },
+    "legendaGuia": 51.2,
+    "mosaico": [
+      {
+        "left": 51.2,
+        "width": 921.6
+      },
+      {
+        "left": 51.2,
+        "width": 921.6
+      },
+      {
+        "left": 0,
+        "width": 0
+      },
+      {
+        "left": 51.2,
+        "width": 921.6
+      },
+      {
+        "left": 51.2,
+        "width": 921.6
+      }
+    ]
+  },
+  {
+    "viewport": 1440,
+    "W": 1440,
+    "guia": null,
+    "stripFoto": {
+      "left": 632,
+      "right": 1440,
+      "width": 808
+    },
+    "stripFotoSobra": 0,
+    "legendaProjetos": {
+      "left": 72,
+      "right": 1368,
+      "width": 1296
+    },
+    "legendaGuia": 72,
+    "mosaico": [
+      {
+        "left": 72,
+        "width": 1296
+      },
+      {
+        "left": 72,
+        "width": 1296
+      },
+      {
+        "left": 0,
+        "width": 0
+      },
+      {
+        "left": 72,
+        "width": 1296
+      },
+      {
+        "left": 72,
+        "width": 1296
+      }
+    ]
+  },
+  {
+    "viewport": 1600,
+    "W": 1600,
+    "guia": null,
+    "stripFoto": {
+      "left": 703.3,
+      "right": 1600,
+      "width": 896.7
+    },
+    "stripFotoSobra": 0,
+    "legendaProjetos": {
+      "left": 100,
+      "right": 1500,
+      "width": 1400
+    },
+    "legendaGuia": 100,
+    "mosaico": [
+      {
+        "left": 100,
+        "width": 1400
+      },
+      {
+        "left": 100,
+        "width": 1400
+      },
+      {
+        "left": 0,
+        "width": 0
+      },
+      {
+        "left": 72,
+        "width": 1456
+      },
+      {
+        "left": 100,
+        "width": 1400
+      }
+    ]
+  },
+  {
+    "viewport": 1920,
+    "W": 1920,
+    "guia": null,
+    "stripFoto": {
+      "left": 863.3,
+      "right": 1920,
+      "width": 1056.7
+    },
+    "stripFotoSobra": 0,
+    "legendaProjetos": {
+      "left": 260,
+      "right": 1660,
+      "width": 1400
+    },
+    "legendaGuia": 260,
+    "mosaico": [
+      {
+        "left": 260,
+        "width": 1400
+      },
+      {
+        "left": 260,
+        "width": 1400
+      },
+      {
+        "left": 0,
+        "width": 0
+      },
+      {
+        "left": 200,
+        "width": 1520
+      },
+      {
+        "left": 260,
+        "width": 1400
+      }
+    ]
+  }
+]

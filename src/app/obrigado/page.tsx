@@ -15,7 +15,10 @@ export const metadata: Metadata = {
 
 export default function ThankYouPage() {
   return (
-    <Container className="flex min-h-[70vh] max-w-3xl flex-col items-start justify-center py-20 pt-[calc(var(--header-height)+4rem)]">
+    <Container
+      size="narrow"
+      className="flex min-h-[70vh] flex-col items-start justify-center py-20 pt-[calc(var(--header-height)+4rem)]"
+    >
       <span
         aria-hidden="true"
         className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-success/10 text-success"

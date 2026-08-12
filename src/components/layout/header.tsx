@@ -55,12 +55,31 @@ export function Header() {
           : 'border-white/[0.06]',
       )}
     >
-      {/*
-        Margens em `cqw` (largura do próprio cabeçalho), não em `vw`: `vw`
-        inclui a barra de rolagem e desalinharia a marca em relação à coluna
-        de texto do hero, que é medida sobre a área de conteúdo.
-      */}
-      <div className="flex h-full w-full items-center px-5 md:px-8 lg:pl-[3.1cqw] lg:pr-[4.2cqw]">
+      {/* ----------
+          G-1b — O CABEÇALHO NÃO TEM MAIS EIXO PRÓPRIO
+
+          Era `px-5 md:px-8 lg:pl-[3.1cqw] lg:pr-[4.2cqw]`: uma margem
+          proporcional à largura da **própria faixa**, isto é, um segundo
+          sistema horizontal convivendo com o do conteúdo. Os dois só
+          coincidiam por volta de 1366, por coincidência aritmética. Medido
+          antes: marca em 59,5 contra `h1` em 300 numa janela de 1920 — a marca
+          240px à esquerda do título que ela deveria ancorar.
+
+          Agora a faixa usa a **mesma casca** de toda seção da página
+          (`.container-shell`, globals.css). Não é "o mesmo número em dois
+          lugares": é o mesmo cálculo, num lugar só. A marca começa onde o `h1`
+          da hero começa, em qualquer largura, porque as duas arestas são a
+          mesma aresta.
+
+          Fora de `main`, o cabeçalho não enxerga `--guia` — e não precisa: a
+          casca já resolve a guia como sua própria aresta interna.
+
+          **Só o eixo horizontal muda.** Altura da faixa, escala do logotipo,
+          tipografia da navegação, o CTA, os estados e o menu mobile continuam
+          exatamente como estavam. Os `cqw` que sobraram abaixo (vãos internos)
+          são ritmo entre elementos da faixa, não a guia.
+          ---------- */}
+      <div className="container-shell flex h-full items-center">
         {/* ----------
             Marca. `shrink-0` nos dois níveis: sem ele o logotipo é um item
             flexível dentro de outro e encolhe abaixo da altura pedida.

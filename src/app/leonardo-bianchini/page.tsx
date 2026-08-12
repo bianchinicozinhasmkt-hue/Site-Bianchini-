@@ -71,7 +71,8 @@ export default function LeonardoPage() {
 
       {/* ============ 2. Tese de trabalho ============ */}
       <Section id="tese" tone="canvas" space="lg" bleed aria-labelledby="tese-titulo">
-        <div className="mx-auto w-full max-w-container px-5 md:px-8 lg:px-10">
+        {/* `Section bleed` não injeta o `Container`; a casca entra aqui, e é a mesma. */}
+        <div className="container-shell">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
               <Eyebrow as="p">{leonardo.thesis.eyebrow}</Eyebrow>
