@@ -28,7 +28,7 @@ já está certo e **reabri-lo é regressão**.
 | # | seção | silhueta hoje | silhueta alvo |
 | --- | --- | --- | --- |
 | 1 | hero | **A** palco | **A** |
-| 2 | equipamentos | **A** palco (variante showcase) | **B** editorial assimétrico |
+| 2 | equipamentos | **B** editorial assimétrico ✅ **R1** | **B** editorial assimétrico |
 | 3 | projetos | **B** editorial | **D** friso fotográfico |
 | 4 | pilares | **C** prova tipográfica | **C** |
 | 5 | sintomas | **B** editorial | **B** |
@@ -95,9 +95,13 @@ preferência narrativa, que definiu a cor de `#transicao` e que manteve `#credib
 
 | seção | métrica estourada | valor | teto |
 | --- | --- | ---: | ---: |
-| `#equipamentos` | caracteres · blocos | 2.443 · 26 | 1.200 · 12 |
+| ~~`#equipamentos`~~ ✅ **R1** | caracteres · blocos | ~~2.443 · 26~~ → **343 · 8** | 1.200 · 12 |
 | `#quem-conduz` | regiões amarelas | 14 | 3 |
 | `#projetos` | altura · cards | 1.593px · 6 | 1.100px · 4 |
+
+**O valor de `#equipamentos` nesta tabela era do inventário de 2026-08-10 (`1f96a1f`) e
+já estava velho quando R1 começou** — a seção tinha sido recomposta no mesmo dia. Medido
+em `20f7e8c`, o ponto de partida real era **1.078 · 14**. Ver o selo da ficha 2.
 
 ### 1.4 O ativo desperdiçado
 
@@ -469,6 +473,39 @@ fim de R0-B o diff da hero soma duas linhas de declaração nova (a grade de `.d
 
 ## [2] EQUIPAMENTOS — `#equipamentos`
 
+> ## ✅ CONGELADA — R1, 2026-08-12
+>
+> Recomposta e selada na rodada **R1**. Os oito critérios de aprovação passaram, medidos
+> em build de produção nas oito larguras (320 · 390 · 768 · 1024 · 1366 · 1440 · 1600 ·
+> 1920). Evidência: `docs/v2/capturas/equipamentos-r1-2026-08-12/`.
+>
+> | critério | teto | medido em 1440 |
+> | --- | ---: | ---: |
+> | caracteres | ≤1.200 | **343** |
+> | blocos de texto | ≤12 | **8** |
+> | cards | 0 | **0** |
+> | regiões amarelas | ≤3 | **3** |
+> | altura | ≤1.100px | **1.033px** |
+> | CTA PRIMARY | 1 | **1** |
+> | overflow horizontal | 0 | **0** |
+> | P0/P1 abertos | 0 | **0** |
+>
+> **Não reabrir por preferência.** Mudança aqui exige defeito objetivo registrado.
+>
+> ### O baseline histórico desta ficha estava velho
+>
+> Os números que este documento cobrava — 2.443 caracteres, 26 blocos, 5 cards, 1.565px —
+> vêm do inventário de 2026-08-10 (HEAD `1f96a1f`). A seção foi recomposta **no mesmo dia**
+> e de novo em `ca7a1c3`/correção seguinte. Medido em `20f7e8c`, o ponto de partida real
+> de R1 era **1.078 caracteres / 14 blocos / 5 cards / 5 amarelos / 1.379px**.
+>
+> Consequência prática: o teto de caracteres **já estava cumprido** antes da rodada, e o
+> corte foi feito por função (§8 do briefing), não para atingir um delta aritmético. Os
+> tetos que de fato reprovavam eram **blocos, cards, amarelos e altura** — e uma quinta
+> conta que a ficha não cobrava mas era a pior: a fotografia protagonista ocupava 20,6% da
+> área da seção contra 24,0% das quatro secundárias somadas. **Juntas, as secundárias eram
+> maiores que a protagonista.** Depois de R1: 35,6% contra 25,1%.
+
 ### FUNÇÃO COMERCIAL
 A frente principal (DEC-001). Converter quem chegou para cotar equipamento, sem obrigá-lo
 a atravessar a empresa inteira.
@@ -496,20 +533,29 @@ fotografias encostadas, sem vão.
 65/35 — fotografia / texto. Nunca 50/50.
 
 ### TEXTO
-**Teto de 1.200 caracteres.** Hoje: 2.443. O corte não é de qualidade, é de lugar: a
-nota sobre "avulso ou cozinha inteira" e o detalhamento por linha são conteúdo de FAQ e
-de rota interna, não de vitrine.
+**Teto de 1.200 caracteres.** ~~Hoje: 2.443.~~ **343 em 8 blocos** (R1). O corte não foi
+de qualidade, foi de lugar: a nota sobre "avulso ou cozinha inteira" e o detalhamento por
+linha são conteúdo de FAQ e de rota interna, não de vitrine. Os dois destinos foram
+conferidos antes do corte — `faq.ts`/`#credibilidade` para o primeiro,
+`/linhas-de-produtos` (âncora por categoria, alcançável pelo rodapé) para o segundo.
 
 ### IMAGEM
 Grau A ou B. Cinco fotografias de categoria, todas de operação real. **Miniatura de
-112 × 135 está proibida** — foi o que a auditoria visual global reprovou.
+112 × 135 está proibida** — foi o que a auditoria visual global reprovou. Em R1 a menor
+prova mede **238 × 190** em 1024 e **342 × 274** em 1440. Nenhum asset foi trocado: no
+viewport de referência nenhum é ampliado (a protagonista renderiza a 0,90× da fonte em
+1440 e 1,15× em 1920).
 
 ### CTA
 **PRIMARY** — "Solicitar orçamento de equipamentos" → `/contato?intencao=equipamentos`.
 Um só.
 
 ### COR
-`graphite-soft`. Amarelo: **máximo 3 regiões** (hoje 3 — está correto).
+`graphite-soft`. Amarelo: **máximo 3 regiões**. ~~(hoje 3 — está correto)~~ — o inventário
+de `20f7e8c` mediu **5**, não 3. As duas excedentes eram a etiqueta "categoria prioritária"
+e o sublinhado do link da nota de fecho; **as duas caíram junto com o conteúdo que R1
+removeu por composição**, sem rodada de cor e sem reduzir opacidade. Restam as três
+corretas: texto da etiqueta, traço da etiqueta e preenchimento do CTA.
 
 ### SUPERFÍCIE
 Escura. Segunda metade do par escuro que abre a página.
@@ -522,19 +568,33 @@ Vitrine vira lista vertical de fotografias com nome sobreposto. **Nome das categ
 CTA nunca somem.**
 
 ### ELEMENTOS A REMOVER
-- 14 dos 26 blocos de texto;
-- a nota de detalhamento por linha (vai para rota interna);
-- os 5 cards — a categoria é a fotografia + o nome, não um cartão.
+- ~~14 dos 26 blocos de texto~~ **6 dos 14** (R1): os quatro parágrafos de benefício da
+  faixa, o benefício da cocção e a nota de fecho;
+- ~~a nota de detalhamento por linha (vai para rota interna)~~ **feito** — o destino
+  (`/linhas-de-produtos`) já publicava as cinco categorias com âncora própria;
+- ~~os 5 cards~~ **feito**. Os cinco eram `bg-graphite` (#101010) na caixa de cada
+  fotografia, dentro de uma seção `graphite-soft` (#1A1A1A): superfície própria distinta
+  da superfície da seção **é** a construção de card (doc 01 §7.3). Mesmo diagnóstico e
+  mesma correção que R0-D aplicou em `#transicao`. Como a imagem é `fill` + `object-cover`,
+  o fundo nunca aparecia depois do carregamento — saiu a caixa, não a composição.
 
 ### ELEMENTOS A PRESERVAR
 - `variant="showcase"` como composição da Home (a rota interna continua `dossier`);
-- a sangria pela borda direita;
-- a transcrição de `faq.ts` como origem do enunciado.
+- a sangria pela borda direita — em R1 ela passou a ser **compartilhada** por palco e
+  faixa, que terminam na mesma vertical. Continua sendo uma só aresta sangrada, e continua
+  sendo `calc(-1 * var(--guia))`;
+- a transcrição de `faq.ts` como origem do enunciado — preservada como a **linha de
+  capacidade** ("Especificamos, fornecemos, instalamos e comissionamos."), agora na coluna
+  de texto, acima do CTA. O que saiu dela foi a cláusula "avulso × cozinha inteira", que
+  esta mesma Home publica em `#credibilidade`.
 
 ### PROBLEMAS ATUAIS
-`P1 · DENSIDADE` 2.443 caracteres e 26 blocos — o dobro do teto.
-`P2 · COMPOSIÇÃO` 5 cards numa seção que deveria ser fotografia nomeada.
-`P2 · ALTURA` 1.565px em 1440.
+**Nenhum.** Todos fechados em R1 — ver o selo no topo desta ficha.
+
+~~`P1 · DENSIDADE` 2.443 caracteres e 26 blocos~~ — baseline velho; o real era 1.078 / 14,
+e hoje é 343 / 8.
+~~`P2 · COMPOSIÇÃO` 5 cards numa seção que deveria ser fotografia nomeada.~~ — 0 cards.
+~~`P2 · ALTURA` 1.565px em 1440.~~ — baseline velho; o real era 1.379px, e hoje é 1.033px.
 
 ### DIREÇÃO DEFINITIVA
 Palco fotográfico com enunciado curto e uma ação. As seis frentes nomeadas por fotografia
@@ -547,12 +607,19 @@ Fotografia grau B para as seis categorias. **Preparo e Higienização não têm 
 próprio** (DEC-007) — a vitrine pode abrir só com as que têm, e isso não invalida a
 categoria.
 
+**Estado em R1:** a vitrine abre com as **cinco** que têm dataset e fotografia real
+(Cocção, Refrigeração, Mobiliário em inox, Exaustão e ventilação, Tecnologia de cocção).
+Preparo e Higienização **continuam existindo** como frentes empresariais em
+`src/data/v2/categories.ts` e em DEC-007 — R1 não as apagou de dado nem de rota, só não
+inventou fotografia para elas. Pendência de acervo **A-3** segue aberta (doc 05 §2).
+
 ### CRITÉRIO DE APROVAÇÃO
 ≤1.200 caracteres · ≤12 blocos · zero cards · ≤3 amarelos · altura ≤1.100px em 1440 ·
-CTA único · teste da miniatura passa.
+CTA único · teste da miniatura passa. **Todos cumpridos em R1** — ver o selo no topo.
 
 ### CRITÉRIO DE CONGELAMENTO
-Aprovada + validada em 390/768/1440/1920 + sem P0/P1.
+Aprovada + validada em 390/768/1440/1920 + sem P0/P1. **Cumprido em R1**, e ampliado para
+oito larguras (320 · 390 · 768 · 1024 · 1366 · 1440 · 1600 · 1920).
 
 ---
 
@@ -1456,7 +1523,7 @@ A ação que a página inteira preparou.
 ### HIERARQUIA
 1. o CTA de orçamento
 2. o título que nomeia as três necessidades
-3. WhatsApp e os dois secundários nomeados
+3. o WhatsApp
 
 ### COMPOSIÇÃO
 Silhueta **F — fechamento**. Mantém.
@@ -1472,8 +1539,17 @@ Painel diagonal com fotografia; conteúdo convergindo para a ação.
 46% de área. Correto.
 
 ### CTA
-**PRIMARY** (orçamento de equipamentos) + **WhatsApp** + 2 **SECONDARY** nomeados
-(projetista, diagnóstico).
+**PRIMARY** (orçamento de equipamentos) + **WhatsApp**. Duas ações, e só duas.
+
+> **Correção documental — R1, 2026-08-12.** Esta ficha descrevia
+> "PRIMARY + WhatsApp + 2 **SECONDARY** nomeados (projetista, diagnóstico)". O produto
+> congelado em R0-D nunca teve os dois secundários: `final-cta-section.tsx` monta
+> exatamente dois `LinkButton` (`variant="primary"` e `variant="whatsapp-light"`), e as
+> três necessidades são nomeadas **na copy**, não em botões. A divergência era da ficha.
+>
+> Decisão da direção: **alinhar a ficha ao produto** — não acrescentar dois CTAs a uma
+> seção congelada. Isto é correção de texto normativo; **nenhum arquivo de produto de
+> `#fechamento` foi tocado em R1**, e a seção segue congelada como saiu de R0-D.
 
 ### COR
 `graphite`. ~~5 amarelos — reduzir para ≤3.~~ **3 em ≥1024 e 2 abaixo** (R0-D): keyline
@@ -1502,8 +1578,9 @@ Painel diagonal vira massa. **Título, CTA primário e WhatsApp nunca somem.**
   proíbe;
 - o mesmo componente das nove rotas internas, sem alteração de composição — só copy e
   destino vêm por props;
-- os dois secundários nomeados, para que quem veio por projeto ou diagnóstico se
-  reconheça;
+- **as três necessidades nomeadas na copy**, para que quem veio por projeto ou diagnóstico
+  se reconheça. É a copy que faz esse trabalho — não botões secundários, que a seção não
+  tem;
 - `.diag-panel` / `.diag-keyline` lendo `--diag` do wrapper por herança. **Declarar
   `--diag` dentro de `.diag-panel` sobrescreve o valor no painel e não na keyline: as
   arestas deixam de ser paralelas e sobra uma cunha amarela.**
@@ -1538,25 +1615,36 @@ composição, copy ou destino.
 | estado | seções |
 | --- | --- |
 | **Conformidade + congelamento** (R0) | **hero** (5 deltas) · `#pilares` · `#transicao` · `#fechamento` · Header |
+| **Recomposição concluída** (R1) | ✅ `#equipamentos` |
 | **Ajuste pontual** | `#sintomas` · `#leonardo` · `#credibilidade` · `#metodo` |
 | **Recomposição** | `#projetos` · `#diagnostico` · `#quem-conduz` |
-| **Recomposição + asset novo** | `#equipamentos` · `#industria-do-inox` |
+| **Recomposição + asset novo** | `#industria-do-inox` |
 
 **A R0 fechou em 2026-08-12.** Os cinco deltas da hero fecharam em R0-B (§2.12, selo no
 topo de §2), os quatro do cabeçalho em R0-C (selo em `06-MATRIZ-DE-DELTAS.md` §2), G-6 em
 R0-C.1, e os três das seções de conformidade — `#pilares` (S-08), `#transicao` (S-15) e
 `#fechamento` (S-31) — em **R0-D**, com selo `CONGELADA` nas fichas 4, 7 e 13.
 
-**Cinco itens estão fora da fila de trabalho:** sistemas globais, hero, cabeçalho, sistema
-de botões e essas três seções. A próxima rodada é **R1 — `#equipamentos`**.
+**A R1 fechou em 2026-08-12**, no mesmo dia: `#equipamentos` recomposta para a silhueta B
+e congelada, com selo na ficha 2. `#equipamentos` saiu da coluna "recomposição + asset
+novo" porque a rodada **não precisou de asset novo** — os cinco arquivos existentes
+aguentaram a escala nova, e o que faltava (Preparo e Higienização) continua registrado
+como pendência A-3, sem bloquear a seção.
+
+**Seis itens estão fora da fila de trabalho:** sistemas globais, hero, cabeçalho, sistema
+de botões, as três seções de conformidade e `#equipamentos`. A próxima rodada é
+**R2 — `#projetos`**.
 
 ### 4.2 Os cinco itens de maior retorno
 
 1. **`#quem-conduz`: 14 amarelos → 3.** Maior violação isolada do sistema.
 2. **`#projetos`: silhueta B → D.** Quebra a corrente de editoriais e usa o melhor
    acervo.
-3. **`#equipamentos`: 2.443 → 1.200 caracteres.** A frente comercial principal está
-   ilegível por densidade.
+3. ~~**`#equipamentos`: 2.443 → 1.200 caracteres.**~~ ✅ **Feito em R1** — e o diagnóstico
+   estava errado no essencial: a densidade real era 1.078 caracteres, dentro do teto. O que
+   reprovava a frente comercial principal era **composição** (5 cards, protagonista menor
+   que a soma das secundárias), não texto. Entregue: 343 caracteres, 0 cards,
+   protagonista 35,6% contra 25,1% da faixa.
 4. **`#diagnostico`: 12 → 6 hairlines.** Remove a leitura de "PDF colado na página".
 5. **`#industria-do-inox`: 15% → 60% de imagem.** Depende de acervo novo, e é o maior
    ganho de percepção de capacidade industrial.

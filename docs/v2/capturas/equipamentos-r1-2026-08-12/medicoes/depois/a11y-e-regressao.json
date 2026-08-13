@@ -1,0 +1,105 @@
+{
+ "a11y": {
+  "foco": [
+   {
+    "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+    "href": "/contato?intencao=equipamentos",
+    "focoVisivel": true,
+    "outline": "2px",
+    "preenchimento": false
+   }
+  ],
+  "tabulaveis": [
+   {
+    "tag": "a",
+    "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+    "visivel": true,
+    "tabindex": null
+   }
+  ],
+  "semantica": {
+   "rotulada": "equipamentos-titulo",
+   "tituloExiste": true,
+   "headings": [
+    "H2: Especificado pelo volume real, não pela ",
+    "H3: Refrigeração",
+    "H3: Mobiliário em inox",
+    "H3: Exaustão e ventilação",
+    "H3: Tecnologia de cocção"
+   ],
+   "figuras": 5,
+   "figcaptions": 5,
+   "imagensSemAlt": 0,
+   "alts": [
+    "Linha de fogões industriais com bancada de apoio e",
+    "Refrigeradores verticais em aço inox alinhados em ",
+    "Bancada em aço inox com gaveteiro, armários, pia d",
+    "Coifa em aço inox sobre linha de cocção em cozinha",
+    "Forno combinado profissional instalado em cozinha "
+   ],
+   "gradientesOcultos": 7
+  },
+  "toque": [
+   {
+    "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+    "w": 348.4,
+    "h": 48,
+    "ok": true
+   }
+  ]
+ },
+ "regressao": {
+  "header": {
+   "altura": 80,
+   "ctaRotulo": "SOLICITAR ORÇAMENTO",
+   "ctaDestino": "/contato?intencao=equipamentos",
+   "ctaRaio": "2px",
+   "ctaSombra": "none",
+   "marcaX": 72
+  },
+  "g1b": {
+   "marcaX": 72,
+   "h1X": 72,
+   "alinhado": true
+  },
+  "hero": {
+   "h1": "Equipamentos para cozinha profissional, especificados para a sua operação.",
+   "portas": [
+    "SOLICITAR ORÇAMENTO FA",
+    "SOLICITAR ORÇAMENTO DE",
+    "SOLICITAR ORÇAMENTO"
+   ],
+   "alturaDobra": 900
+  },
+  "botoes": {
+   "total": 41,
+   "foraDaNorma": []
+  },
+  "pilares": {
+   "h": 637,
+   "blocos": 11,
+   "caracteres": 704,
+   "nAmarelos": 2
+  },
+  "transicao": {
+   "h": 578,
+   "blocos": 3,
+   "caracteres": 326,
+   "nAmarelos": 2
+  },
+  "fechamento": {
+   "h": 705,
+   "blocos": 2,
+   "caracteres": 182,
+   "nAmarelos": 3
+  },
+  "consoleErros": 0
+ },
+ "reducedMotion": {
+  "invisiveis": [],
+  "nInvisiveis": 0,
+  "imagensCarregadas": "5/5",
+  "textosVisiveis": 8,
+  "consoleErros": 0
+ }
+}

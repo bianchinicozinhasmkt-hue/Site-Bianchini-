@@ -261,10 +261,11 @@ relatório da rodada.
 
 | id | seção | regra normativa | estado atual | delta | sev. | rodada | critério de saída |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| **S-01** | equipamentos | ≤1.200 caracteres, ≤12 blocos — doc 01 §4.5 | 2.443 caracteres, 26 blocos | o dobro do teto | `P1 · CONTEÚDO` | **R1** | ≤1.200 / ≤12 |
-| **S-02** | equipamentos | zero card; categoria é foto+nome — doc 01 §7.3 | 5 cards | leitura de catálogo | `P2 · COMPOSIÇÃO` | **R1** | zero cards |
-| **S-03** | equipamentos | altura ≤1.100px | 1.565px | +42% | `P2 · COMPOSIÇÃO` | **R1** | ≤1.100px |
-| **S-04** | equipamentos | silhueta **B** (não palco, para não repetir a hero) — doc 03 §1.1 | palco (A) logo após a hero (A) | dupla consecutiva | `P2 · COMPOSIÇÃO` | **R1** | texto na guia, 65/35 |
+| ~~**S-01**~~ | equipamentos | ≤1.200 caracteres, ≤12 blocos — doc 01 §4.5 | ~~2.443 caracteres, 26 blocos~~ → **medido 1.078 / 14 em `20f7e8c`; o número da linha era do inventário de `1f96a1f`, anterior à recomposição do mesmo dia** → **343 / 8** | **FECHADO em R1** (2026-08-12) | `P1 · CONTEÚDO` | **R1** | ✅ 343 caracteres em 8 blocos — 71% abaixo do teto de caracteres, 33% abaixo do de blocos; corte por função, com destino conferido para cada trecho removido |
+| ~~**S-02**~~ | equipamentos | zero card; categoria é foto+nome — doc 01 §7.3 | ~~5 cards~~ → `bg-graphite` (#101010) na caixa de cada fotografia, dentro de seção `graphite-soft` (#1A1A1A) — mesma construção de S-15 | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ zero cards nas 8 larguras; superfície removida, nada no lugar; composição renderizada idêntica (a imagem é `fill` + `cover` e o fundo nunca aparecia) |
+| ~~**S-03**~~ | equipamentos | altura ≤1.100px | ~~1.565px~~ → **medido 1.379px em `20f7e8c`** → **1.033px** | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ 1.033px em 1440, −25%; redução por menos blocos, zero cards e faixa integrada — sem crop forçado, texto miúdo ou gap insuficiente |
+| ~~**S-04**~~ | equipamentos | silhueta **B** (não palco, para não repetir a hero) — doc 03 §1.1 | ~~palco (A) logo após a hero (A)~~ | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ texto na guia, ao lado da fotografia; massa 69,7/30,3 em 1440 (teto: nunca 50/50); uma só aresta sangrada, compartilhada por palco e faixa |
+| **S-04b** | equipamentos | a fotografia protagonista domina a massa fotográfica — doc 03 ficha 2, HIERARQUIA | protagonista **20,6%** da área contra **24,0%** das quatro secundárias somadas | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ 35,6% contra 25,1%; área fotográfica total 44,6% → 60,7% |
 | **S-05** | projetos | silhueta **D** friso — doc 03 §1.1 | **B**, repetindo vizinhas | corrente de editoriais | `P1 · COMPOSIÇÃO` | **R2** | silhueta D; ≥1 imagem rompendo o container |
 | **S-06** | projetos | ≤4 cards, ≤6 hairlines, ≤3 amarelos | 6 cards, 9 hairlines, 8 amarelos | leitura de grade | `P2 · ESTÉTICA` | **R2** | dentro dos tetos |
 | **S-07** | projetos | altura ≤1.100px; ≥70% de imagem | 1.593px; 55% | seção mais alta da página | `P2 · COMPOSIÇÃO` | **R2** | ≤1.100px, ≥70% |
@@ -368,22 +369,31 @@ produto ou o contrário.
 
 ## 5. Contagem
 
-Atualizado em 2026-08-12, ao fim de **R0-D** — que encerra a R0. O total é **41**: G-6
-entrou como delta novo em R0-C e fechou em R0-C.1.
+Atualizado em 2026-08-12, ao fim de **R1**. O total é **42**: G-6 entrou como delta novo em
+R0-C e fechou em R0-C.1; **S-04b** entrou como delta novo em R1 e fechou na mesma rodada.
 
 | severidade | total | fechados | **abertos** |
 | --- | ---: | ---: | ---: |
 | **P0** | 0 | 0 | **0** |
-| **P1** | 10 | **7** | **3** |
-| **P2** | 20 | **3** | **17** |
+| **P1** | 10 | **8** | **2** |
+| **P2** | 21 | **7** | **14** |
 | **P3** | 11 | **6** | **5** |
-| **TOTAL** | 41 | **16** | **25** |
+| **TOTAL** | 42 | **21** | **21** |
+
+**Metade da matriz está fechada.** R1 fechou quatro linhas (S-01 a S-04) e abriu-e-fechou
+uma quinta: **S-04b**, o protagonismo da fotografia. Ela não existia porque nenhum
+documento cobrava a relação de área entre a categoria prioritária e o conjunto das
+secundárias — e era ela, não a densidade de texto, que fazia a frente comercial principal
+ler como grade. Fica registrada para que a mesma conta seja feita em R2 (`#projetos`) e
+R6 (`#industria-do-inox`), que também têm uma fotografia protagonista e um conjunto de
+apoio.
 
 Fechados em R0-A: **G-1**, **G-1b**, **G-2** e **D-3** (que é G-2 aplicado à dobra).
 Fechados em R0-B: **D-1**, **D-2**, **D-4** e **D-5**.
 Fechados em R0-C: **H-1**, **H-2**, **H-3** e **H-4**. Aberto por R0-C: **G-6**.
 Fechados em R0-C.1: **G-6**.
 Fechados em R0-D: **S-08**, **S-15** e **S-31**.
+Fechados em R1: **S-01**, **S-02**, **S-03** e **S-04**. Aberto e fechado por R1: **S-04b**.
 
 **Todos os sistemas globais estão conformes** — G-1, G-1b, G-2 e G-6 fechados; G-3 e G-4
 já eram. Sobra **G-5** (orçamento de cor), que é contagem por seção e vive nas fichas.
@@ -394,9 +404,12 @@ já eram. Sobra **G-5** (orçamento de cor), que é contagem por seção e vive 
 **`#pilares`, `#transicao` e `#fechamento`** fecharam os três de R0-D e receberam selo
 `CONGELADA` nas fichas 4, 7 e 13.
 
-**A R0 está encerrada.** Nada sobra na fase de conformidade: sistemas globais, hero,
-cabeçalho, sistema de botões e as três seções estão conformes e selados. O que resta na
-matriz pertence a R1–R7, e a próxima é **R1 — `#equipamentos`** (S-01 a S-04).
+**`#equipamentos`** fechou os quatro dela mais S-04b e recebeu selo `CONGELADA` na ficha 2.
+
+**A R0 está encerrada e a R1 também.** Nada sobra na fase de conformidade: sistemas
+globais, hero, cabeçalho, sistema de botões e as três seções de R0-D estão conformes e
+selados, e a frente comercial principal está recomposta e congelada. O que resta na matriz
+pertence a R2–R7, e a próxima é **R2 — `#projetos`** (S-05 a S-07).
 
 **Zero P0.** Nenhum delta bloqueia publicação — o produto no ar é funcional, acessível e
 sem dado inventado. Os itens restantes são distância entre o que está no ar e o que a norma
@@ -410,7 +423,7 @@ pede.
 | **R0-B** | ~~2 — D-1, D-2~~ **fechados** |
 | **R0-C** | ~~1 — H-1~~ **fechado** |
 | **R0-D** | 0 — os três deltas dela (S-08, S-15, S-31) são P3, e **fecharam** |
-| R1 | 1 — S-01 |
+| **R1** | ~~1 — S-01~~ **fechado** |
 | R2 | 1 — S-05 |
 | R3 | 1 — S-26 |
 | R4 | 1 — S-11 |

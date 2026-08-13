@@ -157,19 +157,36 @@ o Header passam nos doze testes · captura arquivada · selo `CONGELADA` com dat
 
 ---
 
-## RODADA 1 — A frente comercial principal
+## RODADA 1 — A frente comercial principal ✅ CONCLUÍDA (2026-08-12)
 
 **Objetivo:** tornar `#equipamentos` legível como dobra comercial em vez de documento.
 
 **Seções:** `#equipamentos`
 
 **Trabalho:**
-- 2.443 → ≤1.200 caracteres; 26 → ≤12 blocos;
-- silhueta **A → B**: o texto sai de cima da fotografia e vai para a guia, em 65/35.
-  Dois palcos consecutivos (hero + equipamentos) anulam o efeito dos dois;
-- remover os 5 cards — a categoria é fotografia + nome, não cartão;
-- migrar o detalhamento por linha para as rotas de `/linhas-de-produtos`;
-- altura 1.565 → ≤1.100px em 1440.
+- ~~2.443 → ≤1.200 caracteres; 26 → ≤12 blocos~~ **1.078 → 343 caracteres; 14 → 8 blocos.**
+  O baseline histórico estava velho: medido em `20f7e8c`, o teto de caracteres **já estava
+  cumprido** antes da rodada. O corte foi por função, não por aritmética;
+- ~~silhueta **A → B**~~ **feito**: o texto vive na guia, ao lado da fotografia, em 69,7/30,3
+  de massa em 1440 (a ficha pede 65/35 e proíbe 50/50);
+- ~~remover os 5 cards~~ **feito** — eram `bg-graphite` na caixa de cada fotografia, dentro
+  de uma seção `graphite-soft`. Mesma construção que R0-D removeu de `#transicao`;
+- ~~migrar o detalhamento por linha~~ **feito** — o destino já existia e já era alcançável;
+- ~~altura 1.565 → ≤1.100px em 1440~~ **1.379 → 1.033px.**
+
+**Entregue além do previsto:** a fotografia protagonista ocupava **20,6%** da área da seção
+contra **24,0%** das quatro secundárias somadas — a categoria prioritária perdia em massa
+para o conjunto das secundárias, e nenhum documento cobrava isso. Depois de R1: **35,6%
+contra 25,1%.** Área fotográfica total: 44,6% → **60,7%**.
+
+**Defeito encontrado e corrigido dentro da rodada:** a primeira versão pôs `text-canvas` no
+`figcaption` em vez de no elemento de texto. `globals.css` declara
+`h1..h4 { text-ink }` na camada base — declaração no elemento vence herança —, então os
+quatro `h3` da faixa saíram grafite sobre grafite e sumiram, enquanto o nome da
+prioritária (um `p`) ficou correto. Pego pelo recorte ampliado, não pela contagem: as
+métricas de densidade, card, cor e altura passavam todas com o texto invisível.
+
+**Evidência:** `docs/v2/capturas/equipamentos-r1-2026-08-12/`.
 
 **Ganho visual:** alto. **Ganho comercial:** **máximo** — é a frente prioritária
 (DEC-001) e hoje ela é a seção mais densa da página.
@@ -184,6 +201,11 @@ desejável; DEC-007 permite abrir só com as que têm dataset.
 **Critério de saída:** ≤1.200 caracteres · ≤12 blocos · zero cards · ≤3 amarelos ·
 altura ≤1.100px · `/solucoes/cozinhas-industriais` inalterada (comparação byte a byte da
 composição).
+
+**Resultado — todos cumpridos:** 343 caracteres · 8 blocos · 0 cards · 3 amarelos ·
+1.033px em 1440. **Dossiê: PASS** — 59 nós, 29 textos, 2.409 caracteres, 5 imagens,
+2 ações, 14.530 bytes de HTML e altura (2.395px em 390, 1.564px em 1440) **idênticos**
+antes e depois, em comparação nó a nó da árvore.
 
 ---
 
@@ -382,7 +404,7 @@ R0-C  header CTA (H-1)
 R0-D  #pilares · #transicao · #fechamento
    │  ─────────── selo CONGELADA nas quatro áreas ───────────
    │
-R1  #equipamentos             ──┐
+R1  #equipamentos  ✅ CONGELADA 2026-08-12  ──┐
 R2  #projetos                 ──┤
                                 ├─ R3 pode correr em paralelo a R2
 R3  cor e motion global       ──┤

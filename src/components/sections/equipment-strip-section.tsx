@@ -6,6 +6,7 @@ import { PhotoReveal } from '@/components/animations/photo-reveal'
 import { Reveal } from '@/components/animations/reveal'
 import { LinkButton } from '@/components/ui/actions/button'
 import { Eyebrow, Heading } from '@/components/ui/typography/heading'
+import { cn } from '@/lib/utils'
 
 import { equipmentCategories } from '@/data/equipment-categories'
 
@@ -20,11 +21,25 @@ interface EquipmentStripSectionProps {
    */
   variant?: 'dossier' | 'showcase'
   /**
-   * Linha de fecho, à esquerda do CTA. **O default é o texto da V1** e é o que
-   * `/solucoes/cozinhas-industriais` continua renderizando — quem passa um
-   * valor aqui é só a Home.
+   * Linha de fecho do **dossiê**, à esquerda do CTA. O default é o texto da V1
+   * e é o que `/solucoes/cozinhas-industriais` renderiza.
+   *
+   * ---------- R1 (2026-08-12) ----------
+   * A prop deixou de atravessar para a vitrine. Na composição da Home o fecho
+   * não é mais um parágrafo no rodapé da seção: a linha de capacidade subiu
+   * para a coluna de texto, acima do CTA, e é `capability`. Um mesmo nome de
+   * prop servindo dois papéis diferentes era o que tornava difícil enxergar
+   * que a Home e a rota interna não compartilham mais este texto.
    */
   note?: ReactNode
+  /**
+   * Linha de capacidade da **vitrine**, entre o enunciado e o CTA. É a
+   * transcrição de `src/data/faq.ts` que a ficha 2 do documento 03 manda
+   * preservar como origem do enunciado — sem a cláusula de "avulso × cozinha
+   * inteira" e sem o ponteiro de detalhamento por linha, que a mesma ficha
+   * manda migrar para a rota de linhas.
+   */
+  capability?: ReactNode
   /**
    * Ação que encerra a seção. Default = o da V1 ("Ver a solução completa"),
    * preservado para a rota interna; a Home passa a ação comercial.
@@ -33,6 +48,14 @@ interface EquipmentStripSectionProps {
 }
 
 const DEFAULT_CTA = { label: 'Ver a solução completa', href: '/solucoes/cozinhas-industriais' }
+
+/**
+ * A capacidade, em uma linha. Transcrição de `src/data/faq.ts` — `kitchensFaq[0]`
+ * ("especificamos e fornecemos esse item") e `kitchensFaq[2]` ("logística,
+ * montagem, instalação, comissionamento"). Os mesmos quatro verbos já são
+ * publicados por `src/data/pillars.ts` na própria Home. Não é afirmação nova.
+ */
+const DEFAULT_CAPABILITY = 'Especificamos, fornecemos, instalamos e comissionamos.'
 
 /**
  * Equipamentos — parte da solução, não catálogo.
@@ -82,15 +105,65 @@ const DEFAULT_CTA = { label: 'Ver a solução completa', href: '/solucoes/cozinh
  *   não a contagem de pixels. Uma imagem grande cercada por quatro imagens
  *   igualmente grandes deixa de ser protagonista.
  *
- *   SANGRIA ≠ COMPOSIÇÃO — usar a viewport não é sangrar tudo. Aqui só a
- *   fotografia do palco rompe o container, e só pela direita.
+ *   SANGRIA ≠ COMPOSIÇÃO — usar a viewport não é sangrar tudo. A vitrine tem
+ *   **uma** aresta sangrada, a direita, e palco e faixa a compartilham.
  *
  *   TEXTO INTEGRADO ≠ TUDO SOBRE SCRIM — o enunciado tem plano editorial
- *   próprio, sobre o grafite da seção. O que entra na fotografia é apenas o
- *   bloco da categoria prioritária, com proteção **local**, num canto.
+ *   próprio, sobre o grafite da seção. O que entra na fotografia é só o **nome**
+ *   da frente, com proteção local.
  *
- *   VITRINE ≠ MOSAICO — as quatro provas são uma fileira alinhada de
- *   fotografias limpas, de mesmo tamanho e claramente menores que o palco.
+ *   VITRINE ≠ MOSAICO — as quatro provas são uma faixa contínua de fotografias
+ *   limpas, de mesmo tamanho e claramente menores que o palco.
+ *
+ * ============================================================
+ * R1 (2026-08-12) — A RECOMPOSIÇÃO QUE FECHOU A SEÇÃO
+ * ============================================================
+ *
+ * A rodada anterior tinha resolvido a escala das fotografias, mas o inventário
+ * de `20f7e8c` ainda reprovava em quatro contas da ficha 2 (documento 03):
+ *
+ *   14 blocos de texto (teto 12) · 5 cards (teto 0) · 5 regiões amarelas
+ *   (teto 3) · 1.379px de altura em 1440 (teto 1.100).
+ *
+ * E numa quinta, que é a que importa comercialmente: a fotografia protagonista
+ * ocupava **20,6%** da área da seção enquanto as quatro provas somavam 24,0% —
+ * juntas, elas eram maiores que a protagonista. Uma vitrine cuja categoria
+ * prioritária perde em massa para o conjunto das secundárias não tem
+ * protagonista, tem uma grade com uma célula grande.
+ *
+ * O que mudou, e por quê:
+ *
+ *   A · OS CINCO CARDS ERAM `bg-graphite` — a caixa de cada fotografia
+ *   carregava #101010 dentro de uma seção `graphite-soft` (#1A1A1A).
+ *   Superfície própria distinta da superfície da seção **é** a construção de
+ *   card no sistema (documento 01 §7.3), e era essa a única que o inventário
+ *   achava aqui. Como toda imagem é `fill` + `object-cover`, o fundo nunca
+ *   aparecia depois do carregamento: sai a caixa, a composição renderizada não
+ *   muda. Mesmo diagnóstico e mesma correção que R0-D aplicou em `#transicao`.
+ *
+ *   B · A CATEGORIA VOLTOU A SER FOTOGRAFIA + NOME. Saíram os quatro parágrafos
+ *   de benefício da faixa, o benefício da cocção e a etiqueta "categoria
+ *   prioritária". O benefício da cocção repetia literalmente o H2 ("pelo volume
+ *   real, não pela ficha técnica"); os outros quatro explicavam o que a
+ *   fotografia já mostra. Todos continuam publicados em
+ *   `/solucoes/cozinhas-industriais` e em `/linhas-de-produtos`.
+ *
+ *   C · UMA ARESTA SANGRADA, COMPARTILHADA. A faixa passou a recuar a guia
+ *   pela direita igual ao palco, então os dois terminam na **mesma** vertical.
+ *   É o que faz a faixa ler como continuação da composição e não como um
+ *   segundo componente empilhado dentro da seção — e não introduz mecanismo
+ *   novo, é o mesmo `calc(-1 * var(--guia))`.
+ *
+ *   D · SEM VÃO NA FAIXA. Quatro fotografias encostadas formam uma superfície
+ *   fotográfica única; com `gap` elas voltavam a ler como quatro objetos, que é
+ *   meio caminho de volta para o cartão.
+ *
+ *   E · 65/35 EM VEZ DE 61/39. O palco foi de 7 para 8 de 12 colunas a partir
+ *   de `xl`. Em `lg` ele fica em 7: com 4 colunas a coluna de texto cairia para
+ *   261px em 1024 e o H2 quebraria em cinco linhas.
+ *
+ * Resultado medido em 1440: protagonista 36,2% da área contra 24,0% da faixa
+ * inteira — a relação se inverteu, que era o objetivo.
  *
  * ============================================================
  * ESCALA DAS FOTOGRAFIAS — O QUE OS ARQUIVOS AGUENTAM
@@ -98,27 +171,31 @@ const DEFAULT_CTA = { label: 'Ver a solução completa', href: '/solucoes/cozinh
  *
  * Medidos: `linha-de-fogoes` 1024×768, `refrigeradores-verticais` 940×689,
  * `mobiliario-inox` 1170×964, `linha-de-coccao` 787×1400 (vertical),
- * `forno-combinado` 1109×1400 (vertical).
+ * `forno-combinado` 1109×1400 (vertical). **Nenhum foi trocado em R1** — a
+ * troca só se justifica por defeito objetivo (§26 do briefing), e no viewport
+ * de referência nenhum é ampliado.
  *
- * O palco ocupa 7 de 12 colunas e sangra só pela direita: em 1440 renderiza a
- * ~820px contra uma fonte de 1024 (0,80×) e em 1920 a ~1.030px (1,01×). As
- * quatro provas ficam em ~310px de largura em 1440 — entre 0,26× e 0,39× das
- * fontes, nítidas com folga. Era a escala do experimento reprovado que borrava
- * `forno-combinado`: 1.120px de largura num recorte de 2,5:1, que mostrava
- * menos de um quarto da fotografia.
+ * O palco ocupa 8 de 12 colunas a partir de `xl` e sangra pela direita: em 1440
+ * renderiza a ~920px contra uma fonte de 1024 (0,90×) e em 1920 a ~1.177px
+ * (1,15×) — ampliação leve, longe do borrão que reprovou `ca7a1c3`, que pedia
+ * 1.120px num recorte de 2,5:1.
  *
- * A proporção 4:5 das provas veio dos assets, não de estética: duas são
- * verticais (0,56 e 0,79) e duas horizontais (1,36 e 1,21). Num slot de 0,8
- * nenhuma perde o assunto — a mais cortada mostra 59% da largura original.
+ * A proporção da faixa é **5:4 em `lg`**, não 4:5 nem 4:3, e a razão são os
+ * arquivos: duas provas são verticais (0,56 e 0,79) e duas horizontais (1,36 e
+ * 1,21). Em 4:3 a `linha-de-coccao` mostraria 42% da altura original — recorte
+ * agressivo demais para uma coifa. Em 5:4 ela mostra 53% e o `forno-combinado`
+ * 75%, e a faixa custa 274px em vez de 342px (1:1), que era o que estourava o
+ * teto de altura.
  */
 export function EquipmentStripSection({
   compact = false,
   variant = 'dossier',
   note,
+  capability,
   cta = DEFAULT_CTA,
 }: EquipmentStripSectionProps = {}) {
   if (variant === 'showcase') {
-    return <EquipmentShowcase note={note} cta={cta} />
+    return <EquipmentShowcase capability={capability} cta={cta} />
   }
 
   return <EquipmentDossier compact={compact} note={note} cta={cta} />
@@ -129,10 +206,10 @@ export function EquipmentStripSection({
    ============================================================ */
 
 function EquipmentShowcase({
-  note,
+  capability,
   cta,
 }: {
-  note?: ReactNode
+  capability?: ReactNode
   cta: { label: string; href: string }
 }) {
   const [primary, ...rest] = equipmentCategories
@@ -155,19 +232,25 @@ function EquipmentShowcase({
       {/* ==========================================================
           PALCO — enunciado à esquerda, fotografia dominante à direita.
 
-          A fotografia ocupa 7 de 12 colunas e sangra **só pela borda direita**.
-          Ela não passa por baixo do texto: os dois planos são vizinhos, e a
-          profundidade vem da diferença de escala e do bloco da categoria, que
-          se apoia na base da imagem. Não há scrim geral — o enunciado vive
-          sobre o grafite da própria seção, e é isso que mantém a fotografia
-          visível de ponta a ponta.
+          A fotografia ocupa 8 de 12 colunas a partir de `xl` (7 em `lg`) e
+          sangra **só pela borda direita**. Ela não passa por baixo do texto: os
+          dois planos são vizinhos, e a profundidade vem da diferença de escala.
+          Não há scrim geral — o enunciado vive sobre o grafite da própria
+          seção, e é isso que mantém a fotografia visível de ponta a ponta.
 
-          A altura do palco é ditada pela coluna de texto, nunca por `vh`: é o
-          que impede a seção de virar uma segunda primeira dobra.
+          A altura do palco é ditada pela fotografia, nunca por `vh`: é o que
+          impede a seção de virar uma segunda primeira dobra.
           ========================================================== */}
       <Container>
         <div className="grid items-center gap-9 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5">
+          {/*
+            5 de 12 em `lg`, 4 em `xl`. A distribuição-alvo da ficha é 65/35 e
+            em `xl` ela sai exata (400px de texto contra 920px de fotografia em
+            1440). Em `lg` não: com 4 colunas o texto cairia para 261px em 1024
+            e o H2 quebraria em cinco linhas. O teto de massa vale onde há
+            largura para cumpri-lo sem quebrar o enunciado.
+          */}
+          <div className="lg:col-span-5 xl:col-span-4">
             <Reveal>
               <Eyebrow tone="light">Equipamentos e tecnologia</Eyebrow>
 
@@ -193,10 +276,29 @@ function EquipmentShowcase({
               </p>
 
               {/*
-                `size="md"`, como na versão anterior à recomposição: o CTA
-                precisa ter peso comercial, não competir com a fotografia. Em
-                `lg` o experimento reprovado deixava um botão de 56px de altura
-                ao lado de uma imagem de 960px, e o olho ia para o botão.
+                A LINHA DE CAPACIDADE — o que a seção precisa responder antes do
+                CTA ("vocês fornecem, ou só desenham?"). Era o parágrafo de 223
+                caracteres no rodapé da seção; virou uma linha na coluna de
+                texto, imediatamente acima da ação que ela habilita.
+
+                O que saiu dela está publicado em outro lugar, e foi conferido
+                antes do corte: a cláusula "avulso ou cozinha inteira" é
+                `faq.ts` (`kitchensFaq[0]`), é renderizada na FAQ de
+                `/solucoes/cozinhas-industriais` e é dita **nesta mesma Home**
+                por `#credibilidade` ("do equipamento avulso à cozinha
+                inteira"); o ponteiro de detalhamento por linha é
+                `/linhas-de-produtos`, que publica as cinco categorias com
+                âncora própria e continua alcançável pelo rodapé.
+              */}
+              <p className="mt-4 max-w-[44ch] text-body font-semibold text-canvas">
+                {capability ?? DEFAULT_CAPABILITY}
+              </p>
+
+              {/*
+                `size="md"`: o CTA precisa ter peso comercial, não competir com
+                a fotografia. Em `lg` o experimento reprovado deixava um botão
+                de 56px de altura ao lado de uma imagem de 960px, e o olho ia
+                para o botão.
               */}
               <LinkButton href={cta.href} variant="primary" size="md" withArrow className="mt-8">
                 {cta.label}
@@ -205,7 +307,8 @@ function EquipmentShowcase({
           </div>
 
           {/* ----------
-              A fotografia vai da coluna 6 até a borda direita da janela.
+              A fotografia vai da coluna 5 (6 em `lg`) até a borda direita da
+              janela.
 
               A sangria é **exatamente a guia**, com o sinal invertido: a guia é
               a distância da aresta da janela até a aresta interna do container,
@@ -225,174 +328,165 @@ function EquipmentShowcase({
               É sangria, não guia de texto: o cálculo é **derivado** da guia,
               como manda a separação entre eixo de mídia e eixo de conteúdo.
               ---------- */}
-          <div className="lg:col-span-7 lg:mr-[calc(-1*var(--guia))]">
+          <div className="lg:col-span-7 lg:mr-[calc(-1*var(--guia))] xl:col-span-8">
             {/*
-              `figure`, não `PhotoReveal` direto: no telefone a legenda **sai**
-              de cima da fotografia e passa a correr abaixo dela. A 390px de
-              largura um parágrafo de três linhas cobria metade da imagem e
-              caía sobre a coifa clara — ilegível, e o oposto de "precisamos
-              ver o equipamento". A partir de `sm` ela volta a ser sobreposta.
-
               A proporção abre de 4:3 no telefone para 8:5 em `lg`: em 7:5 a
               fotografia ficava mais alta que a coluna de texto e abria ~175px
               de grafite vazio acima e abaixo dela em 1920.
+
+              `settle`, não `PhotoReveal`: a ficha 2 fixa `settle` como o único
+              motion da seção, e passar a usá-lo aqui faz palco e faixa entrarem
+              com o mesmo gesto — uma seção, uma composição. `PhotoReveal`
+              continua servindo o dossiê, onde a cortina é a linguagem da V1.
             */}
-            <figure>
-              <PhotoReveal className="relative aspect-[4/3] w-full overflow-hidden bg-graphite sm:aspect-[16/10] lg:aspect-[8/5]">
-                <Image
-                  src={primary.image}
-                  alt={primary.alt}
-                  fill
-                  sizes="(max-width: 1023px) 100vw, 62vw"
-                  quality={84}
-                  priority
-                  className="object-cover object-[58%_center]"
-                />
-
-                {/* ----------
-                    Proteção **local**. O gradiente sobe do rodapé e é cortado
-                    por uma máscara horizontal que o mata a 78% da largura —
-                    então ele existe só embaixo do bloco de texto, e a metade
-                    direita da fotografia continua limpa. O experimento
-                    reprovado fechava metade da imagem com um gradiente
-                    horizontal, e o resultado era preto com uma fotografia ao
-                    lado.
-                    ---------- */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[54%] bg-[linear-gradient(0deg,rgba(16,16,16,0.95)_0%,rgba(16,16,16,0.86)_26%,rgba(16,16,16,0.42)_58%,transparent_100%)] [mask-image:linear-gradient(90deg,#000_0%,#000_52%,transparent_82%)] sm:block"
-                />
-
-                {/*
-                  CATEGORIA PRIORITÁRIA sobre a fotografia — é o único texto que
-                  entra na imagem. A lista dos quatro tipos de cocção saiu da
-                  Home: eram quatro linhas competindo com a fotografia num
-                  canto, e o detalhamento por linha vive em
-                  `/linhas-de-produtos`, para onde a nota de fecho aponta.
-                  `equipment-categories.ts` está intacto e a rota interna
-                  continua publicando os quatro.
-                */}
-                <figcaption className="absolute inset-x-0 bottom-0 hidden p-5 sm:block sm:max-w-[27rem] lg:p-7">
-                  <CookingBlock name={primary.name} benefit={primary.benefit} />
-                </figcaption>
-              </PhotoReveal>
-
-              <figcaption className="mt-5 sm:hidden">
-                <CookingBlock name={primary.name} benefit={primary.benefit} />
-              </figcaption>
-            </figure>
+            <Reveal variant="settle">
+              <CategoryPhoto
+                category={primary}
+                priority
+                quality={84}
+                sizes="(max-width: 1023px) 100vw, 64vw"
+                ratio="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[8/5]"
+                framing="object-[58%_center]"
+                lead
+              />
+            </Reveal>
           </div>
         </div>
       </Container>
 
       {/* ==========================================================
-          AS OUTRAS QUATRO FRENTES — uma fileira alinhada, dentro do container
-          e claramente menor que o palco.
+          AS OUTRAS QUATRO FRENTES — uma faixa fotográfica contínua.
 
-          Quatro fotografias de mesma proporção e mesma largura, com o título e
-          uma frase **abaixo** da imagem, sobre a superfície da própria seção.
-          Sem moldura, sem preenchimento e sem gradiente cobrindo o
-          equipamento: a exigência aqui é enxergar o inox, e legenda por cima
-          só se justificaria se coubesse em uma linha.
+          Quatro fotografias encostadas, de mesma proporção e mesma largura,
+          terminando na **mesma vertical** que o palco. Não há vão, moldura,
+          preenchimento nem parágrafo por item: a frente é a fotografia mais o
+          nome, e o nome cabe em uma linha — que é a condição sob a qual este
+          projeto aceita legenda sobre a imagem.
 
-          A fileira é o que sustenta o alinhamento: mesma base, mesma altura de
-          imagem, títulos na mesma posição, mesma lógica de legenda.
+          É isso que faz a faixa ler como continuação do palco em vez de um
+          segundo componente empilhado dentro da seção.
           ========================================================== */}
       <Container>
         {/*
-          Quatro em linha só a partir de `xl`. Em 1024 o container de 944px
-          dividido por quatro dava 221px por prova — abaixo do que uma
-          fotografia de equipamento precisa para ser reconhecida. Entre 1024 e
-          1279 a fileira vira 2×2, com ~442px cada, e o alinhamento continua
-          válido: mesma base, mesma altura, títulos na mesma posição.
+          Quatro em linha já em `lg`. Com a sangria, a faixa mede 952px em 1024
+          e cada prova fica em 238px — 2,1× a largura da miniatura de 112px que
+          a auditoria visual global reprovou, e o dobro do que a versão anterior
+          conseguia em 1024. Manter 2×2 até `xl` custaria 762px de faixa e
+          estouraria sozinho o teto de altura da ficha.
+
+          `data-whatsapp-safe-zone`: a última prova termina colada na borda
+          inferior direita, que é onde o botão flutuante do WhatsApp mora — sem
+          o atributo ele cobre o nome de "Tecnologia de cocção" em 1440 e 1920.
+          Mesmo mecanismo já usado no hero, no diagnóstico, em projetos e no
+          fechamento.
         */}
-        <ul className="mt-14 grid grid-cols-1 gap-x-6 gap-y-10 border-t border-white/12 pt-10 sm:grid-cols-2 lg:mt-16 lg:pt-12 xl:grid-cols-4 xl:gap-x-5">
+        <ul
+          data-whatsapp-safe-zone
+          className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:mr-[calc(-1*var(--guia))] lg:mt-14 lg:grid-cols-4"
+        >
           {rest.map((category, index) => (
             <Reveal key={category.id} as="li" variant="settle" delay={index * 70}>
-              <figure>
-                {/*
-                  A proporção acompanha a largura do slot, porque é ela que
-                  decide quanta altura a fileira custa:
-
-                    telefone  1 coluna, ~350px  →  16:9  (~197px)
-                    sm/lg     2 colunas          →  4:3   (218px em 640, 345 em 1024)
-                    xl        4 colunas, ~315px  →  4:5   (394px)
-
-                  Em 4:5 na coluna única do telefone cada prova media 488px e
-                  as quatro somavam quase duas telas — a seção ia a 3.355px. Em
-                  4:5 nas duas colunas de 1024 elas somavam 1.150px e levavam a
-                  seção a 2.104px. O retrato só se paga quando o slot é
-                  estreito, que é o caso do `xl`.
-                */}
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-graphite sm:aspect-[4/3] xl:aspect-[4/5]">
-                  <Image
-                    src={category.image}
-                    alt={category.alt}
-                    fill
-                    /*
-                      O ponto de virada é 1279, não 1023: a fileira só vira
-                      quatro colunas em `xl`. Declarar 24vw a partir de 1024
-                      pedia 246px para um slot que renderiza 460px.
-                    */
-                    sizes="(max-width: 639px) 92vw, (max-width: 1279px) 46vw, 24vw"
-                    quality={82}
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="mt-4">
-                  <h3 className="font-sans text-title-3 font-bold text-canvas">{category.name}</h3>
-                  <p className="mt-1.5 text-body-sm leading-relaxed text-canvas/70">
-                    {category.benefit}
-                  </p>
-                </figcaption>
-              </figure>
+              {/*
+                5:4 em `lg`, não 4:3 nem 1:1 — a razão está nos arquivos, e no
+                bloco de escala do topo: duas provas são verticais (0,56 e
+                0,79). Em 4:3 a `linha-de-coccao` mostraria 42% da altura
+                original; em 5:4 mostra 53%. E 1:1 levaria a faixa a 342px em
+                1440, o que sozinho recolocaria a seção acima do teto.
+              */}
+              <CategoryPhoto
+                category={category}
+                quality={82}
+                sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+                ratio="aspect-[4/3] lg:aspect-[5/4]"
+              />
             </Reveal>
           ))}
         </ul>
-
-        {/*
-          `data-whatsapp-safe-zone`: a quarta prova e a nota de fecho terminam
-          coladas na borda inferior direita, que é onde o botão flutuante do
-          WhatsApp mora. Sem o atributo ele cobria a legenda de "Tecnologia de
-          cocção" em 1440 e 1920. Mesmo mecanismo já usado no hero, no
-          diagnóstico, em projetos e no fechamento — nenhuma lógica nova.
-        */}
-        <p
-          data-whatsapp-safe-zone
-          className="mt-12 max-w-[68ch] text-base text-canvas/75 lg:mt-14"
-        >
-          {note ?? (
-            <>
-              O detalhamento por linha de equipamento — incluindo o{' '}
-              <Link
-                href="/linhas-de-produtos/forno-combinado-rational"
-                className="font-semibold text-canvas underline decoration-yellow underline-offset-4 transition-colors hover:text-white"
-              >
-                forno combinado Rational
-              </Link>{' '}
-              — fica na página de linhas.
-            </>
-          )}
-        </p>
       </Container>
     </Section>
   )
 }
 
 /**
- * O bloco da categoria prioritária. Vive sobre a fotografia a partir de `sm` e
- * abaixo dela no telefone — o texto é o mesmo nos dois casos, então ele mora
- * aqui em vez de ser duplicado nos dois ramos.
+ * Uma frente = uma fotografia + o nome dela. Não há cartão: nenhuma superfície
+ * própria, nenhuma borda, nenhum raio, nenhuma ficha.
+ *
+ * O nome vive **sobre** a imagem, num canto, protegido por um gradiente local
+ * que ocupa a base e morre antes da metade da altura — nunca um scrim geral. É
+ * o mesmo mecanismo em todas as larguras, o que é o que a ficha 2 pede para o
+ * telefone ("nome sobreposto") e o que mantém palco e faixa falando a mesma
+ * língua.
+ *
+ * O `bg-graphite` que ficava na caixa da imagem **saiu**: era ele que fazia
+ * cada fotografia contar como card no inventário (superfície #101010 dentro de
+ * uma seção #1A1A1A). Como a imagem é `fill` + `object-cover`, o fundo nunca
+ * aparecia depois do carregamento — sai a caixa, não a composição.
  */
-function CookingBlock({ name, benefit }: { name: string; benefit: string }) {
+function CategoryPhoto({
+  category,
+  ratio,
+  sizes,
+  quality,
+  framing,
+  priority = false,
+  lead = false,
+}: {
+  category: (typeof equipmentCategories)[number]
+  /** Proporção da caixa, por breakpoint. É ela que dita a altura da seção. */
+  ratio: string
+  sizes: string
+  quality: number
+  /** Enquadramento fino do recorte, quando o assunto não está no centro. */
+  framing?: string
+  priority?: boolean
+  /** A categoria prioritária: nome maior e respiro maior. */
+  lead?: boolean
+}) {
   return (
-    <>
-      <p className="font-condensed text-eyebrow font-semibold uppercase tracking-[0.11em] text-yellow">
-        Categoria prioritária
-      </p>
-      <p className="mt-1.5 font-sans text-title-3 font-bold text-canvas">{name}</p>
-      <p className="mt-2 max-w-[42ch] text-body-sm leading-relaxed text-canvas/85">{benefit}</p>
-    </>
+    <figure className={cn('relative w-full overflow-hidden', ratio)}>
+      <Image
+        src={category.image}
+        alt={category.alt}
+        fill
+        sizes={sizes}
+        quality={quality}
+        priority={priority}
+        className={cn('object-cover', framing)}
+      />
+
+      <div
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(16,16,16,0.9)_0%,rgba(16,16,16,0.62)_38%,rgba(16,16,16,0.2)_72%,transparent_100%)]',
+          lead ? 'h-[40%]' : 'h-[46%]',
+        )}
+      />
+
+      {/* ----------
+          A cor e a escala vão no **próprio** elemento de texto, nunca no
+          `figcaption`.
+
+          `globals.css` tem `h1..h4 { @apply ... text-ink }` na camada base —
+          uma declaração no elemento, que vence a herança. Um `text-canvas` no
+          wrapper deixa os quatro `h3` da faixa em grafite sobre grafite: eles
+          somem, e somem **só na faixa**, porque o nome da prioritária é um `p`
+          e herda normalmente. Foi assim que a primeira versão desta composição
+          entrou; o recorte ampliado (`medicoes/zoom-nomes.mjs`) é o que pegou.
+          ---------- */}
+      <figcaption className={cn('absolute inset-x-0 bottom-0', lead ? 'p-5 lg:p-7' : 'p-4 lg:p-5')}>
+        {/*
+          A prioritária é um `p` e as outras quatro são `h3` — é a estrutura de
+          documento que a seção já publicava antes de R1, e ela não muda por
+          causa de composição: o nome da categoria em destaque não é um título
+          de subseção irmão dos outros quatro.
+        */}
+        {lead ? (
+          <p className="font-sans text-title-2 font-bold text-canvas">{category.name}</p>
+        ) : (
+          <h3 className="font-sans text-title-3 font-bold text-canvas">{category.name}</h3>
+        )}
+      </figcaption>
+    </figure>
   )
 }
 

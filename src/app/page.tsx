@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { HeroStage } from '@/components/v2/hero-stage'
 import { EquipmentStripSection } from '@/components/sections/equipment-strip-section'
 import { ProjectsSection } from '@/components/sections/projects-section'
@@ -138,42 +137,36 @@ export default function HomePage() {
       <HeroStage />
 
       {/* ==========================================================
-          EQUIPAMENTOS — a primeira seção recomposta pela direção de arte
-          final (2026-08-10).
+          EQUIPAMENTOS — a frente comercial principal (DEC-001), recomposta na
+          rodada R1 (2026-08-12) e congelada nela.
 
-          `variant="showcase"` é a vitrine da Home: a fotografia da categoria
-          prioritária vira palco e sangra pela borda direita, o enunciado e o
-          CTA vivem sobre ela, e as outras quatro frentes viram quatro
-          fotografias grandes encostadas sem vão — no lugar das miniaturas de
-          112×135 que a auditoria visual global reprovou. A justificativa
-          completa está em `equipment-strip-section.tsx`.
+          `variant="showcase"` é a vitrine da Home: silhueta **editorial
+          assimétrica**, não palco — a seção vem logo depois da hero, que é o
+          palco da página, e dois palcos consecutivos anulam o efeito dos dois.
+          A fotografia da categoria prioritária domina a massa e sangra pela
+          borda direita; o enunciado e o CTA vivem **ao lado** dela, na guia; e
+          as outras quatro frentes viram uma faixa contínua de fotografias
+          nomeadas, terminando na mesma vertical do palco. A justificativa
+          medida está em `equipment-strip-section.tsx`.
 
           A seção também é montada em `/solucoes/cozinhas-industriais`, que
           **não passa `variant`** e continua recebendo a composição `dossier`
-          da V1, sem uma linha de diferença. `note` e `cta` seguem props com o
-          texto da V1 como default pelo mesmo motivo. O que a Home diz aqui —
-          especificamos, fornecemos, instalamos e comissionamos; avulso **ou**
-          cozinha inteira — é transcrição de `src/data/faq.ts`
-          (`kitchensFaq[0]` e `[2]`), não afirmação nova.
+          da V1, sem uma linha de diferença — R1 não tocou nela.
+
+          `capability` é a linha que a vitrine mostra acima do CTA, e é
+          transcrição de `src/data/faq.ts` (`kitchensFaq[0]` e `[2]`), não
+          afirmação nova. A cláusula "avulso ou cozinha inteira" saiu daqui
+          porque esta mesma página já a publica em `#credibilidade`, e o
+          ponteiro de detalhamento por linha saiu porque o destino dele
+          (`/linhas-de-produtos`, com âncora por categoria) continua alcançável
+          pelo rodapé. `note` deixou de ser passado: ele é do dossiê.
 
           `compact` deixou de ser passado: a vitrine controla o próprio
           respiro, bloco a bloco, porque cada um deles sangra.
           ========================================================== */}
       <EquipmentStripSection
         variant="showcase"
-        note={
-          <>
-            Especificamos, fornecemos, instalamos e comissionamos — um equipamento específico ou a
-            cozinha inteira, os dois formatos existem. O detalhamento por linha, incluindo o{' '}
-            <Link
-              href="/linhas-de-produtos/forno-combinado-rational"
-              className="font-semibold text-canvas underline decoration-yellow underline-offset-4 transition-colors hover:text-white"
-            >
-              forno combinado Rational
-            </Link>
-            , fica na página de linhas.
-          </>
-        }
+        capability="Especificamos, fornecemos, instalamos e comissionamos."
         cta={{ label: 'Solicitar orçamento de equipamentos', href: '/contato?intencao=equipamentos' }}
       />
 

@@ -1,0 +1,1958 @@
+{
+ "baseUrl": "http://127.0.0.1:3210",
+ "quando": "2026-08-12T22:38:11.201Z",
+ "home": {
+  "320x568": {
+   "doc": {
+    "h": 22027,
+    "w": 320,
+    "vw": 320
+   },
+   "equipamentos": {
+    "y": 774,
+    "h": 1700,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "48px / 48px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 1,
+    "cards": [
+     {
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[2px] font-condensed font-s",
+      "w": 280,
+      "h": 72,
+      "bg": "rgb(245, 198, 75)",
+      "paiBg": "rgb(26, 26, 26)",
+      "bordas": 0,
+      "raio": "2px",
+      "motivo": "superficie"
+     }
+    ],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 280,
+      "h": 72,
+      "area": 20160,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 280,
+      "h": 210,
+      "x": 20,
+      "right": 300,
+      "natural": "320x240",
+      "completo": true,
+      "area": 58800,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 280,
+      "h": 210,
+      "x": 20,
+      "right": 300,
+      "natural": "294x215",
+      "completo": true,
+      "area": 58800,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 280,
+      "h": 210,
+      "x": 20,
+      "right": 300,
+      "natural": "294x242",
+      "completo": true,
+      "area": 58800,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 280,
+      "h": 210,
+      "x": 20,
+      "right": 300,
+      "natural": "294x523",
+      "completo": true,
+      "area": 58800,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 280,
+      "h": 210,
+      "x": 20,
+      "right": 300,
+      "natural": "294x371",
+      "completo": true,
+      "area": 58800,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 54,
+    "areaProtagonistaPct": 10.8,
+    "razaoProtagonista": 1,
+    "guia": {
+     "w": 280,
+     "left": 20,
+     "right": 300
+    },
+    "sangria": {
+     "direita": 0,
+     "esquerda": 0
+    },
+    "massa": {
+     "texto": 280,
+     "foto": 280,
+     "pctFoto": 50
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 280,
+      "h": 72,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 48
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 774,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 774,
+     "h": 1700,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 2474,
+     "h": 2184,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "390x844": {
+   "doc": {
+    "h": 20964,
+    "w": 390,
+    "vw": 390
+   },
+   "equipamentos": {
+    "y": 848,
+    "h": 1912,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "48px / 48px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 0,
+    "cards": [],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 348.4,
+      "h": 48,
+      "area": 16723,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 350,
+      "h": 262.5,
+      "x": 20,
+      "right": 370,
+      "natural": "390x292",
+      "completo": true,
+      "area": 91875,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 350,
+      "h": 262.5,
+      "x": 20,
+      "right": 370,
+      "natural": "358x262",
+      "completo": true,
+      "area": 91875,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 350,
+      "h": 262.5,
+      "x": 20,
+      "right": 370,
+      "natural": "358x295",
+      "completo": true,
+      "area": 91875,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 350,
+      "h": 262.5,
+      "x": 20,
+      "right": 370,
+      "natural": "358x638",
+      "completo": true,
+      "area": 91875,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 350,
+      "h": 262.5,
+      "x": 20,
+      "right": 370,
+      "natural": "358x453",
+      "completo": true,
+      "area": 91875,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 61.6,
+    "areaProtagonistaPct": 12.3,
+    "razaoProtagonista": 1,
+    "guia": {
+     "w": 350,
+     "left": 20,
+     "right": 370
+    },
+    "sangria": {
+     "direita": 0,
+     "esquerda": 0
+    },
+    "massa": {
+     "texto": 350,
+     "foto": 350,
+     "pctFoto": 50
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 348.4,
+      "h": 48,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 48
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 848,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 848,
+     "h": 1912,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 2760,
+     "h": 2387,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "768x1024": {
+   "doc": {
+    "h": 19267,
+    "w": 768,
+    "vw": 768
+   },
+   "equipamentos": {
+    "y": 1024,
+    "h": 1496,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "64px / 64px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 0,
+    "cards": [],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 348.4,
+      "h": 48,
+      "area": 16723,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 691.2,
+      "h": 432,
+      "x": 38.4,
+      "right": 729.6,
+      "natural": "768x576",
+      "completo": true,
+      "area": 298582,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 345.6,
+      "h": 259.2,
+      "x": 38.4,
+      "right": 384,
+      "natural": "353x258",
+      "completo": true,
+      "area": 89574,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 345.6,
+      "h": 259.2,
+      "x": 384,
+      "right": 729.6,
+      "natural": "353x290",
+      "completo": true,
+      "area": 89574,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 345.6,
+      "h": 259.2,
+      "x": 38.4,
+      "right": 384,
+      "natural": "353x628",
+      "completo": true,
+      "area": 89574,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 345.6,
+      "h": 259.2,
+      "x": 384,
+      "right": 729.6,
+      "natural": "353x446",
+      "completo": true,
+      "area": 89574,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 57.2,
+    "areaProtagonistaPct": 26,
+    "razaoProtagonista": 3.3,
+    "guia": {
+     "w": 691.2,
+     "left": 38.4,
+     "right": 729.6
+    },
+    "sangria": {
+     "direita": 0,
+     "esquerda": 0
+    },
+    "massa": {
+     "texto": 691.2,
+     "foto": 691.2,
+     "pctFoto": 50
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 348.4,
+      "h": 48,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 64
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 1024,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 1024,
+     "h": 1496,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 2520,
+     "h": 1623,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1024x768": {
+   "doc": {
+    "h": 12990,
+    "w": 1024,
+    "vw": 1024
+   },
+   "equipamentos": {
+    "y": 787,
+    "h": 798,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "64px / 64px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 0,
+    "cards": [],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 348.4,
+      "h": 48,
+      "area": 16723,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 568.8,
+      "h": 355.5,
+      "x": 455.2,
+      "right": 1024,
+      "natural": "655x491",
+      "completo": true,
+      "area": 202198,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 243.2,
+      "h": 194.6,
+      "x": 294.4,
+      "right": 537.6,
+      "natural": "256x210",
+      "completo": true,
+      "area": 47318,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 243.2,
+      "h": 194.6,
+      "x": 780.8,
+      "right": 1024,
+      "natural": "256x323",
+      "completo": true,
+      "area": 47318,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 243.2,
+      "h": 194.5,
+      "x": 51.2,
+      "right": 294.4,
+      "natural": "256x187",
+      "completo": true,
+      "area": 47311,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 243.2,
+      "h": 194.5,
+      "x": 537.6,
+      "right": 780.8,
+      "natural": "256x455",
+      "completo": true,
+      "area": 47311,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 47.9,
+    "areaProtagonistaPct": 24.7,
+    "razaoProtagonista": 4.3,
+    "guia": {
+     "w": 921.6,
+     "left": 51.2,
+     "right": 972.8
+    },
+    "sangria": {
+     "direita": 51.2,
+     "esquerda": -404
+    },
+    "massa": {
+     "texto": 356,
+     "foto": 568.8,
+     "pctFoto": 61.5
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 348.4,
+      "h": 48,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 64
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 787,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 787,
+     "h": 798,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 1585,
+     "h": 1278,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1366x768": {
+   "doc": {
+    "h": 12850,
+    "w": 1366,
+    "vw": 1366
+   },
+   "equipamentos": {
+    "y": 768,
+    "h": 988,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "64px / 64px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 0,
+    "cards": [],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 348.4,
+      "h": 48,
+      "area": 16723,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 871.9,
+      "h": 544.9,
+      "x": 494.1,
+      "right": 1366,
+      "natural": "828x621",
+      "completo": true,
+      "area": 475112,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 324.4,
+      "h": 259.5,
+      "x": 68.3,
+      "right": 392.7,
+      "natural": "341x249",
+      "completo": true,
+      "area": 84198,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 324.4,
+      "h": 259.5,
+      "x": 392.7,
+      "right": 717.1,
+      "natural": "341x281",
+      "completo": true,
+      "area": 84198,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 324.4,
+      "h": 259.5,
+      "x": 717.1,
+      "right": 1041.6,
+      "natural": "341x607",
+      "completo": true,
+      "area": 84198,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 324.4,
+      "h": 259.5,
+      "x": 1041.6,
+      "right": 1366,
+      "natural": "341x431",
+      "completo": true,
+      "area": 84198,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 60.1,
+    "areaProtagonistaPct": 35.2,
+    "razaoProtagonista": 5.6,
+    "guia": {
+     "w": 1229.4,
+     "left": 68.3,
+     "right": 1297.7
+    },
+    "sangria": {
+     "direita": 68.3,
+     "esquerda": -425.8
+    },
+    "massa": {
+     "texto": 377.8,
+     "foto": 871.9,
+     "pctFoto": 69.8
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 348.4,
+      "h": 48,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 64
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 768,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 768,
+     "h": 988,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 1756,
+     "h": 1387,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1440x900": {
+   "doc": {
+    "h": 13117,
+    "w": 1440,
+    "vw": 1440
+   },
+   "equipamentos": {
+    "y": 900,
+    "h": 1033,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "64px / 64px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 0,
+    "cards": [],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 348.4,
+      "h": 48,
+      "area": 16723,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 920,
+      "h": 575,
+      "x": 520,
+      "right": 1440,
+      "natural": "873x655",
+      "completo": true,
+      "area": 529000,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 342,
+      "h": 273.6,
+      "x": 72,
+      "right": 414,
+      "natural": "359x263",
+      "completo": true,
+      "area": 93569,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 342,
+      "h": 273.6,
+      "x": 414,
+      "right": 756,
+      "natural": "359x296",
+      "completo": true,
+      "area": 93569,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 342,
+      "h": 273.6,
+      "x": 756,
+      "right": 1098,
+      "natural": "359x640",
+      "completo": true,
+      "area": 93569,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 342,
+      "h": 273.6,
+      "x": 1098,
+      "right": 1440,
+      "natural": "359x454",
+      "completo": true,
+      "area": 93569,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 60.7,
+    "areaProtagonistaPct": 35.6,
+    "razaoProtagonista": 5.7,
+    "guia": {
+     "w": 1296,
+     "left": 72,
+     "right": 1368
+    },
+    "sangria": {
+     "direita": 72,
+     "esquerda": -448
+    },
+    "massa": {
+     "texto": 400,
+     "foto": 920,
+     "pctFoto": 69.7
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 348.4,
+      "h": 48,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 64
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 900,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 900,
+     "h": 1033,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 1933,
+     "h": 1422,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1600x900": {
+   "doc": {
+    "h": 13483,
+    "w": 1600,
+    "vw": 1600
+   },
+   "equipamentos": {
+    "y": 900,
+    "h": 1120,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "64px / 64px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 0,
+    "cards": [],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 348.4,
+      "h": 48,
+      "area": 16723,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 1017.3,
+      "h": 635.8,
+      "x": 582.7,
+      "right": 1600,
+      "natural": "970x728",
+      "completo": true,
+      "area": 646856,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 375,
+      "h": 300,
+      "x": 100,
+      "right": 475,
+      "natural": "400x293",
+      "completo": true,
+      "area": 112500,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 375,
+      "h": 300,
+      "x": 475,
+      "right": 850,
+      "natural": "400x329",
+      "completo": true,
+      "area": 112500,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 375,
+      "h": 300,
+      "x": 850,
+      "right": 1225,
+      "natural": "400x711",
+      "completo": true,
+      "area": 112500,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 375,
+      "h": 300,
+      "x": 1225,
+      "right": 1600,
+      "natural": "400x505",
+      "completo": true,
+      "area": 112500,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 61.2,
+    "areaProtagonistaPct": 36.1,
+    "razaoProtagonista": 5.7,
+    "guia": {
+     "w": 1400,
+     "left": 100,
+     "right": 1500
+    },
+    "sangria": {
+     "direita": 100,
+     "esquerda": -482.7
+    },
+    "massa": {
+     "texto": 434.7,
+     "foto": 1017.3,
+     "pctFoto": 70.1
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 348.4,
+      "h": 48,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 64
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 900,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 900,
+     "h": 1120,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 2020,
+     "h": 1542,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1920x1080": {
+   "doc": {
+    "h": 14190,
+    "w": 1920,
+    "vw": 1920
+   },
+   "equipamentos": {
+    "y": 1080,
+    "h": 1252,
+    "bg": "rgb(26, 26, 26)",
+    "padding": "64px / 64px",
+    "blocosTexto": 8,
+    "caracteres": 343,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "Especificado pelo volume real, não pela ficha técnica"
+     },
+     {
+      "tag": "p",
+      "txt": "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno."
+     },
+     {
+      "tag": "p",
+      "txt": "Especificamos, fornecemos, instalamos e comissionamos."
+     },
+     {
+      "tag": "p",
+      "txt": "Cocção"
+     },
+     {
+      "tag": "h3",
+      "txt": "Refrigeração"
+     },
+     {
+      "tag": "h3",
+      "txt": "Mobiliário em inox"
+     },
+     {
+      "tag": "h3",
+      "txt": "Exaustão e ventilação"
+     },
+     {
+      "tag": "h3",
+      "txt": "Tecnologia de cocção"
+     }
+    ],
+    "nCards": 0,
+    "cards": [],
+    "nHairlines": 1,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2
+     }
+    ],
+    "nAmarelos": 3,
+    "amarelos": [
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-",
+      "w": 234,
+      "h": 15.6,
+      "area": 3649,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "EQUIPAMENTOS E TECNOLOGIA"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "fundo",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden round",
+      "w": 348.4,
+      "h": 48,
+      "area": 16723,
+      "cor": "rgb(245, 198, 75)"
+     }
+    ],
+    "nImagens": 5,
+    "imagens": [
+     {
+      "src": "image",
+      "w": 1177.3,
+      "h": 735.8,
+      "x": 742.7,
+      "right": 1920,
+      "natural": "655x491",
+      "completo": true,
+      "area": 866323,
+      "sizes": "(max-width: 1023px) 100vw, 64vw"
+     },
+     {
+      "src": "image",
+      "w": 415,
+      "h": 332,
+      "x": 260,
+      "right": 675,
+      "natural": "480x351",
+      "completo": true,
+      "area": 137780,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 415,
+      "h": 332,
+      "x": 675,
+      "right": 1090,
+      "natural": "480x395",
+      "completo": true,
+      "area": 137780,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 415,
+      "h": 332,
+      "x": 1090,
+      "right": 1505,
+      "natural": "480x854",
+      "completo": true,
+      "area": 137780,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     },
+     {
+      "src": "image",
+      "w": 415,
+      "h": 332,
+      "x": 1505,
+      "right": 1920,
+      "natural": "480x606",
+      "completo": true,
+      "area": 137780,
+      "sizes": "(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 25vw"
+     }
+    ],
+    "areaImagemPct": 59,
+    "areaProtagonistaPct": 36,
+    "razaoProtagonista": 6.3,
+    "guia": {
+     "w": 1400,
+     "left": 260,
+     "right": 1660
+    },
+    "sangria": {
+     "direita": 260,
+     "esquerda": -482.7
+    },
+    "massa": {
+     "texto": 434.7,
+     "foto": 1177.3,
+     "pctFoto": 73
+    },
+    "acoes": [
+     {
+      "txt": "SOLICITAR ORÇAMENTO DE EQUIPAMENTOS",
+      "href": "/contato?intencao=equipamentos",
+      "w": 348.4,
+      "h": 48,
+      "bg": "rgb(245, 198, 75)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "primary"
+     }
+    ],
+    "nAcoes": 1,
+    "vazioBase": 64
+   },
+   "vizinhas": {
+    "hero": {
+     "y": 0,
+     "h": 1080,
+     "bg": "rgb(16, 16, 16)"
+    },
+    "equipamentos": {
+     "y": 1080,
+     "h": 1252,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 2332,
+     "h": 1686,
+     "bg": "rgb(255, 255, 255)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  }
+ },
+ "dossie": {
+  "390x844": {
+   "y": 4019,
+   "h": 2395,
+   "w": 390,
+   "bg": "rgb(26, 26, 26)",
+   "padding": "64px / 64px",
+   "nNos": 59,
+   "arvore": [
+    "div|container-shell",
+    "div|grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12",
+    "div|lg:col-span-7",
+    "span|inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-yellow",
+    "span|h-[2px] w-7 shrink-0 bg-yellow",
+    "h2|font-sans text-title-1 font-bold mt-5 max-w-[20ch] text-canvas",
+    "p|text-lead text-canvas/75 lg:col-span-4 lg:col-start-9",
+    "figure|mt-10 lg:mt-14",
+    "div|photo-mask relative aspect-[4/3] w-full overflow-hidden bg-graphite sm:aspect-[16/9] lg:aspect-[2.8/1]",
+    "img|object-cover",
+    "figcaption|mt-5 grid gap-x-12 gap-y-4 border-t border-white/20 pt-5 lg:grid-cols-12",
+    "div|lg:col-span-5",
+    "p|font-condensed text-sm font-semibold uppercase text-canvas/75",
+    "p|mt-2 font-sans font-bold text-title-2 text-canvas",
+    "p|mt-3 max-w-[46ch] text-body text-canvas/75",
+    "ul|lg:col-span-6 lg:col-start-7",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "ul|mt-12 grid gap-x-8 gap-y-8 border-t border-white/15 pt-10 sm:grid-cols-2 lg:mt-16 lg:pt-12",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "div|mt-10 flex flex-col items-start gap-5 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between",
+    "p|max-w-xl text-base text-canvas/75",
+    "a|font-semibold text-canvas underline decoration-yellow underline-offset-4 transition-colors hover:text-white",
+    "a|group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[2px] font-condensed font-semibold uppercase tracking-[0.045em] [transition:color_200ms_var(--ease-precise),border-color_200ms_var(--ease-precise),transform_120ms_var(--ease-precise)] active:scale-[0.985] motion-reduce:active:scale-100 disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45 bg-yellow text-ink before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0 before:transition-transform before:duration-[220ms] before:ease-precise before:content-[\"\"] hover:before:scale-y-100 focus-visible:before:scale-y-100 before:bg-yellow-bright min-h-[3rem] px-5 py-3 text-body-sm shrink-0",
+    "svg|shrink-0 transition-transform duration-200 ease-precise group-hover:translate-x-1 group-focus-visible:translate-x-1",
+    "path|"
+   ],
+   "textos": [
+    "EQUIPAMENTOS E TECNOLOGIA",
+    "Especificado pelo volume real, não pela ficha técnica",
+    "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno.",
+    "CATEGORIA PRIORITÁRIA",
+    "Cocção",
+    "Sustentar o pico sem fila na praça quente: capacidade dimensionada pelo volume real, não pela ficha técnica.",
+    "Fogões e char-broilers",
+    "Chapas e fritadeiras",
+    "Fornos combinados",
+    "Caldeirões e frigideiras basculantes",
+    "Refrigeração Cortar perda de insumo e manter a cadeia fria dentro da faixa, com armazenagem que acompanha o giro do estoque. Câmaras frigoríficas · Refrigeradores e freezers verticais · Balcões refrigerados · Ultracongeladores",
+    "Refrigeração",
+    "Cortar perda de insumo e manter a cadeia fria dentro da faixa, com armazenagem que acompanha o giro do estoque.",
+    "Câmaras frigoríficas · Refrigeradores e freezers verticais · Balcões refrigerados · Ultracongeladores",
+    "Mobiliário em inox Aproveitar cada metro do espaço existente: peças fabricadas sob medida, sem adaptação e sem improviso na obra. Bancadas e mesas · Pias e cubas · Estantes e prateleiras · Armários e gaveteiros",
+    "Mobiliário em inox",
+    "Aproveitar cada metro do espaço existente: peças fabricadas sob medida, sem adaptação e sem improviso na obra.",
+    "Bancadas e mesas · Pias e cubas · Estantes e prateleiras · Armários e gaveteiros",
+    "Exaustão e ventilação Ambiente respirável e vistoria sem pendência: exaustão calculada junto com a linha de cocção, não depois dela. Coifas e capelas · Dutos e filtros · Insuflamento e reposição de ar · Tratamento de gordura",
+    "Exaustão e ventilação",
+    "Ambiente respirável e vistoria sem pendência: exaustão calculada junto com a linha de cocção, não depois dela.",
+    "Coifas e capelas · Dutos e filtros · Insuflamento e reposição de ar · Tratamento de gordura",
+    "Tecnologia de cocção Padronizar o resultado entre turnos e reduzir dependência de improviso, com processos gravados no equipamento. Fornos combinados programáveis · Cocção assistida · Controle e registro de processo · Treinamento da equipe",
+    "Tecnologia de cocção",
+    "Padronizar o resultado entre turnos e reduzir dependência de improviso, com processos gravados no equipamento.",
+    "Fornos combinados programáveis · Cocção assistida · Controle e registro de processo · Treinamento da equipe",
+    "O detalhamento por linha de equipamento — incluindo o forno combinado Rational — fica na página de linhas.",
+    "forno combinado Rational",
+    "VER A SOLUÇÃO COMPLETA"
+   ],
+   "nTextos": 29,
+   "caracteres": 2409,
+   "imagens": [
+    {
+     "src": "image",
+     "w": 350,
+     "h": 262.5,
+     "sizes": "(max-width: 1023px) 92vw, 78vw",
+     "alt": "Linha de fogões industriais com bancada de apoio em aço inox"
+    },
+    {
+     "src": "image",
+     "w": 96,
+     "h": 232.4,
+     "sizes": "112px",
+     "alt": "Refrigeradores verticais em aço inox alinhados em praça de produção"
+    },
+    {
+     "src": "image",
+     "w": 96,
+     "h": 235.6,
+     "sizes": "112px",
+     "alt": "Bancada em aço inox com gaveteiro, armários, pia dupla e prateleiras de parede"
+    },
+    {
+     "src": "image",
+     "w": 96,
+     "h": 209.6,
+     "sizes": "112px",
+     "alt": "Coifa em aço inox sobre linha de cocção em cozinha profissional"
+    },
+    {
+     "src": "image",
+     "w": 96,
+     "h": 232.4,
+     "sizes": "112px",
+     "alt": "Forno combinado profissional instalado em cozinha industrial"
+    }
+   ],
+   "acoes": [
+    {
+     "txt": "forno combinado Rational",
+     "href": "/linhas-de-produtos/forno-combinado-rational",
+     "w": 196,
+     "h": 22
+    },
+    {
+     "txt": "VER A SOLUÇÃO COMPLETA",
+     "href": "/solucoes/cozinhas-industriais",
+     "w": 246,
+     "h": 48
+    }
+   ],
+   "html": 14530,
+   "docH": 19152,
+   "consoleErrors": [],
+   "httpFailures": []
+  },
+  "1440x900": {
+   "y": 2859,
+   "h": 1564,
+   "w": 1440,
+   "bg": "rgb(26, 26, 26)",
+   "padding": "80px / 80px",
+   "nNos": 59,
+   "arvore": [
+    "div|container-shell",
+    "div|grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12",
+    "div|lg:col-span-7",
+    "span|inline-flex items-center gap-3.5 font-condensed text-eyebrow font-semibold uppercase text-yellow",
+    "span|h-[2px] w-7 shrink-0 bg-yellow",
+    "h2|font-sans text-title-1 font-bold mt-5 max-w-[20ch] text-canvas",
+    "p|text-lead text-canvas/75 lg:col-span-4 lg:col-start-9",
+    "figure|mt-10 lg:mt-14",
+    "div|photo-mask relative aspect-[4/3] w-full overflow-hidden bg-graphite sm:aspect-[16/9] lg:aspect-[2.8/1]",
+    "img|object-cover",
+    "figcaption|mt-5 grid gap-x-12 gap-y-4 border-t border-white/20 pt-5 lg:grid-cols-12",
+    "div|lg:col-span-5",
+    "p|font-condensed text-sm font-semibold uppercase text-canvas/75",
+    "p|mt-2 font-sans font-bold text-title-2 text-canvas",
+    "p|mt-3 max-w-[46ch] text-body text-canvas/75",
+    "ul|lg:col-span-6 lg:col-start-7",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "li|border-t border-white/15 py-2.5 text-base text-canvas/85 first:border-t-0 first:pt-0 lg:first:border-t lg:first:pt-2.5",
+    "ul|mt-12 grid gap-x-8 gap-y-8 border-t border-white/15 pt-10 sm:grid-cols-2 lg:mt-16 lg:pt-12",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "li|reveal is-visible",
+    "div|flex gap-5",
+    "div|relative aspect-square w-24 shrink-0 overflow-hidden bg-graphite sm:w-28",
+    "img|object-cover",
+    "div|min-w-0",
+    "h3|font-sans font-bold text-title-3 text-canvas",
+    "p|mt-1.5 text-base leading-relaxed text-canvas/75",
+    "p|mt-2 text-sm leading-relaxed text-canvas/65",
+    "div|mt-10 flex flex-col items-start gap-5 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between",
+    "p|max-w-xl text-base text-canvas/75",
+    "a|font-semibold text-canvas underline decoration-yellow underline-offset-4 transition-colors hover:text-white",
+    "a|group relative isolate inline-flex items-center justify-center gap-3 overflow-hidden rounded-[2px] font-condensed font-semibold uppercase tracking-[0.045em] [transition:color_200ms_var(--ease-precise),border-color_200ms_var(--ease-precise),transform_120ms_var(--ease-precise)] active:scale-[0.985] motion-reduce:active:scale-100 disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45 bg-yellow text-ink before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0 before:transition-transform before:duration-[220ms] before:ease-precise before:content-[\"\"] hover:before:scale-y-100 focus-visible:before:scale-y-100 before:bg-yellow-bright min-h-[3rem] px-5 py-3 text-body-sm shrink-0",
+    "svg|shrink-0 transition-transform duration-200 ease-precise group-hover:translate-x-1 group-focus-visible:translate-x-1",
+    "path|"
+   ],
+   "textos": [
+    "EQUIPAMENTOS E TECNOLOGIA",
+    "Especificado pelo volume real, não pela ficha técnica",
+    "A capacidade instalada é definida pela produção, pelo cardápio e pelos horários de pico. Equipamento sobrando é capital parado; faltando, é gargalo todo turno.",
+    "CATEGORIA PRIORITÁRIA",
+    "Cocção",
+    "Sustentar o pico sem fila na praça quente: capacidade dimensionada pelo volume real, não pela ficha técnica.",
+    "Fogões e char-broilers",
+    "Chapas e fritadeiras",
+    "Fornos combinados",
+    "Caldeirões e frigideiras basculantes",
+    "Refrigeração Cortar perda de insumo e manter a cadeia fria dentro da faixa, com armazenagem que acompanha o giro do estoque. Câmaras frigoríficas · Refrigeradores e freezers verticais · Balcões refrigerados · Ultracongeladores",
+    "Refrigeração",
+    "Cortar perda de insumo e manter a cadeia fria dentro da faixa, com armazenagem que acompanha o giro do estoque.",
+    "Câmaras frigoríficas · Refrigeradores e freezers verticais · Balcões refrigerados · Ultracongeladores",
+    "Mobiliário em inox Aproveitar cada metro do espaço existente: peças fabricadas sob medida, sem adaptação e sem improviso na obra. Bancadas e mesas · Pias e cubas · Estantes e prateleiras · Armários e gaveteiros",
+    "Mobiliário em inox",
+    "Aproveitar cada metro do espaço existente: peças fabricadas sob medida, sem adaptação e sem improviso na obra.",
+    "Bancadas e mesas · Pias e cubas · Estantes e prateleiras · Armários e gaveteiros",
+    "Exaustão e ventilação Ambiente respirável e vistoria sem pendência: exaustão calculada junto com a linha de cocção, não depois dela. Coifas e capelas · Dutos e filtros · Insuflamento e reposição de ar · Tratamento de gordura",
+    "Exaustão e ventilação",
+    "Ambiente respirável e vistoria sem pendência: exaustão calculada junto com a linha de cocção, não depois dela.",
+    "Coifas e capelas · Dutos e filtros · Insuflamento e reposição de ar · Tratamento de gordura",
+    "Tecnologia de cocção Padronizar o resultado entre turnos e reduzir dependência de improviso, com processos gravados no equipamento. Fornos combinados programáveis · Cocção assistida · Controle e registro de processo · Treinamento da equipe",
+    "Tecnologia de cocção",
+    "Padronizar o resultado entre turnos e reduzir dependência de improviso, com processos gravados no equipamento.",
+    "Fornos combinados programáveis · Cocção assistida · Controle e registro de processo · Treinamento da equipe",
+    "O detalhamento por linha de equipamento — incluindo o forno combinado Rational — fica na página de linhas.",
+    "forno combinado Rational",
+    "VER A SOLUÇÃO COMPLETA"
+   ],
+   "nTextos": 29,
+   "caracteres": 2409,
+   "imagens": [
+    {
+     "src": "image",
+     "w": 1296,
+     "h": 462.8,
+     "sizes": "(max-width: 1023px) 92vw, 78vw",
+     "alt": "Linha de fogões industriais com bancada de apoio em aço inox"
+    },
+    {
+     "src": "image",
+     "w": 112,
+     "h": 134.9,
+     "sizes": "112px",
+     "alt": "Refrigeradores verticais em aço inox alinhados em praça de produção"
+    },
+    {
+     "src": "image",
+     "w": 112,
+     "h": 134.9,
+     "sizes": "112px",
+     "alt": "Bancada em aço inox com gaveteiro, armários, pia dupla e prateleiras de parede"
+    },
+    {
+     "src": "image",
+     "w": 112,
+     "h": 134.9,
+     "sizes": "112px",
+     "alt": "Coifa em aço inox sobre linha de cocção em cozinha profissional"
+    },
+    {
+     "src": "image",
+     "w": 112,
+     "h": 134.9,
+     "sizes": "112px",
+     "alt": "Forno combinado profissional instalado em cozinha industrial"
+    }
+   ],
+   "acoes": [
+    {
+     "txt": "forno combinado Rational",
+     "href": "/linhas-de-produtos/forno-combinado-rational",
+     "w": 539.8,
+     "h": 46
+    },
+    {
+     "txt": "VER A SOLUÇÃO COMPLETA",
+     "href": "/solucoes/cozinhas-industriais",
+     "w": 246,
+     "h": 48
+    }
+   ],
+   "html": 14530,
+   "docH": 12004,
+   "consoleErrors": [],
+   "httpFailures": []
+  }
+ }
+}
