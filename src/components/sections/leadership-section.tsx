@@ -209,7 +209,7 @@ export function LeadershipSection() {
                       superfície some nas laterais, a régua não, e é ela que
                       dá o "chão".
                     */}
-                    <div aria-hidden="true" className="h-[3px] w-full bg-yellow" />
+                    <div aria-hidden="true" className="h-[3px] w-full bg-canvas/20" />
                   </div>
 
                   {/* ---------- Dossiê ---------- */}
@@ -233,7 +233,7 @@ export function LeadershipSection() {
                       cargo continua sendo texto — quem cresceu foi só o alvo.
                     */}
                     <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-0">
-                      <p className="font-condensed text-caption font-semibold uppercase tracking-[0.09em] text-yellow">
+                      <p className="font-condensed text-caption font-semibold uppercase tracking-[0.09em] text-canvas/70">
                         {person.role}
                       </p>
                       {'instagram' in person && person.instagram ? (
@@ -265,7 +265,7 @@ export function LeadershipSection() {
                         >
                           <span
                             aria-hidden="true"
-                            className="mt-[0.5em] h-[2px] w-2.5 shrink-0 bg-yellow/70"
+                            className="mt-[0.5em] h-[2px] w-2.5 shrink-0 bg-canvas/35"
                           />
                           {bullet}
                         </li>
@@ -331,7 +331,7 @@ export function LeadershipSection() {
                               lado, e continua no `alt` dela (`BookCover`) para
                               leitor de tela e indexação.
                             */}
-                            <p className="mt-3 font-condensed text-caption font-semibold uppercase tracking-[0.07em] text-yellow">
+                            <p className="mt-3 font-condensed text-caption font-semibold uppercase tracking-[0.07em] text-canvas/70">
                               {book.seal}
                             </p>
                           </div>

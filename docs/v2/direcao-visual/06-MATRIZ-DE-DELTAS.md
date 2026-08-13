@@ -2,7 +2,7 @@
 
 ```text
 STATUS: ACTIVE — rastreamento de conformidade
-DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A · R0-B · R0-C · R0-C.1 · R0-D)
+DATA: 2026-08-12 (levantamento) · 2026-08-12 (R0-A · R0-B · R0-C · R0-C.1 · R0-D · R1 · R2) · 2026-08-13 (R3 · R3.1)
 DEPENDE DE: 01-CONSTITUICAO-VISUAL.md · 03-BLUEPRINT-HOME.md · 04-CRITERIOS-DE-APROVACAO.md
 NATUREZA: rastreamento vivo. O levantamento original não alterou produto;
           a partir de R0-A esta matriz registra também o que já foi fechado.
@@ -46,9 +46,9 @@ Números de seção são de 1440 × 900, salvo onde indicado.
 | ~~**G-1**~~ | Guia única: `--gutter: clamp(20px, 5vw, 72px)` como **margem**, `guia = max(gutter, (100vw−1400)/2)` — doc 01 §3.1 | ~~guia medida 20/20/32/40/40/60/140/300~~ → **20/20/38,4/51,2/68,3/72/100/260**, exata nas 8 larguras | **FECHADO em R0-A** (2026-08-12) | `P1 · COMPOSIÇÃO` | **R0-A** | nenhuma | ✅ guia bate com doc 01 §3.1.2 nas 8 larguras (0px de desvio, não ±1); **uma** definição no código; zero overflow |
 | ~~**G-1b**~~ | Marca do cabeçalho e `h1` da hero no mesmo eixo — doc 01 §3.2 | ~~`lg:pl-[3.1cqw]`, marca em 59,5 contra `h1` em 300 (1920)~~ → cabeçalho usa `.container-shell`, a mesma casca de toda seção | **FECHADO em R0-A** (2026-08-12) | `P1 · COMPOSIÇÃO` | **R0-A** | G-1 | ✅ `x` da marca = `x` do `h1` nas 8 larguras (desvio 0 em todas); altura, proporções internas e tipografia da navegação inalteradas |
 | ~~**G-2**~~ | CTA de WhatsApp é massa **ou** contorno, nunca irmão preenchido do primário — doc 01 §6.4, §8 | ~~`bg-[#2A6F44]` cheio~~ → contorno com superfície grafite translúcida e **glifo verde**, na dobra e no fechamento | **FECHADO em R0-A** (2026-08-12), com uma ressalva de razão abaixo de 1366 — ver nota | `P1 · CONVERSÃO` | **R0-A** | nenhuma | ✅ par massa+contorno na dobra e no fechamento; razão 1,300 em ≥1366; 4 estados preservados |
-| **G-3** | Três curvas de motion, sem laço — doc 01 §13 | conforme, exceto o marquee (ver M-1) | — | — | — | — | — |
+| ~~**G-3**~~ | Três curvas de motion, sem laço — doc 01 §13 | ~~marquee e animação ambiente infinita na Hero~~ → lista única sem autoplay e Hero estática em repouso | **FECHADO em R3.1** (2026-08-13) | `P2 · MOTION` | **R3/R3.1** | M-1/M-2 | ✅ zero loop na página nas 8 larguras; entradas e trocas funcionais preservadas |
 | **G-4** | Escala tipográfica registrada em `tailwind-merge` — doc 01 §5 | conforme | — | — | — | — | — |
-| **G-5** | Orçamento de cor: ≤3 amarelos por viewport — doc 01 §6.2 | violado em 6 seções | ver seções | `P1`/`P2` | **R3** | nenhuma | contagem ≤3 por seção |
+| ~~**G-5**~~ | Orçamento de cor: ≤3 amarelos relevantes por viewport — doc 01 §6.2 | o histórico dizia 6 seções; a medição real encontrou reprovação em `#sintomas` desktop, `#industria-do-inox` e `#quem-conduz`; Diagnóstico e Leonardo já passavam | **FECHADO em R3.1** (2026-08-13) nas áreas abertas | `P1`/`P2` | **R3/R3.1** | nenhuma | ✅ ≤3 relevantes nas 8 larguras e gate visual PASS; áreas congeladas não foram editadas |
 | ~~**G-6**~~ | Base comum de botão: raio 2px · preenchimento por `scaleY` da base · sem sombra de projeção — doc 01 §7.1, §8, §14.1/§14.2 | ~~`base` com `rounded-[3px]`; `primary`/`light` por `scale-x` da esquerda com `shadow-cta`~~ → **uma gramática só**: raio 2px na base, `scaleY` da base em 220ms `precise` em todos os papéis, zero sombra, pressão `scale(0.985)` | **FECHADO em R0-C.1** (2026-08-12) | `P2 · ESTÉTICA/MOTION` | **R0-C.1** | nenhuma | ✅ **0 fora da norma** em 41 botões renderizados × 6 rotas × 2 viewports; foco dispara o mesmo preenchimento do hover em 100% dos alvos; caixa não muda ao interagir (Δ 0,0 em todos) |
 
 ### R0-A — o que foi implementado, e o que ficou aberto
@@ -265,20 +265,20 @@ relatório da rodada.
 | ~~**S-02**~~ | equipamentos | zero card; categoria é foto+nome — doc 01 §7.3 | ~~5 cards~~ → `bg-graphite` (#101010) na caixa de cada fotografia, dentro de seção `graphite-soft` (#1A1A1A) — mesma construção de S-15 | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ zero cards nas 8 larguras; superfície removida, nada no lugar; composição renderizada idêntica (a imagem é `fill` + `cover` e o fundo nunca aparecia) |
 | ~~**S-03**~~ | equipamentos | altura ≤1.100px | ~~1.565px~~ → **medido 1.379px em `20f7e8c`** → **1.033px** | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ 1.033px em 1440, −25%; redução por menos blocos, zero cards e faixa integrada — sem crop forçado, texto miúdo ou gap insuficiente |
 | ~~**S-04**~~ | equipamentos | silhueta **B** (não palco, para não repetir a hero) — doc 03 §1.1 | ~~palco (A) logo após a hero (A)~~ | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ texto na guia, ao lado da fotografia; massa 69,7/30,3 em 1440 (teto: nunca 50/50); uma só aresta sangrada, compartilhada por palco e faixa |
-| **S-04b** | equipamentos | a fotografia protagonista domina a massa fotográfica — doc 03 ficha 2, HIERARQUIA | protagonista **20,6%** da área contra **24,0%** das quatro secundárias somadas | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ 35,6% contra 25,1%; área fotográfica total 44,6% → 60,7% |
+| ~~**S-04b**~~ | equipamentos | a fotografia protagonista domina a massa fotográfica — doc 03 ficha 2, HIERARQUIA | protagonista **20,6%** da área contra **24,0%** das quatro secundárias somadas | **FECHADO em R1** (2026-08-12) | `P2 · COMPOSIÇÃO` | **R1** | ✅ 35,6% contra 25,1%; área fotográfica total 44,6% → 60,7% |
 | ~~**S-05**~~ | projetos | silhueta **D** friso — doc 03 §1.1 | ~~**B**, repetindo vizinhas~~ → **já era D em `f418ab0`**: protagonista sangrando as duas bordas, frisa de três provas na mesma altura, legendas dentro da fotografia, zero moldura, CTA textual | **FECHADO em R2** (2026-08-12) | `P1 · COMPOSIÇÃO` | **R2** | ✅ silhueta D nas 8 larguras; 1 imagem rompendo o container (full-bleed) em todas; frisa passou a acompanhar a faixa fotográfica (gutter 24px) e o degrau de 72px sumiu |
 | ~~**S-06**~~ | projetos | ≤4 cards, ≤6 hairlines, ≤3 amarelos | ~~6 cards, 9 hairlines, 8 amarelos~~ → **medido em `f418ab0`: 0 cards autônomos, 3 hairlines, 6 amarelos** → **6 → 3 amarelos** | **FECHADO em R2** (2026-08-12) | `P2 · ESTÉTICA` | **R2** | ✅ 0 cards autônomos (as 4 caixas são leito de fotografia); 3 hairlines, nenhuma estrutural; 3 amarelos em desktop e 2 em mobile |
 | ~~**S-07**~~ | projetos | altura ≤1.100px; ≥70% de imagem | ~~1.593px; 55%~~ → **medido em `f418ab0`: 1.422px; 64,4%** → **1.422px; 68,8% da caixa e 73,3% da área útil** | **FECHADO em R2** (2026-08-12), com **ajuste normativo do teto de altura** — ver nota | `P2 · COMPOSIÇÃO` | **R2** | ✅ ≥70% da área útil em 1024–1920; teto de altura revisto para ≤1.450px por incompatibilidade aritmética com o de área (doc 03, ficha 3) |
 | ~~**S-08**~~ | pilares | ≤1.200 caracteres | ~~1.505~~ → **medido 844 em `48e1b65`; o número da linha era de antes de `bdca4a5`** → **704** depois do corte editorial | **FECHADO em R0-D** (2026-08-12) | `P3 · CONTEÚDO` | **R0-D** | ✅ 704 caracteres, 41% abaixo do teto; corte só em redundância, com ANTES→DEPOIS registrado; três frentes e assimetria a favor de Equipamentos preservadas |
-| **S-09** | sintomas | ≤3 amarelos | 8 | orçamento de cor | `P2 · ESTÉTICA` | **R3** | ≤3 |
-| **S-10** | sintomas | sem moldura fechada — doc 01 §7.3 | `border border-white/15` na fileira de capítulos | moldura de painel | `P3 · ESTÉTICA` | **R3** | sem borda fechada |
+| ~~**S-09**~~ | sintomas | ≤3 amarelos relevantes | histórico: 8; real: **6 desktop / 3 mobile** | **FECHADO em R3.1** (2026-08-13): estado ficou na régua ativa; numerais e rótulo terciário passaram a neutros | `P2 · ESTÉTICA` | **R3/R3.1** | ✅ 3 em 1024–1920; 2 em 320–768; gate visual PASS |
+| ~~**S-10**~~ | sintomas | sem moldura fechada — doc 01 §7.3 | `border border-white/15` na fileira de capítulos | **FECHADO em R3.1** (2026-08-13): contorno externo removido; divisores internos e arquitetura preservados | `P3 · ESTÉTICA` | **R3/R3.1** | ✅ sem borda fechada; continuidade visual PASS |
 | **S-11** | diagnóstico | ≤6 hairlines | **12** — o maior da página | leitura de PDF | `P1 · ESTÉTICA` | **R4** | ≤6 |
 | **S-12** | diagnóstico | ≤12 blocos; zero card | 20 blocos, 3 cards | densidade | `P2 · CONTEÚDO` | **R4** | ≤12, zero cards |
 | **S-13** | diagnóstico | nenhuma lista com maioria inerte — doc 01 §4.2 | 6 frentes, 2 ativas e 4 esmaecidas | tabela de relatório | `P2 · UX` | **R4** | item só tem forma de item se ativo, ou todos no mesmo estado |
 | **S-14** | diagnóstico | silhueta **E** sequência | **B**, repetindo `#sintomas` | dupla consecutiva | `P2 · COMPOSIÇÃO` | **R4** | silhueta E |
 | ~~**S-15**~~ | transição | zero card | ~~1 card residual: `bg-canvas` na caixa da fotografia, dentro de seção `canvas-deep`~~ → superfície removida, nada no lugar | **FECHADO em R0-D** (2026-08-12) | `P3 · COMPOSIÇÃO` | **R0-D** | ✅ zero cards nas 8 larguras; nenhuma substituição ornamental; altura idêntica em todas (a foto é `cover` e o fundo nunca aparecia) |
 | **S-16** | indústria | ≥60% de imagem; silhueta **A** | **15%** | argumento é material, e não há material visível | `P1 · ASSET` | **R6** | ≥60%, palco de textura |
-| **S-17** | indústria | ≤12 blocos; ≤3 amarelos | 18 blocos, 6 amarelos | densidade e cor | `P2` | **R3**/**R6** | dentro dos tetos |
+| **S-17** | indústria | ≤12 blocos; ≤3 amarelos relevantes | histórico: 18/6; real: **14 blocos / 5 relevantes** | **COR FECHADA em R3.1** (1 relevante nas 8 larguras; numerais preservados e legíveis); densidade continua aberta para R6 | `P2` | **R3/R3.1**/**R6** | cor ✅ e gate visual PASS; blocos ≤12 ainda pendente em R6 |
 | **S-18** | indústria | todo numeral com origem rastreável — DEC-006 | 4 numerais visíveis | **verificar origem de cada um** | `P2 · CONTEÚDO` | **R6** | origem confirmada ou numeral removido |
 | **S-19** | indústria | prova de capacidade, **não quarta porta** — doc 03 ficha 8 | 2 CTAs com peso de porta | risco de virar 4ª frente | `P2 · CONVERSÃO` | **R6** | CTA secundário e contextual |
 | **S-20** | método | CTA textual, não primary — doc 01 §17.3 | faixa escura com CTA `lg` primário | conversão em momento de baixa intenção | `P2 · CONVERSÃO` | **R4** | CTA textual |
@@ -286,12 +286,12 @@ relatório da rodada.
 | **S-22** | método | stagger ≤4 passos — doc 01 §13.1 | 6 etapas escalonadas | excede o teto | `P3 · MOTION` | **R4** | ≤4 passos |
 | **S-23** | método | altura ≤1.100px | 1.290px | — | `P3 · COMPOSIÇÃO` | **R4** | ≤1.100px |
 | **S-24** | leonardo | retrato ≥20% da área | **3%** | assimetria sem massa que a sustente | `P2 · ASSET` | **R5** | ≥20% |
-| **S-25** | leonardo | ≤3 amarelos | 4 | — | `P3 · ESTÉTICA` | **R3** | ≤3 |
-| **S-26** | quem conduz | ≤3 amarelos | **14** | **maior violação do sistema na página** | `P1 · ESTÉTICA` | **R3** | ≤3 |
+| ~~**S-25**~~ | leonardo | ≤3 amarelos relevantes | histórico: 4; real: **3 totais / 2 relevantes** | **FECHADO por rebaseline em R3.1** (2026-08-13), sem mudança de produto | `P3 · ESTÉTICA` | **R3/R3.1** | ✅ intacto e já conforme |
+| ~~**S-26**~~ | quem conduz | ≤3 amarelos relevantes | histórico: 14; real: **15 totais / 6 relevantes** | **FECHADO em R3.1** (2026-08-13): decoração, bullets, cargos e selo passaram a neutros; conteúdo e estrutura intactos | `P1 · ESTÉTICA` | **R3/R3.1** | ✅ 1 relevante nas 8 larguras; pessoas protagonistas e gate visual PASS |
 | **S-27** | quem conduz | silhueta **D** friso; altura ≤1.100px | **B**, 1.432px | dupla com `#leonardo` | `P2 · COMPOSIÇÃO` | **R5** | silhueta D, ≤1.100px |
 | **S-28** | quem conduz | sem redundância com `#leonardo` | parcial (etiqueta corrigida em 2026-08-11) | conteúdo ainda se sobrepõe | `P2 · CONTEÚDO` | **R5** | sem sobreposição temática |
-| **S-29** | credibilidade | ≤1.200 caracteres | 1.403 | — | `P2 · CONTEÚDO` | **R3** | ≤1.200 |
-| **S-30** | credibilidade | par de numerais confirmados em escala — doc 03 ficha 12 | 17 anos e 3.000+ no mesmo corpo dos rótulos | prova numérica sem hierarquia | `P2 · COMPOSIÇÃO` | **R3** | os dois numerais em escala `numeral`, crescendo juntos |
+| ~~**S-29**~~ | credibilidade | ≤1.200 caracteres | histórico: 1.403; real: **935 caracteres / 8 blocos** | **FECHADO por rebaseline em R3.1** (2026-08-13), sem corte de copy | `P2 · CONTEÚDO` | **R3/R3.1** | ✅ 935; conteúdo factual intacto |
+| ~~**S-30**~~ | credibilidade | par de numerais confirmados em escala — doc 03 ficha 12 | os dois ainda usavam `text-title-2` | **FECHADO em R3.1** (2026-08-13): ambos usam o token `text-numeral`, sem alterar valor, ordem ou layout | `P2 · COMPOSIÇÃO` | **R3/R3.1** | ✅ escala e hierarquia PASS; zero aparência de widget |
 | ~~**S-31**~~ | fechamento | ≤3 amarelos | ~~5: keyline, texto da etiqueta, traço da etiqueta, CTA primário, traço do rótulo de atendimento~~ → **3**: keyline (MARCA), CTA primário (AÇÃO), traço da etiqueta (hairline) | **FECHADO em R0-D** (2026-08-12) | `P3 · ESTÉTICA` | **R0-D** | ✅ 3 em ≥1024 e 2 abaixo, nas 8 larguras **e nas 10 rotas** que montam o componente; duas massas removidas, zero opacidade reduzida; PRIMARY inequívoco |
 
 ### R0-D — as três seções de conformidade, e o número que não se sustentou
@@ -360,7 +360,8 @@ produto ou o contrário.
 
 | id | escopo | regra normativa | estado atual | delta | sev. | rodada | critério de saída |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| **M-1** | credibilidade | nada em laço; faixa de logos sem movimento automático — doc 01 §13.4.1 | `animate-marquee` sobre lista duplicada, pausa no hover | **única animação em laço permanente da página** | `P2 · MOTION` | **R3** | zero laço; rolagem por ação; logotipos carregam em qualquer posição |
+| ~~**M-1**~~ | credibilidade | nada em laço; faixa de logos sem movimento automático — doc 01 §13.4.1 | `animate-marquee` sobre lista duplicada, pausa no hover | **FECHADO em R3.1** (2026-08-13): lista única, estática quando couber e com overflow navegável por toque/teclado | `P2 · MOTION` | **R3/R3.1** | ✅ zero marquee; 10 logos únicos; overflow navegável |
+| ~~**M-2**~~ | Hero (congelada) | nada em laço, nada de ambiente — doc 01 §13.4 | ~~`ambienteEquipamentos`, `ambienteProjetos` e `ambienteConsultoria`, 11–13s, `infinite alternate`~~ → cena estática em repouso | **FECHADO em R3.1** (2026-08-13), pela reabertura limitada de motion | `P2 · MOTION` | **R3.1** | autorização explícita de R3.1 | ✅ `INFINITE_ANIMATIONS_IN_HERO = 0` em default e nas 3 cenas; 1s/5s/10s; reduced-motion e regressão visual PASS |
 | **MB-1** | página inteira | ≤18 telas em 390px — doc 05 R7 | **26,2 telas** (22.085px) | extensão, não composição | `P1 · RESPONSIVIDADE` | **R7** | ≤18 telas; nada da coluna "nunca some" removido |
 | **MB-2** | rodapé | proporcional ao conteúdo | **2,16 telas em 390px** | rodapé ocupa 8% da página | `P2 · RESPONSIVIDADE` | **R7** | ≤1 tela em 390 |
 | **X-1** | `src/data/`, `CLAUDE.md`, `docs/v1-release/` | documentação reflete o estado consolidado — doc 05 §3 | quatro lugares ainda descrevem "3.000+" como pendente; `home.ts:51-52` afirma, **errado**, que a métrica não é renderizada em rota pública | contradiz o dado confirmado e induz a erro | `P3 · CONTEÚDO` | rodada que tocar esses arquivos | comentários alinhados ao estado consolidado |
@@ -369,17 +370,19 @@ produto ou o contrário.
 
 ## 5. Contagem
 
-Atualizado em 2026-08-12, ao fim de **R2**. O total é **42**: G-6 entrou como delta novo em
-R0-C e fechou em R0-C.1; **S-04b** entrou como delta novo em R1 e fechou na mesma rodada.
-R2 fechou três linhas (S-05, S-06, S-07) sem abrir nenhuma.
+Atualizado em 2026-08-13, após o fechamento de **R3.1**. A contagem abaixo considera as
+linhas realmente abertas da matriz viva; não reutiliza o total histórico de 42, que não
+batia com as próprias linhas ainda não riscadas. `S-17` conta uma vez, como aberto em R6
+pela densidade; sua parcela de cor está fechada. `M-2`, encontrado na auditoria real de
+motion, fechou pela reabertura limitada da Hero em R3.1.
 
-| severidade | total | fechados | **abertos** |
-| --- | ---: | ---: | ---: |
-| **P0** | 0 | 0 | **0** |
-| **P1** | 10 | **9** | **1** |
-| **P2** | 21 | **9** | **12** |
-| **P3** | 11 | **6** | **5** |
-| **TOTAL** | 42 | **24** | **18** |
+| severidade | **abertos** |
+| --- | ---: |
+| **P0** | **0** |
+| **P1** | **3** |
+| **P2** | **12** |
+| **P3** | **3** |
+| **TOTAL ABERTO** | **18** |
 
 **Mais da metade da matriz está fechada.** R1 fechou quatro linhas (S-01 a S-04) e
 abriu-e-fechou uma quinta: **S-04b**, o protagonismo da fotografia. Ela não existia porque
@@ -411,12 +414,18 @@ Fechados em R0-C.1: **G-6**.
 Fechados em R0-D: **S-08**, **S-15** e **S-31**.
 Fechados em R1: **S-01**, **S-02**, **S-03** e **S-04**. Aberto e fechado por R1: **S-04b**.
 Fechados em R2: **S-05**, **S-06** e **S-07**.
+Fechados em R3/R3.1: **G-3**, **G-5**, **S-09**, **S-10**, **S-25**, **S-26**,
+**S-29**, **S-30**, **M-1** e **M-2**; a parcela de cor de **S-17** também fechou,
+enquanto a densidade permanece em R6.
 
-**Todos os sistemas globais estão conformes** — G-1, G-1b, G-2 e G-6 fechados; G-3 e G-4
-já eram. Sobra **G-5** (orçamento de cor), que é contagem por seção e vive nas fichas.
-É o pré-requisito de doc 04 §4.1.2 para congelar seção, e ele está cumprido.
+**O orçamento de cor e motion está conforme nas seções abertas da R3.** A validação em
+produção cobriu 320/390/768/1024/1366/1440/1600/1920, com capturas de 1440 e 390 em
+`docs/v2/capturas/home-r3-2026-08-13/`. O amarelo voltou a ter função sem nova paleta;
+a página ficou sem loop e sem marquee automático.
 
-**A hero** tem zero delta aberto e selo `CONGELADA` (ficha em `03-BLUEPRINT-HOME.md` §2).
+**A Hero** mantém o selo `CONGELADA` (ficha em `03-BLUEPRINT-HOME.md` §2). R3.1 reabriu
+somente motion ambiente para fechar M-2: removeu os três loops `infinite alternate` e
+preservou entrada, troca de cena, controles, layout, copy, fotografia e responsividade.
 **O cabeçalho** fechou os quatro dele e está `CONGELADO DEFINITIVAMENTE`, sem dependência.
 **`#pilares`, `#transicao` e `#fechamento`** fecharam os três de R0-D e receberam selo
 `CONGELADA` nas fichas 4, 7 e 13.
@@ -426,11 +435,7 @@ já eram. Sobra **G-5** (orçamento de cor), que é contagem por seção e vive 
 **`#projetos`** fechou os três dela (S-05, S-06, S-07) e recebeu selo `CONGELADA` na
 ficha 3.
 
-**A R0, a R1 e a R2 estão encerradas.** Nada sobra na fase de conformidade: sistemas
-globais, hero, cabeçalho, sistema de botões e as três seções de R0-D estão conformes e
-selados; a frente comercial principal está recomposta e congelada; e a prova fotográfica
-principal está conforme e congelada. O que resta na matriz pertence a R3–R7, e a próxima é
-**R3 — orçamento de cor + motion global**.
+**A R0, a R1, a R2 e a R3/R3.1 estão encerradas.** R4 não é iniciada por esta matriz.
 
 **Zero P0.** Nenhum delta bloqueia publicação — o produto no ar é funcional, acessível e
 sem dado inventado. Os itens restantes são distância entre o que está no ar e o que a norma
@@ -446,15 +451,16 @@ pede.
 | **R0-D** | 0 — os três deltas dela (S-08, S-15, S-31) são P3, e **fecharam** |
 | **R1** | ~~1 — S-01~~ **fechado** |
 | **R2** | ~~1 — S-05~~ **fechado** |
-| R3 | 1 — S-26 |
+| **R3/R3.1** | ~~1 — S-26~~ **fechado** |
 | R4 | 1 — S-11 |
 | R6 | 1 — S-16 |
 | R7 | 1 — MB-1 |
 
 ### Cobertura
 
-Toda regra normativa dos documentos 01 e 03 com delta identificado tem rodada
-responsável. **Nenhuma linha desta matriz está sem dono.**
+Toda regra normativa dos documentos 01 e 03 com delta identificado tem rodada responsável.
+**M-2** recebeu autorização explícita e limitada em R3.1 para remover somente o motion
+ambiente da Hero; layout, conteúdo e demais propriedades continuam congelados.
 
 ---
 

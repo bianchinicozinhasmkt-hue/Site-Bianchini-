@@ -76,7 +76,7 @@ export function IndustryInoxSection() {
         <ol className="mt-10 grid gap-8 border-t border-white/15 pt-10 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-10 lg:pt-12">
           {industry.deliverables.map((item) => (
             <li key={item.number}>
-              <p className="font-condensed text-caption font-bold tabular-nums text-yellow">
+              <p className="font-condensed text-caption font-bold tabular-nums text-canvas/70">
                 {item.number}
               </p>
               <h3 className="mt-3 font-sans font-bold text-body text-canvas">{item.title}</h3>

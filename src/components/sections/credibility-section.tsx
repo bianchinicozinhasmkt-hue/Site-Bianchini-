@@ -43,7 +43,7 @@ const logoScale = {
  *
  *   escala ....... números + segmentos, em linha — a mesma composição
  *                  compacta que a `TrustSection` já usava
- *   prova ........ logotipos reais, coloridos, em faixa deslizante
+ *   prova ........ logotipos reais, coloridos, em faixa horizontal
  *   depoimentos .. dois, lado a lado, tipografia grande sem caixa
  *
  * Cada zona muda de forma (linha de números, faixa deslizante, citação): é a
@@ -55,8 +55,6 @@ const logoScale = {
  * fim deste arquivo.
  */
 export function CredibilitySection() {
-  const marquee = [...featuredClients, ...featuredClients]
-
   return (
     <Section id="credibilidade" tone="canvas" space="default" bleed aria-labelledby="credibilidade-titulo">
       <Container>
@@ -97,7 +95,7 @@ export function CredibilitySection() {
           <dl className="flex shrink-0 flex-wrap gap-x-10 gap-y-5">
             {scopeMetrics.map((metric) => (
               <div key={metric.value} className="flex flex-col gap-1">
-                <dd className="font-condensed font-bold text-title-2 text-ink">{metric.value}</dd>
+                <dd className="font-condensed font-bold text-numeral text-ink">{metric.value}</dd>
                 <dt className="max-w-[16ch] text-caption text-muted">{metric.label}</dt>
               </div>
             ))}
@@ -114,7 +112,7 @@ export function CredibilitySection() {
         </div>
       </Container>
 
-      {/* ---------- Logotipos reais, em faixa deslizante ---------- */}
+      {/* ---------- Logotipos reais, estáticos ou rolados pelo visitante ---------- */}
       <div className="mt-10 lg:mt-12">
         <Container>
           <TechLabel className="max-w-xl">
@@ -122,14 +120,18 @@ export function CredibilitySection() {
           </TechLabel>
         </Container>
 
-        <div className="group marquee-mask mt-5 overflow-hidden border-y border-line bg-surface py-7">
-          <ul className="flex w-max animate-marquee items-center gap-14 pr-14 [animation-play-state:running] motion-reduce:animate-none group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] md:gap-20 md:pr-20">
-            {marquee.map((client, index) => (
-              <li key={`${client.id}-${index}`} className="flex shrink-0 items-center">
+        <div
+          role="region"
+          aria-label="Marcas de operações atendidas"
+          tabIndex={0}
+          className="mt-5 overflow-x-auto overscroll-x-contain border-y border-line bg-surface py-7 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink"
+        >
+          <ul className="flex w-max min-w-full items-center justify-center gap-14 px-[var(--guia)] md:gap-20">
+            {featuredClients.map((client) => (
+              <li key={client.id} className="flex shrink-0 items-center">
                 <Image
                   src={client.logo}
-                  alt={index < featuredClients.length ? client.name : ''}
-                  aria-hidden={index >= featuredClients.length}
+                  alt={client.name}
                   width={220}
                   height={110}
                   loading="eager"

@@ -77,7 +77,7 @@ export function SymptomsSection() {
             role="tablist"
             aria-label="Capítulos do diagnóstico"
             aria-orientation="horizontal"
-            className="grid grid-cols-3 border border-white/15 bg-graphite-deep"
+            className="grid grid-cols-3 bg-graphite-deep"
           >
             {symptomChapters.map((chapter, index) => {
               const selected = active === index
@@ -105,7 +105,7 @@ export function SymptomsSection() {
                     <span
                       className={cn(
                         'font-condensed text-sm font-bold tabular-nums transition-colors duration-[260ms]',
-                        selected ? 'text-yellow' : 'text-canvas/35',
+                        selected ? 'text-canvas' : 'text-canvas/35',
                       )}
                     >
                       {chapter.number}
@@ -186,7 +186,7 @@ export function SymptomsSection() {
               />
 
               <div className="absolute left-6 top-6 flex items-center gap-3 border-l-2 border-yellow bg-graphite/90 px-4 py-3">
-                <span className="font-condensed text-base font-bold tabular-nums text-yellow">
+                <span className="font-condensed text-base font-bold tabular-nums text-canvas">
                   {current.number}
                 </span>
                 <span className="font-condensed text-sm font-semibold uppercase tracking-[0.09em] text-canvas">
@@ -252,7 +252,7 @@ export function SymptomsSection() {
                     </h3>
 
                     <div className="mt-4 border-l-2 border-yellow pl-4">
-                      <p className="font-condensed text-caption font-semibold uppercase tracking-[0.09em] text-yellow">
+                      <p className="font-condensed text-caption font-semibold uppercase tracking-[0.09em] text-canvas/70">
                         Consequência principal
                       </p>
                       <p className="mt-1.5 font-sans text-title-3 font-semibold leading-snug text-canvas">
@@ -350,7 +350,7 @@ export function SymptomsSection() {
                     <span
                       className={cn(
                         'font-condensed text-caption font-bold tabular-nums',
-                        expanded ? 'text-yellow' : 'text-canvas/40',
+                        expanded ? 'text-canvas' : 'text-canvas/40',
                       )}
                     >
                       {chapter.number}

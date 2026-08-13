@@ -477,79 +477,6 @@
     transform 980ms var(--ease-premium);
 }
 
-/* ============================================================
-   AMBIENT MOTION — UM POR CENA, PORQUE CADA CENA PEDE OUTRA COISA
-   ============================================================
-
-   A deriva anterior era única e comum às três (1,1% em 16s). No vídeo ela era
-   **imperceptível** — o que, para uma cena parada por vários segundos, é
-   indistinguível de não existir. Sobe para 1,4–1,6% em 11–13s, e passa a ter
-   direção própria por assunto:
-
-     equipamentos .. avança para dentro do corredor, deslocando à esquerda: é a
-                     fuga da praça de cocção que ganha profundidade;
-     projetos ...... aproxima-se da prancha, quase sem percurso lateral — o
-                     documento não pode sair do enquadramento;
-     consultoria ... **quase parada**, 0,6% e nenhum percurso. Uma pessoa que
-                     deriva lê como recorte flutuando; o que dá vida a esta cena
-                     é a luz do campo sintetizado (ver `.frameConsultoria`), e
-                     não o movimento do retrato.
-
-   A conta que mantém isto abaixo do limiar de percepção continua valendo: a
-   1,6% em 12s de ida, o deslocamento por quadro em 1920 é de ~0,09px. O
-   visitante não vê a cena se mexer; ele deixa de sentir que ela é um `<img>`
-   parado. É o oposto de Ken Burns — não há destino, a cena volta ao ponto de
-   partida a cada ciclo.
-
-   **Só na cena ativa.** As inativas estão em `opacity: 0`; animá-las seria
-   compor camadas invisíveis a 60Hz sem nada na tela.
-   ============================================================ */
-@keyframes ambienteEquipamentos {
-  from {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  to {
-    transform: scale(1.015) translate3d(-7px, -2px, 0);
-  }
-}
-
-@keyframes ambienteProjetos {
-  from {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  to {
-    transform: scale(1.016) translate3d(-2px, -3px, 0);
-  }
-}
-
-@keyframes ambienteConsultoria {
-  from {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  to {
-    transform: scale(1.006) translate3d(0, 0, 0);
-  }
-}
-
-.frameActive .sceneBox {
-  animation: ambienteEquipamentos 12s var(--ease-smooth) infinite alternate;
-}
-
-.frameActive.frameProjetos .sceneBox {
-  animation-name: ambienteProjetos;
-  animation-duration: 13s;
-}
-
-/*
-  `transform-origin` próprio: a figura de Consultoria é ancorada à direita e à
-  base, e escalar do centro descolaria a aresta direita dela do limite do palco
-  — sobraria uma fresta escura piscando a cada ciclo.
-*/
-.frameActive.frameConsultoria .sceneBox {
-  animation-name: ambienteConsultoria;
-  animation-duration: 11s;
-}
-
 .frameConsultoria .sceneBox {
   transform-origin: right bottom;
 }
@@ -2149,19 +2076,14 @@
    `prefers-reduced-motion` — requisito, não cortesia
    ============================================================
 
-   Cai **tudo** o que esta rodada acrescentou de movimento, e a conferência
-   importa porque agora há mais a desligar do que antes:
+   Cai **tudo** o que a troca de cena acrescenta de movimento:
 
      · a coreografia de troca vira um corte — a cena nova aparece opaca, sem
        saída, sem passagem e sem entrada. O atraso de 150ms da copy é
        curto-circuitado no JavaScript (ver `COPY_OUT_MS` em `hero-stage.tsx`),
        então o texto troca no mesmo quadro;
-     · o **ambient motion** da cena ativa é desligado. Ele é o único movimento
-       permanente da dobra, e "permanente" é exatamente o que reduced-motion
-       existe para eliminar;
-     · a **cena de Consultoria** aparece pronta e parada: a figura ancorada não
-       deriva e o campo sintetizado não se move. Ela continua visível — o
-       requisito é que nada fique invisível nem preso fechado.
+     · a **cena de Consultoria** aparece pronta e parada. Ela continua visível —
+       o requisito é que nada fique invisível nem preso fechado.
 
    O que sobra do estado ativo, todo estático: régua amarela de 3px, superfície
    neutra mais clara, nome em `bold`/`canvas` e seta amarela. A elevação de 6px
@@ -2200,7 +2122,7 @@
   }
 
   /*
-    A cena ativa perde a ponte e o ambient — mas continua opaca, em escala 1 e
+    A cena ativa perde a ponte — mas continua opaca, em escala 1 e
     com a **máscara aberta**. É o ponto que exige atenção: a revelação
     direcional é uma máscara, e máscara parada no meio do caminho esconderia
     metade da cena para sempre. Aqui ela é forçada a `0% 0` nos dois estados,
@@ -2214,12 +2136,6 @@
     transform: none;
     -webkit-mask-position: 0% 0;
     mask-position: 0% 0;
-  }
-
-  .frameActive .sceneBox,
-  .frameActive.frameProjetos .sceneBox,
-  .frameActive.frameConsultoria .sceneBox {
-    animation: none;
   }
 
   /*
