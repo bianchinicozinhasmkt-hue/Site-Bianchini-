@@ -237,6 +237,34 @@ entre elas precisa ser avaliada junto).
 **Critério de saída:** ficha do documento 03 · mosaico continua em `columns-*` (grid abre
 vãos sob os cards baixos) · nenhuma legenda com cliente, local ou prazo.
 
+**Resultado — CONCLUÍDA em 2026-08-12.** O baseline histórico estava velho pela terceira
+rodada seguida: medido em `f418ab0`, `#projetos` já tinha **silhueta D**, **0 cards
+autônomos** (contra "6"), **3 hairlines** (contra "9") e **1.422px** (contra "1.593"). O
+trabalho listado acima como "B → D" já estava feito pela variante `showcase`, então a
+rodada foi **conformidade pontual**, conforme §29 do briefing: amarelo **6 → 3**, frisa
+alinhada à faixa fotográfica (gutter de 24px em vez da guia de texto) e corte da folga
+vertical real.
+
+| métrica (1440) | roadmap dizia | real em `f418ab0` | depois de R2 |
+| --- | ---: | ---: | ---: |
+| altura | 1.593 → ≤1.100 | **1.422** | **1.422** |
+| área fotográfica | ≥70% | **64,4%** da caixa · **69,5%** da área útil | **68,8%** da caixa · **73,3%** da área útil |
+| cards | 6 → ≤4 | **0 autônomos** | **0** |
+| hairlines | 9 → ≤6 | **3** | **3** |
+| amarelos | 8 → ≤3 | **6** | **3** |
+
+**Dois critérios de saída não sobreviveram à medição, e os dois foram revistos com
+justificativa registrada** (ficha 3 do documento 03):
+
+- **`columns-*` "nunca grid"** — a premissa da regra (células de alturas diferentes abrem
+  vãos) não vale numa frisa de altura compartilhada, e `columns-*` **destruiria** a linha
+  única que é a razão de ser da composição. Grid, medido sem vão nas 8 larguras.
+- **altura ≤1.100px** — aritmeticamente incompatível com ≥70% de área. As duas juntas
+  exigem altura não-fotográfica ≤330px, e o piso realista dela é ~390px. Teto revisto para
+  ≤1.450px, com a área como critério que manda.
+
+**Evidência:** `docs/v2/capturas/projetos-r2-2026-08-12/`.
+
 ---
 
 ## RODADA 3 — Cor e motion global

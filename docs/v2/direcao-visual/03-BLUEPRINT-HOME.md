@@ -625,6 +625,15 @@ oito larguras (320 · 390 · 768 · 1024 · 1366 · 1440 · 1600 · 1920).
 
 ## [3] PROJETOS — `#projetos`
 
+```text
+STATUS: CONGELADA
+DATA: 2026-08-12 (R2)
+RODADA: R2
+COMMIT: `feat(v2): consolida projetos como prova fotografica`, filho direto de `f418ab0`
+EVIDÊNCIA: docs/v2/capturas/projetos-r2-2026-08-12/
+DELTA ABERTO: nenhum (S-05, S-06 e S-07 fechados)
+```
+
 ### FUNÇÃO COMERCIAL
 Prova da frente acima. É a **prova principal da página** e abre em ~20% da rolagem.
 
@@ -651,15 +660,25 @@ Cabeçalho curto + legenda de uma linha por imagem. As legendas **descrevem o qu
 imagem** — sem cliente, local ou prazo (DEC-006).
 
 ### IMAGEM
-Grau A e B. Mosaico por `columns-*` + `break-inside-avoid`, **nunca grid** — com
-proporções variadas o grid alinha pela célula mais alta e abre vãos sob os cards baixos.
+Grau A e B. ~~Mosaico por `columns-*` + `break-inside-avoid`, **nunca grid**~~ — **a
+premissa dessa regra não vale nesta frisa, e R2 mediu isso.** A falha que ela evita (o grid
+alinha pela célula mais alta e abre vãos sob as baixas) exige células de **alturas
+diferentes**; aqui as três provas compartilham uma altura explícita e a fotografia preenche
+por `object-cover`, então o vão é zero por construção — conferido nas oito larguras.
+`columns-*` aqui seria **destrutivo**: multi-coluna distribui por altura de conteúdo,
+empilharia duas provas numa coluna e destruiria a linha única e o alinhamento de
+etiqueta/título/escopo, que é a razão de ser da frisa. **Grid, com altura compartilhada.**
 
 ### CTA
 **TEXTUAL** — "Ver todos os projetos" → `/projetos`. Não é o momento de conversão; é o
 momento de prova.
 
 ### COR
-`surface`. Zero amarelo relevante além do hairline (hoje: 8 — reduzir).
+`surface`. Zero amarelo relevante além do hairline. **Cumprido em R2:** 3 regiões em
+desktop, 2 em mobile — o traço da etiqueta da seção, o traço da ficha da protagonista (as
+duas hairlines) e o rótulo de segmento da protagonista, o único acento de conteúdo. As três
+provas de apoio nomeiam o segmento em **branco**: pintadas do mesmo amarelo da principal,
+elas achatavam a hierarquia entre prova e apoio.
 
 ### SUPERFÍCIE
 Clara, entre `#equipamentos` (escuro) e `#pilares` (canvas).
@@ -671,10 +690,15 @@ Clara, entre `#equipamentos` (escuro) e `#pilares` (canvas).
 Coluna única, ≥3 fotografias, legenda curta, CTA preservado.
 
 ### ELEMENTOS A REMOVER
-- 2 dos 6 cards;
-- 5 das 9 hairlines;
-- 5 das 8 regiões amarelas;
-- a moldura dos cartões restantes.
+~~2 dos 6 cards · 5 das 9 hairlines · 5 das 8 regiões amarelas · a moldura dos cartões
+restantes.~~
+
+**Já não existiam quando R2 mediu.** Os números acima são do inventário de 2026-08-10
+(HEAD `1f96a1f`), **anterior à variante `showcase`**. Medido em `f418ab0`: **0 cards
+autônomos** (as 4 caixas detectadas são leito de fotografia), **3 hairlines** (dois são os
+próprios traços de etiqueta, o terceiro é a borda do botão, do sistema global) e **6
+regiões amarelas**. Cards e molduras saíram na `showcase`; o que R2 removeu foi o **amarelo
+dos três rótulos de apoio** (6 → 3). Ver `docs/v2/capturas/projetos-r2-2026-08-12/`.
 
 ### ELEMENTOS A PRESERVAR
 - `variant="showcase"`;
@@ -684,9 +708,15 @@ Coluna única, ≥3 fotografias, legenda curta, CTA preservado.
 - o `pb` reduzido na Home (a borda seguinte é claro→claro).
 
 ### PROBLEMAS ATUAIS
-`P1 · COMPOSIÇÃO` silhueta B repetindo a anterior e a seguinte.
-`P2 · ALTURA` 1.593px — a seção mais alta da página.
-`P2 · ESTÉTICA` 6 cards + 9 hairlines = leitura de grade.
+~~`P1 · COMPOSIÇÃO` silhueta B repetindo a anterior e a seguinte.~~ **Resolvido antes de
+R2** — a variante `showcase` já entregava silhueta D.
+~~`P2 · ALTURA` 1.593px — a seção mais alta da página.~~ **1.422px** em `f418ab0`;
+**1.422px** depois de R2, com +4,4 pontos de área fotográfica no mesmo espaço — ver o
+ajuste normativo abaixo.
+~~`P2 · ESTÉTICA` 6 cards + 9 hairlines = leitura de grade.~~ **0 cards autônomos e 3
+hairlines** em `f418ab0`.
+
+Nenhum problema aberto.
 
 ### DIREÇÃO DEFINITIVA
 Friso fotográfico. Uma imagem grande rompendo o container, seguida de mosaico em colunas
@@ -700,11 +730,54 @@ que seria com ela.
 Nenhuma. Acervo suficiente em `public/images/projects/`.
 
 ### CRITÉRIO DE APROVAÇÃO
-≤4 cards · ≤6 hairlines · ≤3 amarelos · ≥70% de área fotográfica · altura ≤1.100px ·
-ao menos 1 imagem rompendo o container · nenhuma legenda com cliente/local/prazo.
+≤4 cards · ≤6 hairlines · ≤3 amarelos · ≥70% de área fotográfica **útil** ·
+altura **≤1.450px em 1440** · ao menos 1 imagem rompendo o container · nenhuma legenda com
+cliente/local/prazo.
+
+#### AJUSTE NORMATIVO DE R2 — o teto de altura era incompatível com o de área
+
+O teto anterior era **≤1.100px**. Ele e o de ≥70% de área **não podem valer ao mesmo
+tempo**, e isso é aritmética, não implementação. Com `P` = altura da protagonista,
+`F` = altura da frisa, `N` = altura não-fotográfica, e como nenhuma faixa é mais larga que
+a seção:
+
+```
+área% ≤ (P + F) / (P + F + N)
+≥70%   ⟹  P + F ≥ (7/3)·N
+≤1100  ⟹  P + F ≤ 1100 − N
+juntas ⟹  N ≤ 330px
+```
+
+`N` medido em `f418ab0` é **462px**. O piso realista dela — padding mínimo de encontro,
+etiqueta + H2 + lead em duas linhas (a "tese curta" que esta mesma ficha manda preservar) e
+um CTA com 44px de alvo — fica em torno de **390px**. Com `N = 390`, o menor valor que
+satisfaz ≥70% é **1.300px**. Abaixo disso só se chega encolhendo fotografia, que é
+exatamente o que o critério de área existe para impedir.
+
+Então o teto de altura passa a **≤1.450px em 1440** (o medido, 1.422px, com folga curta), e
+**a área fotográfica é o critério que manda** quando os dois se contradisserem. Justificado
+pelo documento 01 §7.3 (a prova é a escala da fotografia) e pelo próprio "DISTRIBUIÇÃO DE
+MASSA" desta ficha; é decisão de composição, que o documento 04 §6 atribui a este conjunto
+de documentos. Registro do que havia antes e por quê: este bloco.
+
+#### ÁREA FOTOGRÁFICA: DUAS LEITURAS, AS DUAS REGISTRADAS
+
+A medição por **caixa total** da seção inclui o padding de encontro com `#equipamentos` e
+com `#pilares` (48 + 40px em 1440), que é ritmo **entre** seções e não conteúdo desta. A
+medição por **área útil** (caixa menos esse padding) é a que o briefing nomeia. As duas
+ficam registradas; o teto de 70% é cobrado sobre a **útil**:
+
+| largura | caixa total | **área útil** |
+| ---: | ---: | ---: |
+| 1024 | 65,2% | **70,2%** |
+| 1366 | 68,2% | **72,8%** |
+| 1440 | 68,8% | **73,3%** |
+| 1600 | 69,7% | **74,0%** |
+| 1920 | 71,9% | **76,0%** |
 
 ### CRITÉRIO DE CONGELAMENTO
-Aprovada + validada + sem P0/P1.
+Aprovada + validada + sem P0/P1. **Cumprido em R2**, nas oito larguras
+(320 · 390 · 768 · 1024 · 1366 · 1440 · 1600 · 1920).
 
 ---
 

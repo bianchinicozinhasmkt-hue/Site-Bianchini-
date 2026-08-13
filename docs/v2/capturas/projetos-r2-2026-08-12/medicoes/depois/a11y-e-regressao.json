@@ -1,0 +1,110 @@
+{
+ "a11y": {
+  "foco": [
+   {
+    "txt": "VER TODOS OS PROJETOS",
+    "href": "/projetos",
+    "focoVisivel": true,
+    "outline": "2px",
+    "preenchimento": false
+   }
+  ],
+  "tabulaveis": [
+   {
+    "tag": "a",
+    "txt": "VER TODOS OS PROJETOS",
+    "visivel": true,
+    "tabindex": null
+   }
+  ],
+  "semantica": {
+   "rotulada": "projetos-titulo",
+   "tituloExiste": true,
+   "headings": [
+    "H2: A prova está na operação construída"
+   ],
+   "figuras": 4,
+   "figcaptions": 5,
+   "imagensSemAlt": 0,
+   "alts": [
+    "Cozinha profissional em operação com fritadeiras, ",
+    "Balcão de bar em aço inox com cuba, apoio refriger",
+    "Interior de câmara frigorífica com estantes modula",
+    "Fritadeiras elétricas e chapa em linha, com bancad"
+   ],
+   "gradientesOcultos": 17
+  },
+  "toque": [
+   {
+    "txt": "VER TODOS OS PROJETOS",
+    "w": 236.5,
+    "h": 50,
+    "ok": true
+   }
+  ]
+ },
+ "regressao": {
+  "header": {
+   "altura": 80,
+   "ctaRotulo": "SOLICITAR ORÇAMENTO",
+   "ctaDestino": "/contato?intencao=equipamentos",
+   "ctaRaio": "2px",
+   "ctaSombra": "none",
+   "marcaX": 72
+  },
+  "g1b": {
+   "marcaX": 72,
+   "h1X": 72,
+   "alinhado": true
+  },
+  "hero": {
+   "h1": "Equipamentos para cozinha profissional, especificados para a sua operação.",
+   "portas": [
+    "SOLICITAR ORÇAMENTO FA",
+    "SOLICITAR ORÇAMENTO DE",
+    "SOLICITAR ORÇAMENTO"
+   ],
+   "alturaDobra": 900
+  },
+  "botoes": {
+   "total": 41,
+   "foraDaNorma": []
+  },
+  "pilares": {
+   "h": 637,
+   "blocos": 11,
+   "caracteres": 704,
+   "nAmarelos": 2
+  },
+  "transicao": {
+   "h": 578,
+   "blocos": 3,
+   "caracteres": 326,
+   "nAmarelos": 2
+  },
+  "fechamento": {
+   "h": 705,
+   "blocos": 2,
+   "caracteres": 182,
+   "nAmarelos": 3
+  },
+  "equipamentos": {
+   "h": 1033,
+   "blocos": 8,
+   "caracteres": 343,
+   "nAmarelos": 3,
+   "nImagens": 5,
+   "A_sobre_Btotal": 1.41,
+   "protagonistaVence": true,
+   "sangraDireita": true
+  },
+  "consoleErros": 0
+ },
+ "reducedMotion": {
+  "invisiveis": [],
+  "nInvisiveis": 0,
+  "imagensCarregadas": "4/4",
+  "textosVisiveis": 8,
+  "consoleErros": 0
+ }
+}

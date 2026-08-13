@@ -1,0 +1,182 @@
+
+=== DEPOIS — inventário de #projetos ===
+
+viewport     altura  chars  blocos  cards  hair  amar  imgs  foto%  A/Btot  A%foto  rompem  ovf
+320x568        2164    511       7      4     3     2     4   55.3     0.5    33.4       1    0
+390x844        2367    511       7      4     3     2     4   63.7     0.5    32.3       1    0
+768x1024       1603    511       7      4     3     3     4   68.6     0.6    39.3       1    0
+1024x768       1238    511       7      4     3     3     4   65.2     1.7    63.4       1    0
+1366x768       1387    511       7      4     3     3     4   68.2     1.5    60.2       1    0
+1440x900       1422    511       7      4     3     3     4   68.8     1.6    61.4       1    0
+1600x900       1502    511       7      4     3     3     4   69.7     1.8    63.7       1    0
+1920x1080      1646    511       7      4     3     3     4   71.9     2.1    67.6       1    0
+
+--- cards por construção (leito de fotografia marcado) ---
+320x568: 4 detectados, 0 autônomos
+390x844: 4 detectados, 0 autônomos
+768x1024: 4 detectados, 0 autônomos
+1024x768: 4 detectados, 0 autônomos
+1366x768: 4 detectados, 0 autônomos
+1440x900: 4 detectados, 0 autônomos
+1600x900: 4 detectados, 0 autônomos
+1920x1080: 4 detectados, 0 autônomos
+
+--- amarelos ---
+320x568: 2
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    fundo  h-[2px] w-6 shrink-0 bg-yellow-deep
+390x844: 2
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    fundo  h-[2px] w-6 shrink-0 bg-yellow-deep
+768x1024: 3
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    texto COZINHA INDUSTRIAL inline-flex items-center gap-3 font-condensed text-eyebrow fon
+    fundo  h-[2px] w-6 shrink-0 bg-yellow
+1024x768: 3
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    texto COZINHA INDUSTRIAL inline-flex items-center gap-3 font-condensed text-eyebrow fon
+    fundo  h-[2px] w-6 shrink-0 bg-yellow
+1366x768: 3
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    texto COZINHA INDUSTRIAL inline-flex items-center gap-3 font-condensed text-eyebrow fon
+    fundo  h-[2px] w-6 shrink-0 bg-yellow
+1440x900: 3
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    texto COZINHA INDUSTRIAL inline-flex items-center gap-3 font-condensed text-eyebrow fon
+    fundo  h-[2px] w-6 shrink-0 bg-yellow
+1600x900: 3
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    texto COZINHA INDUSTRIAL inline-flex items-center gap-3 font-condensed text-eyebrow fon
+    fundo  h-[2px] w-6 shrink-0 bg-yellow
+1920x1080: 3
+    fundo  h-[2px] w-7 shrink-0 bg-yellow-deep
+    texto COZINHA INDUSTRIAL inline-flex items-center gap-3 font-condensed text-eyebrow fon
+    fundo  h-[2px] w-6 shrink-0 bg-yellow
+
+--- hairlines ---
+320x568: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(217, 166, 27) h-[2px] w-6 shrink-0 bg-yellow-deep
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+390x844: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(217, 166, 27) h-[2px] w-6 shrink-0 bg-yellow-deep
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+768x1024: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(245, 198, 75) h-[2px] w-6 shrink-0 bg-yellow
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+1024x768: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(245, 198, 75) h-[2px] w-6 shrink-0 bg-yellow
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+1366x768: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(245, 198, 75) h-[2px] w-6 shrink-0 bg-yellow
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+1440x900: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(245, 198, 75) h-[2px] w-6 shrink-0 bg-yellow
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+1600x900: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(245, 198, 75) h-[2px] w-6 shrink-0 bg-yellow
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+1920x1080: 3
+    barra rgb(217, 166, 27) h-[2px] w-7 shrink-0 bg-yellow-deep
+    barra rgb(245, 198, 75) h-[2px] w-6 shrink-0 bg-yellow
+    border-top rgba(16, 16, 16, 0.7) group relative isolate inline-flex items-center justify-center
+
+--- imagens e sangria ---
+320x568  guia=280px [20..300]
+    cozinha-completa.jpg               320x400      arq=320x240    amp=1 rompe=true full=true
+    fritadeiras-e-chapa.jpg            280x373.3    arq=294x392    amp=1 rompe=false full=false
+    bar-em-inox.jpg                    280x350      arq=294x442    amp=1 rompe=false full=false
+    camara-frigorifica.jpg             280x186.7    arq=294x157    amp=1 rompe=false full=false
+390x844  guia=350px [20..370]
+    cozinha-completa.jpg               390x487.5    arq=390x292    amp=1 rompe=true full=true
+    fritadeiras-e-chapa.jpg            350x466.7    arq=358x478    amp=1 rompe=false full=false
+    bar-em-inox.jpg                    350x437.5    arq=358x539    amp=1 rompe=false full=false
+    camara-frigorifica.jpg             350x233.3    arq=358x191    amp=1 rompe=false full=false
+768x1024  guia=691.2px [38.4..729.6]
+    cozinha-completa.jpg               768x432      arq=768x576    amp=1 rompe=true full=true
+    camara-frigorifica.jpg             691.2x296.2  arq=706x376    amp=1 rompe=false full=false
+    bar-em-inox.jpg                    339.6x452.8  arq=353x530    amp=1 rompe=false full=false
+    fritadeiras-e-chapa.jpg            339.6x452.8  arq=353x471    amp=1 rompe=false full=false
+1024x768  guia=976px [24..1000]
+    cozinha-completa.jpg               1024x512     arq=1024x768   amp=1 rompe=true full=true
+    camara-frigorifica.jpg             314.7x320    arq=286x153    amp=1.1 rompe=false full=false
+    bar-em-inox.jpg                    314.7x320    arq=337x507    amp=0.9 rompe=false full=false
+    fritadeiras-e-chapa.jpg            314.7x320    arq=337x450    amp=0.9 rompe=false full=false
+1366x768  guia=1318px [24..1342]
+    cozinha-completa.jpg               1366x569.2   arq=996x747    amp=1.4 rompe=true full=true
+    fritadeiras-e-chapa.jpg            450.1x400    arq=450x600    amp=1 rompe=false full=false
+    bar-em-inox.jpg                    450.1x400    arq=450x677    amp=1 rompe=false full=false
+    camara-frigorifica.jpg             385.8x400    arq=382x204    amp=1 rompe=false full=false
+1440x900  guia=1392px [24..1416]
+    cozinha-completa.jpg               1440x600     arq=1050x787   amp=1.4 rompe=true full=true
+    bar-em-inox.jpg                    476x400      arq=475x714    amp=1 rompe=false full=false
+    fritadeiras-e-chapa.jpg            476x400      arq=475x633    amp=1 rompe=false full=false
+    camara-frigorifica.jpg             408x400      arq=403x214    amp=1 rompe=false full=false
+1600x900  guia=1552px [24..1576]
+    cozinha-completa.jpg               1600x666.7   arq=1166x875   amp=1.4 rompe=true full=true
+    bar-em-inox.jpg                    532x400      arq=528x793    amp=1 rompe=false full=false
+    fritadeiras-e-chapa.jpg            532x400      arq=528x703    amp=1 rompe=false full=false
+    camara-frigorifica.jpg             456x400      arq=448x238    amp=1 rompe=false full=false
+1920x1080  guia=1872px [24..1896]
+    cozinha-completa.jpg               1920x800     arq=1400x1050  amp=1.4 rompe=true full=true
+    bar-em-inox.jpg                    644x400      arq=633x952    amp=1 rompe=false full=false
+    fritadeiras-e-chapa.jpg            644x400      arq=633x844    amp=1 rompe=false full=false
+    camara-frigorifica.jpg             552x400      arq=537x286    amp=1 rompe=false full=false
+
+--- estrutura do mosaico ---
+320x568: grid · cols=280px · columnCount=auto · gap=12px
+390x844: grid · cols=350px · columnCount=auto · gap=12px
+768x1024: grid · cols=339.594px 339.594px · columnCount=auto · gap=12px
+1024x768: grid · cols=314.656px 314.672px 314.656px · columnCount=auto · gap=16px
+1366x768: grid · cols=450.094px 385.797px 450.109px · columnCount=auto · gap=16px
+1440x900: grid · cols=476px 408px 476px · columnCount=auto · gap=16px
+1600x900: grid · cols=532px 456px 532px · columnCount=auto · gap=16px
+1920x1080: grid · cols=644px 552px 644px · columnCount=auto · gap=16px
+
+--- ações e legendas ---
+320x568: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+390x844: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+768x1024: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+1024x768: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+1366x768: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+1440x900: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+1600x900: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+1920x1080: 1 ação(ões) · 4 legendas
+    CTA: textual VER TODOS OS PROJETOS → /projetos 236.5x50
+
+--- saúde ---
+320x568: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+390x844: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+768x1024: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+1024x768: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+1366x768: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+1440x900: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+1600x900: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+1920x1080: console=0 http=0 imgsQuebradas=0 hrefsVazios=0 ancoras=0 overflow=0
+
+--- vizinhas (y, altura, fundo) ---
+320x568: equipamentos y=774 h=1700 | projetos y=2474 h=2164 bg=rgb(255, 255, 255) | pilares y=4638 h=1434 bg=rgb(239, 237, 235)
+390x844: equipamentos y=848 h=1912 | projetos y=2760 h=2367 bg=rgb(255, 255, 255) | pilares y=5127 h=1314 bg=rgb(239, 237, 235)
+768x1024: equipamentos y=1024 h=1496 | projetos y=2520 h=1603 bg=rgb(255, 255, 255) | pilares y=4123 h=1150 bg=rgb(239, 237, 235)
+1024x768: equipamentos y=787 h=798 | projetos y=1585 h=1238 bg=rgb(255, 255, 255) | pilares y=2823 h=701 bg=rgb(239, 237, 235)
+1366x768: equipamentos y=768 h=988 | projetos y=1756 h=1387 bg=rgb(255, 255, 255) | pilares y=3143 h=655 bg=rgb(239, 237, 235)
+1440x900: equipamentos y=900 h=1033 | projetos y=1933 h=1422 bg=rgb(255, 255, 255) | pilares y=3355 h=637 bg=rgb(239, 237, 235)
+1600x900: equipamentos y=900 h=1120 | projetos y=2020 h=1502 bg=rgb(255, 255, 255) | pilares y=3521 h=651 bg=rgb(239, 237, 235)
+1920x1080: equipamentos y=1080 h=1252 | projetos y=2332 h=1646 bg=rgb(255, 255, 255) | pilares y=3978 h=659 bg=rgb(239, 237, 235)
+
+--- dossiê (/solucoes/cozinhas-industriais) ---
+390x844: h=2498px nos=80 textos=42 chars=1182 imgs=4 html=13586B
+1440x900: h=1641px nos=80 textos=42 chars=1182 imgs=4 html=13586B

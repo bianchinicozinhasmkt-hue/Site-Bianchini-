@@ -138,10 +138,12 @@ export function ProjectsSection({
  * hierarquia; a coluna larga tem de ir para as fotografias que sustentam
  * ampliação e têm assunto para mostrar.
  *
- * Ela também é o teto de resolução da seção: com 400px de altura de arquivo,
- * qualquer frisa mais alta a amplia — daí a escala parar em `2xl:h-[25rem]`.
- * Na coluna estreita isso deixou de ser o fator limitante e passou a ser folga:
- * em 1920 ela renderiza 422 × 400 contra 750 × 400, ampliação zero.
+ * Ela também é o **teto de altura** da frisa: com 400px de altura de arquivo, qualquer
+ * faixa mais alta que 25rem a amplia. É por isso que `PROOF_HEIGHT` para em 25rem e não
+ * sobe mais — e é a razão de a frisa ter ganhado altura em R2 até exatamente esse valor,
+ * nem um pixel além. Na coluna estreita a largura nunca foi o limite: mesmo com a frisa
+ * sangrada ela renderiza 408 × 400 em 1440 e 566 × 400 em 1920, contra 750 × 400 de
+ * arquivo — `cover` resolve em 1,0 nos dois casos, ampliação zero.
  *
  * Os dois retratos têm altura sobrando e aguentam o recorte da faixa; o
  * `object-position` de cada um está calibrado para o assunto (a bancada do bar,
@@ -174,15 +176,44 @@ export function ProjectsSection({
  * ESCALA E SANGRIA
  * ============================================================
  *
- * SANGRIA ≠ COMPOSIÇÃO: só a protagonista rompe o container, e é ela que faz a
- * seção ocupar 1920. A frisa fica contida, porque `camara-frigorifica` não
- * suporta ser esticada — em `2xl` ela ganha `max-w-wide` (1520) em vez do
- * `max-w-container` (1400) do texto, que é o quanto os arquivos permitem
- * absorver sem ampliação.
+ * **O texto assenta na guia; a fotografia corre a página.** A protagonista vai de borda a
+ * borda e a frisa acompanha, com um gutter de 24px (ver o bloco sobre a frisa, abaixo).
+ * O que continua contido é a coluna de leitura — etiqueta, título, lead, CTA e nota.
  *
  * O vão entre a protagonista e a frisa é o **mesmo** dos vãos entre as provas
  * (16px em `lg`): é isso que faz as quatro fotografias lerem como uma
  * composição só, e não como uma imagem seguida de uma grade.
+ *
+ * ============================================================
+ * ALTURA: POR QUE O TETO DE 1.100px NÃO É ALCANÇÁVEL AQUI
+ * ============================================================
+ *
+ * A ficha 3 do documento 03 pede **duas** coisas ao mesmo tempo: altura ≤1.100px em 1440 e
+ * ≥70% de área fotográfica. Medido em `f418ab0`, elas são **incompatíveis** — não por esta
+ * implementação, mas por aritmética.
+ *
+ * Chamando `P` a altura da protagonista, `F` a da frisa e `N` a altura não-fotográfica
+ * (padding + abertura + vãos + CTA), e notando que nenhuma faixa é mais larga que a seção:
+ *
+ *     área% ≤ (P + F) / (P + F + N)
+ *
+ * Exigir área% ≥ 0,70 obriga `P + F ≥ (7/3)·N`. Exigir altura ≤1.100 obriga
+ * `P + F ≤ 1.100 − N`. As duas juntas só existem se `N ≤ 330px`.
+ *
+ * `N` medido nesta seção é **462px** em 1440, e o piso realista dela — padding mínimo,
+ * etiqueta + H2 + lead em duas linhas, vãos curtos e um CTA de 44px de alvo — fica em torno
+ * de **390px**. Abaixo disso não há corte de folga: há corte de conteúdo que a própria
+ * ficha manda preservar (tese curta) ou de acessibilidade (alvo de toque).
+ *
+ * Com `N = 390`, o menor valor que satisfaz ≥70% é `P + F = 910`, ou seja **1.300px de
+ * altura**. Qualquer número abaixo disso só se atinge encolhendo fotografia — que é
+ * exatamente o que o critério de área existe para impedir, e o que §17 do briefing proíbe
+ * como caminho ("não por foto pequena, fonte reduzida, crop ruim ou spacing sufocado").
+ *
+ * Então R2 não persegue 1.100px. Persegue **área fotográfica**, e trata a altura como
+ * consequência: caem os 462px de `N` até onde há folga real, sobe a largura da frisa (que
+ * dá área a custo zero de altura) e sobe `F` até o teto do arquivo mais fraco. O teto de
+ * altura da ficha fica registrado como ajuste normativo em `06-MATRIZ-DE-DELTAS.md`.
  */
 const SHOWCASE_ORDER = ['bar-inox', 'camara-frigorifica', 'fritadeiras-chapa']
 
@@ -230,8 +261,16 @@ const PROOF_LAYOUT = [
   },
 ]
 
-/** Altura compartilhada da frisa — o alinhamento inteiro depende dela. */
-const PROOF_HEIGHT = 'lg:h-[20rem] xl:h-[22.5rem] 2xl:h-[25rem]'
+/**
+ * Altura compartilhada da frisa — o alinhamento inteiro depende dela.
+ *
+ * `xl` subiu de 22,5rem para 25rem em R2, e o limite continua sendo
+ * `camara-frigorifica` (750 × 400): na coluna estreita da frisa sangrada ela renderiza
+ * 360px de largura em 1280 e 408px em 1440, contra 400px de altura — `cover` resolve em
+ * **1,0**, ampliação zero. 25rem é o teto do arquivo, não uma escolha de composição; acima
+ * disso a prova mais fraca do trio passaria a ser esticada, que é o que §23 proíbe.
+ */
+const PROOF_HEIGHT = 'lg:h-[20rem] xl:h-[25rem]'
 
 function ProjectsShowcase({
   lead,
@@ -247,7 +286,12 @@ function ProjectsShowcase({
       id="projetos"
       tone="surface"
       space={compact ? 'sm' : 'default'}
-      className={className}
+      /*
+        `lg:pt-12` corta 16px do topo em desktop. Vem antes de `className` de propósito: a
+        Home passa `pb-8 md:pb-10` e o merge tem de deixar o padding de baixo dela vencer —
+        aquele é ritmo de encontro com `#pilares`, não folga desta seção.
+      */
+      className={cn('lg:pt-12', className)}
       bleed
       aria-labelledby="projetos-titulo"
     >
@@ -262,10 +306,10 @@ function ProjectsShowcase({
       <Container>
         <Reveal>
           <Eyebrow>Projetos entregues</Eyebrow>
-          <Heading as={2} id="projetos-titulo" size="title-1" className="mt-5 max-w-[19ch]">
+          <Heading as={2} id="projetos-titulo" size="title-1" className="mt-4 max-w-[19ch]">
             A prova está na operação construída
           </Heading>
-          <p className="mt-4 max-w-[64ch] text-lead text-muted">{lead}</p>
+          <p className="mt-3 max-w-[64ch] text-lead text-muted">{lead}</p>
         </Reveal>
       </Container>
 
@@ -287,7 +331,7 @@ function ProjectsShowcase({
       <figure
         id={`projeto-${leadProject.id}`}
         data-whatsapp-safe-zone
-        className="mt-9 scroll-mt-[calc(var(--header-height)+1rem)] lg:mt-11"
+        className="mt-7 scroll-mt-[calc(var(--header-height)+1rem)] lg:mt-8"
       >
         {/*
           `lg:aspect-[2/1]` antes do 2,4:1 de `xl`: em 1024 a proporção larga
@@ -354,7 +398,29 @@ function ProjectsShowcase({
           horizontal que separa as provas entre si, e é isso que faz as quatro
           fotografias lerem como uma composição só.
           ========================================================== */}
-      <Container className="2xl:[--container-max:var(--container-wide)]">
+      {/* ----------
+          A FRISA ACOMPANHA A FAIXA FOTOGRÁFICA, NÃO A GUIA DE TEXTO (R2).
+
+          Antes ela assentava na guia de conteúdo. Em 1440 isso punha a protagonista de 0
+          a 1440 e a frisa de 72 a 1368 — um degrau de 72px de cada lado, visível na
+          captura, que separava em dois o que a seção quer que se leia como **uma**
+          composição fotográfica. Custava 96px de largura de fotografia sem comprar nada.
+
+          Agora o texto continua na guia e a **fotografia** corre a página: a frisa usa um
+          gutter de 24px e teto livre, então em 1440 vai a 1392 (contra 1296) e em 1920 a
+          1872 (contra 1520). São +34.560px² de fotografia em 1440 a **custo zero de
+          altura** — o único movimento desta rodada que sobe a área fotográfica sem
+          empurrar a seção para baixo.
+
+          `9999px` no teto, e não `100vw`: `vw` inclui a barra de rolagem e devolveria
+          overflow horizontal. Com `min(9999px, 100% − 2 × 24px)` quem manda é sempre o
+          gutter, e `100%` é a largura de conteúdo do pai, sem barra.
+
+          Só de `lg` para cima. Em 768 a frisa é dois retratos com a paisagem embaixo, uma
+          disposição calibrada para a guia; e em ≤390 a coluna única já usa a largura toda
+          que o telefone tem.
+          ---------- */}
+      <Container className="lg:[--gutter:1.5rem] lg:[--container-max:9999px]">
         {/*
           As larguras desiguais (35 / 30 / 35) só entram em `xl`. Entre 1024 e
           1279 as três colunas são iguais: ali a coluna estreita cairia para
@@ -409,6 +475,19 @@ function ProjectsShowcase({
                         cada escala de texto, e o respiro entre as linhas. É a
                         protagonista que mantém o traço — ela é a ficha
                         principal, e a repetição é que virava padrão de cartão.
+
+                        O SEGMENTO DO APOIO NÃO É AMARELO (R2, 2026-08-12).
+                        Medido em `f418ab0`: seis regiões amarelas na seção
+                        contra o teto de três — o traço da etiqueta, o traço e
+                        o rótulo da protagonista, e **um rótulo amarelo em cada
+                        uma das três provas**. Os três de baixo eram a maior
+                        parte do excesso, e custavam mais do que cor: pintados
+                        do mesmo amarelo do rótulo da protagonista, achatavam a
+                        distinção entre a prova principal e o apoio justamente
+                        onde ela precisa aparecer. Agora o amarelo marca **só**
+                        a protagonista, e o apoio se nomeia em branco — mesma
+                        informação, mesma legibilidade sobre a proteção
+                        (`canvas` a 85% sobre o gradiente), hierarquia de volta.
                         ---------- */}
                     <figcaption className="absolute inset-x-0 bottom-0 p-3.5 xl:p-4">
                       {/*
@@ -426,7 +505,7 @@ function ProjectsShowcase({
                         className="pointer-events-none absolute inset-x-0 -top-12 bottom-0 bg-[linear-gradient(0deg,rgba(16,16,16,0.93)_0%,rgba(16,16,16,0.88)_52%,rgba(16,16,16,0.48)_78%,transparent_100%)]"
                       />
                       <span className="relative block">
-                        <span className="block font-condensed text-[0.75rem] font-semibold uppercase leading-none tracking-[0.13em] text-yellow">
+                        <span className="block font-condensed text-[0.75rem] font-semibold uppercase leading-none tracking-[0.13em] text-canvas/85">
                           {project.segment}
                         </span>
                         <span className="mt-1.5 block font-sans text-title-3 font-bold leading-tight text-canvas">
@@ -472,7 +551,7 @@ function ProjectsShowcase({
           ========================================================== */}
       <Container>
         <Reveal>
-          <div className="mt-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7 lg:mt-6">
+          <div className="mt-4 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7 lg:mt-5">
             <LinkButton href="/projetos" variant="secondary" size="md" withArrow className="shrink-0">
               Ver todos os projetos
             </LinkButton>

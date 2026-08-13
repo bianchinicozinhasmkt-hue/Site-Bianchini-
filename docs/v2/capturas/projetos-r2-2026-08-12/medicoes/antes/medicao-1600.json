@@ -1,0 +1,415 @@
+{
+ "baseUrl": "http://127.0.0.1:3210",
+ "quando": "2026-08-13T13:03:46.544Z",
+ "home": {
+  "1600x900": {
+   "doc": {
+    "h": 13483,
+    "w": 1600,
+    "vw": 1600
+   },
+   "projetos": {
+    "y": 2020,
+    "h": 1542,
+    "bg": "rgb(255, 255, 255)",
+    "padding": "64px / 40px",
+    "blocosTexto": 7,
+    "caracteres": 511,
+    "textos": [
+     {
+      "tag": "h2",
+      "txt": "A prova está na operação construída"
+     },
+     {
+      "tag": "p",
+      "txt": "Cozinhas, bares, cadeia fria e mobiliário em inox que a Bianchini projetou, especificou, fabricou ou instalou. As legendas descrevem o que está na imagem — sem cliente, local ou prazo atribuídos."
+     },
+     {
+      "tag": "p",
+      "txt": "Projeto executivo· Especificação· Fabricação em inox· Instalação"
+     },
+     {
+      "tag": "p",
+      "txt": "Mobiliário sob medida· Apoio refrigerado"
+     },
+     {
+      "tag": "p",
+      "txt": "Dimensionamento· Armazenagem"
+     },
+     {
+      "tag": "p",
+      "txt": "Especificação· Instalação"
+     },
+     {
+      "tag": "p",
+      "txt": "Mais registros de cozinhas, bares, panificação, cadeia fria, mobiliário em inox e material de projeto na página de projetos."
+     }
+    ],
+    "nCards": 4,
+    "cards": [
+     {
+      "tag": "div",
+      "cls": "photo-mask relative aspect-[4/5] w-full overflow-hidden bg-graphite-soft sm:aspect-[16/9] lg:aspect-[2/1] xl:aspect-[2.4/1] is-visible",
+      "w": 1600,
+      "h": 666.7,
+      "bg": "rgb(26, 26, 26)",
+      "paiBg": "rgb(255, 255, 255)",
+      "bordas": 0,
+      "raio": "0px",
+      "motivo": "superficie",
+      "leitoDeFoto": true
+     },
+     {
+      "tag": "div",
+      "cls": "photo-mask media-zoom relative w-full overflow-hidden bg-canvas-deep aspect-[4/5] md:aspect-[3/4] lg:aspect-auto lg:h-[20rem] xl:h-[22.5rem]",
+      "w": 498.4,
+      "h": 400,
+      "bg": "rgb(230, 227, 222)",
+      "paiBg": "rgb(255, 255, 255)",
+      "bordas": 0,
+      "raio": "0px",
+      "motivo": "superficie",
+      "leitoDeFoto": true
+     },
+     {
+      "tag": "div",
+      "cls": "photo-mask media-zoom relative w-full overflow-hidden bg-canvas-deep aspect-[3/2] md:aspect-[21/9] lg:aspect-auto lg:h-[20rem] xl:h-[22.5rem",
+      "w": 427.2,
+      "h": 400,
+      "bg": "rgb(230, 227, 222)",
+      "paiBg": "rgb(255, 255, 255)",
+      "bordas": 0,
+      "raio": "0px",
+      "motivo": "superficie",
+      "leitoDeFoto": true
+     },
+     {
+      "tag": "div",
+      "cls": "photo-mask media-zoom relative w-full overflow-hidden bg-canvas-deep aspect-[3/4] lg:aspect-auto lg:h-[20rem] xl:h-[22.5rem] 2xl:h-[25rem] i",
+      "w": 498.4,
+      "h": 400,
+      "bg": "rgb(230, 227, 222)",
+      "paiBg": "rgb(255, 255, 255)",
+      "bordas": 0,
+      "raio": "0px",
+      "motivo": "superficie",
+      "leitoDeFoto": true
+     }
+    ],
+    "nHairlines": 3,
+    "hairlines": [
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+      "w": 28,
+      "h": 2,
+      "cor": "rgb(217, 166, 27)"
+     },
+     {
+      "via": "barra",
+      "tag": "span",
+      "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+      "w": 24,
+      "h": 2,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "border-top",
+      "tag": "a",
+      "cls": "group relative isolate inline-flex items-center justify-center gap-3 overflow-hi",
+      "w": 236.5,
+      "cor": "rgba(16, 16, 16, 0.7)"
+     }
+    ],
+    "nAmarelos": 6,
+    "amarelos": [
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-7 shrink-0 bg-yellow-deep",
+      "w": 28,
+      "h": 2,
+      "area": 56,
+      "cor": "rgb(217, 166, 27)"
+     },
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "inline-flex items-center gap-3 font-condensed text-eyebrow font-semibold uppercase trackin",
+      "w": 173.1,
+      "h": 15.6,
+      "area": 2699,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "COZINHA INDUSTRIAL"
+     },
+     {
+      "via": "fundo",
+      "tag": "span",
+      "cls": "h-[2px] w-6 shrink-0 bg-yellow",
+      "w": 24,
+      "h": 2,
+      "area": 48,
+      "cor": "rgb(245, 198, 75)"
+     },
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "block font-condensed text-[0.75rem] font-semibold uppercase leading-none tracking-[0.13em]",
+      "w": 466.4,
+      "h": 12,
+      "area": 5597,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "BAR E SALÃO"
+     },
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "block font-condensed text-[0.75rem] font-semibold uppercase leading-none tracking-[0.13em]",
+      "w": 395.2,
+      "h": 12,
+      "area": 4742,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "CADEIA FRIA"
+     },
+     {
+      "via": "texto",
+      "tag": "span",
+      "cls": "block font-condensed text-[0.75rem] font-semibold uppercase leading-none tracking-[0.13em]",
+      "w": 466.4,
+      "h": 12,
+      "area": 5597,
+      "cor": "rgb(245, 198, 75)",
+      "txt": "COCÇÃO"
+     }
+    ],
+    "nImagens": 4,
+    "imagens": [
+     {
+      "src": "cozinha-completa.jpg",
+      "entregue": "1920",
+      "w": 1600,
+      "h": 666.7,
+      "x": 0,
+      "right": 1600,
+      "natural": "1166x875",
+      "proporcaoArquivo": 1.3,
+      "proporcaoRender": 2.4,
+      "ampliacao": 1.4,
+      "completo": true,
+      "area": 1066650,
+      "sizes": "100vw",
+      "figId": "projeto-cozinha-completa",
+      "legenda": "COZINHA INDUSTRIAL Cozinha profissional completa Cocção, apoio refrigerado, mobiliário em inox e exaustão integrados no mesmo projeto. Projeto executivo· Especi"
+     },
+     {
+      "src": "bar-em-inox.jpg",
+      "entregue": "640",
+      "w": 498.4,
+      "h": 400,
+      "x": 72,
+      "right": 570.4,
+      "natural": "528x793",
+      "proporcaoArquivo": 0.7,
+      "proporcaoRender": 1.2,
+      "ampliacao": 0.9,
+      "completo": true,
+      "area": 199356,
+      "sizes": "(max-width: 767px) 92vw, (max-width: 1023px) 46vw, 33vw",
+      "figId": "projeto-bar-inox",
+      "legenda": "BAR E SALÃO Estrutura de bar em inox Mobiliário sob medida· Apoio refrigerado"
+     },
+     {
+      "src": "fritadeiras-e-chapa.jpg",
+      "entregue": "640",
+      "w": 498.4,
+      "h": 400,
+      "x": 1029.6,
+      "right": 1528,
+      "natural": "528x703",
+      "proporcaoArquivo": 0.8,
+      "proporcaoRender": 1.2,
+      "ampliacao": 0.9,
+      "completo": true,
+      "area": 199356,
+      "sizes": "(max-width: 767px) 92vw, (max-width: 1023px) 46vw, 33vw",
+      "figId": "projeto-fritadeiras-chapa",
+      "legenda": "COCÇÃO Praça de fritura e chapa Especificação· Instalação"
+     },
+     {
+      "src": "camara-frigorifica.jpg",
+      "entregue": "640",
+      "w": 427.2,
+      "h": 400,
+      "x": 586.4,
+      "right": 1013.6,
+      "natural": "448x238",
+      "proporcaoArquivo": 1.9,
+      "proporcaoRender": 1.1,
+      "ampliacao": 1,
+      "completo": true,
+      "area": 170881,
+      "sizes": "(max-width: 1023px) 92vw, 28vw",
+      "figId": "projeto-camara-frigorifica",
+      "legenda": "CADEIA FRIA Câmara frigorífica Dimensionamento· Armazenagem"
+     }
+    ],
+    "areaImagemPct": 66.3,
+    "massaFoto": {
+     "protagonista": {
+      "src": "cozinha-completa.jpg",
+      "area": 1066650,
+      "w": 1600,
+      "h": 666.7
+     },
+     "apoio": [
+      {
+       "src": "bar-em-inox.jpg",
+       "area": 199356,
+       "w": 498.4,
+       "h": 400
+      },
+      {
+       "src": "fritadeiras-e-chapa.jpg",
+       "area": 199356,
+       "w": 498.4,
+       "h": 400
+      },
+      {
+       "src": "camara-frigorifica.jpg",
+       "area": 170881,
+       "w": 427.2,
+       "h": 400
+      }
+     ],
+     "A": 1066650,
+     "Btotal": 569593,
+     "maiorB": 199356,
+     "A_sobre_maiorB": 5.4,
+     "A_sobre_Btotal": 1.9,
+     "A_pct_da_area_fotografica": 65.2,
+     "Btotal_pct_da_area_fotografica": 34.8,
+     "maiorB_pct_da_area_fotografica": 12.2,
+     "A_pct_da_secao": 43.2,
+     "Btotal_pct_da_secao": 23.1
+    },
+    "guia": {
+     "w": 1456,
+     "left": 72,
+     "right": 1528
+    },
+    "sangriaPorImagem": [
+     {
+      "src": "cozinha-completa.jpg",
+      "rompeDireita": 72,
+      "rompeEsquerda": 72,
+      "rompe": true,
+      "fullBleed": true
+     },
+     {
+      "src": "bar-em-inox.jpg",
+      "rompeDireita": -957.6,
+      "rompeEsquerda": 0,
+      "rompe": false,
+      "fullBleed": false
+     },
+     {
+      "src": "fritadeiras-e-chapa.jpg",
+      "rompeDireita": 0,
+      "rompeEsquerda": -957.6,
+      "rompe": false,
+      "fullBleed": false
+     },
+     {
+      "src": "camara-frigorifica.jpg",
+      "rompeDireita": -514.4,
+      "rompeEsquerda": -514.4,
+      "rompe": false,
+      "fullBleed": false
+     }
+    ],
+    "nRompem": 1,
+    "contentores": [
+     {
+      "tag": "div",
+      "cls": "container-shell 2xl:[--container-max:var(--container-wide)]",
+      "display": "block",
+      "gridTemplateColumns": "none",
+      "columnCount": "auto",
+      "gap": "normal",
+      "nImgs": 3,
+      "w": 1456,
+      "h": 400
+     },
+     {
+      "tag": "ul",
+      "cls": "mt-3 grid gap-3 md:grid-cols-2 lg:mt-4 lg:grid-cols-3 lg:gap-4 xl:grid-cols-[7fr_6fr_7fr]",
+      "display": "grid",
+      "gridTemplateColumns": "498.391px 427.203px 498.391px",
+      "columnCount": "auto",
+      "gap": "16px",
+      "nImgs": 3,
+      "w": 1456,
+      "h": 400
+     }
+    ],
+    "acoes": [
+     {
+      "txt": "VER TODOS OS PROJETOS",
+      "href": "/projetos",
+      "w": 236.5,
+      "h": 50,
+      "bg": "rgba(0, 0, 0, 0)",
+      "cor": "rgb(16, 16, 16)",
+      "papel": "textual"
+     }
+    ],
+    "nAcoes": 1,
+    "legendas": [
+     {
+      "txt": "COZINHA INDUSTRIAL Cozinha profissional completa Cocção, apoio refrigerado, mobiliário em inox e exaustão integrados no mesmo projeto. Projeto executivo· Especificação· Fabricação em inox· Instalação",
+      "dentroDaFoto": true
+     },
+     {
+      "txt": "BAR E SALÃO Estrutura de bar em inox Mobiliário sob medida· Apoio refrigerado",
+      "dentroDaFoto": true
+     },
+     {
+      "txt": "CADEIA FRIA Câmara frigorífica Dimensionamento· Armazenagem",
+      "dentroDaFoto": true
+     },
+     {
+      "txt": "COCÇÃO Praça de fritura e chapa Especificação· Instalação",
+      "dentroDaFoto": true
+     }
+    ],
+    "nLegendas": 4,
+    "vazioBase": 41
+   },
+   "vizinhas": {
+    "equipamentos": {
+     "y": 900,
+     "h": 1120,
+     "bg": "rgb(26, 26, 26)"
+    },
+    "projetos": {
+     "y": 2020,
+     "h": 1542,
+     "bg": "rgb(255, 255, 255)"
+    },
+    "pilares": {
+     "y": 3561,
+     "h": 651,
+     "bg": "rgb(239, 237, 235)"
+    }
+   },
+   "overflow": [],
+   "imgsQuebradas": [],
+   "hrefsVazios": [],
+   "ancorasQuebradas": [],
+   "consoleErrors": [],
+   "httpFailures": []
+  }
+ },
+ "dossie": {}
+}
